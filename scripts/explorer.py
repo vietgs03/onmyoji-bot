@@ -181,6 +181,7 @@ def explore(budget=60, home_every=20, max_depth=4):
     stuck = 0  # dem so buoc lien tiep khong sinh transition moi -> chong ket
     home_fails = 0  # dem so lan goto_home lien tiep KHONG ve duoc HOME
     unreachable = set()  # frontier khong toi duoc -> bo qua de tranh loop
+    recent = []  # cac state gan day -> phat hien dao dong
 
     for step in range(budget):
         sid, isnew, img = wm.observe()
@@ -249,12 +250,31 @@ def explore(budget=60, home_every=20, max_depth=4):
             wm.add_edge(sid, (x, y), sid2)
             transitions += 1
             stuck = 0
+            recent.append(sid2)
+            if len(recent) > 12: recent.pop(0)
             log({"event": "transition", "from": sid, "click": [x, y],
                  "to": sid2, "to_is_new": isnew2, "step": step})
             print(f"[{step}] {sid} --({x},{y})--> {sid2} {'NEW' if isnew2 else ''}")
         else:
             stuck += 1
             log({"event": "noop", "state": sid, "click": [x, y], "step": step})
+
+        # chong DAO DONG: 12 buoc gan nhat chi quanh <=2 state -> nhay frontier
+        if len(recent) >= 12 and len(set(recent)) <= 2:
+            print(f"[{step}] dao dong giua {set(recent)} -> nhay frontier")
+            recent.clear()
+            fsid, _ = find_frontier(wm, sid, home_sid, skip=unreachable)
+            if fsid is None:
+                print(f"[{step}] het frontier -> XONG"); break
+            goto_home(wm, home_sid)
+            navp = wm.bfs_path(home_sid, fsid) or []
+            for (nx, ny) in navp:
+                bgclick(nx, ny); time.sleep(1.2)
+            cur, _, _ = wm.observe()
+            if cur != fsid:
+                unreachable.add(fsid)
+            stuck = 0
+            continue
 
         # chong ket: neu nhieu buoc khong co transition -> ve HOME
         if stuck >= 8:
