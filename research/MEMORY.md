@@ -89,3 +89,20 @@ File: `tasks/base_task.py`.
   click duoc, KHONG chiem chuot that. Test: click Explore -> mo dung Explore map.
 - => Toan bo viec map UI se dung bgshot/bgclick. Toa do tinh tren anh 1152x679 (full window).
 - CLI: `./onmyoji.sh bgshot <ten>` , `./onmyoji.sh bgclick <x> <y>`.
+
+## 8. [2026-06-02] UI State-Graph engine + Autonomous Explorer DA CHAY
+- `scripts/graph.py`: load pages.yaml/edges.yaml, detect_current() (template match),
+  shortest_path (BFS), goto() (di + verify tung buoc). TEST: HOME<->EXPLORE OK (score ~1.0).
+- `scripts/explorer.py`: vong lap tu kham pha.
+  - dHash tren VUNG TINH (mask chat bar y95-130 + nhan vat giua) => state ID ON DINH.
+  - canonicalize: gop man hinh gan giong (hamming<=14) ve cung 1 state.
+  - thu diem grid, ghi transition (click X o state A -> state B), luu screenshot moi.
+  - TEST: tu dong tim ra Settings panel (click goc phai 936,91).
+- HAN CHE hien tai: grid 8x6 mu => nhieu noop (click trung vung trong).
+  HUONG SUA: detect nut that (icon tron + footer text) thay vi grid; hoac dung
+  AI vision mo ta moi state moi (tu dat ten + liet ke nut) - khep voi "model hoc game".
+
+## 9. STATES da map (exploration/screens/)
+- HOME (san nha): 1202f24f24
+- SETTINGS panel: 520d1f4bf3  (mo tu nut goc tren phai ~936,91)
+- EXPLORE (chapter map): da co anchor rieng trong ui_graph.

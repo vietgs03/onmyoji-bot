@@ -1,0 +1,12 @@
+# UI Edges (chuyen canh). from -> to qua 1 action (click toa do client-relative).
+# wait: giay cho sau khi click truoc khi verify.
+
+- from: HOME
+  to: EXPLORE
+  action: { type: click, x: 608, y: 188 }   # nut Explore
+  wait: 2.0
+
+- from: EXPLORE
+  to: HOME
+  action: { type: click, x: 28, y: 68 }     # back goc tren trai
+  wait: 1.8

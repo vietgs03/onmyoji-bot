@@ -1,0 +1,33 @@
+# UI Pages (nodes). Moi page nhan dien bang anchor (template ROI).
+# match: all (mac dinh, moi anchor phai pass) hoac any.
+# Toa do/roi tinh tren anh bgshot 1152x679.
+
+_common:
+  # Cac diem click thu khi UNKNOWN de ve node da biet (recovery).
+  recover_clicks:
+    - [28, 68]      # back goc tren trai (nhieu UI)
+    - [1115, 78]    # close X goc tren phai
+
+HOME:
+  desc: "San nha chinh / Courtyard"
+  is_root: true
+  match: any
+  anchors:
+    - asset: HOME/explore_label.png
+      roi: [568, 177, 86, 46]
+      threshold: 0.85
+    - asset: HOME/collection_label.png
+      roi: [77, 603, 100, 46]
+      threshold: 0.85
+
+EXPLORE:
+  desc: "Ban do chuong (Realms Gates / Chapter map)"
+  close_to: HOME
+  match: any
+  anchors:
+    - asset: EXPLORE/realm_raid_label.png
+      roi: [195, 617, 120, 44]
+      threshold: 0.85
+    - asset: EXPLORE/soul_label.png
+      roi: [135, 617, 70, 44]
+      threshold: 0.85

@@ -1,0 +1,26 @@
+{"event": "new_state", "state": "1202f24f24", "step": 0}
+{"event": "noop", "state": "1202f24f24", "click": [72, 91], "step": 0}
+{"event": "noop", "state": "1202f24f24", "click": [216, 91], "step": 1}
+{"event": "noop", "state": "1202f24f24", "click": [360, 91], "step": 2}
+{"event": "noop", "state": "1202f24f24", "click": [504, 91], "step": 3}
+{"event": "noop", "state": "1202f24f24", "click": [648, 91], "step": 4}
+{"event": "noop", "state": "1202f24f24", "click": [792, 91], "step": 5}
+{"event": "transition", "from": "1202f24f24", "click": [936, 91], "to": "520d1f4bf3", "to_is_new": true, "step": 6}
+{"event": "transition", "from": "520d1f4bf3", "click": [72, 91], "to": "1202f24f24", "to_is_new": false, "step": 7}
+{"event": "noop", "state": "1202f24f24", "click": [1080, 91], "step": 8}
+{"event": "noop", "state": "1202f24f24", "click": [72, 194], "step": 9}
+{"event": "noop", "state": "1202f24f24", "click": [216, 194], "step": 10}
+{"event": "noop", "state": "1202f24f24", "click": [360, 194], "step": 11}
+{"event": "noop", "state": "1202f24f24", "click": [504, 194], "step": 12}
+{"event": "noop", "state": "1202f24f24", "click": [648, 194], "step": 13}
+{"event": "noop", "state": "1202f24f24", "click": [792, 194], "step": 14}
+{"event": "noop", "state": "1202f24f24", "click": [936, 194], "step": 15}
+{"event": "noop", "state": "1202f24f24", "click": [1080, 194], "step": 16}
+{"event": "noop", "state": "1202f24f24", "click": [72, 297], "step": 17}
+{"event": "noop", "state": "1202f24f24", "click": [216, 297], "step": 18}
+{"event": "noop", "state": "1202f24f24", "click": [360, 297], "step": 19}
+{"event": "noop", "state": "1202f24f24", "click": [504, 297], "step": 20}
+{"event": "noop", "state": "1202f24f24", "click": [648, 297], "step": 21}
+{"event": "noop", "state": "1202f24f24", "click": [792, 297], "step": 22}
+{"event": "noop", "state": "1202f24f24", "click": [936, 297], "step": 23}
+{"event": "noop", "state": "1202f24f24", "click": [1080, 297], "step": 24}
