@@ -368,3 +368,24 @@
 {"event": "noop", "state": "083fd547c4", "click": [351, 345], "step": 78}
 {"event": "noop", "state": "083fd547c4", "click": [287, 367], "step": 79}
 {"event": "noop", "state": "083fd547c4", "click": [79, 485], "step": 80}
+{"event": "transition", "from": "846da320d2", "click": [214, 439], "to": "0d383f13cc", "to_is_new": false, "step": 0}
+{"event": "transition", "from": "0d383f13cc", "click": [113, 74], "to": "ced1805075", "to_is_new": false, "step": 1}
+{"event": "transition", "from": "e72dd865e0", "click": [454, 363], "to": "6a4a4745c2", "to_is_new": false, "step": 2}
+{"event": "noop", "state": "6a4a4745c2", "click": [825, 443], "step": 3}
+{"event": "transition", "from": "6a4a4745c2", "click": [1077, 175], "to": "846da320d2", "to_is_new": false, "step": 4}
+{"event": "transition", "from": "846da320d2", "click": [217, 401], "to": "0d383f13cc", "to_is_new": false, "step": 5}
+{"event": "noop", "state": "0d383f13cc", "click": [220, 279], "step": 6}
+{"event": "noop", "state": "0d383f13cc", "click": [78, 589], "step": 7}
+{"event": "transition", "from": "0d383f13cc", "click": [734, 455], "to": "79322e988a", "to_is_new": true, "step": 8}
+{"event": "new_state", "state": "b89d37204f", "step": 9}
+{"event": "noop", "state": "300e45f1cc", "click": [175, 499], "step": 10}
+{"event": "noop", "state": "300e45f1cc", "click": [167, 467], "step": 11}
+{"event": "noop", "state": "300e45f1cc", "click": [415, 469], "step": 12}
+{"event": "noop", "state": "300e45f1cc", "click": [175, 569], "step": 13}
+{"event": "noop", "state": "300e45f1cc", "click": [409, 277], "step": 14}
+{"event": "noop", "state": "300e45f1cc", "click": [179, 271], "step": 15}
+{"event": "noop", "state": "300e45f1cc", "click": [153, 371], "step": 16}
+{"event": "noop", "state": "300e45f1cc", "click": [391, 367], "step": 17}
+{"event": "noop", "state": "300e45f1cc", "click": [167, 397], "step": 18}
+{"event": "noop", "state": "300e45f1cc", "click": [179, 369], "step": 19}
+{"event": "noop", "state": "300e45f1cc", "click": [391, 49], "step": 21}

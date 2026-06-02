@@ -123,7 +123,7 @@ def state_has_untried(wm, sid):
     im = _cv.imread(path)
     if im is None:
         return 0, []
-    is_home = (sid == HOME_SID_HINT[0])
+    is_home = (wm.states.get(sid, {}).get("label") == "HOME")
     cands = candidate_buttons(im, sid, is_home)
     untried = [p for p in cands if not wm.is_tried(sid, p)]
     return len(untried), untried
@@ -219,13 +219,22 @@ def explore(budget=60, home_every=20, max_depth=4):
                 deep_escape(wm); home_fails = 0
             continue
 
-        is_home = (sid == home_sid)
+        is_home = (wm._logical(sid) == wm._logical(home_sid))
         cands = candidate_buttons(img, sid, is_home)
         target = next((p for p in cands if not wm.is_tried(sid, p)), None)
 
         if target is None:
-            # het nut o state nay -> tim FRONTIER (state khac con nut chua thu)
-            fsid, fpath = find_frontier(wm, sid, home_sid, skip=unreachable)
+            # het nut o state nay -> tim FRONTIER (bo qua MOI state cung label hien tai)
+            cur_lbl = wm.states[sid].get("label")
+            skip = set(unreachable)
+            if cur_lbl:
+                skip |= {s for s, st in wm.states.items() if st.get("label") == cur_lbl}
+            else:
+                skip.add(sid)
+            fsid, fpath = find_frontier(wm, sid, home_sid, skip=skip)
+            if fsid is None:
+                # khong con frontier khac label -> thu lai gom ca label hien tai
+                fsid, fpath = find_frontier(wm, sid, home_sid, skip=unreachable)
             if fsid is None:
                 print(f"[{step}] KHONG con frontier nao -> XONG het ban do"); break
             print(f"[{step}] {sid} het nut -> di toi frontier {fsid} ({len(fpath)} buoc)")
@@ -237,8 +246,8 @@ def explore(budget=60, home_every=20, max_depth=4):
             for (nx, ny) in navp:
                 bgclick(nx, ny); time.sleep(1.2)
             cur, _, _ = wm.observe()
-            if cur != fsid:
-                # khong toi dung frontier -> blacklist de tranh loop
+            # so khop theo LOGIC (cung label = coi nhu toi noi)
+            if wm._logical(cur) != wm._logical(fsid):
                 unreachable.add(fsid)
                 print(f"[{step}]   -> khong toi frontier (o {cur}), blacklist {fsid}")
             else:
@@ -275,7 +284,7 @@ def explore(budget=60, home_every=20, max_depth=4):
             for (nx, ny) in navp:
                 bgclick(nx, ny); time.sleep(1.2)
             cur, _, _ = wm.observe()
-            if cur != fsid:
+            if wm._logical(cur) != wm._logical(fsid):
                 unreachable.add(fsid)
             stuck = 0
             continue
@@ -303,7 +312,7 @@ def explore(budget=60, home_every=20, max_depth=4):
             for (nx, ny) in navp:
                 bgclick(nx, ny); time.sleep(1.2)
             cur, _, _ = wm.observe()
-            if cur != fsid:
+            if wm._logical(cur) != wm._logical(fsid):
                 unreachable.add(fsid)
             continue
         if (step + 1) % home_every == 0:
