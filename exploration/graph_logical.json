@@ -1,0 +1,179 @@
+{
+  "nodes": {
+    "HOME": {
+      "sids": [
+        "944c9e62e0",
+        "c0a6d0df01",
+        "9126c78dcf",
+        "ba5092a92c",
+        "17be941175",
+        "3405f68f74",
+        "c230b8c49a",
+        "c3124e1509",
+        "27130682e0",
+        "c33e658b4d",
+        "0e9a297ae5",
+        "6f8f0ed99b",
+        "b670be283b",
+        "515f2c5afc",
+        "c2c590c5cf"
+      ],
+      "count": 15,
+      "desc": "San nha | San nha (footer menu hien) | San nha (footer menu) | San nha (tooltip Switch characters) | San nha + side panel trai (Forum/Support/Yard) | San nha chinh"
+    },
+    "Settings": {
+      "sids": [
+        "6499b7175b"
+      ],
+      "count": 1,
+      "desc": "Bang cai dat / ho so nguoi choi (Audio/View/Name/Code)"
+    },
+    "Loading": {
+      "sids": [
+        "ecdf7cbfaa",
+        "073136c598"
+      ],
+      "count": 2,
+      "desc": "Frame chuyen canh (dang vao Awakened Wisdom) | Frame chuyen canh toi mau"
+    },
+    "Event": {
+      "sids": [
+        "7db1433b6f"
+      ],
+      "count": 1,
+      "desc": "Trang su kien (Awakened Wisdom event overview)"
+    },
+    "CreateFloat": {
+      "sids": [
+        "9d70d5a3d5"
+      ],
+      "count": 1,
+      "desc": "Man hinh tao xe dieu hanh (Create Float)"
+    },
+    "ChampionTrial": {
+      "sids": [
+        "52259731af"
+      ],
+      "count": 1,
+      "desc": "Champion Trial (Successor Trial/Fujiwara Archives/Uncharted Dreams)"
+    },
+    "Explore": {
+      "sids": [
+        "76a9b09240"
+      ],
+      "count": 1,
+      "desc": "Ban do Explore/Chapter (Realm Raid/Soul/Secret Zone)"
+    },
+    "TownSetting": {
+      "sids": [
+        "5daac9b858"
+      ],
+      "count": 1,
+      "desc": "Popup cai dat Town (Original/Normal/Extreme)"
+    }
+  },
+  "edges": [
+    {
+      "from": "HOME",
+      "to": "Settings",
+      "clicks": [
+        [
+          64,
+          77
+        ],
+        [
+          61,
+          89
+        ],
+        [
+          64,
+          77
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Loading",
+      "clicks": [
+        [
+          694,
+          213
+        ],
+        [
+          625,
+          214
+        ],
+        [
+          183,
+          214
+        ],
+        [
+          519,
+          217
+        ],
+        [
+          315,
+          213
+        ],
+        [
+          255,
+          213
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Event",
+      "clicks": [
+        [
+          1077,
+          175
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "CreateFloat",
+      "clicks": [
+        [
+          229,
+          463
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "ChampionTrial",
+      "clicks": [
+        [
+          1077,
+          242
+        ],
+        [
+          1075,
+          185
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Explore",
+      "clicks": [
+        [
+          608,
+          192
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "TownSetting",
+      "clicks": [
+        [
+          660,
+          277
+        ]
+      ]
+    }
+  ]
+}
