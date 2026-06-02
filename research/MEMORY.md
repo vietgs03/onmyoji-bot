@@ -106,3 +106,28 @@ File: `tasks/base_task.py`.
 - HOME (san nha): 1202f24f24
 - SETTINGS panel: 520d1f4bf3  (mo tu nut goc tren phai ~936,91)
 - EXPLORE (chapter map): da co anchor rieng trong ui_graph.
+
+## 10. [2026-06-02] Kien truc 3 tang "model hoc game" (DA TRIEN KHAI)
+File chinh:
+- scripts/perception.py : bgshot/bgclick, dhash (4 VUNG TINH -> on dinh voi animation),
+  is_loading (man hinh toi), detect_buttons (Hough circles + saturation contour + NMS).
+  KHONG hardcode toa do -> khac OAS (template thu cong).
+- scripts/world_model.py: graph state(node)+edge. canonicalize (gop man hinh gan giong,
+  hamming<=12). bfs_path. luu exploration/world.json.
+- scripts/explorer.py   : DFS sau. depth = khoang cach BFS tu HOME. chong ket (stuck>=8
+  -> goto HOME). bo qua Loading. back-clicks AN TOAN (khong bam (1115,78)=X game).
+- scripts/label_states.py: gan label/desc/buttons cho moi state (agent vision tu xem).
+- scripts/build_graph.py : gom physical states CUNG LABEL -> graph LOGIC. xuat graph.md + mermaid.
+
+## 11. Ket qua map (lan 2)
+HOME (944c9e62e0) la HUB. Menu cap 1 tu HOME:
+  Settings(64,77) Explore(608,192) Event(1077,175) ChampionTrial(1077,242)
+  CreateFloat(229,463) TownSetting-popup(660,277) Loading(694,213->Awakened Wisdom)
+DFS da vao SAU: Shikigami collection (My Shikigami 2915), va nhieu state depth 2-4.
+
+## 12. CANH BAO / luu y van hanh
+- Game co popup "Downloading resource expansion package" (~3GB) tu bat khi vao
+  Shikigami/cac man can asset. Co nut Cancel + Minimize. NEN bam Minimize de tai ngam,
+  DUNG Cancel. Cho tai xong moi explore tiep vung do.
+- Moi popup co nut X o vi tri KHAC nhau (vd Town setting X o ~1015,95). Can detect X.
+- bgshot mat ~1.2s (WSL->Win sync) -> explorer cham (~7-8s/buoc). Co the toi uu sau.
