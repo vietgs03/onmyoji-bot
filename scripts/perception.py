@@ -80,7 +80,7 @@ def is_loading(img, dark_thr=45, dark_ratio=0.7):
 
 
 def find_close_button(img):
-    """Tim nut X (dong popup) - dac trung Onmyoji: vong tron MAU DO/HONG.
+    """Tim nut X (dong popup) - dac trung Onmyoji: vong tron MAU DO/HONG hoac X TRANG.
     Tra (cx, cy) hoac None. Uu tien o nua tren man hinh (popup thuong co X tren-phai)."""
     hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
     # mau do/hong: H quanh 0 va 170-180, S cao, V kha cao
@@ -98,14 +98,28 @@ def find_close_button(img):
         if not (0.6 < w / max(h, 1) < 1.7):
             continue
         cx, cy = x + w // 2, y + h // 2
-        # X popup thuong o GOC TREN-PHAI panel: cx 820..1090, cy 60..170
-        if not (820 <= cx <= 1090 and 55 <= cy <= 175):
+        # X popup thuong o GOC TREN-PHAI panel: cx 800..1110, cy 50..180
+        if not (800 <= cx <= 1110 and 50 <= cy <= 180):
             continue
         # uu tien gan (1000,110)
         score = -((cx - 1000) ** 2 + (cy - 110) ** 2)
         if best is None or score > best[0]:
             best = (score, cx, cy)
-    return (best[1], best[2]) if best else None
+    if best:
+        return (best[1], best[2])
+    # fallback: X TRANG/SANG nho o goc tren-phai (vd man character showcase)
+    # chi nhan vung rat hep gan goc (y 50..80) de tranh nham icon thu/chat tren HOME
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    roi = gray[48:82, 1078:1122]
+    _, bw = cv2.threshold(roi, 195, 255, cv2.THRESH_BINARY)
+    bw = cv2.morphologyEx(bw, cv2.MORPH_CLOSE, np.ones((3, 3), np.uint8))
+    cnts2, _ = cv2.findContours(bw, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    for c in cnts2:
+        x, y, w, h = cv2.boundingRect(c)
+        area = w * h
+        if 80 < area < 1200 and 0.5 < w / max(h, 1) < 2.0:
+            return (1078 + x + w // 2, 48 + y + h // 2)
+    return None
 
 
 def hamming(a, b):
