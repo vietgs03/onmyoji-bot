@@ -32,9 +32,15 @@ public class Native {
   [DllImport("user32.dll")] public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, IntPtr dwExtraInfo);
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+  [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
   [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int n);
   [DllImport("user32.dll")] public static extern bool GetCursorPos(out POINT p);
+  [DllImport("user32.dll")] public static extern IntPtr GetWindowDC(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern int ReleaseDC(IntPtr hWnd, IntPtr hDC);
+  [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, uint nFlags);
+  [DllImport("user32.dll")] public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+  [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
   [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
   [StructLayout(LayoutKind.Sequential)] public struct POINT { public int X, Y; }
 }
@@ -102,6 +108,41 @@ function Do-Shot($r, $path) {
   $g.Dispose(); $bmp.Dispose()
 }
 
+function Do-BgShot($hwnd, $path) {
+  # Background capture using PrintWindow (works even if window is covered).
+  # nFlags=2 => PW_RENDERFULLCONTENT (needed for DirectX/hardware accelerated windows)
+  Add-Type -AssemblyName System.Drawing
+  $r = New-Object Native+RECT
+  [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
+  $w = $r.Right - $r.Left
+  $h = $r.Bottom - $r.Top
+  $bmp = New-Object System.Drawing.Bitmap $w, $h
+  $g = [System.Drawing.Graphics]::FromImage($bmp)
+  $hdc = $g.GetHdc()
+  $ok = [Native]::PrintWindow($hwnd, $hdc, 2)
+  $g.ReleaseHdc($hdc)
+  if (-not $ok) {
+    # fallback flag 0
+    $hdc2 = $g.GetHdc()
+    [Native]::PrintWindow($hwnd, $hdc2, 0) | Out-Null
+    $g.ReleaseHdc($hdc2)
+  }
+  $bmp.Save($path)
+  $g.Dispose(); $bmp.Dispose()
+  return @($w,$h,$ok)
+}
+
+function Do-BgClick($hwnd, $x, $y) {
+  # client-relative coordinates; send to window without stealing real cursor
+  $WM_MOUSEMOVE=0x0200; $WM_LBUTTONDOWN=0x0201; $WM_LBUTTONUP=0x0202
+  $MK_LBUTTON=[IntPtr]0x0001
+  $lparam = [IntPtr](($y -shl 16) -bor ($x -band 0xFFFF))
+  [Native]::PostMessage($hwnd, $WM_MOUSEMOVE, [IntPtr]::Zero, $lparam) | Out-Null
+  [Native]::PostMessage($hwnd, $WM_LBUTTONDOWN, $MK_LBUTTON, $lparam) | Out-Null
+  Start-Sleep -Milliseconds (Get-Random -Minimum 60 -Maximum 130)
+  [Native]::PostMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lparam) | Out-Null
+}
+
 $p = Get-GameProc
 $h = $p.MainWindowHandle
 
@@ -117,6 +158,14 @@ switch ($Action.ToLower()) {
     $r = Get-Rect $h
     Do-Shot $r $Out
     Write-Output ("saved {0} ({1}x{2})" -f $Out, ($r.Right-$r.Left), ($r.Bottom-$r.Top))
+  }
+  "bgshot" {
+    $res = Do-BgShot $h $Out
+    Write-Output ("bgsaved {0} ({1}x{2}) printwindow_ok={3}" -f $Out, $res[0], $res[1], $res[2])
+  }
+  "bgclick" {
+    Do-BgClick $h $X $Y
+    Write-Output ("bgclick ({0},{1})" -f $X,$Y)
   }
   "click" {
     Ensure-Front $h; $r = Get-Rect $h

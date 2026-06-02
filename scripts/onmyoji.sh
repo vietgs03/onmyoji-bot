@@ -32,13 +32,27 @@ case "$cmd" in
   focus)  run -Action focus ;;
   shot)
     name="${1:-latest}"
-    win_out="C:\\Users\\Public\\onmyoji_${name}.png"
-    wsl_out="/mnt/c/Users/Public/onmyoji_${name}.png"
+    # sanitize windows-side filename (no subdirs on windows temp)
+    flat="${name//\//_}"
+    win_out="C:\\Users\\Public\\onmyoji_${flat}.png"
+    wsl_out="/mnt/c/Users/Public/onmyoji_${flat}.png"
     run -Action shot -Out "$win_out" >/dev/null
+    mkdir -p "$(dirname "$CAP_DIR/${name}.png")"
     cp "$wsl_out" "$CAP_DIR/${name}.png"
     echo "$CAP_DIR/${name}.png"
     ;;
   click)  run -Action click  -X "$1" -Y "$2" ;;
+  bgclick) run -Action bgclick -X "$1" -Y "$2" ;;
+  bgshot)
+    name="${1:-latest}"
+    flat="${name//\//_}"
+    win_out="C:\\Users\\Public\\onmyoji_${flat}.png"
+    wsl_out="/mnt/c/Users/Public/onmyoji_${flat}.png"
+    run -Action bgshot -Out "$win_out" >/dev/null
+    mkdir -p "$(dirname "$CAP_DIR/${name}.png")"
+    cp "$wsl_out" "$CAP_DIR/${name}.png"
+    echo "$CAP_DIR/${name}.png"
+    ;;
   dclick) run -Action dclick -X "$1" -Y "$2" ;;
   move)   run -Action move   -X "$1" -Y "$2" ;;
   drag)   run -Action drag   -X "$1" -Y "$2" -X2 "$3" -Y2 "$4" -Dur "${5:-500}" ;;
