@@ -23,6 +23,16 @@ CLI = os.path.join(ROOT, "scripts", "onmyoji.sh")
 
 W, H = 1152, 679
 
+# Persistent controller (PowerShell server qua pipe) - nhanh hon spawn moi lan.
+# Khoi tao lazy de cac script khong dung control van import duoc.
+_CTL = None
+def _ctl():
+    global _CTL
+    if _CTL is None:
+        from control_client import Controller
+        _CTL = Controller()
+    return _CTL
+
 # vung dong cua HOME (san nha): chat bar + nhan vat. Dung de mask khi hash.
 DYNAMIC_MASKS = [
     (350, 95, 1000, 130),   # chat bar tren
@@ -31,14 +41,11 @@ DYNAMIC_MASKS = [
 
 
 def bgshot(name="_perc_tmp"):
-    out = subprocess.run([CLI, "bgshot", name], capture_output=True, text=True)
-    p = out.stdout.strip().splitlines()[-1] if out.stdout.strip() else None
-    return cv2.imread(p) if p else None
+    return _ctl().bgshot()
 
 
 def bgclick(x, y):
-    subprocess.run([CLI, "bgclick", str(int(x)), str(int(y))],
-                   capture_output=True, text=True)
+    _ctl().bgclick(x, y)
 
 
 # Cac VUNG TINH dung de tinh state-hash. Tranh nhan vat dong + cay + chat.
