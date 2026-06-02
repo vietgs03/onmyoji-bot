@@ -73,15 +73,25 @@ class WorldModel:
         if e not in self.edges:
             self.edges.append(e)
 
+    def _same_label_sids(self, sid):
+        """Cac sid cung LABEL (de gop buttons_tried theo man hinh logic).
+        Neu chua co label, chi tinh ban than sid."""
+        lbl = self.states.get(sid, {}).get("label")
+        if not lbl:
+            return [sid]
+        return [s for s, st in self.states.items() if st.get("label") == lbl]
+
     def mark_tried(self, sid, click):
         bt = self.states[sid]["buttons_tried"]
         if list(click) not in bt:
             bt.append(list(click))
 
     def is_tried(self, sid, click, tol=18):
-        for bx, by in self.states[sid]["buttons_tried"]:
-            if abs(bx - click[0]) <= tol and abs(by - click[1]) <= tol:
-                return True
+        # gop buttons_tried cua TAT CA states cung label (man hinh logic)
+        for s in self._same_label_sids(sid):
+            for bx, by in self.states[s].get("buttons_tried", []):
+                if abs(bx - click[0]) <= tol and abs(by - click[1]) <= tol:
+                    return True
         return False
 
     def neighbors(self, sid):
