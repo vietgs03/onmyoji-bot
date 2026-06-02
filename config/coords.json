@@ -1,0 +1,26 @@
+{
+  "window": { "expected_width": 1152, "expected_height": 679 },
+  "_note": "Toa do RELATIVE so voi goc tren-trai cua cua so game (1152x679). Neu doi kich thuoc cua so, can scale lai.",
+  "home_buttons": {
+    "explore":       [451, 188],
+    "summon":        [834, 240],
+    "town":          [531, 280],
+    "event":         [1078, 175],
+    "mail":          [1030, 72],
+    "chat":          [1092, 72],
+    "collection":    [126, 595],
+    "travelers_stop":[228, 595],
+    "warehouse":     [325, 595],
+    "team":          [424, 595],
+    "guild":         [523, 595],
+    "shop":          [622, 595],
+    "talisman_pass": [724, 595],
+    "friends":       [822, 595],
+    "onmyoji":       [922, 595],
+    "shikigami":     [1022, 595]
+  },
+  "common": {
+    "close_x_topright": [1115, 78],
+    "back_topleft":     [40, 80]
+  }
+}
