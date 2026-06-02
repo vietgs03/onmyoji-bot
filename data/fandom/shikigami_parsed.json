@@ -1,0 +1,2154 @@
+[
+  {
+    "id": 200,
+    "name_en": "Momo no Sei",
+    "name_cn": "桃花妖",
+    "name_jp": "桃の精",
+    "name_gl": "Momo",
+    "rarity": "SR"
+  },
+  {
+    "id": 201,
+    "name_en": "Yuki Onna",
+    "name_cn": "雪女",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 202,
+    "name_en": "Sanbi no Kitsune",
+    "name_cn": "三尾狐",
+    "name_jp": "三尾の狐",
+    "name_gl": "Mio",
+    "rarity": "R"
+  },
+  {
+    "id": 203,
+    "name_en": "Lantern Soul",
+    "name_cn": "灯笼鬼",
+    "name_jp": "提灯お化け",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 205,
+    "name_en": "Zashiki Warashi",
+    "name_cn": "座敷童子",
+    "name_jp": "Zashiki",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 206,
+    "name_en": "Koi no Sei",
+    "name_cn": "鲤鱼精",
+    "name_jp": "鯉の精",
+    "name_gl": "Koi",
+    "rarity": "R"
+  },
+  {
+    "id": 207,
+    "name_en": "Kyuumei Neko",
+    "name_cn": "九命猫",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 208,
+    "name_en": "Baketanuki",
+    "name_cn": "狸猫",
+    "name_jp": "化け狸",
+    "name_gl": "Tanuki",
+    "rarity": "R"
+  },
+  {
+    "id": 209,
+    "name_en": "Kappa",
+    "name_cn": "河童",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 210,
+    "name_en": "Shiro Mujou",
+    "name_cn": "鬼使白",
+    "name_jp": "白無常",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 211,
+    "name_en": "Kuro Mujou",
+    "name_cn": "鬼使黑",
+    "name_jp": "黒無常",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 212,
+    "name_en": "Oguna",
+    "name_cn": "童男",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 213,
+    "name_en": "Doujo",
+    "name_cn": "童女",
+    "name_jp": "Dojo",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 214,
+    "name_en": "Gaki",
+    "name_cn": "饿鬼",
+    "name_jp": "餓鬼",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 215,
+    "name_en": "Mouba",
+    "name_cn": "孟婆",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 216,
+    "name_en": "Kodokushi",
+    "name_cn": "巫蛊师",
+    "name_jp": "蠱毒師",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 217,
+    "name_en": "Ootengu",
+    "name_cn": "大天狗",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 218,
+    "name_en": "Karasu Tengu",
+    "name_cn": "鸦天狗",
+    "name_jp": "烏天狗",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 219,
+    "name_en": "Shuten Douji",
+    "name_cn": "酒吞童子",
+    "name_jp": "Shuten Doji",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 220,
+    "name_en": "Inugami",
+    "name_cn": "犬神",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 221,
+    "name_en": "Kamikui",
+    "name_cn": "食发鬼",
+    "name_jp": "髪喰い",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 222,
+    "name_en": "Samurai no Rei",
+    "name_cn": "武士之灵",
+    "name_jp": "侍の霊",
+    "name_gl": "Warrior Soul",
+    "rarity": "R"
+  },
+  {
+    "id": 223,
+    "name_en": "Hone Onna",
+    "name_cn": "骨女",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 224,
+    "name_en": "Ame Onna",
+    "name_cn": "雨女",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 225,
+    "name_en": "Kyonshii Otouto",
+    "name_cn": "跳跳弟弟",
+    "name_jp": "キョンシー弟",
+    "name_gl": "Kyonshi Ototo",
+    "rarity": "R"
+  },
+  {
+    "id": 226,
+    "name_en": "Kyonshii Imouto",
+    "name_cn": "跳跳妹妹",
+    "name_jp": "キョンシー妹",
+    "name_gl": "Kyonshi Imoto",
+    "rarity": "R"
+  },
+  {
+    "id": 227,
+    "name_en": "Heiyou",
+    "name_cn": "兵俑",
+    "name_jp": "Samurai X",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 228,
+    "name_en": "Ushi no Toki",
+    "name_cn": "丑时之女",
+    "name_jp": "丑の刻参り",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 230,
+    "name_en": "Hitotsume Kozou",
+    "name_cn": "独眼小僧",
+    "name_jp": "一つ目小僧",
+    "name_gl": "Hitotsume",
+    "rarity": "R"
+  },
+  {
+    "id": 231,
+    "name_en": "Kijo Momiji",
+    "name_cn": "鬼女红叶",
+    "name_jp": "鬼女紅葉",
+    "name_gl": "Momiji",
+    "rarity": "SR"
+  },
+  {
+    "id": 232,
+    "name_en": "Tesso",
+    "name_cn": "铁鼠",
+    "name_jp": "鉄鼠",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 233,
+    "name_en": "Kyonshii Ani",
+    "name_cn": "跳跳哥哥",
+    "name_jp": "キョンシー兄",
+    "name_gl": "Kyonshi Ani",
+    "rarity": "SR"
+  },
+  {
+    "id": 234,
+    "name_en": "Shouzu",
+    "name_cn": "椒图",
+    "name_jp": "椒図",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 236,
+    "name_en": "Kudagitsune",
+    "name_cn": "管狐",
+    "name_jp": "Kanko",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 237,
+    "name_en": "Yama Usagi",
+    "name_cn": "山兔",
+    "name_jp": "山兎",
+    "name_gl": "Yamausagi",
+    "rarity": "R"
+  },
+  {
+    "id": 238,
+    "name_en": "Hotarugusa",
+    "name_cn": "萤草",
+    "name_jp": "蛍草",
+    "name_gl": "Kusa",
+    "rarity": "R"
+  },
+  {
+    "id": 241,
+    "name_en": "Kochou no Sei",
+    "name_cn": "蝴蝶精",
+    "name_jp": "胡蝶の精",
+    "name_gl": "Chocho",
+    "rarity": "R"
+  },
+  {
+    "id": 242,
+    "name_en": "Kairaishi",
+    "name_cn": "傀儡师",
+    "name_jp": "Puppeteer",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 243,
+    "name_en": "Yamawaro",
+    "name_cn": "山童",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 244,
+    "name_en": "Kubinashi",
+    "name_cn": "首无",
+    "name_jp": "首なし",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 245,
+    "name_en": "Lantern Boy",
+    "name_cn": "提灯小僧",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 246,
+    "name_en": "Akashita",
+    "name_cn": "赤舌",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 247,
+    "name_en": "Umibouzu",
+    "name_cn": "海坊主",
+    "name_jp": "Umibozu",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 248,
+    "name_en": "Arakawa no Aruji",
+    "name_cn": "荒川之主",
+    "name_jp": "荒川の主",
+    "name_gl": "Lord Arakawa",
+    "rarity": "SSR"
+  },
+  {
+    "id": 249,
+    "name_en": "Satori",
+    "name_cn": "觉",
+    "name_jp": "覚",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 250,
+    "name_en": "Jikikaeru",
+    "name_cn": "青蛙瓷器",
+    "name_jp": "磁器蛙",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 251,
+    "name_en": "Hangan",
+    "name_cn": "判官",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 252,
+    "name_en": "Hououka",
+    "name_cn": "凤凰火",
+    "name_jp": "鳳凰火",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 253,
+    "name_en": "Kyuuketsu Hime",
+    "name_cn": "吸血姬",
+    "name_jp": "Vampira",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 254,
+    "name_en": "Youko",
+    "name_cn": "妖狐",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 255,
+    "name_en": "Enma",
+    "name_cn": "阎魔",
+    "name_jp": "閻魔",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 256,
+    "name_en": "Youkinshi",
+    "name_cn": "妖琴师",
+    "name_jp": "Maestro",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 257,
+    "name_en": "Yumekui",
+    "name_cn": "食梦貘",
+    "name_jp": "夢喰い",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 258,
+    "name_en": "Ryoumenbotoke",
+    "name_cn": "两面佛",
+    "name_jp": "両面仏",
+    "name_gl": "Ryomen",
+    "rarity": "SSR"
+  },
+  {
+    "id": 259,
+    "name_en": "Shishio",
+    "name_cn": "小鹿男",
+    "name_jp": "シシオ",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 260,
+    "name_en": "Kiyohime",
+    "name_cn": "清姬",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 261,
+    "name_en": "Kamaitachi",
+    "name_cn": "镰鼬",
+    "name_jp": "鎌鼬",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 262,
+    "name_en": "Ubume",
+    "name_cn": "姑获鸟",
+    "name_jp": "姑獲鳥",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 263,
+    "name_en": "Futakuchi Onna",
+    "name_cn": "二口女",
+    "name_jp": "Futakuchi",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 264,
+    "name_en": "Hakurou",
+    "name_cn": "白狼",
+    "name_jp": "Hakuro",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 265,
+    "name_en": "Ibaraki Douji",
+    "name_cn": "茨木童子",
+    "name_jp": "Ibaraki Doji",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 266,
+    "name_en": "Aoandon",
+    "name_cn": "青行灯",
+    "name_jp": "青行燈",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 267,
+    "name_en": "Sakura no Sei",
+    "name_cn": "樱花妖",
+    "name_jp": "桜の精",
+    "name_gl": "Sakura",
+    "rarity": "SR"
+  },
+  {
+    "id": 268,
+    "name_en": "Ebisu",
+    "name_cn": "惠比寿",
+    "name_jp": "恵比寿",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 269,
+    "name_en": "Youtou Hime",
+    "name_cn": "妖刀姬",
+    "name_jp": "Yoto Hime",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 270,
+    "name_en": "Jorougumo",
+    "name_cn": "络新妇",
+    "name_jp": "絡新婦",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 271,
+    "name_en": "Hannya",
+    "name_cn": "般若",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 272,
+    "name_en": "Ichimokuren",
+    "name_cn": "一目连",
+    "name_jp": "一目連",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 273,
+    "name_en": "Aobouzu",
+    "name_cn": "青坊主",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 274,
+    "name_en": "Korouka",
+    "name_cn": "古笼火",
+    "name_jp": "古籠火",
+    "name_gl": "Koroka",
+    "rarity": "R"
+  },
+  {
+    "id": 275,
+    "name_en": "Mannendake",
+    "name_cn": "万年竹",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 276,
+    "name_en": "Yasha",
+    "name_cn": "夜叉",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 277,
+    "name_en": "Kuro Douji",
+    "name_cn": "黑童子",
+    "name_jp": "黒童子",
+    "name_gl": "Kuro",
+    "rarity": "SR"
+  },
+  {
+    "id": 278,
+    "name_en": "Shiro Douji",
+    "name_cn": "白童子",
+    "name_jp": "Shiro",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 279,
+    "name_en": "Kachou Fuugetsu",
+    "name_cn": "花鸟卷",
+    "name_jp": "花鳥風月",
+    "name_gl": "Hana",
+    "rarity": "SSR"
+  },
+  {
+    "id": 280,
+    "name_en": "Kaguya Hime",
+    "name_cn": "辉夜姬",
+    "name_jp": "かぐや姫",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 281,
+    "name_en": "Enenra",
+    "name_cn": "烟烟罗",
+    "name_jp": "煙々羅",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 282,
+    "name_en": "Kingyo Hime",
+    "name_cn": "金鱼姬",
+    "name_jp": "金魚姫",
+    "name_gl": "Kingyo",
+    "rarity": "SR"
+  },
+  {
+    "id": 283,
+    "name_en": "Susabi",
+    "name_cn": "荒",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 285,
+    "name_en": "Chin",
+    "name_cn": "鸩",
+    "name_jp": "鴆",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 286,
+    "name_en": "Itsumade",
+    "name_cn": "以津真天",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 287,
+    "name_en": "Hako no Shoujo",
+    "name_cn": "匣中少女",
+    "name_jp": "匣の少女",
+    "name_gl": "Hako Shoujo",
+    "rarity": "SR"
+  },
+  {
+    "id": 288,
+    "name_en": "Higanbana",
+    "name_cn": "彼岸花",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 289,
+    "name_en": "Usagimaru",
+    "name_cn": "兔丸",
+    "name_jp": "Usagi",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 290,
+    "name_en": "Komatsumaru",
+    "name_cn": "小松丸",
+    "name_jp": "Komatsu",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 291,
+    "name_en": "Shoyou",
+    "name_cn": "书翁",
+    "name_jp": "書妖",
+    "name_gl": "Bukkuman",
+    "rarity": "SR"
+  },
+  {
+    "id": 292,
+    "name_en": "Yuki Douji",
+    "name_cn": "雪童子",
+    "name_jp": "Yuki",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 293,
+    "name_en": "Doumeki",
+    "name_cn": "百目鬼",
+    "name_jp": "Dodomeki",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 294,
+    "name_en": "Nura Rikuo",
+    "name_cn": "奴良陆生",
+    "name_jp": "奴良リクオ",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 295,
+    "name_en": "Oitsukigami",
+    "name_cn": "追月神",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 296,
+    "name_en": "Yamakaze",
+    "name_cn": "山风",
+    "name_jp": "山風",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 297,
+    "name_en": "Hiyoribou",
+    "name_cn": "日和坊",
+    "name_jp": "Hiyoribo",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 298,
+    "name_en": "Kaoru",
+    "name_cn": "薰",
+    "name_jp": "薫",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 300,
+    "name_en": "Tamamo no Mae",
+    "name_cn": "玉藻前",
+    "name_jp": "Tamamonomae",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 301,
+    "name_en": "Juzu",
+    "name_cn": "数珠",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 302,
+    "name_en": "Kosode no Te",
+    "name_cn": "小袖之手",
+    "name_jp": "小袖の手",
+    "name_gl": "Kosodenote",
+    "rarity": "R"
+  },
+  {
+    "id": 303,
+    "name_en": "Kisei",
+    "name_cn": "弈",
+    "name_jp": "棋聖",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 304,
+    "name_en": "Miketsu",
+    "name_cn": "御馔津",
+    "name_jp": "御饌津",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 305,
+    "name_en": "Kusuriuri",
+    "name_cn": "卖药郎",
+    "name_jp": "薬売り",
+    "name_gl": "Medicine Seller",
+    "rarity": "SSR"
+  },
+  {
+    "id": 306,
+    "name_en": "Mushishi",
+    "name_cn": "虫师",
+    "name_jp": "蟲師",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 307,
+    "name_en": "Nekomata",
+    "name_cn": "猫掌柜",
+    "name_jp": "猫又",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 308,
+    "name_en": "Hozuki",
+    "name_cn": "鬼灯",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 309,
+    "name_en": "Okou",
+    "name_cn": "阿香",
+    "name_jp": "お香",
+    "name_gl": "Oko",
+    "rarity": "SR"
+  },
+  {
+    "id": 310,
+    "name_en": "Peach Maki & Karashi",
+    "name_cn": "蜜桃&芥子",
+    "name_jp": "ピーチマキ＆芥子",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 311,
+    "name_en": "Menreiki",
+    "name_cn": "面灵气",
+    "name_jp": "面霊気",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 312,
+    "name_en": "Onikiri",
+    "name_cn": "鬼切",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 313,
+    "name_en": "Inuyasha",
+    "name_cn": "犬夜叉",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 314,
+    "name_en": "Sesshoumaru",
+    "name_cn": "杀生丸",
+    "name_jp": "殺生丸",
+    "name_gl": "Sesshomaru",
+    "rarity": "SSR"
+  },
+  {
+    "id": 315,
+    "name_en": "Shouu Ootengu",
+    "name_cn": "少羽大天狗",
+    "name_jp": "Jr Ootengu",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 316,
+    "name_en": "Hakuzousu",
+    "name_cn": "白藏主",
+    "name_jp": "Hakuzosu",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 317,
+    "name_en": "Ninmenju",
+    "name_cn": "人面树",
+    "name_jp": "Jinmenju",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 318,
+    "name_en": "Okikumushi",
+    "name_cn": "於菊虫",
+    "name_jp": "お菊虫",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 319,
+    "name_en": "Kikyou",
+    "name_cn": "桔梗",
+    "name_jp": "Kikyo",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 320,
+    "name_en": "Ittan Momen",
+    "name_cn": "一反木绵",
+    "name_jp": "一反木綿",
+    "name_gl": "Ittan",
+    "rarity": "SR"
+  },
+  {
+    "id": 321,
+    "name_en": "Okuribito",
+    "name_cn": "入殓师",
+    "name_jp": "納棺師",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 322,
+    "name_en": "Rengoku Ibaraki Douji",
+    "name_cn": "炼狱茨木童子",
+    "name_jp": "煉獄茨木童子",
+    "name_gl": "Inferno Ibaraki Doji",
+    "rarity": "SP"
+  },
+  {
+    "id": 323,
+    "name_en": "Tenjo Kudari",
+    "name_cn": "天井下",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 324,
+    "name_en": "Bakekujira",
+    "name_cn": "化鯨",
+    "name_jp": "Bake",
+    "name_gl": "kujira",
+    "rarity": "SR"
+  },
+  {
+    "id": 325,
+    "name_en": "Orochi",
+    "name_cn": "八岐大蛇",
+    "name_jp": "オロチ",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 326,
+    "name_en": "Inari Miketsu",
+    "name_cn": "稻荷神御馔津",
+    "name_jp": "稲荷御饌津",
+    "name_gl": "Divine Miketsu",
+    "rarity": "SP"
+  },
+  {
+    "id": 327,
+    "name_en": "Soufuu Ichimokuren",
+    "name_cn": "苍风一目连",
+    "name_jp": "蒼風一目連",
+    "name_gl": "Azurestorm Ichimokuren",
+    "rarity": "SP"
+  },
+  {
+    "id": 328,
+    "name_en": "Akakage Youtou Hime",
+    "name_cn": "赤影妖刀姫",
+    "name_jp": "Crimson Yoto",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 329,
+    "name_en": "Kainin",
+    "name_cn": "海忍",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 330,
+    "name_en": "Shiranui",
+    "name_cn": "不知火",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 331,
+    "name_en": "Oura Hannya",
+    "name_cn": "御怨般若",
+    "name_jp": "Vengeful Hannya",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 332,
+    "name_en": "Kujira",
+    "name_cn": "久次良",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 333,
+    "name_en": "Ootakemaru",
+    "name_cn": "大岳丸",
+    "name_jp": "大嶽丸",
+    "name_gl": "Otakemaru",
+    "rarity": "SSR"
+  },
+  {
+    "id": 334,
+    "name_en": "Gyourou Arakawa no Aruji",
+    "name_cn": "骁浪荒川之主",
+    "name_jp": "驍浪荒川の主",
+    "name_gl": "Waverider Lord Arakawa",
+    "rarity": "SP"
+  },
+  {
+    "id": 335,
+    "name_en": "Kani Hime",
+    "name_cn": "蟹姬",
+    "name_jp": "Kanihime",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 336,
+    "name_en": "Rukia Kuchiki",
+    "name_cn": "朽木露琪亚",
+    "name_jp": "朽木ルキア",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 337,
+    "name_en": "Ichigo Kurosaki",
+    "name_cn": "黑崎一护",
+    "name_jp": "黒崎 一護",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 338,
+    "name_en": "Takiyasha Hime",
+    "name_cn": "泷夜叉姬",
+    "name_jp": "滝夜叉姫",
+    "name_gl": "Takiyashahime",
+    "rarity": "SSR"
+  },
+  {
+    "id": 339,
+    "name_en": "Jinten Tamamo no Mae",
+    "name_cn": "烬天玉藻前",
+    "name_jp": "燼天玉藻前",
+    "name_gl": "Blazing Tamamonomae",
+    "rarity": "SP"
+  },
+  {
+    "id": 340,
+    "name_en": "Kamimai",
+    "name_cn": "纸舞",
+    "name_jp": "紙舞",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 341,
+    "name_en": "Oniou Shuten Douji",
+    "name_cn": "鬼王酒吞童子",
+    "name_jp": "Demoniac Shuten Doji",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 342,
+    "name_en": "Hoshiguma Douji",
+    "name_cn": "星熊童子",
+    "name_jp": "Hoshiguma Doji",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 343,
+    "name_en": "Tenken Jinshin Onikiri",
+    "name_cn": "天剑韧心鬼切",
+    "name_jp": "天剣刃心鬼切",
+    "name_gl": "Onikiri Reforged",
+    "rarity": "SP"
+  },
+  {
+    "id": 344,
+    "name_en": "Ungaikyou",
+    "name_cn": "云外镜",
+    "name_jp": "雲外鏡",
+    "name_gl": "Ungaikyo",
+    "rarity": "SSR"
+  },
+  {
+    "id": 345,
+    "name_en": "Kidoumaru",
+    "name_cn": "鬼童丸",
+    "name_jp": "Kidomaru",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 346,
+    "name_en": "Reikai Kingyo Hime",
+    "name_cn": "聆海金鱼姬",
+    "name_jp": "聆海金魚姫",
+    "name_gl": "Seawatch Kingyo",
+    "rarity": "SP"
+  },
+  {
+    "id": 347,
+    "name_en": "Enmusubi no Kami",
+    "name_cn": "缘结神",
+    "name_jp": "縁結神",
+    "name_gl": "Enmusubi",
+    "rarity": "SSR"
+  },
+  {
+    "id": 348,
+    "name_en": "Ukiyo Aoandon",
+    "name_cn": "浮世青行灯",
+    "name_jp": "浮世青行燈",
+    "name_gl": "Wordly Aoandon",
+    "rarity": "SP"
+  },
+  {
+    "id": 349,
+    "name_en": "Fuuri",
+    "name_cn": "风狸",
+    "name_jp": "風狸",
+    "name_gl": "Furi",
+    "rarity": "SR"
+  },
+  {
+    "id": 350,
+    "name_en": "Sasori Onna",
+    "name_cn": "蝎女",
+    "name_jp": "蠍女",
+    "name_gl": "Sasori",
+    "rarity": "SR"
+  },
+  {
+    "id": 351,
+    "name_en": "Suzuka Gozen",
+    "name_cn": "铃鹿御前",
+    "name_jp": "鈴鹿御前",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 352,
+    "name_en": "Bakkotsu Kiyohime",
+    "name_cn": "缚骨清姬",
+    "name_jp": "縛骨清姫",
+    "name_gl": "Lovebound Kiyohime",
+    "rarity": "SP"
+  },
+  {
+    "id": 353,
+    "name_en": "Kinnara",
+    "name_cn": "紧那罗",
+    "name_jp": "緊那羅",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 354,
+    "name_en": "Matsuyoi Ubume",
+    "name_cn": "待宵姑获鸟",
+    "name_jp": "待宵姑獲鳥",
+    "name_gl": "Guardian Ubume",
+    "rarity": "SP"
+  },
+  {
+    "id": 355,
+    "name_en": "Rokumei Ootakemaru",
+    "name_cn": "麓铭大岳丸",
+    "name_jp": "麓銘大嶽丸",
+    "name_gl": "Monumental Otakemaru",
+    "rarity": "SP"
+  },
+  {
+    "id": 356,
+    "name_en": "Senhime",
+    "name_cn": "千姬",
+    "name_jp": "千姫",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 357,
+    "name_en": "Hatsurei Yamakaze",
+    "name_cn": "初翎山风",
+    "name_jp": "初翎山風",
+    "name_gl": "Valiant Yamakaze",
+    "rarity": "SP"
+  },
+  {
+    "id": 358,
+    "name_en": "Yomei Higanbana",
+    "name_cn": "夜溟彼岸花",
+    "name_jp": "Nightveil Higanbana",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 359,
+    "name_en": "Tanjiro Kamado",
+    "name_cn": "灶门炭治郎",
+    "name_jp": "竈門炭治郎",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 360,
+    "name_en": "Nezuko Kamado",
+    "name_cn": "灶门祢豆子",
+    "name_jp": "竈門禰豆子",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 361,
+    "name_en": "Akaname",
+    "name_cn": "垢尝",
+    "name_jp": "垢嘗",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 362,
+    "name_en": "Semigoori Yuki Onna",
+    "name_cn": "蝉冰雪女",
+    "name_jp": "Frosty Yuki Onna",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 363,
+    "name_en": "Taishakuten",
+    "name_cn": "帝释天",
+    "name_jp": "帝釈天",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 364,
+    "name_en": "Asura",
+    "name_cn": "阿修罗",
+    "name_jp": "阿修羅",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 365,
+    "name_en": "Nyuunai-suzume",
+    "name_cn": "入内雀",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 366,
+    "name_en": "Kuusou Menreiki",
+    "name_cn": "空相面灵气",
+    "name_jp": "空相面霊気",
+    "name_gl": "Void Menreiki",
+    "rarity": "SP"
+  },
+  {
+    "id": 367,
+    "name_en": "Kaisei Kachou Fuugetsu",
+    "name_cn": "绘世花鸟卷",
+    "name_jp": "絵世花鳥風月",
+    "name_gl": "Virtuoso Hana",
+    "rarity": "SP"
+  },
+  {
+    "id": 368,
+    "name_en": "Amezaiku",
+    "name_cn": "饴细工",
+    "name_jp": "飴細工",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 369,
+    "name_en": "Shokurei",
+    "name_cn": "食灵",
+    "name_jp": "食霊",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 370,
+    "name_en": "Mishige",
+    "name_cn": "饭笥",
+    "name_jp": "飯笥",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 371,
+    "name_en": "Kawazaru",
+    "name_cn": "川猿",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 372,
+    "name_en": "Inaba Kaguya Hime",
+    "name_cn": "因幡辉夜姬",
+    "name_jp": "因幡かぐや姫",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 373,
+    "name_en": "Yato no Kami",
+    "name_cn": "夜刀神",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 375,
+    "name_en": "Kagewani",
+    "name_cn": "影鳄",
+    "name_jp": "影鰐",
+    "name_gl": null,
+    "rarity": "R"
+  },
+  {
+    "id": 376,
+    "name_en": "Suzuhiko Hime",
+    "name_cn": "铃彦姬",
+    "name_jp": "鈴彦姫",
+    "name_gl": "Suzuhikohime",
+    "rarity": "SSR"
+  },
+  {
+    "id": 377,
+    "name_en": "Mujin Yama Usagi",
+    "name_cn": "梦寻山兔",
+    "name_jp": "夢尋山兎",
+    "name_gl": "Ninja Yamausagi",
+    "rarity": "SP"
+  },
+  {
+    "id": 378,
+    "name_en": "Garuda",
+    "name_cn": "迦楼羅",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 379,
+    "name_en": "Fukengaku",
+    "name_cn": "不见岳",
+    "name_jp": "不見岳",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 382,
+    "name_en": "Umi no Chou",
+    "name_cn": "灵海蝶",
+    "name_jp": "海の蝶",
+    "name_gl": "Uminochou",
+    "rarity": "SR"
+  },
+  {
+    "id": 383,
+    "name_en": "Kamiochi Orochi",
+    "name_cn": "神堕八岐大蛇",
+    "name_jp": "神堕オロチ",
+    "name_gl": "Fallen God Orochi",
+    "rarity": "SP"
+  },
+  {
+    "id": 384,
+    "name_en": "Oshiroi Baba",
+    "name_cn": "粉婆婆",
+    "name_jp": "白粉婆",
+    "name_gl": "Oshiroibaba",
+    "rarity": "SR"
+  },
+  {
+    "id": 385,
+    "name_en": "Daiyamaten Enma",
+    "name_cn": "大夜摩天阎魔",
+    "name_jp": "大夜摩天閻魔",
+    "name_gl": "Yamalord Enma",
+    "rarity": "SP"
+  },
+  {
+    "id": 386,
+    "name_en": "Zenitsu Agatsuma",
+    "name_cn": "我妻善逸",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 387,
+    "name_en": "Inosuke Hashibira",
+    "name_cn": "嘴平伊之助",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 388,
+    "name_en": "Kokorogari Kijo Momiji",
+    "name_cn": "心狩鬼女红叶",
+    "name_jp": "心狩鬼女紅葉",
+    "name_gl": "Heartseeker Momiji",
+    "rarity": "SP"
+  },
+  {
+    "id": 389,
+    "name_en": "Susanoo",
+    "name_cn": "须佐之男",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 390,
+    "name_en": "Shinkei Susabi",
+    "name_cn": "神启荒",
+    "name_jp": "神啓荒",
+    "name_gl": "Divine Prophet Susabi",
+    "rarity": "SP"
+  },
+  {
+    "id": 391,
+    "name_en": "Jinkougyou",
+    "name_cn": "寻香行",
+    "name_jp": "尋香行",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 392,
+    "name_en": "Shiki",
+    "name_cn": "季",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 393,
+    "name_en": "Zenshin Ungaikyou",
+    "name_cn": "禅心云外镜",
+    "name_jp": "禅心雲外鏡",
+    "name_gl": "Zen Ungaikyo",
+    "rarity": "SP"
+  },
+  {
+    "id": 394,
+    "name_en": "Tsukuyomi",
+    "name_cn": "月读",
+    "name_jp": "月読",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 395,
+    "name_en": "Ryuukou Oitsukigami",
+    "name_cn": "流光追月神",
+    "name_jp": "Luminary Oitsuki",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 396,
+    "name_en": "Shura Kidoumaru",
+    "name_cn": "修罗鬼童丸",
+    "name_jp": "修羅鬼童丸",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 397,
+    "name_en": "Gintoki Sakata",
+    "name_cn": "坂田银时",
+    "name_jp": "坂田銀時",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 398,
+    "name_en": "Amanozako",
+    "name_cn": "天逆每",
+    "name_jp": "天逆毎",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 399,
+    "name_en": "Kotodama",
+    "name_cn": "言灵",
+    "name_jp": "言霊",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 400,
+    "name_en": "Grave Digger",
+    "name_cn": "盗墓小鬼",
+    "name_jp": "墓荒らしの霊",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 401,
+    "name_en": "Parasite",
+    "name_cn": "寄生魂",
+    "name_jp": "寄生霊",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 403,
+    "name_en": "Umbrella",
+    "name_cn": "唐纸伞妖",
+    "name_jp": "からかさ小僧",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 404,
+    "name_en": "Green Imp",
+    "name_cn": "天邪鬼绿",
+    "name_jp": "天邪鬼緑",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 405,
+    "name_en": "Red Imp",
+    "name_cn": "天邪鬼赤",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 406,
+    "name_en": "Yellow Imp",
+    "name_cn": "天邪鬼黄",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 407,
+    "name_en": "Blue Imp",
+    "name_cn": "天邪鬼青",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 408,
+    "name_en": "Hahakigami",
+    "name_cn": "帚神",
+    "name_jp": "箒神",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 409,
+    "name_en": "Nurikabe",
+    "name_cn": "涂壁",
+    "name_jp": "ぬりかべ",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 414,
+    "name_en": "Ootengu Frog",
+    "name_cn": "大天狗呱",
+    "name_jp": "大天狗蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 415,
+    "name_en": "Shuten Frog",
+    "name_cn": "酒吞呱",
+    "name_jp": "酒呑蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 416,
+    "name_en": "Arakawa Frog",
+    "name_cn": "荒川呱",
+    "name_jp": "荒川蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 417,
+    "name_en": "Enma Frog",
+    "name_cn": "阎魔呱",
+    "name_jp": "閻魔蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 418,
+    "name_en": "Ryoumenbotoke Frog",
+    "name_cn": "两面佛呱",
+    "name_jp": "両面仏蛙",
+    "name_gl": "Ryomen Frog",
+    "rarity": "N"
+  },
+  {
+    "id": 419,
+    "name_en": "Shishio Frog",
+    "name_cn": "小鹿男呱",
+    "name_jp": "シシオ蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 420,
+    "name_en": "Ibaraki Frog",
+    "name_cn": "茨木呱",
+    "name_jp": "茨木蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 421,
+    "name_en": "Aoandon Frog",
+    "name_cn": "青行灯呱",
+    "name_jp": "青行燈蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 422,
+    "name_en": "Youtou Hime Frog",
+    "name_cn": "妖刀姬呱",
+    "name_jp": "妖刀姫蛙",
+    "name_gl": "Yoto Hime Frog",
+    "rarity": "N"
+  },
+  {
+    "id": 423,
+    "name_en": "Ichimokuren Frog",
+    "name_cn": "一目连呱",
+    "name_jp": "一目連蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 424,
+    "name_en": "Kachou Fuugetsu Frog",
+    "name_cn": "花鸟卷呱",
+    "name_jp": "花鳥風月蛙",
+    "name_gl": "Hana Frog",
+    "rarity": "N"
+  },
+  {
+    "id": 425,
+    "name_en": "Kaguya Hime Frog",
+    "name_cn": "辉夜姬呱",
+    "name_jp": "かぐや姫蛙",
+    "name_gl": "Kaguya Frog",
+    "rarity": "N"
+  },
+  {
+    "id": 426,
+    "name_en": "Susabi Frog",
+    "name_cn": "荒呱",
+    "name_jp": "荒蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 427,
+    "name_en": "Higanbana Frog",
+    "name_cn": "彼岸花呱",
+    "name_jp": "彼岸花蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 428,
+    "name_en": "Yuki Douji Frog",
+    "name_cn": "雪童子呱",
+    "name_jp": "雪童子蛙",
+    "name_gl": "Yuki Frog",
+    "rarity": "N"
+  },
+  {
+    "id": 429,
+    "name_en": "Tamamo no Mae Frog",
+    "name_cn": "玉藻前呱",
+    "name_jp": "玉藻前蛙",
+    "name_gl": "Tamamonomae Frog",
+    "rarity": "N"
+  },
+  {
+    "id": 430,
+    "name_en": "Miketsu Frog",
+    "name_cn": "御馔津呱",
+    "name_jp": "御饌津蛙",
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 433,
+    "name_en": "Namahage Oni",
+    "name_cn": null,
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "N"
+  },
+  {
+    "id": 500,
+    "name_en": "Kagura & Sadaharu",
+    "name_cn": "神乐&定春",
+    "name_jp": "神楽&定春",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 550,
+    "name_en": "Kujaku-Myouou",
+    "name_cn": "孔雀明王",
+    "name_jp": "Kujaku",
+    "name_gl": "Myoo",
+    "rarity": "SSR"
+  },
+  {
+    "id": 551,
+    "name_en": "Jinshin Shishio",
+    "name_cn": "寻森小鹿男",
+    "name_jp": "尋森シシオ",
+    "name_gl": "Greenwarden Shishio",
+    "rarity": "SP"
+  },
+  {
+    "id": 552,
+    "name_en": "Miakashi",
+    "name_cn": "慧明灯",
+    "name_jp": "御明かし",
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 553,
+    "name_en": "Wenren Yixuan",
+    "name_cn": "闻人翊悬",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 554,
+    "name_en": "Negai Tsumugi Enmusubi no Kami",
+    "name_cn": "纺愿缘结神",
+    "name_jp": "愿紡縁結神",
+    "name_gl": "Bondweaver Enmusubi",
+    "rarity": "SP"
+  },
+  {
+    "id": 555,
+    "name_en": "Byounen Hotarugusa",
+    "name_cn": "渺念萤草",
+    "name_jp": "渺念蛍草",
+    "name_gl": "Kusa Regrown",
+    "rarity": "SP"
+  },
+  {
+    "id": 556,
+    "name_en": "Amaterasu",
+    "name_cn": "天照",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 557,
+    "name_en": "Izanami",
+    "name_cn": "伊邪那美",
+    "name_jp": "イザナミ",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 558,
+    "name_en": "Nusubitogami",
+    "name_cn": "盗人神",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 559,
+    "name_en": "Honshin Sanbi no Kitsune",
+    "name_cn": "本真三尾狐",
+    "name_jp": "本真三尾の狐",
+    "name_gl": "Trueself Mio",
+    "rarity": "SP"
+  },
+  {
+    "id": 561,
+    "name_en": "Taki",
+    "name_cn": "泷",
+    "name_jp": "瀧",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 562,
+    "name_en": "Eikyo Senhime",
+    "name_cn": "鲸汐千姬",
+    "name_jp": "盈虚千姫",
+    "name_gl": "Senhime Resurgent",
+    "rarity": "SP"
+  },
+  {
+    "id": 563,
+    "name_en": "Hatsune Miku",
+    "name_cn": "初音未来",
+    "name_jp": "初音ミク",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 564,
+    "name_en": "Kagamine Rin & Len",
+    "name_cn": "镜音铃·连",
+    "name_jp": "鏡音リン・レン",
+    "name_gl": "Kagamine Rin/Len",
+    "rarity": "SSR"
+  },
+  {
+    "id": 565,
+    "name_en": "Shoufuku Zashiki Warashi",
+    "name_cn": "福悦座敷童子",
+    "name_jp": "招福座敷童子",
+    "name_gl": "Fortunegiver Zashiki",
+    "rarity": "SP"
+  },
+  {
+    "id": 566,
+    "name_en": "Gyoujitsu Ebisu",
+    "name_cn": "晨晖惠比寿",
+    "name_jp": "暁日恵比寿",
+    "name_gl": "Returner Ebisu",
+    "rarity": "SP"
+  },
+  {
+    "id": 567,
+    "name_en": "Shentu Ziye",
+    "name_cn": "申屠子夜",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 568,
+    "name_en": "Ryougin Suzuka Gozen",
+    "name_cn": "龙吟铃鹿御前",
+    "name_jp": "龍吟鈴鹿御前",
+    "name_gl": "Draconic Suzuka Gozen",
+    "rarity": "SP"
+  },
+  {
+    "id": 569,
+    "name_en": "Nekogawa",
+    "name_cn": "猫川",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 570,
+    "name_en": "Magatsugami",
+    "name_cn": "祸津神",
+    "name_jp": "禍津神",
+    "name_gl": "Magatsuhi",
+    "rarity": "SSR"
+  },
+  {
+    "id": 571,
+    "name_en": "Tagitsuhime",
+    "name_cn": "湍津姫",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SR"
+  },
+  {
+    "id": 572,
+    "name_en": "Younen Enenra",
+    "name_cn": "遥念烟烟罗",
+    "name_jp": "遥念煙々羅",
+    "name_gl": "Nostalgic Enenra",
+    "rarity": "SP"
+  },
+  {
+    "id": 573,
+    "name_en": "Ryukaku",
+    "name_cn": "龙珏",
+    "name_jp": "瀧珏",
+    "name_gl": "Loongjue",
+    "rarity": "SSR"
+  },
+  {
+    "id": 574,
+    "name_en": "Shinyuu Inugami",
+    "name_cn": "心友犬神",
+    "name_jp": "Bosomboddy Inugami",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 575,
+    "name_en": "Fuuyoukun",
+    "name_cn": "封阳君",
+    "name_jp": "封陽君",
+    "name_gl": "Fengyang",
+    "rarity": "SSR"
+  },
+  {
+    "id": 576,
+    "name_en": "Natsume & Nyanko-sensei",
+    "name_cn": "夏目&猫老师",
+    "name_jp": "夏目&ニャンコ先生",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 577,
+    "name_en": "Kikinyou",
+    "name_cn": "鬼金羊",
+    "name_jp": "Guijinyang",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 578,
+    "name_en": "Shinjou Hoshiguma Douji",
+    "name_cn": "神酿星熊童子",
+    "name_jp": "神釀星熊童子",
+    "name_gl": "Ambrosial Hoshiguma Doji",
+    "rarity": "SP"
+  },
+  {
+    "id": 579,
+    "name_en": "Youon Kinnara",
+    "name_cn": "瑶音紧那罗",
+    "name_jp": "瑶音緊那羅",
+    "name_gl": "Panharmonic Kinnara",
+    "rarity": "SP"
+  },
+  {
+    "id": 580,
+    "name_en": "Seishi Hiyoribou",
+    "name_cn": "晴思日和坊",
+    "name_jp": "Sungraced Hiyoribou",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 581,
+    "name_en": "Karuta",
+    "name_cn": "歌留多",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 582,
+    "name_en": "Megurine Luka",
+    "name_cn": "巡音流歌",
+    "name_jp": "巡音ルカ",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 583,
+    "name_en": "Himiko",
+    "name_cn": "卑弥呼",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 584,
+    "name_en": "Jiyou Takiyasha Hime",
+    "name_cn": "时曜泷夜叉姬",
+    "name_jp": "時曜滝夜叉姫",
+    "name_gl": "Glorious Takiyashahime",
+    "rarity": "SP"
+  },
+  {
+    "id": 585,
+    "name_en": "Gashadokuro",
+    "name_cn": "荒骷髅",
+    "name_jp": "餓者髑髏",
+    "name_gl": "Odokuro",
+    "rarity": "SSR"
+  },
+  {
+    "id": 586,
+    "name_en": "Unjou Fukengaku",
+    "name_cn": "云间不见岳",
+    "name_jp": "雲上不見岳",
+    "name_gl": "Lavaforged Fukengaku",
+    "rarity": "SP"
+  },
+  {
+    "id": 587,
+    "name_en": "Sakura Kinomoto",
+    "name_cn": "木之本樱",
+    "name_jp": "木之本さくら",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 588,
+    "name_en": "Syaoran Li",
+    "name_cn": "李小狼",
+    "name_jp": "リ・シャオラン",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 590,
+    "name_en": "Myoushu Kyuumei Neko",
+    "name_cn": "妙主九命猫",
+    "name_jp": "Meowlord Kyuumei Neko",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 591,
+    "name_en": "Yuki Gozen",
+    "name_cn": "雪御前",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 592,
+    "name_en": "Taira no Masakado",
+    "name_cn": "平将门",
+    "name_jp": "平将門",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 593,
+    "name_en": "UR Youtou Hime",
+    "name_cn": "妖刀姬·绯夜猎刃",
+    "name_jp": "Scarlet Nightedge Yoto Hime",
+    "name_gl": null,
+    "rarity": null
+  },
+  {
+    "id": 594,
+    "name_en": "Yumebiki Kochou no Sei",
+    "name_cn": null,
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": null
+  },
+  {
+    "id": 595,
+    "name_en": "Yumeyama Hakuzousu",
+    "name_cn": "梦山白藏主",
+    "name_jp": "夢山白蔵主",
+    "name_gl": "Hakuzosu Unbound",
+    "rarity": null
+  },
+  {
+    "id": 596,
+    "name_en": "Kannazuki",
+    "name_cn": null,
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 597,
+    "name_en": "Kuzunoha",
+    "name_cn": "葛叶",
+    "name_jp": "葛の葉",
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 598,
+    "name_en": "Shakubana Momo no Sei",
+    "name_cn": "灼华桃花妖",
+    "name_jp": "灼華桃の精",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 599,
+    "name_en": "Shokugetsu Kyuuketsu Hime",
+    "name_cn": "蚀月吸血姬",
+    "name_jp": "蝕月吸血姫",
+    "name_gl": null,
+    "rarity": "SP"
+  },
+  {
+    "id": 600,
+    "name_en": "Shinigami",
+    "name_cn": "市加美",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 601,
+    "name_en": "Omoikane no Kami",
+    "name_cn": "阶式神",
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SSR"
+  },
+  {
+    "id": 602,
+    "name_en": "Tenkamei Suzuhiko Hime",
+    "name_cn": null,
+    "name_jp": null,
+    "name_gl": null,
+    "rarity": "SP"
+  }
+]

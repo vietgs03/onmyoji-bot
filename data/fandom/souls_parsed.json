@@ -1,0 +1,692 @@
+[
+  {
+    "name": "Kosode-no-Te",
+    "no": "001",
+    "name_cn": "小袖之手",
+    "name_jp": "小袖の手",
+    "name_en": "Kosode-no-Te",
+    "type": "N/A",
+    "combo2": "N/A",
+    "combo4": "When HP is below 30%, gain a shield that can absorb 10% of lost HP"
+  },
+  {
+    "name": "Pearl",
+    "no": "1",
+    "name_cn": "珍珠 / Zhēnzhū",
+    "name_jp": "真珠 / Shinju",
+    "name_en": "Pearl",
+    "type": "DEF",
+    "combo2": "Increases defense by 30%",
+    "combo4": "When healing, creates an undispellable shield that can absorb damage equal to 30% of the healing, lasts for 2 turns."
+  },
+  {
+    "name": "Dice Sprite",
+    "no": "2",
+    "name_cn": "骰子鬼 / Shǎizi guǐ",
+    "name_jp": "骰子の鬼 / Saikoro no oni",
+    "name_en": "Dice Spirit",
+    "type": "Resist",
+    "combo2": "Increases resist by 15%",
+    "combo4": "When resisting, launches a counter-attack at the source. Damage for the counter-attack is increased by 50%. Move bar is increased by 25% when inflicted with a control effect."
+  },
+  {
+    "name": "Suzume",
+    "no": "002",
+    "name_cn": "铃女",
+    "name_jp": "鈴女",
+    "name_en": "Suzume",
+    "type": "N/A",
+    "combo2": "N/A",
+    "combo4": "When landing critical hits has 100% chance to push enemy move bar by 30%"
+  },
+  {
+    "name": "Aosaginohi​",
+    "no": "003",
+    "name_cn": "青鸾火",
+    "name_jp": "青鷺火",
+    "name_en": "Aosaginohi​",
+    "type": "N/A",
+    "combo2": "N/A",
+    "combo4": "When KO'd, all allies are healed by 20% of the equipper's max HP"
+  },
+  {
+    "name": "Sea Sprite",
+    "no": "3",
+    "name_cn": "蚌精 / Bàng jīng",
+    "name_jp": "蛤の精 / Hamaguri no Sei",
+    "name_en": "Sea Sprite",
+    "type": "HIT",
+    "combo2": "Increases HIT by 15%",
+    "combo4": "Grants all allies with a 30pxshield that can absorb damage equal to 10% of the eqipper's HP at the start of battle."
+  },
+  {
+    "name": "Temptress",
+    "no": "4",
+    "name_cn": "魅妖 / Mèi yāo",
+    "name_jp": "魅妖 / Miyō",
+    "name_en": "Temptress",
+    "type": "DEF",
+    "combo2": "Increases defense by 30%",
+    "combo4": "When dealing damage has a 25% base chance to inflict 30pxconfuse on the target, lasts for 1 turn."
+  },
+  {
+    "name": "Youtou",
+    "no": "004",
+    "name_cn": "妖刀",
+    "name_jp": "妖刀",
+    "name_en": "Youtou",
+    "type": "N/A",
+    "combo2": "N/A",
+    "combo4": "When dealing damage, there is a 20% chance to do 40% additional damage."
+  },
+  {
+    "name": "Seductress",
+    "no": "5",
+    "name_cn": "针女 / Zhēn nǚ",
+    "name_jp": "針女 / Hari-onna",
+    "name_en": "Seductress",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%",
+    "combo4": "When dealing crit attacks, has a 40% chance to deal extra damage equal to 10% of the target's max HP. Cannot exceed 120% of the equipper's attack."
+  },
+  {
+    "name": "Snow Spirit",
+    "no": "6",
+    "name_cn": "雪幽魂 / Xuě yōuhún",
+    "name_jp": "雪幽魂 / Setsuyūkon",
+    "name_en": "Snow Spirit",
+    "type": "DEF",
+    "combo2": "Increases DEF by 30%",
+    "combo4": "When dealing damage, has a 15% base chance (chance increases to 30% if target has Slow) to inflict targets with Freeze when dealing damage, lasts for 1 turn. When attacked, decreases attacker’s 30pxSPD by 30, lasts for 1 turn."
+  },
+  {
+    "name": "Jizo Statue",
+    "no": "7",
+    "name_cn": "地藏像 / De cáng xiàng",
+    "name_jp": "地蔵の像 / Jizō no Zō",
+    "name_en": "Jizo Satue",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "When receiving a crit attack, gain a 30pxshield that can absorb 10% of damage received and has 30% chance to grant random allies shields, chance to trigger is lowered by 60% against taunted targets."
+  },
+  {
+    "name": "Nightwing",
+    "no": "8",
+    "name_cn": "蝠翼 / Fú yì",
+    "name_jp": "蝙蝠の翼 / Kōmori no Tsubasa",
+    "name_en": "Nightwing",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "When dealing damage, gain 20% HP Steal."
+  },
+  {
+    "name": "Holy Flame",
+    "no": "9",
+    "name_cn": "涅槃之火 / Nièpán zhī huǒ",
+    "name_jp": "再生の火 / Saisei no hi",
+    "name_en": "Holy Flame",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "At the end of turn, if HP is below 30%, 15% of max HP will be restored."
+  },
+  {
+    "name": "Samisen",
+    "no": "10",
+    "name_cn": "三味 / Sānwèi",
+    "name_jp": "三味 / Shami",
+    "name_en": "Samisen",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%",
+    "combo4": "When an ally is inflicted with a control effect, the equipper's 30pxspeed is increased by 30, lasts for 2 turns. Cannot be dispelled, max of 2 layers."
+  },
+  {
+    "name": "Mimic",
+    "no": "11",
+    "name_cn": "魍魉之匣 / Wǎng liǎng zhī xiá",
+    "name_jp": "魍魎の匣 / Mouryō no hako",
+    "name_en": "Mimic",
+    "type": "RES",
+    "combo2": "Increases resist by 15%",
+    "combo4": "When dealing damage has 25% base chance to inflict a daze, silence, 30px40% reduced healing or confuse."
+  },
+  {
+    "name": "Boroboroton",
+    "no": "12",
+    "name_cn": "被服 / Bèifú",
+    "name_jp": "暮露暮露団 / Boroboroton",
+    "name_en": "Boroboroton",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "Received damage is decreased 30%."
+  },
+  {
+    "name": "Fortune Cat",
+    "no": "13",
+    "name_cn": "招财猫 / Zhāo cái māo",
+    "name_jp": "招き猫 / Maneki Neko",
+    "name_en": "Fortune Cat",
+    "type": "DEF",
+    "combo2": "Increases defense by 30%.",
+    "combo4": "Has a 50% chance to gain 2 onibi at the start of turn."
+  },
+  {
+    "name": "Shy Soul",
+    "no": "14",
+    "name_cn": "反枕 / Fǎn zhěn",
+    "name_jp": "枕返し / Makuragaeshi",
+    "name_en": "Shy Soul",
+    "type": "DEF",
+    "combo2": "Increases defense by 30%",
+    "combo4": "When dealing damage has 23% base chance to inflict 30pxsleep on the target, lasts for 1 turn."
+  },
+  {
+    "name": "Soultaker",
+    "no": "15",
+    "name_cn": "轮入道 / Lún rùdào",
+    "name_jp": "輪入道 / Wanyūdō",
+    "name_en": "Soultaker",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "Has a 20% chance to gain a new turn at the end of turn."
+  },
+  {
+    "name": "Dawn Fairy",
+    "no": "16",
+    "name_cn": "日女巳时 / Rì nǚ sìshí",
+    "name_jp": "日女巳時 / Himemidoki",
+    "name_en": "Dawn Fairy",
+    "type": "DEF",
+    "combo2": "Increases defense by 30%",
+    "combo4": "When dealing damage has 20% chance to reduce target's action bar by 30%, chance is increased to 30% against targets with buff effects."
+  },
+  {
+    "name": "Mirror Lady",
+    "no": "17",
+    "name_cn": "镜姬 / Jìng jī",
+    "name_jp": "鏡姫 / Kagami-hime",
+    "name_en": "Mirror Lady",
+    "type": "HP",
+    "combo2": "Increases HP by 15%.",
+    "combo4": "Has a 30% chance of reflecting 100% of damage received, chance decreases by 60% against 30pxtaunted targets."
+  },
+  {
+    "name": "Priestess",
+    "no": "18",
+    "name_cn": "钟灵 / Zhōnglíng",
+    "name_jp": "鍾霊 / Shourei",
+    "name_en": "Priestess",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "When dealing damage has a 10% chance of inflicting 30pxdaze on the target, lasts for 1 turn. If there are no enemies inflicted with Daze, chance increases to 20%."
+  },
+  {
+    "name": "Scarlet",
+    "no": "19",
+    "name_cn": "狰 / Zhēng",
+    "name_jp": "猙 / Sou",
+    "name_en": "Scarlet",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "Has a 35% chance to counter-attack with a normal attack after receiving damage, chance is decreased by 60% against 30pxtaunted targets."
+  },
+  {
+    "name": "Azure Basan",
+    "no": "20",
+    "name_cn": "火灵 / Huǒ líng",
+    "name_jp": "火霊 / Karei",
+    "name_en": "Azure Basan",
+    "type": "HIT",
+    "combo2": "Increases HIT by 15%",
+    "combo4": "Gain 3 onibi at the start of a round."
+  },
+  {
+    "name": "House Imp",
+    "no": "21",
+    "name_cn": "鸣屋 / Míng wū",
+    "name_jp": "家鳴 / Yanari",
+    "name_en": "House Imp",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "Increases damage by 45% when attacking a target inflicted with a control effect."
+  },
+  {
+    "name": "Watcher",
+    "no": "22",
+    "name_cn": "心眼 / Xīnyǎn",
+    "name_jp": "心眼 / Shingan",
+    "name_en": "Watcher",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "Increases damage dealt by 10% for each 15% of target’s HP reduced."
+  },
+  {
+    "name": "Tree Spirit",
+    "no": "23",
+    "name_cn": "树妖 / Shù yāo",
+    "name_jp": "樹妖 / Juyō",
+    "name_en": "Tree Spirit",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "All healing effects increase by 20% (increases by 50% instead if equipper's HP is below 20%)."
+  },
+  {
+    "name": "Claws",
+    "no": "24",
+    "name_cn": "网切 / Wǎng qiè",
+    "name_jp": "網切 / Amikiri",
+    "name_en": "Claws",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%",
+    "combo4": "When dealing damage, has a 50% chance to ignore 45% of target's defense."
+  },
+  {
+    "name": "Harpy",
+    "no": "25",
+    "name_cn": "阴摩罗 / Yīn mó luó",
+    "name_jp": "陰摩羅鬼 / Onmoraki",
+    "name_en": "Harpy",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "Gain 3 onibi upon KO'ing a target."
+  },
+  {
+    "name": "Fenikkusu",
+    "no": "26",
+    "name_cn": "伤魂鸟 / Shāng hún niǎo",
+    "name_jp": "悲鳴鳥 / Himeidori",
+    "name_en": "Fenikkusu",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%.",
+    "combo4": "When a \"non-monster target\" is KO’d, restores the equipper's max HP by 20% and increases their 30pxdamage by 20% (up to 120%) until the end of battle."
+  },
+  {
+    "name": "Shadow",
+    "no": "27",
+    "name_cn": "破势 / Pò shì",
+    "name_jp": "破勢 / Hasei",
+    "name_en": "Shadow",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%.",
+    "combo4": "Increases damage by 40% against targets with more than 70% HP."
+  },
+  {
+    "name": "Tomb Guard",
+    "no": "28",
+    "name_cn": "镇墓兽 / Zhèn mù shòu",
+    "name_jp": "墓守り / Hakamori",
+    "name_en": "Tomb Guard",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%",
+    "combo4": "Increases 30pxcrit damage by 0.5% per 1% of HP lost."
+  },
+  {
+    "name": "Tree Nymph",
+    "no": "29",
+    "name_cn": "木魅 / Mù mèi",
+    "name_jp": "玉樹 / Gyokuju",
+    "name_en": "Tree Nymph",
+    "type": "DEF",
+    "combo2": "Increases defense by 30%",
+    "combo4": "Has a 25% chance to decrease target's onibi by 1 when an ally takes damage, chance decreases by 60% against 30pxtaunted targets. Effect does not stack with multiple hits."
+  },
+  {
+    "name": "Soul Edge",
+    "no": "30",
+    "name_cn": "薙魂 / Tì hún",
+    "name_jp": "薙魂 / Teikon",
+    "name_en": "Soul Edge",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "When an ally is attacked by a single target attack the equipper has a 50% chance of reducing the ally's received damage by 20% and sharing 40% of the remaining damage."
+  },
+  {
+    "name": "Senecio",
+    "no": "31",
+    "name_cn": "返魂香 / Fǎn hún xiāng",
+    "name_jp": "返魂香 / Hangonkō",
+    "name_en": "Senecio",
+    "type": "RES",
+    "combo2": "Increases resist by 15%",
+    "combo4": "When receiving damage, has 25% base chance to inflict the attacker with 30pxdaze, lasts for 1 turn. Chance is decreased by 60% against 30pxtaunted targets, if the equipper is attacked multiple times it will only activate once."
+  },
+  {
+    "name": "Kyoukotsu",
+    "no": "32",
+    "name_cn": "狂骨 / Kuang gu",
+    "name_jp": "狂骨 / Kyoukotsu",
+    "name_en": "Kyokotsu",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "When dealing damage, damage is increased by 8% damage per onibi currently have upon using a skill."
+  },
+  {
+    "name": "Yamabiko",
+    "no": "33",
+    "name_cn": "幽谷响 / Youguxiang",
+    "name_jp": "幽谷響 / Yamabiko",
+    "name_en": "Yamabiko",
+    "type": "RES",
+    "combo2": "Increases RES by 15%",
+    "combo4": "When a control effect is successfully resisted, has a 50% chance to reflect the effect to the source and is guaranteed to inflict them with the resisted control effect."
+  },
+  {
+    "name": "Wisp",
+    "no": "44",
+    "name_cn": "遗念火 / Yí niàn huǒ",
+    "name_jp": "遺念火 / Inenbi",
+    "name_en": "Wisp",
+    "type": "HIT",
+    "combo2": "Increases HIT by 15%",
+    "combo4": "At the start of turn gain 1 stack of 30pxThought (increases resist by 15%), max of 3 stacks. An equal amount of Thought stacks are consumed first before onibi when using skills that require onibi."
+  },
+  {
+    "name": "Merrow",
+    "no": "45",
+    "name_cn": "共潜 / Gòng qián",
+    "name_jp": "共潜 / Tomogatsuki",
+    "name_en": "Merrow",
+    "type": "RES",
+    "combo2": "Increases resist by 15%",
+    "combo4": "At the end of the turn, 1 random debuff will be dispelled from the equipper or an ally. If no damage is dealt on that turn, 2 additional random debuffs will also be dispelled."
+  },
+  {
+    "name": "Leviathan",
+    "no": "46",
+    "name_cn": "恶楼 / È lóu",
+    "name_jp": "悪樓 / Akuru",
+    "name_en": "Leviathan",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "At the start of battle, gain the 30pxLeviathan Force (increases damage dealt and damage reduction by 80%). For the equipper's first 8 turns of battle, Leviathan Force is temporarily 30pxsealed."
+  },
+  {
+    "name": "Conch Blower",
+    "no": "47",
+    "name_cn": "贝吹坊 / Bèi chuī fāng",
+    "name_jp": "貝吹坊 / Kaibukibou",
+    "name_en": "Conch Blower",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "At the start of turn, creates a 30pxShell Shield to block damage once. While Shell Shield is active, the equipper's damage dealt is increased by 25%."
+  },
+  {
+    "name": "Wispzoa",
+    "no": "48",
+    "name_cn": "海月火玉 / Hǎi yuè huǒ yù",
+    "name_jp": "海月の火の玉 / Kurage no Hi no Tama",
+    "name_en": "Wispzoa",
+    "type": "Crit",
+    "combo2": "Increases Crit by 15%",
+    "combo4": "When there is enough onibi on the equipper's turn, their onibi using skills will consume 1 additional onibi and damage dealt will be increased by 40%."
+  },
+  {
+    "name": "Oracle",
+    "no": "49",
+    "name_cn": "出世螺 / Chūshì luó",
+    "name_jp": "出世螺 / Shusse Bura",
+    "name_en": "Oracle",
+    "type": "DEF",
+    "combo2": "Increases defense by 15%",
+    "combo4": "After taking damage, recovers HP by 10% of the damage received. Grants 30pxShell (max 1 stack) at the start of battle and before taking an action. When received damage exceeds 60% of own max HP, the damage will be reduced by 60% and Shell will be removed."
+  },
+  {
+    "name": "Tomb Robber",
+    "no": "50",
+    "name_cn": "火之车",
+    "name_jp": "火の車 / Hi no Kuruma",
+    "name_en": "Tomb Robber",
+    "type": "DEF",
+    "combo2": "Increases DEF by 30%.",
+    "combo4": "Grants 1 Tomb Fire stack at the end of the equipped unit's turn."
+  },
+  {
+    "name": "Possessor",
+    "no": "51",
+    "name_cn": "隐念",
+    "name_jp": "隱念 / In'nen",
+    "name_en": "Possessor",
+    "type": "ATK",
+    "combo2": "Increases ATK by 15%",
+    "combo4": "Increases damage dealt by 20%. If it's dealt to the same target, increases the damage dealt by subsequent strikes by 40% and 60% respectively. Damage boost loops 20%, 40%, 60% for further strikes."
+  },
+  {
+    "name": "Tapper",
+    "no": "52",
+    "name_cn": "叠叩",
+    "name_jp": "畳叩 / Tatamitataki",
+    "name_en": "Tapper",
+    "type": "HP",
+    "combo2": "Increases HP by 15%.",
+    "combo4": "Exclusive effect. / If the equipped unit's starting Crit is over 120%, reduces Crit DMG taken by non-summoned ally entities by 15%."
+  },
+  {
+    "name": "Echoer",
+    "no": "53",
+    "name_cn": "应声虫",
+    "name_jp": "応声虫 / Ouseichuu",
+    "name_en": "Echoer",
+    "type": "Crit",
+    "combo2": "Increases Crit by 15%.",
+    "combo4": "Grants the equipped unit a 20% chance of Assisting."
+  },
+  {
+    "name": "Bell-Haunt",
+    "no": "54",
+    "name_cn": "元兴寺",
+    "name_jp": "元興寺 / Gagoze",
+    "name_en": "Bell-Haunt",
+    "type": "HIT",
+    "combo2": "Increases HIT by 15%",
+    "combo4": "Exclusive effect. / When the equipped unit lands a controling effect on their turn, for each target, increases the 30pxdamage dealt by non-summoned ally entities by 5%, up to 40% for 2 turns (triggers only once for multiple hits on the same target.)"
+  },
+  {
+    "name": "Dangler",
+    "no": "55",
+    "name_cn": "钓瓶火",
+    "name_jp": "釣瓶火 / Tsurubebi",
+    "name_en": "Dangler",
+    "type": "RES",
+    "combo2": "Increases RES by 15%.",
+    "combo4": "Fills up the Orb Bar by an additional 1 slot and heals the HP of the non-summoned ally entity with the lowest proportion of HP by 700% of the equipped unit's DEF."
+  },
+  {
+    "name": "Mutodori",
+    "no": "57",
+    "name_cn": "无刀取",
+    "name_jp": "無刀取り / Mutoudori",
+    "name_en": "Mutodori",
+    "type": "Crit DMG",
+    "combo2": "Increases Crit DMG by 20%.",
+    "combo4": "At the end of the turn, permanently increases 30px damage by 15%, up to 45%."
+  },
+  {
+    "name": "Chartbringer",
+    "no": "58",
+    "name_cn": "奉海図",
+    "name_jp": "奉海図 / Houkaizu",
+    "name_en": "Chartbringer",
+    "type": "DEF",
+    "combo2": "Increases DEF by 30%.",
+    "combo4": "Exclusive effect. When an ally is attacked, grants Chart Protection lasting 1 turn on them."
+  },
+  {
+    "name": "Kataha no Ashi",
+    "no": "59",
+    "name_cn": "片叶之苇",
+    "name_jp": "片叶の葦 / Kataha no Ashi",
+    "name_en": "|type = Crit",
+    "type": "Crit",
+    "combo2": "Increases Crit by 15%",
+    "combo4": "When current HP is at max, damage dealt is increased by 45%."
+  },
+  {
+    "name": "Chirizuka",
+    "no": "60",
+    "name_cn": "尘冢",
+    "name_jp": "塵塚 / Chiridzuka",
+    "name_en": "|type = ATK",
+    "type": "ATK",
+    "combo2": "Increases ATK by 15%",
+    "combo4": "When taking an action, damage dealt is increased by 25%. For each non-summoned ally there is of more than the enemy, 30pxdamage dealt is increased by an additional 4% (max of 45%)."
+  },
+  {
+    "name": "Abura-akago",
+    "no": "61",
+    "name_cn": "油赤子",
+    "name_jp": "油赤子 / Abura Akago",
+    "name_en": "|type = HIT",
+    "type": "HIT",
+    "combo2": "Increases HIT by 15%",
+    "combo4": "Exclusive effect. At the start of battle, gain 2 Spirit stacks. Each Spirit stack increases all allies' DEF by 8%. If an ally doesn't have enough onibi to use a special skill, an equal number of Spirit stacks can be consumed instead."
+  },
+  {
+    "name": "Nakiishi",
+    "no": "62",
+    "name_cn": "夜啼石",
+    "name_jp": "夜啼石 / Yonaki Ishi",
+    "name_en": "|type = HP",
+    "type": "HP",
+    "combo2": "Increases HP by 15%",
+    "combo4": "When a non-summoned ally is KO'd, gain 30px30% of their initial ATK and DEF (max of 5 stacks and cannot exceed more the 150% of the equipper's initial stats)."
+  },
+  {
+    "name": "Okuri-inu",
+    "no": "63",
+    "name_cn": "夜送犬",
+    "name_jp": "夜送りの犬 / Yo'okuri no Inu",
+    "name_en": "|type = RES",
+    "type": "RES",
+    "combo2": "Increases RES by 15%",
+    "combo4": "When the equipper is inflicted with a control effect for the first time, gain 1 Night Parade stack. Night Parade increases RES by 80%, max of 3 stacks. At the start of turn, and if the equipper is able to take an action, removes Night Parade effect."
+  },
+  {
+    "name": "Amefurikozo",
+    "no": "64",
+    "name_cn": "雨降",
+    "name_jp": "雨降り小僧 / Amefuri Kozou",
+    "name_en": "|type = DEF",
+    "type": "DEF",
+    "combo2": "Increases DEF by 30%",
+    "combo4": "When the equipper's HP goes below 30% for the first time, their max HP is decreased to 1 and they gain 3 Dew stacks. When receiving damage, consume 1 Dew stack and absorb all the damage."
+  },
+  {
+    "name": "The Mirror of Yata",
+    "no": "65",
+    "name_cn": "八咫镜 / Bā Zhǐ Jìng",
+    "name_jp": "八咫鏡 / Yata no Kagami",
+    "name_en": "The Mirror of Yata",
+    "type": "Increases a random base stat: *ATK by 8% *HP by 8% *DEF by 16% *HIT by 8% *RES by 8% *Crit by 8%",
+    "combo2": "Exclusive effect. When dealing damage during battle against monsters, inflicts 30pxScorching Radiance. Inflicting Scorching Radiance again removes it to increase damage by 20%",
+    "combo4": null
+  },
+  {
+    "name": "Feather Slash",
+    "no": "66",
+    "name_cn": "天羽羽斩 / Tiān Yǔ Yǔ Zhǎn",
+    "name_jp": "天羽々斬 / Ame no Habakiri",
+    "name_en": "Feather Slash",
+    "type": "Increases a random base stat: *ATK by 8% *HP by 8% *DEF by 16% *HIT by 8% *RES by 8% *Crit by 8%",
+    "combo2": "Grants a 50 DEF-ignoring effect at the start of battle against monsters.",
+    "combo4": null
+  },
+  {
+    "name": "Prophecy Astrolabe",
+    "no": "67",
+    "name_cn": "预言星盘 / Yùyán Xīng Pán",
+    "name_jp": "預言星盤 / Yogen Seiban",
+    "name_en": "Prophecy Astrolabe",
+    "type": "Increases a random base stat: *ATK by 8% *HP by 8% *DEF by 16% *HIT by 8% *RES by 8% *Crit by 8%",
+    "combo2": "Exclusive effect. When using a skill in battle against monsters, increases the Onmyoji's 30pxCrit by 15% of the equipped unit's Crit.",
+    "combo4": null
+  },
+  {
+    "name": "Moonstone",
+    "no": "68",
+    "name_cn": "月之石 / Yuè Zhī Shí",
+    "name_jp": "月の石 / Tsuki no Ishi",
+    "name_en": "Moonstone",
+    "type": "Increases a random base stat: *ATK by 8% *HP by 8% *DEF by 16% *HIT by 8% *RES by 8% *Crit by 8%",
+    "combo2": "Exclusive effect. While an allied summoned entity is present, the monsters' total Effect RES is reduced by 30% (not exceeding 50% of own initial RES).",
+    "combo4": null
+  },
+  {
+    "name": "Bond Weaver",
+    "no": "69",
+    "name_cn": "纺缘锤 / Fǎng Yuán Chuí",
+    "name_jp": "願紡錘 / Negai Bousui",
+    "name_en": "Bond Weaver",
+    "type": "Increases a random base stat: *ATK by 8% *HP by 8% *DEF by 16% *HIT by 8% *RES by 8% *Crit by 8%",
+    "combo2": "At the start of battle and at the start of each own turn, gain Bond Guard. Bond Guard: Blocks 500 damage upon being attacked by a monster; removed after blocking damage equal to 300% of initial DEF.",
+    "combo4": null
+  },
+  {
+    "name": "Prosperity Arrow",
+    "no": "70",
+    "name_cn": "稻荷 / Dào Hé",
+    "name_jp": "穗箭 / Inari Hoya",
+    "name_en": "Prosperity Arrow",
+    "type": "Increases a random base stat: *ATK by 8% *HP by 8% *DEF by 16% *HIT by 8% *RES by 8% *Crit by 8%",
+    "combo2": "Exclusive effect. When battling against monsters, after the turn ends, raises the Onmyoji's Move Bar by 10% (limited to once before the Onmyoji's turn begins).",
+    "combo4": null
+  },
+  {
+    "name": "Amanojaku",
+    "no": "u1",
+    "name_cn": "天邪 / Tiān xié",
+    "name_jp": "?",
+    "name_en": "Amanojaku",
+    "type": "ATK",
+    "combo2": "ATK increases by 15%.",
+    "combo4": "Each time an ally is KO'd, the equipper's damage dealt is increased by 30%. The effect stacks."
+  },
+  {
+    "name": "Aonyobo",
+    "no": "u4",
+    "name_cn": "青女房 / Qīng nǚ fáng",
+    "name_jp": "青女房 / Aonyōbō",
+    "name_en": "Aonyobo",
+    "type": "Crit",
+    "combo2": "Increases crit by 15%",
+    "combo4": "When the equipper receives a lethal hit for the first time all buffs and debuffs will be removed, HP restored to 100% and become 30pxfrozen for 1 turn. While frozen, defense is increased by 100% and they become immune to debuffs. If the equipper survives the frozen status, HP is restored to 100% again. / Only triggers once per battle."
+  },
+  {
+    "name": "Enshyoujo",
+    "no": "u2",
+    "name_cn": "飞缘魔 / Fēi yuán mó",
+    "name_jp": "飛縁魔 / Hinoenma",
+    "name_en": "Enshyoujo",
+    "type": "HIT",
+    "combo2": "Increases HIT by 15%",
+    "combo4": "When inflicting a debuff, ignore 30% of target's resist."
+  },
+  {
+    "name": "EXP Soul",
+    "no": "u1",
+    "name_cn": "青吉鬼 / Qingjigui",
+    "name_jp": "青吉鬼 / Seikichi Oni",
+    "name_en": "Cyan Imp",
+    "type": "Material",
+    "combo2": null,
+    "combo4": null
+  },
+  {
+    "name": "Hyosube",
+    "no": "u3",
+    "name_cn": "兵主部 / Bīng zhǔ bù",
+    "name_jp": "兵主部 / Hyōsube",
+    "name_en": "Hyosube",
+    "type": "ATK",
+    "combo2": "Increases attack by 15%",
+    "combo4": "At the end of turn gain 1 layer of a 30pxPiercing Arrow, each layer ignores 75 of target's defense when attacking. Max 3 layers."
+  },
+  {
+    "name": "Nuribotoke",
+    "no": "u5",
+    "name_cn": "涂佛 / Tú fó",
+    "name_jp": "塗仏 / Nuribotoke",
+    "name_en": "Nuribotoke",
+    "type": "HP",
+    "combo2": "Increases by HP by 15%",
+    "combo4": "Unique effect. / At the end of the equipper's turn, after they use a normal attack or are immobile, 30pxresist and 30pxdamage for all allies is increased by 15%. The effect is doubled for the equipper. Lasts for 2 turns."
+  }
+]

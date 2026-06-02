@@ -1,3 +1,4 @@
 captures/*.png
 logs/*.log
 research/OAS/
+.venv/
