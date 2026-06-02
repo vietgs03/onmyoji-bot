@@ -172,6 +172,9 @@ def explore(budget=60, home_every=20, max_depth=4):
     if isnew:
         log({"event": "new_state", "state": home_sid, "step": -1})
     HOME_SID_HINT[0] = home_sid
+    # auto-label HOME (vua di toi qua anchor) de bfs_path logic dung duoc
+    if not wm.states[home_sid].get("label"):
+        wm.states[home_sid]["label"] = "HOME"; wm.save()
     print(f"HOME = {home_sid}")
 
     transitions = 0

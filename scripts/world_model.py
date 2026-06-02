@@ -97,15 +97,31 @@ class WorldModel:
     def neighbors(self, sid):
         return [(tuple(e["click"]), e["to"]) for e in self.edges if e["from"] == sid]
 
+    def _logical(self, sid):
+        """Khoa logic cua state: label neu co, nguoc lai chinh sid.
+        Cac state cung label duoc coi la 1 node (chia se edges)."""
+        lbl = self.states.get(sid, {}).get("label")
+        return f"L:{lbl}" if lbl else sid
+
     def bfs_path(self, src, dst):
-        """Tim duong click ngan nhat src->dst. Tra list click hoac None."""
+        """Tim duong click ngan nhat src->dst (theo node LOGIC = cung label gop chung).
+        Tra list click hoac None."""
         from collections import deque
-        q = deque([(src, [])]); seen = {src}
+        # map logic -> cac click-edge: (click, logic_dst)
+        adj = {}
+        for e in self.edges:
+            lf = self._logical(e["from"])
+            lt = self._logical(e["to"])
+            adj.setdefault(lf, []).append((tuple(e["click"]), lt))
+        lsrc, ldst = self._logical(src), self._logical(dst)
+        if lsrc == ldst:
+            return []
+        q = deque([(lsrc, [])]); seen = {lsrc}
         while q:
             cur, path = q.popleft()
-            if cur == dst:
+            if cur == ldst:
                 return path
-            for click, nxt in self.neighbors(cur):
+            for click, nxt in adj.get(cur, []):
                 if nxt not in seen:
                     seen.add(nxt)
                     q.append((nxt, path + [click]))

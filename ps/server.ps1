@@ -19,6 +19,9 @@ public class Native {
   [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
   [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int n);
+  [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
+  [DllImport("user32.dll")] public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, IntPtr dwExtraInfo);
   [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
 }
 "@
@@ -57,6 +60,22 @@ function Do-BgClick($hwnd, $x, $y) {
   [Native]::PostMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lparam) | Out-Null
 }
 
+function Do-FgClick($hwnd, $x, $y) {
+  # Click thuc (foreground): focus cua so + di chuot toi toa do man hinh + bam.
+  # Tin cay tren MOI popup/modal (PostMessage bi mot so modal bo qua).
+  $r = New-Object Native+RECT
+  [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
+  $sx = $r.Left + $x; $sy = $r.Top + $y
+  [Native]::SetForegroundWindow($hwnd) | Out-Null
+  Start-Sleep -Milliseconds 40
+  [Native]::SetCursorPos($sx, $sy) | Out-Null
+  Start-Sleep -Milliseconds 30
+  $LEFTDOWN=0x0002; $LEFTUP=0x0004
+  [Native]::mouse_event($LEFTDOWN,0,0,0,[IntPtr]::Zero)
+  Start-Sleep -Milliseconds (Get-Random -Minimum 50 -Maximum 100)
+  [Native]::mouse_event($LEFTUP,0,0,0,[IntPtr]::Zero)
+}
+
 $hwnd = Get-Handle
 Write-Output "OK ready"
 [Console]::Out.Flush()
@@ -81,8 +100,16 @@ while ($true) {
         Write-Output ("OK {0}x{1} pw={2}" -f $res[0],$res[1],$res[2])
       }
       "bgclick" {
-        Do-BgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Do-FgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
         Write-Output ("OK click {0} {1}" -f $parts[1],$parts[2])
+      }
+      "fgclick" {
+        Do-FgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Write-Output ("OK fgclick {0} {1}" -f $parts[1],$parts[2])
+      }
+      "pmclick" {
+        Do-BgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Write-Output ("OK pmclick {0} {1}" -f $parts[1],$parts[2])
       }
       "quit"   { Write-Output "OK bye"; break }
       default  { Write-Output ("ERR unknown {0}" -f $cmd) }

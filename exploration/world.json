@@ -727,7 +727,7 @@
     },
     "189ca95eec": {
       "dhash": "0101000100010101001000100110011011000111111111000110111010111101",
-      "label": null,
+      "label": "HOME",
       "desc": null,
       "screenshot": "exploration/screens/189ca95eec.png",
       "buttons_tried": [
