@@ -17,7 +17,7 @@ Chay: .venv/bin/python scripts/explorer.py [budget]
 import os, sys, time, json
 import cv2
 from perception import (bgshot, bgclick, dhash, hamming, detect_buttons,
-                        is_loading, W, H)
+                        is_loading, find_close_button, W, H)
 from world_model import WorldModel, SCREENS, EXP
 
 OBS = os.path.join(EXP, "observations.jsonl")
@@ -54,9 +54,14 @@ def candidate_buttons(img, sid, is_home):
     return uniq
 
 def try_back(wm):
-    """Bam cac nut back pho bien, tra sid sau khi back."""
+    """Dong popup/back ve. Uu tien tim nut X (CV) -> roi BACK_CLICKS co dinh."""
+    img = bgshot()
+    if img is not None:
+        xb = find_close_button(img)
+        if xb:
+            bgclick(xb[0], xb[1]); time.sleep(1.0)
     for bx, by in BACK_CLICKS:
-        bgclick(bx, by); time.sleep(0.9)
+        bgclick(bx, by); time.sleep(0.8)
     sid, _, _ = wm.observe()
     return sid
 

@@ -79,6 +79,35 @@ def is_loading(img, dark_thr=45, dark_ratio=0.7):
     return dark > dark_ratio
 
 
+def find_close_button(img):
+    """Tim nut X (dong popup) - dac trung Onmyoji: vong tron MAU DO/HONG.
+    Tra (cx, cy) hoac None. Uu tien o nua tren man hinh (popup thuong co X tren-phai)."""
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    # mau do/hong: H quanh 0 va 170-180, S cao, V kha cao
+    m1 = cv2.inRange(hsv, (0, 90, 90), (12, 255, 255))
+    m2 = cv2.inRange(hsv, (160, 90, 90), (180, 255, 255))
+    mask = cv2.morphologyEx(m1 | m2, cv2.MORPH_CLOSE, np.ones((5, 5), np.uint8))
+    cnts, _ = cv2.findContours(mask, cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
+    best = None
+    for c in cnts:
+        x, y, w, h = cv2.boundingRect(c)
+        area = w * h
+        # nut X: gan vuong, kich thuoc vua, KHONG o ria ngoai cung (do la X cua so game)
+        if not (500 < area < 9000):
+            continue
+        if not (0.6 < w / max(h, 1) < 1.7):
+            continue
+        cx, cy = x + w // 2, y + h // 2
+        # X popup thuong o GOC TREN-PHAI panel: cx 820..1090, cy 60..170
+        if not (820 <= cx <= 1090 and 55 <= cy <= 175):
+            continue
+        # uu tien gan (1000,110)
+        score = -((cx - 1000) ** 2 + (cy - 110) ** 2)
+        if best is None or score > best[0]:
+            best = (score, cx, cy)
+    return (best[1], best[2]) if best else None
+
+
 def hamming(a, b):
     return sum(c1 != c2 for c1, c2 in zip(a, b))
 
