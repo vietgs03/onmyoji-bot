@@ -85,9 +85,13 @@ def goto_home(wm, home_sid, max_back=4):
     import subprocess
     gp = os.path.join(os.path.dirname(__file__), "graph.py")
     py = sys.executable
-    subprocess.run([py, gp, "goto", "HOME"], capture_output=True, text=True)
+    r = subprocess.run([py, gp, "goto", "HOME"], capture_output=True, text=True)
     time.sleep(1.5)
     sid, _, _ = wm.observe()
+    # anchor goto chi "OK" khi DA o HOME -> tin tuong, gan nhan HOME cho variant moi
+    if "OK" in (r.stdout or "") and not wm.states[sid].get("label"):
+        wm.states[sid]["label"] = "HOME"; wm.save()
+        sid = home_sid  # coi nhu da ve HOME (cung logic)
     return sid
 
 def deep_escape(wm):
