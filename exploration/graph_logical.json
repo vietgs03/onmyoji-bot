@@ -12,10 +12,22 @@
         "444b9b610c",
         "a4a12df431",
         "11fc5f017c",
-        "c5e9d1492a"
+        "c5e9d1492a",
+        "c6d3d9c4a2",
+        "16e393445b",
+        "189ca95eec",
+        "c65699e9c3",
+        "300e45f1cc",
+        "6a4a4745c2",
+        "846da320d2",
+        "406633cd8e",
+        "39b697ba72",
+        "097d7a5006",
+        "97bf901238",
+        "3d7b28f2a4"
       ],
-      "count": 11,
-      "desc": "San nha | San nha (chat the gioi) | San nha (dem) | San nha (nut Yard goc trai duoi) | San nha (thong bao Nurikabe Shard) | San nha (thong bao Soul DEF Bonus) | San nha (thong bao trieu hoi SP) | San nha + side panel (Forum/Support) | San nha chinh"
+      "count": 23,
+      "desc": "Home courtyard radial menu | Home radial menu | Home with character switch menu | Home with switch menu | Main courtyard home | Main home courtyard | San nha | San nha (chat the gioi) | San nha (dem) | San nha (nut Yard goc trai duoi) | San nha (thong bao Nurikabe Shard) | San nha (thong bao Soul DEF Bonus) | San nha (thong bao trieu hoi SP) | San nha + side panel (Forum/Support) | San nha chinh"
     },
     "Settings": {
       "sids": [
@@ -23,29 +35,165 @@
         "739925704b",
         "c744fa0b6e",
         "b5bfd6920a",
-        "87540f1823"
+        "87540f1823",
+        "129ca2d344"
       ],
-      "count": 5,
-      "desc": "Bang cai dat (Audio/ho so/tai khoan) | Chon khung vien avatar | Cua so chon khung vien avatar (Frame) | Hop thoai lien ket tai khoan (nhan 50 Jade) | Trinh phat nhac nen"
+      "count": 6,
+      "desc": "Bang cai dat (Audio/ho so/tai khoan) | Chon khung vien avatar | Cua so chon khung vien avatar (Frame) | Hop thoai lien ket tai khoan (nhan 50 Jade) | Settings My Birthday popup | Trinh phat nhac nen"
     },
     "Event": {
       "sids": [
         "ba4dee7541",
         "e91a4cdc54",
         "1bb4756a8f",
-        "7a71153582"
+        "7a71153582",
+        "7354a09913",
+        "f10db24cd0",
+        "50d8a76f1b",
+        "79322e988a",
+        "f8658e5b5d",
+        "b89d37204f",
+        "57a3988353",
+        "21f4675f8a",
+        "5702b6005d",
+        "ebe3d911e8",
+        "6eb6ad8932",
+        "a6d0d5b4d9"
       ],
-      "count": 4,
-      "desc": "Awakened Wisdom event overview | Ban do su kien Awakened Wisdom (cac che do) | Champion Trial cua su kien | Melodic Mastery (nang cap ky nang)"
+      "count": 16,
+      "desc": "Awakened Wisdom event overview | Ban do su kien Awakened Wisdom (cac che do) | Champion Trial cua su kien | Event Overview listing | Frozen Treasure event detail | Melodic Mastery (nang cap ky nang) | Return Benefits sign-in rewards | Spring Parade mileage | Spring Parade mileage track | Spring Parade multiplayer carts | Wanted Quests bounty list | Wisdom Ignited Shard tab | Wisdom Ignited story Main tab"
     },
     "Loading": {
       "sids": [
         "f7c82a2059",
         "ced1805075",
-        "4f1f9ea06f"
+        "4f1f9ea06f",
+        "ab0c6d51af",
+        "31fb85fdc5"
+      ],
+      "count": 5,
+      "desc": "Loading splash | Man hinh tai (logo + chuot) | Man hinh tai (logo + miko) | Man hinh tai (nui + trang) | Startup splash"
+    },
+    "Explore": {
+      "sids": [
+        "cc83106e05",
+        "1d811c3586",
+        "a1f61978c6",
+        "960ae24156",
+        "f08cf26275"
+      ],
+      "count": 5,
+      "desc": "Chapter map near Six Realms Gates | Chapter map with chapters 26-28 | Explore map Another Seimei | Explore map quest locations | Stage challenge panel Doujo boss"
+    },
+    "Animation": {
+      "sids": [
+        "257dfee8a8",
+        "92f58d44ed",
+        "1c7ba0e2cd",
+        "e701a70fef"
+      ],
+      "count": 4,
+      "desc": "Cinematic card butterfly wings | Cinematic card cutscene | Cinematic pagoda night | Story cutscene with Skip"
+    },
+    "Town": {
+      "sids": [
+        "94693fae24",
+        "0bedf36317"
+      ],
+      "count": 2,
+      "desc": "Town district: Arena, Demon Parade, Mystic Trader | Yard/courtyard night scene"
+    },
+    "Character Showcase": {
+      "sids": [
+        "69227e751e",
+        "3ff31faaaf",
+        "22443e079d",
+        "083fd547c4",
+        "d75df14f36",
+        "a3f93ec6dd",
+        "74abbbb405",
+        "2aca760fb4",
+        "4ac62e3546"
+      ],
+      "count": 9,
+      "desc": "Acc & SFX customization | Nameplate upgrade popup | Shikigami showcase selection | Shikigami showcase skin variants | Showcase character/skin selection | Showcase courtyard empty stage | Showcase selection panel | Showcase setup | Showcase setup skin selection"
+    },
+    "Shikigami": {
+      "sids": [
+        "7003532d8f",
+        "69c220ee42",
+        "e7fc915f03",
+        "edf6100e8e"
+      ],
+      "count": 4,
+      "desc": "Shikigami collection grid | Shikigami collection list"
+    },
+    "Mentor": {
+      "sids": [
+        "f9dfc53ce1"
+      ],
+      "count": 1,
+      "desc": "Mentor's Guidance apprentice recommendation"
+    },
+    "Select Champion": {
+      "sids": [
+        "fcb56783bf"
+      ],
+      "count": 1,
+      "desc": "Champion selection"
+    },
+    "Create Float": {
+      "sids": [
+        "0d383f13cc"
+      ],
+      "count": 1,
+      "desc": "Float creation: name/greeting"
+    },
+    "Friends": {
+      "sids": [
+        "49c515b9f5",
+        "3cf8734d7c"
+      ],
+      "count": 2,
+      "desc": "Chat panel World/Guild/Team | Player profile card popup"
+    },
+    "World": {
+      "sids": [
+        "e82aa07bd7"
+      ],
+      "count": 1,
+      "desc": "World chat / team recruitment"
+    },
+    "Shrine Pass": {
+      "sids": [
+        "41bd554bf1",
+        "79abec1238",
+        "3fdba617ea"
       ],
       "count": 3,
-      "desc": "Man hinh tai (logo + chuot) | Man hinh tai (logo + miko) | Man hinh tai (nui + trang)"
+      "desc": "Mystic Scroll quest reward track | Shrine Pass purchase confirm popup | Shrine Pass reward track"
+    },
+    "Event Overview": {
+      "sids": [
+        "6dbfb79cfa",
+        "0239625840"
+      ],
+      "count": 2,
+      "desc": "Skin shop new skins | Worldly Guardian skin preview"
+    },
+    "Shop": {
+      "sids": [
+        "a39e85b120"
+      ],
+      "count": 1,
+      "desc": "Acc & SFX entrance effects"
+    },
+    "Summon": {
+      "sids": [
+        "f1d02e59f7"
+      ],
+      "count": 1,
+      "desc": "Summon Room Wisdom Flames"
     }
   },
   "edges": [
@@ -64,6 +212,10 @@
         [
           59,
           82
+        ],
+        [
+          53,
+          88
         ]
       ]
     },
@@ -86,6 +238,38 @@
         [
           1077,
           242
+        ],
+        [
+          1077,
+          242
+        ],
+        [
+          1077,
+          313
+        ],
+        [
+          131,
+          142
+        ],
+        [
+          163,
+          137
+        ],
+        [
+          151,
+          208
+        ],
+        [
+          127,
+          173
+        ],
+        [
+          213,
+          466
+        ],
+        [
+          241,
+          233
         ]
       ]
     },
@@ -108,6 +292,348 @@
         [
           526,
           220
+        ],
+        [
+          660,
+          277
+        ],
+        [
+          764,
+          494
+        ],
+        [
+          434,
+          218
+        ],
+        [
+          766,
+          399
+        ],
+        [
+          183,
+          213
+        ],
+        [
+          184,
+          213
+        ],
+        [
+          809,
+          446
+        ],
+        [
+          157,
+          632
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Explore",
+      "clicks": [
+        [
+          608,
+          192
+        ]
+      ]
+    },
+    {
+      "from": "Explore",
+      "to": "Loading",
+      "clicks": [
+        [
+          743,
+          581
+        ]
+      ]
+    },
+    {
+      "from": "Loading",
+      "to": "Town",
+      "clicks": [
+        [
+          739,
+          218
+        ]
+      ]
+    },
+    {
+      "from": "Town",
+      "to": "Character Showcase",
+      "clicks": [
+        [
+          1045,
+          575
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Mentor",
+      "clicks": [
+        [
+          970,
+          387
+        ],
+        [
+          197,
+          163
+        ],
+        [
+          182,
+          187
+        ]
+      ]
+    },
+    {
+      "from": "Event",
+      "to": "Select Champion",
+      "clicks": [
+        [
+          77,
+          157
+        ]
+      ]
+    },
+    {
+      "from": "Select Champion",
+      "to": "Event",
+      "clicks": [
+        [
+          583,
+          244
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Create Float",
+      "clicks": [
+        [
+          1076,
+          373
+        ],
+        [
+          1049,
+          409
+        ],
+        [
+          557,
+          439
+        ],
+        [
+          214,
+          439
+        ],
+        [
+          217,
+          401
+        ]
+      ]
+    },
+    {
+      "from": "Create Float",
+      "to": "Loading",
+      "clicks": [
+        [
+          59,
+          56
+        ],
+        [
+          113,
+          74
+        ]
+      ]
+    },
+    {
+      "from": "Mentor",
+      "to": "Friends",
+      "clicks": [
+        [
+          721,
+          167
+        ],
+        [
+          872,
+          181
+        ],
+        [
+          783,
+          233
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "World",
+      "clicks": [
+        [
+          445,
+          111
+        ],
+        [
+          583,
+          107
+        ]
+      ]
+    },
+    {
+      "from": "World",
+      "to": "HOME",
+      "clicks": [
+        [
+          1077,
+          175
+        ],
+        [
+          1072,
+          603
+        ]
+      ]
+    },
+    {
+      "from": "Event",
+      "to": "HOME",
+      "clicks": [
+        [
+          47,
+          65
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Character Showcase",
+      "clicks": [
+        [
+          1019,
+          589
+        ],
+        [
+          838,
+          421
+        ],
+        [
+          242,
+          307
+        ]
+      ]
+    },
+    {
+      "from": "Event",
+      "to": "Shrine Pass",
+      "clicks": [
+        [
+          955,
+          601
+        ],
+        [
+          911,
+          616
+        ]
+      ]
+    },
+    {
+      "from": "Settings",
+      "to": "Character Showcase",
+      "clicks": [
+        [
+          437,
+          238
+        ],
+        [
+          1009,
+          151
+        ]
+      ]
+    },
+    {
+      "from": "Character Showcase",
+      "to": "Settings",
+      "clicks": [
+        [
+          272,
+          181
+        ]
+      ]
+    },
+    {
+      "from": "Event",
+      "to": "Explore",
+      "clicks": [
+        [
+          929,
+          267
+        ]
+      ]
+    },
+    {
+      "from": "Create Float",
+      "to": "Event",
+      "clicks": [
+        [
+          734,
+          455
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Event Overview",
+      "clicks": [
+        [
+          1081,
+          458
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Town",
+      "clicks": [
+        [
+          89,
+          579
+        ]
+      ]
+    },
+    {
+      "from": "Town",
+      "to": "Friends",
+      "clicks": [
+        [
+          187,
+          80
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Shop",
+      "clicks": [
+        [
+          806,
+          453
+        ]
+      ]
+    },
+    {
+      "from": "Settings",
+      "to": "HOME",
+      "clicks": [
+        [
+          992,
+          119
+        ]
+      ]
+    },
+    {
+      "from": "HOME",
+      "to": "Animation",
+      "clicks": [
+        [
+          734,
+          595
         ]
       ]
     }

@@ -752,8 +752,8 @@
     },
     "cc83106e05": {
       "dhash": "0011001100101011110100110011001110110001111001110011000010011001",
-      "label": null,
-      "desc": null,
+      "label": "Explore",
+      "desc": "Chapter map with chapters 26-28",
       "screenshot": "exploration/screens/cc83106e05.png",
       "buttons_tried": [
         [
@@ -764,15 +764,15 @@
     },
     "257dfee8a8": {
       "dhash": "0001000100010001000010000001100000000100000000001110011111110011",
-      "label": null,
-      "desc": null,
+      "label": "Animation",
+      "desc": "Story cutscene with Skip",
       "screenshot": "exploration/screens/257dfee8a8.png",
       "buttons_tried": []
     },
     "1d811c3586": {
       "dhash": "0001000110001001110100110011001110010011111001110110100111011011",
-      "label": null,
-      "desc": null,
+      "label": "Explore",
+      "desc": "Chapter map near Six Realms Gates",
       "screenshot": "exploration/screens/1d811c3586.png",
       "buttons_tried": [
         [
@@ -783,8 +783,8 @@
     },
     "ab0c6d51af": {
       "dhash": "0111011101111111000010101101001001000010011001101101101111101000",
-      "label": null,
-      "desc": null,
+      "label": "Loading",
+      "desc": "Loading splash",
       "screenshot": "exploration/screens/ab0c6d51af.png",
       "buttons_tried": [
         [
@@ -795,8 +795,8 @@
     },
     "94693fae24": {
       "dhash": "1100110101001000001011010111000011010010110101011101011010110100",
-      "label": null,
-      "desc": null,
+      "label": "Town",
+      "desc": "Town district: Arena, Demon Parade, Mystic Trader",
       "screenshot": "exploration/screens/94693fae24.png",
       "buttons_tried": [
         [
@@ -807,36 +807,36 @@
     },
     "69227e751e": {
       "dhash": "0101010111001110010010010001110011101011110110101011011100110001",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Showcase courtyard empty stage",
       "screenshot": "exploration/screens/69227e751e.png",
       "buttons_tried": []
     },
     "7003532d8f": {
       "dhash": "0110011010100010010110011100000010100011000100101000100111000101",
-      "label": null,
-      "desc": null,
+      "label": "Shikigami",
+      "desc": "Shikigami collection grid",
       "screenshot": "exploration/screens/7003532d8f.png",
       "buttons_tried": []
     },
     "69c220ee42": {
       "dhash": "0110111011101101001010000100110010010010000101011000100111010101",
-      "label": null,
-      "desc": null,
+      "label": "Shikigami",
+      "desc": "Shikigami collection grid",
       "screenshot": "exploration/screens/69c220ee42.png",
       "buttons_tried": []
     },
     "e7fc915f03": {
       "dhash": "1100110011011100101010100100101010010011001001000000000111000101",
-      "label": null,
-      "desc": null,
+      "label": "Shikigami",
+      "desc": "Shikigami collection grid",
       "screenshot": "exploration/screens/e7fc915f03.png",
       "buttons_tried": []
     },
     "f9dfc53ce1": {
       "dhash": "1010001000101010101000000010110011101101111011000100110011010011",
-      "label": null,
-      "desc": null,
+      "label": "Mentor",
+      "desc": "Mentor's Guidance apprentice recommendation",
       "screenshot": "exploration/screens/f9dfc53ce1.png",
       "buttons_tried": [
         [
@@ -919,8 +919,8 @@
     },
     "c6d3d9c4a2": {
       "dhash": "1011101111011000101010100010001010010010000001000110101010001100",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Main courtyard home",
       "screenshot": "exploration/screens/c6d3d9c4a2.png",
       "buttons_tried": [
         [
@@ -947,8 +947,8 @@
     },
     "16e393445b": {
       "dhash": "1010101011101010111000101110111010010010010000000110011011001010",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Main courtyard home",
       "screenshot": "exploration/screens/16e393445b.png",
       "buttons_tried": [
         [
@@ -963,8 +963,8 @@
     },
     "fcb56783bf": {
       "dhash": "0011001100110011111110111101101001011101110011001100110111011001",
-      "label": null,
-      "desc": null,
+      "label": "Select Champion",
+      "desc": "Champion selection",
       "screenshot": "exploration/screens/fcb56783bf.png",
       "buttons_tried": [
         [
@@ -975,8 +975,8 @@
     },
     "0d383f13cc": {
       "dhash": "0101010111011101010000010001001001010011000001010101011010001000",
-      "label": null,
-      "desc": null,
+      "label": "Create Float",
+      "desc": "Float creation: name/greeting",
       "screenshot": "exploration/screens/0d383f13cc.png",
       "buttons_tried": [
         [
@@ -1083,8 +1083,8 @@
     },
     "7354a09913": {
       "dhash": "0010000110110100110100100001010101001001100001000111111100111111",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Event Overview listing",
       "screenshot": "exploration/screens/7354a09913.png",
       "buttons_tried": []
     },
@@ -1166,8 +1166,8 @@
     },
     "c65699e9c3": {
       "dhash": "1011101110011000110111101010001010010010010101000101110011010100",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Home with character switch menu",
       "screenshot": "exploration/screens/c65699e9c3.png",
       "buttons_tried": [
         [
@@ -1182,15 +1182,15 @@
     },
     "3ff31faaaf": {
       "dhash": "0101001010100110100011100110100001000100010000000000100100101100",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Acc & SFX customization",
       "screenshot": "exploration/screens/3ff31faaaf.png",
       "buttons_tried": []
     },
     "49c515b9f5": {
       "dhash": "0010101001101010010000000010000010101100110011000100110011110010",
-      "label": null,
-      "desc": null,
+      "label": "Friends",
+      "desc": "Player profile card popup",
       "screenshot": "exploration/screens/49c515b9f5.png",
       "buttons_tried": [
         [
@@ -1281,8 +1281,8 @@
     },
     "e82aa07bd7": {
       "dhash": "1010101010101010011000101010011010011010101110100100010001000101",
-      "label": null,
-      "desc": null,
+      "label": "World",
+      "desc": "World chat / team recruitment",
       "screenshot": "exploration/screens/e82aa07bd7.png",
       "buttons_tried": [
         [
@@ -1297,8 +1297,8 @@
     },
     "f10db24cd0": {
       "dhash": "0000011001100110010000001000000001010100000100001100101011000010",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Return Benefits sign-in rewards",
       "screenshot": "exploration/screens/f10db24cd0.png",
       "buttons_tried": [
         [
@@ -1381,15 +1381,15 @@
     },
     "edf6100e8e": {
       "dhash": "0100010111010100010000000100001010010010000100011000100111010101",
-      "label": null,
-      "desc": null,
+      "label": "Shikigami",
+      "desc": "Shikigami collection list",
       "screenshot": "exploration/screens/edf6100e8e.png",
       "buttons_tried": []
     },
     "41bd554bf1": {
       "dhash": "0011001010100010110100000010111010101010101000000100110011010110",
-      "label": null,
-      "desc": null,
+      "label": "Shrine Pass",
+      "desc": "Mystic Scroll quest reward track",
       "screenshot": "exploration/screens/41bd554bf1.png",
       "buttons_tried": [
         [
@@ -1656,8 +1656,8 @@
     },
     "79abec1238": {
       "dhash": "0011001110000010100100100100100000001010100000000001110111010111",
-      "label": null,
-      "desc": null,
+      "label": "Shrine Pass",
+      "desc": "Shrine Pass purchase confirm popup",
       "screenshot": "exploration/screens/79abec1238.png",
       "buttons_tried": [
         [
@@ -1756,8 +1756,8 @@
     },
     "6a4a4745c2": {
       "dhash": "1010101011011000010110101010011010100001010001000101110110100010",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Home with switch menu",
       "screenshot": "exploration/screens/6a4a4745c2.png",
       "buttons_tried": [
         [
@@ -1816,8 +1816,8 @@
     },
     "22443e079d": {
       "dhash": "1010101000111110010000000010000000010000000000000110011011111110",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Nameplate upgrade popup",
       "screenshot": "exploration/screens/22443e079d.png",
       "buttons_tried": [
         [
@@ -1852,8 +1852,8 @@
     },
     "50d8a76f1b": {
       "dhash": "1110101011010101000100110010001010010001000110011100111001000101",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Wanted Quests bounty list",
       "screenshot": "exploration/screens/50d8a76f1b.png",
       "buttons_tried": [
         [
@@ -1920,29 +1920,29 @@
     },
     "a1f61978c6": {
       "dhash": "0001010101010100000100110011010110110001110101110101111000101010",
-      "label": null,
-      "desc": null,
+      "label": "Explore",
+      "desc": "Explore map quest locations",
       "screenshot": "exploration/screens/a1f61978c6.png",
       "buttons_tried": []
     },
     "960ae24156": {
       "dhash": "0010011001010100000100110001001111111101010101011011111000100111",
-      "label": null,
-      "desc": null,
+      "label": "Explore",
+      "desc": "Explore map Another Seimei",
       "screenshot": "exploration/screens/960ae24156.png",
       "buttons_tried": []
     },
     "f08cf26275": {
       "dhash": "0010001001000110010100110001001010111110011001010101111000010111",
-      "label": null,
-      "desc": null,
+      "label": "Explore",
+      "desc": "Stage challenge panel Doujo boss",
       "screenshot": "exploration/screens/f08cf26275.png",
       "buttons_tried": []
     },
     "083fd547c4": {
       "dhash": "0001000100100010000010000010000010100110101000101000111011000010",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Showcase character/skin selection",
       "screenshot": "exploration/screens/083fd547c4.png",
       "buttons_tried": [
         [
@@ -2181,57 +2181,57 @@
     },
     "d75df14f36": {
       "dhash": "0001000100111010000000101010110010100110101000101000000001101010",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Showcase selection panel",
       "screenshot": "exploration/screens/d75df14f36.png",
       "buttons_tried": []
     },
     "79322e988a": {
       "dhash": "1011101110101001011110000100001100011011010111100110011101011001",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Spring Parade mileage track",
       "screenshot": "exploration/screens/79322e988a.png",
       "buttons_tried": []
     },
     "f8658e5b5d": {
       "dhash": "1011101110101010101000100110011000011011010011100110011001000001",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Spring Parade mileage",
       "screenshot": "exploration/screens/f8658e5b5d.png",
       "buttons_tried": []
     },
     "b89d37204f": {
       "dhash": "1011101111101110110110011000001100011011010011100110011110111001",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Spring Parade mileage",
       "screenshot": "exploration/screens/b89d37204f.png",
       "buttons_tried": []
     },
     "57a3988353": {
       "dhash": "1011100111101010101100101010011001011010010011100111010110010001",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Spring Parade mileage",
       "screenshot": "exploration/screens/57a3988353.png",
       "buttons_tried": []
     },
     "6dbfb79cfa": {
       "dhash": "0110010001000100001011000100000111001100110011100110111101010111",
-      "label": null,
-      "desc": null,
+      "label": "Event Overview",
+      "desc": "Skin shop new skins",
       "screenshot": "exploration/screens/6dbfb79cfa.png",
       "buttons_tried": []
     },
     "0239625840": {
       "dhash": "0100010001000100001011001101000010101001101110110100111101011010",
-      "label": null,
-      "desc": null,
+      "label": "Event Overview",
+      "desc": "Worldly Guardian skin preview",
       "screenshot": "exploration/screens/0239625840.png",
       "buttons_tried": []
     },
     "39b697ba72": {
       "dhash": "1101110111011000111010010111111000110101010101011101100101000010",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Home radial menu",
       "screenshot": "exploration/screens/39b697ba72.png",
       "buttons_tried": [
         [
@@ -2242,22 +2242,22 @@
     },
     "31fb85fdc5": {
       "dhash": "1101110111011001001001101010110000111011001101111101100100100110",
-      "label": null,
-      "desc": null,
+      "label": "Loading",
+      "desc": "Startup splash",
       "screenshot": "exploration/screens/31fb85fdc5.png",
       "buttons_tried": []
     },
     "097d7a5006": {
       "dhash": "1011100111011010100110100010001001101010011010010110101010011100",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Home courtyard radial menu",
       "screenshot": "exploration/screens/097d7a5006.png",
       "buttons_tried": []
     },
     "21f4675f8a": {
       "dhash": "0101010101010101000001001100101110111101100110001010001000111000",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Frozen Treasure event detail",
       "screenshot": "exploration/screens/21f4675f8a.png",
       "buttons_tried": [
         [
@@ -2296,8 +2296,8 @@
     },
     "5702b6005d": {
       "dhash": "0100010001001100011000011001101010111010100010100100111101111110",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Wisdom Ignited story Main tab",
       "screenshot": "exploration/screens/5702b6005d.png",
       "buttons_tried": [
         [
@@ -2308,8 +2308,8 @@
     },
     "ebe3d911e8": {
       "dhash": "0100010001011101001100010000010011001100100110000110110101011111",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Wisdom Ignited Shard tab",
       "screenshot": "exploration/screens/ebe3d911e8.png",
       "buttons_tried": [
         [
@@ -2336,8 +2336,8 @@
     },
     "a3f93ec6dd": {
       "dhash": "0010001000010001101101000001110010100010101000101010010101101101",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Shikigami showcase selection",
       "screenshot": "exploration/screens/a3f93ec6dd.png",
       "buttons_tried": [
         [
@@ -2348,8 +2348,8 @@
     },
     "74abbbb405": {
       "dhash": "1011101000011001001101000001010010100010101000101001001010100101",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Shikigami showcase skin variants",
       "screenshot": "exploration/screens/74abbbb405.png",
       "buttons_tried": [
         [
@@ -2364,22 +2364,22 @@
     },
     "2aca760fb4": {
       "dhash": "1001001000001000110101000001000110100010101000101010010101101110",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Showcase setup skin selection",
       "screenshot": "exploration/screens/2aca760fb4.png",
       "buttons_tried": []
     },
     "4ac62e3546": {
       "dhash": "1011101000001000110101000001100100100010001000100101110110100101",
-      "label": null,
-      "desc": null,
+      "label": "Character Showcase",
+      "desc": "Showcase setup",
       "screenshot": "exploration/screens/4ac62e3546.png",
       "buttons_tried": []
     },
     "3fdba617ea": {
       "dhash": "0010001010100010101111100001100110101010101000000000100001100110",
-      "label": null,
-      "desc": null,
+      "label": "Shrine Pass",
+      "desc": "Shrine Pass reward track",
       "screenshot": "exploration/screens/3fdba617ea.png",
       "buttons_tried": [
         [
@@ -2402,8 +2402,8 @@
     },
     "0bedf36317": {
       "dhash": "1010111010100110110100111010010100010101010101011010110001101100",
-      "label": null,
-      "desc": null,
+      "label": "Town",
+      "desc": "Yard/courtyard night scene",
       "screenshot": "exploration/screens/0bedf36317.png",
       "buttons_tried": [
         [
@@ -2414,8 +2414,8 @@
     },
     "3cf8734d7c": {
       "dhash": "1010101010101010110100111010010110011001100110010010010000100100",
-      "label": null,
-      "desc": null,
+      "label": "Friends",
+      "desc": "Chat panel World/Guild/Team",
       "screenshot": "exploration/screens/3cf8734d7c.png",
       "buttons_tried": [
         [
@@ -2454,8 +2454,8 @@
     },
     "97bf901238": {
       "dhash": "1110101011101010010001100110001011000010010010001101101010100010",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Main home courtyard",
       "screenshot": "exploration/screens/97bf901238.png",
       "buttons_tried": [
         [
@@ -2474,36 +2474,36 @@
     },
     "a39e85b120": {
       "dhash": "0111010101110111100000010001000111011101101110110011100100111100",
-      "label": null,
-      "desc": null,
+      "label": "Shop",
+      "desc": "Acc & SFX entrance effects",
       "screenshot": "exploration/screens/a39e85b120.png",
       "buttons_tried": []
     },
     "3d7b28f2a4": {
       "dhash": "1001100110011010111011101010011010100011001000100101110011010100",
-      "label": null,
-      "desc": null,
+      "label": "HOME",
+      "desc": "Home radial menu",
       "screenshot": "exploration/screens/3d7b28f2a4.png",
       "buttons_tried": []
     },
     "6eb6ad8932": {
       "dhash": "1011101110111110110100010010000101011011010011100101011111000001",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Spring Parade mileage",
       "screenshot": "exploration/screens/6eb6ad8932.png",
       "buttons_tried": []
     },
     "a6d0d5b4d9": {
       "dhash": "1010010010101011110010110101110001011010010011100111010101011001",
-      "label": null,
-      "desc": null,
+      "label": "Event",
+      "desc": "Spring Parade multiplayer carts",
       "screenshot": "exploration/screens/a6d0d5b4d9.png",
       "buttons_tried": []
     },
     "129ca2d344": {
       "dhash": "1010101001011000100001100010001001010101010001001101111001011011",
-      "label": null,
-      "desc": null,
+      "label": "Settings",
+      "desc": "Settings My Birthday popup",
       "screenshot": "exploration/screens/129ca2d344.png",
       "buttons_tried": [
         [
@@ -2514,29 +2514,29 @@
     },
     "f1d02e59f7": {
       "dhash": "0010001100001001010100100001101011001100010001000011111010101011",
-      "label": null,
-      "desc": null,
+      "label": "Summon",
+      "desc": "Summon Room Wisdom Flames",
       "screenshot": "exploration/screens/f1d02e59f7.png",
       "buttons_tried": []
     },
     "92f58d44ed": {
       "dhash": "1001100110011101001101110001111101100100110011001010000010001011",
-      "label": null,
-      "desc": null,
+      "label": "Animation",
+      "desc": "Cinematic pagoda night",
       "screenshot": "exploration/screens/92f58d44ed.png",
       "buttons_tried": []
     },
     "1c7ba0e2cd": {
       "dhash": "1001100111011101000000001100000000000000000001001011111111111111",
-      "label": null,
-      "desc": null,
+      "label": "Animation",
+      "desc": "Cinematic card cutscene",
       "screenshot": "exploration/screens/1c7ba0e2cd.png",
       "buttons_tried": []
     },
     "e701a70fef": {
       "dhash": "1111111111111111010000001000000101000100010001001111111111111111",
-      "label": null,
-      "desc": null,
+      "label": "Animation",
+      "desc": "Cinematic card butterfly wings",
       "screenshot": "exploration/screens/e701a70fef.png",
       "buttons_tried": []
     }
