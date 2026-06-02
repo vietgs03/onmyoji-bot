@@ -16,7 +16,8 @@ Chay: .venv/bin/python scripts/explorer.py [budget]
 """
 import os, sys, time, json
 import cv2
-from perception import (bgshot, bgclick, dhash, hamming, detect_buttons, W, H)
+from perception import (bgshot, bgclick, dhash, hamming, detect_buttons,
+                        is_loading, W, H)
 from world_model import WorldModel, SCREENS, EXP
 
 OBS = os.path.join(EXP, "observations.jsonl")
@@ -32,7 +33,8 @@ HOME_FOOTER = [(125, 632), (235, 632), (335, 632), (425, 632), (523, 632),
                (936, 91),    # settings (da biet)
                (660, 277)]   # Town
 
-BACK_CLICKS = [(1115, 78), (28, 68), (575, 640)]  # X cua so / back goc trai / vung duoi
+BACK_CLICKS = [(1015, 95), (990, 118), (45, 62), (28, 68)]
+# X popup giua-tren / back goc tren trai. KHONG bam (1115,78)=X cua so game (tat game!)
 
 def log(rec):
     with open(OBS, "a", encoding="utf-8") as f:
@@ -76,32 +78,57 @@ def goto_home(wm, home_sid, max_back=4):
             return sid
     return sid
 
-def explore(budget=60, home_every=12):
+def explore(budget=60, home_every=20, max_depth=4):
+    """DFS sau: vao state moi -> kham pha het no truoc khi back.
+    - Khong back ngay sau transition (de di SAU vao menu con).
+    - Chi back khi state hien tai het nut chua thu.
+    - Bo qua khong khai thac state 'Loading' (transient)."""
     wm = WorldModel().load()
-    # xac dinh HOME sid: observe lan dau (gia dinh dang o HOME sau goto)
     home_sid, isnew, img = wm.observe()
     if isnew:
         log({"event": "new_state", "state": home_sid, "step": -1})
     print(f"HOME = {home_sid}")
 
     transitions = 0
+    stuck = 0  # dem so buoc lien tiep khong sinh transition moi -> chong ket
+
     for step in range(budget):
         sid, isnew, img = wm.observe()
         if img is None:
             print("  ! no shot"); break
+        # neu dang loading -> doi cho qua, observe lai (toi da 3 lan)
+        waits = 0
+        while is_loading(img) and waits < 3:
+            time.sleep(1.5); img = bgshot(); waits += 1
+        if img is not None and is_loading(img):
+            print(f"[{step}] van loading -> back")
+            try_back(wm); continue
+        sid, isnew, img = wm.observe()  # re-observe sau khi loading xong
         if isnew:
             log({"event": "new_state", "state": sid, "step": step})
             print(f"[{step}] NEW STATE {sid} (total {len(wm.states)})")
 
+        # do sau = khoang cach BFS tu HOME toi state nay (theo graph da hoc)
+        path_from_home = wm.bfs_path(home_sid, sid)
+        cur_depth = len(path_from_home) if path_from_home is not None else 99
+
+        lbl = wm.states[sid].get("label")
+        if lbl == "Loading":
+            try_back(wm); continue
+        if cur_depth >= max_depth:
+            print(f"[{step}] {sid} depth={cur_depth} >= {max_depth} -> ve HOME")
+            goto_home(wm, home_sid); stuck = 0
+            continue
+
         is_home = (sid == home_sid)
         cands = candidate_buttons(img, sid, is_home)
-        # chon nut chua thu
         target = next((p for p in cands if not wm.is_tried(sid, p)), None)
 
         if target is None:
-            print(f"[{step}] {sid} het nut -> ve HOME")
-            home_sid_now = goto_home(wm, home_sid)
-            wm.save()
+            if is_home:
+                print(f"[{step}] HOME het nut -> xong"); break
+            print(f"[{step}] {sid} het nut -> ve HOME tim cho khac")
+            goto_home(wm, home_sid); stuck = 0
             continue
 
         x, y = target
@@ -112,20 +139,18 @@ def explore(budget=60, home_every=12):
         if sid2 != sid:
             wm.add_edge(sid, (x, y), sid2)
             transitions += 1
+            stuck = 0
             log({"event": "transition", "from": sid, "click": [x, y],
                  "to": sid2, "to_is_new": isnew2, "step": step})
             print(f"[{step}] {sid} --({x},{y})--> {sid2} {'NEW' if isnew2 else ''}")
-            # back ve state cu (sid) de tiep tuc thu nut khac cua no.
-            # Uu tien BFS sid2->sid; neu khong co thi bam back tho.
-            path = wm.bfs_path(sid2, sid)
-            if path:
-                for (bx, by) in path:
-                    bgclick(bx, by); time.sleep(1.0)
-            else:
-                try_back(wm)
         else:
+            stuck += 1
             log({"event": "noop", "state": sid, "click": [x, y], "step": step})
 
+        # chong ket: neu nhieu buoc khong co transition -> ve HOME
+        if stuck >= 8:
+            print(f"[{step}] stuck={stuck} -> ve HOME")
+            goto_home(wm, home_sid); stuck = 0
         if (step + 1) % home_every == 0:
             goto_home(wm, home_sid)
         if (step + 1) % 10 == 0:

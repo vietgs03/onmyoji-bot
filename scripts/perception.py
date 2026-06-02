@@ -64,6 +64,14 @@ def dhash(img, per_region=4):
     return "".join(parts)
 
 
+def is_loading(img, dark_thr=45, dark_ratio=0.7):
+    """Heuristic: man hinh loading/chuyen canh thuong RAT TOI (phan lon pixel toi).
+    Tra True neu >dark_ratio pixel co do sang < dark_thr."""
+    g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    dark = (g < dark_thr).mean()
+    return dark > dark_ratio
+
+
 def hamming(a, b):
     return sum(c1 != c2 for c1, c2 in zip(a, b))
 

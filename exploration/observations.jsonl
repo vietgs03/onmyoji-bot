@@ -45,3 +45,31 @@
 {"event": "noop", "state": "5daac9b858", "click": [1077, 175], "step": 42}
 {"event": "noop", "state": "5daac9b858", "click": [913, 403], "step": 43}
 {"event": "noop", "state": "5daac9b858", "click": [837, 219], "step": 44}
+{"event": "noop", "state": "5daac9b858", "click": [125, 632], "step": 0}
+{"event": "noop", "state": "5daac9b858", "click": [235, 632], "step": 1}
+{"event": "noop", "state": "5daac9b858", "click": [335, 632], "step": 2}
+{"event": "transition", "from": "944c9e62e0", "click": [1078, 243], "to": "31fb85fdc5", "to_is_new": true, "step": 0}
+{"event": "new_state", "state": "c142644754", "step": 1}
+{"event": "transition", "from": "c142644754", "click": [235, 179], "to": "836b3a937a", "to_is_new": true, "step": 1}
+{"event": "new_state", "state": "99bef8742e", "step": 2}
+{"event": "transition", "from": "99bef8742e", "click": [735, 436], "to": "7f4fe90ea3", "to_is_new": true, "step": 2}
+{"event": "transition", "from": "7f4fe90ea3", "click": [1048, 572], "to": "19f546e61b", "to_is_new": true, "step": 3}
+{"event": "new_state", "state": "a26ccf0256", "step": 4}
+{"event": "noop", "state": "a26ccf0256", "click": [466, 297], "step": 5}
+{"event": "noop", "state": "a26ccf0256", "click": [68, 613], "step": 6}
+{"event": "noop", "state": "a26ccf0256", "click": [316, 52], "step": 7}
+{"event": "noop", "state": "a26ccf0256", "click": [205, 473], "step": 8}
+{"event": "transition", "from": "ea8fb22e7e", "click": [637, 529], "to": "a26ccf0256", "to_is_new": false, "step": 9}
+{"event": "transition", "from": "ea8fb22e7e", "click": [67, 613], "to": "a26ccf0256", "to_is_new": false, "step": 11}
+{"event": "noop", "state": "a26ccf0256", "click": [123, 321], "step": 13}
+{"event": "transition", "from": "ea8fb22e7e", "click": [125, 329], "to": "a26ccf0256", "to_is_new": false, "step": 14}
+{"event": "noop", "state": "a26ccf0256", "click": [265, 52], "step": 16}
+{"event": "transition", "from": "a26ccf0256", "click": [203, 391], "to": "ea8fb22e7e", "to_is_new": false, "step": 17}
+{"event": "transition", "from": "a26ccf0256", "click": [569, 353], "to": "ea8fb22e7e", "to_is_new": false, "step": 19}
+{"event": "transition", "from": "bef53345ed", "click": [201, 472], "to": "a26ccf0256", "to_is_new": false, "step": 21}
+{"event": "transition", "from": "ea8fb22e7e", "click": [403, 541], "to": "a26ccf0256", "to_is_new": false, "step": 23}
+{"event": "transition", "from": "ea8fb22e7e", "click": [265, 52], "to": "a26ccf0256", "to_is_new": false, "step": 25}
+{"event": "noop", "state": "a26ccf0256", "click": [109, 557], "step": 27}
+{"event": "transition", "from": "a26ccf0256", "click": [395, 625], "to": "ea8fb22e7e", "to_is_new": false, "step": 28}
+{"event": "noop", "state": "a26ccf0256", "click": [463, 433], "step": 30}
+{"event": "noop", "state": "ea8fb22e7e", "click": [392, 187], "step": 31}

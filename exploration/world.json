@@ -73,6 +73,10 @@
         [
           660,
           277
+        ],
+        [
+          1078,
+          243
         ]
       ]
     },
@@ -352,6 +356,144 @@
           219
         ]
       ]
+    },
+    "31fb85fdc5": {
+      "dhash": "1101110111011001001001101010110000111011001101111101100100100110",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/31fb85fdc5.png",
+      "buttons_tried": []
+    },
+    "c142644754": {
+      "dhash": "0000000000000000011001100101010000000000000000000011111010111011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/c142644754.png",
+      "buttons_tried": [
+        [
+          235,
+          179
+        ]
+      ]
+    },
+    "836b3a937a": {
+      "dhash": "0001000100010001001001011001010100000000000000000110000001000001",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/836b3a937a.png",
+      "buttons_tried": []
+    },
+    "1ac8296c87": {
+      "dhash": "0001000100010001000110111100000100000000000000001100111011011001",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/1ac8296c87.png",
+      "buttons_tried": []
+    },
+    "99bef8742e": {
+      "dhash": "0001000100010001100001001100101000000000000000001011111010011011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/99bef8742e.png",
+      "buttons_tried": [
+        [
+          735,
+          436
+        ]
+      ]
+    },
+    "7f4fe90ea3": {
+      "dhash": "0100110111001000001011011011001011010010110101011101011010110100",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/7f4fe90ea3.png",
+      "buttons_tried": [
+        [
+          1048,
+          572
+        ]
+      ]
+    },
+    "19f546e61b": {
+      "dhash": "0101010101001100010010010001100001101010010000101010011000110000",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/19f546e61b.png",
+      "buttons_tried": []
+    },
+    "8a0de505f3": {
+      "dhash": "0001000100000100010000001010100010100011000101101100110010101011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/8a0de505f3.png",
+      "buttons_tried": []
+    },
+    "a26ccf0256": {
+      "dhash": "1100110001000100001000001010001010100010000001100100010010101011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/a26ccf0256.png",
+      "buttons_tried": [
+        [
+          466,
+          297
+        ],
+        [
+          68,
+          613
+        ],
+        [
+          316,
+          52
+        ],
+        [
+          205,
+          473
+        ],
+        [
+          123,
+          321
+        ],
+        [
+          265,
+          52
+        ],
+        [
+          203,
+          391
+        ],
+        [
+          569,
+          353
+        ]
+      ]
+    },
+    "ea8fb22e7e": {
+      "dhash": "1110111001000100101011100011001010010010000000010100010010101011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/ea8fb22e7e.png",
+      "buttons_tried": [
+        [
+          637,
+          529
+        ],
+        [
+          67,
+          613
+        ],
+        [
+          125,
+          329
+        ]
+      ]
+    },
+    "bef53345ed": {
+      "dhash": "0110111001100011010000001010001010100010000100110100110110101011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/bef53345ed.png",
+      "buttons_tried": []
     }
   },
   "edges": [
@@ -554,6 +696,78 @@
         277
       ],
       "to": "5daac9b858"
+    },
+    {
+      "from": "944c9e62e0",
+      "click": [
+        1078,
+        243
+      ],
+      "to": "31fb85fdc5"
+    },
+    {
+      "from": "c142644754",
+      "click": [
+        235,
+        179
+      ],
+      "to": "836b3a937a"
+    },
+    {
+      "from": "99bef8742e",
+      "click": [
+        735,
+        436
+      ],
+      "to": "7f4fe90ea3"
+    },
+    {
+      "from": "7f4fe90ea3",
+      "click": [
+        1048,
+        572
+      ],
+      "to": "19f546e61b"
+    },
+    {
+      "from": "ea8fb22e7e",
+      "click": [
+        637,
+        529
+      ],
+      "to": "a26ccf0256"
+    },
+    {
+      "from": "ea8fb22e7e",
+      "click": [
+        67,
+        613
+      ],
+      "to": "a26ccf0256"
+    },
+    {
+      "from": "ea8fb22e7e",
+      "click": [
+        125,
+        329
+      ],
+      "to": "a26ccf0256"
+    },
+    {
+      "from": "a26ccf0256",
+      "click": [
+        203,
+        391
+      ],
+      "to": "ea8fb22e7e"
+    },
+    {
+      "from": "a26ccf0256",
+      "click": [
+        569,
+        353
+      ],
+      "to": "ea8fb22e7e"
     }
   ]
 }
