@@ -81,6 +81,13 @@ def goto_home(wm, home_sid, max_back=4):
         sid = try_back(wm)
         if sid == home_sid:
             return sid
+    # van lac -> escape manh: dung graph.py (anchor HOME) de ve
+    import subprocess
+    gp = os.path.join(os.path.dirname(__file__), "graph.py")
+    py = sys.executable
+    subprocess.run([py, gp, "goto", "HOME"], capture_output=True, text=True)
+    time.sleep(1.5)
+    sid, _, _ = wm.observe()
     return sid
 
 def explore(budget=60, home_every=20, max_depth=4):
@@ -89,6 +96,18 @@ def explore(budget=60, home_every=20, max_depth=4):
     - Chi back khi state hien tai het nut chua thu.
     - Bo qua khong khai thac state 'Loading' (transient)."""
     wm = WorldModel().load()
+    # DAM BAO o HOME truoc khi bat dau: dong popup + goto HOME (anchor).
+    import subprocess
+    for _ in range(3):
+        im = bgshot()
+        if im is not None:
+            xb = find_close_button(im)
+            if xb:
+                bgclick(*xb); time.sleep(1.0)
+        bgclick(45, 55); time.sleep(0.8); bgclick(28, 68); time.sleep(0.8)
+    gp = os.path.join(os.path.dirname(__file__), "graph.py")
+    subprocess.run([sys.executable, gp, "goto", "HOME"], capture_output=True, text=True)
+    time.sleep(1.5)
     home_sid, isnew, img = wm.observe()
     if isnew:
         log({"event": "new_state", "state": home_sid, "step": -1})

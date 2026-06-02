@@ -1,36 +1,24 @@
 # Onmyoji UI Graph (logical)
 
-Nodes: 8  Edges: 7
+Nodes: 4  Edges: 3
 
 ## Nodes
 
-- **HOME** (x15 physical): San nha | San nha (footer menu hien) | San nha (footer menu) | San nha (tooltip Switch characters) | San nha + side panel trai (Forum/Support/Yard) | San nha chinh
-- **Loading** (x2 physical): Frame chuyen canh (dang vao Awakened Wisdom) | Frame chuyen canh toi mau
-- **Settings** (x1 physical): Bang cai dat / ho so nguoi choi (Audio/View/Name/Code)
-- **Event** (x1 physical): Trang su kien (Awakened Wisdom event overview)
-- **CreateFloat** (x1 physical): Man hinh tao xe dieu hanh (Create Float)
-- **ChampionTrial** (x1 physical): Champion Trial (Successor Trial/Fujiwara Archives/Uncharted Dreams)
-- **Explore** (x1 physical): Ban do Explore/Chapter (Realm Raid/Soul/Secret Zone)
-- **TownSetting** (x1 physical): Popup cai dat Town (Original/Normal/Extreme)
+- **HOME** (x11 physical): San nha | San nha (chat the gioi) | San nha (dem) | San nha (nut Yard goc trai duoi) | San nha (thong bao Nurikabe Shard) | San nha (thong bao Soul DEF Bonus) | San nha (thong bao trieu hoi SP) | San nha + side panel (Forum/Support) | San nha chinh
+- **Settings** (x5 physical): Bang cai dat (Audio/ho so/tai khoan) | Chon khung vien avatar | Cua so chon khung vien avatar (Frame) | Hop thoai lien ket tai khoan (nhan 50 Jade) | Trinh phat nhac nen
+- **Event** (x4 physical): Awakened Wisdom event overview | Ban do su kien Awakened Wisdom (cac che do) | Champion Trial cua su kien | Melodic Mastery (nang cap ky nang)
+- **Loading** (x3 physical): Man hinh tai (logo + chuot) | Man hinh tai (logo + miko) | Man hinh tai (nui + trang)
 
 ## Transitions
 
-- HOME --click [64, 77]--> Settings
-- HOME --click [694, 213]--> Loading
-- HOME --click [1077, 175]--> Event
-- HOME --click [229, 463]--> CreateFloat
-- HOME --click [1077, 242]--> ChampionTrial
-- HOME --click [608, 192]--> Explore
-- HOME --click [660, 277]--> TownSetting
+- HOME --click [59, 89]--> Settings
+- HOME --click [1077, 176]--> Event
+- HOME --click [698, 209]--> Loading
 
 ## Mermaid
 ```mermaid
 graph TD
     HOME[HOME] --> Settings[Settings]
-    HOME[HOME] --> Loading[Loading]
     HOME[HOME] --> Event[Event]
-    HOME[HOME] --> CreateFloat[CreateFloat]
-    HOME[HOME] --> ChampionTrial[ChampionTrial]
-    HOME[HOME] --> Explore[Explore]
-    HOME[HOME] --> TownSetting[TownSetting]
+    HOME[HOME] --> Loading[Loading]
 ```

@@ -1,10 +1,10 @@
 {
   "states": {
-    "944c9e62e0": {
-      "dhash": "1011101111011010010000101010001001010011010101011110101010111100",
+    "eef6c85a46": {
+      "dhash": "1010101011101010010000101010011010010010010101001100110011011100",
       "label": "HOME",
       "desc": "San nha chinh",
-      "screenshot": "exploration/screens/944c9e62e0.png",
+      "screenshot": "exploration/screens/eef6c85a46.png",
       "buttons_tried": [
         [
           125,
@@ -41,143 +41,288 @@
         [
           922,
           632
-        ],
-        [
-          1022,
-          632
-        ],
-        [
-          608,
-          192
-        ],
-        [
-          988,
-          245
-        ],
-        [
-          1075,
-          185
-        ],
-        [
-          1033,
-          72
-        ],
-        [
-          1092,
-          72
-        ],
-        [
-          936,
-          91
-        ],
-        [
-          660,
-          277
-        ],
-        [
-          1078,
-          243
         ]
       ]
     },
-    "c0a6d0df01": {
-      "dhash": "1001101111011000011010101110101011010101110011001101111010111011",
+    "f75b02582d": {
+      "dhash": "1010101111111000010010101110101011010010110100001101111010111011",
       "label": "HOME",
-      "desc": "San nha + side panel trai (Forum/Support/Yard)",
-      "screenshot": "exploration/screens/c0a6d0df01.png",
+      "desc": "San nha + side panel (Forum/Support)",
+      "screenshot": "exploration/screens/f75b02582d.png",
       "buttons_tried": [
         [
           1031,
           70
         ],
         [
-          64,
-          77
+          1073,
+          623
         ],
         [
-          694,
+          59,
+          89
+        ],
+        [
+          1077,
+          176
+        ],
+        [
+          698,
+          209
+        ]
+      ]
+    },
+    "45e8880646": {
+      "dhash": "1100100100011100100001100111101001010011010111001101111011101011",
+      "label": "Settings",
+      "desc": "Bang cai dat (Audio/ho so/tai khoan)",
+      "screenshot": "exploration/screens/45e8880646.png",
+      "buttons_tried": [
+        [
+          308,
+          203
+        ],
+        [
+          269,
+          454
+        ]
+      ]
+    },
+    "739925704b": {
+      "dhash": "1100101100011000000001000110010010000011010011001110111011111010",
+      "label": "Settings",
+      "desc": "Cua so chon khung vien avatar (Frame)",
+      "screenshot": "exploration/screens/739925704b.png",
+      "buttons_tried": [
+        [
+          622,
+          495
+        ],
+        [
+          850,
+          286
+        ],
+        [
+          501,
+          377
+        ],
+        [
+          265,
+          490
+        ],
+        [
+          622,
+          265
+        ],
+        [
+          497,
+          261
+        ],
+        [
+          385,
+          260
+        ],
+        [
+          266,
+          377
+        ],
+        [
+          380,
+          380
+        ],
+        [
+          649,
+          239
+        ]
+      ]
+    },
+    "ba4dee7541": {
+      "dhash": "0111001011001100100000001101010011111001100101000110011110111011",
+      "label": "Event",
+      "desc": "Awakened Wisdom event overview",
+      "screenshot": "exploration/screens/ba4dee7541.png",
+      "buttons_tried": [
+        [
+          484,
+          531
+        ],
+        [
+          381,
+          383
+        ],
+        [
+          325,
+          293
+        ],
+        [
+          334,
+          595
+        ],
+        [
+          673,
+          532
+        ],
+        [
+          407,
+          256
+        ],
+        [
+          1017,
+          223
+        ],
+        [
+          353,
+          413
+        ],
+        [
+          461,
+          458
+        ],
+        [
+          526,
+          177
+        ],
+        [
+          355,
+          251
+        ],
+        [
+          803,
+          302
+        ],
+        [
+          353,
+          599
+        ],
+        [
+          868,
+          235
+        ]
+      ]
+    },
+    "f7c82a2059": {
+      "dhash": "1010101010001000000000000000000010001000100010000000000000000000",
+      "label": "Loading",
+      "desc": "Man hinh tai (nui + trang)",
+      "screenshot": "exploration/screens/f7c82a2059.png",
+      "buttons_tried": []
+    },
+    "e91a4cdc54": {
+      "dhash": "0001000100010001011110110001100101011101010111010100110101100110",
+      "label": "Event",
+      "desc": "Ban do su kien Awakened Wisdom (cac che do)",
+      "screenshot": "exploration/screens/e91a4cdc54.png",
+      "buttons_tried": []
+    },
+    "e72dd865e0": {
+      "dhash": "1011101110111010011000101010011000010101010101011110111010111100",
+      "label": "HOME",
+      "desc": "San nha (nut Yard goc trai duoi)",
+      "screenshot": "exploration/screens/e72dd865e0.png",
+      "buttons_tried": []
+    },
+    "c81c31c6bc": {
+      "dhash": "1001100110011000110111100110101011001011110011000100101101111110",
+      "label": "HOME",
+      "desc": "San nha",
+      "screenshot": "exploration/screens/c81c31c6bc.png",
+      "buttons_tried": [
+        [
+          628,
+          212
+        ]
+      ]
+    },
+    "7e264a697a": {
+      "dhash": "1011100110111010010010100110111011001011110011000101111111101011",
+      "label": "HOME",
+      "desc": "San nha (thong bao Nurikabe Shard)",
+      "screenshot": "exploration/screens/7e264a697a.png",
+      "buttons_tried": [
+        [
+          1077,
+          176
+        ],
+        [
+          565,
           213
         ]
       ]
     },
-    "6499b7175b": {
-      "dhash": "1100100100011100100001100011101001010101010011000101111011101111",
+    "6f12779e52": {
+      "dhash": "1010101011101010111011101010001011001001100011001101011001000111",
+      "label": "HOME",
+      "desc": "San nha",
+      "screenshot": "exploration/screens/6f12779e52.png",
+      "buttons_tried": [
+        [
+          1077,
+          175
+        ],
+        [
+          526,
+          220
+        ]
+      ]
+    },
+    "e07e1a1db5": {
+      "dhash": "1011101111011010010000100110001011010101010101011111101010001110",
+      "label": "HOME",
+      "desc": "San nha",
+      "screenshot": "exploration/screens/e07e1a1db5.png",
+      "buttons_tried": []
+    },
+    "444b9b610c": {
+      "dhash": "1010101011101010110000101010001001010101010101011001100010111100",
+      "label": "HOME",
+      "desc": "San nha (dem)",
+      "screenshot": "exploration/screens/444b9b610c.png",
+      "buttons_tried": [
+        [
+          67,
+          86
+        ]
+      ]
+    },
+    "c744fa0b6e": {
+      "dhash": "1010101000011100100001100110101001010101010100010101011011101111",
       "label": "Settings",
-      "desc": "Bang cai dat / ho so nguoi choi (Audio/View/Name/Code)",
-      "screenshot": "exploration/screens/6499b7175b.png",
+      "desc": "Hop thoai lien ket tai khoan (nhan 50 Jade)",
+      "screenshot": "exploration/screens/c744fa0b6e.png",
+      "buttons_tried": [
+        [
+          269,
+          454
+        ],
+        [
+          190,
+          453
+        ],
+        [
+          308,
+          203
+        ]
+      ]
+    },
+    "a4a12df431": {
+      "dhash": "1011101110011010110001101110001001010101110101010101010011010000",
+      "label": "HOME",
+      "desc": "San nha (thong bao Soul DEF Bonus)",
+      "screenshot": "exploration/screens/a4a12df431.png",
       "buttons_tried": []
     },
-    "ecdf7cbfaa": {
-      "dhash": "0000000010001000000000000001000010001000100011000100010000100010",
+    "ced1805075": {
+      "dhash": "0110010011001000001110000010001001100100010001011011001110011010",
       "label": "Loading",
-      "desc": "Frame chuyen canh (dang vao Awakened Wisdom)",
-      "screenshot": "exploration/screens/ecdf7cbfaa.png",
+      "desc": "Man hinh tai (logo + miko)",
+      "screenshot": "exploration/screens/ced1805075.png",
       "buttons_tried": []
     },
-    "9126c78dcf": {
-      "dhash": "1000100110011010010110100110001011001101110011000101101101111100",
+    "11fc5f017c": {
+      "dhash": "1011101110011010011001100110101001011011110011001001000111000011",
       "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/9126c78dcf.png",
-      "buttons_tried": [
-        [
-          1031,
-          70
-        ],
-        [
-          61,
-          89
-        ],
-        [
-          625,
-          214
-        ]
-      ]
-    },
-    "ba5092a92c": {
-      "dhash": "1011101110111010011010000010100001011101110011000101110111101011",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/ba5092a92c.png",
-      "buttons_tried": [
-        [
-          1031,
-          70
-        ],
-        [
-          64,
-          77
-        ],
-        [
-          601,
-          295
-        ]
-      ]
-    },
-    "17be941175": {
-      "dhash": "1110101011101010001111010000001001000001000010001100010110101111",
-      "label": "HOME",
-      "desc": "San nha (tooltip Switch characters)",
-      "screenshot": "exploration/screens/17be941175.png",
-      "buttons_tried": []
-    },
-    "3405f68f74": {
-      "dhash": "1011100110111010101000011100110100100011001010100110011011001010",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/3405f68f74.png",
-      "buttons_tried": [
-        [
-          183,
-          214
-        ]
-      ]
-    },
-    "c230b8c49a": {
-      "dhash": "1010101011101010110000101110111000100011001010100110011010011010",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/c230b8c49a.png",
+      "desc": "San nha (thong bao trieu hoi SP)",
+      "screenshot": "exploration/screens/11fc5f017c.png",
       "buttons_tried": [
         [
           1077,
@@ -185,589 +330,333 @@
         ]
       ]
     },
-    "073136c598": {
-      "dhash": "0010001000101010000000000000000010011001000010010000000000000000",
-      "label": "Loading",
-      "desc": "Frame chuyen canh toi mau",
-      "screenshot": "exploration/screens/073136c598.png",
-      "buttons_tried": []
-    },
-    "c3124e1509": {
-      "dhash": "1011101110111010110011101010001011001011100011001101011001010111",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/c3124e1509.png",
-      "buttons_tried": [
-        [
-          519,
-          217
-        ]
-      ]
-    },
-    "27130682e0": {
-      "dhash": "1011101110111010110001101110001001010101110101010101010011010000",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/27130682e0.png",
-      "buttons_tried": [
-        [
-          315,
-          213
-        ]
-      ]
-    },
-    "c33e658b4d": {
-      "dhash": "1010101011101010011000101010011000010101010101011110110011011100",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/c33e658b4d.png",
-      "buttons_tried": [
-        [
-          1077,
-          175
-        ],
-        [
-          457,
-          406
-        ]
-      ]
-    },
-    "7db1433b6f": {
-      "dhash": "0101010011001100100000001101010011111001100101000110011110010011",
+    "1bb4756a8f": {
+      "dhash": "0101010101010100000111101110001101100111010111111001111111101010",
       "label": "Event",
-      "desc": "Trang su kien (Awakened Wisdom event overview)",
-      "screenshot": "exploration/screens/7db1433b6f.png",
+      "desc": "Champion Trial cua su kien",
+      "screenshot": "exploration/screens/1bb4756a8f.png",
+      "buttons_tried": [
+        [
+          1066,
+          590
+        ]
+      ]
+    },
+    "7a71153582": {
+      "dhash": "0110011001001110001110101000000110101100111111100101101110001010",
+      "label": "Event",
+      "desc": "Melodic Mastery (nang cap ky nang)",
+      "screenshot": "exploration/screens/7a71153582.png",
+      "buttons_tried": [
+        [
+          99,
+          425
+        ],
+        [
+          219,
+          183
+        ],
+        [
+          99,
+          545
+        ],
+        [
+          99,
+          183
+        ],
+        [
+          218,
+          545
+        ],
+        [
+          219,
+          427
+        ],
+        [
+          219,
+          307
+        ]
+      ]
+    },
+    "4f1f9ea06f": {
+      "dhash": "1100110010101010111001010111001110111011110001010010101011101111",
+      "label": "Loading",
+      "desc": "Man hinh tai (logo + chuot)",
+      "screenshot": "exploration/screens/4f1f9ea06f.png",
       "buttons_tried": []
     },
-    "0e9a297ae5": {
-      "dhash": "1010101011101010010001100110101001000101010001001001001001000001",
+    "c5e9d1492a": {
+      "dhash": "1011101110111010010011100110001001010101010001000010010110010110",
       "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/0e9a297ae5.png",
+      "desc": "San nha (chat the gioi)",
+      "screenshot": "exploration/screens/c5e9d1492a.png",
       "buttons_tried": [
         [
-          255,
-          213
+          59,
+          82
         ]
       ]
     },
-    "6f8f0ed99b": {
-      "dhash": "1011101110111010011011000110001001010101001000100010010110010110",
-      "label": "HOME",
-      "desc": "San nha",
-      "screenshot": "exploration/screens/6f8f0ed99b.png",
+    "b5bfd6920a": {
+      "dhash": "1010101000011000000001000110010010000001001000100110011111101110",
+      "label": "Settings",
+      "desc": "Chon khung vien avatar",
+      "screenshot": "exploration/screens/b5bfd6920a.png",
       "buttons_tried": [
         [
-          229,
-          463
-        ]
-      ]
-    },
-    "9d70d5a3d5": {
-      "dhash": "0101010111011101010000010001001001010011000001010100011010001000",
-      "label": "CreateFloat",
-      "desc": "Man hinh tao xe dieu hanh (Create Float)",
-      "screenshot": "exploration/screens/9d70d5a3d5.png",
-      "buttons_tried": []
-    },
-    "b670be283b": {
-      "dhash": "1010101011011000010110101010011010010010010000000101100110100010",
-      "label": "HOME",
-      "desc": "San nha (footer menu hien)",
-      "screenshot": "exploration/screens/b670be283b.png",
-      "buttons_tried": []
-    },
-    "515f2c5afc": {
-      "dhash": "1010101011101010010000101110111010010010110001000110011011001010",
-      "label": "HOME",
-      "desc": "San nha (footer menu hien)",
-      "screenshot": "exploration/screens/515f2c5afc.png",
-      "buttons_tried": []
-    },
-    "52259731af": {
-      "dhash": "0101010101010100000111001110001100100110010111011001111111101010",
-      "label": "ChampionTrial",
-      "desc": "Champion Trial (Successor Trial/Fujiwara Archives/Uncharted Dreams)",
-      "screenshot": "exploration/screens/52259731af.png",
-      "buttons_tried": []
-    },
-    "76a9b09240": {
-      "dhash": "0011100110011001110100110011001110110011111001111111111011011001",
-      "label": "Explore",
-      "desc": "Ban do Explore/Chapter (Realm Raid/Soul/Secret Zone)",
-      "screenshot": "exploration/screens/76a9b09240.png",
-      "buttons_tried": []
-    },
-    "c2c590c5cf": {
-      "dhash": "1010101011101010010100111001000111010010010101001010100010111100",
-      "label": "HOME",
-      "desc": "San nha (footer menu)",
-      "screenshot": "exploration/screens/c2c590c5cf.png",
-      "buttons_tried": []
-    },
-    "5daac9b858": {
-      "dhash": "1010100010001010000000000000000010010001000001001110110011101110",
-      "label": "TownSetting",
-      "desc": "Popup cai dat Town (Original/Normal/Extreme)",
-      "screenshot": "exploration/screens/5daac9b858.png",
-      "buttons_tried": [
-        [
-          283,
-          320
+          622,
+          495
         ],
         [
-          273,
-          484
-        ],
-        [
-          643,
-          361
-        ],
-        [
-          578,
-          371
-        ],
-        [
-          655,
-          405
-        ],
-        [
-          826,
-          485
-        ],
-        [
-          851,
-          367
-        ],
-        [
-          919,
-          358
-        ],
-        [
-          1077,
-          175
-        ],
-        [
-          913,
-          403
-        ],
-        [
-          837,
-          219
-        ]
-      ]
-    },
-    "31fb85fdc5": {
-      "dhash": "1101110111011001001001101010110000111011001101111101100100100110",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/31fb85fdc5.png",
-      "buttons_tried": []
-    },
-    "c142644754": {
-      "dhash": "0000000000000000011001100101010000000000000000000011111010111011",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/c142644754.png",
-      "buttons_tried": [
-        [
-          235,
-          179
-        ]
-      ]
-    },
-    "836b3a937a": {
-      "dhash": "0001000100010001001001011001010100000000000000000110000001000001",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/836b3a937a.png",
-      "buttons_tried": []
-    },
-    "1ac8296c87": {
-      "dhash": "0001000100010001000110111100000100000000000000001100111011011001",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/1ac8296c87.png",
-      "buttons_tried": []
-    },
-    "99bef8742e": {
-      "dhash": "0001000100010001100001001100101000000000000000001011111010011011",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/99bef8742e.png",
-      "buttons_tried": [
-        [
-          735,
-          436
-        ]
-      ]
-    },
-    "7f4fe90ea3": {
-      "dhash": "0100110111001000001011011011001011010010110101011101011010110100",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/7f4fe90ea3.png",
-      "buttons_tried": [
-        [
-          1048,
-          572
-        ]
-      ]
-    },
-    "19f546e61b": {
-      "dhash": "0101010101001100010010010001100001101010010000101010011000110000",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/19f546e61b.png",
-      "buttons_tried": []
-    },
-    "8a0de505f3": {
-      "dhash": "0001000100000100010000001010100010100011000101101100110010101011",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/8a0de505f3.png",
-      "buttons_tried": []
-    },
-    "a26ccf0256": {
-      "dhash": "1100110001000100001000001010001010100010000001100100010010101011",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/a26ccf0256.png",
-      "buttons_tried": [
-        [
-          466,
-          297
-        ],
-        [
-          68,
-          613
-        ],
-        [
-          316,
-          52
-        ],
-        [
-          205,
-          473
-        ],
-        [
-          123,
-          321
+          850,
+          286
         ],
         [
           265,
-          52
+          490
         ],
         [
-          203,
-          391
+          506,
+          380
         ],
         [
-          569,
-          353
+          380,
+          380
+        ],
+        [
+          501,
+          263
+        ],
+        [
+          626,
+          377
+        ],
+        [
+          503,
+          489
+        ],
+        [
+          262,
+          379
+        ],
+        [
+          622,
+          262
+        ],
+        [
+          649,
+          239
+        ],
+        [
+          380,
+          266
+        ],
+        [
+          385,
+          493
         ]
       ]
     },
-    "ea8fb22e7e": {
-      "dhash": "1110111001000100101011100011001010010010000000010100010010101011",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/ea8fb22e7e.png",
-      "buttons_tried": [
-        [
-          637,
-          529
-        ],
-        [
-          67,
-          613
-        ],
-        [
-          125,
-          329
-        ]
-      ]
-    },
-    "bef53345ed": {
-      "dhash": "0110111001100011010000001010001010100010000100110100110110101011",
-      "label": null,
-      "desc": null,
-      "screenshot": "exploration/screens/bef53345ed.png",
+    "87540f1823": {
+      "dhash": "0011001000110011000000100001000000100010001000110000001010000000",
+      "label": "Settings",
+      "desc": "Trinh phat nhac nen",
+      "screenshot": "exploration/screens/87540f1823.png",
       "buttons_tried": []
     }
   },
   "edges": [
     {
-      "from": "944c9e62e0",
+      "from": "eef6c85a46",
       "click": [
         125,
         632
       ],
-      "to": "c0a6d0df01"
+      "to": "f75b02582d"
     },
     {
-      "from": "c0a6d0df01",
+      "from": "f75b02582d",
       "click": [
-        64,
-        77
+        59,
+        89
       ],
-      "to": "6499b7175b"
+      "to": "45e8880646"
     },
     {
-      "from": "c0a6d0df01",
+      "from": "45e8880646",
       "click": [
-        694,
-        213
+        308,
+        203
       ],
-      "to": "ecdf7cbfaa"
+      "to": "739925704b"
     },
     {
-      "from": "944c9e62e0",
+      "from": "f75b02582d",
+      "click": [
+        1077,
+        176
+      ],
+      "to": "ba4dee7541"
+    },
+    {
+      "from": "f75b02582d",
+      "click": [
+        698,
+        209
+      ],
+      "to": "f7c82a2059"
+    },
+    {
+      "from": "eef6c85a46",
       "click": [
         235,
         632
       ],
-      "to": "9126c78dcf"
+      "to": "c81c31c6bc"
     },
     {
-      "from": "9126c78dcf",
+      "from": "c81c31c6bc",
       "click": [
-        61,
-        89
+        628,
+        212
       ],
-      "to": "6499b7175b"
+      "to": "f7c82a2059"
     },
     {
-      "from": "9126c78dcf",
-      "click": [
-        625,
-        214
-      ],
-      "to": "ecdf7cbfaa"
-    },
-    {
-      "from": "944c9e62e0",
+      "from": "eef6c85a46",
       "click": [
         335,
         632
       ],
-      "to": "c0a6d0df01"
+      "to": "7e264a697a"
     },
     {
-      "from": "ba5092a92c",
+      "from": "7e264a697a",
       "click": [
-        64,
-        77
+        1077,
+        176
       ],
-      "to": "6499b7175b"
+      "to": "ba4dee7541"
     },
     {
-      "from": "ba5092a92c",
+      "from": "7e264a697a",
       "click": [
-        601,
-        295
+        565,
+        213
       ],
-      "to": "17be941175"
+      "to": "f7c82a2059"
     },
     {
-      "from": "3405f68f74",
-      "click": [
-        183,
-        214
-      ],
-      "to": "073136c598"
-    },
-    {
-      "from": "944c9e62e0",
+      "from": "eef6c85a46",
       "click": [
         425,
         632
       ],
-      "to": "c3124e1509"
+      "to": "6f12779e52"
     },
     {
-      "from": "c3124e1509",
-      "click": [
-        519,
-        217
-      ],
-      "to": "073136c598"
-    },
-    {
-      "from": "944c9e62e0",
-      "click": [
-        723,
-        632
-      ],
-      "to": "27130682e0"
-    },
-    {
-      "from": "27130682e0",
-      "click": [
-        315,
-        213
-      ],
-      "to": "ecdf7cbfaa"
-    },
-    {
-      "from": "c33e658b4d",
+      "from": "6f12779e52",
       "click": [
         1077,
         175
       ],
-      "to": "7db1433b6f"
+      "to": "ba4dee7541"
     },
     {
-      "from": "944c9e62e0",
+      "from": "6f12779e52",
+      "click": [
+        526,
+        220
+      ],
+      "to": "f7c82a2059"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        523,
+        632
+      ],
+      "to": "e07e1a1db5"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        623,
+        632
+      ],
+      "to": "444b9b610c"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        723,
+        632
+      ],
+      "to": "444b9b610c"
+    },
+    {
+      "from": "444b9b610c",
+      "click": [
+        67,
+        86
+      ],
+      "to": "45e8880646"
+    },
+    {
+      "from": "eef6c85a46",
       "click": [
         822,
         632
       ],
-      "to": "0e9a297ae5"
+      "to": "11fc5f017c"
     },
     {
-      "from": "0e9a297ae5",
-      "click": [
-        255,
-        213
-      ],
-      "to": "073136c598"
-    },
-    {
-      "from": "944c9e62e0",
-      "click": [
-        922,
-        632
-      ],
-      "to": "6f8f0ed99b"
-    },
-    {
-      "from": "6f8f0ed99b",
-      "click": [
-        229,
-        463
-      ],
-      "to": "9d70d5a3d5"
-    },
-    {
-      "from": "c33e658b4d",
-      "click": [
-        457,
-        406
-      ],
-      "to": "b670be283b"
-    },
-    {
-      "from": "c230b8c49a",
+      "from": "11fc5f017c",
       "click": [
         1077,
         242
       ],
-      "to": "52259731af"
+      "to": "1bb4756a8f"
     },
     {
-      "from": "944c9e62e0",
+      "from": "1bb4756a8f",
       "click": [
-        608,
-        192
+        1066,
+        590
       ],
-      "to": "76a9b09240"
+      "to": "7a71153582"
     },
     {
-      "from": "944c9e62e0",
+      "from": "eef6c85a46",
       "click": [
-        1075,
-        185
+        922,
+        632
       ],
-      "to": "52259731af"
+      "to": "c5e9d1492a"
     },
     {
-      "from": "944c9e62e0",
+      "from": "c5e9d1492a",
       "click": [
-        1092,
-        72
+        59,
+        82
       ],
-      "to": "c2c590c5cf"
+      "to": "c744fa0b6e"
     },
     {
-      "from": "944c9e62e0",
+      "from": "c744fa0b6e",
       "click": [
-        660,
-        277
+        308,
+        203
       ],
-      "to": "5daac9b858"
+      "to": "b5bfd6920a"
     },
     {
-      "from": "944c9e62e0",
+      "from": "739925704b",
       "click": [
-        1078,
-        243
+        380,
+        380
       ],
-      "to": "31fb85fdc5"
-    },
-    {
-      "from": "c142644754",
-      "click": [
-        235,
-        179
-      ],
-      "to": "836b3a937a"
-    },
-    {
-      "from": "99bef8742e",
-      "click": [
-        735,
-        436
-      ],
-      "to": "7f4fe90ea3"
-    },
-    {
-      "from": "7f4fe90ea3",
-      "click": [
-        1048,
-        572
-      ],
-      "to": "19f546e61b"
-    },
-    {
-      "from": "ea8fb22e7e",
-      "click": [
-        637,
-        529
-      ],
-      "to": "a26ccf0256"
-    },
-    {
-      "from": "ea8fb22e7e",
-      "click": [
-        67,
-        613
-      ],
-      "to": "a26ccf0256"
-    },
-    {
-      "from": "ea8fb22e7e",
-      "click": [
-        125,
-        329
-      ],
-      "to": "a26ccf0256"
-    },
-    {
-      "from": "a26ccf0256",
-      "click": [
-        203,
-        391
-      ],
-      "to": "ea8fb22e7e"
-    },
-    {
-      "from": "a26ccf0256",
-      "click": [
-        569,
-        353
-      ],
-      "to": "ea8fb22e7e"
+      "to": "b5bfd6920a"
     }
   ]
 }
