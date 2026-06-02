@@ -16,6 +16,12 @@ File: `data/fandom/shikigami_parsed.json` (id, name_en, name_cn, name_jp, name_g
 - Phan bo: **SP 48, SSR 82, SR 68, R 38, N 30**.
 - Co ca ten EN (dung cho ban Global cua minh) va ten CN/JP (doi chieu wiki TQ).
 - VD: {id:200, name_en:"Momo no Sei", name_cn:"桃花妖", rarity:"SR"}
+- **Full wikitext**: `data/fandom/shikigami_full.json` (271 con: skill, evolve element,
+  CV, intro, summon method, SP version, link kamigame JP). 55 con co SP version.
+  Parsed: `shikigami_full_parsed.json`.
+
+## TOOL TRA CUU
+`python3 scripts/kb.py stats | shikigami <ten> | soul <ten> | rarity SSR`
 
 ## 2. SOULS / 御魂 (Mitama) - 69 bo
 File: `data/fandom/souls_parsed.json` (no, name_en/cn/jp, type, combo2, combo4)

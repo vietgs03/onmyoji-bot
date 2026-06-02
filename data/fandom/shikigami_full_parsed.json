@@ -1,0 +1,2162 @@
+[
+  {
+    "name": "Amaterasu",
+    "no": "556",
+    "rarity": "SSR",
+    "cv": "Mai Nakahara",
+    "name_cn": "天照 Tiānzhào",
+    "has_sp": false
+  },
+  {
+    "name": "Aoandon",
+    "no": "266",
+    "rarity": "SSR",
+    "cv": "Nana Mizuki",
+    "name_cn": "青行灯 Qīng xíngdēng",
+    "has_sp": true
+  },
+  {
+    "name": "Arakawa no Aruji",
+    "no": "248",
+    "rarity": "SSR",
+    "cv": "Takehito Koyasu",
+    "name_cn": "荒川之主 Huāngchuān zhī zhǔ",
+    "has_sp": true
+  },
+  {
+    "name": "Asura",
+    "no": "364",
+    "rarity": "SSR",
+    "cv": "Katsuyuki Konishi",
+    "name_cn": "阿修罗 Ā​xiū​luó​",
+    "has_sp": true
+  },
+  {
+    "name": "Enma",
+    "no": "255",
+    "rarity": "SSR",
+    "cv": "Mamiko Noto",
+    "name_cn": "阎魔 Yánmó",
+    "has_sp": true
+  },
+  {
+    "name": "Enmusubi no Kami",
+    "no": "347",
+    "rarity": "SSR",
+    "cv": "Amamiya Sora",
+    "name_cn": "缘结神 Yuánjié Shén",
+    "has_sp": true
+  },
+  {
+    "name": "Fukengaku",
+    "no": "379",
+    "rarity": "SSR",
+    "cv": "Kenshou Ono",
+    "name_cn": "不见岳 Bùjiànyuè",
+    "has_sp": true
+  },
+  {
+    "name": "Fuuyoukun",
+    "no": "575",
+    "rarity": "SSR",
+    "cv": "Masahiro Yamanaka",
+    "name_cn": "封阳君 Fēngyángjūn",
+    "has_sp": false
+  },
+  {
+    "name": "Gashadokuro",
+    "no": "585",
+    "rarity": "SSR",
+    "cv": "Kenyu Horiuchi",
+    "name_cn": "荒骷髅",
+    "has_sp": false
+  },
+  {
+    "name": "Gintoki Sakata",
+    "no": "397",
+    "rarity": "SSR",
+    "cv": "Tomokazu Sugita",
+    "name_cn": "坂田银时 Bǎntián Yínshí",
+    "has_sp": false
+  },
+  {
+    "name": "Hakuzousu",
+    "no": "316",
+    "rarity": "SSR",
+    "cv": "Daiki Kobayashi",
+    "name_cn": "白藏主 Bái zāngzhǔ",
+    "has_sp": true
+  },
+  {
+    "name": "Hatsune Miku",
+    "no": "563",
+    "rarity": "SSR",
+    "cv": "{{Popup|text=<span style=\"border-bottom:1px dotted; cursor:help;\">Hatsune Miku</",
+    "name_cn": "初音未来 Chūyīn Wèilái",
+    "has_sp": false
+  },
+  {
+    "name": "Higanbana",
+    "no": "288",
+    "rarity": "SSR",
+    "cv": "Sayaka Ohara",
+    "name_cn": "彼岸花 Bǐ'ànhuā",
+    "has_sp": true
+  },
+  {
+    "name": "Himiko",
+    "no": "583",
+    "rarity": "SSR",
+    "cv": "Rie Tanaka",
+    "name_cn": "卑弥呼",
+    "has_sp": false
+  },
+  {
+    "name": "Hozuki",
+    "no": "308",
+    "rarity": "SSR",
+    "cv": "Hiroki Yasumoto",
+    "name_cn": "鬼灯 Guideng",
+    "has_sp": false
+  },
+  {
+    "name": "Ibaraki Douji",
+    "no": "265",
+    "rarity": "SSR",
+    "cv": "Jun Fukuyama",
+    "name_cn": "茨木童子 Címù tóngzǐ",
+    "has_sp": true
+  },
+  {
+    "name": "Ichigo Kurosaki",
+    "no": "337",
+    "rarity": "SSR",
+    "cv": "Masakazu Morita",
+    "name_cn": "黑崎一护 Hēiqí Yīhù",
+    "has_sp": false
+  },
+  {
+    "name": "Ichimokuren",
+    "no": "272",
+    "rarity": "SSR",
+    "cv": "Hikaru Midorikawa",
+    "name_cn": "一目连 Yīmù lián",
+    "has_sp": true
+  },
+  {
+    "name": "Inosuke Hashibira",
+    "no": "387",
+    "rarity": "SSR",
+    "cv": "Yoshitsugu Matsuoka",
+    "name_cn": "嘴平伊之助 Zuǐpíng Yīzhīzhù",
+    "has_sp": false
+  },
+  {
+    "name": "Inuyasha",
+    "no": "313",
+    "rarity": "SSR",
+    "cv": "Kappei Yamaguchi",
+    "name_cn": "犬夜叉",
+    "has_sp": false
+  },
+  {
+    "name": "Izanami",
+    "no": "557",
+    "rarity": "SSR",
+    "cv": "Yumi Hara",
+    "name_cn": "伊邪那美 Yīxiénàměi",
+    "has_sp": false
+  },
+  {
+    "name": "Jinkougyou",
+    "no": "391",
+    "rarity": "SSR",
+    "cv": "Yuusuke Kobayashi",
+    "name_cn": "寻香行 Xún xiāng xíng",
+    "has_sp": false
+  },
+  {
+    "name": "Kachou Fuugetsu",
+    "no": "279",
+    "rarity": "SSR",
+    "cv": "Saori Hayami",
+    "name_cn": "花鸟卷 Huāniǎojuǎn",
+    "has_sp": true
+  },
+  {
+    "name": "Kagamine Rin & Len",
+    "no": "564",
+    "rarity": "SSR",
+    "cv": "{{Popup|text=<span style=\"border-bottom:1px dotted; cursor:help;\">Kagamine Rin &",
+    "name_cn": "镜音铃·连 Jìngyīn Líng·Lián",
+    "has_sp": false
+  },
+  {
+    "name": "Kagura & Sadaharu",
+    "no": "500",
+    "rarity": "SSR",
+    "cv": "Rie Kugimiya (Kagura) Mikako Takahashi (Sadaharu)",
+    "name_cn": "神乐&定春 Shén lè & Dìng chūn",
+    "has_sp": false
+  },
+  {
+    "name": "Kaguya Hime",
+    "no": "280",
+    "rarity": "SSR",
+    "cv": "Ayana Taketatsu",
+    "name_cn": "辉夜姬 Huī yè jī",
+    "has_sp": true
+  },
+  {
+    "name": "Kannazuki",
+    "no": "596",
+    "rarity": "SSR",
+    "cv": "Inoue Honoka",
+    "name_cn": "神无月 Shén Wú Yué",
+    "has_sp": false
+  },
+  {
+    "name": "Karuta",
+    "no": "581",
+    "rarity": "SSR",
+    "cv": "Toda Megumi",
+    "name_cn": "歌留多 Gē liú duō",
+    "has_sp": false
+  },
+  {
+    "name": "Kidoumaru",
+    "no": "345",
+    "rarity": "SSR",
+    "cv": "KENN",
+    "name_cn": "鬼童丸 Guǐ​ tóng​ wán",
+    "has_sp": true
+  },
+  {
+    "name": "Kikinyou",
+    "no": "577",
+    "rarity": "SSR",
+    "cv": "Kou Bankoubara",
+    "name_cn": "鬼金羊 Guǐjīnyáng",
+    "has_sp": false
+  },
+  {
+    "name": "Kikyou",
+    "no": "319",
+    "rarity": "SSR",
+    "cv": "Hidaka Noriko",
+    "name_cn": "桔梗",
+    "has_sp": false
+  },
+  {
+    "name": "Kinnara",
+    "no": "353",
+    "rarity": "SSR",
+    "cv": "Yoshino Nanjou",
+    "name_cn": "紧那罗 Jǐnnàluō",
+    "has_sp": true
+  },
+  {
+    "name": "Kotodama",
+    "no": "399",
+    "rarity": "SSR",
+    "cv": "Satomi Arai",
+    "name_cn": "言灵 Yán líng",
+    "has_sp": false
+  },
+  {
+    "name": "Kujaku-Myouou",
+    "no": "550",
+    "rarity": "SSR",
+    "cv": "Chiwa Saitou",
+    "name_cn": "孔雀明王 Kǒngquè míngwáng",
+    "has_sp": false
+  },
+  {
+    "name": "Kusuriuri",
+    "no": "305",
+    "rarity": "SSR",
+    "cv": "Takahiro Sakurai",
+    "name_cn": "卖药郎 Maiyaolang",
+    "has_sp": false
+  },
+  {
+    "name": "Kuzunoha",
+    "no": "597",
+    "rarity": "SSR",
+    "cv": "Endo Anya",
+    "name_cn": "葛叶 Gě yè",
+    "has_sp": false
+  },
+  {
+    "name": "Magatsugami",
+    "no": "570",
+    "rarity": "SSR",
+    "cv": "Saima Nakano",
+    "name_cn": "祸津神 Huòjīnshén",
+    "has_sp": false
+  },
+  {
+    "name": "Megurine Luka",
+    "no": "582",
+    "rarity": "SSR",
+    "cv": "{{Popup|text=<span style=\"border-bottom:1px dotted; cursor:help;\">Megurine Luka<",
+    "name_cn": "巡音流歌",
+    "has_sp": false
+  },
+  {
+    "name": "Menreiki",
+    "no": "311",
+    "rarity": "SSR",
+    "cv": "Kana Hanazawa",
+    "name_cn": "面灵气 Miànlíngqì",
+    "has_sp": true
+  },
+  {
+    "name": "Miketsu",
+    "no": "304",
+    "rarity": "SSR",
+    "cv": "Ayako Kawasumi",
+    "name_cn": "御馔津 Yuzhuanjin",
+    "has_sp": true
+  },
+  {
+    "name": "Mishige",
+    "no": "370",
+    "rarity": "SSR",
+    "cv": "Rie Takahashi",
+    "name_cn": "饭笥 Fàn sì",
+    "has_sp": false
+  },
+  {
+    "name": "Natsume & Nyanko-sensei",
+    "no": "576",
+    "rarity": "SSR",
+    "cv": "Hiroshi Kamiya (Natsume) Kazuhiko Inoue (Nyanko)",
+    "name_cn": "夏目&猫老师",
+    "has_sp": false
+  },
+  {
+    "name": "Nekogawa",
+    "no": "569",
+    "rarity": "SSR",
+    "cv": "Yuuya Hirose",
+    "name_cn": "猫川 Māo chuān",
+    "has_sp": false
+  },
+  {
+    "name": "Nezuko Kamado",
+    "no": "360",
+    "rarity": "SSR",
+    "cv": "Akari Kitou",
+    "name_cn": "灶门祢豆子 Zàomén Mídòuzi",
+    "has_sp": false
+  },
+  {
+    "name": "Nura Rikuo",
+    "no": "294",
+    "rarity": "SSR",
+    "cv": "Jun Fukuyama",
+    "name_cn": "奴良陆生 Núliáng Lùshēng",
+    "has_sp": false
+  },
+  {
+    "name": "Omoikane no Kami",
+    "no": "601",
+    "rarity": "SSR",
+    "cv": "Igarashi Masashi",
+    "name_cn": "思金神 Sī Jīn Shén",
+    "has_sp": false
+  },
+  {
+    "name": "Onikiri",
+    "no": "312",
+    "rarity": "SSR",
+    "cv": "Kousuke Toriumi",
+    "name_cn": "鬼切 Guǐqiè",
+    "has_sp": true
+  },
+  {
+    "name": "Ootakemaru",
+    "no": "333",
+    "rarity": "SSR",
+    "cv": "Nobuhiko Okamoto",
+    "name_cn": "大岳丸 Dayue Wan",
+    "has_sp": true
+  },
+  {
+    "name": "Ootengu",
+    "no": "217",
+    "rarity": "SSR",
+    "cv": "Tomoaki Maeno",
+    "name_cn": "大天狗 Dà tiāngǒu",
+    "has_sp": true
+  },
+  {
+    "name": "Orochi",
+    "no": "325",
+    "rarity": "SSR",
+    "cv": "Mamoru Miyano",
+    "name_cn": "八岐大蛇 Baqi Dashe",
+    "has_sp": true
+  },
+  {
+    "name": "Ryoumenbotoke",
+    "no": "258",
+    "rarity": "SSR",
+    "cv": "Kazuhiko Inoue",
+    "name_cn": "两面佛 Liǎngmiàn fú",
+    "has_sp": false
+  },
+  {
+    "name": "Ryukaku",
+    "no": "573",
+    "rarity": "SSR",
+    "cv": "Manaka Iwami",
+    "name_cn": "龙珏 Lóngjué",
+    "has_sp": false
+  },
+  {
+    "name": "Sakura Kinomoto",
+    "no": "587",
+    "rarity": "SSR",
+    "cv": "|cv_cn = 伍凯立",
+    "name_cn": "木之本樱",
+    "has_sp": false
+  },
+  {
+    "name": "Senhime",
+    "no": "356",
+    "rarity": "SSR",
+    "cv": "Ayahi Takagaki",
+    "name_cn": "千姬 Qiānjī",
+    "has_sp": true
+  },
+  {
+    "name": "Sesshoumaru",
+    "no": "314",
+    "rarity": "SSR",
+    "cv": "Ken Narita",
+    "name_cn": "杀生丸",
+    "has_sp": false
+  },
+  {
+    "name": "Shentu Ziye",
+    "no": "567",
+    "rarity": "SSR",
+    "cv": "|cv_cn = 郝祥海",
+    "name_cn": "申屠子夜 Shēntú Zǐyè",
+    "has_sp": false
+  },
+  {
+    "name": "Shiki",
+    "no": "392",
+    "rarity": "SSR",
+    "cv": "Kana Ichinose",
+    "name_cn": "季 Jì​",
+    "has_sp": false
+  },
+  {
+    "name": "Shinigami",
+    "no": "600",
+    "rarity": "SSR",
+    "cv": "Yū Asakawa",
+    "name_cn": "市加美 shì jiā měi",
+    "has_sp": false
+  },
+  {
+    "name": "Shiranui",
+    "no": "330",
+    "rarity": "SSR",
+    "cv": "Nao Tōyama",
+    "name_cn": "不知火 Bùzhīhuǒ",
+    "has_sp": false
+  },
+  {
+    "name": "Shishio",
+    "no": "259",
+    "rarity": "SSR",
+    "cv": "Kengo Kawanishi",
+    "name_cn": "小鹿男 Xiǎolù nán",
+    "has_sp": true
+  },
+  {
+    "name": "Shokurei",
+    "no": "369",
+    "rarity": "SSR",
+    "cv": "Shouya Chiba",
+    "name_cn": "食灵 Shí líng",
+    "has_sp": false
+  },
+  {
+    "name": "Shuten Douji",
+    "no": "219",
+    "rarity": "SSR",
+    "cv": "Sakaguchi Shuuhei",
+    "name_cn": "酒吞童子 Jiǔ tūn tóngzǐ",
+    "has_sp": true
+  },
+  {
+    "name": "Susabi",
+    "no": "283",
+    "rarity": "SSR",
+    "cv": "Daisuke Hirakawa",
+    "name_cn": "荒 Huāng",
+    "has_sp": true
+  },
+  {
+    "name": "Susanoo",
+    "no": "389",
+    "rarity": "SSR",
+    "cv": "Kouki Uchiyama",
+    "name_cn": "须佐之男 Xū Zuǒ Zhī Nán",
+    "has_sp": false
+  },
+  {
+    "name": "Suzuhiko Hime",
+    "no": "376",
+    "rarity": "SSR",
+    "cv": "Mikako Komatsu",
+    "name_cn": "铃彦姬 Líng Yàn jī",
+    "has_sp": true
+  },
+  {
+    "name": "Suzuka Gozen",
+    "no": "351",
+    "rarity": "SSR",
+    "cv": "Youko Hikasa",
+    "name_cn": "铃鹿御前 Línglù Yùqián",
+    "has_sp": true
+  },
+  {
+    "name": "Syaoran Li",
+    "no": "588",
+    "rarity": "SSR",
+    "cv": "|cv_cn = 黃莺",
+    "name_cn": "李小狼",
+    "has_sp": false
+  },
+  {
+    "name": "Taira no Masakado",
+    "no": "592",
+    "rarity": "SSR",
+    "cv": "Makoto Furukawa",
+    "name_cn": "平将门 Píng Jiàng Mén",
+    "has_sp": false
+  },
+  {
+    "name": "Taishakuten",
+    "no": "363",
+    "rarity": "SSR",
+    "cv": "Hiroshi Kamiya",
+    "name_cn": "帝释天 Dì shì tiān",
+    "has_sp": true
+  },
+  {
+    "name": "Taki",
+    "no": "561",
+    "rarity": "SSR",
+    "cv": "Takeo Ootsuka",
+    "name_cn": "泷 Lóng​",
+    "has_sp": false
+  },
+  {
+    "name": "Takiyasha Hime",
+    "no": "338",
+    "rarity": "SSR",
+    "cv": "Hitomi Nabatame",
+    "name_cn": "泷夜叉姬 Lóngyèchājī",
+    "has_sp": true
+  },
+  {
+    "name": "Tamamo no Mae",
+    "no": "300",
+    "rarity": "SSR",
+    "cv": "Romi Park (previous CV) Chifuyu (Skins 1-3) Shinichiro Miki (Skins 4-6)",
+    "name_cn": "玉藻前 Yùzǎo qián",
+    "has_sp": true
+  },
+  {
+    "name": "Tamatori",
+    "no": "560",
+    "rarity": "SSR",
+    "cv": "Kei Shindou",
+    "name_cn": "玉取 Yùqǔ",
+    "has_sp": false
+  },
+  {
+    "name": "Tanjiro Kamado",
+    "no": "359",
+    "rarity": "SSR",
+    "cv": "Natsuki Hanae",
+    "name_cn": "灶门炭治郎 Zàomén Tànzhìláng",
+    "has_sp": false
+  },
+  {
+    "name": "Tsukuyomi",
+    "no": "394",
+    "rarity": "SSR",
+    "cv": "Hiroki Takahashi (Skin 1, 3) Kikuko Inoue (Skin 2, 4)",
+    "name_cn": "月读 ​Yuè dú",
+    "has_sp": false
+  },
+  {
+    "name": "Ungaikyou",
+    "no": "344",
+    "rarity": "SSR",
+    "cv": "Ayumu Murase",
+    "name_cn": "云外镜 Yun wai jing",
+    "has_sp": true
+  },
+  {
+    "name": "Wenren Yixuan",
+    "no": "553",
+    "rarity": "SSR",
+    "cv": "|cv_cn = 郭盛",
+    "name_cn": "闻人翊悬 Wénrén Yìxuán",
+    "has_sp": false
+  },
+  {
+    "name": "Yamakaze",
+    "no": "296",
+    "rarity": "SSR",
+    "cv": "Toshiki Masuda",
+    "name_cn": "山风 Shanfeng",
+    "has_sp": true
+  },
+  {
+    "name": "Yato no Kami",
+    "no": "373",
+    "rarity": "SSR",
+    "cv": "Kaito Ishikawa",
+    "name_cn": "夜刀神 Yè​dāo​ Shén​",
+    "has_sp": false
+  },
+  {
+    "name": "Youtou Hime",
+    "no": "269",
+    "rarity": "SSR",
+    "cv": "Shiori Izawa",
+    "name_cn": "妖刀姬 Yāo Dāo Jī",
+    "has_sp": true
+  },
+  {
+    "name": "Yuki Douji",
+    "no": "292",
+    "rarity": "SSR",
+    "cv": "Marina Inoue",
+    "name_cn": "雪童子 Xuě Tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Yuki Gozen",
+    "no": "591",
+    "rarity": "SSR",
+    "cv": "Saori Hayami",
+    "name_cn": "雪御前 Xuě yù qián",
+    "has_sp": false
+  },
+  {
+    "name": "Zenitsu Agatsuma",
+    "no": "386",
+    "rarity": "SSR",
+    "cv": "Hiro Shimono",
+    "name_cn": "我妻善逸 Wǒqī Shànyì",
+    "has_sp": false
+  },
+  {
+    "name": "Akakage Youtou Hime",
+    "no": "328",
+    "rarity": "SP",
+    "cv": "Shiori Izawa",
+    "name_cn": "赤影妖刀姫 Chì Yǐng Yāodāojī",
+    "has_sp": false
+  },
+  {
+    "name": "Bakkotsu Kiyohime",
+    "no": "352",
+    "rarity": "SP",
+    "cv": "Toa Yukinari",
+    "name_cn": "缚骨清姬 Fùgǔ Qīngjī",
+    "has_sp": false
+  },
+  {
+    "name": "Byounen Hotarugusa",
+    "no": "555",
+    "rarity": "SP",
+    "cv": "Ayaka Suwa",
+    "name_cn": "渺念萤草 Miǎo niàn yíng cǎo",
+    "has_sp": false
+  },
+  {
+    "name": "Daiyamaten Enma",
+    "no": "385",
+    "rarity": "SP",
+    "cv": "Mamiko Noto",
+    "name_cn": "大夜摩天阎魔 Dàyèmótiān Yánmó",
+    "has_sp": false
+  },
+  {
+    "name": "Eikyo Senhime",
+    "no": "562",
+    "rarity": "SP",
+    "cv": "Ayahi Takagaki",
+    "name_cn": "鲸汐千姬 Jīng xī Qiān jī",
+    "has_sp": false
+  },
+  {
+    "name": "Gyoujitsu Ebisu",
+    "no": "566",
+    "rarity": "SP",
+    "cv": "Yuuto Uemura",
+    "name_cn": "晨晖惠比寿 Chénhuī Huìbǐshòu",
+    "has_sp": false
+  },
+  {
+    "name": "Gyourou Arakawa no Aruji",
+    "no": "334",
+    "rarity": "SP",
+    "cv": "Takehito Koyasu",
+    "name_cn": "骁浪荒川之主 Xiāolàng Huāngchuān Zhī Zhǔ​",
+    "has_sp": false
+  },
+  {
+    "name": "Hatsurei Yamakaze",
+    "no": "357",
+    "rarity": "SP",
+    "cv": "Masuda Toshiki",
+    "name_cn": "初翎山风 Chūlíng Shānfēng",
+    "has_sp": false
+  },
+  {
+    "name": "Honshin Sanbi no Kitsune",
+    "no": "559",
+    "rarity": "SP",
+    "cv": "Miyuki Sawashiro",
+    "name_cn": "本真三尾狐 Běnzhēn Sānwěihú",
+    "has_sp": false
+  },
+  {
+    "name": "Inaba Kaguya Hime",
+    "no": "372",
+    "rarity": "SP",
+    "cv": "Ayana Taketatsu",
+    "name_cn": "因幡辉夜姬 Yīnfān Huīyèjī",
+    "has_sp": false
+  },
+  {
+    "name": "Inari Miketsu",
+    "no": "326",
+    "rarity": "SP",
+    "cv": "Kawasumi Ayako",
+    "name_cn": "稻荷神御馔津 Daoheshen Yuzhuanjin",
+    "has_sp": false
+  },
+  {
+    "name": "Jinshin Shishio",
+    "no": "551",
+    "rarity": "SP",
+    "cv": "Kengo Kawanishi",
+    "name_cn": "寻森小鹿男 Xún sēn Xiǎolù nán",
+    "has_sp": true
+  },
+  {
+    "name": "Jinten Tamamo no Mae",
+    "no": "339",
+    "rarity": "SP",
+    "cv": "Romi Park (previous CV) Chifuyu (Skins 1-2) Shinichiro Miki (Skins 3-5)",
+    "name_cn": "烬天玉藻前 Jìntiān Yùzǎoqián",
+    "has_sp": false
+  },
+  {
+    "name": "Jiyou Takiyasha Hime",
+    "no": "584",
+    "rarity": "SP",
+    "cv": "Hitomi Nabatame",
+    "name_cn": "时曜泷夜叉姬 Shíyào Lóngyè Chājī",
+    "has_sp": false
+  },
+  {
+    "name": "Kaisei Kachou Fuugetsu",
+    "no": "367",
+    "rarity": "SP",
+    "cv": "Saori Hayami",
+    "name_cn": "绘世花鸟卷 Huìshì Huāniǎojuǎn",
+    "has_sp": false
+  },
+  {
+    "name": "Kamiochi Orochi",
+    "no": "383",
+    "rarity": "SP",
+    "cv": "Mamoru Miyano",
+    "name_cn": "神堕八岐大蛇 Shén Duò BaQiDaShe",
+    "has_sp": false
+  },
+  {
+    "name": "Kokorogari Kijo Momiji",
+    "no": "388",
+    "rarity": "SP",
+    "cv": "Houko Kuwashima",
+    "name_cn": "心狩鬼女红叶 Xīn Shòu Guǐnǚ Gōng Yè",
+    "has_sp": false
+  },
+  {
+    "name": "Kuusou Menreiki",
+    "no": "366",
+    "rarity": "SP",
+    "cv": "Kana Hanazawa",
+    "name_cn": "空相面灵气 Kōngxiàng Miànlíngqì",
+    "has_sp": false
+  },
+  {
+    "name": "Matsuyoi Ubume",
+    "no": "354",
+    "rarity": "SP",
+    "cv": "Toa Yukinari",
+    "name_cn": "待宵姑获鸟 Dàixiāo Gūhuòniǎo",
+    "has_sp": false
+  },
+  {
+    "name": "Mujin Yama Usagi",
+    "no": "377",
+    "rarity": "SP",
+    "cv": "Aki Toyosaki",
+    "name_cn": "梦寻山兔 Mèng Xún Shān Tù",
+    "has_sp": false
+  },
+  {
+    "name": "Myoushu Kyuumei Neko",
+    "no": "590",
+    "rarity": "SP",
+    "cv": "Mayumi Shintani",
+    "name_cn": "妙主九命猫 Miào zhǔ jiǔ ming máo",
+    "has_sp": false
+  },
+  {
+    "name": "Negai Tsumugi Enmusubi no Kami",
+    "no": "554",
+    "rarity": "SP",
+    "cv": "Amamiya Sora",
+    "name_cn": "纺愿缘结神 Fǎng yuàn Yuánjié Shén",
+    "has_sp": false
+  },
+  {
+    "name": "Oniou Shuten Douji",
+    "no": "341",
+    "rarity": "SP",
+    "cv": "Shuuhei Sakaguchi",
+    "name_cn": "鬼王酒吞童子 Guǐwáng Jiǔtūn Tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Oura Hannya",
+    "no": "331",
+    "rarity": "SP",
+    "cv": "Yuuki Kaji (Hannya) Mayumi Shintani (Kimono Goddess)",
+    "name_cn": "御怨般若 Yùyuàn Bōrě",
+    "has_sp": false
+  },
+  {
+    "name": "Reikai Kingyo Hime",
+    "no": "346",
+    "rarity": "SP",
+    "cv": "Maaya Uchida",
+    "name_cn": "聆海金鱼姬 Línghǎi Jīnyú Jī",
+    "has_sp": false
+  },
+  {
+    "name": "Rengoku Ibaraki Douji",
+    "no": "322",
+    "rarity": "SP",
+    "cv": "Fukuyama Jun Sayaka Senbongi (Skin 4)",
+    "name_cn": "炼狱茨木童子 Lianyu Címù Tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Rokumei Ootakemaru",
+    "no": "355",
+    "rarity": "SP",
+    "cv": "Nobuhiko Okamoto",
+    "name_cn": "麓铭大岳丸 Lùmíng Dàyuèwán",
+    "has_sp": false
+  },
+  {
+    "name": "Ryougin Suzuka Gozen",
+    "no": "568",
+    "rarity": "SP",
+    "cv": "Youko Hikasa",
+    "name_cn": "龙吟铃鹿御前 Lóngyín Línglù Yùqián",
+    "has_sp": true
+  },
+  {
+    "name": "Ryuukou Oitsukigami",
+    "no": "395",
+    "rarity": "SP",
+    "cv": "Kaori Nazuka",
+    "name_cn": "流光追月神 Liúguāng Zhuī Yuè Shén",
+    "has_sp": false
+  },
+  {
+    "name": "Seishi Hiyoribou",
+    "no": "580",
+    "rarity": "SP",
+    "cv": "Suzuko Mimori",
+    "name_cn": "晴思日和坊 Qíngsī Rìhéfāng",
+    "has_sp": false
+  },
+  {
+    "name": "Semigoori Yuki Onna",
+    "no": "362",
+    "rarity": "SP",
+    "cv": "Ayaka Suwa",
+    "name_cn": "蝉冰雪女 Chánbīng Xuěnǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Shakubana Momo no Sei",
+    "no": "598",
+    "rarity": "SP",
+    "cv": "Mizuki Nana",
+    "name_cn": "灼华桃花妖 Zhuó Huá Táohuā Yāo",
+    "has_sp": false
+  },
+  {
+    "name": "Shinjou Hoshiguma Douji",
+    "no": "578",
+    "rarity": "SP",
+    "cv": "Yuuki Kaji",
+    "name_cn": "神酿星熊童子 Shén Niàng Xīng Xióng Tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Shinkei Susabi",
+    "no": "390",
+    "rarity": "SP",
+    "cv": "Daisuke Hirakawa",
+    "name_cn": "神启荒 Shén Qǐ Huāng",
+    "has_sp": false
+  },
+  {
+    "name": "Shinyuu Inugami",
+    "no": "574",
+    "rarity": "SP",
+    "cv": "Toshihiko Seki",
+    "name_cn": "心友犬神 Xīnyǒu Quǎnshén",
+    "has_sp": false
+  },
+  {
+    "name": "Shokugetsu Kyuuketsu Hime",
+    "no": "599",
+    "rarity": "SP",
+    "cv": "Yukana",
+    "name_cn": "蚀月吸血姬 Shí Yuè Xīxuè jī",
+    "has_sp": false
+  },
+  {
+    "name": "Shoufuku Zashiki Warashi",
+    "no": "565",
+    "rarity": "SP",
+    "cv": "Junko Takeuchi",
+    "name_cn": "福悦座敷童子 Fú yuè zuòfū tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Shouu Ootengu",
+    "no": "315",
+    "rarity": "SP",
+    "cv": "Ryoko Shiraishi",
+    "name_cn": "少羽大天狗 Shaoyu Datiangou",
+    "has_sp": false
+  },
+  {
+    "name": "Shura Kidoumaru",
+    "no": "396",
+    "rarity": "SP",
+    "cv": "KENN",
+    "name_cn": "修罗鬼童丸 Xiūluō Guǐtóng​wán",
+    "has_sp": true
+  },
+  {
+    "name": "Soufuu Ichimokuren",
+    "no": "327",
+    "rarity": "SP",
+    "cv": "Midorikawa Hikaru",
+    "name_cn": "苍风一目连 Cāngfēng Yīmù lián",
+    "has_sp": false
+  },
+  {
+    "name": "Tenkamei Suzuhiko Hime",
+    "no": "603",
+    "rarity": "SP",
+    "cv": "Mikato Komatsu",
+    "name_cn": "天火命铃彦姬 Tiān Huǒ Mìng Líng Yàn Jī",
+    "has_sp": false
+  },
+  {
+    "name": "Tenken Jinshin Onikiri",
+    "no": "343",
+    "rarity": "SP",
+    "cv": "Mitsuki Saiga (previous CV) Mariya Ise",
+    "name_cn": "天剑韧心鬼切 Tiānjiàn Rènxīn Guǐqiè",
+    "has_sp": false
+  },
+  {
+    "name": "Ukiyo Aoandon",
+    "no": "348",
+    "rarity": "SP",
+    "cv": "Nana Mizuki",
+    "name_cn": "浮世青行灯 Fúshì Qīngxíngdēng",
+    "has_sp": false
+  },
+  {
+    "name": "Unjou Fukengaku",
+    "no": "586",
+    "rarity": "SP",
+    "cv": "Kenshou Ono & Yui Ishikawa",
+    "name_cn": "云间不见岳 Yún Jiān Bù Jiàn Yuè",
+    "has_sp": false
+  },
+  {
+    "name": "Yomei Higanbana",
+    "no": "358",
+    "rarity": "SP",
+    "cv": "Sayaka Ohara",
+    "name_cn": "夜溟彼岸花 Yèmíng Bǐ​'àn​huā​",
+    "has_sp": false
+  },
+  {
+    "name": "Younen Enenra",
+    "no": "572",
+    "rarity": "SP",
+    "cv": "Yuuko Kaida",
+    "name_cn": "遥念烟烟罗 Yáoniàn Yānyānluō",
+    "has_sp": true
+  },
+  {
+    "name": "Youon Kinnara",
+    "no": "579",
+    "rarity": "SP",
+    "cv": "Yoshino Nanjou",
+    "name_cn": "瑶音紧那罗 Yáoyīn Jǐnnàluó",
+    "has_sp": false
+  },
+  {
+    "name": "Yumebiki Kochou no Sei",
+    "no": "594",
+    "rarity": "SP",
+    "cv": "Aoi Yuki",
+    "name_cn": "梦引蝴蝶精 Miào zhǔ jiǔ ming máo",
+    "has_sp": false
+  },
+  {
+    "name": "Yumeyama Hakuzousu",
+    "no": "595",
+    "rarity": "SP",
+    "cv": "Daiki Kobayashi",
+    "name_cn": "梦山白藏主 Mèng Shān Bái Zāngzhǔ",
+    "has_sp": false
+  },
+  {
+    "name": "Zenshin Ungaikyou",
+    "no": "393",
+    "rarity": "SP",
+    "cv": "Ayumu Murase",
+    "name_cn": "禅心云外镜 Chán Xīn Yún Wài Jìng",
+    "has_sp": false
+  },
+  {
+    "name": "Amanozako",
+    "no": "398",
+    "rarity": "SR",
+    "cv": "Yukako Kiuchi",
+    "name_cn": "天逆每 Tiān nì měi",
+    "has_sp": false
+  },
+  {
+    "name": "Amezaiku",
+    "no": "368",
+    "rarity": "SR",
+    "cv": "Tooru Ookawa",
+    "name_cn": "饴细工 Yí xì gōng",
+    "has_sp": false
+  },
+  {
+    "name": "Aobouzu",
+    "no": "273",
+    "rarity": "SR",
+    "cv": "Hosoya Yoshimasa",
+    "name_cn": "青坊主 Qīng fāngzhǔ",
+    "has_sp": false
+  },
+  {
+    "name": "Bakekujira",
+    "no": "324",
+    "rarity": "SR",
+    "cv": "Asami Seto",
+    "name_cn": "化鯨 Huàjīng",
+    "has_sp": false
+  },
+  {
+    "name": "Chin",
+    "no": "285",
+    "rarity": "SR",
+    "cv": "Tomatsu Haruka",
+    "name_cn": "鸩 Zhèn",
+    "has_sp": false
+  },
+  {
+    "name": "Doumeki",
+    "no": "293",
+    "rarity": "SR",
+    "cv": "Rina Hidaka",
+    "name_cn": "百目鬼 Bǎimùguǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Ebisu",
+    "no": "268",
+    "rarity": "SR",
+    "cv": "Chafurin",
+    "name_cn": "惠比寿 Huì bǐ shòu",
+    "has_sp": true
+  },
+  {
+    "name": "Enenra",
+    "no": "281",
+    "rarity": "SR",
+    "cv": "Yuuko Kaida",
+    "name_cn": "烟烟罗 Yān yān luō",
+    "has_sp": true
+  },
+  {
+    "name": "Futakuchi Onna",
+    "no": "263",
+    "rarity": "SR",
+    "cv": "Mayumi Shintani",
+    "name_cn": "二口女 Èr kǒu nǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Fuuri",
+    "no": "349",
+    "rarity": "SR",
+    "cv": "Oosaka Ryouta",
+    "name_cn": "风狸 Fēnglí",
+    "has_sp": false
+  },
+  {
+    "name": "Garuda",
+    "no": "378",
+    "rarity": "SR",
+    "cv": "Nara Toru",
+    "name_cn": "迦楼羅 Jiālóuluó",
+    "has_sp": false
+  },
+  {
+    "name": "Hako no Shoujo",
+    "no": "287",
+    "rarity": "SR",
+    "cv": "Ami Koshimizu",
+    "name_cn": "匣中少女 Xiá zhōng shàonǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Hakurou",
+    "no": "264",
+    "rarity": "SR",
+    "cv": "Houko Kuwashima",
+    "name_cn": "白狼 Bái láng",
+    "has_sp": false
+  },
+  {
+    "name": "Hangan",
+    "no": "251",
+    "rarity": "SR",
+    "cv": "Akira Ishida",
+    "name_cn": "判官 Pànguān",
+    "has_sp": false
+  },
+  {
+    "name": "Hannya",
+    "no": "271",
+    "rarity": "SR",
+    "cv": "Yuuki Kaji",
+    "name_cn": "般若 Bōrě",
+    "has_sp": true
+  },
+  {
+    "name": "Hiyoribou",
+    "no": "297",
+    "rarity": "SR",
+    "cv": "Suzuko Mimori",
+    "name_cn": "日和坊 Rihefang",
+    "has_sp": true
+  },
+  {
+    "name": "Hone Onna",
+    "no": "223",
+    "rarity": "SR",
+    "cv": "Ayaka Suwa",
+    "name_cn": "骨女 Gǔ nǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Hoshiguma Douji",
+    "no": "342",
+    "rarity": "SR",
+    "cv": "Yuuki Kaji",
+    "name_cn": "星熊童子 Xīngxióng Tóngzǐ",
+    "has_sp": true
+  },
+  {
+    "name": "Hououka",
+    "no": "252",
+    "rarity": "SR",
+    "cv": "Marina Inoue",
+    "name_cn": "凤凰火 Fènghuáng huǒ",
+    "has_sp": false
+  },
+  {
+    "name": "Inugami",
+    "no": "220",
+    "rarity": "SR",
+    "cv": "Toshihiko Seki",
+    "name_cn": "犬神 Quǎnshén",
+    "has_sp": true
+  },
+  {
+    "name": "Itsumade",
+    "no": "286",
+    "rarity": "SR",
+    "cv": "Satomi Satou",
+    "name_cn": "以津真天 Yǐjīnzhēntiān",
+    "has_sp": false
+  },
+  {
+    "name": "Ittan Momen",
+    "no": "320",
+    "rarity": "SR",
+    "cv": "Kotono Mitsuishi",
+    "name_cn": "一反木绵 Yifan mumian",
+    "has_sp": false
+  },
+  {
+    "name": "Jorougumo",
+    "no": "270",
+    "rarity": "SR",
+    "cv": "Shizuka Ito",
+    "name_cn": "络新妇 Luò xīnfù",
+    "has_sp": false
+  },
+  {
+    "name": "Kainin",
+    "no": "329",
+    "rarity": "SR",
+    "cv": "Yūki Kuwahara",
+    "name_cn": "海忍 Hǎirěn",
+    "has_sp": false
+  },
+  {
+    "name": "Kairaishi",
+    "no": "242",
+    "rarity": "SR",
+    "cv": "Mamiko Noto",
+    "name_cn": "傀儡师 Kuǐlěi shī",
+    "has_sp": false
+  },
+  {
+    "name": "Kamaitachi",
+    "no": "261",
+    "rarity": "SR",
+    "cv": "Yasuhiro Mamiya",
+    "name_cn": "镰鼬 Lián yòu",
+    "has_sp": false
+  },
+  {
+    "name": "Kamimai",
+    "no": "340",
+    "rarity": "SR",
+    "cv": "Sumire Uesaka",
+    "name_cn": "​纸舞 Zhǐwǔ",
+    "has_sp": false
+  },
+  {
+    "name": "Kani Hime",
+    "no": "335",
+    "rarity": "SR",
+    "cv": "Kana Ueda",
+    "name_cn": "蟹姬 Xiè​ Jī",
+    "has_sp": false
+  },
+  {
+    "name": "Kaoru",
+    "no": "298",
+    "rarity": "SR",
+    "cv": "Inori Minase",
+    "name_cn": "薰 Xun",
+    "has_sp": false
+  },
+  {
+    "name": "Kawazaru",
+    "no": "371",
+    "rarity": "SR",
+    "cv": "Akane Fujita",
+    "name_cn": "川猿 Chuān yuán",
+    "has_sp": false
+  },
+  {
+    "name": "Kijo Momiji",
+    "no": "231",
+    "rarity": "SR",
+    "cv": "Houko Kuwashima",
+    "name_cn": "鬼女红叶 Guǐnǚ Gōng Yè",
+    "has_sp": true
+  },
+  {
+    "name": "Kingyo Hime",
+    "no": "282",
+    "rarity": "SR",
+    "cv": "Maaya Uchida",
+    "name_cn": "金鱼姬 Jīnyú jī",
+    "has_sp": true
+  },
+  {
+    "name": "Kisei",
+    "no": "303",
+    "rarity": "SR",
+    "cv": "Tetsuya Kakihara",
+    "name_cn": "弈 Yi",
+    "has_sp": false
+  },
+  {
+    "name": "Kiyohime",
+    "no": "260",
+    "rarity": "SR",
+    "cv": "Toa Yukinari",
+    "name_cn": "清姬 Qīng jī",
+    "has_sp": true
+  },
+  {
+    "name": "Komatsumaru",
+    "no": "290",
+    "rarity": "SR",
+    "cv": "Ai Kayano (previous) Miyuri Shimabukuro",
+    "name_cn": "小松丸 Xiǎosōng wán",
+    "has_sp": false
+  },
+  {
+    "name": "Kujira",
+    "no": "332",
+    "rarity": "SR",
+    "cv": "Ryota Takeuchi",
+    "name_cn": "久次良 Jiu ci liang",
+    "has_sp": false
+  },
+  {
+    "name": "Kuro Douji",
+    "no": "277",
+    "rarity": "SR",
+    "cv": "Tomozaku Sugita",
+    "name_cn": "黑童子 Hēi tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Kuro Mujou",
+    "no": "211",
+    "rarity": "SR",
+    "cv": "Nakai Kazuya",
+    "name_cn": "鬼使黑 Guǐ shǐ hēi",
+    "has_sp": false
+  },
+  {
+    "name": "Kyonshii Ani",
+    "no": "233",
+    "rarity": "SR",
+    "cv": "Daisuke Endou",
+    "name_cn": "跳跳哥哥 Tiào tiào gēgē",
+    "has_sp": false
+  },
+  {
+    "name": "Kyuuketsu Hime",
+    "no": "253",
+    "rarity": "SR",
+    "cv": "Yukana",
+    "name_cn": "吸血姬 Xīxuè jī",
+    "has_sp": true
+  },
+  {
+    "name": "Mannendake",
+    "no": "275",
+    "rarity": "SR",
+    "cv": "Shinnosuke Tachibana",
+    "name_cn": "万年竹 Wàn nián zhú",
+    "has_sp": false
+  },
+  {
+    "name": "Miakashi",
+    "no": "552",
+    "rarity": "SR",
+    "cv": "Yuuki Kyouka",
+    "name_cn": "慧明灯 Huìmíngdēng",
+    "has_sp": false
+  },
+  {
+    "name": "Momo no Sei",
+    "no": "200",
+    "rarity": "SR",
+    "cv": "Nana Mizuki",
+    "name_cn": "桃花妖 Táohuā Yāo",
+    "has_sp": true
+  },
+  {
+    "name": "Mouba",
+    "no": "215",
+    "rarity": "SR",
+    "cv": "Rie Kugimiya",
+    "name_cn": "孟婆 Mèng pó",
+    "has_sp": false
+  },
+  {
+    "name": "Nekomata",
+    "no": "307",
+    "rarity": "SR",
+    "cv": "Yui Horie",
+    "name_cn": "猫掌柜 Mao Zhanggui",
+    "has_sp": false
+  },
+  {
+    "name": "Ninmenju",
+    "no": "317",
+    "rarity": "SR",
+    "cv": "Natsuki Hanae",
+    "name_cn": "人面树 Renmianshu",
+    "has_sp": false
+  },
+  {
+    "name": "Noukanshi",
+    "no": "321",
+    "rarity": "SR",
+    "cv": "Sho Hayami",
+    "name_cn": "入殓师 Rulianshi",
+    "has_sp": false
+  },
+  {
+    "name": "Nusubitogami",
+    "no": "558",
+    "rarity": "SR",
+    "cv": "Daisuke Kasuya",
+    "name_cn": "盗人神 Dàorénshén",
+    "has_sp": false
+  },
+  {
+    "name": "Nyuunai-suzume",
+    "no": "365",
+    "rarity": "SR",
+    "cv": "Takuya Eguchi",
+    "name_cn": "入内雀 Rùnèi què",
+    "has_sp": false
+  },
+  {
+    "name": "Oitsukigami",
+    "no": "295",
+    "rarity": "SR",
+    "cv": "Kaori Nazuka",
+    "name_cn": "追月神 Zhui Yue Shen",
+    "has_sp": true
+  },
+  {
+    "name": "Okikumushi",
+    "no": "318",
+    "rarity": "SR",
+    "cv": "Mari Hagai",
+    "name_cn": "於菊虫 Yú jú chóng",
+    "has_sp": false
+  },
+  {
+    "name": "Okou",
+    "no": "309",
+    "rarity": "SR",
+    "cv": "Eri Kitamura",
+    "name_cn": "阿香 A xiang",
+    "has_sp": false
+  },
+  {
+    "name": "Oshiroi Baba",
+    "no": "384",
+    "rarity": "SR",
+    "cv": "Eiko Hanawa",
+    "name_cn": "粉婆婆 Fěn Pópo",
+    "has_sp": false
+  },
+  {
+    "name": "Rukia Kuchiki",
+    "no": "336",
+    "rarity": "SR",
+    "cv": "Fumiko Orikasa",
+    "name_cn": "朽木露琪亚 Xiǔmù Lùqíyà",
+    "has_sp": false
+  },
+  {
+    "name": "Sakura no Sei",
+    "no": "267",
+    "rarity": "SR",
+    "cv": "Mamiko Noto",
+    "name_cn": "樱花妖 Yīnghuā yāo",
+    "has_sp": false
+  },
+  {
+    "name": "Sasori Onna",
+    "no": "350",
+    "rarity": "SR",
+    "cv": "Reina Ueda",
+    "name_cn": "蝎女 Xiē Nǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Shiro Douji",
+    "no": "278",
+    "rarity": "SR",
+    "cv": "Yuuichi Nakamura",
+    "name_cn": "白童子 Bái tóngzǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Shiro Mujou",
+    "no": "210",
+    "rarity": "SR",
+    "cv": "Suzumura Ken'ichi",
+    "name_cn": "鬼使白 Guǐ shǐ bái",
+    "has_sp": false
+  },
+  {
+    "name": "Shoyou",
+    "no": "291",
+    "rarity": "SR",
+    "cv": "Masaya Onosaka",
+    "name_cn": "书翁 Shū wēng",
+    "has_sp": false
+  },
+  {
+    "name": "Tagitsuhime",
+    "no": "571",
+    "rarity": "SR",
+    "cv": "Maria Abo",
+    "name_cn": "湍津姫 tuān jīn jī",
+    "has_sp": false
+  },
+  {
+    "name": "Ubume",
+    "no": "262",
+    "rarity": "SR",
+    "cv": "Toa Yukinari",
+    "name_cn": "姑获鸟 Gū huò niǎo",
+    "has_sp": true
+  },
+  {
+    "name": "Umi no Chou",
+    "no": "382",
+    "rarity": "SR",
+    "cv": "Azumi Waki",
+    "name_cn": "灵海蝶 Líng hǎi dié",
+    "has_sp": false
+  },
+  {
+    "name": "Umibouzu",
+    "no": "247",
+    "rarity": "SR",
+    "cv": "Toshihiko Seki",
+    "name_cn": "海坊主 Hǎi fāngzhǔ",
+    "has_sp": false
+  },
+  {
+    "name": "Yasha",
+    "no": "276",
+    "rarity": "SR",
+    "cv": "Katsuyuki Konishi",
+    "name_cn": "夜叉 Yèchā",
+    "has_sp": false
+  },
+  {
+    "name": "Youkinshi",
+    "no": "256",
+    "rarity": "SR",
+    "cv": "Nobunaga Shimazaki",
+    "name_cn": "妖琴师 Yāo qínshī",
+    "has_sp": false
+  },
+  {
+    "name": "Youko",
+    "no": "254",
+    "rarity": "SR",
+    "cv": "Nobunaga Shimazaki",
+    "name_cn": "妖狐 Yāohú",
+    "has_sp": false
+  },
+  {
+    "name": "Yuki Onna",
+    "no": "201",
+    "rarity": "SR",
+    "cv": "Ayaka Suwa",
+    "name_cn": "雪女 Xuěnǚ",
+    "has_sp": true
+  },
+  {
+    "name": "Yumekui",
+    "no": "257",
+    "rarity": "SR",
+    "cv": "Shuuichi Nishitani",
+    "name_cn": "食梦貘 Shí mèng mò",
+    "has_sp": false
+  },
+  {
+    "name": "Akaname",
+    "no": "361",
+    "rarity": "R",
+    "cv": "{{Popup|text=<span style=\"border-bottom:1px dotted; cursor:help;\">Kaede Kawakami",
+    "name_cn": "垢尝 Gòu cháng",
+    "has_sp": false
+  },
+  {
+    "name": "Ame Onna",
+    "no": "224",
+    "rarity": "R",
+    "cv": "Ai Kakuma",
+    "name_cn": "雨女 Yǔ Nǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Baketanuki",
+    "no": "208",
+    "rarity": "R",
+    "cv": "Souichirou Hoshi",
+    "name_cn": "狸猫 Límāo",
+    "has_sp": false
+  },
+  {
+    "name": "Doujo",
+    "no": "213",
+    "rarity": "R",
+    "cv": "Ai Kakuma",
+    "name_cn": "童女 Tóngnǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Gaki",
+    "no": "214",
+    "rarity": "R",
+    "cv": "Marina Inoue",
+    "name_cn": "饿鬼 Èguǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Heiyou",
+    "no": "227",
+    "rarity": "R",
+    "cv": "Akira Ishida",
+    "name_cn": "兵俑 Bīng yǒng",
+    "has_sp": false
+  },
+  {
+    "name": "Hitotsume Kozou",
+    "no": "230",
+    "rarity": "R",
+    "cv": "Yuu Kobayashi",
+    "name_cn": "独眼小僧 Dúyǎn xiǎosēng",
+    "has_sp": false
+  },
+  {
+    "name": "Hotarugusa",
+    "no": "238",
+    "rarity": "R",
+    "cv": "Ayaka Suwa",
+    "name_cn": "萤草 Yíng cǎo",
+    "has_sp": true
+  },
+  {
+    "name": "Jikikaeru",
+    "no": "250",
+    "rarity": "R",
+    "cv": "Hiroyuki Yoshino",
+    "name_cn": "青蛙瓷器 Qīngwā cíqì",
+    "has_sp": false
+  },
+  {
+    "name": "Juzu",
+    "no": "301",
+    "rarity": "R",
+    "cv": "Yukari Tamura",
+    "name_cn": "数珠 Shu Zhu",
+    "has_sp": false
+  },
+  {
+    "name": "Kagewani",
+    "no": "375",
+    "rarity": "R",
+    "cv": "Kanako Miyamoto (previous) Minami Hinata",
+    "name_cn": "影鳄 Yǐng è",
+    "has_sp": false
+  },
+  {
+    "name": "Kamikui",
+    "no": "221",
+    "rarity": "R",
+    "cv": "Mamiya Yasuhiro",
+    "name_cn": "食发鬼 Shí fā guǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Kappa",
+    "no": "209",
+    "rarity": "R",
+    "cv": "Souichirou Hoshi",
+    "name_cn": "河童 Hétóng",
+    "has_sp": false
+  },
+  {
+    "name": "Karasu Tengu",
+    "no": "218",
+    "rarity": "R",
+    "cv": "Yuu Kobayashi",
+    "name_cn": "鸦天狗 Yā tiāngǒu",
+    "has_sp": false
+  },
+  {
+    "name": "Kochou no Sei",
+    "no": "241",
+    "rarity": "R",
+    "cv": "Aoi Yuuki",
+    "name_cn": "蝴蝶精 Húdié jīng",
+    "has_sp": false
+  },
+  {
+    "name": "Kodokushi",
+    "no": "216",
+    "rarity": "R",
+    "cv": "Yasuhiro Mamiya",
+    "name_cn": "巫蛊师 Wū gǔ shī",
+    "has_sp": false
+  },
+  {
+    "name": "Koi no Sei",
+    "no": "206",
+    "rarity": "R",
+    "cv": "Yuuki Aoi",
+    "name_cn": "鲤鱼精 Lǐyú jīng",
+    "has_sp": false
+  },
+  {
+    "name": "Korouka",
+    "no": "274",
+    "rarity": "R",
+    "cv": "Yoshitsugu Matsuoka",
+    "name_cn": "古笼火 Gǔ lóng huǒ",
+    "has_sp": false
+  },
+  {
+    "name": "Kosode no Te",
+    "no": "302",
+    "rarity": "R",
+    "cv": "Yuka Iguchi",
+    "name_cn": "小袖之手 Xiaoxiu zhi shou",
+    "has_sp": false
+  },
+  {
+    "name": "Kubinashi",
+    "no": "244",
+    "rarity": "R",
+    "cv": "Kaito Ishikawa",
+    "name_cn": "首无 Shǒu wú",
+    "has_sp": false
+  },
+  {
+    "name": "Kudagitsune",
+    "no": "236",
+    "rarity": "R",
+    "cv": "Kenichiro Matsuda",
+    "name_cn": "管狐 Guǎn hú",
+    "has_sp": false
+  },
+  {
+    "name": "Kyonshii Imouto",
+    "no": "226",
+    "rarity": "R",
+    "cv": "Ayaka Suwa",
+    "name_cn": "跳跳妹妹 Tiào tiào mèimei",
+    "has_sp": false
+  },
+  {
+    "name": "Kyonshii Inu",
+    "no": "402",
+    "rarity": "R",
+    "cv": null,
+    "name_cn": "Tiào tiào quǎn 跳跳犬",
+    "has_sp": false
+  },
+  {
+    "name": "Kyonshii Otouto",
+    "no": "225",
+    "rarity": "R",
+    "cv": "Minami Takayama",
+    "name_cn": "跳跳弟弟 Tiào tiào dìdì",
+    "has_sp": false
+  },
+  {
+    "name": "Kyuumei Neko",
+    "no": "207",
+    "rarity": "R",
+    "cv": "Mayumi Shintani",
+    "name_cn": "九命猫 Jiǔ mìng Māo",
+    "has_sp": true
+  },
+  {
+    "name": "Mushishi",
+    "no": "306",
+    "rarity": "R",
+    "cv": "Sakura Ayane",
+    "name_cn": "虫师 Chongshi",
+    "has_sp": false
+  },
+  {
+    "name": "Oguna",
+    "no": "212",
+    "rarity": "R",
+    "cv": "Marina Inoue",
+    "name_cn": "童男 Tóng nán",
+    "has_sp": false
+  },
+  {
+    "name": "Peach Maki & Karashi",
+    "no": "310",
+    "rarity": "R",
+    "cv": "Sumire Uesaka (Peach Maki) Atsumi Tanezaki (Karashi)",
+    "name_cn": "蜜桃&芥子 Mitao & Jiezi",
+    "has_sp": false
+  },
+  {
+    "name": "Samurai no Rei",
+    "no": "222",
+    "rarity": "R",
+    "cv": "Inoue Kazuhiko",
+    "name_cn": "武士之灵 Wǔshì zhī líng",
+    "has_sp": false
+  },
+  {
+    "name": "Sanbi no Kitsune",
+    "no": "202",
+    "rarity": "R",
+    "cv": "Miyuki Sawashiro",
+    "name_cn": "三尾狐 Sānwěi Hú",
+    "has_sp": true
+  },
+  {
+    "name": "Satori",
+    "no": "249",
+    "rarity": "R",
+    "cv": "Yukana",
+    "name_cn": "觉 Jué",
+    "has_sp": false
+  },
+  {
+    "name": "Shouzu",
+    "no": "234",
+    "rarity": "R",
+    "cv": "Mamiko Noto",
+    "name_cn": "椒图 Jiāo tú",
+    "has_sp": false
+  },
+  {
+    "name": "Tenjo Kudari",
+    "no": "323",
+    "rarity": "R",
+    "cv": "Yui Ogura",
+    "name_cn": "天井下 Tiānjǐng Xià",
+    "has_sp": false
+  },
+  {
+    "name": "Tesso",
+    "no": "232",
+    "rarity": "R",
+    "cv": "Souichirou Hoshi",
+    "name_cn": "铁鼠 Tiě shǔ",
+    "has_sp": false
+  },
+  {
+    "name": "Usagimaru",
+    "no": "289",
+    "rarity": "R",
+    "cv": "Tsubasa Yonaga",
+    "name_cn": "兔丸 Tù wán",
+    "has_sp": false
+  },
+  {
+    "name": "Ushi no Toki",
+    "no": "228",
+    "rarity": "R",
+    "cv": "Chiwa Saitou",
+    "name_cn": "丑时之女 Chǒushí zhī nǚ",
+    "has_sp": false
+  },
+  {
+    "name": "Yama Usagi",
+    "no": "237",
+    "rarity": "R",
+    "cv": "Aki Toyosaki",
+    "name_cn": "山兔 Shān tù",
+    "has_sp": true
+  },
+  {
+    "name": "Yamawaro",
+    "no": "243",
+    "rarity": "R",
+    "cv": "Akira Ishida",
+    "name_cn": "山童 Shān tóng",
+    "has_sp": false
+  },
+  {
+    "name": "Zashiki Warashi",
+    "no": "205",
+    "rarity": "R",
+    "cv": "Junko Takeuchi",
+    "name_cn": "座敷童子 Zuòfū Tóngzǐ",
+    "has_sp": true
+  },
+  {
+    "name": "Akashita",
+    "no": "246",
+    "rarity": "n",
+    "cv": "Nara Toru",
+    "name_cn": "Chì shé 赤舌",
+    "has_sp": false
+  },
+  {
+    "name": "Aoandon Frog",
+    "no": "421",
+    "rarity": "N",
+    "cv": "Yurina Watanabe",
+    "name_cn": "青行灯呱 Qingxingdeng gua",
+    "has_sp": false
+  },
+  {
+    "name": "Arakawa Frog",
+    "no": "416",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "荒川呱 Huangchuan gua",
+    "has_sp": false
+  },
+  {
+    "name": "Blue Imp",
+    "no": "407",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Tiānxiéguǐ qīng 天邪鬼青",
+    "has_sp": false
+  },
+  {
+    "name": "Enma Frog",
+    "no": "417",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "阎魔呱 Yanmo gua",
+    "has_sp": false
+  },
+  {
+    "name": "Grave Digger",
+    "no": "400",
+    "rarity": "N",
+    "cv": "Shintani Mayumi",
+    "name_cn": "Dàomù xiǎoguǐ 盗墓小鬼",
+    "has_sp": false
+  },
+  {
+    "name": "Green Imp",
+    "no": "404",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Tiānxiéguǐ lǜ 天邪鬼绿",
+    "has_sp": false
+  },
+  {
+    "name": "Hahakigami",
+    "no": "408",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Zhou shén 帚神",
+    "has_sp": false
+  },
+  {
+    "name": "Higanbana Frog",
+    "no": "427",
+    "rarity": "N",
+    "cv": "Akiha Matsui",
+    "name_cn": "彼岸花呱 Bianhua gua",
+    "has_sp": false
+  },
+  {
+    "name": "Ibaraki Frog",
+    "no": "420",
+    "rarity": "N",
+    "cv": "Souichi Abe",
+    "name_cn": "茨木呱 Cimu gua",
+    "has_sp": false
+  },
+  {
+    "name": "Ichimokuren Frog",
+    "no": "423",
+    "rarity": "N",
+    "cv": "Daiki Hamano",
+    "name_cn": "一目连呱 Yīmù lián gua",
+    "has_sp": false
+  },
+  {
+    "name": "Kachou Fuugetsu Frog",
+    "no": "424",
+    "rarity": "N",
+    "cv": "Yui Kondou",
+    "name_cn": "花鸟卷呱 Huaniaojuan gua",
+    "has_sp": false
+  },
+  {
+    "name": "Kaguya Hime Frog",
+    "no": "425",
+    "rarity": "N",
+    "cv": "Misaki Ikeda",
+    "name_cn": "辉夜姬呱 Huiyeji gua",
+    "has_sp": false
+  },
+  {
+    "name": "Lantern Boy",
+    "no": "245",
+    "rarity": "n",
+    "cv": "Yuuki Aoi",
+    "name_cn": "Tídēng xiǎosēng 提灯小僧",
+    "has_sp": false
+  },
+  {
+    "name": "Lantern Soul",
+    "no": "203",
+    "rarity": "n",
+    "cv": "Koyasu Takehito",
+    "name_cn": "<!--Dēnglóng guǐ-->灯笼鬼",
+    "has_sp": false
+  },
+  {
+    "name": "Miketsu Frog",
+    "no": "430",
+    "rarity": "N",
+    "cv": "Kanna Arima",
+    "name_cn": "御馔津呱",
+    "has_sp": false
+  },
+  {
+    "name": "Namahage Oni",
+    "no": "433",
+    "rarity": "N",
+    "cv": "Yuuka Takata",
+    "name_cn": "生剥鬼 shēng bāo guǐ",
+    "has_sp": false
+  },
+  {
+    "name": "Nurikabe",
+    "no": "409",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Tu bì 涂壁",
+    "has_sp": false
+  },
+  {
+    "name": "Ootengu Frog",
+    "no": "414",
+    "rarity": "N",
+    "cv": "Tetsu Kimishima",
+    "name_cn": "大天狗呱 Datiangou gua",
+    "has_sp": false
+  },
+  {
+    "name": "Parasite",
+    "no": "401",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Jìshēng hún 寄生魂",
+    "has_sp": false
+  },
+  {
+    "name": "Red Imp",
+    "no": "405",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Tiānxiéguǐ hóng 天邪鬼赤",
+    "has_sp": false
+  },
+  {
+    "name": "Ryoumenbotoke Frog",
+    "no": "418",
+    "rarity": "N",
+    "cv": "Takayuki Miyamoto",
+    "name_cn": "两面佛呱 Liǎngmiànfú gua",
+    "has_sp": false
+  },
+  {
+    "name": "Shishio Frog",
+    "no": "419",
+    "rarity": "N",
+    "cv": "Takefumi Yumihara",
+    "name_cn": "小鹿男呱 Xiaolunan gua",
+    "has_sp": false
+  },
+  {
+    "name": "Shuten Frog",
+    "no": "415",
+    "rarity": "N",
+    "cv": "Takaki Ootomari",
+    "name_cn": "酒吞呱 Jiutun gua",
+    "has_sp": false
+  },
+  {
+    "name": "Susabi Frog",
+    "no": "426",
+    "rarity": "N",
+    "cv": "Ryou Iwasaki",
+    "name_cn": "荒呱 Huang gua",
+    "has_sp": false
+  },
+  {
+    "name": "Tamamo no Mae Frog",
+    "no": "429",
+    "rarity": "N",
+    "cv": "Ken Uo",
+    "name_cn": "玉藻前呱",
+    "has_sp": false
+  },
+  {
+    "name": "Umbrella",
+    "no": "403",
+    "rarity": "N",
+    "cv": "Kobayashi Yuu",
+    "name_cn": "Táng zhǐ sǎn yāo 唐纸伞妖",
+    "has_sp": false
+  },
+  {
+    "name": "Yellow Imp",
+    "no": "406",
+    "rarity": "N",
+    "cv": "N/A",
+    "name_cn": "Tiānxiéguǐ huáng 天邪鬼黄",
+    "has_sp": false
+  },
+  {
+    "name": "Youtou Hime Frog",
+    "no": "422",
+    "rarity": "N",
+    "cv": "Mari Hagai",
+    "name_cn": "妖刀姬呱 Yāodāo jī gua",
+    "has_sp": false
+  },
+  {
+    "name": "Yuki Douji Frog",
+    "no": "428",
+    "rarity": "N",
+    "cv": "Kaede Kujou",
+    "name_cn": "雪童子呱",
+    "has_sp": false
+  }
+]
