@@ -18,7 +18,7 @@ import os, sys, time, json
 import cv2
 from perception import (bgshot, bgclick, dhash, hamming, detect_buttons,
                         is_loading, find_close_button, W, H)
-from world_model import WorldModel, SCREENS, EXP
+from world_model import WorldModel, SCREENS, EXP, ROOT
 
 OBS = os.path.join(EXP, "observations.jsonl")
 
@@ -33,8 +33,8 @@ HOME_FOOTER = [(125, 632), (235, 632), (335, 632), (425, 632), (523, 632),
                (936, 91),    # settings (da biet)
                (660, 277)]   # Town
 
-BACK_CLICKS = [(1015, 95), (990, 118), (45, 62), (28, 68)]
-# X popup giua-tren / back goc tren trai. KHONG bam (1115,78)=X cua so game (tat game!)
+BACK_CLICKS = [(1015, 95), (990, 118), (45, 55), (28, 68)]
+# X popup giua-tren / mui ten back goc tren trai. KHONG bam (1115,78)=X cua so game (tat game!)
 
 def log(rec):
     with open(OBS, "a", encoding="utf-8") as f:
@@ -90,6 +90,66 @@ def goto_home(wm, home_sid, max_back=4):
     sid, _, _ = wm.observe()
     return sid
 
+def deep_escape(wm):
+    """Thoat manh khi ket: back qua MOI goc nhieu lan + dong popup CV + graph anchor.
+    Dung cho man 3D/map dac biet (vd Heian-Kyo story, secret realm)."""
+    import subprocess
+    for _ in range(5):
+        im = bgshot()
+        if im is not None:
+            xb = find_close_button(im)
+            if xb:
+                bgclick(*xb); time.sleep(0.8)
+        for (x, y) in [(45, 55), (28, 68), (45, 62), (1015, 95)]:
+            bgclick(x, y); time.sleep(0.7)
+    gp = os.path.join(os.path.dirname(__file__), "graph.py")
+    subprocess.run([sys.executable, gp, "goto", "HOME"], capture_output=True, text=True)
+    time.sleep(1.5)
+    sid, _, _ = wm.observe()
+    return sid
+
+def state_has_untried(wm, sid):
+    """Load screenshot da luu cua state, detect nut, xem con nut chua thu khong.
+    Tra (so_nut_chua_thu, list_nut). HOME them HOME_FOOTER."""
+    st = wm.states.get(sid)
+    if not st:
+        return 0, []
+    path = os.path.join(ROOT, st["screenshot"]) if not os.path.isabs(st["screenshot"]) else st["screenshot"]
+    import cv2 as _cv
+    im = _cv.imread(path)
+    if im is None:
+        return 0, []
+    is_home = (sid == HOME_SID_HINT[0])
+    cands = candidate_buttons(im, sid, is_home)
+    untried = [p for p in cands if not wm.is_tried(sid, p)]
+    return len(untried), untried
+
+def find_frontier(wm, from_sid, home_sid, skip=None):
+    """Tim state GAN NHAT (BFS tu from_sid, roi tu HOME) con nut chua thu.
+    Tra (sid, path_clicks) hoac (None, None)."""
+    skip = skip or set()
+    # uu tien BFS tu vi tri hien tai, fallback tu HOME
+    for src in (from_sid, home_sid):
+        best = None
+        for sid in wm.states:
+            if sid in skip:
+                continue
+            if wm.states[sid].get("label") == "Loading":
+                continue
+            n, _ = state_has_untried(wm, sid)
+            if n <= 0:
+                continue
+            p = wm.bfs_path(src, sid)
+            if p is None:
+                continue
+            if best is None or len(p) < best[2]:
+                best = (sid, p, len(p))
+        if best:
+            return best[0], best[1]
+    return None, None
+
+HOME_SID_HINT = [None]  # gan trong explore()
+
 def explore(budget=60, home_every=20, max_depth=4):
     """DFS sau: vao state moi -> kham pha het no truoc khi back.
     - Khong back ngay sau transition (de di SAU vao menu con).
@@ -111,10 +171,13 @@ def explore(budget=60, home_every=20, max_depth=4):
     home_sid, isnew, img = wm.observe()
     if isnew:
         log({"event": "new_state", "state": home_sid, "step": -1})
+    HOME_SID_HINT[0] = home_sid
     print(f"HOME = {home_sid}")
 
     transitions = 0
     stuck = 0  # dem so buoc lien tiep khong sinh transition moi -> chong ket
+    home_fails = 0  # dem so lan goto_home lien tiep KHONG ve duoc HOME
+    unreachable = set()  # frontier khong toi duoc -> bo qua de tranh loop
 
     for step in range(budget):
         sid, isnew, img = wm.observe()
@@ -141,7 +204,11 @@ def explore(budget=60, home_every=20, max_depth=4):
             try_back(wm); continue
         if cur_depth >= max_depth:
             print(f"[{step}] {sid} depth={cur_depth} >= {max_depth} -> ve HOME")
-            goto_home(wm, home_sid); stuck = 0
+            hs = goto_home(wm, home_sid); stuck = 0
+            home_fails = 0 if hs == home_sid else home_fails + 1
+            if home_fails >= 4:
+                print(f"[{step}] goto HOME that bai {home_fails} lan -> escape sau")
+                deep_escape(wm); home_fails = 0
             continue
 
         is_home = (sid == home_sid)
@@ -149,10 +216,25 @@ def explore(budget=60, home_every=20, max_depth=4):
         target = next((p for p in cands if not wm.is_tried(sid, p)), None)
 
         if target is None:
-            if is_home:
-                print(f"[{step}] HOME het nut -> xong"); break
-            print(f"[{step}] {sid} het nut -> ve HOME tim cho khac")
-            goto_home(wm, home_sid); stuck = 0
+            # het nut o state nay -> tim FRONTIER (state khac con nut chua thu)
+            fsid, fpath = find_frontier(wm, sid, home_sid, skip=unreachable)
+            if fsid is None:
+                print(f"[{step}] KHONG con frontier nao -> XONG het ban do"); break
+            print(f"[{step}] {sid} het nut -> di toi frontier {fsid} ({len(fpath)} buoc)")
+            # ve HOME truoc roi BFS toi frontier (duong tin cay hon)
+            goto_home(wm, home_sid)
+            navp = wm.bfs_path(home_sid, fsid)
+            if navp is None:
+                navp = fpath
+            for (nx, ny) in navp:
+                bgclick(nx, ny); time.sleep(1.2)
+            cur, _, _ = wm.observe()
+            if cur != fsid:
+                # khong toi dung frontier -> blacklist de tranh loop
+                unreachable.add(fsid)
+                print(f"[{step}]   -> khong toi frontier (o {cur}), blacklist {fsid}")
+            else:
+                stuck = 0; home_fails = 0
             continue
 
         x, y = target

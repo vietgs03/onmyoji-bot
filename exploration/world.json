@@ -41,6 +41,62 @@
         [
           922,
           632
+        ],
+        [
+          1022,
+          632
+        ],
+        [
+          608,
+          192
+        ],
+        [
+          988,
+          245
+        ],
+        [
+          1092,
+          72
+        ],
+        [
+          936,
+          91
+        ],
+        [
+          660,
+          277
+        ],
+        [
+          232,
+          158
+        ],
+        [
+          970,
+          387
+        ],
+        [
+          271,
+          91
+        ],
+        [
+          1076,
+          373
+        ],
+        [
+          248,
+          451
+        ],
+        [
+          170,
+          660
+        ],
+        [
+          302,
+          40
+        ],
+        [
+          1077,
+          313
         ]
       ]
     },
@@ -339,6 +395,22 @@
         [
           1066,
           590
+        ],
+        [
+          77,
+          157
+        ],
+        [
+          169,
+          609
+        ],
+        [
+          70,
+          607
+        ],
+        [
+          659,
+          286
         ]
       ]
     },
@@ -463,6 +535,271 @@
       "desc": "Trinh phat nhac nen",
       "screenshot": "exploration/screens/87540f1823.png",
       "buttons_tried": []
+    },
+    "cc83106e05": {
+      "dhash": "0011001100101011110100110011001110110001111001110011000010011001",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/cc83106e05.png",
+      "buttons_tried": [
+        [
+          743,
+          581
+        ]
+      ]
+    },
+    "257dfee8a8": {
+      "dhash": "0001000100010001000010000001100000000100000000001110011111110011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/257dfee8a8.png",
+      "buttons_tried": []
+    },
+    "1d811c3586": {
+      "dhash": "0001000110001001110100110011001110010011111001110110100111011011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/1d811c3586.png",
+      "buttons_tried": []
+    },
+    "ab0c6d51af": {
+      "dhash": "0111011101111111000010101101001001000010011001101101101111101000",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/ab0c6d51af.png",
+      "buttons_tried": [
+        [
+          739,
+          218
+        ]
+      ]
+    },
+    "94693fae24": {
+      "dhash": "1100110101001000001011010111000011010010110101011101011010110100",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/94693fae24.png",
+      "buttons_tried": [
+        [
+          1045,
+          575
+        ]
+      ]
+    },
+    "69227e751e": {
+      "dhash": "0101010111001110010010010001110011101011110110101011011100110001",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/69227e751e.png",
+      "buttons_tried": []
+    },
+    "7003532d8f": {
+      "dhash": "0110011010100010010110011100000010100011000100101000100111000101",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/7003532d8f.png",
+      "buttons_tried": []
+    },
+    "69c220ee42": {
+      "dhash": "0110111011101101001010000100110010010010000101011000100111010101",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/69c220ee42.png",
+      "buttons_tried": []
+    },
+    "e7fc915f03": {
+      "dhash": "1100110011011100101010100100101010010011001001000000000111000101",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/e7fc915f03.png",
+      "buttons_tried": []
+    },
+    "f9dfc53ce1": {
+      "dhash": "1010001000101010101000000010110011101101111011000100110011010011",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/f9dfc53ce1.png",
+      "buttons_tried": [
+        [
+          1087,
+          637
+        ],
+        [
+          163,
+          452
+        ],
+        [
+          983,
+          443
+        ],
+        [
+          914,
+          430
+        ],
+        [
+          719,
+          223
+        ],
+        [
+          811,
+          167
+        ]
+      ]
+    },
+    "c6d3d9c4a2": {
+      "dhash": "1011101111011000101010100010001010010010000001000110101010001100",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/c6d3d9c4a2.png",
+      "buttons_tried": [
+        [
+          584,
+          287
+        ],
+        [
+          637,
+          341
+        ],
+        [
+          1031,
+          70
+        ]
+      ]
+    },
+    "16e393445b": {
+      "dhash": "1010101011101010111000101110111010010010010000000110011011001010",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/16e393445b.png",
+      "buttons_tried": [
+        [
+          1077,
+          242
+        ]
+      ]
+    },
+    "fcb56783bf": {
+      "dhash": "0011001100110011111110111101101001011101110011001100110111011001",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/fcb56783bf.png",
+      "buttons_tried": [
+        [
+          583,
+          244
+        ]
+      ]
+    },
+    "0d383f13cc": {
+      "dhash": "0101010111011101010000010001001001010011000001010101011010001000",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/0d383f13cc.png",
+      "buttons_tried": [
+        [
+          401,
+          469
+        ],
+        [
+          245,
+          454
+        ],
+        [
+          435,
+          445
+        ],
+        [
+          403,
+          394
+        ],
+        [
+          59,
+          56
+        ]
+      ]
+    },
+    "7354a09913": {
+      "dhash": "0010000110110100110100100001010101001001100001000111111100111111",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/7354a09913.png",
+      "buttons_tried": []
+    },
+    "189ca95eec": {
+      "dhash": "0101000100010101001000100110011011000111111111000110111010111101",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/189ca95eec.png",
+      "buttons_tried": [
+        [
+          125,
+          632
+        ],
+        [
+          235,
+          632
+        ],
+        [
+          335,
+          632
+        ],
+        [
+          425,
+          632
+        ],
+        [
+          523,
+          632
+        ],
+        [
+          623,
+          632
+        ],
+        [
+          723,
+          632
+        ],
+        [
+          822,
+          632
+        ],
+        [
+          922,
+          632
+        ],
+        [
+          1022,
+          632
+        ],
+        [
+          608,
+          192
+        ],
+        [
+          988,
+          245
+        ],
+        [
+          1075,
+          185
+        ],
+        [
+          1033,
+          72
+        ],
+        [
+          1092,
+          72
+        ],
+        [
+          936,
+          91
+        ],
+        [
+          660,
+          277
+        ]
+      ]
     }
   },
   "edges": [
@@ -657,6 +994,118 @@
         380
       ],
       "to": "b5bfd6920a"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        608,
+        192
+      ],
+      "to": "cc83106e05"
+    },
+    {
+      "from": "cc83106e05",
+      "click": [
+        743,
+        581
+      ],
+      "to": "4f1f9ea06f"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        660,
+        277
+      ],
+      "to": "ab0c6d51af"
+    },
+    {
+      "from": "ab0c6d51af",
+      "click": [
+        739,
+        218
+      ],
+      "to": "94693fae24"
+    },
+    {
+      "from": "94693fae24",
+      "click": [
+        1045,
+        575
+      ],
+      "to": "69227e751e"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        970,
+        387
+      ],
+      "to": "f9dfc53ce1"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        271,
+        91
+      ],
+      "to": "c6d3d9c4a2"
+    },
+    {
+      "from": "c6d3d9c4a2",
+      "click": [
+        1031,
+        70
+      ],
+      "to": "16e393445b"
+    },
+    {
+      "from": "16e393445b",
+      "click": [
+        1077,
+        242
+      ],
+      "to": "1bb4756a8f"
+    },
+    {
+      "from": "1bb4756a8f",
+      "click": [
+        77,
+        157
+      ],
+      "to": "fcb56783bf"
+    },
+    {
+      "from": "fcb56783bf",
+      "click": [
+        583,
+        244
+      ],
+      "to": "1bb4756a8f"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        1076,
+        373
+      ],
+      "to": "0d383f13cc"
+    },
+    {
+      "from": "0d383f13cc",
+      "click": [
+        59,
+        56
+      ],
+      "to": "4f1f9ea06f"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        1077,
+        313
+      ],
+      "to": "7354a09913"
     }
   ]
 }
