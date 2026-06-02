@@ -1,156 +1,141 @@
 #!/usr/bin/env python3
 """
-Autonomous UI explorer cho Onmyoji.
+Autonomous explorer v2 - dung perception (CV detect nut) + world_model (graph).
 
-Y tuong: bot tu "mo" game - tai moi page, no thu click vao cac diem CHUA THU
-(grid hoac cac vung interactive), so sanh man hinh truoc/sau de biet:
-  - click do co lam DOI MAN HINH khong (transition) hay khong (no-op).
-  - neu doi -> luu screenshot moi + ghi lai "tu <page> click (x,y) -> man hinh moi".
-  - tu dong tim duong VE node goc (HOME) de tiep tuc kham pha cho khac.
+Chien luoc:
+  1. observe() -> sid hien tai. Neu moi -> luu screenshot.
+  2. detect_buttons() -> danh sach nut UNG VIEN (CV, khong hardcode).
+     Bo sung HOTSPOTS co dinh (footer 11 nut + cac goc) cho HOME -> chac chan.
+  3. Chon nut CHUA THU diem cao nhat. Click. observe() lai.
+     - neu doi state -> add_edge, luu, roi BACK ve (de thu tiep nut khac state cu).
+     - neu khong doi -> mark tried, thu nut khac.
+  4. Neu state hien tai het nut chua thu -> tim duong BFS ve HOME (hoac back tho).
+  5. Dinh ky (moi N buoc) ve HOME de tranh lac sau.
 
-Output:
-  exploration/observations.jsonl   # moi dong 1 quan sat (state-hash, click, ket qua)
-  exploration/screens/<hash>.png   # anh moi man hinh la
-  exploration/frontier.json        # cac (page_hash, click) chua thu / da thu
-
-Man hinh "moi" duoc dinh danh bang perceptual-ish hash (dHash) cua anh.
-Con NGUOI/AI (toi) doc observations + screens de DAT TEN va MO TA chuc nang.
+Chay: .venv/bin/python scripts/explorer.py [budget]
 """
-import json, os, subprocess, sys, time, hashlib
+import os, sys, time, json
 import cv2
-import numpy as np
+from perception import (bgshot, bgclick, dhash, hamming, detect_buttons, W, H)
+from world_model import WorldModel, SCREENS, EXP
 
-ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-CLI = os.path.join(ROOT, "scripts", "onmyoji.sh")
-EXP = os.path.join(ROOT, "exploration")
-SCREENS = os.path.join(EXP, "screens")
 OBS = os.path.join(EXP, "observations.jsonl")
-os.makedirs(SCREENS, exist_ok=True)
 
-W, H = 1152, 679
+# Hotspot entry-point co dinh (footer HOME + goc). Khong phai hardcode toan bo
+# graph - chi seed cac diem chac chan de explorer khong bo sot menu chinh.
+HOME_FOOTER = [(125, 632), (235, 632), (335, 632), (425, 632), (523, 632),
+               (623, 632), (723, 632), (822, 632), (922, 632), (1022, 632),
+               (608, 192),   # Explore
+               (988, 245),   # Summon
+               (1075, 185),  # Event
+               (1033, 72), (1092, 72),  # mail/chat goc tren phai
+               (936, 91),    # settings (da biet)
+               (660, 277)]   # Town
 
-def bgshot():
-    out = subprocess.run([CLI, "bgshot", "_explore_tmp"], capture_output=True, text=True)
-    p = out.stdout.strip().splitlines()[-1] if out.stdout.strip() else None
-    return cv2.imread(p) if p else None
+BACK_CLICKS = [(1115, 78), (28, 68), (575, 640)]  # X cua so / back goc trai / vung duoi
 
-def bgclick(x, y):
-    subprocess.run([CLI, "bgclick", str(int(x)), str(int(y))], capture_output=True, text=True)
-
-def dhash(img, hash_size=16):
-    """Perceptual hash tren VUNG TINH (bo chat bar tren + animation giua + nhan vat).
-    Onmyoji co chat bar (~y 100-125) va nhan vat dong o giua -> gay nhieu.
-    Ta hash phan KHUNG/UI (vien trai, phai, footer text) bang cach mask vung dong."""
-    g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
-    # mask: zero hoa vung chat bar va vung giua-tren (nhieu dong nhat)
-    g = g.copy()
-    g[95:130, 350:1000] = 0     # chat bar
-    g[150:480, 280:900] = 0     # vung nhan vat dong o san nha
-    g = cv2.resize(g, (hash_size + 1, hash_size))
-    diff = g[:, 1:] > g[:, :-1]
-    return "".join("1" if v else "0" for v in diff.flatten())
-
-def hamming(a, b):
-    return sum(c1 != c2 for c1, c2 in zip(a, b))
-
-def state_id(img):
-    """Tra ve hash ngan lam ID man hinh."""
-    return hashlib.md5(dhash(img).encode()).hexdigest()[:12]
-
-def is_new_state(h, known, threshold=18):
-    """So voi cac dhash da biet; neu khac biet du lon -> man hinh moi."""
-    for kh in known:
-        if hamming(h, kh) <= threshold:
-            return False, kh
-    return True, None
-
-def log_obs(rec):
+def log(rec):
     with open(OBS, "a", encoding="utf-8") as f:
         f.write(json.dumps(rec, ensure_ascii=False) + "\n")
 
-def grid_points(cols=8, rows=6, margin_top=40, margin_bot=20):
-    """Sinh luoi diem click phu man hinh (tranh vien title bar)."""
-    pts = []
-    usable_h = H - margin_top - margin_bot
-    for r in range(rows):
-        for c in range(cols):
-            x = int((c + 0.5) * W / cols)
-            y = int(margin_top + (r + 0.5) * usable_h / rows)
-            pts.append((x, y))
-    return pts
+def candidate_buttons(img, sid, is_home):
+    """Gop nut CV + hotspot (neu HOME). Tra list (x,y) sap theo uu tien."""
+    btns = detect_buttons(img, suppress_center=is_home)
+    pts = [(cx, cy) for cx, cy, w, h, s in btns if s >= 0.5]
+    if is_home:
+        pts = HOME_FOOTER + pts
+    # khu trung gan nhau
+    uniq = []
+    for p in pts:
+        if all(abs(p[0]-q[0]) > 20 or abs(p[1]-q[1]) > 20 for q in uniq):
+            uniq.append(p)
+    return uniq
 
-def explore(budget=40, back_clicks=((1115, 78), (28, 68))):
-    """Vong lap kham pha co he thong.
-    - Moi 'state' duoc dinh danh on dinh bang canonical hash (gom man hinh gan giong).
-    - Tai state hien tai, thu diem grid CHUA THU; sau moi click ghi nhan transition;
-      roi BACK ve de tiep tuc thu diem khac cua CUNG state (khong bi lac sang nhanh sau).
-    """
-    # canonical states: list (hash, id) - dai dien on dinh
-    canon = []  # [(dhash, sid)]
-    def canonicalize(dh, img):
-        for kh, sid in canon:
-            if hamming(dh, kh) <= 14:
-                return sid, False
-        sid = hashlib.md5(dh.encode()).hexdigest()[:10]
-        canon.append((dh, sid))
-        cv2.imwrite(os.path.join(SCREENS, f"{sid}.png"), img)
-        return sid, True
+def try_back(wm):
+    """Bam cac nut back pho bien, tra sid sau khi back."""
+    for bx, by in BACK_CLICKS:
+        bgclick(bx, by); time.sleep(0.9)
+    sid, _, _ = wm.observe()
+    return sid
 
-    # nap canon tu screens da co (de chay tiep, khong lam lai)
-    for fn in sorted(os.listdir(SCREENS)):
-        if fn.endswith(".png"):
-            im = cv2.imread(os.path.join(SCREENS, fn))
-            if im is not None:
-                canon.append((dhash(im), fn[:-4]))
+def goto_home(wm, home_sid, max_back=4):
+    """Co gang ve HOME bang BFS; neu khong co duong, bam back nhieu lan."""
+    sid, _, _ = wm.observe()
+    if sid == home_sid:
+        return sid
+    path = wm.bfs_path(sid, home_sid)
+    if path:
+        for (x, y) in path:
+            bgclick(x, y); time.sleep(1.2)
+        sid, _, _ = wm.observe()
+        if sid == home_sid:
+            return sid
+    for _ in range(max_back):
+        sid = try_back(wm)
+        if sid == home_sid:
+            return sid
+    return sid
 
-    visited_clicks = set()
+def explore(budget=60, home_every=12):
+    wm = WorldModel().load()
+    # xac dinh HOME sid: observe lan dau (gia dinh dang o HOME sau goto)
+    home_sid, isnew, img = wm.observe()
+    if isnew:
+        log({"event": "new_state", "state": home_sid, "step": -1})
+    print(f"HOME = {home_sid}")
+
     transitions = 0
-
     for step in range(budget):
-        before = bgshot()
-        if before is None:
-            print("  ! no screenshot"); break
-        dh = dhash(before)
-        sid, isnew = canonicalize(dh, before)
+        sid, isnew, img = wm.observe()
+        if img is None:
+            print("  ! no shot"); break
         if isnew:
-            print(f"[{step}] NEW STATE {sid} (total {len(canon)})")
-            log_obs({"event": "new_state", "state": sid, "step": step})
+            log({"event": "new_state", "state": sid, "step": step})
+            print(f"[{step}] NEW STATE {sid} (total {len(wm.states)})")
 
-        # chon diem grid chua thu o state nay
-        target = None
-        for (x, y) in grid_points():
-            if (sid, x, y) not in visited_clicks:
-                target = (x, y); break
+        is_home = (sid == home_sid)
+        cands = candidate_buttons(img, sid, is_home)
+        # chon nut chua thu
+        target = next((p for p in cands if not wm.is_tried(sid, p)), None)
+
         if target is None:
-            print(f"[{step}] state {sid} het diem -> back")
-            for bx, by in back_clicks:
-                bgclick(bx, by); time.sleep(1.0)
+            print(f"[{step}] {sid} het nut -> ve HOME")
+            home_sid_now = goto_home(wm, home_sid)
+            wm.save()
             continue
 
         x, y = target
-        visited_clicks.add((sid, x, y))
-        bgclick(x, y)
-        time.sleep(1.3)
-        after = bgshot()
-        if after is None:
-            continue
-        dh2 = dhash(after)
-        if hamming(dh, dh2) > 14:
-            sid2, isnew2 = canonicalize(dh2, after)
-            transitions += 1
-            log_obs({"event": "transition", "from": sid, "click": [x, y],
-                     "to": sid2, "to_is_new": isnew2, "step": step})
-            print(f"[{step}] {sid} --click({x},{y})--> {sid2} {'(NEW)' if isnew2 else ''}")
-            # back ve state cu de tiep tuc thu diem khac cua no
-            for bx, by in back_clicks:
-                bgclick(bx, by); time.sleep(1.0)
-        else:
-            log_obs({"event": "noop", "state": sid, "click": [x, y], "step": step})
+        wm.mark_tried(sid, (x, y))
+        bgclick(x, y); time.sleep(1.1)
+        sid2, isnew2, img2 = wm.observe()
 
-    print(f"\nDone. canonical_states={len(canon)} transitions={transitions}")
-    print(f"Observations: {OBS}")
-    print(f"Screens: {SCREENS}/")
+        if sid2 != sid:
+            wm.add_edge(sid, (x, y), sid2)
+            transitions += 1
+            log({"event": "transition", "from": sid, "click": [x, y],
+                 "to": sid2, "to_is_new": isnew2, "step": step})
+            print(f"[{step}] {sid} --({x},{y})--> {sid2} {'NEW' if isnew2 else ''}")
+            # back ve state cu (sid) de tiep tuc thu nut khac cua no.
+            # Uu tien BFS sid2->sid; neu khong co thi bam back tho.
+            path = wm.bfs_path(sid2, sid)
+            if path:
+                for (bx, by) in path:
+                    bgclick(bx, by); time.sleep(1.0)
+            else:
+                try_back(wm)
+        else:
+            log({"event": "noop", "state": sid, "click": [x, y], "step": step})
+
+        if (step + 1) % home_every == 0:
+            goto_home(wm, home_sid)
+        if (step + 1) % 10 == 0:
+            wm.save()
+            print(f"  ...saved. {wm.stats()}")
+
+    wm.save()
+    print(f"\nDONE. {wm.stats()} transitions={transitions}")
+    print(f"world -> {os.path.join(EXP,'world.json')}")
 
 if __name__ == "__main__":
-    budget = int(sys.argv[1]) if len(sys.argv) > 1 else 40
+    budget = int(sys.argv[1]) if len(sys.argv) > 1 else 60
     explore(budget=budget)
