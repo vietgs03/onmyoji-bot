@@ -137,6 +137,18 @@
         [
           470,
           436
+        ],
+        [
+          1081,
+          458
+        ],
+        [
+          1054,
+          355
+        ],
+        [
+          182,
+          187
         ]
       ]
     },
@@ -750,6 +762,26 @@
         [
           783,
           233
+        ],
+        [
+          1055,
+          184
+        ],
+        [
+          1107,
+          185
+        ],
+        [
+          989,
+          371
+        ],
+        [
+          902,
+          362
+        ],
+        [
+          945,
+          431
         ]
       ]
     },
@@ -1881,6 +1913,39 @@
       "desc": null,
       "screenshot": "exploration/screens/57a3988353.png",
       "buttons_tried": []
+    },
+    "6dbfb79cfa": {
+      "dhash": "0110010001000100001011000100000111001100110011100110111101010111",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/6dbfb79cfa.png",
+      "buttons_tried": []
+    },
+    "0239625840": {
+      "dhash": "0100010001000100001011001101000010101001101110110100111101011010",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/0239625840.png",
+      "buttons_tried": []
+    },
+    "39b697ba72": {
+      "dhash": "1101110111011000111010010111111000110101010101011101100101000010",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/39b697ba72.png",
+      "buttons_tried": [
+        [
+          766,
+          399
+        ]
+      ]
+    },
+    "31fb85fdc5": {
+      "dhash": "1101110111011001001001101010110000111011001101111101100100100110",
+      "label": null,
+      "desc": null,
+      "screenshot": "exploration/screens/31fb85fdc5.png",
+      "buttons_tried": []
     }
   },
   "edges": [
@@ -2683,6 +2748,38 @@
         455
       ],
       "to": "79322e988a"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        1081,
+        458
+      ],
+      "to": "6dbfb79cfa"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        1054,
+        355
+      ],
+      "to": "39b697ba72"
+    },
+    {
+      "from": "39b697ba72",
+      "click": [
+        766,
+        399
+      ],
+      "to": "31fb85fdc5"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        182,
+        187
+      ],
+      "to": "f9dfc53ce1"
     }
   ]
 }

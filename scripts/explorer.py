@@ -33,8 +33,9 @@ HOME_FOOTER = [(125, 632), (235, 632), (335, 632), (425, 632), (523, 632),
                (936, 91),    # settings (da biet)
                (660, 277)]   # Town
 
-BACK_CLICKS = [(1015, 95), (990, 118), (45, 55), (28, 68)]
-# X popup giua-tren / mui ten back goc tren trai. KHONG bam (1115,78)=X cua so game (tat game!)
+BACK_CLICKS = [(1015, 95), (990, 118), (1070, 77), (1050, 133), (45, 55), (28, 68)]
+# X popup / Skip animation / X mailbox / mui ten back goc tren trai.
+# KHONG bam (1115,78)=X cua so game (tat game!)
 
 def log(rec):
     with open(OBS, "a", encoding="utf-8") as f:
@@ -96,16 +97,22 @@ def goto_home(wm, home_sid, max_back=4):
 
 def deep_escape(wm):
     """Thoat manh khi ket: back qua MOI goc nhieu lan + dong popup CV + graph anchor.
-    Dung cho man 3D/map dac biet (vd Heian-Kyo story, secret realm)."""
+    Dung cho man 3D/map dac biet (vd Heian-Kyo story, secret realm), animation summon, mailbox..."""
     import subprocess
-    for _ in range(5):
+    # cac vi tri dong pho bien: Skip (animation), X mailbox/popup, back arrows
+    ESCAPE_PTS = [(1070, 77),   # Skip (man animation summon/draw)
+                  (1050, 133),  # X tron do (mailbox, mot so popup)
+                  (1043, 178),  # X hong (shrine pass...)
+                  (1095, 62),   # X trang (character showcase)
+                  (45, 55), (28, 68), (45, 62), (1015, 95)]
+    for _ in range(4):
         im = bgshot()
         if im is not None:
             xb = find_close_button(im)
             if xb:
                 bgclick(*xb); time.sleep(0.8)
-        for (x, y) in [(45, 55), (28, 68), (45, 62), (1015, 95)]:
-            bgclick(x, y); time.sleep(0.7)
+        for (x, y) in ESCAPE_PTS:
+            bgclick(x, y); time.sleep(0.5)
     gp = os.path.join(os.path.dirname(__file__), "graph.py")
     subprocess.run([sys.executable, gp, "goto", "HOME"], capture_output=True, text=True)
     time.sleep(1.5)
@@ -213,8 +220,9 @@ def explore(budget=60, home_every=20, max_depth=4):
         if cur_depth >= max_depth:
             print(f"[{step}] {sid} depth={cur_depth} >= {max_depth} -> ve HOME")
             hs = goto_home(wm, home_sid); stuck = 0
-            home_fails = 0 if hs == home_sid else home_fails + 1
-            if home_fails >= 4:
+            ok = (wm._logical(hs) == wm._logical(home_sid))
+            home_fails = 0 if ok else home_fails + 1
+            if home_fails >= 2:
                 print(f"[{step}] goto HOME that bai {home_fails} lan -> escape sau")
                 deep_escape(wm); home_fails = 0
             continue
