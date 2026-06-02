@@ -280,10 +280,32 @@ def explore(budget=60, home_every=20, max_depth=4):
             stuck = 0
             continue
 
-        # chong ket: neu nhieu buoc khong co transition -> ve HOME
+        # chong ket: nhieu buoc khong sinh transition -> NHAY FRONTIER (khong chi ve HOME)
         if stuck >= 8:
-            print(f"[{step}] stuck={stuck} -> ve HOME")
-            goto_home(wm, home_sid); stuck = 0
+            print(f"[{step}] stuck={stuck} -> nhay frontier")
+            stuck = 0
+            recent.clear()
+            # bo qua MOI state cung label voi state hien tai (tranh quanh quan)
+            cur_lbl = wm.states[sid].get("label")
+            skip = set(unreachable)
+            if cur_lbl:
+                skip |= {s for s, st in wm.states.items() if st.get("label") == cur_lbl}
+            else:
+                skip.add(sid)
+            fsid, _ = find_frontier(wm, sid, home_sid, skip=skip)
+            if fsid is None:
+                # khong con frontier khac -> thu lai toan bo (co the HOME con viec)
+                fsid, _ = find_frontier(wm, sid, home_sid, skip=unreachable)
+            if fsid is None:
+                goto_home(wm, home_sid); continue
+            goto_home(wm, home_sid)
+            navp = wm.bfs_path(home_sid, fsid) or []
+            for (nx, ny) in navp:
+                bgclick(nx, ny); time.sleep(1.2)
+            cur, _, _ = wm.observe()
+            if cur != fsid:
+                unreachable.add(fsid)
+            continue
         if (step + 1) % home_every == 0:
             goto_home(wm, home_sid)
         if (step + 1) % 10 == 0:
