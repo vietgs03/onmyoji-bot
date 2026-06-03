@@ -98,13 +98,17 @@ NODES: dict[str, dict] = {
     # tab ke ben (cung co Apprentices) -> phan biet bang nut dac trung friends.
     "friends":   {"identify": ["Add Friend", "Guild Invite", "Recommended"],
                   "parent": "HOME"},
-    "shop":      {"identify": ["Garment", "Mall", "Stellar Omen"], "parent": "HOME"},
+    "shop":      {"identify": ["Garment", "Mall", "Stellar Omen", "Consignment", "General"],
+                  "parent": "HOME"},
     # --- man tien ich / su kien (duoi HOME) ---
-    # Event: banner su kien (Version Event, Memory Scroll...). Nut Event goc phai HOME.
-    "event":     {"identify": ["Version Event", "Memory Scroll", "Gilded Echoes"],
+    # Event: banner su kien. 16 anh that = NHIEU sub-man (Event/Overview/Mileage/...)
+    # -> identify rong de phu cac tab (Overview/Mileage/Benefits/Record tu OCR that).
+    "event":     {"identify": ["Version Event", "Memory Scroll", "Gilded Echoes",
+                               "Overview", "Mileage", "Benefits", "Record"],
                   "parent": "HOME"},
     # Settings: bang cai dat (Audio/Music/SFX/Nameplate). Mo tu gear goc HOME.
-    "settings":  {"identify": ["Settings", "Audio", "Nameplate"], "parent": "HOME"},
+    "settings":  {"identify": ["Settings", "Audio", "Nameplate", "Notif", "Music"],
+                  "parent": "HOME"},
     # Guild: san guild (Guild Grounds, decorations). Nut Guild day HOME.
     "guild":     {"identify": ["Guild Grounds", "Guild Hall"], "parent": "HOME"},
     # Shrine Pass: battle pass (Mystic Scroll, Knowledge). Vao tu banner.
@@ -148,7 +152,8 @@ NODES: dict[str, dict] = {
 #   dismiss   : controls.find_dismiss (back/X/Cancel).
 # ======================================================================
 OVERLAYS: dict[str, dict] = {
-    "loading":   {"identify": ["Tap to"], "kind": "transient", "resolve": "wait"},
+    "loading":   {"identify": ["Tap to"], "detector": "loading",
+                  "kind": "transient", "resolve": "wait"},
     "animation": {"identify": ["Skip"],   "kind": "transient", "resolve": "skip"},
     # popup che man -> dismiss ve man duoi
     "char_showcase":  {"identify": ["Showcase", "Promote", "Liking"],
@@ -238,10 +243,19 @@ class ScreenGraph:
     # OVERLAY: trang thai tam/popup che man. Phat hien + xu ly rieng NODES.
     # ------------------------------------------------------------------
     def detect_overlay(self, reader=None) -> tuple[Optional[str], float]:
-        """Tra (ten overlay, conf) neu man dang bi overlay/popup che, else (None,0)."""
+        """Tra (ten overlay, conf) neu man dang bi overlay/popup che, else (None,0).
+        Mot so overlay (loading) KHONG co text dac trung -> dung detector rieng
+        (dhash) khai bao qua field 'detector' thay vi OCR keyword."""
         r = reader if reader is not None else (self.a.read() if self.a else None)
         if r is None:
             return None, 0.0
+        # 1) detector dac biet (vd loading qua dhash) - uu tien, chac hon OCR.
+        if self.a is not None:
+            for name, d in OVERLAYS.items():
+                det = d.get("detector")
+                if det == "loading" and self.a.is_loading_screen(r.img):
+                    return name, 1.0
+        # 2) OCR keyword nhu binh thuong.
         return self._match(r, OVERLAYS)
 
     def resolve_overlay(self, name: str) -> None:
