@@ -97,9 +97,15 @@ class Agent:
         return ScreenReader(img, min_conf=min_conf)
 
     def wait_stable(self, max_wait=12.0, poll=0.6, min_buttons=2, settle=1):
-        """Doi man dung de DOC: het loading toi + co du button conf cao.
+        """Doi man dung de DOC: het loading (TOI hoac ARTWORK sang) + co du button.
         Tra ngay khi on dinh 'settle' lan (mac dinh 1 = lan dau du dieu kien).
-        Khong cho 'dung yen tuyet doi' (HOME co timer/badge dong) -> tranh treo."""
+        Khong cho 'dung yen tuyet doi' (HOME co timer/badge dong) -> tranh treo.
+
+        XU LY 2 loai loading screen Onmyoji:
+          1. Loading TOI (den + chu 'Onmyoji')           -> is_loading() bat duoc.
+          2. Loading ARTWORK sang (tranh + watermark)      -> chi co watermark, KHONG
+             co button that. Ta bo qua watermark roi dem button con lai; neu < min
+             thi coi nhu CHUA on dinh (van dang chuyen canh)."""
         from screen_reader import ScreenReader
         t = 0.0
         ok_cnt = 0
@@ -109,7 +115,9 @@ class Agent:
             if not is_loading(img):
                 r = ScreenReader(img)
                 taps = r.tappables()
-                n_hi = sum(1 for _, _, _, c in taps if c >= 80)
+                # bo watermark 'onmyoji' + token loading khoi dem button that
+                n_hi = sum(1 for txt, _, _, c in taps
+                           if c >= 80 and not self._is_watermark(txt))
                 if n_hi >= min_buttons:
                     ok_cnt += 1
                     last = (img, r)
@@ -119,6 +127,38 @@ class Agent:
                     ok_cnt = 0
             time.sleep(poll); t += poll
         return last if last else (img, ScreenReader(img))
+
+    # watermark / token thuong xuat hien tren LOADING screen (khong phai button that).
+    # Loading Onmyoji = artwork + logo 'ONMYOJI' + 1 dong tip ('...Soul and receive a
+    # 16 Speed Jizo Statue', 'is challenging EXP Spirit'...). Sau khi loai het cac tu
+    # nay thi loading con 0 button -> phan biet voi man UI (>=10 button) rat ro.
+    _WATERMARK = {
+        "onmyoji", "onmyojil", "onmyg", "nm", "myc", "omyg", "ommyg", "mmyg",
+        "and", "is", "has", "the", "a", "to", "tapto", "join", "an", "of", "in",
+        "receivea", "receive", "soul", "speed", "defbonus", "souledge", "tengashi",
+        "obtained", "opened", "premium", "bag", "jizostatue", "jizo", "statue",
+        "challenging", "exp", "spirit", "othe", "others", "requested",
+        "rebateful", "uade", "joul", "ommyojl", "ail",
+    }
+
+    def _is_watermark(self, txt):
+        """True neu text la watermark/loading-noise, khong phai button dieu huong."""
+        import re
+        words = re.findall(r"[a-z]+", txt.lower())
+        if not words:
+            return True  # so/icon, khong tinh la button text
+        return all(w in self._WATERMARK for w in words)
+
+    def click(self, x, y, wait=2.5, settle_buttons=2):
+        """Click 1 toa do roi DOI cho qua loading + on dinh. Dung cho MOI click
+        co the chuyen canh (vd vao 1 page moi). Tra ScreenReader man moi.
+
+        Vi sao can: moi click co the trigger LOADING screen (chuyen canh). Neu doc
+        ngay se doc nham watermark. Ta click -> ngu ngan -> wait_stable (bo qua
+        loading ca 2 loai) -> tra man dich on dinh."""
+        self.c.bgclick(x, y)
+        time.sleep(wait)
+        return self.wait_stable(min_buttons=settle_buttons)[1]
 
     def tap_text(self, target, wait=2.0, fuzzy=0.8):
         """Tim text tren man (OCR) roi click. Tra (True/False, ScreenReader moi)."""

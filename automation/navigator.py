@@ -116,8 +116,8 @@ class Navigator:
             btn = self.graph[cur][dst]
         if btn and btn.get("center"):
             cx, cy = btn["center"]
-            self.a.c.bgclick(cx, cy)
-            time.sleep(1.8)
+            # click() doi qua loading + on dinh truoc khi doc (khong sleep cung)
+            self.a.click(cx, cy)
             return self.current() == dst
         return False
 
