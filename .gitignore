@@ -6,3 +6,4 @@ __pycache__/
 *.pyc
 ml/models/*.pkl
 knowledge/vectordb/*.pkl
+knowledge/screen_text.json.tokcache.json

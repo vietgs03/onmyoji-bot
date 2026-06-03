@@ -31,10 +31,15 @@ def main():
     affordance.evaluate()
     affordance.train()
 
-    print("\n[3/3] Screen classifier")
+    print("\n[3/4] Screen classifier (grid features)")
     import screen_clf
     screen_clf.evaluate()
     screen_clf.train()
+
+    print("\n[4/4] Screen classifier (OCR text fingerprint - manh nhat cho EN)")
+    import screen_ocr
+    screen_ocr.build()
+    screen_ocr.evaluate()
 
     print("\n" + "=" * 60)
     print("XONG. Models luu o ml/models/")

@@ -38,6 +38,7 @@ class Agent:
         self.c = Controller()
         self.wm = WorldModel().load()
         self._screen_clf = None
+        self._screen_ocr = None
         self._afford = None
         self._vdb = None
 
@@ -51,6 +52,17 @@ class Agent:
             except Exception:
                 self._screen_clf = False
         return self._screen_clf or None
+
+    @property
+    def screen_ocr(self):
+        if self._screen_ocr is None:
+            try:
+                import screen_ocr as _so
+                _so._model()  # nem neu chua build
+                self._screen_ocr = _so
+            except Exception:
+                self._screen_ocr = False
+        return self._screen_ocr or None
 
     @property
     def afford(self):
@@ -86,7 +98,15 @@ class Agent:
         lbl = self.wm.states.get(sid, {}).get("label")
         if lbl:
             return sid, lbl, "dhash"
-        # chua co nhan -> doan bang screen classifier
+        # chua co nhan -> uu tien OCR text (manh nhat cho client EN)
+        if self.screen_ocr:
+            try:
+                plbl, sc, _ = self.screen_ocr.predict(img)
+                if sc >= 0.15:  # nguong score chuan hoa
+                    return sid, plbl, f"ocr:{sc:.2f}"
+            except Exception:
+                pass
+        # cuoi cung: screen classifier theo grid feature
         if self.screen_clf:
             plbl, prob = self.screen_clf.predict(img)
             if prob >= 0.5:
