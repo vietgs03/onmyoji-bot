@@ -96,32 +96,27 @@ class Agent:
         img = img if img is not None else self.shot()
         return ScreenReader(img, min_conf=min_conf)
 
-    def wait_stable(self, max_wait=22.0, poll=1.0, min_buttons=2, settle=2):
-        """Doi man on dinh truoc khi doc. On dinh = 2 anh lien tiep gan giong
-        (dhash) + het loading toi + du element. Bo qua loading artwork (sang mau)."""
+    def wait_stable(self, max_wait=12.0, poll=0.6, min_buttons=2, settle=1):
+        """Doi man dung de DOC: het loading toi + co du button conf cao.
+        Tra ngay khi on dinh 'settle' lan (mac dinh 1 = lan dau du dieu kien).
+        Khong cho 'dung yen tuyet doi' (HOME co timer/badge dong) -> tranh treo."""
         from screen_reader import ScreenReader
-        from perception import hamming
         t = 0.0
-        prev_dh = None
-        stable_cnt = 0
+        ok_cnt = 0
         last = None
         while t < max_wait:
             img = self.shot()
-            dh = dhash(img)
-            # on dinh khung hinh?
-            if prev_dh is not None and dh is not None and hamming(dh, prev_dh) <= 2:
-                stable_cnt += 1
-            else:
-                stable_cnt = 0
-            prev_dh = dh
             if not is_loading(img):
                 r = ScreenReader(img)
                 taps = r.tappables()
-                # da on dinh (khung khong doi) VA du button -> xong
-                if stable_cnt >= settle and len(taps) >= min_buttons:
-                    return img, r
-                if len(taps) >= min_buttons:
+                n_hi = sum(1 for _, _, _, c in taps if c >= 80)
+                if n_hi >= min_buttons:
+                    ok_cnt += 1
                     last = (img, r)
+                    if ok_cnt >= settle:
+                        return img, r
+                else:
+                    ok_cnt = 0
             time.sleep(poll); t += poll
         return last if last else (img, ScreenReader(img))
 

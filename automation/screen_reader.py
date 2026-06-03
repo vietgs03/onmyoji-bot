@@ -33,7 +33,10 @@ from ocr import ocr_words  # noqa: E402
 # tu/cum hay xuat hien trong marquee (thong bao cuon tren cung) -> bo
 _MARQUEE_HINT = re.compile(
     r"summoned|challenging|triggered|requested|shard zone|add them|friend to|"
-    r"obtained|the rare|sigil", re.I)
+    r"obtained|the rare|sigil|has |is |a |to |them|rare ", re.I)
+
+# vung marquee tren cung (y < 130) - thong bao cuon, bo khi tim button
+_MARQUEE_Y = 130
 
 
 def _norm(s):
@@ -54,12 +57,17 @@ class ScreenReader:
         return out
 
     def _candidates(self, drop_marquee=True):
-        """Loc bo marquee dai (thong bao cuon) - khong phai button bam duoc."""
+        """Loc bo marquee (thong bao cuon tren cung) + text dai - khong phai button."""
         res = []
         for txt, (x, y, w, h), conf in self.words:
-            if drop_marquee and (_MARQUEE_HINT.search(txt) or len(txt) > 24):
-                continue
-            res.append((txt, x + w // 2, y + h // 2, conf))
+            cy = y + h // 2
+            if drop_marquee:
+                # marquee: o dai bang tren cung (y nho) HOAC text dai/co tu thong bao
+                if cy < _MARQUEE_Y and (w > 120 or _MARQUEE_HINT.search(txt)):
+                    continue
+                if len(txt) > 24 or _MARQUEE_HINT.search(txt):
+                    continue
+            res.append((txt, x + w // 2, cy, conf))
         return res
 
     # ---------- tim element ----------
