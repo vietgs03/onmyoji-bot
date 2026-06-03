@@ -29,7 +29,16 @@ Add-Type -AssemblyName System.Drawing
 
 $Title = "Onmyoji"
 function Get-Handle {
-  $c = Get-Process | Where-Object { $_.MainWindowTitle -match $Title -or $_.MainWindowTitle -match '陰陽師|阴阳师' } | Select-Object -First 1
+  # Game NeoX engine luon co ProcessName 'Client' + title 陰陽師/Onmyoji.
+  # Uu tien match process name de tranh nham browser tab "onmyoji-bot".
+  $c = Get-Process -Name Client -ErrorAction SilentlyContinue |
+       Where-Object { $_.MainWindowHandle -ne 0 } | Select-Object -First 1
+  if (-not $c) {
+    # fallback: title CJK (chi game co), KHONG match latin 'Onmyoji' (de tranh browser)
+    $c = Get-Process | Where-Object {
+           $_.MainWindowHandle -ne 0 -and $_.MainWindowTitle -match '陰陽師|阴阳师'
+         } | Select-Object -First 1
+  }
   if (-not $c) { return [IntPtr]::Zero }
   return $c.MainWindowHandle
 }
