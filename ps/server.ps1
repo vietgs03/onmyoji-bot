@@ -86,6 +86,28 @@ function Do-BgClick($hwnd, $x, $y) {
   [Native]::PostMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lparam) | Out-Null
 }
 
+function Do-SendDrag($hwnd, $x0, $y0, $x1, $y1, $steps) {
+  # Keo (scroll list) KHONG CHIEM CHUOT: SendMessage down tai (x0,y0) -> nhieu
+  # buoc move toi (x1,y1) -> up. Dung de scroll danh sach stage Soul.
+  $WM_MOUSEMOVE=0x0200; $WM_LBUTTONDOWN=0x0201; $WM_LBUTTONUP=0x0202
+  $MK_LBUTTON=[IntPtr]0x0001
+  if ($steps -lt 2) { $steps = 12 }
+  $lp0 = [IntPtr]((([int]$y0) -shl 16) -bor (([int]$x0) -band 0xFFFF))
+  [Native]::SendMessage($hwnd, $WM_MOUSEMOVE, [IntPtr]::Zero, $lp0) | Out-Null
+  [Native]::SendMessage($hwnd, $WM_LBUTTONDOWN, $MK_LBUTTON, $lp0) | Out-Null
+  Start-Sleep -Milliseconds 40
+  for ($i=1; $i -le $steps; $i++) {
+    $x = [int]($x0 + ($x1 - $x0) * $i / $steps)
+    $y = [int]($y0 + ($y1 - $y0) * $i / $steps)
+    $lp = [IntPtr]((($y) -shl 16) -bor (($x) -band 0xFFFF))
+    [Native]::SendMessage($hwnd, $WM_MOUSEMOVE, $MK_LBUTTON, $lp) | Out-Null
+    Start-Sleep -Milliseconds 18
+  }
+  Start-Sleep -Milliseconds 40
+  $lp1 = [IntPtr]((([int]$y1) -shl 16) -bor (([int]$x1) -band 0xFFFF))
+  [Native]::SendMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lp1) | Out-Null
+}
+
 function Do-SendClick($hwnd, $x, $y) {
   # Click KHONG CHIEM CHUOT: SendMessage thang vao hwnd game (NeoX/Win32Window).
   # Game bo qua PostMessage (async) nhung NHAN SendMessage (sync, cho game xu ly).
@@ -171,6 +193,11 @@ while ($true) {
       "politeclick" {
         Do-PoliteClick $hwnd ([int]$parts[1]) ([int]$parts[2])
         Write-Output ("OK politeclick {0} {1}" -f $parts[1],$parts[2])
+      }
+      "senddrag" {
+        $st = if ($parts.Count -ge 6) { [int]$parts[5] } else { 12 }
+        Do-SendDrag $hwnd ([int]$parts[1]) ([int]$parts[2]) ([int]$parts[3]) ([int]$parts[4]) $st
+        Write-Output ("OK senddrag {0} {1} -> {2} {3}" -f $parts[1],$parts[2],$parts[3],$parts[4])
       }
       "fgclick" {
         Do-FgClick $hwnd ([int]$parts[1]) ([int]$parts[2])

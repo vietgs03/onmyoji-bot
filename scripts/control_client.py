@@ -56,6 +56,10 @@ class Controller:
     def bgclick(self, x, y):
         return self._cmd(f"bgclick {int(x)} {int(y)}")
 
+    def bgdrag(self, x0, y0, x1, y1, steps=12):
+        """Keo/scroll KHONG chiem chuot (SendMessage down->moves->up)."""
+        return self._cmd(f"senddrag {int(x0)} {int(y0)} {int(x1)} {int(y1)} {int(steps)}")
+
     def info(self):
         return self._cmd("info")
 
