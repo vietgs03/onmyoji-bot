@@ -44,6 +44,23 @@ def main():
         for sid, st in states.items():
             if not st.get("label"):
                 print(f"UNLABELED {sid}  {st['screenshot']}")
+    elif cmd == "suggest":
+        # dung screen_ocr de tu de xuat nhan cho state chua label -> agent xac nhan
+        import cv2
+        sys.path.insert(0, os.path.join(ROOT, "ml"))
+        from screen_ocr import predict
+        SCREENS = os.path.join(ROOT, "exploration", "screens")
+        only = sys.argv[2] if len(sys.argv) > 2 else None  # 'all' = ke ca da label
+        for sid, st in states.items():
+            if not only and st.get("label"):
+                continue
+            p = os.path.join(SCREENS, f"{sid}.png")
+            img = cv2.imread(p)
+            if img is None:
+                continue
+            lbl, conf, _ = predict(img)
+            cur = st.get("label") or "?"
+            print(f"  {sid}  hien={cur:18s} de_xuat={lbl} ({conf:.2f})")
     elif cmd == "dump":
         for sid, st in states.items():
             print(f"\n=== {sid}  [{st.get('label') or '?'}] ===")
