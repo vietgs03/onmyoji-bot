@@ -39,3 +39,11 @@ File: `tasks/run.py` -> `farm_soul(agent, stage="Moan", zone="Orochi", times=N, 
 ## Commit gan nhat
 - 84040a0 feat(soul): task farm_soul + GHI SO LIEU
 - (fix) tang timeout 75->120s + retry 6 lan tim Challenge
+
+## Nghien cuu: native multi-battle (chua thu - tranh dung khi 100-run dang chay)
+Man Soul co cac nut tang toc native (toa do tu /tmp/after_soul.png):
+- 'x5' @ ~(650,635): danh 5 tran 1 lan bam (multi-battle native).
+- 'Auto' @ (707,639): tu dong lap.
+- 'Line-up' @ (595,640): doi team nhanh.
+- 'Challenge x12' @ (1063,580): x12 = cost 12 stamina/lan? (nhung do stamina_used 30 lan = 400 -> ~13.3/vong, gan dung 12-13).
+=> NEN thu dung 'x5' thay vong lap Python: it screenshot/OCR hon, nhanh hon. Verify counter +5 sau 1 lan.
