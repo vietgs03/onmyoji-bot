@@ -52,3 +52,19 @@ Giai ma tu **res.npk** (NetEase NXPK, key XOR=150 + flag&1 zlib, ref `zhouhang95
 Repo `trmzaiu/onmyoji_wiki` co TONG 6005 anh EN (ten file = ten EN chuan):
 shikigami icons(461)/images(458)/skills(933)/skins(713)/shards(270)/bios(61) + souls + onmyoji + effects(373).
 Co the keo them skill/skins neu can. Regen: `rebuild_assets.py wiki`.
+
+## 7. DATABASE day du (Supabase wiki - PHIEN 2, GIA TRI CAO NHAT cho phan tich)
+Wiki trmzaiu dung Supabase (REST API mo, anon key public read-only). Keo TOAN BO:
+| Table | Rows | Noi dung |
+|-------|------|----------|
+| Shikigami | 271 | skill structured (name/type/onibi/cooldown/levels/voice) + stats(ATK/HP/DEF/SPD/Crit min-max) + build(role/souls/substats) + evolution + skins + profile (en/cn/jp/vn) |
+| Soul | 64 | type + effects piece2/piece4 structured |
+| Onmyoji | 6 | nhan vat onmyoji |
+| Effect | 480 | buff/debuff/status definitions |
+| Tag | 33 | skill tags |
+| Evolution | 13 | evolution chains |
+| Illustration | 1156 | metadata tranh |
+
+-> `data/wiki_db/*.json` (TRACKED, 2.7MB). Nap vao KB (shikigami_db/soul_db) -> 817 docs.
+Cho phep xay chuc nang PHAN TICH: team builder, skill lookup, soul recommend, counter.
+Regen: `scripts/fetch_wiki_db.py` (URL+anon key trong script).

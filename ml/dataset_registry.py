@@ -44,6 +44,8 @@ SOURCES = [
      "kind": "image", "desc": "461 shikigami icon EN (+65 soul +38 stats +12 onmyoji +6 rarity)", "regen": "rebuild_assets.py wiki"},
     {"name": "qidu_templates", "path": "data/external/qidu_templates", "for": ["augment button recog"],
      "kind": "image", "desc": "44 button template (CN) - augment (vi tri/icon/mau giong, chu khac)", "regen": "rebuild_assets.py qidu"},
+    {"name": "wiki_db", "path": "data/wiki_db", "for": ["KB analysis (team/skill/counter)"],
+     "kind": "json", "desc": "271 shikigami (skill/stat/build) + 64 soul + 480 effect (Supabase, da ngon ngu en/vn)", "regen": "fetch_wiki_db.py"},
 ]
 
 MIN_PER_CLASS = 5  # nguong toi thieu mau / lop de train tin cay

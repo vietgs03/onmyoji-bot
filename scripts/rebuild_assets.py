@@ -105,12 +105,17 @@ def step_qidu():
     print(f"  qidu_templates: {n} files")
 
 
+def step_wiki_db():
+    """Keo DB Supabase (271 shikigami/64 soul/480 effect ...) - data phan tich."""
+    _run([PY, "scripts/fetch_wiki_db.py"])
+
+
 def step_oas():
     _run([PY, "scripts/extract_oas_tasks.py"])
 
 
 STEPS = {"ui": step_ui, "sprites": step_sprites, "assets_en": step_assets_en,
-         "fandom": step_fandom, "wiki": step_wiki, "qidu": step_qidu, "oas": step_oas}
+         "fandom": step_fandom, "wiki": step_wiki, "qidu": step_qidu, "wiki_db": step_wiki_db, "oas": step_oas}
 
 
 def main():
