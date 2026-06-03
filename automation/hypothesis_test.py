@@ -85,66 +85,106 @@ def _currency_saliency(img):
     return edge * ramp
 
 
+# 3 loai currency tren top-bar HOME (xac nhan boi user, KHONG doan):
+#   gold(vang)=14.62M | jade(hong ngoc)=32 | shushi=13.4K   (Sjade/ngoc tim o SHOP, khong o HOME)
+# Moi currency = mot CON SO o thanh tren (y<70). Ta dinh vi bang OCR THAT (vi tri so)
+# roi lay ICON ngay ben trai so -> doc MAU de phan biet -> mark dung tung loai.
+CUR_ORDER = ["gold", "jade", "shushi"]   # trai -> phai tren top-bar
+CUR_VI = {"gold": "VANG (gold)", "jade": "HONG NGOC (jade)", "shushi": "SHUSHI"}
+CUR_BGR = {"gold": (0, 215, 255), "jade": (180, 105, 255), "shushi": (60, 180, 75)}
+
+
+def _find_currencies(img):
+    """Dinh vi 3 currency tren top-bar HOME bang OCR THAT (khong doan toa do).
+    Tra list dict {name, num_box, value, icon_center, hue}. Sap trai->phai."""
+    sys.path.insert(0, os.path.join(ROOT, "ml"))
+    from ocr import ocr_words
+    words = ocr_words(img, min_conf=40)
+    # con so currency: nam o thanh tren (y<70), la chuoi co chu so (vd 14.62M / 32 / 13.4K)
+    nums = []
+    for t, (x, y, w, h), cf in words:
+        if y >= 70:
+            continue
+        s = t.replace(",", "").replace(".", "")
+        if any(ch.isdigit() for ch in t) and not s.isalpha() and len(t) <= 8:
+            # bo gio/ngay (vd 'Tue.13:09') va toa do nhieu dau ':'
+            if ":" in t or t.count("d") and t[:-1].isdigit():
+                continue
+            nums.append((x, y, w, h, t))
+    nums.sort(key=lambda z: z[0])           # trai -> phai
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    out = []
+    for (x, y, w, h, t) in nums[:3]:         # 3 currency dau tien
+        # icon nam NGAY BEN TRAI con so; n4 so ngan (vd '32') thi icon van ~24px cao.
+        iw = max(26, h)
+        ix1 = x - 3
+        ix0 = max(0, ix1 - iw)
+        sub = hsv[max(0, y-6):y+h+6, ix0:ix1]
+        m = (sub[:, :, 1] > 50) & (sub[:, :, 2] > 60)
+        hmode = -1
+        if m.sum() >= 3:
+            hu = sub[:, :, 0][m].astype(int)
+            hmode = int(np.bincount(hu, minlength=180).argmax())
+        out.append({"value": t, "num_box": (x, y, w, h),
+                    "icon_center": ((ix0+ix1)//2, y+h//2), "hue": hmode})
+    return out
+
+
 def hyp_gold():
-    print("=== TANG 2: TIM 'GIA TRI VANG' TRONG ANH (KHONG OCR, KHONG label) ===\n")
+    print("=== TANG 2: DINH VI 3 CURRENCY tren HOME (gold/jade/shushi) ===\n")
     img, st = _load_home()
     if img is None:
         print("khong co anh HOME"); return
     H, W = img.shape[:2]
-    print(f"anh HOME: ma tran {W}x{H} pixel (~{W*H:,} o). "
-          f"Tim vung currency MA KHONG OCR.\n")
+    print(f"anh HOME: ma tran {W}x{H} pixel. Top-bar co 3 currency (trai->phai):")
+    print("  gold(vang)=14.62M | jade(hong ngoc)=32 | shushi=13.4K  "
+          "[Sjade/ngoc tim o SHOP, KHONG o HOME]\n")
 
-    sal = _currency_saliency(img)
-    # luoi probe GxG: agent 'nhin' tam 1 o luoi moi lan (mo phong attention/foveal).
-    G = 24
-    cell_h, cell_w = H // G, W // G
-    scores = np.zeros((G, G), np.float32)
-    for r in range(G):
-        for c in range(G):
-            blk = sal[r*cell_h:(r+1)*cell_h, c*cell_w:(c+1)*cell_w]
-            scores[r, c] = blk.mean()
+    cur = _find_currencies(img)
+    if len(cur) < 3:
+        print(f"  ! chi dinh vi duoc {len(cur)}/3 con so o top-bar"); 
+    # gan ten theo THU TU trai->phai (da xac nhan boi user)
+    for i, c in enumerate(cur[:3]):
+        c["name"] = CUR_ORDER[i]
 
-    # --- chien luoc 1: QUET TUAN TU (raster) - baseline ngok ---
-    order_raster = [(r, c) for r in range(G) for c in range(G)]
-    # --- chien luoc 2: GREEDY theo saliency (nhin cho 'sang' nhat truoc) ---
-    order_greedy = sorted(order_raster, key=lambda rc: -scores[rc[0], rc[1]])
+    print("ket qua dinh vi (OCR that, KHONG doan toa do):")
+    for c in cur[:3]:
+        nm = c["name"]; bx = c["num_box"]; ic = c["icon_center"]
+        print(f"  {CUR_VI[nm]:20} value={c['value']:>8}  so@({bx[0]},{bx[1]})  "
+              f"icon@{ic} hue={c['hue']}")
+    print()
 
-    # nguong 'tim thay' = o nam trong top-3 saliency that (gia tri vang that).
-    truth = set(sorted(order_raster, key=lambda rc: -scores[rc[0], rc[1]])[:3])
+    # --- phan biet bang MAU icon (hue) - de verify 3 currency KHAC nhau ---
+    print("phan biet bang MAU icon (hue 0-180, -1=khong ro):")
+    for c in cur[:3]:
+        h = c["hue"]
+        col = ("?" if h < 0 else "DO/HONG" if (h < 13 or h > 165) else "CAM/VANG"
+               if h < 40 else "XANH-LA" if h < 85 else "XANH-DUONG" if h < 125
+               else "TIM")
+        print(f"  {c['name']:7} hue={h:3d} -> {col}")
+    print()
 
-    def probes_until_hit(order):
-        for i, rc in enumerate(order, 1):
-            if rc in truth:
-                return i
-        return len(order)
-
-    p_raster = probes_until_hit(order_raster)
-    p_greedy = probes_until_hit(order_greedy)
-    print(f"luoi probe {G}x{G} = {G*G} o (moi o = 1 lan 'nhin', KHONG OCR ca anh):")
-    print(f"  quet tuan tu (raster):     {p_raster:4d} lan probe moi cham vung vang")
-    print(f"  greedy theo saliency:      {p_greedy:4d} lan probe (nhin cho sang truoc)")
-    print(f"  => model co 'attention' (saliency) tim ra trong {p_greedy} lan thay vi "
-          f"{p_raster} -> nhanh {p_raster/max(p_greedy,1):.0f}x, KHONG can OCR/label.\n")
-
-    # GIA THUYET cho HOME->town (tang 1) trong khong gian anh (tang 2):
-    print("GIA THUYET ket hop: 'muon toi town' -> tang 1 cho biet click nut Town.")
-    print("  Nut Town o anh la 1 VUNG pixel; neu chua label, model dung saliency +")
-    print("  template-match de dinh vi -> 1 lan dinh vi thay vi quet ca 1M pixel.")
-
-    # --- RENDER: ban do saliency + thu tu probe greedy ---
-    heat = cv2.applyColorMap(
-        cv2.normalize(sal, None, 0, 255, cv2.NORM_MINMAX).astype(np.uint8),
-        cv2.COLORMAP_JET)
-    vis = cv2.addWeighted(img, 0.5, heat, 0.5, 0)
-    # danh dau top-3 vung vang
-    for rank, (r, c) in enumerate(sorted(order_raster, key=lambda rc: -scores[rc[0], rc[1]])[:3], 1):
-        x, y = c*cell_w, r*cell_h
-        cv2.rectangle(vis, (x, y), (x+cell_w, y+cell_h), (0, 255, 255), 3)
-        cv2.putText(vis, f"#{rank}", (x+3, y+22), cv2.FONT_HERSHEY_SIMPLEX,
-                    0.7, (0, 255, 255), 2)
-    out = os.path.join(OUT, "gold_saliency.png")
+    # --- RENDER: mark DUNG tung currency rieng ---
+    vis = img.copy()
+    for c in cur[:3]:
+        nm = c["name"]; col = CUR_BGR[nm]
+        x, y, w, h = c["num_box"]; ic = c["icon_center"]
+        # khoanh con so
+        cv2.rectangle(vis, (x-2, y-2), (x+w+2, y+h+2), col, 2)
+        # khoanh icon
+        cv2.circle(vis, ic, max(14, h//2+2), col, 2)
+        # nhan ten currency (phia duoi)
+        cv2.putText(vis, f"{nm}={c['value']}", (min(ic[0]-30, x-30), y+h+22),
+                    cv2.FONT_HERSHEY_SIMPLEX, 0.55, col, 2, cv2.LINE_AA)
+    out = os.path.join(OUT, "currencies_home.png")
     cv2.imwrite(out, vis)
-    print(f"  render: {out} (heatmap currency + top-3 vung vang khoanh vang)")
+    # ban crop top-bar phong to de doi chieu
+    bar = img[34:80, 430:940]
+    cv2.imwrite(os.path.join(OUT, "currencies_topbar_zoom.png"),
+                cv2.resize(bar, None, fx=3, fy=3, interpolation=cv2.INTER_NEAREST))
+    print(f"  render: {out} (mark RIENG tung currency: "
+          f"gold=vang, jade=tim-hong, shushi=xanh)")
+    print(f"  render: {os.path.join(OUT,'currencies_topbar_zoom.png')} (top-bar phong to)")
 
 
 def main():
