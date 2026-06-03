@@ -50,6 +50,9 @@ class KB:
         self.souls = _load(os.path.join(FANDOM, "souls_parsed.json"), [])
         self.modes = _load(os.path.join(FANDOM, "game_modes.json"), {})
         self.core = _load(os.path.join(FANDOM, "core_pages.json"), {})
+        self.skills = _load(os.path.join(FANDOM, "shikigami_skills.json"), {})
+        self.battle = _load(os.path.join(FANDOM, "battle_mechanics.json"), {})
+        self.progression = _load(os.path.join(FANDOM, "progression_guide.json"), {})
         self.world = _load(os.path.join(EXP, "world.json"), {"states": {}, "edges": []})
         # index nhanh shikigami_full theo ten
         self._sfull = {s.get("name", "").lower(): s for s in self.shikigami_full}
@@ -73,6 +76,14 @@ class KB:
         return [s for s in self.souls
                 if ql in (s.get("name_en") or "").lower()
                 or ql in (s.get("name_cn") or "").lower()]
+
+    def skill(self, shiki_name):
+        """Tra skill cua 1 shikigami (khop ten EN gan dung)."""
+        ql = shiki_name.lower()
+        for name, info in self.skills.items():
+            if ql in name.lower():
+                return {"name": name, **info}
+        return None
 
     def soul_by_type(self, t):
         tl = t.lower()
@@ -100,11 +111,16 @@ class KB:
         for s in self.shikigami_list:
             f = self._sfull.get((s.get("name_en") or "").lower(), {})
             title = s.get("name_en") or s.get("name_gl") or f"shiki-{s.get('id')}"
+            sk = self.skills.get(title, {})
+            skill_txt = ""
+            if sk.get("skills"):
+                skill_txt = " Skills: " + "; ".join(
+                    f"{k['name']} - {k.get('desc','')[:120]}" for k in sk["skills"][:4])
             text = (f"Shikigami {title} (CN {s.get('name_cn')}, JP {s.get('name_jp')}), "
                     f"rarity {s.get('rarity')}. CV {f.get('cv','?')}. "
-                    f"{'Co phien ban SP.' if f.get('has_sp') else ''}")
+                    f"{'Co phien ban SP.' if f.get('has_sp') else ''}{skill_txt}")
             docs.append({"id": f"shiki:{s.get('id')}", "type": "shikigami",
-                         "title": title, "text": text.strip(),
+                         "title": title, "text": text.strip()[:1500],
                          "meta": {"rarity": s.get("rarity"), "name_cn": s.get("name_cn")}})
         # 2) souls
         for s in self.souls:
@@ -125,6 +141,20 @@ class KB:
                 docs.append({"id": f"core:{name}", "type": "core",
                              "title": name, "text": f"{name}. {_clean(body)}",
                              "meta": {}})
+        # 4b) battle mechanics (Formulae/Move Bar/Damage/Skill Effects/...)
+        if isinstance(self.battle, dict):
+            for name, body in self.battle.items():
+                txt = body if isinstance(body, str) else str(body)
+                docs.append({"id": f"battle:{name}", "type": "battle",
+                             "title": f"Battle: {name.lstrip('_')}",
+                             "text": _clean(txt, 1800), "meta": {}})
+        # 4c) progression / beginner guide / daily routine
+        if isinstance(self.progression, dict):
+            for name, body in self.progression.items():
+                txt = body if isinstance(body, str) else str(body)
+                docs.append({"id": f"prog:{name}", "type": "progression",
+                             "title": f"Guide: {name.lstrip('_')}",
+                             "text": _clean(txt, 1800), "meta": {}})
         # 5) UI screens (chuc nang game da map)
         seen = set()
         for sid, st in self.world["states"].items():
@@ -154,8 +184,12 @@ class KB:
         return {
             "shikigami": len(self.shikigami_list),
             "shikigami_full": len(self.shikigami_full),
+            "shikigami_with_skills": len(self.skills),
+            "total_skills": sum(len(v.get("skills", [])) for v in self.skills.values()),
             "souls": len(self.souls),
             "modes": len(self.modes),
+            "battle_pages": len(self.battle),
+            "progression_pages": len(self.progression),
             "screens_labeled": len({st.get("label") for st in self.world["states"].values()
                                     if st.get("label")}),
             "documents": len(self.documents()),
@@ -183,6 +217,14 @@ def main():
         for s in kb.soul(q)[:10]:
             print(f"#{s['no']} {s['name_en']} [{s['type']}]")
             print(f"   2: {s['combo2']}\n   4: {s['combo4']}")
+    elif cmd == "skill":
+        sk = kb.skill(q)
+        if sk:
+            print(f"=== {sk['name']} [{sk.get('rarity')}] ===")
+            for k in sk.get("skills", []):
+                print(f"  - {k['name']} ({k.get('type','?')}): {k.get('desc','')[:200]}")
+        else:
+            print("khong tim thay")
     elif cmd == "mode":
         for k, v in kb.mode(q).items():
             print(f"=== {k} ===\n{_clean(v, 400)}\n")
