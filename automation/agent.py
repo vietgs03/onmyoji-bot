@@ -202,6 +202,18 @@ class Agent:
                 Agent._ctrl = False
         return Agent._ctrl or None
 
+    _nav = None
+
+    @property
+    def nav(self):
+        """ScreenGraph - CONG DIEU HUONG CHINH (graph clean: where/goto/escape).
+        Dung thay cho Agent.goto/where cu (world-model dhash) o cac task moi.
+        Lazy-load + cache tren instance."""
+        if self._nav is None:
+            from screen_graph import ScreenGraph
+            self._nav = ScreenGraph(self)
+        return self._nav
+
     def back(self, wait=2.0, home=False):
         """Thoat man hien tai - dung find_dismiss (controls.py) tim CHINH XAC nut thoat:
           1. Icon back (mui ten) / close (X popup) bang TEMPLATE MATCH.

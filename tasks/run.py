@@ -22,14 +22,15 @@ from agent import Agent
 
 def daily_signin(agent: Agent):
     """Demo AN TOAN: ve HOME -> mo Event -> chup man (de nguoi/bot xem co nut Claim).
-    Chua tu bam Claim (can hoc them vi tri nut qua explorer/OCR truoc)."""
+    Chua tu bam Claim (can hoc them vi tri nut qua explorer/OCR truoc).
+    Dieu huong bang agent.nav (ScreenGraph clean: goto/where/escape)."""
     print("[task] daily_signin")
-    if not agent.goto("HOME"):
+    if not agent.nav.goto("HOME"):
         print("  ! khong ve duoc HOME"); return False
-    if not agent.goto("Event"):
+    if not agent.nav.goto("event"):
         print("  ! khong mo duoc Event"); return False
-    sid, lbl, src = agent.where()
-    print(f"  da o {lbl} (sid={sid}, {src}). Dung OCR tim nut Claim...")
+    node, conf = agent.nav.where()
+    print(f"  da o '{node}' (conf {conf:.2f}). Dung OCR tim nut Claim...")
     from ocr import find_text
     img = agent.shot()
     for word in ("Claim", "Sign", "Receive", "Get"):
