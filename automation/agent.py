@@ -190,34 +190,69 @@ class Agent:
         time.sleep(wait)
         return True, self.wait_stable()[1]
 
+    _ctrl = None
+
+    def controls(self):
+        """ControlFinder (template match nut back/close tu OAS). Lazy-load."""
+        if Agent._ctrl is None:
+            try:
+                from controls import ControlFinder
+                Agent._ctrl = ControlFinder()
+            except Exception:
+                Agent._ctrl = False
+        return Agent._ctrl or None
+
     def back(self, wait=2.0, home=False):
-        """Thoat man hien tai THONG MINH:
-          1. Neu co nut X (popup) -> bam X (find_close_button)
-          2. Nguoc lai bam mui ten back goc tren-trai. Vi tri back khac nhau
-             theo man (Town~90, Summon Room~45,48) -> thu tung vi tri.
-        home=True: bam lien tuc cho den khi ve HOME (xu ly man co nhieu lop/tab)."""
+        """Thoat man hien tai - dung TEMPLATE MATCH (controls.py) tim CHINH XAC nut:
+          1. Nut X dong popup (close) - uu tien (popup phai dong bang X, khong phai back).
+          2. Mui ten back goc tren-trai (yellow/blue/green - template match dung vi tri).
+          3. Fallback: find_close_button HSV + cac vi tri doan cu.
+        home=True: lap den khi ve HOME (xu ly man nhieu lop/tab nhu Summon Room).
+
+        Bai hoc: truoc day doan mu vi tri back -> ket Summon Room. Gio template match
+        cho back@(55,62) Summon, close@(917,115) Group Buying... score 0.95-0.99."""
         from perception import find_close_button, dhash, hamming
         from screen_reader import ScreenReader
-        positions = [(60, 90), (45, 48), (58, 55), (60, 72)]
-        for attempt in range(6 if home else 1):
+        cf = self.controls()
+        fallback_pos = [(60, 90), (45, 48), (58, 55), (60, 72)]
+        for _ in range(6 if home else 1):
             img = self.shot()
             r = ScreenReader(img)
             if home and r.has('Explore') and r.has('Summon'):
                 return r  # da ve HOME
-            cb = find_close_button(img)
-            if cb:
-                self.c.bgclick(cb[0], cb[1])
+
+            clicked = None
+            if cf:
+                # Tim ca close (X popup) va back (mui ten). back P=1.0 rat dang tin;
+                # close co the FP -> chi uu tien close khi score CAO (>=0.9, chac chan
+                # la X popup that). Nguoc lai uu tien back.
+                close = cf.find(img, kind='close')
+                back = cf.find(img, kind='back')
+                if close and close[2] >= 0.9:
+                    clicked = (close[0], close[1])
+                elif back:
+                    clicked = (back[0], back[1])
+                elif close:
+                    clicked = (close[0], close[1])
+            if clicked is None:
+                cb = find_close_button(img)
+                if cb:
+                    clicked = cb
+            if clicked is not None:
+                self.c.bgclick(clicked[0], clicked[1])
                 time.sleep(wait)
                 if not home:
                     return self.wait_stable()[1]
                 continue
+
+            # fallback cuoi: doan nhieu vi tri (truong hop template khong match)
             before = dhash(img)
-            for bx, by in positions:
+            for bx, by in fallback_pos:
                 self.c.bgclick(bx, by)
                 time.sleep(1.2)
                 after = dhash(self.shot())
                 if before is None or after is None or hamming(before, after) > 4:
-                    break  # man da doi -> back co tac dung
+                    break
             if not home:
                 time.sleep(max(0.0, wait - 1.2))
                 return self.wait_stable()[1]
