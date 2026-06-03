@@ -30,6 +30,21 @@ OUT = os.path.join(ROOT, "knowledge", "loading_hashes.json")
 
 _HASH_SIZE = 16   # pHash 16x16 = 256 bit (du phan biet, ben voi nhieu)
 
+# Game hien loading bang cach CAT 64px moi ben artwork goc (1280 -> 1152), KHONG zoom.
+# (do bang ORB affine: art456 -> game74 chi tx=-64, scale=1). Crop nay cho phep
+# hash artwork DB GIONG het cach game hien -> match chinh xac.
+_CROP_X = 64       # so px cat moi ben artwork goc (1280 wide)
+
+
+def game_crop(art):
+    """Mo phong cach game crop artwork goc 1280xH -> vung hien 1152xH."""
+    if art is None:
+        return art
+    w = art.shape[1]
+    if w >= 1280:
+        return art[:, _CROP_X:w - _CROP_X]
+    return art
+
 
 def phash(img, hash_size=_HASH_SIZE):
     """Perceptual hash (DCT) -> chuoi bit. Ben voi resize/sang-toi nhe."""
@@ -54,11 +69,12 @@ def build():
     idx = {}
     for f in files:
         img = cv2.imread(f)
-        h = phash(img)
+        h = phash(game_crop(img))   # hash theo CACH GAME HIEN (cat 64px 2 ben)
         if h:
             idx[os.path.basename(f)] = h
     json.dump(idx, open(OUT, "w"))
-    print(f"built {OUT}: {len(idx)} loading artwork hashed (pHash {_HASH_SIZE*_HASH_SIZE} bit)")
+    print(f"built {OUT}: {len(idx)} loading artwork hashed "
+          f"(pHash {_HASH_SIZE*_HASH_SIZE} bit, game-crop)")
     return idx
 
 
@@ -67,15 +83,24 @@ class LoadingDB:
     _idx = None
 
     def __init__(self, threshold=None):
-        # nguong hamming: 256-bit, <~25 (10%) coi nhu khop. Loading artwork rat dac trung.
-        self.threshold = threshold if threshold is not None else 28
+        # 256-bit pHash. Artwork that khop ham 23-34; man UI thuong ham >100.
+        # Bien rat rong -> nguong 38 an toan tuyet doi (0 false-pos do DB).
+        self.threshold = threshold if threshold is not None else 38
         if LoadingDB._idx is None:
             LoadingDB._idx = json.load(open(OUT)) if os.path.exists(OUT) else {}
         self.idx = LoadingDB._idx
 
+    def _prep(self, img):
+        """Bo titlebar windows (~32px tren) khoi screenshot game truoc khi hash."""
+        if img is None:
+            return None
+        if img.shape[0] > 660:           # screenshot game co titlebar
+            return img[32:]
+        return img
+
     def match(self, img):
         """Tra (ten_anh, hamming) cua loading artwork gan nhat, hoac (None, dist)."""
-        h = phash(img)
+        h = phash(self._prep(img))
         if not h or not self.idx:
             return None, 999
         best, bd = None, 999

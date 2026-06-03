@@ -96,6 +96,26 @@ class Agent:
         img = img if img is not None else self.shot()
         return ScreenReader(img, min_conf=min_conf)
 
+    _loading_db = None
+
+    def is_loading_screen(self, img):
+        """HOP NHAT 3 detector loading (OR):
+          1. is_loading() dark-ratio  -> boot/splash toi (vd man nui noi khoi dong).
+          2. LoadingDB pHash 260 artwork -> loading-tip artwork (shikigami), ham<45.
+          3. (wait_stable tu lo) it button that -> loading chuyen canh chung.
+        Tra True neu (1) hoac (2). (3) do wait_stable xu ly qua dem button."""
+        if is_loading(img):
+            return True
+        if Agent._loading_db is None:
+            try:
+                from loading_db import LoadingDB
+                Agent._loading_db = LoadingDB()
+            except Exception:
+                Agent._loading_db = False
+        if Agent._loading_db:
+            return Agent._loading_db.is_loading(img)
+        return False
+
     def wait_stable(self, max_wait=12.0, poll=0.6, min_buttons=2, settle=1):
         """Doi man dung de DOC: het loading (TOI hoac ARTWORK sang) + co du button.
         Tra ngay khi on dinh 'settle' lan (mac dinh 1 = lan dau du dieu kien).
@@ -112,7 +132,7 @@ class Agent:
         last = None
         while t < max_wait:
             img = self.shot()
-            if not is_loading(img):
+            if not self.is_loading_screen(img):
                 r = ScreenReader(img)
                 taps = r.tappables()
                 # bo watermark 'onmyoji' + token loading khoi dem button that

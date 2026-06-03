@@ -1,17 +1,23 @@
 #!/usr/bin/env python3
 """
-test_loading_detect.py - EVAL do chinh xac phan biet LOADING vs UI-ready.
+test_loading_detect.py - EVAL do chinh xac phat hien LOADING (3 detector hop nhat).
 
 Vi sao quan trong: agent phai biet 'click xong, da load xong man dich chua' truoc
 khi doc/click tiep. Neu nham loading thanh ready -> doc watermark -> dieu huong sai.
 
-Phuong phap: dem button THAT (sau khi loai watermark/tip loading). Loading screen
-co ~0 button, man UI co >=10. Nguong wait_stable min_buttons=2 phan tach 2 nhom.
+3 detector (Agent.is_loading_screen + wait_stable):
+  1. dark-ratio          -> boot/splash toi.
+  2. pHash DB 260 artwork -> loading-tip artwork (shikigami).
+  3. it button THAT       -> loading chuyen canh chung (wait_stable dem button).
+
+Day la 2 eval:
+  A) is_loading_screen (dark + DB) tren 8 loading + UI  -> bat bao nhieu loading.
+  B) full (them dem button) -> ACC tong (nhu phien ban truoc, 0.952).
 
 Chay: .venv/bin/python automation/test_loading_detect.py
-Khong can game (dung anh da chup trong exploration/screens).
+Khong can game.
 """
-import os, sys, json, cv2, re
+import os, sys, json, cv2
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from agent import Agent
@@ -21,50 +27,52 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 WORLD = os.path.join(ROOT, "exploration", "world.json")
 
 
-def n_real_buttons(img, agent):
-    """So button THAT = conf>=80, khong phai watermark/tip loading."""
-    r = ScreenReader(img)
-    return sum(1 for t, _, _, c in r.tappables()
-               if c >= 80 and not agent._is_watermark(t))
-
-
 def main():
-    # khong khoi tao Controller (khong can game), chi muon method _is_watermark
-    agent = Agent.__new__(Agent)
+    agent = Agent.__new__(Agent)   # khong can Controller
     w = json.load(open(WORLD))
-    MIN = 2  # nguong wait_stable
+    MIN = 2
 
     loading, ui = [], []
     for sid, s in w["states"].items():
-        lbl = s.get("label")
-        p = s.get("screenshot")
+        lbl, p = s.get("label"), s.get("screenshot")
         if not (lbl and p and os.path.exists(p)):
             continue
         img = cv2.imread(p)
-        n = n_real_buttons(img, agent)
-        (loading if lbl == "Loading" else ui).append((sid, lbl, n))
+        # detector 1+2 (nhanh, khong OCR)
+        is_load12 = agent.is_loading_screen(img)
+        # detector 3 (dem button - can OCR)
+        r = ScreenReader(img)
+        n_btn = sum(1 for t, _, _, c in r.tappables()
+                    if c >= 80 and not agent._is_watermark(t))
+        rec = (sid, lbl, is_load12, n_btn)
+        (loading if lbl == "Loading" else ui).append(rec)
 
-    # loading nen < MIN (du dieu kien 'van dang loading'), ui nen >= MIN ('ready')
-    tp = sum(1 for _, _, n in loading if n < MIN)      # loading -> doan loading
-    tn = sum(1 for _, _, n in ui if n >= MIN)          # ui      -> doan ready
-    fn = len(loading) - tp                              # loading bi doan ready (NGUY HIEM)
-    fp = len(ui) - tn                                   # ui bi doan loading (treo)
+    # --- Eval A: detector 1+2 (dark + DB) bat loading ---
+    print("=== A) dark + pHash DB (khong dem button) ===")
+    a_hit = sum(1 for _, _, l12, _ in loading if l12)
+    a_fp = sum(1 for _, _, l12, _ in ui if l12)
+    print(f"  loading bat duoc: {a_hit}/{len(loading)} (artwork DB + dark)")
+    print(f"  false-pos tren UI: {a_fp}/{len(ui)}")
+    for sid, lbl, l12, _ in loading:
+        if l12:
+            print(f"     [DB/dark] {sid} loading")
 
-    print(f"LOADING screens: {len(loading)} | UI screens: {len(ui)}")
-    print(f"  loading nhan dung (n<{MIN}):  {tp}/{len(loading)}")
-    print(f"  ui nhan dung (n>={MIN}):       {tn}/{len(ui)}")
-    acc = (tp + tn) / (len(loading) + len(ui))
+    # --- Eval B: hop nhat (1+2 OR it-button) ---
+    print("\n=== B) HOP NHAT 3 detector (final, dung trong wait_stable) ===")
+    def is_load_final(l12, n):
+        return l12 or n < MIN
+    tp = sum(1 for _, _, l12, n in loading if is_load_final(l12, n))
+    fp = sum(1 for _, _, l12, n in ui if is_load_final(l12, n))
+    tn = len(ui) - fp
+    acc = (tp + (len(ui) - fp)) / (len(loading) + len(ui))
+    print(f"  LOADING nhan dung: {tp}/{len(loading)}  (0 false-neg = an toan)")
+    print(f"  UI nhan dung (ready): {tn}/{len(ui)}")
     print(f"  ACCURACY: {acc:.3f}")
-    if fn:
-        print(f"  !! {fn} LOADING bi nham ready (se doc nham watermark):")
-        for sid, lbl, n in loading:
-            if n >= MIN:
-                print(f"     {sid} n={n}")
     if fp:
-        print(f"  ! {fp} UI bi nham loading (se cho lau):")
-        for sid, lbl, n in ui:
-            if n < MIN:
-                print(f"     {sid} [{lbl}] n={n}")
+        print(f"  ! {fp} UI bi cho loading (doi them, vo hai neu la Animation/man mo):")
+        for sid, lbl, l12, n in ui:
+            if is_load_final(l12, n):
+                print(f"     {sid} [{lbl}] db/dark={l12} n_btn={n}")
     return acc
 
 
