@@ -21,8 +21,10 @@ public class Native {
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int n);
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
+  [DllImport("user32.dll")] public static extern bool GetCursorPos(out POINT lpPoint);
   [DllImport("user32.dll")] public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, IntPtr dwExtraInfo);
   [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
+  [StructLayout(LayoutKind.Sequential)] public struct POINT { public int X, Y; }
 }
 "@
 Add-Type -AssemblyName System.Drawing
@@ -99,6 +101,28 @@ function Do-FgClick($hwnd, $x, $y) {
   [Native]::mouse_event($LEFTUP,0,0,0,[IntPtr]::Zero)
 }
 
+function Do-PoliteClick($hwnd, $x, $y) {
+  # Click 'lich su': LUU vi tri chuot cua user -> di chuot toi game -> bam ->
+  # TRA chuot ve cho cu NGAY. User chi thay chuot 'nhap nhay' 1 cai rat nhanh,
+  # khong mat vi tri/cong viec dang lam. Van can SetForegroundWindow (game
+  # DirectX bo qua PostMessage) nhung tra focus/chuot ngay sau.
+  $orig = New-Object Native+POINT
+  [Native]::GetCursorPos([ref]$orig) | Out-Null      # nho cho chuot user
+  $r = New-Object Native+RECT
+  [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
+  $sx = $r.Left + $x; $sy = $r.Top + $y
+  [Native]::SetForegroundWindow($hwnd) | Out-Null
+  Start-Sleep -Milliseconds 30
+  [Native]::SetCursorPos($sx, $sy) | Out-Null
+  Start-Sleep -Milliseconds 25
+  $LEFTDOWN=0x0002; $LEFTUP=0x0004
+  [Native]::mouse_event($LEFTDOWN,0,0,0,[IntPtr]::Zero)
+  Start-Sleep -Milliseconds 50
+  [Native]::mouse_event($LEFTUP,0,0,0,[IntPtr]::Zero)
+  Start-Sleep -Milliseconds 15
+  [Native]::SetCursorPos($orig.X, $orig.Y) | Out-Null   # TRA chuot ve cho user
+}
+
 $hwnd = Get-Handle
 Write-Output "OK ready"
 [Console]::Out.Flush()
@@ -123,8 +147,12 @@ while ($true) {
         Write-Output ("OK {0}x{1} pw={2}" -f $res[0],$res[1],$res[2])
       }
       "bgclick" {
-        Do-FgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Do-PoliteClick $hwnd ([int]$parts[1]) ([int]$parts[2])
         Write-Output ("OK click {0} {1}" -f $parts[1],$parts[2])
+      }
+      "politeclick" {
+        Do-PoliteClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Write-Output ("OK politeclick {0} {1}" -f $parts[1],$parts[2])
       }
       "fgclick" {
         Do-FgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
