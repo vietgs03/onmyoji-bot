@@ -64,6 +64,9 @@ NODES: dict[str, dict] = {
             "event":       {"text": ["Event"],      "center": [1078, 195]},
             "shop":        {"text": ["Shop"],       "center": [624, 625]},
             "guild":       {"text": ["Guild"],      "center": [525, 625]},
+            # gear goc tren trai -> Settings; nut goc duoi -> Cosmetics (toa do tu world.json).
+            "settings":    {"text": [],             "center": [59, 88]},
+            "cosmetics":   {"text": [],             "center": [309, 628]},
         },
     },
     "exploration": {
@@ -97,22 +100,26 @@ NODES: dict[str, dict] = {
     # friends: tab ban be (Add Friend / Guild Invite / Recommended). Mentor la
     # tab ke ben (cung co Apprentices) -> phan biet bang nut dac trung friends.
     "friends":   {"identify": ["Add Friend", "Guild Invite", "Recommended"],
-                  "parent": "HOME"},
+                  "parent": "HOME",
+                  # Mentor (Mentorship) mo tu trong man Friends -> forward edge.
+                  "exits": {"mentor": {"text": ["Mentorship"], "center": [928, 314]}}},
     "shop":      {"identify": ["Garment", "Mall", "Stellar Omen", "Consignment", "General"],
                   "parent": "HOME"},
     # --- man tien ich / su kien (duoi HOME) ---
     # Event: banner su kien. 16 anh that = NHIEU sub-man (Event/Overview/Mileage/...)
     # -> identify rong de phu cac tab (Overview/Mileage/Benefits/Record tu OCR that).
+    # Shrine Pass mo tu trong Event (banner goc duoi phai) -> forward edge.
     "event":     {"identify": ["Version Event", "Memory Scroll", "Gilded Echoes",
                                "Overview", "Mileage", "Benefits", "Record"],
-                  "parent": "HOME"},
+                  "parent": "HOME",
+                  "exits": {"shrine_pass": {"text": ["Shrine"], "center": [955, 601]}}},
     # Settings: bang cai dat (Audio/Music/SFX/Nameplate). Mo tu gear goc HOME.
     "settings":  {"identify": ["Settings", "Audio", "Nameplate", "Notif", "Music"],
                   "parent": "HOME"},
     # Guild: san guild (Guild Grounds, decorations). Nut Guild day HOME.
     "guild":     {"identify": ["Guild Grounds", "Guild Hall"], "parent": "HOME"},
     # Shrine Pass: battle pass (Mystic Scroll, Knowledge). Vao tu banner.
-    "shrine_pass": {"identify": ["Shrine Pass", "Mystic Scroll"], "parent": "HOME"},
+    "shrine_pass": {"identify": ["Shrine Pass", "Mystic Scroll"], "parent": "event"},
     # Cosmetics: skin/frame shop (Cosmetic Scene/Skin/Frame). Tranh nham Shop.
     "cosmetics": {"identify": ["Cosmetic", "Frame", "Ranking"],
                   "avoid": ["Garment"], "parent": "HOME"},
