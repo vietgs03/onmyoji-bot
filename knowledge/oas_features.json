@@ -1,0 +1,3157 @@
+[
+ {
+  "task": "AbyssShadows",
+  "name": "Abyss Shadows (业原火)",
+  "options": [
+   {
+    "field": "CombatTime_enable",
+    "title": null,
+    "desc": "开启智能伤害",
+    "default": "False"
+   },
+   {
+    "field": "boss_combat_time",
+    "title": null,
+    "desc": "以秒为单位设置首领战斗时间，请合理设置",
+    "default": "60"
+   },
+   {
+    "field": "general_combat_time",
+    "title": null,
+    "desc": "以秒为单位设置副将战斗时间，请合理设置",
+    "default": "60"
+   },
+   {
+    "field": "elite_combat_time",
+    "title": null,
+    "desc": "以秒为单位设置精英战斗时间，请合理设置",
+    "default": "60"
+   }
+  ],
+  "templates": 23,
+  "ocr_regions": 0,
+  "images": 24,
+  "script_methods": [
+   "name",
+   "__str__",
+   "name",
+   "__str__",
+   "run",
+   "fight_and_switch",
+   "switch_area",
+   "check_current_area",
+   "change_area",
+   "goto_main",
+   "goto_abyss_shadows",
+   "select_boss",
+   "find_enemy",
+   "run_boss_fight",
+   "run_general_fight",
+   "run_elite_fight",
+   "click_emeny_area",
+   "run_general_battle_back"
+  ]
+ },
+ {
+  "task": "ActivityShikigami",
+  "name": "Activity Shikigami (活动式神)",
+  "options": [
+   {
+    "field": "enable_switch_pass",
+    "title": null,
+    "desc": "是否切换门票爬塔御魂",
+    "default": "False"
+   },
+   {
+    "field": "pass_group_team",
+    "title": null,
+    "desc": "组1-7,队伍1-4 中间用英文,分隔",
+    "default": "'-1"
+   },
+   {
+    "field": "enable_switch_pass_by_name",
+    "title": null,
+    "desc": "是否通过ocr切换御魂",
+    "default": "False"
+   },
+   {
+    "field": "pass_group_team_name",
+    "title": null,
+    "desc": "组名,队伍名 中间用英文,分隔",
+    "default": "''"
+   },
+   {
+    "field": "enable_switch_ap",
+    "title": null,
+    "desc": "是否切换体力爬塔御魂",
+    "default": "False"
+   },
+   {
+    "field": "ap_group_team",
+    "title": null,
+    "desc": "组1-7,队伍1-4 中间用英文,分隔",
+    "default": "'-1"
+   },
+   {
+    "field": "enable_switch_ap_by_name",
+    "title": null,
+    "desc": "是否通过ocr切换御魂",
+    "default": "False"
+   },
+   {
+    "field": "ap_group_team_name",
+    "title": null,
+    "desc": "组名,队伍名 中间用英文,分隔",
+    "default": "''"
+   },
+   {
+    "field": "enable_switch_boss",
+    "title": null,
+    "desc": "是否切换boss爬塔御魂",
+    "default": "False"
+   },
+   {
+    "field": "boss_group_team",
+    "title": null,
+    "desc": "组1-7,队伍1-4 中间用英文,分隔",
+    "default": "'-1"
+   },
+   {
+    "field": "enable_switch_boss_by_name",
+    "title": null,
+    "desc": "是否通过ocr切换御魂",
+    "default": "False"
+   },
+   {
+    "field": "boss_group_team_name",
+    "title": null,
+    "desc": "组名,队伍名 中间用英文,分隔",
+    "default": "''"
+   },
+   {
+    "field": "enable_switch_ap100",
+    "title": null,
+    "desc": "是否切换100体爬塔御魂",
+    "default": "False"
+   },
+   {
+    "field": "ap100_group_team",
+    "title": null,
+    "desc": "组1-7,队伍1-4 中间用英文,分隔",
+    "default": "'-1"
+   },
+   {
+    "field": "enable_switch_ap100_by_name",
+    "title": null,
+    "desc": "是否通过ocr切换御魂",
+    "default": "False"
+   },
+   {
+    "field": "ap100_group_team_name",
+    "title": null,
+    "desc": "组名,队伍名 中间用英文,分隔",
+    "default": "''"
+   },
+   {
+    "field": "enable_pass_preset",
+    "title": null,
+    "desc": "是否切换门票爬塔预设, 仅数字切换御魂可用",
+    "default": "False"
+   },
+   {
+    "field": "enable_pass_green",
+    "title": null,
+    "desc": "是否开启门票爬塔绿标",
+    "default": "False"
+   },
+   {
+    "field": "pass_green_mark",
+    "title": null,
+    "desc": "门票爬塔绿标位置",
+    "default": "GreenMarkType.GREEN_LEFT1"
+   },
+   {
+    "field": "enable_pass_anti_detect",
+    "title": null,
+    "desc": "门票爬塔战斗过程是否随机点击或滑动",
+    "default": "False"
+   },
+   {
+    "field": "enable_ap_preset",
+    "title": null,
+    "desc": "是否切换体力爬塔预设, 仅数字切换御魂可用",
+    "default": "False"
+   },
+   {
+    "field": "enable_ap_green",
+    "title": null,
+    "desc": "是否开启体力爬塔绿标",
+    "default": "False"
+   },
+   {
+    "field": "ap_green_mark",
+    "title": null,
+    "desc": "体力爬塔绿标位置",
+    "default": "GreenMarkType.GREEN_LEFT1"
+   },
+   {
+    "field": "enable_ap_anti_detect",
+    "title": null,
+    "desc": "体力爬塔战斗过程是否随机点击或滑动",
+    "default": "False"
+   },
+   {
+    "field": "enable_boss_preset",
+    "title": null,
+    "desc": "是否切换boss爬塔预设, 仅数字切换御魂可用",
+    "default": "False"
+   },
+   {
+    "field": "enable_boss_green",
+    "title": null,
+    "desc": "是否开启boss爬塔绿标",
+    "default": "False"
+   },
+   {
+    "field": "boss_green_mark",
+    "title": null,
+    "desc": "boss爬塔绿标位置",
+    "default": "GreenMarkType.GREEN_LEFT1"
+   },
+   {
+    "field": "enable_boss_anti_detect",
+    "title": null,
+    "desc": "boss爬塔战斗过程是否随机点击或滑动",
+    "default": "False"
+   },
+   {
+    "field": "enable_ap100_preset",
+    "title": null,
+    "desc": "是否切换100体爬塔预设, 仅数字切换御魂可用",
+    "default": "False"
+   },
+   {
+    "field": "enable_ap100_green",
+    "title": null,
+    "desc": "是否开启100体爬塔绿标",
+    "default": "False"
+   },
+   {
+    "field": "ap100_green_mark",
+    "title": null,
+    "desc": "100体爬塔绿标位置",
+    "default": "GreenMarkType.GREEN_LEFT1"
+   },
+   {
+    "field": "enable_ap100_anti_detect",
+    "title": null,
+    "desc": "100体爬塔战斗过程是否随机点击或滑动",
+    "default": "False"
+   }
+  ],
+  "templates": 18,
+  "ocr_regions": 8,
+  "images": 27,
+  "script_methods": [
+   "conf",
+   "climb_type",
+   "count_map",
+   "put_status",
+   "get_count",
+   "get_limit",
+   "switch_next",
+   "run",
+   "_run_pass",
+   "_run_ap",
+   "_run_boss",
+   "_run_ap100",
+   "start_battle",
+   "battle_wait",
+   "switch_soul",
+   "switch_climb_mode_in_game",
+   "lock_team",
+   "check_tickets_enough",
+   "get_general_battle_conf",
+   "random_reward_click"
+  ]
+ },
+ {
+  "task": "AreaBoss",
+  "name": "Area Boss (地域鬼王)",
+  "options": [],
+  "templates": 22,
+  "ocr_regions": 6,
+  "images": 23,
+  "script_methods": [
+   "run",
+   "go_back",
+   "boss",
+   "boss_fight",
+   "start_fight",
+   "switch_to_level_60",
+   "get_difficulty",
+   "switch_difficulty",
+   "switch_to_floor_1",
+   "switch_to_floor_10",
+   "fight_reward_boss",
+   "get_hot_in_reward",
+   "get_num_challenge",
+   "get_bossName",
+   "open_boss_detail",
+   "is_group_ranked",
+   "open_filter",
+   "switch_to_collect",
+   "switch_to_famous",
+   "switch_to_reward",
+   "check_common_chars"
+  ]
+ },
+ {
+  "task": "AutoCheckinBigGod",
+  "name": "Auto check-in (神社签到)",
+  "options": [
+   {
+    "field": "usage",
+    "title": "Usage",
+    "desc": "checkin_big_god_usage_help",
+    "default": "''"
+   }
+  ],
+  "templates": 0,
+  "ocr_regions": 0,
+  "images": 0,
+  "script_methods": [
+   "run",
+   "_cleanup",
+   "_adb_cmd",
+   "_adb_shell",
+   "_get_app_pid",
+   "_launch_app",
+   "_check_adb_connection",
+   "_is_frida_server_running",
+   "_is_frida_server_installed",
+   "_ensure_frida_local",
+   "_push_frida_server",
+   "_start_frida_server",
+   "_ensure_frida_server_running",
+   "_get_frida_exe",
+   "_ensure_frida_repl",
+   "_ping_frida_repl",
+   "_run_frida_script",
+   "_run_frida_script_oneshot",
+   "_try_extract_token",
+   "_extract_token",
+   "_frida_sign",
+   "_auto_login",
+   "_get_urs_credentials",
+   "_get_app_version",
+   "_get_device_id",
+   "_login_by_urs_token",
+   "_get_role_info",
+   "_is_token_expired",
+   "_relogin",
+   "_generate_nonce"
+  ]
+ },
+ {
+  "task": "BondlingFairyland",
+  "name": "Bonding Fairyland (契灵之境)",
+  "options": [
+   {
+    "field": "user_status",
+    "title": null,
+    "desc": "user_status_help",
+    "default": "UserStatus.ALONE"
+   },
+   {
+    "field": "bondling_mode",
+    "title": null,
+    "desc": "只刷探查:自动切换契灵对应地域\\n低级式盘:自动切换非连续,非羁绊\\n中级式盘:自动切换连续,羁绊",
+    "default": "BondlingMode.MODE1"
+   },
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "30"
+   },
+   {
+    "field": "bondling_stone_class",
+    "title": null,
+    "desc": "设置需要刷的契灵",
+    "default": "BondlingClass.TOMB_GUARD"
+   },
+   {
+    "field": "bondling_stone_enable",
+    "title": null,
+    "desc": "没有契灵了是否使用鸣契石购买契灵",
+    "default": "False"
+   },
+   {
+    "field": "check_enable",
+    "title": null,
+    "desc": "是否检查契忆数量",
+    "default": "True"
+   },
+   {
+    "field": "search_switch",
+    "title": null,
+    "desc": "设置探查御魂装配分组",
+    "default": "''"
+   },
+   {
+    "field": "tomb_guard_switch",
+    "title": null,
+    "desc": "tomb_guard_switch_help",
+    "default": "''"
+   },
+   {
+    "field": "snowball_switch",
+    "title": null,
+    "desc": "snowball_switch_help",
+    "default": "''"
+   },
+   {
+    "field": "little_kuro_switch",
+    "title": null,
+    "desc": "little_kuro_switch_help",
+    "default": "''"
+   },
+   {
+    "field": "azure_basan_switch",
+    "title": null,
+    "desc": "azure_basan_switch_help",
+    "default": "''"
+   },
+   {
+    "field": "bondling_2_1_switch",
+    "title": null,
+    "desc": "设置针女御魂装配分组",
+    "default": "''"
+   },
+   {
+    "field": "bondling_2_2_switch",
+    "title": null,
+    "desc": "设置薙魂御魂装配分组",
+    "default": "''"
+   },
+   {
+    "field": "bondling_2_3_switch",
+    "title": null,
+    "desc": "设置月魔兔御魂装配分组",
+    "default": "''"
+   },
+   {
+    "field": "bondling_2_4_switch",
+    "title": null,
+    "desc": "设置狐火御魂装配分组",
+    "default": "''"
+   }
+  ],
+  "templates": 44,
+  "ocr_regions": 9,
+  "images": 57,
+  "script_methods": [
+   "run",
+   "run_leader",
+   "run_member",
+   "switch_ball",
+   "run_stone",
+   "run_search",
+   "run_catch",
+   "is_room_dead",
+   "ball_click",
+   "goto_ball_area",
+   "capture_setting",
+   "enter_shikigami_records",
+   "lock_team",
+   "get_bondling_class",
+   "limit_time",
+   "run_alone",
+   "wait_battle",
+   "exit_team",
+   "in_catch_ui",
+   "in_search_ui",
+   "click_search",
+   "check_then_accept",
+   "general_battle_config",
+   "switch_soul"
+  ]
+ },
+ {
+  "task": "CollectiveMissions",
+  "name": "Collective/Guild missions",
+  "options": [
+   {
+    "field": "missions_rule",
+    "title": null,
+    "desc": "missions_rule_help",
+    "default": "'契灵 > 觉醒三 > 觉醒二 > 觉醒一 > 御灵三 > 御灵二 > 御灵一 > 御魂二 > 御魂一 > 远远不够'"
+   },
+   {
+    "field": "setup_when_bondling",
+    "title": null,
+    "desc": "setup_when_bondling_help",
+    "default": "True"
+   },
+   {
+    "field": "missions_select",
+    "title": null,
+    "desc": "指定的任务",
+    "default": "'觉醒三'"
+   }
+  ],
+  "templates": 12,
+  "ocr_regions": 13,
+  "images": 14,
+  "script_methods": [
+   "rule",
+   "run",
+   "detect_one",
+   "detect_best",
+   "_bondling_fairyland",
+   "_donate",
+   "select_mission",
+   "_soul",
+   "_feed"
+  ]
+ },
+ {
+  "task": "DailyTrifles",
+  "name": "Daily tasks (日常)",
+  "options": [
+   {
+    "field": "one_summon",
+    "title": "One Summon",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "summon_type",
+    "title": null,
+    "desc": "召唤类型",
+    "default": "SummonType.default"
+   },
+   {
+    "field": "draw_mystery_pattern",
+    "title": "Draw Mystery Pattern",
+    "desc": "是否绘制神秘图案",
+    "default": "False"
+   },
+   {
+    "field": "guild_wish",
+    "title": "Guild Wish",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "friend_love",
+    "title": "Friend Love",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "luck_msg",
+    "title": "Luck Msg",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "store_sign",
+    "title": "Store Sign",
+    "desc": "store_sign_help",
+    "default": "False"
+   },
+   {
+    "field": "buy_sushi_count",
+    "title": "Buy Sushi Count",
+    "desc": null,
+    "default": "-1"
+   }
+  ],
+  "templates": 16,
+  "ocr_regions": 8,
+  "images": 16,
+  "script_methods": [
+   "run",
+   "run_one_summon",
+   "check_time",
+   "summon_recall",
+   "run_guild_wish",
+   "run_luck_msg",
+   "run_friend_love",
+   "run_store",
+   "run_store_sign",
+   "run_buy_sushi"
+  ]
+ },
+ {
+  "task": "Delegation",
+  "name": "Delegation (式神委派)",
+  "options": [
+   {
+    "field": "miyoshino_painting",
+    "title": null,
+    "desc": "miyoshino_painting_help",
+    "default": "False"
+   },
+   {
+    "field": "bird_feather",
+    "title": null,
+    "desc": "bird_feather_help",
+    "default": "False"
+   },
+   {
+    "field": "find_earring",
+    "title": null,
+    "desc": "find_earring_help",
+    "default": "False"
+   },
+   {
+    "field": "cat_boss",
+    "title": null,
+    "desc": "cat_boss_help",
+    "default": "False"
+   },
+   {
+    "field": "miyoshino",
+    "title": null,
+    "desc": "miyoshino_help",
+    "default": "False"
+   },
+   {
+    "field": "strange_trace",
+    "title": null,
+    "desc": "strange_trace_help",
+    "default": "False"
+   }
+  ],
+  "templates": 17,
+  "ocr_regions": 2,
+  "images": 17,
+  "script_methods": [
+   "run",
+   "delegate_one",
+   "check_reward"
+  ]
+ },
+ {
+  "task": "DemonEncounter",
+  "name": "Demon Encounter (鬼王)",
+  "options": [
+   {
+    "field": "box_buy_sushi",
+    "title": null,
+    "desc": "逢魔宝箱是否购买体力",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_kiryou_utahime_select",
+    "title": "Best Kiryou Utahime Select",
+    "desc": "极鬼灵歌姬是否开启",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_shinkirou_select",
+    "title": "Best Shinkirou Select",
+    "desc": "极蜃气楼是否开启",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_tsuchigumo_select",
+    "title": "Best Tsuchigumo Select",
+    "desc": "极土蜘蛛是否开启",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_gashadokuro_select",
+    "title": "Best Gashadokuro Select",
+    "desc": "极荒骷髅是否开启",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_namazu_select",
+    "title": "Best Namazu Select",
+    "desc": "极地震鲇是否开启",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_oboroguruma_select",
+    "title": "Best Oboroguruma Select",
+    "desc": "极胧车是否开启",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_nightly_aramitama_select",
+    "title": "Best Nightly Aramitama Select",
+    "desc": "极夜荒魂是否开启",
+    "default": "False"
+   },
+   {
+    "field": "demon_kiryou_utahime",
+    "title": null,
+    "desc": "鬼灵歌姬御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_shinkirou",
+    "title": null,
+    "desc": "蜃气楼御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_tsuchigumo",
+    "title": null,
+    "desc": "土蜘蛛御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_gashadokuro",
+    "title": null,
+    "desc": "荒骷髅御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_namazu",
+    "title": null,
+    "desc": "地震鲇御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_oboroguruma",
+    "title": null,
+    "desc": "胧车御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_nightly_aramitama",
+    "title": null,
+    "desc": "夜荒魂御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_kiryou_utahime",
+    "title": null,
+    "desc": "极鬼灵歌姬御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_shinkirou",
+    "title": null,
+    "desc": "极蜃气楼御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_tsuchigumo",
+    "title": null,
+    "desc": "极土蜘蛛御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_gashadokuro",
+    "title": null,
+    "desc": "极荒骷髅御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_namazu",
+    "title": null,
+    "desc": "极地震鲇御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_oboroguruma",
+    "title": null,
+    "desc": "极胧车御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "best_demon_nightly_aramitamau",
+    "title": null,
+    "desc": "极夜荒魂御魂",
+    "default": "\"group"
+   },
+   {
+    "field": "demon_shinkirou_enable",
+    "title": null,
+    "desc": "是否切换蜃气楼预设",
+    "default": "False"
+   },
+   {
+    "field": "demon_shinkirou",
+    "title": null,
+    "desc": "蜃气楼预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "demon_tsuchigumo_enable",
+    "title": null,
+    "desc": "是否切换土蜘蛛预设",
+    "default": "False"
+   },
+   {
+    "field": "demon_tsuchigumo",
+    "title": null,
+    "desc": "土蜘蛛预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "demon_gashadokuro_enable",
+    "title": null,
+    "desc": "是否切换荒骷髅预设",
+    "default": "False"
+   },
+   {
+    "field": "demon_gashadokuro",
+    "title": null,
+    "desc": "荒骷髅预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "demon_namazu_enable",
+    "title": null,
+    "desc": "是否切换地震鲶预设",
+    "default": "False"
+   },
+   {
+    "field": "demon_namazu",
+    "title": null,
+    "desc": "地震鲶预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "demon_oboroguruma_enable",
+    "title": null,
+    "desc": "是否切换胧车预设",
+    "default": "False"
+   },
+   {
+    "field": "demon_oboroguruma",
+    "title": null,
+    "desc": "胧车预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "demon_nightly_aramitama_enable",
+    "title": null,
+    "desc": "是否切换夜荒魂预设",
+    "default": "False"
+   },
+   {
+    "field": "demon_nightly_aramitama",
+    "title": null,
+    "desc": "夜荒魂预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "best_demon_shinkirou_enable",
+    "title": null,
+    "desc": "是否切换极蜃气楼预设",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_shinkirou",
+    "title": null,
+    "desc": "极蜃气楼预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "best_demon_tsuchigumo_enable",
+    "title": null,
+    "desc": "是否切换极土蜘蛛预设",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_tsuchigumo",
+    "title": null,
+    "desc": "极土蜘蛛预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "best_demon_gashadokuro_enable",
+    "title": null,
+    "desc": "是否切换极荒骷髅预设",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_gashadokuro",
+    "title": null,
+    "desc": "极荒骷髅预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "best_demon_namazu_enable",
+    "title": null,
+    "desc": "是否切换极地震鲶预设",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_namazu",
+    "title": null,
+    "desc": "极地震鲶预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "best_demon_oboroguruma_enable",
+    "title": null,
+    "desc": "是否切换极胧车预设",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_oboroguruma",
+    "title": null,
+    "desc": "极胧车预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "best_demon_nightly_aramitama_enable",
+    "title": null,
+    "desc": "是否切换极夜荒魂预设",
+    "default": "False"
+   },
+   {
+    "field": "best_demon_nightly_aramitamau",
+    "title": null,
+    "desc": "极夜荒魂预设",
+    "default": "\"-1"
+   },
+   {
+    "field": "priority",
+    "title": null,
+    "desc": "priority_help",
+    "default": "2"
+   }
+  ],
+  "templates": 26,
+  "ocr_regions": 8,
+  "images": 40,
+  "script_methods": [
+   "run",
+   "checkout_soul",
+   "execute_boss",
+   "execute_lantern",
+   "check_lantern",
+   "_box",
+   "_mail",
+   "_battle",
+   "_realm",
+   "_mystery",
+   "_boss",
+   "check_time",
+   "battle_wait",
+   "boss_type",
+   "best_demon_enable",
+   "wait_and_click"
+  ]
+ },
+ {
+  "task": "DemonRetreat",
+  "name": "Demon Retreat",
+  "options": [],
+  "templates": 10,
+  "ocr_regions": 1,
+  "images": 10,
+  "script_methods": [
+   "run",
+   "goto_demon_retreat",
+   "demon_retreat",
+   "run_demon_battle",
+   "battle_wait",
+   "goto_main"
+  ]
+ },
+ {
+  "task": "Dokan",
+  "name": "Dokan / Area Boss (道馆)",
+  "options": [
+   {
+    "field": "remain_attack_count",
+    "title": null,
+    "desc": "remain_attack_count_help",
+    "default": "2"
+   },
+   {
+    "field": "attack_date",
+    "title": null,
+    "desc": "attack_date_help",
+    "default": "'2023-01-01'"
+   },
+   {
+    "field": "daily_attack_count",
+    "title": null,
+    "desc": "daily_attack_count_help",
+    "default": "2"
+   },
+   {
+    "field": "attack_dokan_master",
+    "title": null,
+    "desc": "attack_dokan_master_help",
+    "default": "AttackDokanMasterType.ATTACK_TWO_TWO"
+   },
+   {
+    "field": "dokan_declare_war",
+    "title": null,
+    "desc": "dokan_declare_war_help",
+    "default": "False"
+   },
+   {
+    "field": "dokan_declear_war_priority",
+    "title": null,
+    "desc": "dokan_declear_war_priority_help",
+    "default": "0"
+   },
+   {
+    "field": "dokan_attack_priority",
+    "title": null,
+    "desc": "dokan_attack_priority_help",
+    "default": "0"
+   },
+   {
+    "field": "dokan_auto_cheering_while_cd",
+    "title": null,
+    "desc": "dokan_auto_cheering_while_cd_help",
+    "default": "False"
+   },
+   {
+    "field": "random_delay",
+    "title": null,
+    "desc": "random_delay_help",
+    "default": "False"
+   },
+   {
+    "field": "anti_detect_click_fixed_random_area",
+    "title": null,
+    "desc": "anti_detect_click_fixed_random_area_help",
+    "default": "False"
+   },
+   {
+    "field": "monday_to_thursday",
+    "title": null,
+    "desc": "monday_to_thursday_help",
+    "default": "True"
+   },
+   {
+    "field": "try_start_dokan",
+    "title": null,
+    "desc": "try_start_dokan",
+    "default": "False"
+   },
+   {
+    "field": "find_dokan_score",
+    "title": null,
+    "desc": "dokan_score_help",
+    "default": "4.6"
+   },
+   {
+    "field": "min_people_num",
+    "title": null,
+    "desc": "min_people_num_help",
+    "default": "-1"
+   },
+   {
+    "field": "min_bounty",
+    "title": null,
+    "desc": "min_bounty_help",
+    "default": "0"
+   },
+   {
+    "field": "find_dokan_refresh_count",
+    "title": null,
+    "desc": "find_dokan_refresh_count_help",
+    "default": "7"
+   },
+   {
+    "field": "switch_preset_enable",
+    "title": null,
+    "desc": "switch_preset_enable_help",
+    "default": "False"
+   },
+   {
+    "field": "preset_group_1",
+    "title": null,
+    "desc": "preset_group_1_help",
+    "default": "\"\""
+   },
+   {
+    "field": "preset_group_2",
+    "title": null,
+    "desc": "preset_group_2_help",
+    "default": "\"\""
+   },
+   {
+    "field": "green_mark_shikigami_name",
+    "title": null,
+    "desc": "green_mark_shikigami_name_help",
+    "default": "\"\""
+   }
+  ],
+  "templates": 60,
+  "ocr_regions": 7,
+  "images": 65,
+  "script_methods": [
+   "_attack_priorities",
+   "run",
+   "dokan_battle_1",
+   "dokan_choose_attack_priority",
+   "anti_detect",
+   "goto_main",
+   "goto_dokan_scene",
+   "enter_dokan",
+   "find_dokan",
+   "creat_dokan",
+   "find_all_element",
+   "start_cheering",
+   "update_remain_attack_count",
+   "quit_battle",
+   "abandoned_toppa",
+   "switch_soul_in_dokan",
+   "next_run",
+   "position_offset",
+   "click_until_smt_disappear",
+   "ui_click_until_appear_or_timeout",
+   "dokan_battle"
+  ]
+ },
+ {
+  "task": "Duel",
+  "name": "Duel / Hyakki Yakou battles? (斗技/演武)",
+  "options": [
+   {
+    "field": "switch_enabled",
+    "title": null,
+    "desc": "是否切换阴阳师",
+    "default": "True"
+   },
+   {
+    "field": "switch_onmyoji",
+    "title": null,
+    "desc": "切换阴阳师",
+    "default": "Onmyoji.YORIMITSU"
+   },
+   {
+    "field": "switch_all_soul",
+    "title": null,
+    "desc": "switch_all_soul_help",
+    "default": "False"
+   },
+   {
+    "field": "target_score",
+    "title": null,
+    "desc": "target_score_help",
+    "default": "2000"
+   },
+   {
+    "field": "honor_full_exit",
+    "title": null,
+    "desc": "honor_full_exit_help",
+    "default": "False"
+   },
+   {
+    "field": "green_enable",
+    "title": null,
+    "desc": "green_enable_help",
+    "default": "False"
+   },
+   {
+    "field": "green_mark",
+    "title": null,
+    "desc": "green_mark_help",
+    "default": "GreenMarkType.GREEN_LEFT1"
+   },
+   {
+    "field": "celeb_battle",
+    "title": null,
+    "desc": "是否开启名仕战斗",
+    "default": "False"
+   },
+   {
+    "field": "ban_name",
+    "title": null,
+    "desc": "填写第五手式神名称",
+    "default": "''"
+   },
+   {
+    "field": "initial_score",
+    "title": null,
+    "desc": "设置初始斗技分值默认为8颗星之后每赢一场加100输一场减100",
+    "default": "3800"
+   }
+  ],
+  "templates": 20,
+  "ocr_regions": 6,
+  "images": 27,
+  "script_methods": [
+   "run",
+   "prepare_duel",
+   "can_start_duel",
+   "start_duel",
+   "enter_battle",
+   "battle_prepare",
+   "wait_battle",
+   "duel_exit_battle",
+   "check_honor",
+   "get_and_update_cur_score",
+   "switch_soul",
+   "duel_main",
+   "switch_all_soul",
+   "check_and_get_reward",
+   "is_in_battle_prepare",
+   "is_battle_win",
+   "is_battle_lose",
+   "is_battle_end",
+   "reset_device"
+  ]
+ },
+ {
+  "task": "DyeTrials",
+  "name": "Dye Trials (染色)",
+  "options": [],
+  "templates": 5,
+  "ocr_regions": 1,
+  "images": 5,
+  "script_methods": [
+   "run",
+   "get_all"
+  ]
+ },
+ {
+  "task": "EternitySea",
+  "name": "Eternity Sea (永生之海)",
+  "options": [
+   {
+    "field": "user_status",
+    "title": null,
+    "desc": "user_status_help",
+    "default": "UserStatus.LEADER"
+   },
+   {
+    "field": "layer",
+    "title": null,
+    "desc": "layer_help",
+    "default": "Layer.FOUR"
+   },
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "30"
+   }
+  ],
+  "templates": 7,
+  "ocr_regions": 0,
+  "images": 7,
+  "script_methods": [
+   "task_name",
+   "_two_teams_switch_sous",
+   "run",
+   "run_leader",
+   "run_member",
+   "run_alone",
+   "is_room_dead",
+   "eternitysea_enter",
+   "_is_in_eternity_sea",
+   "_limit_time",
+   "_enter_eternity_sea",
+   "_navigate_to_soul_zones",
+   "_navigate_to_game_page",
+   "_task_config",
+   "check_layer",
+   "check_lock"
+  ]
+ },
+ {
+  "task": "EvoZone",
+  "name": "Evolve Zone (觉醒副本)",
+  "options": [
+   {
+    "field": "user_status",
+    "title": null,
+    "desc": "user_status_help",
+    "default": "UserStatus.LEADER"
+   },
+   {
+    "field": "kirin_type",
+    "title": null,
+    "desc": "kirin_type_help",
+    "default": "KirinType.LIGHTNINGKIRIN"
+   },
+   {
+    "field": "layer",
+    "title": null,
+    "desc": "layer_help",
+    "default": "Layer.TEN"
+   },
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "30"
+   },
+   {
+    "field": "soul_buff_enable",
+    "title": null,
+    "desc": "是否开启觉醒加成",
+    "default": "False"
+   }
+  ],
+  "templates": 10,
+  "ocr_regions": 1,
+  "images": 10,
+  "script_methods": [
+   "run",
+   "evozone_enter",
+   "check_layer",
+   "check_lock",
+   "run_leader",
+   "run_member",
+   "run_alone",
+   "run_wild"
+  ]
+ },
+ {
+  "task": "ExperienceYoukai",
+  "name": "Experience Youkai (经验妖怪)",
+  "options": [],
+  "templates": 1,
+  "ocr_regions": 0,
+  "images": 1,
+  "script_methods": [
+   "run",
+   "battle_wait",
+   "experience_exit"
+  ]
+ },
+ {
+  "task": "Exploration",
+  "name": "Exploration / Soul farming (探索)",
+  "options": [
+   {
+    "field": "friend_1",
+    "title": null,
+    "desc": "friend_name_help",
+    "default": "''"
+   },
+   {
+    "field": "find_mode",
+    "title": null,
+    "desc": "find_mode_help",
+    "default": "FindMode.AUTO_FIND"
+   },
+   {
+    "field": "scrolls_enable",
+    "title": "绘卷模式",
+    "desc": "scrolls_enable_help",
+    "default": "False"
+   },
+   {
+    "field": "scrolls_cd",
+    "title": "间隔时间",
+    "desc": null,
+    "default": "TimeDelta(hours=0"
+   },
+   {
+    "field": "scrolls_threshold",
+    "title": "突破票数量",
+    "desc": "scrolls_threshold_help",
+    "default": "'25'"
+   },
+   {
+    "field": "user_status",
+    "title": null,
+    "desc": "user_status_help_",
+    "default": "UserStatus.ALONE"
+   },
+   {
+    "field": "current_exploration_count",
+    "title": "探索次数",
+    "desc": "默认探索7次",
+    "default": "'7'"
+   },
+   {
+    "field": "minions_cnt",
+    "title": "战斗次数",
+    "desc": "minions_cnt_help",
+    "default": "'30'"
+   },
+   {
+    "field": "exploration_level",
+    "title": "探索等级",
+    "desc": "exploration_level_help",
+    "default": "ExplorationLevel.EXPLORATION_28"
+   },
+   {
+    "field": "auto_rotate",
+    "title": "自动添加候补式神",
+    "desc": "auto_rotate_help",
+    "default": "AutoRotate.no"
+   },
+   {
+    "field": "choose_rarity",
+    "title": "选择狗粮稀有度",
+    "desc": "choose_rarity_help",
+    "default": "ChooseRarity.N"
+   },
+   {
+    "field": "up_type",
+    "title": "UpType",
+    "desc": "up_type_help",
+    "default": "UpType.ALL"
+   }
+  ],
+  "templates": 44,
+  "ocr_regions": 4,
+  "images": 47,
+  "script_methods": []
+ },
+ {
+  "task": "FallenSun",
+  "name": "Fallen Sun event",
+  "options": [
+   {
+    "field": "user_status",
+    "title": null,
+    "desc": "user_status_help",
+    "default": "UserStatus.LEADER"
+   },
+   {
+    "field": "layer",
+    "title": null,
+    "desc": "layer_help",
+    "default": "Layer.THREE"
+   },
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "50"
+   }
+  ],
+  "templates": 6,
+  "ocr_regions": 1,
+  "images": 6,
+  "script_methods": [
+   "run",
+   "fallen_sun_enter",
+   "check_layer",
+   "check_lock",
+   "run_leader",
+   "run_member",
+   "run_alone",
+   "run_wild",
+   "battle_wait"
+  ]
+ },
+ {
+  "task": "FindJade",
+  "name": "Find Jade (勾玉/友情邀请)",
+  "options": [
+   {
+    "field": "name",
+    "title": null,
+    "desc": "name_help",
+    "default": "\"\""
+   },
+   {
+    "field": "default_invite_type",
+    "title": null,
+    "desc": "default_invite_type_help",
+    "default": "CooperationSelectMaskDescription.JadeAndFood"
+   },
+   {
+    "field": "invite_info_count",
+    "title": null,
+    "desc": "invite_info_count_help",
+    "default": "1"
+   },
+   {
+    "field": "sup_account_count",
+    "title": null,
+    "desc": "sup_account_count_help",
+    "default": "1"
+   }
+  ],
+  "templates": 0,
+  "ocr_regions": 0,
+  "images": 0,
+  "script_methods": [
+   "run",
+   "is_need_login",
+   "CreatObjectFromModule",
+   "save_config",
+   "next_run"
+  ]
+ },
+ {
+  "task": "FloatParade",
+  "name": "Float Parade (花车巡游)",
+  "options": [],
+  "templates": 15,
+  "ocr_regions": 0,
+  "images": 15,
+  "script_methods": [
+   "run",
+   "get_all",
+   "get_flower"
+  ]
+ },
+ {
+  "task": "FrogBoss",
+  "name": "Frog Boss betting (青蛙boss)",
+  "options": [
+   {
+    "field": "strategy_frog",
+    "title": null,
+    "desc": "strategy_frog_help",
+    "default": "Strategy.Majority"
+   }
+  ],
+  "templates": 14,
+  "ocr_regions": 3,
+  "images": 16,
+  "script_methods": [
+   "run",
+   "next_run",
+   "do_bet",
+   "detect",
+   "get_bilibili",
+   "get_dashen"
+  ]
+ },
+ {
+  "task": "GlobalGame",
+  "name": "Global server helpers (国际服)",
+  "options": [
+   {
+    "field": "enable",
+    "title": null,
+    "desc": "enable_help",
+    "default": "False"
+   },
+   {
+    "field": "broker",
+    "title": null,
+    "desc": "broker_help",
+    "default": "''"
+   },
+   {
+    "field": "port",
+    "title": null,
+    "desc": "port_help",
+    "default": "8883"
+   },
+   {
+    "field": "transport",
+    "title": null,
+    "desc": "transport_help",
+    "default": "Transport.TCP"
+   },
+   {
+    "field": "ca",
+    "title": null,
+    "desc": "ca_help",
+    "default": "''"
+   },
+   {
+    "field": "username",
+    "title": null,
+    "desc": "username_help",
+    "default": "''"
+   },
+   {
+    "field": "password",
+    "title": null,
+    "desc": "password_help",
+    "default": "''"
+   }
+  ],
+  "templates": 22,
+  "ocr_regions": 0,
+  "images": 29,
+  "script_methods": []
+ },
+ {
+  "task": "GoldYoukai",
+  "name": "Gold Youkai (黄金妖怪)",
+  "options": [],
+  "templates": 1,
+  "ocr_regions": 0,
+  "images": 1,
+  "script_methods": [
+   "run",
+   "battle_wait",
+   "gold_exit"
+  ]
+ },
+ {
+  "task": "GoryouRealm",
+  "name": "Goryou Realm (御灵)",
+  "options": [
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "30"
+   },
+   {
+    "field": "goryou_class",
+    "title": null,
+    "desc": "goryou_class_help",
+    "default": "GoryouClass.RANDOM"
+   }
+  ],
+  "templates": 3,
+  "ocr_regions": 1,
+  "images": 3,
+  "script_methods": [
+   "run"
+  ]
+ },
+ {
+  "task": "GuildActivityMonitor",
+  "name": "Guild activity monitor",
+  "options": [
+   {
+    "field": "detection_interval",
+    "title": null,
+    "desc": "通知检测间隔（秒）\\n通过adb检测系统中收到的活动推送，自动拉起对应任务",
+    "default": "30"
+   },
+   {
+    "field": "monitor_duration",
+    "title": null,
+    "desc": "监控持续时间（分）\\n请确保已开启游戏通知权限，游戏设置权限中对应活动推送",
+    "default": "15"
+   },
+   {
+    "field": "recheck_interval",
+    "title": null,
+    "desc": "拉起对应活动后，间隔多久再次开启检测（分）\\n若监控时间内未检测到活动，则按调度器设置下次运行时间",
+    "default": "5"
+   },
+   {
+    "field": "run_days",
+    "title": null,
+    "desc": "运行日期，1-7 对应周一到周日；例如 5,6,7",
+    "default": "\"1"
+   }
+  ],
+  "templates": 0,
+  "ocr_regions": 0,
+  "images": 0,
+  "script_methods": [
+   "run",
+   "get_notification_info",
+   "clear_notifications"
+  ]
+ },
+ {
+  "task": "GuildBanquet",
+  "name": "Guild Banquet (寮宴会)",
+  "options": [
+   {
+    "field": "day_1",
+    "title": null,
+    "desc": "每周第1次运行时间设置，注意第一次时间要比第二次时间早",
+    "default": "Weekday.Wednesday"
+   },
+   {
+    "field": "day_2",
+    "title": null,
+    "desc": "每周第2次运行时间设置",
+    "default": "Weekday.Saturday"
+   }
+  ],
+  "templates": 1,
+  "ocr_regions": 0,
+  "images": 1,
+  "script_methods": [
+   "run",
+   "check_runtime",
+   "plan_next_run",
+   "get_key_from_value",
+   "get_weekday_enum",
+   "set_config"
+  ]
+ },
+ {
+  "task": "HeroTest",
+  "name": "Hero Test (式神觉醒材料)",
+  "options": [
+   {
+    "field": "layer",
+    "title": null,
+    "desc": "选择要打的关卡。\\n兵藏秘境升级顺序八华斩->无畏 -> 暴击伤害 -> 默认祝福 -> 默认属性\\n",
+    "default": "Layer.YANWU"
+   },
+   {
+    "field": "skill_mode",
+    "title": null,
+    "desc": "技能本技能偏向\\n藤原道长使用攻略高配阵容,需自己配置好技能和祝福",
+    "default": "SkillMode.PVE"
+   },
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "100"
+   },
+   {
+    "field": "exp_50_buff_enable_help",
+    "title": null,
+    "desc": "打开经验50%加成",
+    "default": "False"
+   },
+   {
+    "field": "exp_100_buff_enable_help",
+    "title": null,
+    "desc": "打开经验100%加成",
+    "default": "False"
+   }
+  ],
+  "templates": 34,
+  "ocr_regions": 4,
+  "images": 41,
+  "script_methods": [
+   "run",
+   "enter_battle",
+   "battle_wait",
+   "hero1_skill_wait",
+   "hero2_skill_wait",
+   "switch_hero",
+   "can_run",
+   "check_art_war_card",
+   "check_level_max",
+   "check_and_switch_soul",
+   "open_exp_buff",
+   "close_exp_buff",
+   "check_and_lock_team",
+   "init_pages"
+  ]
+ },
+ {
+  "task": "Hunt",
+  "name": "Wanted/Hunt (狩猎/觅契)",
+  "options": [
+   {
+    "field": "kirin_group_team",
+    "title": null,
+    "desc": "switch_group_team_help",
+    "default": "'-1"
+   }
+  ],
+  "templates": 8,
+  "ocr_regions": 0,
+  "images": 8,
+  "script_methods": [
+   "run",
+   "check_datetime",
+   "plan_tomorrow_hunt",
+   "kirin",
+   "netherworld",
+   "battle_wait"
+  ]
+ },
+ {
+  "task": "Hyakkiyakou",
+  "name": "Hyakkiyakou (百鬼夜行)",
+  "options": [
+   {
+    "field": "hya_limit_count",
+    "title": null,
+    "desc": "hya_limit_count_help",
+    "default": "10"
+   },
+   {
+    "field": "hya_invite_friend",
+    "title": null,
+    "desc": "hya_invite_friend_help",
+    "default": "False"
+   },
+   {
+    "field": "hya_onmyoji",
+    "title": null,
+    "desc": "切换阴阳师",
+    "default": "Onmyoji.KAGURA"
+   },
+   {
+    "field": "hya_auto_bean",
+    "title": null,
+    "desc": "hya_auto_bean_help",
+    "default": "False"
+   },
+   {
+    "field": "hya_priorities",
+    "title": null,
+    "desc": "hya_priorities_help",
+    "default": "''"
+   },
+   {
+    "field": "hya_sp",
+    "title": null,
+    "desc": "hya_sp_help",
+    "default": "1."
+   },
+   {
+    "field": "hya_ssr",
+    "title": null,
+    "desc": "hya_ssr_help",
+    "default": "1."
+   },
+   {
+    "field": "hya_sr",
+    "title": null,
+    "desc": "hya_sr_help",
+    "default": "0.7"
+   },
+   {
+    "field": "hya_r",
+    "title": null,
+    "desc": "hya_r_help",
+    "default": "0.3"
+   },
+   {
+    "field": "hya_n",
+    "title": null,
+    "desc": "hya_n_help",
+    "default": "0.0"
+   },
+   {
+    "field": "hya_g",
+    "title": null,
+    "desc": "hya_g_help",
+    "default": "0.0"
+   },
+   {
+    "field": "conf_threshold",
+    "title": null,
+    "desc": "conf_threshold_help",
+    "default": "0.6"
+   },
+   {
+    "field": "iou_threshold",
+    "title": null,
+    "desc": "iou_threshold_help",
+    "default": "0.7"
+   },
+   {
+    "field": "model_precision",
+    "title": null,
+    "desc": "model_precision_help",
+    "default": "ModelPrecision.FP32"
+   },
+   {
+    "field": "inference_engine",
+    "title": null,
+    "desc": "inference_engine_help",
+    "default": "InferenceEngine.ONNXRUNTIME"
+   },
+   {
+    "field": "hya_show",
+    "title": null,
+    "desc": "hya_show_help",
+    "default": "False"
+   },
+   {
+    "field": "hya_info",
+    "title": null,
+    "desc": "hya_info_help",
+    "default": "False"
+   },
+   {
+    "field": "continuous_learning",
+    "title": null,
+    "desc": "continuous_learning_help",
+    "default": "False"
+   },
+   {
+    "field": "hya_save_result",
+    "title": null,
+    "desc": "hya_save_result_help",
+    "default": "False"
+   },
+   {
+    "field": "hya_interval",
+    "title": null,
+    "desc": "hya_interval_help",
+    "default": "300"
+   },
+   {
+    "field": "hya_screenshot_method",
+    "title": null,
+    "desc": "hya_screenshot",
+    "default": "ScreenshotMethod.WINDOW_BACKGROUND"
+   },
+   {
+    "field": "hya_control_method",
+    "title": null,
+    "desc": "hya_control_method",
+    "default": "ControlMethod.WINDOW_MESSAGE"
+   }
+  ],
+  "templates": 16,
+  "ocr_regions": 1,
+  "images": 69,
+  "script_methods": [
+   "_config",
+   "tracker",
+   "agent",
+   "debugger",
+   "run",
+   "_rarity_score",
+   "_detect_current_rarity",
+   "_select_best_boss",
+   "one",
+   "do_action"
+  ]
+ },
+ {
+  "task": "KekkaiActivation",
+  "name": "Kekkai/Barrier activation (结界突破)",
+  "options": [
+   {
+    "field": "priority",
+    "title": null,
+    "desc": "priority_help",
+    "default": "2"
+   },
+   {
+    "field": "card_type",
+    "title": null,
+    "desc": "card_rule_help",
+    "default": "CardType.TAIKO"
+   },
+   {
+    "field": "min_taiko_num",
+    "title": null,
+    "desc": "挂卡太鼓每小时最少收益,低于则不挂卡",
+    "default": "8"
+   },
+   {
+    "field": "min_fish_num",
+    "title": null,
+    "desc": "挂卡斗鱼每小时最少收益,低于则不挂卡",
+    "default": "16"
+   },
+   {
+    "field": "exchange_before",
+    "title": null,
+    "desc": "exchange_before_help",
+    "default": "True"
+   },
+   {
+    "field": "exchange_max",
+    "title": null,
+    "desc": "exchange_max_help",
+    "default": "True"
+   },
+   {
+    "field": "shikigami_class",
+    "title": null,
+    "desc": "shikigami_class_help",
+    "default": "ShikigamiClass.N"
+   },
+   {
+    "field": "card_not_found_count",
+    "title": null,
+    "desc": "未发现卡次数",
+    "default": "0"
+   }
+  ],
+  "templates": 38,
+  "ocr_regions": 2,
+  "images": 38,
+  "script_methods": [
+   "run",
+   "dict_card_image",
+   "dict_image_card",
+   "order_targets",
+   "run_activation",
+   "goto_cards",
+   "check_card_status",
+   "check_card_effect",
+   "ocr_time",
+   "screening_card",
+   "check_card_num",
+   "_card_not_found",
+   "check_max_lv",
+   "harvest_card"
+  ]
+ },
+ {
+  "task": "KekkaiUtilize",
+  "name": "Kekkai utilize (结界寄养)",
+  "options": [
+   {
+    "field": "priority",
+    "title": null,
+    "desc": "priority_help",
+    "default": "2"
+   },
+   {
+    "field": "utilize_rule",
+    "title": null,
+    "desc": "utilize_rule_help",
+    "default": "UtilizeRule.DEFAULT"
+   },
+   {
+    "field": "select_friend_list",
+    "title": null,
+    "desc": "select_friend_list_help",
+    "default": "SelectFriendList.SAME_SERVER"
+   },
+   {
+    "field": "shikigami_class",
+    "title": null,
+    "desc": "shikigami_class_help",
+    "default": "ShikigamiClass.N"
+   },
+   {
+    "field": "shikigami_order",
+    "title": null,
+    "desc": "shikigami_order_help",
+    "default": "4"
+   },
+   {
+    "field": "harvest_guild_max_times",
+    "title": null,
+    "desc": "收取寮资金或体力失败的最大尝试次数",
+    "default": "3"
+   },
+   {
+    "field": "utilize_enable",
+    "title": null,
+    "desc": "是否蹭卡，小号可以选择不蹭卡",
+    "default": "True"
+   },
+   {
+    "field": "guild_ap_enable",
+    "title": null,
+    "desc": "guild_ap_enable_help",
+    "default": "True"
+   },
+   {
+    "field": "guild_assets_enable",
+    "title": null,
+    "desc": "guild_assets_enable_help",
+    "default": "True"
+   },
+   {
+    "field": "box_ap_enable",
+    "title": null,
+    "desc": "box_ap_enable_help",
+    "default": "True"
+   },
+   {
+    "field": "box_exp_enable",
+    "title": null,
+    "desc": "box_exp_enable_help",
+    "default": "True"
+   },
+   {
+    "field": "box_exp_waste",
+    "title": null,
+    "desc": "box_exp_waste_help",
+    "default": "True"
+   }
+  ],
+  "templates": 44,
+  "ocr_regions": 3,
+  "images": 52,
+  "script_methods": [
+   "run",
+   "recive_guild_ap_or_assets",
+   "check_utilize_add",
+   "check_max_lv",
+   "check_guild_ap_or_assets",
+   "goto_realm",
+   "check_box_ap_or_exp",
+   "check_utilize_harvest",
+   "realm_goto_grown",
+   "grown_goto_utilize",
+   "switch_friend_list",
+   "order_targets",
+   "order_cards",
+   "run_utilize",
+   "_select_optimal_resource_card",
+   "_current_select_best",
+   "perform_swipe_action",
+   "check_card_num",
+   "back_guild",
+   "back_realm"
+  ]
+ },
+ {
+  "task": "KittyShop",
+  "name": "Kitty Shop (猫店/集市)",
+  "options": [
+   {
+    "field": "kitty_attempts",
+    "title": null,
+    "desc": "kitty_attempts_help",
+    "default": "1"
+   },
+   {
+    "field": "kitty_quit_when_finished",
+    "title": null,
+    "desc": "kitty_quit_when_finished_help",
+    "default": "False"
+   }
+  ],
+  "templates": 16,
+  "ocr_regions": 0,
+  "images": 17,
+  "script_methods": [
+   "run",
+   "_run",
+   "_select_kitty",
+   "_main_select_kitty"
+  ]
+ },
+ {
+  "task": "MemoryScrolls",
+  "name": "Memory Scrolls (绘卷)",
+  "options": [
+   {
+    "field": "auto_contribute_memoryscrolls",
+    "title": null,
+    "desc": "自动贡献绘卷碎片",
+    "default": "True"
+   },
+   {
+    "field": "double_scrolls",
+    "title": null,
+    "desc": "double_scrolls_help",
+    "default": "DoubleScrolls.ONE"
+   },
+   {
+    "field": "scroll_number",
+    "title": null,
+    "desc": "scroll_number_help",
+    "default": "ScrollNumber.ONE"
+   },
+   {
+    "field": "auto_close_exploration",
+    "title": null,
+    "desc": "指定绘卷结束后，自动关闭探索任务，避免长时间无意义执行",
+    "default": "False"
+   },
+   {
+    "field": "notification_95",
+    "title": null,
+    "desc": "到达95%进度时发送通知",
+    "default": "False"
+   },
+   {
+    "field": "auto_finish_exploration",
+    "title": null,
+    "desc": "小绘卷满50后自动结束当日探索任务",
+    "default": "False"
+   }
+  ],
+  "templates": 15,
+  "ocr_regions": 0,
+  "images": 15,
+  "script_methods": [
+   "run",
+   "goto_memoryscrolls_main",
+   "goto_scroll",
+   "contribute_memoryscrolls"
+  ]
+ },
+ {
+  "task": "MetaDemon",
+  "name": "Meta Demon",
+  "options": [
+   {
+    "field": "md_preset_group_team_default_1",
+    "title": null,
+    "desc": "md_preset_group_team_default_1_help",
+    "default": "'1"
+   },
+   {
+    "field": "md_preset_group_team_default_2",
+    "title": null,
+    "desc": "md_preset_group_team_default_2_help",
+    "default": "'1"
+   },
+   {
+    "field": "meta_crafting_card",
+    "title": null,
+    "desc": "craft_essence_help",
+    "default": "True"
+   },
+   {
+    "field": "auto_tea",
+    "title": null,
+    "desc": "auto_tea_help",
+    "default": "False"
+   },
+   {
+    "field": "extreme_notify",
+    "title": null,
+    "desc": "extreme_notify_help",
+    "default": "False"
+   },
+   {
+    "field": "md_strategy_count",
+    "title": null,
+    "desc": "md_strategy_count_help",
+    "default": "0"
+   },
+   {
+    "field": "md_use_strategy",
+    "title": null,
+    "desc": "md_use_strategy_help",
+    "default": "False"
+   }
+  ],
+  "templates": 17,
+  "ocr_regions": 6,
+  "images": 34,
+  "script_methods": [
+   "cached_strategies",
+   "cached_default_group_team",
+   "is_star56",
+   "hp_threshold_low",
+   "get_group_team",
+   "run",
+   "current_exhaustion",
+   "buy_tea",
+   "crafting",
+   "find_demon",
+   "battle_boss",
+   "battle_wait"
+  ]
+ },
+ {
+  "task": "MysteryShop",
+  "name": "Mystery Shop (神秘商店)",
+  "options": [
+   {
+    "field": "share_friend_1",
+    "title": "Share Friend 1",
+    "desc": "share_friend_1_help",
+    "default": "''"
+   },
+   {
+    "field": "share_friend_2",
+    "title": "Share Friend 2",
+    "desc": null,
+    "default": "''"
+   },
+   {
+    "field": "share_friend_3",
+    "title": "Share Friend 3",
+    "desc": null,
+    "default": "''"
+   },
+   {
+    "field": "share_friend_4",
+    "title": "Share Friend 4",
+    "desc": null,
+    "default": "''"
+   },
+   {
+    "field": "share_friend_5",
+    "title": "Share Friend 5",
+    "desc": null,
+    "default": "''"
+   }
+  ],
+  "templates": 5,
+  "ocr_regions": 2,
+  "images": 17,
+  "script_methods": [
+   "run",
+   "next_one",
+   "run_shop",
+   "share",
+   "invite_friend",
+   "shop_reward",
+   "next_time"
+  ]
+ },
+ {
+  "task": "Nian",
+  "name": "Nian event",
+  "options": [],
+  "templates": 3,
+  "ocr_regions": 2,
+  "images": 3,
+  "script_methods": [
+   "run",
+   "check_cd",
+   "battle_config"
+  ]
+ },
+ {
+  "task": "Orochi",
+  "name": "Orochi (八岐大蛇)",
+  "options": [
+   {
+    "field": "user_status",
+    "title": null,
+    "desc": "user_status_help",
+    "default": "UserStatus.LEADER"
+   },
+   {
+    "field": "layer",
+    "title": null,
+    "desc": "layer_help",
+    "default": "Layer.ELEVEN"
+   },
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "30"
+   },
+   {
+    "field": "soul_buff_enable",
+    "title": null,
+    "desc": "soul_buff_enable_help",
+    "default": "False"
+   },
+   {
+    "field": "switch_group_team",
+    "title": null,
+    "desc": "switch_group_team_help",
+    "default": "'-1"
+   },
+   {
+    "field": "enable_switch_by_name",
+    "title": null,
+    "desc": "enable_switch_by_name_help",
+    "default": "False"
+   },
+   {
+    "field": "auto_switch_soul",
+    "title": null,
+    "desc": "auto_switch_soul_orochi_help",
+    "default": "False"
+   },
+   {
+    "field": "ten_switch",
+    "title": null,
+    "desc": "ten_switch_help",
+    "default": "'-1"
+   },
+   {
+    "field": "eleven_switch",
+    "title": null,
+    "desc": "eleven_switch_help",
+    "default": "'-1"
+   },
+   {
+    "field": "twelve_switch",
+    "title": null,
+    "desc": "twelve_switch_help",
+    "default": "'-1"
+   },
+   {
+    "field": "thirteen_switch",
+    "title": null,
+    "desc": "thirteen_switch_help",
+    "default": "'-1"
+   }
+  ],
+  "templates": 7,
+  "ocr_regions": 1,
+  "images": 8,
+  "script_methods": [
+   "run",
+   "orochi_enter",
+   "check_layer",
+   "check_lock",
+   "run_leader",
+   "run_member",
+   "run_alone",
+   "run_wild",
+   "is_room_dead",
+   "battle_wait",
+   "orochi_switch_soul"
+  ]
+ },
+ {
+  "task": "OrochiMoans",
+  "name": "Orochi groan/assist",
+  "options": [],
+  "templates": 0,
+  "ocr_regions": 0,
+  "images": 0,
+  "script_methods": []
+ },
+ {
+  "task": "Pets",
+  "name": "Pets feeding (宠物)",
+  "options": [],
+  "templates": 8,
+  "ocr_regions": 2,
+  "images": 8,
+  "script_methods": [
+   "run",
+   "_feed",
+   "_play"
+  ]
+ },
+ {
+  "task": "Quiz",
+  "name": "Daily Quiz (逢魔密信/答题)",
+  "options": [
+   {
+    "field": "quiz_cnt",
+    "title": null,
+    "desc": "quiz_cnt_help",
+    "default": "1"
+   },
+   {
+    "field": "quiz_per_round",
+    "title": null,
+    "desc": "quiz_per_round_help",
+    "default": "150"
+   }
+  ],
+  "templates": 6,
+  "ocr_regions": 8,
+  "images": 6,
+  "script_methods": [
+   "anwser",
+   "click_options",
+   "_config",
+   "run",
+   "enter",
+   "once",
+   "detect_new",
+   "_deal_quiz",
+   "detect_question_and_answers"
+  ]
+ },
+ {
+  "task": "RealmRaid",
+  "name": "Realm Raid (突破)",
+  "options": [
+   {
+    "field": "raid_mode",
+    "title": "Raid Mode",
+    "desc": "raid_mode_help",
+    "default": "RaidMode.NORMAL"
+   },
+   {
+    "field": "attack_number",
+    "title": "Attack Number",
+    "desc": null,
+    "default": "AttackNumber.ALL"
+   },
+   {
+    "field": "number_attack",
+    "title": "Number Attack",
+    "desc": "number_attack_help",
+    "default": "30"
+   },
+   {
+    "field": "number_base",
+    "title": "Number Base",
+    "desc": "number_base_help",
+    "default": "0"
+   },
+   {
+    "field": "exit_four",
+    "title": "Exit Four",
+    "desc": "exit_four_help",
+    "default": "True"
+   },
+   {
+    "field": "order_attack",
+    "title": "Order Attack",
+    "desc": "order_attack_help",
+    "default": "'5 > 4 > 3 > 2 > 1 > 0'"
+   },
+   {
+    "field": "three_refresh",
+    "title": "Three Refresh",
+    "desc": "three_refresh_help",
+    "default": "False"
+   },
+   {
+    "field": "when_attack_fail",
+    "title": "WhenAttackFail",
+    "desc": "when_attack_fail_help",
+    "default": "WhenAttackFail.REFRESH"
+   }
+  ],
+  "templates": 20,
+  "ocr_regions": 12,
+  "images": 24,
+  "script_methods": [
+   "run",
+   "is_ticket",
+   "medal_fire",
+   "execute_round",
+   "run_2",
+   "ensure_lock",
+   "is_frog",
+   "check_ticket",
+   "order_medal",
+   "partition",
+   "find_one",
+   "check_medal_is_frog",
+   "reward_detect_click",
+   "check_refresh",
+   "fire",
+   "false_roi",
+   "false_image"
+  ]
+ },
+ {
+  "task": "RichMan",
+  "name": "Rich Man / shopping (富豪/商店)",
+  "options": [
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "mystery_amulet",
+    "title": "Mystery Amulet",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "black_daruma_fragment",
+    "title": "Black Daruma Fragment",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "ap",
+    "title": "AP",
+    "desc": "ap_help",
+    "default": "False"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "buy_sale_ticket",
+    "title": "Buy Sale Ticket",
+    "desc": "buy_sale_ticket_help",
+    "default": "False"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "orochi_scales",
+    "title": "Orochi Scales",
+    "desc": "orochi_scales_help",
+    "default": "40"
+   },
+   {
+    "field": "demon_souls",
+    "title": "Demon Souls",
+    "desc": "demon_souls_help",
+    "default": "50"
+   },
+   {
+    "field": "demon_class",
+    "title": "DemonClass",
+    "desc": "demon_class_help",
+    "default": "DemonClass.TSUCHIGUMO"
+   },
+   {
+    "field": "demon_position",
+    "title": "Demon Position",
+    "desc": "demon_position_help",
+    "default": "1"
+   },
+   {
+    "field": "picture_book_scrap",
+    "title": "Picture Book Scrap",
+    "desc": "picture_book_scrap_help",
+    "default": "30"
+   },
+   {
+    "field": "picture_book_rule",
+    "title": "Picture Book Rule",
+    "desc": "picture_book_rule_help",
+    "default": "'auto'"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "totem_pass",
+    "title": "Totem Pass",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "medium_bondling_discs",
+    "title": "Medium Bondling Discs",
+    "desc": "medium_bondling_discs_special",
+    "default": "0"
+   },
+   {
+    "field": "low_bondling_discs",
+    "title": "Low Bondling Discs",
+    "desc": "low_bondling_discs_special",
+    "default": "0"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "mystery_amulet",
+    "title": "Mystery Amulet",
+    "desc": "mystery_amulet_help_honor",
+    "default": "False"
+   },
+   {
+    "field": "black_daruma_scrap",
+    "title": "Black Daruma Scrap",
+    "desc": "black_daruma_scrap_help_honor",
+    "default": "False"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "white_daruma",
+    "title": "White Daruma",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "red_daruma",
+    "title": "Red Daruma",
+    "desc": null,
+    "default": "0"
+   },
+   {
+    "field": "broken_amulet",
+    "title": "Broken Amulet",
+    "desc": null,
+    "default": "0"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "black_daruma",
+    "title": "Black Daruma",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "mystery_amulet",
+    "title": "Mystery Amulet",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "ap_100",
+    "title": "AP 100",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "random_soul",
+    "title": "Random Soul",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "white_daruma",
+    "title": "White Daruma",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "challenge_pass",
+    "title": "Challenge Pass",
+    "desc": "challenge_pass_help",
+    "default": "0"
+   },
+   {
+    "field": "red_daruma",
+    "title": "Red Daruma",
+    "desc": null,
+    "default": "0"
+   },
+   {
+    "field": "broken_amulet",
+    "title": "Broken Amulet",
+    "desc": null,
+    "default": "0"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "black_daruma_scrap",
+    "title": "Black Daruma Scrap",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "mystery_amulet",
+    "title": "Mystery Amulet",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "black_daruma",
+    "title": "Black Daruma",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "white_daruma_five",
+    "title": "White Daruma Five",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "white_daruma_four",
+    "title": "White Daruma Four",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "random_soul",
+    "title": "Random Soul",
+    "desc": "random_soul_help",
+    "default": "0"
+   },
+   {
+    "field": "bondling_stone",
+    "title": "Bondling Stone",
+    "desc": "bondling_stone_help",
+    "default": "0"
+   },
+   {
+    "field": "high_bondling_discs",
+    "title": "High Bondling Discs",
+    "desc": "high_bondling_discs_help",
+    "default": "0"
+   },
+   {
+    "field": "medium_bondling_discs",
+    "title": "Medium Bondling Discs",
+    "desc": "medium_bondling_discs_help",
+    "default": "0"
+   },
+   {
+    "field": "enable",
+    "title": "Enable",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "mystery_amulet",
+    "title": "Mystery Amulet",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "black_daruma_scrap",
+    "title": "Black Daruma Scrap",
+    "desc": null,
+    "default": "False"
+   },
+   {
+    "field": "skin_ticket",
+    "title": "Skin Ticket",
+    "desc": "skin_ticket_help",
+    "default": "0"
+   }
+  ],
+  "templates": 80,
+  "ocr_regions": 40,
+  "images": 105,
+  "script_methods": [
+   "run"
+  ]
+ },
+ {
+  "task": "RyouToppa",
+  "name": "Ryou Toppa / Liao breakthrough",
+  "options": [
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "50"
+   },
+   {
+    "field": "skip_difficult",
+    "title": null,
+    "desc": "skip_difficult_help",
+    "default": "True"
+   },
+   {
+    "field": "ryou_access",
+    "title": null,
+    "desc": "ryou_access_help",
+    "default": "False"
+   },
+   {
+    "field": "random_delay",
+    "title": null,
+    "desc": "random_delay_help",
+    "default": "False"
+   },
+   {
+    "field": "raid_mode",
+    "title": "Raid Mode",
+    "desc": "raid_mode_help",
+    "default": "RaidMode.ATTACK_ALL"
+   },
+   {
+    "field": "attack_number",
+    "title": "Attack Number",
+    "desc": null,
+    "default": "AttackNumber.ALL"
+   }
+  ],
+  "templates": 12,
+  "ocr_regions": 1,
+  "images": 16,
+  "script_methods": [
+   "run",
+   "plan_tomorrow_ryoutoppa",
+   "start_ryou_toppa",
+   "has_ticket",
+   "check_area",
+   "flush_area_cache",
+   "attack_area"
+  ]
+ },
+ {
+  "task": "Secret",
+  "name": "Secret Zone (秘闻副本)",
+  "options": [
+   {
+    "field": "secret_gold_50",
+    "title": "Secret Gold 50",
+    "desc": "secret_gold_50_help",
+    "default": "False"
+   },
+   {
+    "field": "secret_gold_100",
+    "title": "Secret Gold 100",
+    "desc": "secret_gold_100_help",
+    "default": "False"
+   },
+   {
+    "field": "layer_10",
+    "title": "Layer 10",
+    "desc": "layer_10_help",
+    "default": "False"
+   },
+   {
+    "field": "layer_9",
+    "title": "Layer 9",
+    "desc": null,
+    "default": "False"
+   }
+  ],
+  "templates": 7,
+  "ocr_regions": 9,
+  "images": 7,
+  "script_methods": [
+   "match_layer",
+   "battle_config",
+   "run",
+   "find_battle",
+   "click_battle",
+   "battle_wait",
+   "check_time"
+  ]
+ },
+ {
+  "task": "SixRealms",
+  "name": "Six Realms (永生之海/月之海 marks)",
+  "options": [
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "1"
+   }
+  ],
+  "templates": 32,
+  "ocr_regions": 5,
+  "images": 51,
+  "script_methods": [
+   "_config",
+   "run",
+   "run_moon_sea"
+  ]
+ },
+ {
+  "task": "Sougenbi",
+  "name": "Sougenbi (草原火/festival)",
+  "options": [
+   {
+    "field": "limit_count",
+    "title": null,
+    "desc": "limit_count_help",
+    "default": "30"
+   }
+  ],
+  "templates": 8,
+  "ocr_regions": 3,
+  "images": 8,
+  "script_methods": [
+   "run"
+  ]
+ },
+ {
+  "task": "SoulsTidy",
+  "name": "Souls / Mitama auto-sort & sell (御魂整理)",
+  "options": [
+   {
+    "field": "enable_greed",
+    "title": null,
+    "desc": "是否启用贪吃鬼",
+    "default": "True"
+   },
+   {
+    "field": "enable_maneki",
+    "title": null,
+    "desc": "是否启用奉纳",
+    "default": "True"
+   }
+  ],
+  "templates": 18,
+  "ocr_regions": 8,
+  "images": 18,
+  "script_methods": [
+   "run",
+   "goto_souls",
+   "back_records",
+   "greed_maneki"
+  ]
+ },
+ {
+  "task": "Tako",
+  "name": "Tako event",
+  "options": [],
+  "templates": 0,
+  "ocr_regions": 0,
+  "images": 0,
+  "script_methods": [
+   "run",
+   "exit_task",
+   "battle_wait"
+  ]
+ },
+ {
+  "task": "TalismanPass",
+  "name": "Talisman Pass (御札任务/daily)",
+  "options": [
+   {
+    "field": "harvest_soul",
+    "title": null,
+    "desc": "收获1500签御魂",
+    "default": "False"
+   }
+  ],
+  "templates": 14,
+  "ocr_regions": 0,
+  "images": 14,
+  "script_methods": [
+   "run",
+   "get_all",
+   "get_flower",
+   "in_task",
+   "harvest_soul"
+  ]
+ },
+ {
+  "task": "TrueOrochi",
+  "name": "True Orochi (真八岐大蛇)",
+  "options": [
+   {
+    "field": "priority",
+    "title": null,
+    "desc": "priority_help",
+    "default": "10"
+   },
+   {
+    "field": "find_true_orochi",
+    "title": null,
+    "desc": "find_true_orochi_help",
+    "default": "True"
+   },
+   {
+    "field": "green_enable",
+    "title": null,
+    "desc": "green_enable_help",
+    "default": "False"
+   },
+   {
+    "field": "green_mark_type",
+    "title": null,
+    "desc": "green_mark_type_help",
+    "default": "GreenMarkType.LEFT_1"
+   },
+   {
+    "field": "current_success",
+    "title": null,
+    "desc": "current_success_help",
+    "default": "0"
+   }
+  ],
+  "templates": 14,
+  "ocr_regions": 1,
+  "images": 14,
+  "script_methods": [
+   "run",
+   "check_true_orochi",
+   "check_times",
+   "run_true_orochi"
+  ]
+ },
+ {
+  "task": "WantedQuests",
+  "name": "Wanted Quests (悬赏封印)",
+  "options": [
+   {
+    "field": "cooperation_type",
+    "title": null,
+    "desc": "cooperation_type_help",
+    "default": "CooperationSelectMaskDescription.Any"
+   },
+   {
+    "field": "battle_priority",
+    "title": null,
+    "desc": "battle_priority_help",
+    "default": "'挑战 > 秘闻 > 探索'"
+   },
+   {
+    "field": "cooperation_only",
+    "title": null,
+    "desc": "cooperation_only_help",
+    "default": "False"
+   },
+   {
+    "field": "unwanted_boss_names",
+    "title": null,
+    "desc": "unwanted_boss_name_help",
+    "default": "'酒吞童子"
+   },
+   {
+    "field": "layer_limit",
+    "title": null,
+    "desc": "X层及以上不打",
+    "default": "LayerLimit.LAYER_7"
+   }
+  ],
+  "templates": 49,
+  "ocr_regions": 20,
+  "images": 38,
+  "script_methods": [
+   "run",
+   "next_run",
+   "pre_work",
+   "pre_work_cooperation_only",
+   "trace_one",
+   "execute_mission",
+   "challenge",
+   "secret",
+   "invite_random",
+   "invite_five",
+   "all_cooperation_invite",
+   "cooperation_invite",
+   "get_cooperation_info",
+   "appear_highlight",
+   "special_main",
+   "get_config",
+   "need_invite_vip",
+   "get_invite_vip_name",
+   "invite_success_callback",
+   "process_ocr",
+   "txt_ocr_appear",
+   "find_wq",
+   "is_wq_remained"
+  ]
+ },
+ {
+  "task": "WeeklyTrifles",
+  "name": "Weekly tasks (周常)",
+  "options": [
+   {
+    "field": "share_collect",
+    "title": null,
+    "desc": "share_collect_help",
+    "default": "True"
+   },
+   {
+    "field": "share_area_boss",
+    "title": null,
+    "desc": "share_area_boss_help",
+    "default": "True"
+   },
+   {
+    "field": "share_secret",
+    "title": null,
+    "desc": "share_secret_help",
+    "default": "True"
+   },
+   {
+    "field": "broken_amulet",
+    "title": "Broken Amulet",
+    "desc": "trifles_broken_amulet_help",
+    "default": "100"
+   }
+  ],
+  "templates": 19,
+  "ocr_regions": 3,
+  "images": 19,
+  "script_methods": [
+   "run",
+   "click_share",
+   "_share_collect",
+   "_share_area_boss",
+   "_share_secret",
+   "_broken_amulet"
+  ]
+ }
+]

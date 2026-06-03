@@ -53,6 +53,7 @@ class KB:
         self.skills = _load(os.path.join(FANDOM, "shikigami_skills.json"), {})
         self.battle = _load(os.path.join(FANDOM, "battle_mechanics.json"), {})
         self.progression = _load(os.path.join(FANDOM, "progression_guide.json"), {})
+        self.features = _load(os.path.join(os.path.dirname(__file__), "oas_features.json"), [])
         self.world = _load(os.path.join(EXP, "world.json"), {"states": {}, "edges": []})
         # index nhanh shikigami_full theo ten
         self._sfull = {s.get("name", "").lower(): s for s in self.shikigami_full}
@@ -155,6 +156,19 @@ class KB:
                 docs.append({"id": f"prog:{name}", "type": "progression",
                              "title": f"Guide: {name.lstrip('_')}",
                              "text": _clean(txt, 1800), "meta": {}})
+        # 4d) game features / activities (trich tu OAS - game co che do/hoat dong gi)
+        for f in self.features:
+            opts = "; ".join(
+                f"{o.get('title') or o.get('field')}: {o.get('desc') or ''}"
+                for o in f.get("options", [])[:15])
+            methods = ", ".join(f.get("script_methods", [])[:12])
+            text = (f"Game activity/mode: {f['name']} (OAS task '{f['task']}'). "
+                    f"Do phuc tap: {f.get('templates',0)} template, {f.get('ocr_regions',0)} vung OCR. "
+                    f"Tuy chon tu dong hoa: {opts}. "
+                    f"Cac buoc/ham xu ly: {methods}.")
+            docs.append({"id": f"feature:{f['task']}", "type": "feature",
+                         "title": f"Activity: {f['name']}",
+                         "text": _clean(text, 1600), "meta": {"task": f["task"]}})
         # 5) UI screens (chuc nang game da map)
         seen = set()
         for sid, st in self.world["states"].items():
@@ -190,6 +204,7 @@ class KB:
             "modes": len(self.modes),
             "battle_pages": len(self.battle),
             "progression_pages": len(self.progression),
+            "game_features": len(self.features),
             "screens_labeled": len({st.get("label") for st in self.world["states"].values()
                                     if st.get("label")}),
             "documents": len(self.documents()),
@@ -231,6 +246,14 @@ def main():
     elif cmd == "screen":
         for s in kb.screen(q):
             print(f"  {s['label']}: {s['desc']}")
+    elif cmd == "features":
+        for f in sorted(kb.features, key=lambda z: -z.get("templates", 0)):
+            if q and q.lower() not in f["name"].lower():
+                continue
+            print(f"• {f['name']}  [{f.get('templates',0)} tmpl]")
+            if q:  # chi tiet khi loc 1 task
+                for o in f.get("options", [])[:12]:
+                    print(f"    - {o.get('title') or o.get('field')}: {o.get('desc') or ''}")
     else:
         print("unknown cmd")
 
