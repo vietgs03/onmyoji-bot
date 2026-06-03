@@ -2,3 +2,5 @@ captures/*.png
 logs/*.log
 research/OAS/
 .venv/
+__pycache__/
+*.pyc

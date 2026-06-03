@@ -605,3 +605,9 @@
 {"event": "transition", "from": "eef6c85a46", "click": [97, 205], "to": "f10db24cd0", "to_is_new": false, "step": 58}
 {"event": "noop", "state": "eef6c85a46", "click": [577, 127], "step": 60}
 {"event": "transition", "from": "eef6c85a46", "click": [457, 85], "to": "c6d3d9c4a2", "to_is_new": false, "step": 61}
+{"event": "transition", "from": "16e393445b", "click": [197, 410], "to": "79322e988a", "to_is_new": false, "step": 0}
+{"event": "transition", "from": "a6d0d5b4d9", "click": [284, 585], "to": "152a85ace8", "to_is_new": true, "step": 1}
+{"event": "transition", "from": "eef6c85a46", "click": [505, 109], "to": "e82aa07bd7", "to_is_new": false, "step": 3}
+{"event": "transition", "from": "e82aa07bd7", "click": [1077, 243], "to": "eef6c85a46", "to_is_new": false, "step": 4}
+{"event": "transition", "from": "45e8880646", "click": [1075, 245], "to": "35056d5c44", "to_is_new": false, "step": 6}
+{"event": "noop", "state": "35056d5c44", "click": [269, 454], "step": 7}

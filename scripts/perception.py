@@ -61,9 +61,13 @@ STABLE_REGIONS = [
 def dhash(img, per_region=4):
     """State-hash on dinh: hash tung VUNG TINH roi noi lai.
     Bo qua hoan toan vung nhan vat dong o giua + cay sakura."""
+    if img is None or img.size == 0 or img.shape[0] < H or img.shape[1] < W:
+        return None
     parts = []
     for x0, y0, x1, y1 in STABLE_REGIONS:
         crop = img[y0:y1, x0:x1]
+        if crop.size == 0:
+            return None
         g = cv2.cvtColor(crop, cv2.COLOR_BGR2GRAY)
         g = cv2.resize(g, (per_region + 1, per_region))
         diff = g[:, 1:] > g[:, :-1]

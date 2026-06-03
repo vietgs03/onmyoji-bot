@@ -34,10 +34,24 @@ function Get-Handle {
   return $c.MainWindowHandle
 }
 
+function Restore-Win($hwnd) {
+  # SW_RESTORE = 9: bo minimize/maximize, dua cua so ve trang thai binh thuong.
+  [Native]::ShowWindow($hwnd, 9) | Out-Null
+  Start-Sleep -Milliseconds 120
+  [Native]::SetForegroundWindow($hwnd) | Out-Null
+  Start-Sleep -Milliseconds 120
+}
+
 function Do-BgShot($hwnd, $path) {
   $r = New-Object Native+RECT
   [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
   $w = $r.Right - $r.Left; $h = $r.Bottom - $r.Top
+  # Cua so bi minimize (rect 0/qua nho) -> restore roi do lai rect.
+  if ($w -le 200 -or $h -le 100) {
+    Restore-Win $hwnd
+    [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
+    $w = $r.Right - $r.Left; $h = $r.Bottom - $r.Top
+  }
   if ($w -le 0 -or $h -le 0) { return @(0,0,$false) }
   $bmp = New-Object System.Drawing.Bitmap $w, $h
   $g = [System.Drawing.Graphics]::FromImage($bmp)
@@ -110,6 +124,11 @@ while ($true) {
       "pmclick" {
         Do-BgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
         Write-Output ("OK pmclick {0} {1}" -f $parts[1],$parts[2])
+      }
+      "restore" {
+        Restore-Win $hwnd
+        $r = New-Object Native+RECT; [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
+        Write-Output ("OK restore {0} {1}" -f ($r.Right-$r.Left),($r.Bottom-$r.Top))
       }
       "quit"   { Write-Output "OK bye"; break }
       default  { Write-Output ("ERR unknown {0}" -f $cmd) }

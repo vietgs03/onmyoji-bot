@@ -65,6 +65,8 @@ class WorldModel:
         if img is None:
             return None, False, None
         dh = dhash(img)
+        if dh is None:          # anh hong/sai kich thuoc -> coi nhu khong chup duoc
+            return None, False, None
         sid, isnew = self.canonicalize(dh, img)
         return sid, isnew, img
 

@@ -256,11 +256,18 @@ def explore(budget=60, home_every=20, max_depth=4):
     home_fails = 0  # dem so lan goto_home lien tiep KHONG ve duoc HOME
     unreachable = set()  # frontier khong toi duoc -> bo qua de tranh loop
     recent = []  # cac state gan day -> phat hien dao dong
+    no_shot = 0  # dem so lan lien tiep khong chup duoc anh
 
     for step in range(budget):
         sid, isnew, img = wm.observe()
         if img is None:
-            print("  ! no shot"); break
+            # anh hong/chua chup duoc -> thu lai vai lan thay vi dung han
+            print(f"[{step}] no shot -> retry"); time.sleep(1.5)
+            no_shot += 1
+            if no_shot >= 5:
+                print("  ! 5 lan khong chup duoc -> dung"); break
+            continue
+        no_shot = 0
         # AN TOAN: neu lo vao tran -> thoat ngay (Confirm roi tran / tap continue)
         if handle_battle(wm):
             goto_home(wm, home_sid); stuck = 0
