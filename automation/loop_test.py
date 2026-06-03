@@ -23,12 +23,10 @@ TARGETS = [
 
 def goto_home(a, tries=4):
     """Bam back nhieu lan ve HOME (co Explore + Summon)."""
-    for _ in range(tries):
-        r = a.read()
-        if r.has("Explore") and r.has("Summon"):
-            return True
-        a.back()
     r = a.read()
+    if r.has("Explore") and r.has("Summon"):
+        return True
+    r = a.back(home=True)
     return r.has("Explore") and r.has("Summon")
 
 
