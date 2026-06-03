@@ -7,3 +7,7 @@ __pycache__/
 ml/models/*.pkl
 knowledge/vectordb/*.pkl
 knowledge/screen_text.json.tokcache.json
+
+# game asset raw (lon, local-only - extract lai tu game bang nxpk_extract.py)
+data/game_assets/
+data/fandom_images/*.png
