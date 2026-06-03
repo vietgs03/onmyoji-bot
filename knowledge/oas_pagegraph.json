@@ -1,0 +1,3228 @@
+{
+ "resolution_src": [
+  1280,
+  720
+ ],
+ "resolution_dst": [
+  1152,
+  679
+ ],
+ "n_assets": 2002,
+ "pages": {
+  "page_login": {
+   "name": "page_login",
+   "check": [
+    {
+     "name": "I_CHECK_LOGIN_FORM",
+     "roi_src": [
+      178,
+      572,
+      53,
+      60
+     ],
+     "roi": [
+      160,
+      539,
+      48,
+      57
+     ],
+     "center": [
+      184,
+      567
+     ],
+     "file": "",
+     "desc": "用于判断是否在登录界面的",
+     "kind": "image"
+    }
+   ],
+   "links": {},
+   "additional": []
+  },
+  "page_main": {
+   "name": "page_main",
+   "check": [
+    {
+     "name": "I_CHECK_MAIN",
+     "roi_src": [
+      807,
+      108,
+      76,
+      45
+     ],
+     "roi": [
+      726,
+      102,
+      68,
+      42
+     ],
+     "center": [
+      760,
+      123
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_summon": {
+     "name": "I_MAIN_GOTO_SUMMON",
+     "roi_src": [
+      1073,
+      174,
+      57,
+      65
+     ],
+     "roi": [
+      966,
+      164,
+      51,
+      61
+     ],
+     "center": [
+      991,
+      194
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_exploration": {
+     "name": "I_MAIN_GOTO_EXPLORATION",
+     "roi_src": [
+      493,
+      116,
+      45,
+      75
+     ],
+     "roi": [
+      444,
+      109,
+      40,
+      71
+     ],
+     "center": [
+      464,
+      144
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_town": {
+     "name": "I_MAIN_GOTO_TOWN",
+     "roi_src": [
+      706,
+      249,
+      61,
+      57
+     ],
+     "roi": [
+      635,
+      235,
+      55,
+      54
+     ],
+     "center": [
+      662,
+      262
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_shikigami_records": {
+     "name": "I_MAIN_GOTO_SHIKIGAMI_RECORDS",
+     "roi_src": [
+      1080,
+      590,
+      56,
+      64
+     ],
+     "roi": [
+      972,
+      556,
+      50,
+      60
+     ],
+     "center": [
+      997,
+      586
+     ],
+     "file": "",
+     "desc": "式神录",
+     "kind": "image"
+    },
+    "page_onmyodo": {
+     "name": "I_MAIN_GOTO_ONMYODO",
+     "roi_src": [
+      960,
+      590,
+      39,
+      36
+     ],
+     "roi": [
+      864,
+      556,
+      35,
+      34
+     ],
+     "center": [
+      881,
+      573
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_friends": {
+     "name": "I_MAIN_GOTO_FRIENDS",
+     "roi_src": [
+      845,
+      590,
+      55,
+      55
+     ],
+     "roi": [
+      760,
+      556,
+      50,
+      52
+     ],
+     "center": [
+      785,
+      582
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_daily": {
+     "name": "I_MAIN_GOTO_DAILY",
+     "roi_src": [
+      779,
+      612,
+      51,
+      67
+     ],
+     "roi": [
+      701,
+      577,
+      46,
+      63
+     ],
+     "center": [
+      724,
+      608
+     ],
+     "file": "",
+     "desc": "进入花合战",
+     "kind": "image"
+    },
+    "page_mall": {
+     "name": "I_MAIN_GOTO_MALL",
+     "roi_src": [
+      663,
+      661,
+      41,
+      22
+     ],
+     "roi": [
+      597,
+      623,
+      37,
+      21
+     ],
+     "center": [
+      615,
+      633
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_guild": {
+     "name": "I_MAIN_GOTO_GUILD",
+     "roi_src": [
+      495,
+      590,
+      50,
+      22
+     ],
+     "roi": [
+      446,
+      556,
+      45,
+      21
+     ],
+     "center": [
+      468,
+      566
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_team": {
+     "name": "I_MAIN_GOTO_TEAM",
+     "roi_src": [
+      395,
+      590,
+      38,
+      48
+     ],
+     "roi": [
+      356,
+      556,
+      34,
+      45
+     ],
+     "center": [
+      373,
+      578
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_collection": {
+     "name": "I_MAIN_GOTO_COLLECTION",
+     "roi_src": [
+      70,
+      590,
+      36,
+      41
+     ],
+     "roi": [
+      63,
+      556,
+      32,
+      39
+     ],
+     "center": [
+      79,
+      575
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_travel": {
+     "name": "I_MAIN_GOTO_TRAVEL",
+     "roi_src": [
+      170,
+      590,
+      64,
+      61
+     ],
+     "roi": [
+      153,
+      556,
+      58,
+      58
+     ],
+     "center": [
+      182,
+      585
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "I_AD_CLOSE_RED",
+     "roi_src": [
+      993,
+      130,
+      33,
+      36
+     ],
+     "roi": [
+      894,
+      123,
+      30,
+      34
+     ],
+     "center": [
+      909,
+      140
+     ],
+     "file": "",
+     "desc": "商店弹窗红色关闭",
+     "kind": "image"
+    },
+    {
+     "name": "I_BACK_FRIENDS",
+     "roi_src": [
+      1152,
+      87,
+      53,
+      52
+     ],
+     "roi": [
+      1037,
+      82,
+      48,
+      49
+     ],
+     "center": [
+      1061,
+      106
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    {
+     "name": "I_CANCEL_BATTLE",
+     "roi_src": [
+      471,
+      395,
+      129,
+      55
+     ],
+     "roi": [
+      424,
+      373,
+      116,
+      52
+     ],
+     "center": [
+      482,
+      399
+     ],
+     "file": "",
+     "desc": "取消继续战斗",
+     "kind": "image"
+    },
+    {
+     "name": "I_LOGIN_COURTYARD",
+     "roi_src": [
+      40,
+      640,
+      100,
+      50
+     ],
+     "roi": [
+      36,
+      604,
+      90,
+      47
+     ],
+     "center": [
+      81,
+      627
+     ],
+     "file": "",
+     "desc": "闲庭图片(用户新增，用于判断是否需要点击卷轴关闭区域)",
+     "kind": "image"
+    },
+    {
+     "name": "C_LOGIN_SCROLL_CLOSE_AREA",
+     "unresolved": true
+    },
+    {
+     "name": "I_CLOSE_CHAT_WINDOW",
+     "roi_src": [
+      653,
+      397,
+      18,
+      18
+     ],
+     "roi": [
+      588,
+      374,
+      16,
+      17
+     ],
+     "center": [
+      596,
+      382
+     ],
+     "file": "",
+     "desc": "关闭聊天窗口",
+     "kind": "image"
+    }
+   ]
+  },
+  "page_summon": {
+   "name": "page_summon",
+   "check": [
+    {
+     "name": "I_CHECK_SUMMON",
+     "roi_src": [
+      750,
+      580,
+      30,
+      28
+     ],
+     "roi": [
+      675,
+      547,
+      27,
+      26
+     ],
+     "center": [
+      688,
+      560
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_SUMMON_GOTO_MAIN",
+     "roi_src": [
+      27,
+      5,
+      49,
+      51
+     ],
+     "roi": [
+      24,
+      5,
+      44,
+      48
+     ],
+     "center": [
+      46,
+      29
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_exploration": {
+   "name": "page_exploration",
+   "check": [
+    {
+     "name": "I_CHECK_EXPLORATION",
+     "roi_src": [
+      681,
+      12,
+      27,
+      36
+     ],
+     "roi": [
+      613,
+      11,
+      24,
+      34
+     ],
+     "center": [
+      625,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_awake_zones": {
+     "name": "I_EXPLORATION_GOTO_AWAKE_ZONE",
+     "roi_src": [
+      65,
+      632,
+      50,
+      41
+     ],
+     "roi": [
+      58,
+      596,
+      45,
+      39
+     ],
+     "center": [
+      80,
+      615
+     ],
+     "file": "",
+     "desc": "探索前往觉醒",
+     "kind": "image"
+    },
+    "page_soul_zones": {
+     "name": "I_EXPLORATION_GOTO_SOUL_ZONE",
+     "roi_src": [
+      165,
+      639,
+      44,
+      36
+     ],
+     "roi": [
+      148,
+      603,
+      40,
+      34
+     ],
+     "center": [
+      168,
+      620
+     ],
+     "file": "",
+     "desc": "探索前往御魂",
+     "kind": "image"
+    },
+    "page_realm_raid": {
+     "name": "I_EXPLORATION_GOTO_REALM_RAID",
+     "roi_src": [
+      263,
+      636,
+      51,
+      46
+     ],
+     "roi": [
+      237,
+      600,
+      46,
+      43
+     ],
+     "center": [
+      260,
+      621
+     ],
+     "file": "",
+     "desc": "探索前往结界突破",
+     "kind": "image"
+    },
+    "page_goryou_realm": {
+     "name": "I_EXPLORATION_GOTO_GORYOU_REALM",
+     "roi_src": [
+      353,
+      639,
+      47,
+      45
+     ],
+     "roi": [
+      318,
+      603,
+      42,
+      42
+     ],
+     "center": [
+      339,
+      624
+     ],
+     "file": "",
+     "desc": "探索前往御灵",
+     "kind": "image"
+    },
+    "page_delegation": {
+     "name": "I_EXPLORATION_GOTO_DELEGATION",
+     "roi_src": [
+      453,
+      639,
+      53,
+      37
+     ],
+     "roi": [
+      408,
+      603,
+      48,
+      35
+     ],
+     "center": [
+      432,
+      620
+     ],
+     "file": "",
+     "desc": "探索前往式神委派",
+     "kind": "image"
+    },
+    "page_secret_zones": {
+     "name": "I_EXPLORATION_GOTO_SECRET_ZONES",
+     "roi_src": [
+      549,
+      633,
+      53,
+      40
+     ],
+     "roi": [
+      494,
+      597,
+      48,
+      38
+     ],
+     "center": [
+      518,
+      616
+     ],
+     "file": "",
+     "desc": "探索前往秘闻",
+     "kind": "image"
+    },
+    "page_area_boss": {
+     "name": "I_EXPLORATION_GOTO_AREA_BOSS",
+     "roi_src": [
+      640,
+      638,
+      51,
+      45
+     ],
+     "roi": [
+      576,
+      602,
+      46,
+      42
+     ],
+     "center": [
+      599,
+      623
+     ],
+     "file": "",
+     "desc": "探索前往地域鬼王",
+     "kind": "image"
+    },
+    "page_heian_kitan": {
+     "name": "I_EXPLORATION_GOTO_HEIAN_KITAN",
+     "roi_src": [
+      739,
+      643,
+      52,
+      44
+     ],
+     "roi": [
+      665,
+      606,
+      47,
+      41
+     ],
+     "center": [
+      688,
+      626
+     ],
+     "file": "",
+     "desc": "探索前往平安奇谭",
+     "kind": "image"
+    },
+    "page_six_gates": {
+     "name": "I_EXPLORATION_GOTO_SIX_GATES",
+     "roi_src": [
+      928,
+      638,
+      54,
+      46
+     ],
+     "roi": [
+      835,
+      602,
+      49,
+      43
+     ],
+     "center": [
+      859,
+      623
+     ],
+     "file": "",
+     "desc": "探索前往六道之门",
+     "kind": "image"
+    },
+    "page_bondling_fairyland": {
+     "name": "I_EXPLORATION_GOTO_BONDLING_FAIRYLAND",
+     "roi_src": [
+      1032,
+      634,
+      46,
+      50
+     ],
+     "roi": [
+      929,
+      598,
+      41,
+      47
+     ],
+     "center": [
+      949,
+      621
+     ],
+     "file": "",
+     "desc": "探索前往契灵之境",
+     "kind": "image"
+    },
+    "page_hero_test": {
+     "name": "I_EXPLORATION_GOTO_HERO_TEST",
+     "roi_src": [
+      837,
+      630,
+      58,
+      56
+     ],
+     "roi": [
+      753,
+      594,
+      52,
+      53
+     ],
+     "center": [
+      779,
+      620
+     ],
+     "file": "",
+     "desc": "探索前往英杰试炼",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_town": {
+   "name": "page_town",
+   "check": [
+    {
+     "name": "I_CHECK_TOWN",
+     "roi_src": [
+      1026,
+      106,
+      68,
+      82
+     ],
+     "roi": [
+      923,
+      100,
+      61,
+      77
+     ],
+     "center": [
+      953,
+      138
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_TOWN_GOTO_MAIN",
+     "roi_src": [
+      1017,
+      231,
+      78,
+      73
+     ],
+     "roi": [
+      915,
+      218,
+      70,
+      69
+     ],
+     "center": [
+      950,
+      252
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_duel": {
+     "name": "I_TOWN_GOTO_DUEL",
+     "roi_src": [
+      756,
+      142,
+      48,
+      68
+     ],
+     "roi": [
+      680,
+      134,
+      43,
+      64
+     ],
+     "center": [
+      701,
+      166
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_demon_encounter": {
+     "name": "I_TOWN_GOTO_DEMON_ENCOUNTER",
+     "roi_src": [
+      617,
+      135,
+      51,
+      75
+     ],
+     "roi": [
+      555,
+      127,
+      46,
+      71
+     ],
+     "center": [
+      578,
+      162
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_hunt": {
+     "name": "I_TOWN_GOTO_HUNT",
+     "roi_src": [
+      475,
+      138,
+      46,
+      69
+     ],
+     "roi": [
+      428,
+      130,
+      41,
+      65
+     ],
+     "center": [
+      448,
+      162
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_hunt_kirin": {
+     "name": "I_TOWN_GOTO_HUNT",
+     "roi_src": [
+      475,
+      138,
+      46,
+      69
+     ],
+     "roi": [
+      428,
+      130,
+      41,
+      65
+     ],
+     "center": [
+      448,
+      162
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_draft_duel": {
+     "name": "I_TOWN_GOTO_DRAFT_DUEL",
+     "roi_src": [
+      335,
+      159,
+      55,
+      72
+     ],
+     "roi": [
+      302,
+      150,
+      50,
+      68
+     ],
+     "center": [
+      327,
+      184
+     ],
+     "file": "",
+     "desc": "协同对弈",
+     "kind": "image"
+    },
+    "page_hyakkisen": {
+     "name": "I_TOWN_GOTO_HYAKKISEN",
+     "roi_src": [
+      192,
+      145,
+      48,
+      67
+     ],
+     "roi": [
+      173,
+      137,
+      43,
+      63
+     ],
+     "center": [
+      194,
+      168
+     ],
+     "file": "",
+     "desc": "百鬼奕",
+     "kind": "image"
+    },
+    "page_hyakkiyakou": {
+     "name": "I_TOWN_GOTO_HYAKKIYAKOU",
+     "roi_src": [
+      880,
+      165,
+      53,
+      69
+     ],
+     "roi": [
+      792,
+      156,
+      48,
+      65
+     ],
+     "center": [
+      816,
+      188
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_awake_zones": {
+   "name": "page_awake_zones",
+   "check": [
+    {
+     "name": "I_CHECK_AWAKE",
+     "roi_src": [
+      164,
+      534,
+      42,
+      41
+     ],
+     "roi": [
+      148,
+      504,
+      38,
+      39
+     ],
+     "center": [
+      167,
+      523
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_soul_zones": {
+   "name": "page_soul_zones",
+   "check": [
+    {
+     "name": "I_CHECK_SOUL_ZONES",
+     "roi_src": [
+      1193,
+      636,
+      40,
+      40
+     ],
+     "roi": [
+      1074,
+      600,
+      36,
+      38
+     ],
+     "center": [
+      1092,
+      619
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_realm_raid": {
+   "name": "page_realm_raid",
+   "check": [
+    {
+     "name": "I_CHECK_REALM_RAID",
+     "roi_src": [
+      129,
+      632,
+      52,
+      48
+     ],
+     "roi": [
+      116,
+      596,
+      47,
+      45
+     ],
+     "center": [
+      139,
+      618
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_REALM_RAID_GOTO_EXPLORATION",
+     "roi_src": [
+      1192,
+      107,
+      36,
+      43
+     ],
+     "roi": [
+      1073,
+      101,
+      32,
+      41
+     ],
+     "center": [
+      1089,
+      121
+     ],
+     "file": "",
+     "desc": "就是一个红叉",
+     "kind": "image"
+    },
+    "page_kekkai_toppa": {
+     "name": "I_RYOU_TOPPA",
+     "roi_src": [
+      1191,
+      352,
+      78,
+      116
+     ],
+     "roi": [
+      1072,
+      332,
+      70,
+      109
+     ],
+     "center": [
+      1107,
+      386
+     ],
+     "file": "",
+     "desc": "寮突",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_kekkai_toppa": {
+   "name": "page_kekkai_toppa",
+   "check": [
+    {
+     "name": "I_KEKKAI_TOPPA",
+     "roi_src": [
+      1065,
+      3,
+      203,
+      61
+     ],
+     "roi": [
+      958,
+      3,
+      183,
+      58
+     ],
+     "center": [
+      1049,
+      32
+     ],
+     "file": "",
+     "desc": "寮结界突破右上角",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_REALM_RAID_GOTO_EXPLORATION",
+     "roi_src": [
+      1192,
+      107,
+      36,
+      43
+     ],
+     "roi": [
+      1073,
+      101,
+      32,
+      41
+     ],
+     "center": [
+      1089,
+      121
+     ],
+     "file": "",
+     "desc": "就是一个红叉",
+     "kind": "image"
+    },
+    "page_realm_raid": {
+     "name": "I_RYOUTOPPA_GOTO_REALMRAID",
+     "roi_src": [
+      1201,
+      234,
+      62,
+      105
+     ],
+     "roi": [
+      1081,
+      221,
+      56,
+      99
+     ],
+     "center": [
+      1109,
+      270
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_goryou_realm": {
+   "name": "page_goryou_realm",
+   "check": [
+    {
+     "name": "I_CHECK_GORYOU",
+     "roi_src": [
+      881,
+      17,
+      30,
+      39
+     ],
+     "roi": [
+      793,
+      16,
+      27,
+      37
+     ],
+     "center": [
+      806,
+      34
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_delegation": {
+   "name": "page_delegation",
+   "check": [
+    {
+     "name": "I_CHECK_DELEGATION",
+     "roi_src": [
+      839,
+      132,
+      49,
+      45
+     ],
+     "roi": [
+      755,
+      124,
+      44,
+      42
+     ],
+     "center": [
+      777,
+      145
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_secret_zones": {
+   "name": "page_secret_zones",
+   "check": [
+    {
+     "name": "I_CHECK_SECRET_ZONES",
+     "roi_src": [
+      1145,
+      592,
+      110,
+      119
+     ],
+     "roi": [
+      1030,
+      558,
+      99,
+      112
+     ],
+     "center": [
+      1079,
+      614
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_area_boss": {
+   "name": "page_area_boss",
+   "check": [
+    {
+     "name": "I_CHECK_AREA_BOSS",
+     "roi_src": [
+      20,
+      320,
+      150,
+      130
+     ],
+     "roi": [
+      18,
+      302,
+      135,
+      123
+     ],
+     "center": [
+      85,
+      363
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_heian_kitan": {
+   "name": "page_heian_kitan",
+   "check": [
+    {
+     "name": "I_CHECK_HEIAN_KITAN",
+     "roi_src": [
+      27,
+      48,
+      47,
+      39
+     ],
+     "roi": [
+      24,
+      45,
+      42,
+      37
+     ],
+     "center": [
+      45,
+      63
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_CHECK_HEIAN_KITAN",
+     "roi_src": [
+      27,
+      48,
+      47,
+      39
+     ],
+     "roi": [
+      24,
+      45,
+      42,
+      37
+     ],
+     "center": [
+      45,
+      63
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_six_gates": {
+   "name": "page_six_gates",
+   "check": [
+    {
+     "name": "I_CHECK_SIX_GATES",
+     "roi_src": [
+      1174,
+      621,
+      55,
+      44
+     ],
+     "roi": [
+      1057,
+      586,
+      50,
+      41
+     ],
+     "center": [
+      1082,
+      606
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_SIX_GATES_GOTO_EXPLORATION",
+     "roi_src": [
+      18,
+      19,
+      52,
+      55
+     ],
+     "roi": [
+      16,
+      18,
+      47,
+      52
+     ],
+     "center": [
+      39,
+      44
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_bondling_fairyland": {
+   "name": "page_bondling_fairyland",
+   "check": [
+    {
+     "name": "I_BALL_AREA",
+     "roi_src": [
+      61,
+      631,
+      50,
+      48
+     ],
+     "roi": [
+      55,
+      595,
+      45,
+      45
+     ],
+     "center": [
+      77,
+      617
+     ],
+     "file": "",
+     "desc": "地域",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_hero_test": {
+   "name": "page_hero_test",
+   "check": [
+    {
+     "name": "I_CHECK_HERO_TEST",
+     "roi_src": [
+      148,
+      10,
+      133,
+      48
+     ],
+     "roi": [
+      133,
+      9,
+      120,
+      45
+     ],
+     "center": [
+      193,
+      31
+     ],
+     "file": "",
+     "desc": "英杰试炼左上角标志",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_exploration": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_duel": {
+   "name": "page_duel",
+   "check": [
+    {
+     "name": "I_CHECK_DUEL",
+     "roi_src": [
+      149,
+      16,
+      64,
+      38
+     ],
+     "roi": [
+      134,
+      15,
+      58,
+      36
+     ],
+     "center": [
+      163,
+      33
+     ],
+     "file": "",
+     "desc": "斗技主界面左上角文字图像",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_demon_encounter": {
+   "name": "page_demon_encounter",
+   "check": [
+    {
+     "name": "I_CHECK_DEMON_ENCOUNTER",
+     "roi_src": [
+      153,
+      16,
+      129,
+      38
+     ],
+     "roi": [
+      138,
+      15,
+      116,
+      36
+     ],
+     "center": [
+      196,
+      33
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    "page_demon_encounter_realworld": {
+     "name": "I_DEMON_ENCOUNTER_REALWORLD_GOTO",
+     "roi_src": [
+      994,
+      485,
+      106,
+      30
+     ],
+     "roi": [
+      895,
+      457,
+      95,
+      28
+     ],
+     "center": [
+      942,
+      471
+     ],
+     "file": "",
+     "desc": "逢魔之时进入现世逢魔",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_demon_encounter_realworld": {
+   "name": "page_demon_encounter_realworld",
+   "check": [
+    {
+     "name": "I_CHECK_DEMON_ENCOUNTER_REALWORLD",
+     "roi_src": [
+      26,
+      658,
+      42,
+      43
+     ],
+     "roi": [
+      23,
+      621,
+      38,
+      41
+     ],
+     "center": [
+      42,
+      641
+     ],
+     "file": "",
+     "desc": "检查逢魔之时现世逢魔界面",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_demon_encounter": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_hunt": {
+   "name": "page_hunt",
+   "check": [
+    {
+     "name": "I_CHECK_HUNT",
+     "roi_src": [
+      575,
+      30,
+      46,
+      25
+     ],
+     "roi": [
+      518,
+      28,
+      41,
+      24
+     ],
+     "center": [
+      538,
+      40
+     ],
+     "file": "",
+     "desc": "检查狩猎战界面",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_hunt_kirin": {
+   "name": "page_hunt_kirin",
+   "check": [
+    {
+     "name": "I_CHECK_HUNT_KIRIN",
+     "roi_src": [
+      353,
+      240,
+      30,
+      54
+     ],
+     "roi": [
+      318,
+      226,
+      27,
+      51
+     ],
+     "center": [
+      331,
+      251
+     ],
+     "file": "",
+     "desc": "检查狩猎战麒麟界面",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_draft_duel": {
+   "name": "page_draft_duel",
+   "check": [
+    {
+     "name": "I_CHECK_DRAFT_DUEL",
+     "roi_src": [
+      1051,
+      612,
+      56,
+      58
+     ],
+     "roi": [
+      946,
+      577,
+      50,
+      55
+     ],
+     "center": [
+      971,
+      604
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_hyakkisen": {
+   "name": "page_hyakkisen",
+   "check": [
+    {
+     "name": "I_CHECK_HYAKKISEN",
+     "roi_src": [
+      1014,
+      607,
+      53,
+      55
+     ],
+     "roi": [
+      913,
+      572,
+      48,
+      52
+     ],
+     "center": [
+      937,
+      598
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_hyakkiyakou": {
+   "name": "page_hyakkiyakou",
+   "check": [
+    {
+     "name": "I_CHECK_KYAKKIYAKOU",
+     "roi_src": [
+      305,
+      567,
+      56,
+      64
+     ],
+     "roi": [
+      274,
+      535,
+      50,
+      60
+     ],
+     "center": [
+      299,
+      565
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_town": {
+     "name": "I_HYAKKIYAKOU_CLOSE",
+     "roi_src": [
+      1063,
+      181,
+      47,
+      43
+     ],
+     "roi": [
+      957,
+      171,
+      42,
+      41
+     ],
+     "center": [
+      978,
+      191
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_shikigami_records": {
+   "name": "page_shikigami_records",
+   "check": [
+    {
+     "name": "I_CHECK_RECORDS",
+     "roi_src": [
+      269,
+      71,
+      55,
+      50
+     ],
+     "roi": [
+      242,
+      67,
+      50,
+      47
+     ],
+     "center": [
+      267,
+      90
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "I_AD_DISAPPEAR",
+     "roi_src": [
+      412,
+      405,
+      37,
+      40
+     ],
+     "roi": [
+      371,
+      382,
+      33,
+      38
+     ],
+     "center": [
+      387,
+      401
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    {
+     "name": "I_RECORDS_CLOSE",
+     "roi_src": [
+      914,
+      143,
+      30,
+      30
+     ],
+     "roi": [
+      823,
+      135,
+      27,
+      28
+     ],
+     "center": [
+      836,
+      149
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    {
+     "name": "I_UI_CANCEL_SAMLL",
+     "roi_src": [
+      472,
+      389,
+      128,
+      62
+     ],
+     "roi": [
+      425,
+      367,
+      115,
+      58
+     ],
+     "center": [
+      482,
+      396
+     ],
+     "file": "",
+     "desc": "短一点的取消",
+     "kind": "image"
+    }
+   ]
+  },
+  "page_onmyodo": {
+   "name": "page_onmyodo",
+   "check": [
+    {
+     "name": "I_CHECK_ONMYODO",
+     "roi_src": [
+      1166,
+      117,
+      84,
+      547
+     ],
+     "roi": [
+      1049,
+      110,
+      76,
+      516
+     ],
+     "center": [
+      1087,
+      368
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_friends": {
+   "name": "page_friends",
+   "check": [
+    {
+     "name": "I_CHECK_FRIENDS",
+     "roi_src": [
+      74,
+      628,
+      58,
+      66
+     ],
+     "roi": [
+      67,
+      592,
+      52,
+      62
+     ],
+     "center": [
+      93,
+      623
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_daily": {
+   "name": "page_daily",
+   "check": [
+    {
+     "name": "I_CHECK_DAILY",
+     "roi_src": [
+      28,
+      515,
+      58,
+      62
+     ],
+     "roi": [
+      25,
+      486,
+      52,
+      58
+     ],
+     "center": [
+      51,
+      515
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "O_CLICK_CLOSE_1",
+     "roi_src": [
+      521,
+      659,
+      232,
+      32
+     ],
+     "roi": [
+      469,
+      621,
+      209,
+      30
+     ],
+     "center": [
+      573,
+      636
+     ],
+     "keyword": "点击空白处关闭此界面",
+     "desc": "点击空白处关闭此界面",
+     "kind": "ocr"
+    },
+    {
+     "name": "O_CLICK_CLOSE_2",
+     "roi_src": [
+      508,
+      584,
+      214,
+      40
+     ],
+     "roi": [
+      457,
+      551,
+      193,
+      38
+     ],
+     "center": [
+      553,
+      570
+     ],
+     "keyword": "点击空白处关闭弹窗",
+     "desc": "点击空白处关闭弹窗",
+     "kind": "ocr"
+    }
+   ]
+  },
+  "page_mall": {
+   "name": "page_mall",
+   "check": [
+    {
+     "name": "I_CHECK_MALL",
+     "roi_src": [
+      147,
+      527,
+      82,
+      82
+     ],
+     "roi": [
+      132,
+      497,
+      74,
+      77
+     ],
+     "center": [
+      169,
+      535
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    },
+    {
+     "name": "I_ROOM_GIFT",
+     "roi_src": [
+      1138,
+      658,
+      52,
+      40
+     ],
+     "roi": [
+      1024,
+      621,
+      47,
+      38
+     ],
+     "center": [
+      1047,
+      640
+     ],
+     "file": "",
+     "desc": "礼包屋",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_YOLLOW",
+     "roi_src": [
+      24,
+      16,
+      48,
+      55
+     ],
+     "roi": [
+      22,
+      15,
+      43,
+      52
+     ],
+     "center": [
+      43,
+      41
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "I_AD_CLOSE_RED",
+     "roi_src": [
+      993,
+      130,
+      33,
+      36
+     ],
+     "roi": [
+      894,
+      123,
+      30,
+      34
+     ],
+     "center": [
+      909,
+      140
+     ],
+     "file": "",
+     "desc": "商店弹窗红色关闭",
+     "kind": "image"
+    },
+    {
+     "name": "I_UI_CANCEL_SAMLL",
+     "roi_src": [
+      472,
+      389,
+      128,
+      62
+     ],
+     "roi": [
+      425,
+      367,
+      115,
+      58
+     ],
+     "center": [
+      482,
+      396
+     ],
+     "file": "",
+     "desc": "短一点的取消",
+     "kind": "image"
+    },
+    {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ]
+  },
+  "page_guild": {
+   "name": "page_guild",
+   "check": [
+    {
+     "name": "I_CHECK_GUILD",
+     "roi_src": [
+      1072,
+      630,
+      49,
+      46
+     ],
+     "roi": [
+      965,
+      594,
+      44,
+      43
+     ],
+     "center": [
+      987,
+      615
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "I_PLANT_TREE_CLOSE",
+     "roi_src": [
+      777,
+      91,
+      36,
+      34
+     ],
+     "roi": [
+      699,
+      86,
+      32,
+      32
+     ],
+     "center": [
+      715,
+      102
+     ],
+     "file": "",
+     "desc": "种树活动关闭标识",
+     "kind": "image"
+    },
+    {
+     "name": "I_CLOSE_CHAT_WINDOW",
+     "roi_src": [
+      653,
+      397,
+      18,
+      18
+     ],
+     "roi": [
+      588,
+      374,
+      16,
+      17
+     ],
+     "center": [
+      596,
+      382
+     ],
+     "file": "",
+     "desc": "关闭聊天窗口",
+     "kind": "image"
+    }
+   ]
+  },
+  "page_team": {
+   "name": "page_team",
+   "check": [
+    {
+     "name": "I_CHECK_TEAM",
+     "roi_src": [
+      32,
+      585,
+      82,
+      90
+     ],
+     "roi": [
+      29,
+      552,
+      74,
+      85
+     ],
+     "center": [
+      66,
+      594
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_collection": {
+   "name": "page_collection",
+   "check": [
+    {
+     "name": "I_CHECK_COLLECTION",
+     "roi_src": [
+      579,
+      639,
+      63,
+      65
+     ],
+     "roi": [
+      521,
+      603,
+      57,
+      61
+     ],
+     "center": [
+      549,
+      633
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "I_UI_CANCEL_SAMLL",
+     "roi_src": [
+      472,
+      389,
+      128,
+      62
+     ],
+     "roi": [
+      425,
+      367,
+      115,
+      58
+     ],
+     "center": [
+      482,
+      396
+     ],
+     "file": "",
+     "desc": "短一点的取消",
+     "kind": "image"
+    }
+   ]
+  },
+  "page_travel": {
+   "name": "page_travel",
+   "check": [
+    {
+     "name": "I_CHECK_TRAVEL",
+     "roi_src": [
+      1134,
+      583,
+      78,
+      77
+     ],
+     "roi": [
+      1021,
+      550,
+      70,
+      73
+     ],
+     "center": [
+      1056,
+      586
+     ],
+     "file": "",
+     "desc": "珍旅居",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": []
+  },
+  "page_dokan": {
+   "name": "page_dokan",
+   "check": [
+    {
+     "name": "I_RYOU_DOKAN_CHECK",
+     "roi_src": [
+      567,
+      15,
+      144,
+      42
+     ],
+     "roi": [
+      510,
+      14,
+      130,
+      40
+     ],
+     "center": [
+      575,
+      34
+     ],
+     "file": "",
+     "desc": "是否已经成功进入道馆，上面中间的“道馆突破”文字",
+     "kind": "image"
+    }
+   ],
+   "links": {
+    "page_main": {
+     "name": "I_BACK_Y",
+     "roi_src": [
+      15,
+      4,
+      57,
+      52
+     ],
+     "roi": [
+      14,
+      4,
+      51,
+      49
+     ],
+     "center": [
+      39,
+      28
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   },
+   "additional": [
+    {
+     "name": "I_EXIT",
+     "roi_src": [
+      14,
+      12,
+      43,
+      41
+     ],
+     "roi": [
+      13,
+      11,
+      39,
+      39
+     ],
+     "center": [
+      32,
+      30
+     ],
+     "file": "",
+     "desc": "左上角的退出",
+     "kind": "image"
+    },
+    {
+     "name": "I_RYOU_DOKAN_EXIT_ENSURE",
+     "roi_src": [
+      678,
+      395,
+      125,
+      56
+     ],
+     "roi": [
+      610,
+      373,
+      112,
+      53
+     ],
+     "center": [
+      666,
+      399
+     ],
+     "file": "",
+     "desc": "道馆退出确认",
+     "kind": "image"
+    },
+    {
+     "name": "I_BACK_BLUE",
+     "roi_src": [
+      32,
+      37,
+      54,
+      52
+     ],
+     "roi": [
+      29,
+      35,
+      49,
+      49
+     ],
+     "center": [
+      53,
+      59
+     ],
+     "file": "",
+     "desc": "description",
+     "kind": "image"
+    }
+   ]
+  },
+  "page_battle": {
+   "name": "page_battle",
+   "check": [
+    {
+     "name": "I_BATTLE_INFO",
+     "roi_src": [
+      230,
+      12,
+      37,
+      39
+     ],
+     "roi": [
+      207,
+      11,
+      33,
+      37
+     ],
+     "center": [
+      223,
+      29
+     ],
+     "file": "",
+     "desc": "战斗信息标识",
+     "kind": "image"
+    }
+   ],
+   "links": {},
+   "additional": []
+  },
+  "page_reward": {
+   "name": "page_reward",
+   "check": [
+    {
+     "name": "I_REWARD_PURPLE_SNAKE_SKIN",
+     "roi_src": [
+      604,
+      213,
+      67,
+      37
+     ],
+     "roi": [
+      544,
+      201,
+      60,
+      35
+     ],
+     "center": [
+      574,
+      218
+     ],
+     "file": "",
+     "desc": "结算紫蛇皮",
+     "kind": "image"
+    },
+    {
+     "name": "I_REWARD",
+     "roi_src": [
+      547,
+      518,
+      172,
+      96
+     ],
+     "roi": [
+      492,
+      489,
+      155,
+      91
+     ],
+     "center": [
+      569,
+      534
+     ],
+     "file": "",
+     "desc": "奖励，就是那个魂",
+     "kind": "image"
+    },
+    {
+     "name": "I_REWARD_EXP_SOUL_4",
+     "roi_src": [
+      806,
+      177,
+      97,
+      69
+     ],
+     "roi": [
+      725,
+      167,
+      87,
+      65
+     ],
+     "center": [
+      768,
+      199
+     ],
+     "file": "",
+     "desc": "结算四星青吉鬼",
+     "kind": "image"
+    },
+    {
+     "name": "I_WIN",
+     "roi_src": [
+      385,
+      47,
+      100,
+      100
+     ],
+     "roi": [
+      346,
+      44,
+      90,
+      94
+     ],
+     "center": [
+      391,
+      91
+     ],
+     "file": "",
+     "desc": "战斗胜利",
+     "kind": "image"
+    },
+    {
+     "name": "I_REWARD_GOLD",
+     "roi_src": [
+      268,
+      178,
+      97,
+      69
+     ],
+     "roi": [
+      241,
+      168,
+      87,
+      65
+     ],
+     "center": [
+      284,
+      200
+     ],
+     "file": "",
+     "desc": "结算金币",
+     "kind": "image"
+    },
+    {
+     "name": "I_REWARD_GOLD_SNAKE_SKIN",
+     "roi_src": [
+      537,
+      176,
+      97,
+      75
+     ],
+     "roi": [
+      483,
+      166,
+      87,
+      71
+     ],
+     "center": [
+      526,
+      201
+     ],
+     "file": "",
+     "desc": "结算金蛇皮",
+     "kind": "image"
+    },
+    {
+     "name": "I_REWARD_SOUL_5",
+     "roi_src": [
+      266,
+      533,
+      97,
+      20
+     ],
+     "roi": [
+      239,
+      503,
+      87,
+      19
+     ],
+     "center": [
+      282,
+      512
+     ],
+     "file": "",
+     "desc": "结算五星御魂",
+     "kind": "image"
+    },
+    {
+     "name": "I_REWARD_SOUL_6",
+     "roi_src": [
+      942,
+      397,
+      97,
+      20
+     ],
+     "roi": [
+      848,
+      374,
+      87,
+      19
+     ],
+     "center": [
+      891,
+      383
+     ],
+     "file": "",
+     "desc": "结算六星御魂",
+     "kind": "image"
+    },
+    {
+     "name": "I_UI_REWARD",
+     "roi_src": [
+      481,
+      185,
+      317,
+      42
+     ],
+     "roi": [
+      433,
+      174,
+      285,
+      40
+     ],
+     "center": [
+      575,
+      194
+     ],
+     "file": "",
+     "desc": "'获得奖励' 四个大字",
+     "kind": "image"
+    }
+   ],
+   "links": {},
+   "additional": []
+  },
+  "page_failed": {
+   "name": "page_failed",
+   "check": [
+    {
+     "name": "I_FALSE",
+     "roi_src": [
+      413,
+      124,
+      100,
+      100
+     ],
+     "roi": [
+      372,
+      117,
+      90,
+      94
+     ],
+     "center": [
+      417,
+      164
+     ],
+     "file": "",
+     "desc": "失败",
+     "kind": "image"
+    }
+   ],
+   "links": {},
+   "additional": []
+  }
+ }
+}
