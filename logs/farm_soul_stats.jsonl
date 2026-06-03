@@ -1,0 +1,36 @@
+{"run": "20260603T193719Z", "round": 1, "won": true, "dur_s": 38.7, "counter": 3, "ts": "2026-06-03T19:38:04.234217Z"}
+{"run": "20260603T193719Z", "round": 2, "won": true, "dur_s": 42.4, "counter": 4, "ts": "2026-06-03T19:38:51.455384Z"}
+{"run": "20260603T193719Z", "round": 3, "won": true, "dur_s": 45.4, "counter": 5, "ts": "2026-06-03T19:39:41.773654Z"}
+{"run": "20260603T193719Z", "round": 4, "won": false, "dur_s": 85.2, "counter": null, "ts": "2026-06-03T19:41:08.677075Z"}
+{"run": "20260603T193719Z", "stage": "Moan", "zone": "Orochi", "times": 30, "done": 4, "wins": 3, "win_rate": 0.75, "avg_dur_s": 52.9, "total_dur_s": 211.7, "counter_start": 2, "counter_end": null, "stamina_start": 13400, "stamina_end": null, "stamina_used": null, "summary": true, "ts": "2026-06-03T19:41:16.350529Z"}
+{"run": "20260603T194328Z", "round": 1, "won": true, "dur_s": 41.6, "counter": 7, "ts": "2026-06-03T19:44:20.512644Z"}
+{"run": "20260603T194328Z", "round": 2, "won": true, "dur_s": 42.1, "counter": 8, "ts": "2026-06-03T19:45:08.727606Z"}
+{"run": "20260603T194328Z", "round": 3, "won": true, "dur_s": 47.7, "counter": 9, "ts": "2026-06-03T19:46:02.627309Z"}
+{"run": "20260603T194328Z", "round": 4, "won": true, "dur_s": 42.8, "counter": 10, "ts": "2026-06-03T19:46:52.780534Z"}
+{"run": "20260603T194328Z", "round": 5, "won": true, "dur_s": 45.3, "counter": 11, "ts": "2026-06-03T19:47:42.262147Z"}
+{"run": "20260603T194328Z", "round": 6, "won": true, "dur_s": 53.5, "counter": 12, "ts": "2026-06-03T19:48:39.538949Z"}
+{"run": "20260603T194328Z", "round": 7, "won": true, "dur_s": 58.1, "counter": 13, "ts": "2026-06-03T19:49:41.690091Z"}
+{"run": "20260603T194328Z", "round": 8, "won": true, "dur_s": 43.3, "counter": 14, "ts": "2026-06-03T19:50:31.257684Z"}
+{"run": "20260603T194328Z", "round": 9, "won": true, "dur_s": 50.8, "counter": 15, "ts": "2026-06-03T19:51:27.214735Z"}
+{"run": "20260603T194328Z", "round": 10, "won": true, "dur_s": 42.1, "counter": 16, "ts": "2026-06-03T19:52:12.241968Z"}
+{"run": "20260603T194328Z", "round": 11, "won": true, "dur_s": 85.5, "counter": 17, "ts": "2026-06-03T19:53:42.443525Z"}
+{"run": "20260603T194328Z", "round": 12, "won": true, "dur_s": 39.0, "counter": 18, "ts": "2026-06-03T19:54:25.215323Z"}
+{"run": "20260603T194328Z", "round": 13, "won": true, "dur_s": 41.4, "counter": 19, "ts": "2026-06-03T19:55:11.480818Z"}
+{"run": "20260603T194328Z", "round": 14, "won": true, "dur_s": 54.7, "counter": 20, "ts": "2026-06-03T19:56:09.465551Z"}
+{"run": "20260603T194328Z", "round": 15, "won": true, "dur_s": 42.6, "counter": 21, "ts": "2026-06-03T19:56:56.607326Z"}
+{"run": "20260603T194328Z", "round": 16, "won": true, "dur_s": 42.0, "counter": 22, "ts": "2026-06-03T19:57:44.016316Z"}
+{"run": "20260603T194328Z", "round": 17, "won": true, "dur_s": 45.1, "counter": 23, "ts": "2026-06-03T19:58:36.076612Z"}
+{"run": "20260603T194328Z", "round": 18, "won": true, "dur_s": 39.6, "counter": 24, "ts": "2026-06-03T19:59:19.774915Z"}
+{"run": "20260603T194328Z", "round": 19, "won": true, "dur_s": 37.4, "counter": 25, "ts": "2026-06-03T20:00:02.171601Z"}
+{"run": "20260603T194328Z", "round": 20, "won": true, "dur_s": 52.5, "counter": 26, "ts": "2026-06-03T20:01:00.687258Z"}
+{"run": "20260603T194328Z", "round": 21, "won": true, "dur_s": 40.7, "counter": 27, "ts": "2026-06-03T20:01:46.630464Z"}
+{"run": "20260603T194328Z", "round": 22, "won": true, "dur_s": 45.5, "counter": 28, "ts": "2026-06-03T20:02:37.079116Z"}
+{"run": "20260603T194328Z", "round": 23, "won": true, "dur_s": 47.4, "counter": 29, "ts": "2026-06-03T20:03:28.975773Z"}
+{"run": "20260603T194328Z", "round": 24, "won": true, "dur_s": 39.1, "counter": 30, "ts": "2026-06-03T20:04:12.402644Z"}
+{"run": "20260603T194328Z", "round": 25, "won": true, "dur_s": 46.9, "counter": 31, "ts": "2026-06-03T20:05:04.154644Z"}
+{"run": "20260603T194328Z", "round": 26, "won": true, "dur_s": 44.1, "counter": 32, "ts": "2026-06-03T20:05:52.272380Z"}
+{"run": "20260603T194328Z", "round": 27, "won": true, "dur_s": 39.3, "counter": 33, "ts": "2026-06-03T20:06:36.130292Z"}
+{"run": "20260603T194328Z", "round": 28, "won": true, "dur_s": 39.4, "counter": 34, "ts": "2026-06-03T20:07:19.755667Z"}
+{"run": "20260603T194328Z", "round": 29, "won": true, "dur_s": 36.8, "counter": 35, "ts": "2026-06-03T20:08:00.371984Z"}
+{"run": "20260603T194328Z", "round": 30, "won": true, "dur_s": 38.7, "counter": 36, "ts": "2026-06-03T20:08:42.928155Z"}
+{"run": "20260603T194328Z", "stage": "Moan", "zone": "Orochi", "times": 30, "done": 30, "wins": 30, "win_rate": 1.0, "avg_dur_s": 45.5, "total_dur_s": 1365.0, "counter_start": 6, "counter_end": 36, "stamina_start": 13400, "stamina_end": 13000, "stamina_used": 400, "summary": true, "ts": "2026-06-03T20:08:46.538206Z"}
