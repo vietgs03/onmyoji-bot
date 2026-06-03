@@ -17,6 +17,7 @@ public class Native {
   [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
   [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, uint nFlags);
   [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
+  [DllImport("user32.dll")] public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
   [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int n);
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
@@ -85,6 +86,19 @@ function Do-BgClick($hwnd, $x, $y) {
   [Native]::PostMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lparam) | Out-Null
 }
 
+function Do-SendClick($hwnd, $x, $y) {
+  # Click KHONG CHIEM CHUOT: SendMessage thang vao hwnd game (NeoX/Win32Window).
+  # Game bo qua PostMessage (async) nhung NHAN SendMessage (sync, cho game xu ly).
+  # Khong SetForeground, khong SetCursorPos -> chuot user KHONG bi dong toi.
+  $WM_MOUSEMOVE=0x0200; $WM_LBUTTONDOWN=0x0201; $WM_LBUTTONUP=0x0202
+  $MK_LBUTTON=[IntPtr]0x0001
+  $lparam = [IntPtr](($y -shl 16) -bor ($x -band 0xFFFF))
+  [Native]::SendMessage($hwnd, $WM_MOUSEMOVE, [IntPtr]::Zero, $lparam) | Out-Null
+  [Native]::SendMessage($hwnd, $WM_LBUTTONDOWN, $MK_LBUTTON, $lparam) | Out-Null
+  Start-Sleep -Milliseconds (Get-Random -Minimum 60 -Maximum 110)
+  [Native]::SendMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lparam) | Out-Null
+}
+
 function Do-FgClick($hwnd, $x, $y) {
   # Click thuc (foreground): focus cua so + di chuot toi toa do man hinh + bam.
   # Tin cay tren MOI popup/modal (PostMessage bi mot so modal bo qua).
@@ -147,8 +161,12 @@ while ($true) {
         Write-Output ("OK {0}x{1} pw={2}" -f $res[0],$res[1],$res[2])
       }
       "bgclick" {
-        Do-PoliteClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Do-SendClick $hwnd ([int]$parts[1]) ([int]$parts[2])
         Write-Output ("OK click {0} {1}" -f $parts[1],$parts[2])
+      }
+      "sendclick" {
+        Do-SendClick $hwnd ([int]$parts[1]) ([int]$parts[2])
+        Write-Output ("OK sendclick {0} {1}" -f $parts[1],$parts[2])
       }
       "politeclick" {
         Do-PoliteClick $hwnd ([int]$parts[1]) ([int]$parts[2])
