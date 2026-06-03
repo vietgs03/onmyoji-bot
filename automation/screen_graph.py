@@ -140,29 +140,49 @@ class ScreenGraph:
         scored.sort(key=lambda t: (t[0], t[1]), reverse=True)
         return scored[0][2]
 
-    # ---------- BFS tim duong (thuat toan chung) ----------
+    # ---------- tim duong (Dijkstra trong so = chi phi/do tin cay) ----------
+    # Vi sao Dijkstra chu khong chi BFS: cac canh KHONG bang nhau. Nut OCR ro
+    # (Explore) re + chac; nut nho (six_gates) hay truot -> dat. Canh lui co the
+    # gap popup. Gan 'cost' cho canh -> chon duong RE & CHAC nhat, khong chi ngan.
+    # Mac dinh cost=1 (== BFS): tuong thich nguoc hoan toan.
+    DEFAULT_COST = 1.0
+    BACK_COST = 1.5          # lui (dismiss) hoi dat hon vi co the gap popup
+
+    def _edge_cost(self, src, dst, btn=None):
+        """Chi phi 1 hop. btn co the khai bao 'cost' rieng trong DATA."""
+        if btn and "cost" in btn:
+            return btn["cost"]
+        # canh lui (ve parent) -> dat hon mot chut
+        if dst == self.nodes.get(src, {}).get("parent") and dst not in self.edges.get(src, {}):
+            return self.BACK_COST
+        return self.DEFAULT_COST
+
     def path(self, start, goal):
-        """Duong ngan nhat start->goal theo canh exits. None neu khong toi duoc.
-        Neu can di NGUOC (ra man cha) thi them canh dismiss vao BFS."""
+        """Duong RE NHAT start->goal (Dijkstra). Trong so = chi phi/do tin cay canh.
+        Khi moi canh cost=1, ket qua trung BFS (it buoc nhat). Them canh lui
+        (ve parent qua dismiss) vao do thi. None neu khong toi duoc."""
         if start == goal:
             return [start]
-        q = collections.deque([[start]])
-        seen = {start}
-        while q:
-            p = q.popleft()
-            cur = p[-1]
-            # canh tien (exits) + canh lui (ve parent qua dismiss)
-            neighbors = list(self.edges.get(cur, {}).keys())
+        import heapq
+        # (chi_phi_tich_luy, node, duong_di)
+        pq = [(0.0, start, [start])]
+        best = {start: 0.0}
+        while pq:
+            cost, cur, p = heapq.heappop(pq)
+            if cur == goal:
+                return p
+            if cost > best.get(cur, float("inf")):
+                continue                          # da co duong re hon -> bo
+            # canh tien (exits) + canh lui (ve parent)
+            edges = dict(self.edges.get(cur, {}))
             par = self.nodes.get(cur, {}).get("parent")
-            if par:
-                neighbors.append(par)
-            for nxt in neighbors:
-                if nxt not in seen:
-                    seen.add(nxt)
-                    np = p + [nxt]
-                    if nxt == goal:
-                        return np
-                    q.append(np)
+            if par and par not in edges:
+                edges[par] = None                 # canh lui = dismiss
+            for nxt, btn in edges.items():
+                nc = cost + self._edge_cost(cur, nxt, btn)
+                if nc < best.get(nxt, float("inf")):
+                    best[nxt] = nc
+                    heapq.heappush(pq, (nc, nxt, p + [nxt]))
         return None
 
     # ---------- thao tac (dung lop chung: controls/ocr) ----------
