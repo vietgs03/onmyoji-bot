@@ -5,12 +5,15 @@
    "identify": [
     "Explore",
     "Summon",
-    "Friends"
+    "Friends",
+    "Shikigami"
+   ],
+   "avoid": [
+    "Back"
    ],
    "parent": null,
    "exits": {
     "exploration": {
-     "via": "ocr",
      "text": [
       "Explore"
      ],
@@ -20,7 +23,6 @@
      ]
     },
     "town": {
-     "via": "ocr",
      "text": [
       "Town"
      ],
@@ -30,7 +32,6 @@
      ]
     },
     "summon": {
-     "via": "ocr",
      "text": [
       "Summon"
      ],
@@ -40,7 +41,6 @@
      ]
     },
     "shikigami": {
-     "via": "ocr",
      "text": [
       "Shikigami"
      ],
@@ -50,7 +50,6 @@
      ]
     },
     "onmyodo": {
-     "via": "ocr",
      "text": [
       "Onmyodo"
      ],
@@ -60,7 +59,6 @@
      ]
     },
     "friends": {
-     "via": "ocr",
      "text": [
       "Friends"
      ],
@@ -74,13 +72,12 @@
   "exploration": {
    "identify": [
     "Chapter",
-    "Soul",
-    "Realm"
+    "Realm Raid",
+    "Soul Zones"
    ],
    "parent": "HOME",
    "exits": {
     "realm_raid": {
-     "via": "ocr",
      "text": [
       "Realm"
      ],
@@ -90,7 +87,6 @@
      ]
     },
     "soul_zones": {
-     "via": "ocr",
      "text": [
       "Soul"
      ],
@@ -100,7 +96,6 @@
      ]
     },
     "area_boss": {
-     "via": "ocr",
      "text": [
       "Boss"
      ],
@@ -110,7 +105,6 @@
      ]
     },
     "awake_zones": {
-     "via": "ocr",
      "text": [
       "Awake"
      ],
@@ -120,7 +114,6 @@
      ]
     },
     "secret_zones": {
-     "via": "ocr",
      "text": [
       "Secret"
      ],
@@ -130,7 +123,6 @@
      ]
     },
     "six_gates": {
-     "via": "ocr",
      "text": [
       "Gates"
      ],
@@ -143,14 +135,16 @@
   },
   "town": {
    "identify": [
-    "Encounter",
     "Arena",
-    "Duel"
+    "Mystic Trader",
+    "Demon Parade"
+   ],
+   "avoid": [
+    "Back"
    ],
    "parent": "HOME",
    "exits": {
     "duel": {
-     "via": "ocr",
      "text": [
       "Duel"
      ],
@@ -160,7 +154,6 @@
      ]
     },
     "demon_encounter": {
-     "via": "ocr",
      "text": [
       "Encounter"
      ],
@@ -170,7 +163,6 @@
      ]
     },
     "hunt": {
-     "via": "ocr",
      "text": [
       "Hunt"
      ],
@@ -180,7 +172,6 @@
      ]
     },
     "hyakkisen": {
-     "via": "ocr",
      "text": [
       "Hyakki"
      ],
@@ -196,31 +187,27 @@
     "Summon",
     "Scrolls"
    ],
-   "parent": "HOME",
-   "exits": {}
+   "parent": "HOME"
   },
   "shikigami": {
    "identify": [
     "Shikigami",
     "Preset"
    ],
-   "parent": "HOME",
-   "exits": {}
+   "parent": "HOME"
   },
   "onmyodo": {
    "identify": [
     "Onmyodo"
    ],
-   "parent": "HOME",
-   "exits": {}
+   "parent": "HOME"
   },
   "friends": {
    "identify": [
     "Friends",
     "Guild"
    ],
-   "parent": "HOME",
-   "exits": {}
+   "parent": "HOME"
   },
   "shop": {
    "identify": [
@@ -228,80 +215,75 @@
     "Mall",
     "Stellar Omen"
    ],
-   "parent": "HOME",
-   "exits": {}
+   "parent": "HOME"
   },
   "realm_raid": {
    "identify": [
     "Realm Raid",
     "Assault"
    ],
-   "parent": "exploration",
-   "exits": {}
+   "parent": "exploration"
   },
   "soul_zones": {
    "identify": [
-    "Soul"
+    "Soul Zones",
+    "Harvest"
    ],
-   "parent": "exploration",
-   "exits": {}
+   "parent": "exploration"
   },
   "area_boss": {
    "identify": [
     "Area Boss"
    ],
-   "parent": "exploration",
-   "exits": {}
+   "parent": "exploration"
   },
   "awake_zones": {
    "identify": [
+    "Awaken",
     "Awake"
    ],
-   "parent": "exploration",
-   "exits": {}
+   "parent": "exploration"
   },
   "secret_zones": {
    "identify": [
-    "Secret"
+    "Secret Zone"
    ],
-   "parent": "exploration",
-   "exits": {}
+   "parent": "exploration"
   },
   "six_gates": {
    "identify": [
-    "Six",
-    "Gates"
+    "Six Gates"
    ],
-   "parent": "exploration",
-   "exits": {}
+   "parent": "exploration"
   },
   "duel": {
    "identify": [
-    "Duel"
+    "Duel",
+    "Season"
    ],
-   "parent": "town",
-   "exits": {}
+   "parent": "town"
   },
   "demon_encounter": {
    "identify": [
-    "Encounter"
+    "Demon Encounter"
    ],
-   "parent": "town",
-   "exits": {}
+   "avoid": [
+    "Arena",
+    "Mystic Trader"
+   ],
+   "parent": "town"
   },
   "hunt": {
    "identify": [
     "Hunt"
    ],
-   "parent": "town",
-   "exits": {}
+   "parent": "town"
   },
   "hyakkisen": {
    "identify": [
     "Hyakki"
    ],
-   "parent": "town",
-   "exits": {}
+   "parent": "town"
   }
  }
 }

@@ -14,7 +14,7 @@ import os, sys, json, cv2
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
 sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "ml"))
-from screen_graph import ScreenGraph, NODES, HOME
+from screen_graph import ScreenGraph, NODES, HOME, validate
 from screen_reader import ScreenReader
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -36,22 +36,7 @@ PATH_CASES = [
 
 
 def test_tree():
-    errs = []
-    for n, d in NODES.items():
-        par = d.get("parent")
-        if par and par not in NODES:
-            errs.append(f"{n}: parent '{par}' khong ton tai")
-        # phat hien vong cha
-        seen, cur = set(), n
-        while cur:
-            if cur in seen:
-                errs.append(f"{n}: vong parent")
-                break
-            seen.add(cur)
-            cur = NODES.get(cur, {}).get("parent")
-        for dst in d.get("exits", {}):
-            if dst not in NODES:
-                errs.append(f"{n}: exit '{dst}' khong ton tai")
+    errs = validate()
     print(f"A. CAY: {'HOP LE' if not errs else 'LOI'} ({len(NODES)} node)")
     for e in errs:
         print("   ", e)
@@ -80,12 +65,13 @@ def test_where():
     ok = tot = 0
     for lbl, p in sorted(seen.items()):
         r = ScreenReader(cv2.imread(p))
-        got = g.where(reader=r)
+        got, conf = g.where(reader=r)
         exp = LBL2NODE[lbl]
         good = got == exp
         ok += good
         tot += 1
-        print(f"C. where {lbl:10} -> {str(got):12} mong={exp:12} {'OK' if good else 'SAI'}")
+        print(f"C. where {lbl:10} -> {str(got):12} (conf {conf:.2f}) "
+              f"mong={exp:12} {'OK' if good else 'SAI'}")
     print(f"   where accuracy: {ok}/{tot} = {ok/tot:.3f}")
     return ok / tot
 

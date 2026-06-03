@@ -3,297 +3,362 @@
 screen_graph.py - GRAPH DIEU HUONG hop nhat (nguon su that DUY NHAT).
 
 Triet ly (xem docs/navigation_architecture.md): moi MAN = 1 NODE khai bao trong
-DATA, moi logic dieu huong dung THUAT TOAN CHUNG (BFS) - KHONG if long vong.
-Them man moi = them 1 entry DATA, khong sua thuat toan.
+DATA, moi logic dieu huong dung THUAT TOAN CHUNG - KHONG if long vong tung man.
+Them man moi = them 1 entry DATA, khong dung den thuat toan.
 
-Moi NODE:
-  identify : [tu khoa OCR] de nhan dien dang o man nay
-  exits    : { man_dich : {via:'ocr', text:[...]} | {via:'xy', center:[x,y]} }
-  dismiss  : cach thoat -> man cha. 'auto' = dung controls.find_dismiss (back/X/cancel)
-  parent   : man cha (de escape & kiem tra cay)
+Moi NODE (xem NODES ben duoi):
+  identify : [tu khoa OCR] de nhan dien dang o man nay (CO mat = +1 diem)
+  avoid    : [tu khoa] neu co thi LOAI node nay (chong nham, vd HOME khong co 'Back')
+  exits    : { man_dich : {text:[OCR keywords], center:[x,y], cost:float} }
+  parent   : man cha (canh LUI = dismiss; de escape + kiem tra cay)
 
 API CHUNG (khong phu thuoc so node):
-  where()       : quet identify moi node -> node hien tai
-  goto(target)  : BFS tren exits -> di tung hop
-  escape()      : dismiss lien tuc ve HOME
+  where(reader)      -> (node, confidence) hoac (None, 0.0)
+  path(start, goal)  -> [node,...]  (Dijkstra: duong RE & CHAC nhat)
+  goto(target)       -> bool        (di tung hop, re-plan khi drift)
+  escape()           -> node        (dismiss lien tuc ve HOME)
 
-Build DATA tu OAS pagegraph + PAGE_EN: python screen_graph.py build
-Xem cay:                                python screen_graph.py tree
-Tim duong:                              python screen_graph.py path HOME realm_raid
+CLI:  python screen_graph.py {build|tree|path A B|where|goto X}
 """
-import os, json, sys, collections, time
+from __future__ import annotations
+
+import heapq
+import json
+import os
+import sys
+from collections import defaultdict
+from typing import Optional
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GRAPH_JSON = os.path.join(ROOT, "knowledge", "screen_graph.json")
-OAS_GRAPH = os.path.join(ROOT, "knowledge", "oas_pagegraph.json")
 
 HOME = "HOME"
+
+# Chi phi canh mac dinh. Canh cang dat -> Dijkstra cang tranh.
+COST_DEFAULT = 1.0
+COST_BACK = 1.5     # canh LUI (dismiss) hoi dat: de gap popup, kem chac hon tien
+
+# Diem tin cay toi thieu de coi where() la "chac". Duoi nguong -> goto nghi ngo,
+# uu tien escape ve HOME roi di lai cho an toan.
+CONF_MIN = 0.5
 
 
 # ======================================================================
 # DATA: khai bao NODE. Day la NGUON SU THAT. Them man = them o day.
-# Moi node: identify (OCR), exits (canh), parent (cay). dismiss mac dinh 'auto'.
-# Toa do center (neu co) la fallback 1152x679; uu tien click theo text (OCR).
+# Toa do center la fallback 1152x679; uu tien click theo OCR text (ben voi event).
 # ======================================================================
-NODES = {
+NODES: dict[str, dict] = {
     "HOME": {
-        "identify": ["Explore", "Summon", "Friends"],
+        # HOME dac trung: co dong thoi nhieu nut menu chinh + KHONG co nut Back.
+        "identify": ["Explore", "Summon", "Friends", "Shikigami"],
+        "avoid": ["Back"],
         "parent": None,
         "exits": {
-            "exploration": {"via": "ocr", "text": ["Explore"], "center": [464, 144]},
-            "town":        {"via": "ocr", "text": ["Town"],    "center": [662, 262]},
-            "summon":      {"via": "ocr", "text": ["Summon"],  "center": [991, 194]},
-            "shikigami":   {"via": "ocr", "text": ["Shikigami"], "center": [997, 586]},
-            "onmyodo":     {"via": "ocr", "text": ["Onmyodo"], "center": [881, 573]},
-            "friends":     {"via": "ocr", "text": ["Friends"], "center": [785, 582]},
+            "exploration": {"text": ["Explore"],   "center": [464, 144]},
+            "town":        {"text": ["Town"],       "center": [662, 262]},
+            "summon":      {"text": ["Summon"],     "center": [991, 194]},
+            "shikigami":   {"text": ["Shikigami"],  "center": [997, 586]},
+            "onmyodo":     {"text": ["Onmyodo"],    "center": [881, 573]},
+            "friends":     {"text": ["Friends"],    "center": [785, 582]},
         },
     },
     "exploration": {
-        "identify": ["Chapter", "Soul", "Realm"],
+        "identify": ["Chapter", "Realm Raid", "Soul Zones"],
         "parent": "HOME",
         "exits": {
-            "realm_raid": {"via": "ocr", "text": ["Realm"], "center": [260, 621]},
-            "soul_zones": {"via": "ocr", "text": ["Soul"],  "center": [168, 620]},
-            "area_boss":  {"via": "ocr", "text": ["Boss"],  "center": [599, 623]},
-            "awake_zones":{"via": "ocr", "text": ["Awake"], "center": [80, 615]},
-            "secret_zones":{"via": "ocr", "text": ["Secret"], "center": [518, 616]},
-            "six_gates":  {"via": "ocr", "text": ["Gates"], "center": [859, 623]},
+            "realm_raid":   {"text": ["Realm"],  "center": [260, 621]},
+            "soul_zones":   {"text": ["Soul"],   "center": [168, 620]},
+            "area_boss":    {"text": ["Boss"],   "center": [599, 623]},
+            "awake_zones":  {"text": ["Awake"],  "center": [80, 615]},
+            "secret_zones": {"text": ["Secret"], "center": [518, 616]},
+            "six_gates":    {"text": ["Gates"],  "center": [859, 623]},
         },
     },
     "town": {
-        "identify": ["Encounter", "Arena", "Duel"],
+        # Town = co dong thoi nhieu nut hoat dong + KHONG co Back (la hub cap 1).
+        "identify": ["Arena", "Mystic Trader", "Demon Parade"],
+        "avoid": ["Back"],
         "parent": "HOME",
         "exits": {
-            "duel":            {"via": "ocr", "text": ["Duel"], "center": [701, 166]},
-            "demon_encounter": {"via": "ocr", "text": ["Encounter"], "center": [578, 162]},
-            "hunt":            {"via": "ocr", "text": ["Hunt"], "center": [448, 162]},
-            "hyakkisen":       {"via": "ocr", "text": ["Hyakki"], "center": [194, 168]},
+            "duel":            {"text": ["Duel"],      "center": [701, 166]},
+            "demon_encounter": {"text": ["Encounter"], "center": [578, 162]},
+            "hunt":            {"text": ["Hunt"],      "center": [448, 162]},
+            "hyakkisen":       {"text": ["Hyakki"],    "center": [194, 168]},
         },
     },
-    "summon":    {"identify": ["Summon", "Scrolls"], "parent": "HOME", "exits": {}},
-    "shikigami": {"identify": ["Shikigami", "Preset"], "parent": "HOME", "exits": {}},
-    "onmyodo":   {"identify": ["Onmyodo"], "parent": "HOME", "exits": {}},
-    "friends":   {"identify": ["Friends", "Guild"], "parent": "HOME", "exits": {}},
-    "shop":      {"identify": ["Garment", "Mall", "Stellar Omen"], "parent": "HOME", "exits": {}},
-    # man con cap 2 - duoi exploration
-    "realm_raid":  {"identify": ["Realm Raid", "Assault"], "parent": "exploration", "exits": {}},
-    "soul_zones":  {"identify": ["Soul"], "parent": "exploration", "exits": {}},
-    "area_boss":   {"identify": ["Area Boss"], "parent": "exploration", "exits": {}},
-    "awake_zones": {"identify": ["Awake"], "parent": "exploration", "exits": {}},
-    "secret_zones":{"identify": ["Secret"], "parent": "exploration", "exits": {}},
-    "six_gates":   {"identify": ["Six", "Gates"], "parent": "exploration", "exits": {}},
-    # man con cap 2 - duoi town
-    "duel":            {"identify": ["Duel"], "parent": "town", "exits": {}},
-    "demon_encounter": {"identify": ["Encounter"], "parent": "town", "exits": {}},
-    "hunt":            {"identify": ["Hunt"], "parent": "town", "exits": {}},
-    "hyakkisen":       {"identify": ["Hyakki"], "parent": "town", "exits": {}},
+    # --- man con cap 1 (duoi HOME) ---
+    "summon":    {"identify": ["Summon", "Scrolls"],   "parent": "HOME"},
+    "shikigami": {"identify": ["Shikigami", "Preset"], "parent": "HOME"},
+    "onmyodo":   {"identify": ["Onmyodo"],             "parent": "HOME"},
+    "friends":   {"identify": ["Friends", "Guild"],    "parent": "HOME"},
+    "shop":      {"identify": ["Garment", "Mall", "Stellar Omen"], "parent": "HOME"},
+    # --- man con cap 2 (duoi exploration) ---
+    "realm_raid":   {"identify": ["Realm Raid", "Assault"], "parent": "exploration"},
+    "soul_zones":   {"identify": ["Soul Zones", "Harvest"], "parent": "exploration"},
+    "area_boss":    {"identify": ["Area Boss"],            "parent": "exploration"},
+    "awake_zones":  {"identify": ["Awaken", "Awake"],      "parent": "exploration"},
+    "secret_zones": {"identify": ["Secret Zone"],         "parent": "exploration"},
+    "six_gates":    {"identify": ["Six Gates"],           "parent": "exploration"},
+    # --- man con cap 2 (duoi town) ---
+    "duel":            {"identify": ["Duel", "Season"],     "parent": "town"},
+    # demon_encounter: man trong; tranh nham voi nut "Demon Parade" cua Town
+    # bang avoid cac nut hub Town (Arena/Mystic). Title that = "Demon Encounter".
+    "demon_encounter": {"identify": ["Demon Encounter"],
+                        "avoid": ["Arena", "Mystic Trader"], "parent": "town"},
+    "hunt":            {"identify": ["Hunt"],               "parent": "town"},
+    "hyakkisen":       {"identify": ["Hyakki"],             "parent": "town"},
 }
 
 
 class ScreenGraph:
-    """Graph dieu huong. Toan bo logic qua BFS/escape - khong if tung man."""
+    """Graph dieu huong. Toan bo logic qua Dijkstra/dismiss - khong if tung man.
 
-    def __init__(self, agent=None, nodes=None):
+    `agent` co the None (test offline cac thuat toan tinh: path/tree/where-voi-reader).
+    """
+
+    def __init__(self, agent=None, nodes: Optional[dict] = None):
         self.a = agent
-        self.nodes = nodes or NODES
-        # canh: {src: {dst: button}}
-        self.edges = {n: d.get("exits", {}) for n, d in self.nodes.items()}
+        self.nodes = nodes if nodes is not None else NODES
 
-    # do sau cua node (HOME=0) - de tie-break: man con uu tien hon man cha
-    def _depth(self, name):
-        d = 0
-        cur = name
-        while cur and self.nodes.get(cur, {}).get("parent"):
-            cur = self.nodes[cur]["parent"]
+    # ------------------------------------------------------------------
+    # Tien ich cau truc cay
+    # ------------------------------------------------------------------
+    def _parent(self, name: str) -> Optional[str]:
+        return self.nodes.get(name, {}).get("parent")
+
+    def _exits(self, name: str) -> dict:
+        return self.nodes.get(name, {}).get("exits", {})
+
+    def _is_back_edge(self, src: str, dst: str) -> bool:
+        """dst la canh LUI cua src (ve parent, khong phai exit tien)."""
+        return dst == self._parent(src) and dst not in self._exits(src)
+
+    def _depth(self, name: str) -> int:
+        """Do sau (HOME=0). Dung tie-break where(): man con uu tien man cha."""
+        d, cur, seen = 0, name, set()
+        while cur and self._parent(cur) and cur not in seen:
+            seen.add(cur)
+            cur = self._parent(cur)
             d += 1
-            if d > 20:
-                break
         return d
 
-    # ---------- nhan dien (1 ham chung quet moi node) ----------
-    def where(self, reader=None, img=None):
-        """Node hien tai = node co nhieu tu khoa identify khop nhat.
-        Tie-break: node SAU hon (con) thang (vd Summon co 'Summon' nhung khong phai
-        HOME). Quy tac chung: HOME KHONG co nut back -> neu thay back arrow thi loai HOME.
-        None neu khong ro."""
-        r = reader or (self.a.read() if self.a else None)
+    # ------------------------------------------------------------------
+    # NHAN DIEN: 1 ham chung quet moi node. Tra (node, confidence in [0,1]).
+    # confidence = (so identify khop) / (tong identify cua node) -> [0,1].
+    # ------------------------------------------------------------------
+    def where(self, reader=None) -> tuple[Optional[str], float]:
+        """Node hien tai = node co diem khop cao nhat.
+
+        Diem 1 node = so tu khoa identify xuat hien tren man. avoid co mat -> loai.
+        Tie-break khi bang diem: node SAU hon (con) thang (vd man Summon co chu
+        'Summon' nhung khong phai HOME). Tra (None, 0.0) neu khong nhan dien duoc.
+
+        `reader`: ScreenReader da co (tranh OCR lai). None -> tu doc tu agent.
+        """
+        r = reader if reader is not None else (self.a.read() if self.a else None)
         if r is None:
-            return None
-        # HOME khong co nut back/dismiss. Neu co back-arrow -> chac chan KHONG o HOME.
-        has_back = False
-        if self.a is not None:
-            cf = self.a.controls()
-            shot = img if img is not None else getattr(r, "img", None)
-            if cf is not None and shot is not None:
-                has_back = cf.find(shot, kind="back") is not None
+            return None, 0.0
 
-        scored = []
+        best = None          # (hits, depth, name)
+        best_total = 1
         for name, d in self.nodes.items():
-            if name == HOME and has_back:
-                continue                         # loai HOME khi co nut back
-            n = sum(1 for kw in d["identify"] if r.has(kw))
-            if n > 0:
-                scored.append((n, self._depth(name), name))
-        if not scored:
-            return None
-        # nhieu tu khop nhat; hoa thi node sau hon (depth lon) thang
-        scored.sort(key=lambda t: (t[0], t[1]), reverse=True)
-        return scored[0][2]
+            ident = d.get("identify", [])
+            if not ident:
+                continue
+            if any(r.has(w) for w in d.get("avoid", [])):
+                continue                                    # bi loai boi avoid
+            hits = sum(1 for w in ident if r.has(w))
+            if hits == 0:
+                continue
+            key = (hits, self._depth(name))
+            if best is None or key > best[:2]:
+                best, best_total = (hits, self._depth(name), name), len(ident)
+        if best is None:
+            return None, 0.0
+        return best[2], best[0] / best_total
 
-    # ---------- tim duong (Dijkstra trong so = chi phi/do tin cay) ----------
-    # Vi sao Dijkstra chu khong chi BFS: cac canh KHONG bang nhau. Nut OCR ro
-    # (Explore) re + chac; nut nho (six_gates) hay truot -> dat. Canh lui co the
-    # gap popup. Gan 'cost' cho canh -> chon duong RE & CHAC nhat, khong chi ngan.
-    # Mac dinh cost=1 (== BFS): tuong thich nguoc hoan toan.
-    DEFAULT_COST = 1.0
-    BACK_COST = 1.5          # lui (dismiss) hoi dat hon vi co the gap popup
-
-    def _edge_cost(self, src, dst, btn=None):
-        """Chi phi 1 hop. btn co the khai bao 'cost' rieng trong DATA."""
+    # ------------------------------------------------------------------
+    # TIM DUONG: Dijkstra trong so = chi phi/do tin cay canh.
+    # Vi sao Dijkstra (khong chi BFS): cac canh KHONG bang nhau - nut nho hay
+    # truot OCR thi dat; canh lui de gap popup thi dat. Cost=1 deu -> == BFS.
+    # ------------------------------------------------------------------
+    def _edge_cost(self, src: str, dst: str, btn: Optional[dict]) -> float:
         if btn and "cost" in btn:
             return btn["cost"]
-        # canh lui (ve parent) -> dat hon mot chut
-        if dst == self.nodes.get(src, {}).get("parent") and dst not in self.edges.get(src, {}):
-            return self.BACK_COST
-        return self.DEFAULT_COST
+        return COST_BACK if self._is_back_edge(src, dst) else COST_DEFAULT
 
-    def path(self, start, goal):
-        """Duong RE NHAT start->goal (Dijkstra). Trong so = chi phi/do tin cay canh.
-        Khi moi canh cost=1, ket qua trung BFS (it buoc nhat). Them canh lui
-        (ve parent qua dismiss) vao do thi. None neu khong toi duoc."""
+    def _neighbors(self, name: str) -> dict:
+        """Canh tien (exits) + canh LUI (ve parent). Tra {dst: btn|None}."""
+        nb = dict(self._exits(name))
+        par = self._parent(name)
+        if par and par not in nb:
+            nb[par] = None                                  # canh lui = dismiss
+        return nb
+
+    def path(self, start: str, goal: str) -> Optional[list[str]]:
+        """Duong RE NHAT start->goal (Dijkstra). None neu khong toi duoc."""
         if start == goal:
             return [start]
-        import heapq
-        # (chi_phi_tich_luy, node, duong_di)
-        pq = [(0.0, start, [start])]
-        best = {start: 0.0}
+        pq: list[tuple[float, str, list[str]]] = [(0.0, start, [start])]
+        best_cost = {start: 0.0}
         while pq:
             cost, cur, p = heapq.heappop(pq)
             if cur == goal:
                 return p
-            if cost > best.get(cur, float("inf")):
-                continue                          # da co duong re hon -> bo
-            # canh tien (exits) + canh lui (ve parent)
-            edges = dict(self.edges.get(cur, {}))
-            par = self.nodes.get(cur, {}).get("parent")
-            if par and par not in edges:
-                edges[par] = None                 # canh lui = dismiss
-            for nxt, btn in edges.items():
+            if cost > best_cost.get(cur, float("inf")):
+                continue
+            for nxt, btn in self._neighbors(cur).items():
                 nc = cost + self._edge_cost(cur, nxt, btn)
-                if nc < best.get(nxt, float("inf")):
-                    best[nxt] = nc
+                if nc < best_cost.get(nxt, float("inf")):
+                    best_cost[nxt] = nc
                     heapq.heappush(pq, (nc, nxt, p + [nxt]))
         return None
 
-    # ---------- thao tac (dung lop chung: controls/ocr) ----------
-    def _go_edge(self, src, dst):
-        """Di 1 hop src->dst. Neu dst la parent (lui) -> dismiss. Nguoc lai bam exits."""
-        if dst == self.nodes.get(src, {}).get("parent") and dst not in self.edges.get(src, {}):
-            self.a.back()                       # lui ve cha = dismiss (controls)
-            return self.where() == dst
-        btn = self.edges.get(src, {}).get(dst)
+    # ------------------------------------------------------------------
+    # THAO TAC: dung lop chung (controls/ocr/wait). 1 hop = 1 lan doc lai.
+    # ------------------------------------------------------------------
+    def _go_edge(self, src: str, dst: str) -> None:
+        """Di 1 hop src->dst. LUI -> dismiss; TIEN -> click theo OCR (fallback xy).
+        KHONG kiem tra ket qua o day - goto() doc where() 1 lan/hop de re-plan.
+        """
+        if self._is_back_edge(src, dst):
+            self.a.back()                                   # lui = dismiss (controls)
+            return
+        btn = self._exits(src).get(dst)
         if not btn:
-            return False
-        # uu tien OCR text (ben voi event), fallback toa do
+            return
+        # uu tien OCR text (ben voi event); chi click 1 nut tim thay dau tien.
         for kw in btn.get("text", []):
             ok, _ = self.a.tap_text(kw)
-            if ok and self.where() == dst:
-                return True
-        if btn.get("center"):
+            if ok:
+                return
+        if btn.get("center"):                               # fallback toa do
             self.a.click(*btn["center"])
-            return self.where() == dst
-        return False
 
-    def goto(self, target, max_hops=8):
-        """Di toi `target` tu dau cung duoc (BFS). Re-plan neu drift."""
-        cur = self.where()
-        if cur is None:                          # khong ro -> ve HOME truoc
-            self.escape()
-            cur = self.where() or HOME
-        for _ in range(max_hops):
+    def goto(self, target: str, max_hops: int = 12, verbose: bool = True) -> bool:
+        """Di toi `target` tu BAT KY dau. Re-plan moi hop (doc lai vi tri thuc).
+        Tu phuc hoi: khi lac (where None / conf thap / khong co duong) -> escape
+        ve HOME roi di lai. Tra True neu toi noi.
+        """
+        if target not in self.nodes:
+            raise ValueError(f"node khong ton tai: {target}")
+
+        for hop in range(max_hops):
+            cur, conf = self.where()
+            if verbose:
+                print(f"[goto] hop {hop}: o '{cur}' (conf {conf:.2f}) -> '{target}'")
             if cur == target:
                 return True
+
+            # lac duong: khong ro vi tri, hoac qua nghi ngo -> ve HOME lam moc.
+            if cur is None or conf < CONF_MIN:
+                if verbose:
+                    print("[goto] lac/nghi ngo -> escape ve HOME")
+                self.escape()
+                continue
+
             p = self.path(cur, target)
             if not p or len(p) < 2:
-                self.escape()                    # bi tat -> ve HOME thu lai
-                cur = self.where() or HOME
-                p = self.path(cur, target)
-                if not p or len(p) < 2:
-                    return False
+                if verbose:
+                    print(f"[goto] khong co duong {cur}->{target} -> escape")
+                self.escape()
+                continue
+
             self._go_edge(p[0], p[1])
-            cur = self.where()                   # doc lai vi tri thuc (re-plan)
-        return self.where() == target
+        # het hop: kiem tra lan cuoi
+        return self.where()[0] == target
 
-    def escape(self, max_steps=8):
-        """Dismiss lien tuc ve HOME (dung Agent.back home=True)."""
-        if self.a:
+    def escape(self, max_steps: int = 8) -> Optional[str]:
+        """Dismiss lien tuc ve HOME (Agent.back home=True lo nhieu lop/tab)."""
+        if self.a is not None:
             self.a.back(home=True)
-        return self.where()
+        return self.where()[0]
 
 
 # ======================================================================
-# BUILD: hop nhat / kiem tra DATA. (Hien DATA viet tay - sach hon graph TQ.)
-# Bo sung toa do/canh tu OAS pagegraph neu thieu.
+# VALIDATION + BUILD (1 cho duy nhat - test_screen_graph.py import lai)
 # ======================================================================
-def build():
-    """Xuat DATA ra JSON (de cong cu khac dung) + kiem tra tinh hop le cua cay."""
-    g = ScreenGraph()
-    # kiem tra: moi parent ton tai, khong canh tro toi node la
+def validate(nodes: dict = NODES) -> list[str]:
+    """Kiem tra cay hop le. Tra list loi (rong = OK)."""
     errs = []
-    for n, d in NODES.items():
+    for n, d in nodes.items():
         par = d.get("parent")
-        if par and par not in NODES:
+        if par and par not in nodes:
             errs.append(f"{n}: parent '{par}' khong ton tai")
+        # phat hien vong cha
+        seen, cur = set(), n
+        while cur:
+            if cur in seen:
+                errs.append(f"{n}: vong parent")
+                break
+            seen.add(cur)
+            cur = nodes.get(cur, {}).get("parent")
         for dst in d.get("exits", {}):
-            if dst not in NODES:
+            if dst not in nodes:
                 errs.append(f"{n}: exit '{dst}' khong ton tai")
-    out = {"home": HOME, "nodes": NODES}
-    json.dump(out, open(GRAPH_JSON, "w"), indent=1, ensure_ascii=False)
+    if HOME not in nodes:
+        errs.append(f"thieu node goc '{HOME}'")
+    return errs
+
+
+def build() -> None:
+    """Xuat DATA ra JSON (cho cong cu khac) + bao cao tinh hop le cua cay."""
+    errs = validate()
+    json.dump({"home": HOME, "nodes": NODES}, open(GRAPH_JSON, "w"),
+              indent=1, ensure_ascii=False)
     print(f"luu {GRAPH_JSON}: {len(NODES)} node")
     if errs:
         print("LOI cay:")
         for e in errs:
             print("  ", e)
     else:
-        print("cay HOP LE (moi parent/exit ton tai)")
+        print("cay HOP LE (moi parent/exit ton tai, khong vong)")
 
 
-def show_tree():
-    """In cay node (parent->con) de de kiem tra, khong lan man."""
-    children = collections.defaultdict(list)
+def show_tree() -> None:
+    """In cay node (parent -> con) de de doi chieu, khong lan man."""
+    children = defaultdict(list)
     for n, d in NODES.items():
         children[d.get("parent")].append(n)
 
-    def rec(node, depth):
+    def rec(node: str, depth: int) -> None:
         print("  " * depth + node)
         for c in sorted(children.get(node, [])):
             rec(c, depth + 1)
+
     rec(HOME, 0)
 
 
-def main():
+def _make_agent():
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    from agent import Agent
+    return Agent()
+
+
+def main() -> None:
     cmd = sys.argv[1] if len(sys.argv) > 1 else "build"
     if cmd == "build":
         build()
     elif cmd == "tree":
         show_tree()
     elif cmd == "path":
-        g = ScreenGraph()
-        print(" -> ".join(g.path(sys.argv[2], sys.argv[3]) or ["KHONG CO DUONG"]))
+        p = ScreenGraph().path(sys.argv[2], sys.argv[3])
+        print(" -> ".join(p) if p else "KHONG CO DUONG")
     elif cmd == "where":
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        from agent import Agent
-        a = Agent()
-        print("dang o:", ScreenGraph(a).where())
-        a.c.close()
+        a = _make_agent()
+        try:
+            node, conf = ScreenGraph(a).where()
+            print(f"dang o: {node} (conf {conf:.2f})")
+        finally:
+            a.c.close()
     elif cmd == "goto":
-        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
-        from agent import Agent
-        a = Agent()
-        g = ScreenGraph(a)
-        ok = g.goto(sys.argv[2])
-        print(f"goto {sys.argv[2]}: {'OK' if ok else 'FAIL'} (dang o {g.where()})")
-        a.c.close()
+        a = _make_agent()
+        try:
+            g = ScreenGraph(a)
+            ok = g.goto(sys.argv[2])
+            print(f"goto {sys.argv[2]}: {'OK' if ok else 'FAIL'} (o {g.where()[0]})")
+        finally:
+            a.c.close()
     else:
         print(__doc__)
 

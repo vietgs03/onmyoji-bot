@@ -33,7 +33,7 @@ class Navigator:
 
     @property
     def current(self):
-        return self._g.where()
+        return self._g.where()[0]          # where() tra (node, conf)
 
     def __getattr__(self, name):
         # uy quyen het cho ScreenGraph
