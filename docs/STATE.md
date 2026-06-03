@@ -47,3 +47,10 @@ Man Soul co cac nut tang toc native (toa do tu /tmp/after_soul.png):
 - 'Line-up' @ (595,640): doi team nhanh.
 - 'Challenge x12' @ (1063,580): x12 = cost 12 stamina/lan? (nhung do stamina_used 30 lan = 400 -> ~13.3/vong, gan dung 12-13).
 => NEN thu dung 'x5' thay vong lap Python: it screenshot/OCR hon, nhanh hon. Verify counter +5 sau 1 lan.
+
+## CAP NHAT 2026-06-03 (sau 30+60 lan + fix dialog)
+- DA chay 30 lan (100% win) + 60 lan (counter 78->132 = 54 tran that). Bao cao: docs/farm_soul_report.md.
+- BUG LON da fix: dialog Bonus 'Enable it again?' -> Confirm hitbox @ (660,410) [KHONG 667,416]; detect OCR FULL anh; win = counter TANG.
+- Popup Parade X @ (975,135). Reward dac biet -> tap (576,620)+(576,340).
+- Toa do chot: xem docs/farm_soul_report.md.
+- TODO: dung native x5(@650,635)/Auto(@707,639) de nhanh hon + bot dialog. Mo rong zone/stage khac.
