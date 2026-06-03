@@ -101,19 +101,259 @@ def farm_realm(agent: Agent, times: int = 30, dry: bool = True):
     return True
 
 
+# ---- Soul (Ngu Hon / 御魂) farming -----------------------------------------
+
+SOUL_ZONES = ("Orochi", "Sougenbi", "Himiko", "Fallen Sun", "Sea of Eternity")
+# Layout man Soul/<zone>: cot trai = danh sach stage (scroll duoc),
+# nut Challenge goc phai duoi, vung battle/reward sau do.
+_STAGE_COL = (95, 120, 185, 560)     # ROI cot trai chua ten stage (x,y,w,h)
+_CHALLENGE_XY = (1063, 580)          # nut Challenge
+_DRAG = (145, 500, 145, 180, 16)     # keo scroll list xuong (khong chiem chuot)
+# Duong di da-verify-live HOME -> Soul (graph nav chua map sau tier-2 nen di truc tiep)
+_HOME_EXPLORE_XY = (608, 192)        # nut Explore tren HOME
+_EXPLORE_SOUL_XY = (175, 620)        # icon 'Soul' footer trong man Explore
+
+
+def _ensure_soul_screen(agent, max_try=4):
+    """Tu BAT KY dau -> man Soul (4 zone). Khong dung graph nav (chua map tier-2):
+    ve HOME -> Explore -> click icon Soul. Verify bang OCR ('Orochi' xuat hien)."""
+    from ocr import ocr_words
+
+    def on_soul(img):
+        # Dau hieu CHAC CHAN cua man Soul (tranh false-positive o HOME):
+        #  - header 'Soul' goc trai tren (roi hep y<90, x<320)
+        #  - nut 'Challenge' goc phai duoi
+        head = " ".join(str(t).lower() for t, *_ in ocr_words(img, roi=(0, 40, 320, 90), min_conf=40))
+        body = " ".join(str(t).lower() for t, *_ in ocr_words(img, roi=(0, 40, 1152, 640), min_conf=35))
+        return ("soul" in head) and ("challenge" in body)
+
+    for _ in range(max_try):
+        img = agent.shot()
+        if on_soul(img):
+            return True
+        # ve HOME truoc cho chac (escape moi overlay/man con)
+        agent.nav.goto("HOME")
+        time.sleep(1.0)
+        agent.click(*_HOME_EXPLORE_XY); time.sleep(3.5)   # -> Explore (co the loading)
+        agent.click(*_EXPLORE_SOUL_XY); time.sleep(3.5)   # -> Soul
+        if on_soul(agent.shot()):
+            return True
+    return False
+
+
+def _find_stage(agent, name, max_scroll=8):
+    """Scroll cot trai tim stage theo TEN (OCR), tra ve (x,y) tam de click.
+    name khop khong phan biet hoa/thuong, chap nhan substring (vd 'Moan')."""
+    import numpy as np
+    from ocr import ocr_words
+    key = name.lower().replace(" ", "")
+    prev = None
+    for _ in range(max_scroll):
+        img = agent.shot()
+        for t, (x, y, w, h), cf in ocr_words(img, roi=_STAGE_COL, min_conf=40):
+            tok = str(t).lower().replace(" ", "")
+            # OCR hay dinh rac phia truoc (vd 'TIfMoan') -> dung substring 'in'
+            if key in tok:
+                return (x + w // 2, y + h // 2)
+        # chua thay -> scroll list xuong (khong chiem chuot)
+        agent.drag(*_DRAG); time.sleep(1.1)
+        cur = agent.shot()
+        if prev is not None and np.abs(prev.astype(int) - cur.astype(int)).mean() < 1.5:
+            break        # khong scroll them duoc -> da toi day list
+        prev = cur
+    return None
+
+
+def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
+              times: int = 10, dry: bool = True):
+    """Daily 'farm Ngu Hon (Soul) stage X, N lan' tu BAT KY man nao.
+
+    Quy trinh (state-machine, generic theo TEN stage - khong hardcode toa do stage):
+      1) nav.goto('soul_zones')  -> man Soul (4 zone)
+      2) click zone (Orochi...)  -> man stage cua zone
+      3) _find_stage(stage)      -> scroll list tim + click stage (vd Moan)
+      4) ACTION LOOP: Challenge -> battle (wait_stable) -> reward -> lap, co VERIFY
+
+    An toan: dry=True chi DINH VI + DOC (chon stage, in se-bam), KHONG bam Challenge.
+    Khi xac nhan dung stage roi chay dry=False de danh that.
+    """
+    print(f"[task] farm_soul zone={zone} stage={stage} x{times} (dry={dry})")
+
+    # 1) -> man Soul (di truc tiep HOME->Explore->Soul, verify bang OCR)
+    if not _ensure_soul_screen(agent):
+        print("  ! khong toi duoc man Soul"); return False
+    print("  da o man Soul (thay Orochi/Eternity).")
+
+    # 2) chon zone: man Soul co 4 panel doc xep ngang. Click vao panel zone.
+    #    OCR ten zone bi xoay doc -> dung VI TRI panel (da verify live).
+    _ZONE_X = {"orochi": 200, "sougenbi": 460, "fallen sun": 740,
+               "fallensun": 740, "sea of eternity": 1040, "eternity": 1040,
+               "himiko": 740}
+    zx = _ZONE_X.get(zone.lower().replace("  ", " "), 200)
+    agent.click(zx, 250); time.sleep(2.5)
+    print(f"  da chon zone {zone} @ x={zx}")
+    # neu chua vao (van o man chon zone) -> thu lai 1 lan
+    from ocr import ocr_words
+    toks = " ".join(str(t).lower() for t, *_ in ocr_words(agent.shot(), roi=(0, 40, 1152, 200), min_conf=40))
+    if "daily souls" in toks:        # van con o man liet ke 4 zone
+        agent.click(zx, 350); time.sleep(2.5)
+
+    # 3) tim + chon stage (scroll list)
+    spt = _find_stage(agent, stage)
+    if not spt:
+        print(f"  ! khong tim thay stage '{stage}'"); return False
+    agent.click(*spt); time.sleep(1.5)
+    print(f"  da chon stage {stage} @ {spt}")
+
+    # 4) ACTION LOOP co verify + GHI SO LIEU
+    import json as _json, re as _re, time as _time, os as _os
+    from datetime import datetime as _dt
+
+    def _read_counter(img):
+        """Doc 'Rewards Preview X/500' -> X (so tran da danh trong cycle hien tai).
+        OCR full anh roi loc theo regex (crop ROI nho lam OCR kem)."""
+        for t, *_ in ocr_words(img, min_conf=30):
+            m = _re.search(r"(\d+)\s*/\s*500\b", str(t))
+            if m:
+                return int(m.group(1))
+        return None
+
+    def _read_stamina(img):
+        """Doc shushi (stamina) top-bar -> int (vd 13400). OCR full anh, loc theo
+        bbox o goc tren phai (x>820, y<90) dang 'NN.NK' hoac so thuan."""
+        for t, (x, y, w, h), cf in ocr_words(img, min_conf=30):
+            if not (x > 820 and y < 90):
+                continue
+            s = str(t).replace(",", "").upper()
+            m = _re.match(r"(\d+(?:\.\d+)?)K?$", s)
+            if m:
+                v = float(m.group(1))
+                return int(v * 1000) if "K" in s else int(v)
+        return None
+
+    LOG = _os.path.join(_os.path.dirname(_os.path.dirname(_os.path.abspath(__file__))),
+                        "logs", "farm_soul_stats.jsonl")
+    _os.makedirs(_os.path.dirname(LOG), exist_ok=True)
+    run_id = _dt.utcnow().strftime("%Y%m%dT%H%M%SZ")
+    img0 = agent.shot()
+    c_start = _read_counter(img0)
+    s_start = _read_stamina(img0)
+    print(f"  [stats] run={run_id} counter_start={c_start} stamina_start={s_start}")
+
+    done = 0
+    wins = 0
+    durations = []
+    for i in range(times):
+        img = agent.shot()
+        rr = agent.read(img)
+        if not rr.has("Challenge"):
+            print(f"  vong {i+1}: khong thay Challenge -> dung (het luot/sai man)."); break
+        if dry:
+            print(f"  vong {i+1}/{times}: [DRY] se Challenge @ {_CHALLENGE_XY} -> battle -> reward")
+            done += 1; continue
+        round_t0 = _time.time()
+        agent.click(*_CHALLENGE_XY)
+        time.sleep(3.0)
+        # Cho battle xong: tap deu vao vung trong de bo qua animation/man thuong,
+        # POLL cho den khi 'Challenge' xuat hien lai (= da ve man stage) hoac het gio.
+        won = False
+        t0 = time.time()
+        while time.time() - t0 < 75:                  # 1 tran Soul ~ 30-60s
+            img = agent.shot()
+            r2 = agent.read(img)
+            if r2.has("Challenge"):                   # da ve man stage -> xong vong
+                won = True
+                break
+            # uu tien bam nut ket qua neu co, neu khong tap giua man de tien toi
+            tapped = False
+            for w in ("Reward", "Confirm", "Continue", "OK", "Tap"):
+                if r2.has(w) and agent.tap_text(w, wait=1.2)[0]:
+                    tapped = True
+                    break
+            if not tapped:
+                agent.c.bgclick(576, 340)             # tap giua man bo qua ket qua/animation
+            time.sleep(2.0)
+        dur = round(_time.time() - round_t0, 1)
+        done += 1
+        wins += 1 if won else 0
+        durations.append(dur)
+        # ghi so lieu tung vong
+        with open(LOG, "a") as f:
+            f.write(_json.dumps({
+                "run": run_id, "round": i + 1, "won": won, "dur_s": dur,
+                "counter": _read_counter(agent.shot()),
+                "ts": _dt.utcnow().isoformat() + "Z",
+            }) + "\n")
+        print(f"  vong {i+1}/{times}: {'xong' if won else 'het gio (?)'} ({dur}s)")
+
+    # tong ket run
+    img_end = agent.shot()
+    c_end = _read_counter(img_end)
+    s_end = _read_stamina(img_end)
+    avg = round(sum(durations) / len(durations), 1) if durations else 0
+    summary = {
+        "run": run_id, "stage": stage, "zone": zone, "times": times,
+        "done": done, "wins": wins, "win_rate": round(wins / done, 3) if done else 0,
+        "avg_dur_s": avg, "total_dur_s": round(sum(durations), 1),
+        "counter_start": c_start, "counter_end": c_end,
+        "stamina_start": s_start, "stamina_end": s_end,
+        "stamina_used": (s_start - s_end) if (s_start is not None and s_end is not None) else None,
+        "summary": True, "ts": _dt.utcnow().isoformat() + "Z",
+    }
+    with open(LOG, "a") as f:
+        f.write(_json.dumps(summary) + "\n")
+    print(f"  [SUMMARY] done={done}/{times} wins={wins} win_rate={summary['win_rate']} "
+          f"avg={avg}s counter {c_start}->{c_end} stamina {s_start}->{s_end} "
+          f"(used={summary['stamina_used']})")
+    print(f"  hoan tat {done}/{times} vong farm Soul. Log: {LOG}")
+    return True
+
+
 TASKS = {
     "daily_signin": daily_signin,
     "farm_realm": farm_realm,
+    "farm_soul": farm_soul,
 }
+
+
+def _parse_kwargs(args):
+    """Doc 'key=value' va co --live (=> dry=False) tu argv con lai.
+    Tu dong ep kieu int/float/bool de khop signature task."""
+    kw = {}
+    for a in args:
+        if a == "--live":
+            kw["dry"] = False
+            continue
+        if a in ("--dry", "--dry-run"):
+            kw["dry"] = True
+            continue
+        if "=" not in a:
+            continue
+        k, v = a.split("=", 1)
+        vl = v.lower()
+        if vl in ("true", "false"):
+            kw[k] = (vl == "true")
+        else:
+            try:
+                kw[k] = int(v)
+            except ValueError:
+                try:
+                    kw[k] = float(v)
+                except ValueError:
+                    kw[k] = v
+    return kw
 
 
 def main():
     if len(sys.argv) < 2 or sys.argv[1] not in TASKS:
         print("tasks co san:", ", ".join(TASKS))
-        print("usage: python tasks/run.py <task>")
+        print("usage: python tasks/run.py <task> [key=value ...] [--live]")
+        print("  vd: python tasks/run.py farm_soul zone=Orochi stage=Moan times=10")
+        print("      python tasks/run.py farm_soul zone=Orochi stage=Moan --live")
         return
+    kw = _parse_kwargs(sys.argv[2:])
     agent = Agent()
-    TASKS[sys.argv[1]](agent)
+    TASKS[sys.argv[1]](agent, **kw)
 
 
 if __name__ == "__main__":

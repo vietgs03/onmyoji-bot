@@ -301,6 +301,12 @@ class Agent:
         time.sleep(wait)
         return self.where()
 
+    def drag(self, x0, y0, x1, y1, steps=14, wait=0.0):
+        """Keo/scroll KHONG chiem chuot (vd scroll list stage Soul)."""
+        self.c.bgdrag(x0, y0, x1, y1, steps)
+        if wait:
+            time.sleep(wait)
+
     def goto(self, target_label, max_steps=8):
         """Navigate toi man co label = target_label bang BFS tren graph da hoc.
         Tra True neu toi noi."""
