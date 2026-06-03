@@ -273,28 +273,34 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
             r2 = agent.read(img)
             c_now = _read_counter(img)
             has_ch = r2.has("Challenge")
-            # ve man stage VA counter da tang -> thang that
+            # OCR full anh 1 lan (crop ROI nho lam OCR fail) -> dung chung cho detect
+            full = " ".join(str(t).lower() for t, *_ in ocr_words(img, min_conf=35))
+            is_dialog = ("enable it again" in full) or ("privilege" in full) or ("parade" in full)
+            # ve man stage VA counter da tang -> thang that (dang tin nhat)
             if has_ch and c_before is not None and c_now is not None and c_now > c_before:
                 won = True
                 break
-            # ve man stage nhung counter chua doc duoc / chua tang:
-            #  - neu da tung roi khoi stage (saw_battle) -> coi nhu xong (counter OCR loi)
-            #  - neu CHUA tung roi stage -> battle chua chay (dialog chan) -> xu ly dialog
-            if has_ch and saw_battle:
+            # ve man stage, da tung vao battle that, counter OCR loi -> coi nhu xong
+            if has_ch and saw_battle and not is_dialog:
                 won = True
                 break
-            if not has_ch:
+            # 'roi stage' chi tinh khi KHONG phai dialog (dialog cung an Challenge)
+            if not has_ch and not is_dialog:
                 saw_battle = True
-            # OCR full anh 1 lan (crop ROI nho lam OCR fail) -> dung chung cho detect
-            full = " ".join(str(t).lower() for t, *_ in ocr_words(img, min_conf=35))
-            # --- Dialog 'Bonus ... Enable it again?' -> Confirm @ (664,414) ---
+            # --- Dialog 'Bonus ... Enable it again?' -> Confirm @ (660,410) ---
+            # (hitbox nut nho/lech: 660,410 trung, 667,416 KHONG trung)
             if "bonus" in full and ("enable" in full or "disabled" in full):
-                agent.c.bgclick(664, 414)             # Confirm bat bonus (15') -> het hoi lai
-                time.sleep(2.0)
+                for cxy in ((660, 410), (655, 408), (665, 413), (483, 410)):
+                    agent.c.bgclick(*cxy)
+                    time.sleep(1.5)
+                    if "enable it again" not in " ".join(
+                            str(t).lower() for t, *_ in ocr_words(agent.shot(), min_conf=35)):
+                        break
+                time.sleep(0.5)
                 # battle chua chay (van o stage) -> bam lai Challenge
                 if agent.read().has("Challenge"):
                     agent.c.bgclick(*_CHALLENGE_XY)
-                    time.sleep(2.5)
+                    time.sleep(3.0)
                 continue
             # --- Popup event (vd 'Parade Privilege') -> X dong @ (975,135) ---
             if "privilege" in full or "parade" in full:
