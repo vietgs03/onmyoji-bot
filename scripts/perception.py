@@ -167,7 +167,7 @@ def detect_buttons(img, suppress_center=False):
     circles = cv2.HoughCircles(blur, cv2.HOUGH_GRADIENT, dp=1.2, minDist=30,
                                param1=120, param2=40, minRadius=14, maxRadius=55)
     if circles is not None:
-        for cx, cy, r in np.uint16(np.around(circles))[0]:
+        for cx, cy, r in np.around(circles)[0].astype(int):
             cands.append((int(cx - r), int(cy - r), int(2 * r), int(2 * r), 1.0))
 
     # 2) vung co man do bao hoa cao (nut mau cam/do dac trung Onmyoji)

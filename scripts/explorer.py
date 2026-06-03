@@ -52,6 +52,10 @@ def candidate_buttons(img, sid, is_home):
     for p in pts:
         if all(abs(p[0]-q[0]) > 20 or abs(p[1]-q[1]) > 20 for q in uniq):
             uniq.append(p)
+    # TRANH nut bat dau tran (Challenge/Battle) o goc phai duoi cac man chuan bi -
+    # de khong ton luot danh; handle_battle van bat duoc neu lo vao.
+    if not is_home:
+        uniq = [p for p in uniq if not (p[0] > 980 and p[1] > 540)]
     return uniq
 
 def try_back(wm):
@@ -94,6 +98,65 @@ def goto_home(wm, home_sid, max_back=4):
         wm.states[sid]["label"] = "HOME"; wm.save()
         sid = home_sid  # coi nhu da ve HOME (cung logic)
     return sid
+
+def is_battle(img):
+    """Heuristic phat hien man dang TRONG TRAN / ket qua tran / hop thoai roi tran.
+    Cac dau hieu (Onmyoji battle):
+      - hop thoai 'Sure you want to leave the battle?' (cuon kem, nut Cancel do + Confirm cam o ~y408)
+      - man ket qua Failed/Win co 'Tap to continue' (chu mo o duoi giua) + 'Get stronger via' panel
+      - trong tran: thanh skill duoi cung + nhieu vong tron icon shikigami ben phai (x>1050)
+    Tra ten loai ('leave_dialog'|'result'|'in_battle') hoac None."""
+    if img is None:
+        return None
+    import numpy as _np
+    h, w = img.shape[:2]
+    gray = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
+    # 1) leave-battle dialog: vung cuon kem sang ~ (340..820, 230..470), giua co 2 nut
+    roi = gray[230:470, 340:820]
+    if roi.size:
+        bright = float((roi > 180).mean())
+        # nut Cancel (do) + Confirm (cam) o hang y~408: kiem mau sat cao 2 cum
+        hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+        row = hsv[395:425, 420:730]
+        warm = ((row[:, :, 0] < 25) | (row[:, :, 0] > 160)) & (row[:, :, 1] > 120)
+        if bright > 0.45 and float(warm.mean()) > 0.20:
+            return "leave_dialog"
+    # 2) result: panel toi 'Get stronger via' ~ (230..920, 390..560) + tap-to-continue
+    panel = gray[400:560, 240:910]
+    if panel.size:
+        dark = float((panel < 70).mean())
+        # 3 icon sang trong panel toi
+        if dark > 0.45:
+            return "result"
+    return None
+
+def handle_battle(wm, max_tries=5):
+    """Neu dang o man tran -> thoat an toan (Confirm roi tran / tap continue / back).
+    Tra True neu da xu ly (va co the da thoat), False neu khong phai man tran."""
+    img = bgshot()
+    kind = is_battle(img)
+    if kind is None:
+        return False
+    print(f"  ! BATTLE detected ({kind}) -> thoat an toan")
+    for _ in range(max_tries):
+        img = bgshot()
+        kind = is_battle(img)
+        if kind == "leave_dialog":
+            bgclick(665, 408); time.sleep(2.5)        # Confirm roi tran
+        elif kind == "result":
+            bgclick(576, 648); time.sleep(2.0)        # Tap to continue
+            bgclick(576, 648); time.sleep(2.0)
+        else:
+            # co the dang trong tran: bam back goc trai de hien hop thoai roi tran
+            bgclick(40, 62); time.sleep(1.5)
+            img2 = bgshot()
+            if is_battle(img2) == "leave_dialog":
+                bgclick(665, 408); time.sleep(2.5)
+            else:
+                break
+    # ve HOME sau khi thoat
+    return True
+
 
 def deep_escape(wm):
     """Thoat manh khi ket: back qua MOI goc nhieu lan + dong popup CV + graph anchor.
@@ -198,6 +261,10 @@ def explore(budget=60, home_every=20, max_depth=4):
         sid, isnew, img = wm.observe()
         if img is None:
             print("  ! no shot"); break
+        # AN TOAN: neu lo vao tran -> thoat ngay (Confirm roi tran / tap continue)
+        if handle_battle(wm):
+            goto_home(wm, home_sid); stuck = 0
+            continue
         # neu dang loading -> doi cho qua, observe lai (toi da 3 lan)
         waits = 0
         while is_loading(img) and waits < 3:
