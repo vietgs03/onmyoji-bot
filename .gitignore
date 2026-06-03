@@ -4,3 +4,4 @@ research/OAS/
 .venv/
 __pycache__/
 *.pyc
+ml/models/*.pkl
