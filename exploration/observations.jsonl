@@ -549,3 +549,59 @@
 {"event": "transition", "from": "e91a4cdc54", "click": [685, 361], "to": "dbd7d2f47b", "to_is_new": true, "step": 14}
 {"event": "transition", "from": "dbd7d2f47b", "click": [1046, 591], "to": "918eafcd8b", "to_is_new": true, "step": 15}
 {"event": "transition", "from": "918eafcd8b", "click": [655, 567], "to": "ef1b94da7a", "to_is_new": true, "step": 16}
+{"event": "transition", "from": "eef6c85a46", "click": [1047, 596], "to": "69227e751e", "to_is_new": false, "step": 0}
+{"event": "new_state", "state": "d665a0de88", "step": 1}
+{"event": "transition", "from": "eef6c85a46", "click": [187, 619], "to": "6ef1d6f0d8", "to_is_new": true, "step": 2}
+{"event": "noop", "state": "6ef1d6f0d8", "click": [1051, 111], "step": 3}
+{"event": "transition", "from": "6ef1d6f0d8", "click": [254, 364], "to": "f9dfc53ce1", "to_is_new": false, "step": 4}
+{"event": "transition", "from": "f9dfc53ce1", "click": [723, 285], "to": "49c515b9f5", "to_is_new": false, "step": 5}
+{"event": "transition", "from": "49c515b9f5", "click": [928, 314], "to": "f9dfc53ce1", "to_is_new": false, "step": 6}
+{"event": "noop", "state": "49c515b9f5", "click": [752, 315], "step": 7}
+{"event": "transition", "from": "49c515b9f5", "click": [381, 187], "to": "bd0919c26d", "to_is_new": true, "step": 8}
+{"event": "transition", "from": "eef6c85a46", "click": [653, 626], "to": "a56c7877c8", "to_is_new": true, "step": 10}
+{"event": "noop", "state": "a56c7877c8", "click": [869, 251], "step": 11}
+{"event": "noop", "state": "a56c7877c8", "click": [857, 226], "step": 12}
+{"event": "noop", "state": "a56c7877c8", "click": [1023, 259], "step": 13}
+{"event": "noop", "state": "a56c7877c8", "click": [1013, 283], "step": 14}
+{"event": "noop", "state": "a56c7877c8", "click": [263, 381], "step": 15}
+{"event": "noop", "state": "a56c7877c8", "click": [298, 382], "step": 16}
+{"event": "noop", "state": "a56c7877c8", "click": [417, 297], "step": 17}
+{"event": "noop", "state": "a56c7877c8", "click": [877, 195], "step": 18}
+{"event": "transition", "from": "eef6c85a46", "click": [977, 496], "to": "f9dfc53ce1", "to_is_new": false, "step": 19}
+{"event": "transition", "from": "eef6c85a46", "click": [211, 608], "to": "6ef1d6f0d8", "to_is_new": false, "step": 20}
+{"event": "transition", "from": "6ef1d6f0d8", "click": [296, 475], "to": "f9dfc53ce1", "to_is_new": false, "step": 21}
+{"event": "noop", "state": "f9dfc53ce1", "click": [722, 411], "step": 22}
+{"event": "noop", "state": "f9dfc53ce1", "click": [385, 191], "step": 23}
+{"event": "transition", "from": "f9dfc53ce1", "click": [214, 183], "to": "49c515b9f5", "to_is_new": false, "step": 24}
+{"event": "transition", "from": "49c515b9f5", "click": [214, 184], "to": "f9dfc53ce1", "to_is_new": false, "step": 25}
+{"event": "transition", "from": "f9dfc53ce1", "click": [937, 221], "to": "49c515b9f5", "to_is_new": false, "step": 26}
+{"event": "transition", "from": "49c515b9f5", "click": [716, 219], "to": "f9dfc53ce1", "to_is_new": false, "step": 27}
+{"event": "transition", "from": "49c515b9f5", "click": [745, 393], "to": "f9dfc53ce1", "to_is_new": false, "step": 28}
+{"event": "transition", "from": "49c515b9f5", "click": [937, 151], "to": "f9dfc53ce1", "to_is_new": false, "step": 29}
+{"event": "noop", "state": "f9dfc53ce1", "click": [897, 271], "step": 30}
+{"event": "noop", "state": "f9dfc53ce1", "click": [622, 339], "step": 31}
+{"event": "noop", "state": "f9dfc53ce1", "click": [622, 226], "step": 32}
+{"event": "noop", "state": "f9dfc53ce1", "click": [928, 314], "step": 33}
+{"event": "noop", "state": "f9dfc53ce1", "click": [752, 315], "step": 34}
+{"event": "transition", "from": "f9dfc53ce1", "click": [745, 393], "to": "49c515b9f5", "to_is_new": false, "step": 35}
+{"event": "transition", "from": "f9dfc53ce1", "click": [937, 151], "to": "49c515b9f5", "to_is_new": false, "step": 36}
+{"event": "transition", "from": "49c515b9f5", "click": [1055, 185], "to": "f9dfc53ce1", "to_is_new": false, "step": 37}
+{"event": "noop", "state": "f9dfc53ce1", "click": [1055, 304], "step": 38}
+{"event": "transition", "from": "eef6c85a46", "click": [511, 611], "to": "9e4eaffca3", "to_is_new": true, "step": 40}
+{"event": "new_state", "state": "0a8a1ed50a", "step": 41}
+{"event": "noop", "state": "eef6c85a46", "click": [71, 602], "step": 42}
+{"event": "transition", "from": "eef6c85a46", "click": [907, 577], "to": "01e04a2005", "to_is_new": true, "step": 43}
+{"event": "noop", "state": "eef6c85a46", "click": [499, 62], "step": 45}
+{"event": "transition", "from": "eef6c85a46", "click": [271, 619], "to": "eb87e0ee18", "to_is_new": true, "step": 46}
+{"event": "transition", "from": "eb87e0ee18", "click": [55, 91], "to": "45e8880646", "to_is_new": false, "step": 47}
+{"event": "transition", "from": "45e8880646", "click": [1091, 70], "to": "eb87e0ee18", "to_is_new": false, "step": 48}
+{"event": "transition", "from": "eb87e0ee18", "click": [1031, 70], "to": "300e45f1cc", "to_is_new": false, "step": 49}
+{"event": "noop", "state": "300e45f1cc", "click": [150, 652], "step": 50}
+{"event": "noop", "state": "300e45f1cc", "click": [693, 543], "step": 51}
+{"event": "transition", "from": "eb87e0ee18", "click": [1096, 223], "to": "a7b4fc1aed", "to_is_new": true, "step": 53}
+{"event": "noop", "state": "1bb4756a8f", "click": [397, 135], "step": 54}
+{"event": "noop", "state": "1bb4756a8f", "click": [734, 135], "step": 55}
+{"event": "noop", "state": "1bb4756a8f", "click": [1082, 346], "step": 56}
+{"event": "transition", "from": "eef6c85a46", "click": [97, 205], "to": "f10db24cd0", "to_is_new": false, "step": 58}
+{"event": "noop", "state": "eef6c85a46", "click": [577, 127], "step": 60}
+{"event": "transition", "from": "eef6c85a46", "click": [457, 85], "to": "c6d3d9c4a2", "to_is_new": false, "step": 61}

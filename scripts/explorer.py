@@ -121,12 +121,12 @@ def is_battle(img):
         warm = ((row[:, :, 0] < 25) | (row[:, :, 0] > 160)) & (row[:, :, 1] > 120)
         if bright > 0.45 and float(warm.mean()) > 0.20:
             return "leave_dialog"
-    # 2) result: panel toi 'Get stronger via' ~ (230..920, 390..560) + tap-to-continue
+    # 2) result: panel toi 'Get stronger via' ~ (240..910, 400..560) rat toi (>72%)
+    #    Nguong cao de KHONG nham voi HOME (footer toi nhung chi ~55%).
     panel = gray[400:560, 240:910]
     if panel.size:
         dark = float((panel < 70).mean())
-        # 3 icon sang trong panel toi
-        if dark > 0.45:
+        if dark > 0.72:
             return "result"
     return None
 
