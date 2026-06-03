@@ -24,10 +24,17 @@ UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
 
 def bucket(path):
     if "shikigami/icons/" in path: return "shikigami_icons"
+    if "shikigami/images/" in path: return "shikigami_images"
+    if "shikigami/skills/" in path: return "shikigami_skills"
+    if "shikigami/shards/" in path: return "shikigami_shards"
+    if "shikigami/skins/" in path: return "shikigami_skins"
     if "souls/icons/" in path: return "soul_icons"
+    if "souls/images/" in path: return "soul_images"
     if "onmyoji/icons/" in path: return "onmyoji_icons"
+    if "onmyoji/" in path: return "onmyoji"
     if "images/stats/" in path: return "stats"
     if "images/rarity/" in path: return "rarity"
+    if "effects/" in path: return "effects"
     return "misc"
 
 

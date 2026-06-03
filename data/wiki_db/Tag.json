@@ -1,0 +1,167 @@
+[
+ {
+  "id": 1,
+  "name": "Damage",
+  "color": "grey"
+ },
+ {
+  "id": 2,
+  "name": "Healer",
+  "color": "blue"
+ },
+ {
+  "id": 3,
+  "name": "Feed",
+  "color": "blue"
+ },
+ {
+  "id": 4,
+  "name": "Revive",
+  "color": "blue"
+ },
+ {
+  "id": 5,
+  "name": "Debuff",
+  "color": "red"
+ },
+ {
+  "id": 6,
+  "name": "Shield",
+  "color": "blue"
+ },
+ {
+  "id": 7,
+  "name": "Control",
+  "color": "red"
+ },
+ {
+  "id": 8,
+  "name": "Summon",
+  "color": "yellow"
+ },
+ {
+  "id": 9,
+  "name": "Accelerator",
+  "color": "blue"
+ },
+ {
+  "id": 10,
+  "name": "Round",
+  "color": "blue"
+ },
+ {
+  "id": 11,
+  "name": "Decelerator",
+  "color": "red"
+ },
+ {
+  "id": 12,
+  "name": "Immunity",
+  "color": "yellow"
+ },
+ {
+  "id": 13,
+  "name": "HP Steal",
+  "color": "blue"
+ },
+ {
+  "id": 14,
+  "name": "Dispel",
+  "color": "yellow"
+ },
+ {
+  "id": 15,
+  "name": "Co-op",
+  "color": "yellow"
+ },
+ {
+  "id": 16,
+  "name": "Dispeller",
+  "color": "yellow"
+ },
+ {
+  "id": 17,
+  "name": "Protection",
+  "color": "blue"
+ },
+ {
+  "id": 18,
+  "name": "Recover",
+  "color": "blue"
+ },
+ {
+  "id": 19,
+  "name": "Unyielding",
+  "color": "yellow"
+ },
+ {
+  "id": 20,
+  "name": "Seal",
+  "color": "red"
+ },
+ {
+  "id": 21,
+  "name": "Reflects Damage",
+  "color": "yellow"
+ },
+ {
+  "id": 22,
+  "name": "Blocking",
+  "color": "blue"
+ },
+ {
+  "id": 23,
+  "name": "Counter",
+  "color": "yellow"
+ },
+ {
+  "id": 24,
+  "name": "Orb",
+  "color": "blue"
+ },
+ {
+  "id": 25,
+  "name": "Call to Arms",
+  "color": "yellow"
+ },
+ {
+  "id": 26,
+  "name": "Switch",
+  "color": "yellow"
+ },
+ {
+  "id": 27,
+  "name": "Link",
+  "color": "yellow"
+ },
+ {
+  "id": 28,
+  "name": "Locks Move Bar",
+  "color": "red"
+ },
+ {
+  "id": 29,
+  "name": "Hidden Secret",
+  "color": "yellow"
+ },
+ {
+  "id": 30,
+  "name": "Shield Penetration",
+  "color": "yellow"
+ },
+ {
+  "id": 31,
+  "name": "Transfiguration",
+  "color": "yellow"
+ },
+ {
+  "id": 32,
+  "name": "Special",
+  "color": "yellow"
+ },
+ {
+  "id": 33,
+  "name": "Support",
+  "color": "blue"
+ }
+]

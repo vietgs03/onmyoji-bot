@@ -1,0 +1,10409 @@
+[
+ {
+  "id": 1,
+  "name": "Self-expectation",
+  "shiki": [
+   231,
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 2,
+  "name": "One with Tides",
+  "shiki": [
+   231
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 3,
+  "name": "Sea's Dream",
+  "shiki": [
+   231,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 4,
+  "name": "Deep-sea Patrol",
+  "shiki": [
+   231
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 5,
+  "name": "Fortune Cruise",
+  "shiki": [
+   231,
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 6,
+  "name": "Regal Sisters",
+  "shiki": [
+   231,
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 7,
+  "name": "Senhime Resurgent 1",
+  "shiki": [
+   231
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 8,
+  "name": "逆影",
+  "shiki": [
+   231
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 9,
+  "name": "Mountain Remember",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 10,
+  "name": "Triumphant Return",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 11,
+  "name": "Mirage Shattered",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 12,
+  "name": "Ryougin Suzuka Gozen 1",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 13,
+  "name": "Golden Shade",
+  "shiki": [
+   120
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 14,
+  "name": "Falling Arrows",
+  "shiki": [
+   120
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 15,
+  "name": "Gods' Arrival",
+  "shiki": [
+   120,
+   121
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 16,
+  "name": "No Name 1",
+  "shiki": [
+   1,
+   63,
+   6,
+   19,
+   9,
+   30,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 17,
+  "name": "闲风夏铃",
+  "shiki": [
+   2,
+   33,
+   31,
+   21,
+   36,
+   50,
+   68,
+   77,
+   69
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 18,
+  "name": "No Name 3",
+  "shiki": [
+   1,
+   63,
+   11,
+   5,
+   10
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 19,
+  "name": "No Name 4",
+  "shiki": [
+   2,
+   17,
+   3,
+   13,
+   12,
+   20,
+   94
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 20,
+  "name": "暗心不语",
+  "shiki": [
+   10,
+   11,
+   100
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 21,
+  "name": "暖心之汤",
+  "shiki": [
+   10,
+   11,
+   15,
+   20,
+   35
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 22,
+  "name": "Resurgent Life",
+  "shiki": [
+   231
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 23,
+  "name": "Seaside Breeze",
+  "shiki": [
+   231,
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 24,
+  "name": "Fortune Travelers",
+  "shiki": [
+   231,
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 25,
+  "name": "Sky Shattered",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 26,
+  "name": "Olden Days",
+  "shiki": [
+   237,
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 27,
+  "name": "Ryougin Suzuka Gozen 2",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 28,
+  "name": "未来的自己",
+  "shiki": [
+   231,
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 29,
+  "name": "Azure Abyss",
+  "shiki": [
+   237
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 30,
+  "name": "Dreaming Tides",
+  "shiki": [
+   231
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 31,
+  "name": "The Christmas Cake",
+  "shiki": [
+   19,
+   30,
+   61,
+   106
+  ],
+  "onmyoji": [
+   1,
+   5
+  ]
+ },
+ {
+  "id": 32,
+  "name": "月影温泉",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 33,
+  "name": "Under the Maples",
+  "shiki": [
+   19
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 34,
+  "name": "No Name 7",
+  "shiki": [
+   28,
+   73,
+   5,
+   74
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 35,
+  "name": "挚友相伴",
+  "shiki": [
+   19,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 36,
+  "name": "No Name 9",
+  "shiki": [
+   17,
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 37,
+  "name": "No Name 10",
+  "shiki": [
+   61,
+   19,
+   30,
+   35,
+   47,
+   51,
+   85
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 38,
+  "name": "青竹白雪",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 39,
+  "name": "Royal Gold",
+  "shiki": [
+   17
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 40,
+  "name": "Ibaraki Douji 1",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 41,
+  "name": "No Name 11",
+  "shiki": [
+   17,
+   19,
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 42,
+  "name": "Ootengu 1",
+  "shiki": [
+   17
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 43,
+  "name": "结伴同行",
+  "shiki": [
+   17,
+   61,
+   35,
+   65,
+   57,
+   52
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 44,
+  "name": "No Name 13",
+  "shiki": [
+   19,
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 45,
+  "name": "Defend",
+  "shiki": [
+   19,
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 46,
+  "name": "No Name 14",
+  "shiki": [
+   19,
+   61,
+   78,
+   98,
+   106,
+   105,
+   68
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 47,
+  "name": "Severed Arn",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 48,
+  "name": "No Name 15",
+  "shiki": [
+   106,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 49,
+  "name": "Flute Tune",
+  "shiki": [
+   109
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 50,
+  "name": "Anniversary Celebration",
+  "shiki": [
+   109,
+   110
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 51,
+  "name": "少时之约",
+  "shiki": [
+   110
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 52,
+  "name": "竹幽虫鸣",
+  "shiki": [
+   1,
+   63,
+   35,
+   78,
+   93,
+   100,
+   76,
+   9
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 53,
+  "name": "Inferno",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 54,
+  "name": "Demonic Arm",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 55,
+  "name": "Demon",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 56,
+  "name": "Lord of Sealand",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 57,
+  "name": "Demonship Invasion",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 58,
+  "name": "Harbinger of Tragedy",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 59,
+  "name": "Sudden Change",
+  "shiki": [
+   127,
+   61,
+   135
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 60,
+  "name": "鬼国降临",
+  "shiki": [
+   127,
+   119
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 61,
+  "name": "Fallen",
+  "shiki": [
+   135
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 62,
+  "name": "Out of Control",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 63,
+  "name": "Demoniac Return",
+  "shiki": [
+   135
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 64,
+  "name": "Inferno Fist",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 65,
+  "name": "Trapped",
+  "shiki": [
+   19,
+   61,
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 66,
+  "name": "Rooted Grudge",
+  "shiki": [
+   19
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 67,
+  "name": "Unyielding",
+  "shiki": [
+   19
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 68,
+  "name": "Sea vs. Mountain",
+  "shiki": [
+   19,
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 69,
+  "name": "New Ally",
+  "shiki": [
+   19
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 70,
+  "name": "Besiege",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 71,
+  "name": "No Name 18",
+  "shiki": [
+   127,
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 72,
+  "name": "Arakawa's Fury",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 73,
+  "name": "First Impression",
+  "shiki": [
+   128,
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 74,
+  "name": "一念魔佛",
+  "shiki": [
+   135
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 75,
+  "name": "Ootakemaru 1",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 76,
+  "name": "Ootakemaru 2",
+  "shiki": [
+   127,
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 77,
+  "name": "Brave Heart",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 78,
+  "name": "Fateful Bind",
+  "shiki": [
+   127,
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 79,
+  "name": "No Name 19",
+  "shiki": [
+   127,
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 80,
+  "name": "No Name 20",
+  "shiki": [
+   127,
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 81,
+  "name": "Arms of Steel",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 82,
+  "name": "Gyourou Arakawa no Aruji 1",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 83,
+  "name": "Gyourou Arakawa no Aruji 2",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 84,
+  "name": "Gyourou Arakawa no Aruji 3",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 85,
+  "name": "Invading Waves",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 86,
+  "name": "No Name 21",
+  "shiki": [
+   78,
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 87,
+  "name": "No Name 22",
+  "shiki": [
+   78,
+   44
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 88,
+  "name": "Sai-no-Kawara",
+  "shiki": [
+   83,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 89,
+  "name": "Sealand Battle",
+  "shiki": [
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 90,
+  "name": "战骸之焰",
+  "shiki": [
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 91,
+  "name": "Retrieval Operation",
+  "shiki": [
+   145,
+   144,
+   143
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 92,
+  "name": "A Warrior's Duty",
+  "shiki": [
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 93,
+  "name": "Mt. Suzuka",
+  "shiki": [
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 94,
+  "name": "Tide to Home",
+  "shiki": [
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 95,
+  "name": "Return of the Demonship",
+  "shiki": [
+   145,
+   144,
+   129
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 96,
+  "name": "Delve into Dreams",
+  "shiki": [
+   127,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 97,
+  "name": "Monumental Chapter",
+  "shiki": [
+   149
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 98,
+  "name": "Like Old Times",
+  "shiki": [
+   127,
+   149,
+   126,
+   129
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 99,
+  "name": "The Return",
+  "shiki": [
+   127,
+   149
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 100,
+  "name": "Homeless Thought",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 101,
+  "name": "Battling Together",
+  "shiki": [
+   145,
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 102,
+  "name": "Childhood Promise",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 103,
+  "name": "Three Days Two Centuries",
+  "shiki": [
+   149,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 104,
+  "name": "Like a Dream",
+  "shiki": [
+   127,
+   145,
+   144,
+   126,
+   129,
+   143
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 105,
+  "name": "Crane and Master",
+  "shiki": [
+   148,
+   149
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 106,
+  "name": "Reach of Rescue",
+  "shiki": [
+   145,
+   129,
+   126
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 107,
+  "name": "A New Dawn",
+  "shiki": [
+   150,
+   145
+  ],
+  "onmyoji": [
+   4
+  ]
+ },
+ {
+  "id": 108,
+  "name": "Song of the Sunset",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 109,
+  "name": "Stranded",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 110,
+  "name": "A Different Path",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 111,
+  "name": "The Oath",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 112,
+  "name": "Bloodline",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 113,
+  "name": "Sunshine Beyond",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 114,
+  "name": "Senhime 2",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 115,
+  "name": "Senhime 1",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 116,
+  "name": "Merfolk Sisters",
+  "shiki": [
+   150,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 117,
+  "name": "Lonely Watch",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 118,
+  "name": "Silent Decision",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 119,
+  "name": "Dream of Reunion",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 120,
+  "name": "Sisters's Reunion",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 121,
+  "name": "Dancing Fire",
+  "shiki": [
+   156
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 122,
+  "name": "Warming Sun",
+  "shiki": [
+   156
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 123,
+  "name": "Alone",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 124,
+  "name": "Eternal Winter",
+  "shiki": [
+   156
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 125,
+  "name": "Semigoori Yuki Onna 1",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 126,
+  "name": "Semigoori Yuki Onna 2",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 127,
+  "name": "Boisterous",
+  "shiki": [
+   2
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 128,
+  "name": "Chirping Spring",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 129,
+  "name": "Spring Breeze",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 130,
+  "name": "Frosty Glance",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 131,
+  "name": "Semigoori Yuki Onna 3",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 132,
+  "name": "Silence",
+  "shiki": [
+   156
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 133,
+  "name": "Frosty Moon",
+  "shiki": [
+   2
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 134,
+  "name": "Flaming Year",
+  "shiki": [
+   170,
+   169
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 135,
+  "name": "Adventurous Ninja",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 136,
+  "name": "Ninja's Journey",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 137,
+  "name": "Bell with Ninja",
+  "shiki": [
+   169,
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 138,
+  "name": "Big Dream",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 139,
+  "name": "First Meal",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 140,
+  "name": "Dashing Ninja",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 141,
+  "name": "Kind Guardian",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 142,
+  "name": "Realm of Solitude",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 143,
+  "name": "Strong Rivals",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 144,
+  "name": "Maple Shot",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 145,
+  "name": "Hidden Beauty",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 146,
+  "name": "Maple Crow",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 147,
+  "name": "Maple Days",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 148,
+  "name": "Cry of the Crow",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 149,
+  "name": "The Heartseeker",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 150,
+  "name": "Light in the Dark",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 151,
+  "name": "Cracks Appeared",
+  "shiki": [
+   30
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 152,
+  "name": "Kijo Momiji 1",
+  "shiki": [
+   30,
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 153,
+  "name": "Kokorogari Kijo Momiji 1",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 154,
+  "name": "Kokorogari Kijo Momiji 2",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 155,
+  "name": "罔生",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 156,
+  "name": "Kokorogari Kijo Momiji 3",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 157,
+  "name": "Hot Spring Battle",
+  "shiki": [
+   110,
+   135,
+   61,
+   136
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 158,
+  "name": "Rengoku Ibaraki Douji 1",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 159,
+  "name": "Rengoku Ibaraki Douji 2",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 160,
+  "name": "Rengoku Ibaraki Douji 3",
+  "shiki": [
+   19,
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 161,
+  "name": "Rengoku Ibaraki Douji 4",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 162,
+  "name": "Rengoku Ibaraki Douji 5",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 163,
+  "name": "Rengoku Ibaraki Douji 6",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 164,
+  "name": "Rengoku Ibaraki Douji 7",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 165,
+  "name": "Intense Mellowness",
+  "shiki": [
+   135,
+   116,
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 166,
+  "name": "First Taste",
+  "shiki": [
+   135,
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 167,
+  "name": "Flavor Bittersweet",
+  "shiki": [
+   246,
+   19,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 168,
+  "name": "Mirage Feast",
+  "shiki": [
+   145
+  ],
+  "onmyoji": [
+   1,
+   5
+  ]
+ },
+ {
+  "id": 169,
+  "name": "Sea's Memories",
+  "shiki": [
+   127,
+   145,
+   129
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 170,
+  "name": "Farewell Letter",
+  "shiki": [
+   127,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 171,
+  "name": "Suzuka Gozen 1",
+  "shiki": [
+   145
+  ],
+  "onmyoji": [
+   1,
+   2,
+   5
+  ]
+ },
+ {
+  "id": 172,
+  "name": "Childhood Memory",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 173,
+  "name": "No Name 24",
+  "shiki": [
+   10,
+   11,
+   188,
+   218
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 174,
+  "name": "Winter Spring",
+  "shiki": [
+   150,
+   147,
+   148,
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 175,
+  "name": "Chromatic Feast",
+  "shiki": [
+   116,
+   135,
+   136,
+   39
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 176,
+  "name": "Frosty Maple's Dance",
+  "shiki": [
+   179,
+   110
+  ],
+  "onmyoji": [
+   1,
+   3
+  ]
+ },
+ {
+  "id": 177,
+  "name": "No Name 25",
+  "shiki": [
+   10,
+   11,
+   188,
+   218
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 178,
+  "name": "Day and Night",
+  "shiki": [
+   145,
+   150,
+   157,
+   159,
+   155
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 179,
+  "name": "Prophecy",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 180,
+  "name": "Stars Aligned",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 181,
+  "name": "Self Reflection",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 182,
+  "name": "Destined Fate",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 183,
+  "name": "Moon's Return",
+  "shiki": [
+   79,
+   78,
+   77,
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 184,
+  "name": "Moonlit Galaxy",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 185,
+  "name": "Galaxy Voyage",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 186,
+  "name": "Millennium Watcher",
+  "shiki": [
+   180,
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 187,
+  "name": "No Name 26",
+  "shiki": [
+   180,
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 188,
+  "name": "No Name 27",
+  "shiki": [
+   180,
+   181,
+   169,
+   98,
+   174,
+   141
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 189,
+  "name": "Rabbit Bestowing",
+  "shiki": [
+   120,
+   181,
+   166,
+   169,
+   140,
+   77,
+   141,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 190,
+  "name": "Curtain Raised",
+  "shiki": [
+   174,
+   180,
+   181,
+   185
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 191,
+  "name": "A Distant Past",
+  "shiki": [
+   185,
+   180,
+   181,
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 192,
+  "name": "Radiant Trio",
+  "shiki": [
+   225,
+   180,
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 193,
+  "name": "Warding Light",
+  "shiki": [
+   180,
+   181,
+   225,
+   224,
+   226,
+   98,
+   174
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 194,
+  "name": "Light Followers",
+  "shiki": [
+   225,
+   180,
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 195,
+  "name": "Sworn Blade",
+  "shiki": [
+   225,
+   181,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 196,
+  "name": "Godless World",
+  "shiki": [
+   225,
+   181,
+   180,
+   224,
+   60
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 197,
+  "name": "Fate",
+  "shiki": [
+   225,
+   181,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 198,
+  "name": "Goodbye",
+  "shiki": [
+   225,
+   181,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 199,
+  "name": "Dazzling Party",
+  "shiki": [
+   181,
+   140,
+   166,
+   240
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 200,
+  "name": "Retraced History",
+  "shiki": [
+   79,
+   240
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 201,
+  "name": "Fair Memories",
+  "shiki": [
+   79,
+   78,
+   77,
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 202,
+  "name": "New Imaginations",
+  "shiki": [
+   116,
+   181,
+   180,
+   2,
+   135,
+   15,
+   231,
+   238,
+   174,
+   35,
+   36,
+   106,
+   121,
+   124,
+   17,
+   141,
+   147,
+   149,
+   148,
+   225,
+   158,
+   157,
+   169,
+   187,
+   220,
+   242,
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 203,
+  "name": "Timeworn Bond",
+  "shiki": [
+   180,
+   181,
+   252,
+   17,
+   61,
+   135,
+   224,
+   225,
+   106,
+   223,
+   110,
+   174,
+   251,
+   157,
+   158,
+   148,
+   149,
+   145,
+   124,
+   166,
+   94
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   5
+  ]
+ },
+ {
+  "id": 204,
+  "name": "Savoring Sweets",
+  "shiki": [
+   157,
+   158,
+   2,
+   17,
+   242
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 205,
+  "name": "绘甜愿",
+  "shiki": [
+   242,
+   225,
+   181,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 206,
+  "name": "Netherdream",
+  "shiki": [
+   15,
+   253,
+   73,
+   74
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 207,
+  "name": "Auspicious Dragons",
+  "shiki": [
+   181,
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 208,
+  "name": "Destructive Darkness",
+  "shiki": [
+   181,
+   225,
+   180,
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 209,
+  "name": "Dance Feast",
+  "shiki": [
+   181,
+   180,
+   174,
+   219
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 210,
+  "name": "Millennial Promise",
+  "shiki": [
+   181,
+   180
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 211,
+  "name": "Thunder Divination",
+  "shiki": [
+   180,
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 212,
+  "name": "Shikigami Party",
+  "shiki": [
+   55,
+   118,
+   61,
+   124,
+   67,
+   117,
+   36,
+   136,
+   159,
+   76,
+   17,
+   129,
+   155,
+   145,
+   150,
+   141,
+   92,
+   90,
+   157,
+   94,
+   35,
+   96,
+   98,
+   106,
+   105,
+   51
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 213,
+  "name": "Fox Herald",
+  "shiki": [
+   98
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 214,
+  "name": "百鬼夜宴",
+  "shiki": [
+   61,
+   19,
+   94,
+   73,
+   74,
+   51,
+   47,
+   106,
+   11,
+   10
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 215,
+  "name": "Dawn Wonderland",
+  "shiki": [
+   170,
+   35
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 216,
+  "name": "Winter Hot Spring",
+  "shiki": [
+   98,
+   79
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 217,
+  "name": "Symphony",
+  "shiki": [
+   19,
+   61,
+   98,
+   76,
+   79,
+   62,
+   119,
+   121
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 218,
+  "name": "Festival Dream",
+  "shiki": [
+   181,
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 219,
+  "name": "Childlike Dreams",
+  "shiki": [
+   61,
+   116,
+   181,
+   180,
+   247
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 220,
+  "name": "Taisho Style",
+  "shiki": [
+   106,
+   109,
+   91,
+   79,
+   110
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 221,
+  "name": "Ripened Waves",
+  "shiki": [
+   120
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 222,
+  "name": "Mineral Clash",
+  "shiki": [
+   135,
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 223,
+  "name": "Midnight Gale",
+  "shiki": [
+   17
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 224,
+  "name": "Floral Flute",
+  "shiki": [
+   17
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 225,
+  "name": "Burning Prosperity",
+  "shiki": [
+   98
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 226,
+  "name": "跃动盛季",
+  "shiki": [
+   139,
+   172,
+   94,
+   98,
+   106,
+   127,
+   65,
+   78,
+   132,
+   147,
+   19,
+   79,
+   180,
+   124,
+   158,
+   157,
+   110,
+   76,
+   145,
+   150,
+   2,
+   17,
+   61,
+   51,
+   68,
+   91,
+   119,
+   141,
+   93,
+   169,
+   219,
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 227,
+  "name": "Sorority Founded",
+  "shiki": [
+   248,
+   170,
+   234,
+   186,
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 228,
+  "name": "Heian Vigil",
+  "shiki": [
+   248,
+   35,
+   234,
+   186,
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 229,
+  "name": "Dream Chaser",
+  "shiki": [
+   1,
+   219,
+   224,
+   247,
+   186,
+   169,
+   124,
+   37
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 230,
+  "name": "山火霞光",
+  "shiki": [
+   98,
+   244,
+   116,
+   135,
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 231,
+  "name": "Reverie Retreat",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 232,
+  "name": "Snow Butterfly",
+  "shiki": [
+   156
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 233,
+  "name": "Oldest Dream",
+  "shiki": [
+   110
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 234,
+  "name": "Ember Dance",
+  "shiki": [
+   179
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 235,
+  "name": "Thunderous Surge",
+  "shiki": [
+   149
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 236,
+  "name": "First Correspondent",
+  "shiki": [
+   179,
+   106,
+   110,
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 237,
+  "name": "No Name 23",
+  "shiki": [
+   106,
+   19,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 238,
+  "name": "No Name 32",
+  "shiki": [
+   19,
+   17,
+   61,
+   65
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 239,
+  "name": "Frosty Blossom",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 240,
+  "name": "Children's Game",
+  "shiki": [
+   127,
+   150,
+   145,
+   181,
+   180,
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 241,
+  "name": "Eternal Sea Fair",
+  "shiki": [
+   145,
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 242,
+  "name": "Revisiting the Sin",
+  "shiki": [
+   174,
+   116,
+   135
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ {
+  "id": 243,
+  "name": "Before the Finale",
+  "shiki": [
+   174,
+   116,
+   135,
+   158,
+   106,
+   157
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 244,
+  "name": "First Frosting",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 245,
+  "name": "Flaming General",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 246,
+  "name": "Finale Battle",
+  "shiki": [
+   181,
+   180,
+   225,
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 247,
+  "name": "Calmness",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 248,
+  "name": "搗蛋日",
+  "shiki": [
+   30,
+   35,
+   77,
+   21,
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 249,
+  "name": "Wind Falls",
+  "shiki": [
+   224,
+   135,
+   133,
+   121,
+   60
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 250,
+  "name": "Ninja Flip",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 251,
+  "name": "Snowy Dancers",
+  "shiki": [
+   124,
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 252,
+  "name": "Snow on Mt. Ibuki",
+  "shiki": [
+   135
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 253,
+  "name": "Homeland Memories",
+  "shiki": [
+   145,
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 254,
+  "name": "Ephemeral Radiance",
+  "shiki": [
+   158,
+   145,
+   124,
+   36,
+   173
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 255,
+  "name": "No Name 34",
+  "shiki": [
+   135,
+   61,
+   158,
+   157,
+   106,
+   119,
+   94
+  ],
+  "onmyoji": [
+   1,
+   5
+  ]
+ },
+ {
+  "id": 256,
+  "name": "Sea Surfer",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 257,
+  "name": "Surging Will",
+  "shiki": [
+   128
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 258,
+  "name": "Bonded Supporters",
+  "shiki": [
+   180,
+   61,
+   35,
+   79,
+   110,
+   133,
+   141
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 259,
+  "name": "No Name 35",
+  "shiki": [
+   98,
+   79,
+   30,
+   35,
+   78,
+   119,
+   180,
+   76,
+   87,
+   190,
+   5
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 260,
+  "name": "夜谈物语",
+  "shiki": [
+   15,
+   30,
+   11,
+   10,
+   36,
+   35,
+   48,
+   62,
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 261,
+  "name": "Swallow Augurs",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 262,
+  "name": "A Moment of Peace",
+  "shiki": [
+   145,
+   149
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 263,
+  "name": "Colorful Candy",
+  "shiki": [
+   170
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 264,
+  "name": "No Name 37",
+  "shiki": [
+   181,
+   180,
+   225,
+   120,
+   169,
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 265,
+  "name": "Underworld Grace",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 266,
+  "name": "Yamalord's Arrival",
+  "shiki": [
+   176,
+   47
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 267,
+  "name": "Daiyamaten Enma 1",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 268,
+  "name": "Daiyamaten Enma 2",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 269,
+  "name": "Clad in Armor",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 270,
+  "name": "Fixing the River",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 271,
+  "name": "Daiyamaten Enma 3",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 272,
+  "name": "Guiding the Souls",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 273,
+  "name": "Divine Fortune",
+  "shiki": [
+   98,
+   180,
+   181,
+   141,
+   64
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 274,
+  "name": "Soul Snare",
+  "shiki": [
+   176
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 275,
+  "name": "Halloween Parade",
+  "shiki": [
+   47,
+   51,
+   73,
+   74
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 276,
+  "name": "Shinkei Susabi 1",
+  "shiki": [
+   181
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 277,
+  "name": "Realm Shatterer",
+  "shiki": [
+   149
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 278,
+  "name": "櫻下小聚",
+  "shiki": [
+   110,
+   94
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 279,
+  "name": "Burning Badland",
+  "shiki": [
+   116
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 280,
+  "name": "墨趣乐音",
+  "shiki": [
+   1,
+   141,
+   86,
+   63,
+   161
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 281,
+  "name": "Talk in the Rift",
+  "shiki": [
+   185,
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 282,
+  "name": "After the End",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 283,
+  "name": "The Silent Star",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 284,
+  "name": "Faux Feast",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 285,
+  "name": "Corrupting Moon",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 286,
+  "name": "Moon Ended",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 287,
+  "name": "Under One Moon",
+  "shiki": [
+   180,
+   4,
+   141,
+   186,
+   25,
+   26,
+   35,
+   38,
+   169,
+   185,
+   170,
+   166,
+   194
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 288,
+  "name": "Tsukuyomi 1",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 289,
+  "name": "Tsukuyomi 2",
+  "shiki": [
+   185
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 290,
+  "name": "Tsukuyomi 3",
+  "shiki": [
+   185
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 291,
+  "name": "Kyoto Fire",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 292,
+  "name": "Unparalleled Beauty",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 293,
+  "name": "The End",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 294,
+  "name": "Tamamo no Mae 2",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 295,
+  "name": "Tamamo no Mae 3",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 296,
+  "name": "Breakout 2",
+  "shiki": [
+   100
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 297,
+  "name": "Wind on the Plain",
+  "shiki": [
+   100,
+   91
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 298,
+  "name": "Tamamomae",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 299,
+  "name": "Enma 1",
+  "shiki": [
+   51
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 300,
+  "name": "妖狐降临",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 301,
+  "name": "A Firelit Night",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 302,
+  "name": "Tamamo no Mae 6",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 303,
+  "name": "A Bloody Night",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 304,
+  "name": "Tamamo no Mae 8",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 305,
+  "name": "Tamamo no Mae 9",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 306,
+  "name": "Cold Tears",
+  "shiki": [
+   166,
+   77
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 307,
+  "name": "Sleepless",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 308,
+  "name": "Moonlight Cascade",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 309,
+  "name": "Moon's Embrace",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 310,
+  "name": "Mortal World",
+  "shiki": [
+   166,
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 311,
+  "name": "Heart's Desire",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 312,
+  "name": "Inaba",
+  "shiki": [
+   140,
+   166,
+   79,
+   77,
+   90
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 313,
+  "name": "Moon Hunt",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 314,
+  "name": "Solitude",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 315,
+  "name": "Inaba Kaguya Hime 2",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 316,
+  "name": "Inaba Kaguya Hime 3",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 317,
+  "name": "Inaba Kaguya Hime 1",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 318,
+  "name": "Sealan Feast",
+  "shiki": [
+   145,
+   127,
+   126,
+   129,
+   144
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 319,
+  "name": "No Name 40",
+  "shiki": [
+   94,
+   161
+  ],
+  "onmyoji": [
+   2
+  ]
+ },
+ {
+  "id": 320,
+  "name": "Cloudy Rain",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 321,
+  "name": "曜月竹姬",
+  "shiki": [
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 322,
+  "name": "灼炎狐影",
+  "shiki": [
+   133
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 323,
+  "name": "True Self",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 324,
+  "name": "Menreiki Unbound",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 325,
+  "name": "A Long Night",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 326,
+  "name": "Envious Heart",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 327,
+  "name": "Seven Masks",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 328,
+  "name": "Self-Deception",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 329,
+  "name": "Menreiki 4",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 330,
+  "name": "The Aftermath",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 331,
+  "name": "Menreiki 6",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 332,
+  "name": "The Abandonment",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 333,
+  "name": "Menreiki 8",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 334,
+  "name": "Menreiki 9",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 335,
+  "name": "Menreiki 10",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 336,
+  "name": "Menreiki 11",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 337,
+  "name": "Menreiki 12",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 338,
+  "name": "Menreiki 13",
+  "shiki": [
+   105
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 339,
+  "name": "Shadow in the Dark",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 340,
+  "name": "Trapped in Darkness",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 341,
+  "name": "Above All Else",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 342,
+  "name": "Illusory Dream",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 343,
+  "name": "Silent Duet",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 344,
+  "name": "Dream of Imprisonment",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 345,
+  "name": "Binding Mask",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 346,
+  "name": "Mask Reincarnated",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 347,
+  "name": "Masked Memories",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 348,
+  "name": "Origin of the Mask",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 349,
+  "name": "Curtain Call",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 350,
+  "name": "Inescapable Fate",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 351,
+  "name": "Onto the Stage",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 352,
+  "name": "Kuusou Menreiki 1",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 353,
+  "name": "Kuusou Menreiki 2",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 354,
+  "name": "Crystal",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 355,
+  "name": "Blazing Soul",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 356,
+  "name": "Firelight Journey",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 357,
+  "name": "Firelight Journey 2",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 358,
+  "name": "Threads of Devotion",
+  "shiki": [
+   253,
+   96
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 359,
+  "name": "Nameless Grave",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 360,
+  "name": "Bathed in Flames",
+  "shiki": [
+   253,
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 361,
+  "name": "Blood Warmth",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 362,
+  "name": "Sworn Brotherhood",
+  "shiki": [
+   253,
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 363,
+  "name": "Into the Abyss",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 364,
+  "name": "Ashes of War",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 365,
+  "name": "Gashadokuro 1",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 366,
+  "name": "Gashadokuro 2",
+  "shiki": [
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 367,
+  "name": "Bloomed Again",
+  "shiki": [
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 368,
+  "name": "Dream of Resurrection",
+  "shiki": [
+   152
+  ],
+  "onmyoji": [
+   4
+  ]
+ },
+ {
+  "id": 369,
+  "name": "Nightveil Blossom",
+  "shiki": [
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 370,
+  "name": "Into the Underworld",
+  "shiki": [
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 371,
+  "name": "Yomei Higanbana 1",
+  "shiki": [
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 372,
+  "name": "忘川夜巡",
+  "shiki": [
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 373,
+  "name": "难酬悲欢",
+  "shiki": [
+   152,
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 374,
+  "name": "Underworld River",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 375,
+  "name": "Unextinguished",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 376,
+  "name": "Trapped in Torment",
+  "shiki": [
+   83,
+   51
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 377,
+  "name": "Curtains Fall",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 378,
+  "name": "Mortal World 2",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 379,
+  "name": "天初晓",
+  "shiki": [
+   176,
+   47
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 380,
+  "name": "Exiled Moon",
+  "shiki": [
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 381,
+  "name": "Judgment Day",
+  "shiki": [
+   174,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 382,
+  "name": "Judgment Verdict",
+  "shiki": [
+   180,
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 383,
+  "name": "Sakura Survey",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 384,
+  "name": "The Oracle",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 385,
+  "name": "Judgment's Advent",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 386,
+  "name": "Sin",
+  "shiki": [
+   174,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 387,
+  "name": "Judgment Revisited",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 388,
+  "name": "The Trial",
+  "shiki": [
+   174,
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 389,
+  "name": "The Gamble",
+  "shiki": [
+   174,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 390,
+  "name": "The Evil God",
+  "shiki": [
+   174,
+   180,
+   181,
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 391,
+  "name": "Kamiochi Orochi 1",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 392,
+  "name": "Kamiochi Orochi 2",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 393,
+  "name": "Kamiochi Orochi 3",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 394,
+  "name": "No Name 42",
+  "shiki": [
+   174,
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 395,
+  "name": "No Name 43",
+  "shiki": [
+   180,
+   17,
+   19,
+   61,
+   2,
+   62,
+   141,
+   94
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 396,
+  "name": "Warding the World",
+  "shiki": [
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 397,
+  "name": "Fatebound Duo",
+  "shiki": [
+   225,
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 398,
+  "name": "Dimmed Radiance",
+  "shiki": [
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 399,
+  "name": "Everything Shines",
+  "shiki": [
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 400,
+  "name": "Time Stopped",
+  "shiki": [
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 401,
+  "name": "Appreciating Radiance",
+  "shiki": [
+   225,
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 402,
+  "name": "Ethereal Enchantress",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 403,
+  "name": "Harvest Hour",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 404,
+  "name": "Worldending Anthem",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 405,
+  "name": "Battle of Yomi",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 406,
+  "name": "All Is Dust",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 407,
+  "name": "Genesis",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 408,
+  "name": "Amaterasu 1",
+  "shiki": [
+   225
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 409,
+  "name": "No Name 44",
+  "shiki": [
+   224,
+   225
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 410,
+  "name": "No Name 45",
+  "shiki": [
+   225,
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 411,
+  "name": "No Name 46",
+  "shiki": [
+   225,
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 412,
+  "name": "与喵共饮",
+  "shiki": [
+   257,
+   256,
+   43,
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 413,
+  "name": "邂逅魔法",
+  "shiki": [
+   257,
+   256
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 414,
+  "name": "櫻游绘梦",
+  "shiki": [
+   257,
+   256,
+   247,
+   187,
+   223,
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 415,
+  "name": "緣之味",
+  "shiki": [
+   223,
+   257,
+   256,
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 416,
+  "name": "晴夏物语",
+  "shiki": [
+   257,
+   256,
+   185,
+   1,
+   63,
+   61,
+   135,
+   94,
+   106,
+   127,
+   231,
+   145,
+   62,
+   136,
+   60
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 417,
+  "name": "Sakura Kinomoto 1",
+  "shiki": [
+   256
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 418,
+  "name": "Card Captor 1",
+  "shiki": [
+   257,
+   256
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 419,
+  "name": "Card Captor 2",
+  "shiki": [
+   257,
+   256
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 420,
+  "name": "No Name 47",
+  "shiki": [
+   52,
+   71,
+   76,
+   90,
+   92,
+   91
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 421,
+  "name": "No Name 48",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 422,
+  "name": "No Name 49",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 423,
+  "name": "夏祭同游",
+  "shiki": [
+   21,
+   77
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 424,
+  "name": "No Name 51",
+  "shiki": [
+   107,
+   108
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 425,
+  "name": "No Name 52",
+  "shiki": [
+   6,
+   36,
+   9,
+   38,
+   60,
+   65
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 426,
+  "name": "Minamoto no Yorimitsu 1",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 427,
+  "name": "No Name 53",
+  "shiki": [
+   19,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 428,
+  "name": "No Name 54",
+  "shiki": [
+   106,
+   19,
+   61
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 429,
+  "name": "Minamoto no Yorimitsu 2",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 430,
+  "name": "Farsighted",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 431,
+  "name": "Reversal",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 432,
+  "name": "Abyss",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 433,
+  "name": "Returning",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 434,
+  "name": "",
+  "shiki": null,
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 435,
+  "name": "No Name 56",
+  "shiki": [
+   94,
+   124
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 436,
+  "name": "Kagura's New Year",
+  "shiki": null,
+  "onmyoji": [
+   2
+  ]
+ },
+ {
+  "id": 437,
+  "name": "No Name 57",
+  "shiki": [
+   106,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 438,
+  "name": "No Name 58",
+  "shiki": [
+   19,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 439,
+  "name": "The New Life",
+  "shiki": [
+   106
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 440,
+  "name": "No Name 59",
+  "shiki": [
+   106
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 441,
+  "name": "The Plot",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 442,
+  "name": "No Name 60",
+  "shiki": [
+   106
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 443,
+  "name": "Reunion",
+  "shiki": [
+   106
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 444,
+  "name": "",
+  "shiki": [
+   134
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 445,
+  "name": "Moonlit Sakura",
+  "shiki": [
+   132
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 446,
+  "name": "Living Weapons",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 447,
+  "name": "Glorious Rider",
+  "shiki": null,
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 448,
+  "name": "Fujiwara's Plan",
+  "shiki": null,
+  "onmyoji": [
+   2,
+   3
+  ]
+ },
+ {
+  "id": 449,
+  "name": "Appreciative Audience",
+  "shiki": [
+   147
+  ],
+  "onmyoji": [
+   2,
+   3
+  ]
+ },
+ {
+  "id": 450,
+  "name": "Usher in the Spring",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 451,
+  "name": "Spring Landscape",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 452,
+  "name": "Mountains Unraveled",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 453,
+  "name": "Watchful Reflection",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 454,
+  "name": "Iridescent Dream",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 455,
+  "name": "Scrolls of Seasons",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 456,
+  "name": "Hanging Scrolls",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 457,
+  "name": "No Name 62",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 458,
+  "name": "Breakthrough",
+  "shiki": [
+   167
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 459,
+  "name": "City of Lights",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 460,
+  "name": "No Name 64",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 461,
+  "name": "Kaisei Kachou Fuugetsu 1",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 462,
+  "name": "",
+  "shiki": null,
+  "onmyoji": null
+ },
+ {
+  "id": 463,
+  "name": "No Name 65",
+  "shiki": [
+   164,
+   163
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 464,
+  "name": "Capital of Food",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 465,
+  "name": "No Name 66",
+  "shiki": [
+   164
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "id": 466,
+  "name": "Seimei 1",
+  "shiki": null,
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 467,
+  "name": "No Name 67",
+  "shiki": null,
+  "onmyoji": [
+   2,
+   3
+  ]
+ },
+ {
+  "id": 468,
+  "name": "No Name 68",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 469,
+  "name": "Seimei 2",
+  "shiki": null,
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 470,
+  "name": "Boss Hunt",
+  "shiki": [
+   139
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 471,
+  "name": "No Name 69",
+  "shiki": [
+   266,
+   139,
+   141,
+   25,
+   26,
+   32
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 472,
+  "name": "Kagura 1",
+  "shiki": null,
+  "onmyoji": [
+   2
+  ]
+ },
+ {
+  "id": 473,
+  "name": "Opening Ceremony",
+  "shiki": [
+   230
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 474,
+  "name": "Music Parade",
+  "shiki": [
+   28,
+   233,
+   232
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 475,
+  "name": "No Name 71",
+  "shiki": [
+   91,
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 476,
+  "name": "Sakura Reunion",
+  "shiki": [
+   242
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3
+  ]
+ },
+ {
+  "id": 477,
+  "name": "World Visitor",
+  "shiki": [
+   242
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 478,
+  "name": "Reflections",
+  "shiki": [
+   242
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 479,
+  "name": "Destined Reunion",
+  "shiki": [
+   259,
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 480,
+  "name": "Ice Seal",
+  "shiki": [
+   259,
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 481,
+  "name": "Blazing Snow",
+  "shiki": [
+   259
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 482,
+  "name": "Blade of Sacrifice",
+  "shiki": [
+   259,
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 483,
+  "name": "Snowblade Dance",
+  "shiki": [
+   259
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 484,
+  "name": "Minamoto's Pearl",
+  "shiki": [
+   259,
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 485,
+  "name": "Ice and Fire",
+  "shiki": [
+   259,
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 486,
+  "name": "Moonlit Cat",
+  "shiki": [
+   258
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 487,
+  "name": "Divine Feline",
+  "shiki": [
+   258
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 488,
+  "name": "Summer Play",
+  "shiki": [
+   258,
+   110,
+   12,
+   13
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 489,
+  "name": "Rainbow Patrol",
+  "shiki": [
+   258,
+   7
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 490,
+  "name": "Ode to Birds",
+  "shiki": [
+   258
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 491,
+  "name": "Cat and Snow",
+  "shiki": [
+   258,
+   259
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 492,
+  "name": "Cat & Song",
+  "shiki": [
+   258
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 493,
+  "name": "Yuki Gozen 1",
+  "shiki": [
+   259
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 494,
+  "name": "Sun and Moon Rising",
+  "shiki": [
+   252,
+   251,
+   65,
+   239,
+   253,
+   259,
+   260
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ {
+  "id": 495,
+  "name": "Covenant of the Clans",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   5
+  ]
+ },
+ {
+  "id": 496,
+  "name": "Shadowy Sight",
+  "shiki": [
+   259,
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 497,
+  "name": "Myoushu Kyuumei Neko 1",
+  "shiki": [
+   258
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 498,
+  "name": "Lone Form",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 499,
+  "name": "In Shadow",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 500,
+  "name": "Golden Glow",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 501,
+  "name": "Tempered Edge",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 502,
+  "name": "Sun Chasing",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 503,
+  "name": "Return",
+  "shiki": [
+   260,
+   259,
+   253,
+   106
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4,
+   5
+  ]
+ },
+ {
+  "id": 504,
+  "name": "Endless Duel",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 505,
+  "name": "Light and Shadow",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 506,
+  "name": "Blazing Sun",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 507,
+  "name": "Self Light",
+  "shiki": [
+   260,
+   253,
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 508,
+  "name": "No Name 72",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 509,
+  "name": "Blazing Collapse",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 510,
+  "name": "Forest Stroll",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 511,
+  "name": "Forest's Essence",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 512,
+  "name": "Spring's Return",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 513,
+  "name": "Misty Trails",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 514,
+  "name": "Mountain Splendor",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 515,
+  "name": "Ember Watch",
+  "shiki": [
+   254,
+   172,
+   200
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 516,
+  "name": "Green Hills Again",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 517,
+  "name": "云山隐里",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 518,
+  "name": "Unjou Fukengaku 2",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 519,
+  "name": "Unjou Fukengaku 1",
+  "shiki": [
+   254
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 520,
+  "name": "Stormy Night",
+  "shiki": [
+   255,
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 521,
+  "name": "平安偕行",
+  "shiki": [
+   172,
+   35,
+   31,
+   244
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 522,
+  "name": "新朋贵友",
+  "shiki": [
+   172,
+   244
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 523,
+  "name": "趣游清泉",
+  "shiki": [
+   6,
+   244,
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 524,
+  "name": "櫻庭共的",
+  "shiki": [
+   236,
+   222
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 525,
+  "name": "No Name 31",
+  "shiki": [
+   222
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 526,
+  "name": "Mountain Slumber",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 527,
+  "name": "Heavenly Shelter",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 528,
+  "name": "Spring to Life",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 529,
+  "name": "Mountain's Fall",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 530,
+  "name": "Elusive Peak",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 531,
+  "name": "Divine Servants",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 532,
+  "name": "The Separation",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 533,
+  "name": "The Promise",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 534,
+  "name": "Beauty and the Brute",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 535,
+  "name": "A Time of War",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 536,
+  "name": "Fukengaku 1",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 537,
+  "name": "Sall Again",
+  "shiki": [
+   255,
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 538,
+  "name": "Adventurer",
+  "shiki": [
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 539,
+  "name": "Re-emergence Night",
+  "shiki": [
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 540,
+  "name": "Night Cruiser",
+  "shiki": [
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 541,
+  "name": "Homecoming Day",
+  "shiki": [
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 542,
+  "name": "曙寂潮平",
+  "shiki": [
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 543,
+  "name": "Dreamchaser's Invite",
+  "shiki": [
+   250
+  ],
+  "onmyoji": [
+   2,
+   4
+  ]
+ },
+ {
+  "id": 544,
+  "name": "Kraken Luka",
+  "shiki": [
+   250
+  ],
+  "onmyoji": [
+   2,
+   4
+  ]
+ },
+ {
+  "id": 545,
+  "name": "Nostalgic Thoughts",
+  "shiki": [
+   240
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 546,
+  "name": "Firework Invite",
+  "shiki": [
+   240,
+   21
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 547,
+  "name": "Smoke Cloud",
+  "shiki": [
+   240
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 548,
+  "name": "Moonlit Memories",
+  "shiki": [
+   166,
+   77
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 549,
+  "name": "Old Times",
+  "shiki": [
+   76,
+   77,
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 550,
+  "name": "Joyous Hours",
+  "shiki": [
+   21,
+   77,
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 551,
+  "name": "Younen Enenra 1",
+  "shiki": [
+   240
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 552,
+  "name": "Aoandon's Tale",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 553,
+  "name": "Memories In Flames",
+  "shiki": [
+   142,
+   19,
+   110,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 554,
+  "name": "Illusory World",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 555,
+  "name": "Unworldly Game",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 556,
+  "name": "Lights Up",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 557,
+  "name": "Story at Night",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 558,
+  "name": "Worldly Stories",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 559,
+  "name": "Blue-Flame Butterflies",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 560,
+  "name": "Ukiyo Aoandon 1",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 561,
+  "name": "Ukiyo Aoandon 2",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 562,
+  "name": "Ukiyo Aoandon 3",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 563,
+  "name": "Music Start",
+  "shiki": [
+   250,
+   37
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 564,
+  "name": "Stage Star",
+  "shiki": [
+   250
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 565,
+  "name": "Bonded Duet",
+  "shiki": [
+   233
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 566,
+  "name": "Stage Debut 1",
+  "shiki": [
+   233,
+   232
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 567,
+  "name": "Stage Debut 2",
+  "shiki": [
+   233,
+   232
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 568,
+  "name": "Dazzling Miku",
+  "shiki": [
+   232
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 569,
+  "name": "Kimetsu no Yaiba 1",
+  "shiki": [
+   153,
+   154,
+   177,
+   178
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 570,
+  "name": "Kimetsu no Yaiba 2",
+  "shiki": [
+   177,
+   178
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 571,
+  "name": "Kimetsu no Yaiba 3",
+  "shiki": [
+   177,
+   178
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 572,
+  "name": "Recollection",
+  "shiki": [
+   78,
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 573,
+  "name": "Into the Sea",
+  "shiki": [
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 574,
+  "name": "In the Sea Storm",
+  "shiki": [
+   140,
+   132
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 575,
+  "name": "Seaside Fireworks",
+  "shiki": [
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 576,
+  "name": "No Name 70",
+  "shiki": [
+   140,
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 577,
+  "name": "Kingyo Hime 1",
+  "shiki": [
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 578,
+  "name": "Kingyo Hime 2",
+  "shiki": [
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 579,
+  "name": "Kingyo Hime 3",
+  "shiki": [
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 580,
+  "name": "Kingyo Hime 4",
+  "shiki": [
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 581,
+  "name": "Wave Re-emerged",
+  "shiki": [
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 582,
+  "name": "No Name 73",
+  "shiki": [
+   188,
+   218
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 583,
+  "name": "No Name 74",
+  "shiki": [
+   109,
+   137
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 584,
+  "name": "Taira no Masakado 1",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 585,
+  "name": "Lotus Furnace",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 586,
+  "name": "Galloping Steed",
+  "shiki": [
+   260
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 587,
+  "name": "Flaming Sky",
+  "shiki": [
+   17
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 588,
+  "name": "Flowing Splendor",
+  "shiki": [
+   225,
+   223,
+   124,
+   73,
+   36
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 589,
+  "name": "Free-willed Face-off",
+  "shiki": [
+   137
+  ],
+  "onmyoji": [
+   5
+  ]
+ },
+ {
+  "id": 590,
+  "name": "No Name 75",
+  "shiki": [
+   260,
+   253
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 591,
+  "name": "Dance with Lights",
+  "shiki": [
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 592,
+  "name": "Lustrous Dreamer",
+  "shiki": [
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 593,
+  "name": "Gathering Glimmers",
+  "shiki": [
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 594,
+  "name": "Blazing Breeze",
+  "shiki": [
+   68
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 595,
+  "name": "Glimmer Rest",
+  "shiki": [
+   261
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 596,
+  "name": "Huntress Nightshadow",
+  "shiki": [
+   261
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 597,
+  "name": "Youtou Hime Hiya Ryoujin",
+  "shiki": [
+   261
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 598,
+  "name": "Breakout",
+  "shiki": [
+   262
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 599,
+  "name": "Tea Break",
+  "shiki": [
+   262,
+   1,
+   224,
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 600,
+  "name": "Yumebiki Kochou no Sei 1",
+  "shiki": [
+   262
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 601,
+  "name": "Journey",
+  "shiki": [
+   262
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 602,
+  "name": "Hazy Dream",
+  "shiki": [
+   262
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 603,
+  "name": "Guidance",
+  "shiki": [
+   262,
+   37,
+   29
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 604,
+  "name": "Loops",
+  "shiki": [
+   262,
+   37
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 605,
+  "name": "Long Dream",
+  "shiki": [
+   37,
+   29
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 606,
+  "name": "Sand Sailor",
+  "shiki": [
+   230
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 607,
+  "name": "Dream Liveshow",
+  "shiki": [
+   262,
+   186,
+   1,
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 608,
+  "name": "Flowerdance Fiesta",
+  "shiki": [
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 609,
+  "name": "Bundle",
+  "shiki": [
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 610,
+  "name": "Lost in Feathers",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 611,
+  "name": "Stage Master",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 612,
+  "name": "Crystal Reflection",
+  "shiki": [
+   156
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 613,
+  "name": "Starry Plaything",
+  "shiki": [
+   226
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 614,
+  "name": "Sakura Night",
+  "shiki": [
+   174
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 615,
+  "name": "Poem of Longing",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 616,
+  "name": "Sanzu Songstress",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 617,
+  "name": "Moonlit Chase",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 618,
+  "name": "Crossed Fate",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 619,
+  "name": "Snowy Winter",
+  "shiki": [
+   68
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 620,
+  "name": "Lighted Memories",
+  "shiki": [
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 621,
+  "name": "The Fall",
+  "shiki": [
+   109
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 622,
+  "name": "Brother's Promise",
+  "shiki": [
+   10,
+   11
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 623,
+  "name": "Seafair Fireworks",
+  "shiki": [
+   127,
+   126,
+   129
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 624,
+  "name": "Sound Asleep",
+  "shiki": [
+   110
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 625,
+  "name": "Dreamer Girls",
+  "shiki": [
+   60,
+   122
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 626,
+  "name": "Sea the Fireworks",
+  "shiki": [
+   60,
+   122
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 627,
+  "name": "Tide Watcher",
+  "shiki": [
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 628,
+  "name": "Dress Made",
+  "shiki": [
+   110,
+   65,
+   98,
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 629,
+  "name": "Sheathed Blade",
+  "shiki": [
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 630,
+  "name": "Letter to the Moon",
+  "shiki": [
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 631,
+  "name": "Sakura Shower",
+  "shiki": [
+   76
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 632,
+  "name": "Faithful Familiar",
+  "shiki": [
+   137
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 633,
+  "name": "Reforged & Reborn",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 634,
+  "name": "Faithful Watch",
+  "shiki": [
+   150
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 635,
+  "name": "Sea's Melody",
+  "shiki": [
+   145,
+   150
+  ],
+  "onmyoji": [
+   4
+  ]
+ },
+ {
+  "id": 636,
+  "name": "Release the Inklings",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 637,
+  "name": "Friendless Memories",
+  "shiki": [
+   87,
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 638,
+  "name": "Frozen River",
+  "shiki": [
+   152
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 639,
+  "name": "Landscape Unraveled",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 640,
+  "name": "Colourful World",
+  "shiki": [
+   161
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 641,
+  "name": "Star Shifter",
+  "shiki": [
+   79
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 642,
+  "name": "Soul Fire of Life",
+  "shiki": [
+   79
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 643,
+  "name": "Ceremony in Flames",
+  "shiki": [
+   145
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 644,
+  "name": "Mountain Meeting",
+  "shiki": [
+   121,
+   91
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 645,
+  "name": "Sakura Drink",
+  "shiki": [
+   121
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 646,
+  "name": "Moonlit Creek",
+  "shiki": [
+   166
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 647,
+  "name": "Divine Duet",
+  "shiki": [
+   75
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 648,
+  "name": "Bestower's Boat",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 649,
+  "name": "Silver Lining",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 650,
+  "name": "Worldly Elements",
+  "shiki": [
+   54
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 651,
+  "name": "Art Virtuosos",
+  "shiki": [
+   161,
+   147,
+   86,
+   94
+  ],
+  "onmyoji": [
+   1,
+   3
+  ]
+ },
+ {
+  "id": 652,
+  "name": "Message Sent",
+  "shiki": [
+   148
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 653,
+  "name": "Making the Gift",
+  "shiki": [
+   148
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 654,
+  "name": "Across the Sea",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 655,
+  "name": "Dance of the Demon",
+  "shiki": [
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 656,
+  "name": "畅日闲弈",
+  "shiki": [
+   19,
+   136,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 657,
+  "name": "Resplendent Moment",
+  "shiki": [
+   62
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 658,
+  "name": "Unfateful Reunion",
+  "shiki": [
+   133
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 659,
+  "name": "Clear Water",
+  "shiki": [
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 660,
+  "name": "Archery Practice",
+  "shiki": [
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 661,
+  "name": "Golden Prosperity",
+  "shiki": [
+   98
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 662,
+  "name": "Wandering Guest",
+  "shiki": [
+   242
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 663,
+  "name": "Carp Race",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 664,
+  "name": "Sweet Lumen",
+  "shiki": [
+   248
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 665,
+  "name": "Bright Sunshine",
+  "shiki": [
+   248
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 666,
+  "name": "Sunny Growth",
+  "shiki": [
+   248
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 667,
+  "name": "Silent Forest",
+  "shiki": [
+   248
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 668,
+  "name": "Scooped Promise",
+  "shiki": [
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 669,
+  "name": "Vast Memory",
+  "shiki": [
+   60,
+   36
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 670,
+  "name": "Hotarugusa 1",
+  "shiki": [
+   36
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 671,
+  "name": "Hotarugusa 2",
+  "shiki": [
+   36
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 672,
+  "name": "Field Grass",
+  "shiki": [
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 673,
+  "name": "Wish-blessed Grass",
+  "shiki": [
+   224
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 674,
+  "name": "逐月游舞",
+  "shiki": [
+   186
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 675,
+  "name": "Bond Reconnected",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 676,
+  "name": "Forest Friends",
+  "shiki": [
+   121,
+   93,
+   91,
+   85,
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 677,
+  "name": "No Name 76",
+  "shiki": [
+   220,
+   121,
+   91,
+   55
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 678,
+  "name": "Outing Misconceived",
+  "shiki": [
+   220,
+   121,
+   91,
+   93,
+   85
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 679,
+  "name": "Awakening Dance",
+  "shiki": [
+   124,
+   147,
+   169,
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 680,
+  "name": "Blossoming Fieldtrip",
+  "shiki": [
+   172
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 681,
+  "name": "蜀中风流",
+  "shiki": [
+   166,
+   246,
+   61,
+   19,
+   140
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 682,
+  "name": "Feathered Blade",
+  "shiki": [
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 683,
+  "name": "Flowing Soundisle",
+  "shiki": [
+   124,
+   147,
+   169,
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 684,
+  "name": "Momentary Rest",
+  "shiki": [
+   124,
+   147,
+   169,
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 685,
+  "name": "Sparkling Departure",
+  "shiki": [
+   124,
+   147,
+   169,
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 686,
+  "name": "Shura Hunter",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 687,
+  "name": "Butterfly's Tomb",
+  "shiki": [
+   160
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 688,
+  "name": "Sinful Hunt",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 689,
+  "name": "School Day",
+  "shiki": [
+   139
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 690,
+  "name": "Demon City",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 691,
+  "name": "Ghost Flower",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 692,
+  "name": "Sinful Den",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 693,
+  "name": "Shura Kidoumaru 1",
+  "shiki": [
+   187
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 694,
+  "name": "Shura Kidoumaru 2",
+  "shiki": [
+   187
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 695,
+  "name": "Kidoumaru 1",
+  "shiki": [
+   139
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 696,
+  "name": "Through the Bloodmist",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 697,
+  "name": "Hunter Emerged",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 698,
+  "name": "Departure",
+  "shiki": [
+   148
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 699,
+  "name": "Shelter",
+  "shiki": [
+   148
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 700,
+  "name": "Ubume 1",
+  "shiki": [
+   58
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 701,
+  "name": "Ukiyo Aoandon 4",
+  "shiki": [
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 702,
+  "name": "Golden Feathers",
+  "shiki": [
+   148
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 703,
+  "name": "Demonic Origin",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 704,
+  "name": "Soul Hunter",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 705,
+  "name": "Kidoumaru 2",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 706,
+  "name": "Kidoumaru 3",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 707,
+  "name": "Gone Mad",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 708,
+  "name": "Demon of the Domain",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 709,
+  "name": "Kidoumaru 4",
+  "shiki": [
+   139
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 710,
+  "name": "Restitution",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 711,
+  "name": "Broken Blade",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 712,
+  "name": "Undaunted Heart",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 713,
+  "name": "Shiranui 1",
+  "shiki": [
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 714,
+  "name": "Fearless",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 715,
+  "name": "Lighted Sky",
+  "shiki": [
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 716,
+  "name": "Love at a Glance",
+  "shiki": [
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 717,
+  "name": "Blood-stained Blade",
+  "shiki": [
+   122
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 718,
+  "name": "Akakage Youtou Hime 1",
+  "shiki": [
+   122
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 719,
+  "name": "Akakage Youtou Hime 2",
+  "shiki": [
+   122
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 720,
+  "name": "Akakage Youtou Hime 3",
+  "shiki": [
+   122
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 721,
+  "name": "Shiranui 2",
+  "shiki": [
+   124
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 722,
+  "name": "花烛蝶梦",
+  "shiki": [
+   83
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 723,
+  "name": "Sakura Blade",
+  "shiki": [
+   65
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 724,
+  "name": "Onikiri 1",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 725,
+  "name": "Buddy!",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 726,
+  "name": "Vengeance",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 727,
+  "name": "Onikiri 2",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 728,
+  "name": "Onikiri 3",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 729,
+  "name": "Onikiri 4",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 730,
+  "name": "Onikiri 5",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 731,
+  "name": "Onikiri 6",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 732,
+  "name": "The Pact",
+  "shiki": [
+   106
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 733,
+  "name": "No Name 77",
+  "shiki": [
+   58,
+   12,
+   13
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 734,
+  "name": "海祭舞乐",
+  "shiki": [
+   8,
+   64,
+   78
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 735,
+  "name": "融融暖阳",
+  "shiki": [
+   92
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 736,
+  "name": "Ichimokuren 1",
+  "shiki": [
+   68
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 737,
+  "name": "Yuki Douji 1",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 738,
+  "name": "Yuki Douji 2",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 739,
+  "name": "Yuki Douji 3",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 740,
+  "name": "Yuki Douji 4",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 741,
+  "name": "Yuki Douji 5",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 742,
+  "name": "Yuki Douji 6",
+  "shiki": [
+   87
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 743,
+  "name": "夏日海滩",
+  "shiki": [
+   19,
+   61,
+   51,
+   3,
+   65,
+   62,
+   35,
+   36,
+   79,
+   68,
+   72,
+   75,
+   76,
+   17,
+   78,
+   50
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 744,
+  "name": "夏日祭典",
+  "shiki": [
+   10,
+   11,
+   79,
+   44,
+   78,
+   58,
+   67,
+   110
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 745,
+  "name": "No Name 2",
+  "shiki": [
+   78,
+   6
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 746,
+  "name": "No Name 5",
+  "shiki": [
+   76,
+   78,
+   80,
+   81
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 747,
+  "name": "No Name 6",
+  "shiki": [
+   106,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 748,
+  "name": "Love's Fret",
+  "shiki": [
+   263
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 749,
+  "name": "Boundless Dreams",
+  "shiki": [
+   263,
+   264
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 750,
+  "name": "Fox's Dream",
+  "shiki": [
+   263,
+   110
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 751,
+  "name": "Guiding Bell",
+  "shiki": [
+   263
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 752,
+  "name": "Bell Keeper",
+  "shiki": [
+   263,
+   110
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 753,
+  "name": "Lost in Dreamland",
+  "shiki": [
+   263,
+   264
+  ],
+  "onmyoji": [
+   1,
+   6
+  ]
+ },
+ {
+  "id": 754,
+  "name": "Dream Guide",
+  "shiki": [
+   262,
+   263
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 755,
+  "name": "Truth of Heart",
+  "shiki": [
+   263
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 756,
+  "name": "Yumeyama Hakuzousu 1",
+  "shiki": [
+   263
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 757,
+  "name": "Caged Ritual",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 758,
+  "name": "Promised Flowers",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 759,
+  "name": "Calamity Reincarnated",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 760,
+  "name": "Feast Begins",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 761,
+  "name": "Pristine Flower",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 762,
+  "name": "Caged Heart",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 763,
+  "name": "Aftermath Anthem",
+  "shiki": [
+   239
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 764,
+  "name": "Forest Wings",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 765,
+  "name": "Shishio 1",
+  "shiki": [
+   220,
+   55
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 766,
+  "name": "Prismatic Forest",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 767,
+  "name": "Sylvan Pact",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 768,
+  "name": "Forest's Shelter",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 769,
+  "name": "Dusk-veiled Path",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 770,
+  "name": "Forest Trainings",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 771,
+  "name": "Ruins Unraveled",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 772,
+  "name": "Farewell Ode",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 773,
+  "name": "Asura 1",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 774,
+  "name": "Fervent Hunt",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 775,
+  "name": "Prince of Darkness",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 776,
+  "name": "Endless Slaughter",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 777,
+  "name": "The One I Care Fore",
+  "shiki": [
+   158,
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 778,
+  "name": "Scorch the Sky",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 779,
+  "name": "Celestial Allies",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 780,
+  "name": "Lotus Realm",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 781,
+  "name": "Asura 2",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 782,
+  "name": "Hellish Burst",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 783,
+  "name": "At First Sight",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 784,
+  "name": "Light Meets Shadow",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 785,
+  "name": "Miracle",
+  "shiki": [
+   158,
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 786,
+  "name": "Talk at Night",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 787,
+  "name": "Final Showdown",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 788,
+  "name": "God of War",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 789,
+  "name": "Deeply Connected",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 790,
+  "name": "Touch of Sadness",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 791,
+  "name": "Lutus Crown",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 792,
+  "name": "Intimate Friends",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 793,
+  "name": "Side by Side",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 794,
+  "name": "Break Off",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 795,
+  "name": "Rooted Grudge 2",
+  "shiki": [
+   157,
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 796,
+  "name": "Bloody Coronation",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 797,
+  "name": "Inviting All",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 798,
+  "name": "Spiritual Flavor",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 799,
+  "name": "Celebration",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 800,
+  "name": "Flavor Mixed",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 801,
+  "name": "Flavor Defeat",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 802,
+  "name": "Heavenly Brew",
+  "shiki": [
+   246,
+   61
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 803,
+  "name": "Heroic Courage",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 804,
+  "name": "Brewing Technique",
+  "shiki": [
+   246,
+   4
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 805,
+  "name": "Prosperous Year",
+  "shiki": [
+   234,
+   6,
+   9,
+   64
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 806,
+  "name": "Start Flying",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 807,
+  "name": "Spring Trip",
+  "shiki": [
+   234,
+   64,
+   148
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 808,
+  "name": "福馬引渡",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 809,
+  "name": "勇者冒险",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 810,
+  "name": "抚琴奏梦",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 811,
+  "name": "瑞福除垢",
+  "shiki": [
+   234,
+   37
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 812,
+  "name": "化思为饴",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 813,
+  "name": "飞起来了",
+  "shiki": [
+   234,
+   207,
+   208,
+   209,
+   210,
+   211,
+   212,
+   201
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 814,
+  "name": "Fortune Giveaway",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 815,
+  "name": "故梦",
+  "shiki": [
+   234,
+   5
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 816,
+  "name": "Oath of Mask",
+  "shiki": [
+   125
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 817,
+  "name": "Oura Hannya 1",
+  "shiki": [
+   125
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 818,
+  "name": "Manifested Shadows",
+  "shiki": [
+   125
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 819,
+  "name": "孤影独行",
+  "shiki": [
+   47
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 820,
+  "name": "No Name 8",
+  "shiki": [
+   134
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 821,
+  "name": "Iridescent Box",
+  "shiki": [
+   82
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 822,
+  "name": "Cadence Goddess",
+  "shiki": [
+   247
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 823,
+  "name": "For the World",
+  "shiki": [
+   247,
+   169,
+   124,
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 824,
+  "name": "New Age",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   5,
+   6
+  ]
+ },
+ {
+  "id": 825,
+  "name": "No Name 12",
+  "shiki": null,
+  "onmyoji": [
+   1,
+   5,
+   6
+  ]
+ },
+ {
+  "id": 826,
+  "name": "Ensemble Formed",
+  "shiki": [
+   247
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 827,
+  "name": "Firework Feast",
+  "shiki": [
+   247,
+   248
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 828,
+  "name": "Feathery Melody",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 829,
+  "name": "Embracing Vow",
+  "shiki": [
+   125
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 830,
+  "name": "Reborn from Fall",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 831,
+  "name": "Shiki Chrono",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 832,
+  "name": "Winterborn Spring",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 833,
+  "name": "Shiki 1",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 834,
+  "name": "Spring's Fragrance",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 835,
+  "name": "Seasons Gone",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 836,
+  "name": "Flower Falls",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 837,
+  "name": "Many Promises",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 838,
+  "name": "Snow Mourning",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 839,
+  "name": "Season's the Name",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 840,
+  "name": "Grand Opening",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 841,
+  "name": "Sleight of Hand",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 842,
+  "name": "Earning Gold",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 843,
+  "name": "Old Bond",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 844,
+  "name": "Cat Companion",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 845,
+  "name": "Night Walk",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 846,
+  "name": "Summer Heat",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 847,
+  "name": "Dweller's Dream",
+  "shiki": [
+   264,
+   263,
+   1,
+   63,
+   258,
+   242,
+   234,
+   53
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 848,
+  "name": "Melodic Crossing",
+  "shiki": [
+   264
+  ],
+  "onmyoji": [
+   6
+  ]
+ },
+ {
+  "id": 849,
+  "name": "Lone Gravekeeper",
+  "shiki": [
+   264
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 850,
+  "name": "Watercity Oath",
+  "shiki": [
+   264,
+   53
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 851,
+  "name": "Wind Riding",
+  "shiki": [
+   264,
+   53
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 852,
+  "name": "Dreamtrail Seeker",
+  "shiki": [
+   263,
+   264,
+   53
+  ],
+  "onmyoji": [
+   6
+  ]
+ },
+ {
+  "id": 853,
+  "name": "Dreamweaver Tune",
+  "shiki": [
+   264,
+   53
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 854,
+  "name": "No Name 16",
+  "shiki": [
+   263,
+   264
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 855,
+  "name": "Kannazuki 1",
+  "shiki": [
+   264
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 856,
+  "name": "Wine and Cup",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 857,
+  "name": "Pine with Crane",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 858,
+  "name": "Bird and Butterfly",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 859,
+  "name": "Willow Memories",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 860,
+  "name": "Tabletop Player",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 861,
+  "name": "Cherry Blossom with Curtain",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 862,
+  "name": "Cards' Secrets",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 863,
+  "name": "Card Players",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 864,
+  "name": "Card Pact",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 865,
+  "name": "Moon Over Field",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 866,
+  "name": "Silent Cards",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 867,
+  "name": "Obsession",
+  "shiki": [
+   146,
+   69
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 868,
+  "name": "From Love to Hatred",
+  "shiki": [
+   146
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 869,
+  "name": "Relationship Issue",
+  "shiki": [
+   146,
+   69
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 870,
+  "name": "Ghost of Love",
+  "shiki": [
+   146
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 871,
+  "name": "Mesmerizing Entrance",
+  "shiki": [
+   146
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 872,
+  "name": "Illusory Love",
+  "shiki": [
+   146,
+   56
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 873,
+  "name": "Lady with a Mirror",
+  "shiki": [
+   146
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 874,
+  "name": "Hard Battle",
+  "shiki": [
+   69
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 875,
+  "name": "Demon of Obsession",
+  "shiki": [
+   69
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 876,
+  "name": "The Last Tune",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 877,
+  "name": "Melodic Serenade",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 878,
+  "name": "Awakened from Dreams",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 879,
+  "name": "Mirrored Itsukushima",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 880,
+  "name": "Melodic Light",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 881,
+  "name": "Lord of the Night",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 882,
+  "name": "Prisoners of the Night",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 883,
+  "name": "Musician's Legacy",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 884,
+  "name": "Broken Strings",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 885,
+  "name": "Family of Musicians",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 886,
+  "name": "Kinnara 1",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 887,
+  "name": "Fresh Fish",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 888,
+  "name": "Diligent Practice",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 889,
+  "name": "Harsh Mentorship",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 890,
+  "name": "Dream's Reach",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 891,
+  "name": "Fire Builder",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 892,
+  "name": "Late-Night Restaurant",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 893,
+  "name": "Culinary Soul",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 894,
+  "name": "Full Stomach",
+  "shiki": [
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 895,
+  "name": "Dream Cuisine",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 896,
+  "name": "Attracted by Food",
+  "shiki": [
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 897,
+  "name": "Lazy Afternoon",
+  "shiki": [
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 898,
+  "name": "Crowded",
+  "shiki": [
+   164
+  ],
+  "onmyoji": [
+   2,
+   4,
+   1,
+   3
+  ]
+ },
+ {
+  "id": 899,
+  "name": "Shokurei&Mishige 1",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 900,
+  "name": "Shokurei 1",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 901,
+  "name": "Shokurei 2",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 902,
+  "name": "Shokurei&Mishige 2",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 903,
+  "name": "Shokurei&Mishige 3",
+  "shiki": [
+   163,
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 904,
+  "name": "Shokurei 3",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 905,
+  "name": "Shokurei 4",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 906,
+  "name": "Shokurei 5",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 907,
+  "name": "Shokurei 6",
+  "shiki": [
+   163
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 908,
+  "name": "Bonded with Heian-Kyo",
+  "shiki": [
+   141
+  ],
+  "onmyoji": [
+   1,
+   2,
+   4,
+   3
+  ]
+ },
+ {
+  "id": 909,
+  "name": "Flame of War",
+  "shiki": [
+   141,
+   86
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 910,
+  "name": "Wishing for Light",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 911,
+  "name": "Home's Promise",
+  "shiki": [
+   127
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 912,
+  "name": "Verdant Pinwheel",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 913,
+  "name": "Baekje Dancers",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 914,
+  "name": "Mirrored Flames",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 915,
+  "name": "Mirrored Reality Ripples",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 916,
+  "name": "Glorious Gift",
+  "shiki": [
+   132,
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 917,
+  "name": "Dreamlike Moment",
+  "shiki": [
+   132
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 918,
+  "name": "Ashen Rain",
+  "shiki": [
+   139
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 919,
+  "name": "Behind the Lights",
+  "shiki": [
+   147
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 920,
+  "name": "Camellia Whispers",
+  "shiki": [
+   146
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 921,
+  "name": "Ritual in Roses",
+  "shiki": [
+   169
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 922,
+  "name": "Fiery Ritualist",
+  "shiki": [
+   169
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 923,
+  "name": "Forest Strike",
+  "shiki": [
+   91
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 924,
+  "name": "Dust Settled",
+  "shiki": [
+   151
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 925,
+  "name": "Bygone Dream",
+  "shiki": [
+   182
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 926,
+  "name": "Bygone Butterflies",
+  "shiki": [
+   182
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 927,
+  "name": "Peace Ritual",
+  "shiki": [
+   133
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 928,
+  "name": "Eerie Cherry",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 929,
+  "name": "Kotodama's Growth",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 930,
+  "name": "Spring Feast",
+  "shiki": [
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 931,
+  "name": "Wished Wheatfield",
+  "shiki": [
+   164
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 932,
+  "name": "Butterfly Trot",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 933,
+  "name": "Dawn of Yesterday",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 934,
+  "name": "Frosty Return",
+  "shiki": [
+   158
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 935,
+  "name": "Winter Solitude",
+  "shiki": [
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 936,
+  "name": "Theatrical Dream",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 937,
+  "name": "Lotus Core",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 938,
+  "name": "Afternoon Kite-flying",
+  "shiki": [
+   234
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 939,
+  "name": "Angler's Joy",
+  "shiki": [
+   246
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 940,
+  "name": "Moonlit Blooms",
+  "shiki": [
+   249
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 941,
+  "name": "Blossom Glow",
+  "shiki": [
+   238
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 942,
+  "name": "Luminary Lake",
+  "shiki": [
+   248
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 943,
+  "name": "Kite's Wishes",
+  "shiki": [
+   241
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 944,
+  "name": "Loong's Retreat",
+  "shiki": [
+   241
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 945,
+  "name": "Autumn Ginkgo",
+  "shiki": [
+   183
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 946,
+  "name": "Lotus Dreamglass",
+  "shiki": [
+   262
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 947,
+  "name": "Ancient Memories",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 948,
+  "name": "Lonely Investigation",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 949,
+  "name": "Ancient Friends",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 950,
+  "name": "Bestowing Blessings",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 951,
+  "name": "Peaceful Night",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 952,
+  "name": "Recalling Memories",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 953,
+  "name": "Fortune's Legend",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 954,
+  "name": "Favored Diligence",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 955,
+  "name": "Pond Resting",
+  "shiki": [
+   235
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 956,
+  "name": "Takiyashahime in Tears",
+  "shiki": [
+   132
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 957,
+  "name": "The Sun vs The Moon",
+  "shiki": [
+   132,
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 958,
+  "name": "Radiance of the Sun",
+  "shiki": [
+   132,
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 959,
+  "name": "Takayasha Hime",
+  "shiki": [
+   132,
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 960,
+  "name": "Himiko",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 961,
+  "name": "Usual Affair",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 962,
+  "name": "Blossoming Snow",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 963,
+  "name": "Bustling Bliss",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 964,
+  "name": "Heart Opened",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 965,
+  "name": "Long Search",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 966,
+  "name": "Fuuyoukun 1",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 967,
+  "name": "Leopard Boy",
+  "shiki": [
+   243
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 968,
+  "name": "Shadow's Schemes",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 969,
+  "name": "Castle Built",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 970,
+  "name": "Time's Shadow",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 971,
+  "name": "The Guardian",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 972,
+  "name": "War Survivor",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 973,
+  "name": "Ceaseless Warfare",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 974,
+  "name": "Radiance of the Sun 2",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 975,
+  "name": "Rift in Time",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 976,
+  "name": "Radiance of the Sun 3",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 977,
+  "name": "Himiko 2",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 978,
+  "name": "Himiko 3",
+  "shiki": [
+   251
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 979,
+  "name": "Radient Blade",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 980,
+  "name": "Connected",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 981,
+  "name": "Jiyou Takiyasha Hime",
+  "shiki": [
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 982,
+  "name": "Jiyou Takiyasha Hime 2",
+  "shiki": [
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 983,
+  "name": "Farewell Again",
+  "shiki": [
+   251,
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 984,
+  "name": "New Lantern",
+  "shiki": [
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 985,
+  "name": "Eternal Night",
+  "shiki": [
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 986,
+  "name": "Teenager",
+  "shiki": [
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 987,
+  "name": "Day & Night",
+  "shiki": [
+   252
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 988,
+  "name": "Boat Ride",
+  "shiki": [
+   252,
+   251,
+   132
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 989,
+  "name": "Vulpine Silence",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 990,
+  "name": "Belle Ablaze",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 991,
+  "name": "Torn Heart",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 992,
+  "name": "Fruit Hunt",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 993,
+  "name": "Vulpine Glory",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 994,
+  "name": "Seductive Fox",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 995,
+  "name": "Flower Reunion",
+  "shiki": [
+   228
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 996,
+  "name": "Flower Tears",
+  "shiki": [
+   3
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 997,
+  "name": "Spring Waters",
+  "shiki": [
+   266
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 998,
+  "name": "Family Night",
+  "shiki": [
+   265
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 999,
+  "name": "Gokuraku Foxfeast",
+  "shiki": [
+   265,
+   201,
+   202,
+   203,
+   205,
+   207,
+   94,
+   228,
+   110,
+   50
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1000,
+  "name": "Sunlit Night",
+  "shiki": [
+   2,
+   265,
+   17
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 1001,
+  "name": "Vernal Query",
+  "shiki": [
+   265,
+   266
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1002,
+  "name": "Spring Lingers",
+  "shiki": [
+   265,
+   94
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 1003,
+  "name": "Foxwindow Dream",
+  "shiki": [
+   265
+  ],
+  "onmyoji": [
+   1
+  ]
+ },
+ {
+  "id": 1004,
+  "name": "Twined Souls",
+  "shiki": [
+   265
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1005,
+  "name": "Heartleft Hope",
+  "shiki": [
+   266,
+   63
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1006,
+  "name": "Petaled Boat",
+  "shiki": [
+   266,
+   63
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1007,
+  "name": "Floral Insight",
+  "shiki": [
+   266,
+   148,
+   246,
+   220
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1008,
+  "name": "Spring Return",
+  "shiki": [
+   266,
+   161,
+   142
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1009,
+  "name": "狐梦春桃",
+  "shiki": [
+   266,
+   265
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 1010,
+  "name": "Kuzunoha 1",
+  "shiki": [
+   265
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1011,
+  "name": "Kuzunoha 2",
+  "shiki": [
+   265
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1012,
+  "name": "Shakubana Momo no Sei",
+  "shiki": [
+   266
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1013,
+  "name": "Until Next Time",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1014,
+  "name": "Opposite Views",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1015,
+  "name": "Lotus of the Youth",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1016,
+  "name": "King's Coronation",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1017,
+  "name": "Taishakuten",
+  "shiki": [
+   157
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1018,
+  "name": "Maples in the Snow",
+  "shiki": [
+   151
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1019,
+  "name": "Yamakaze 1",
+  "shiki": [
+   91,
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1020,
+  "name": "Chance to Strike",
+  "shiki": [
+   151,
+   91
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1021,
+  "name": "Valiant Hero",
+  "shiki": [
+   151
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1022,
+  "name": "Blur of the Blades",
+  "shiki": [
+   151
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1023,
+  "name": "The Parting 2",
+  "shiki": [
+   91,
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1024,
+  "name": "Yamakaze 2",
+  "shiki": [
+   91,
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1025,
+  "name": "Yamakaze 3",
+  "shiki": [
+   91
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1026,
+  "name": "Yamakaze 4",
+  "shiki": [
+   91,
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1027,
+  "name": "Yamakaze 5",
+  "shiki": [
+   91
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1028,
+  "name": "Yamakaze 6",
+  "shiki": [
+   91,
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1029,
+  "name": "Mushishi 2",
+  "shiki": [
+   100
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1030,
+  "name": "Cocooning",
+  "shiki": [
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1031,
+  "name": "Finding the Heart",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1032,
+  "name": "Entering the World",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1033,
+  "name": "Secluded Mountain",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1034,
+  "name": "Mirrored Views",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1035,
+  "name": "Phantom Dream",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1036,
+  "name": "Mirrored Flowers",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1037,
+  "name": "Mirrors Parted",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1038,
+  "name": "Clear Heart",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1039,
+  "name": "Zenshin Ungaikyou 1",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1040,
+  "name": "Zenshin Ungaikyou 2",
+  "shiki": [
+   184
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1041,
+  "name": "Final Mirror",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1042,
+  "name": "The Rotating Mirror",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1043,
+  "name": "Joy or Pain",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1044,
+  "name": "Wise Mirror",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1045,
+  "name": "Ungaikyou 1",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1046,
+  "name": "Ungaikyou 2",
+  "shiki": [
+   138
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1047,
+  "name": "Doumeki 1",
+  "shiki": [
+   88
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1048,
+  "name": "Doumeki 2",
+  "shiki": [
+   88
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1049,
+  "name": "Chance Encounter",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1050,
+  "name": "Kotodama's Birth",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1051,
+  "name": "Deprive",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1052,
+  "name": "Tower Toppled",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1053,
+  "name": "The Mantra",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1054,
+  "name": "Decisive Words",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1055,
+  "name": "Born From Bones",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1056,
+  "name": "Sea of Words",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1057,
+  "name": "The Toppling",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1058,
+  "name": "Kotodama",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1059,
+  "name": "Kotodama 2",
+  "shiki": [
+   190
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1060,
+  "name": "No Name 17",
+  "shiki": [
+   73,
+   74
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1061,
+  "name": "Thundering_Wraith",
+  "shiki": [
+   180
+  ],
+  "onmyoji": [
+   2
+  ]
+ },
+ {
+  "id": 1062,
+  "name": "Sky-piercing_Spear",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1063,
+  "name": "Gods'_Fall",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1064,
+  "name": "Thunder_Memory",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1065,
+  "name": "Rooftop_Resting",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1066,
+  "name": "Undying_Thunder",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1067,
+  "name": "Susanoo 1",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1068,
+  "name": "Susanoo 2",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1069,
+  "name": "Susanoo 3",
+  "shiki": [
+   180
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1070,
+  "name": "Flighting",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1071,
+  "name": "Face_Unmasked",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1072,
+  "name": "Holy_Maiden",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1073,
+  "name": "Blind",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1074,
+  "name": "雀舞曼歌",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1075,
+  "name": "Plume_Ascendancy",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1076,
+  "name": "Wind_Dancer",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1077,
+  "name": "Kujaku-Myouou",
+  "shiki": [
+   219
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1078,
+  "name": "No_Traces",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1079,
+  "name": "Persisting_Soul",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1080,
+  "name": "Nocturnal_Star",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1081,
+  "name": "Worry-free",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1082,
+  "name": "Golden_Star",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1083,
+  "name": "Starry_Wish",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1084,
+  "name": "奇袭",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1085,
+  "name": "Midnight_Journey",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1086,
+  "name": "Kikinyou 1",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1087,
+  "name": "Kikinyou 2",
+  "shiki": [
+   245
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1088,
+  "name": "Night's_Embrace",
+  "shiki": [
+   267,
+   26,
+   25,
+   32
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1089,
+  "name": "Nocturna_Rebirth",
+  "shiki": [
+   267,
+   26,
+   49
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1090,
+  "name": "Sinister_Nightfall",
+  "shiki": [
+   267,
+   49
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1091,
+  "name": "Actbreak_Gambol",
+  "shiki": [
+   267,
+   49,
+   25
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1092,
+  "name": "Crimson_Nightstage",
+  "shiki": [
+   267
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1093,
+  "name": "Guardian_Gleam",
+  "shiki": [
+   267,
+   25
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1094,
+  "name": "Redmoon_Dance",
+  "shiki": [
+   267
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1095,
+  "name": "Shokugetsu_Kyuuketsu_Hime",
+  "shiki": [
+   267
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1096,
+  "name": "Long_Nightdream",
+  "shiki": [
+   25,
+   24,
+   49,
+   193
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1097,
+  "name": "Red_Nightfall",
+  "shiki": [
+   67
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1098,
+  "name": "Approaching_the_End",
+  "shiki": [
+   167
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1099,
+  "name": "Redmoon_Catastrophe",
+  "shiki": [
+   167
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1100,
+  "name": "Yato_no_Kami_1",
+  "shiki": [
+   167
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1101,
+  "name": "Yato_no_Kami_2",
+  "shiki": [
+   167
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1102,
+  "name": "Yato_no_Kami_3",
+  "shiki": [
+   167
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1103,
+  "name": "Yato_no_Kami_4",
+  "shiki": [
+   167
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1104,
+  "name": "Fallen_in_Flowers",
+  "shiki": [
+   80
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1105,
+  "name": "Hearts_Connected",
+  "shiki": [
+   141,
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1106,
+  "name": "Bond_Forger",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1107,
+  "name": "Fate_Weaver",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1108,
+  "name": "Wish_Collector",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1109,
+  "name": "Weaving_Knots",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1110,
+  "name": "Forgotten_Bond",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1111,
+  "name": "Bonded_Hearts",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1112,
+  "name": "Bonding_with_the_World",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1113,
+  "name": "Negai_Tsumugi_Enmusubi_no_Kami",
+  "shiki": [
+   223
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1114,
+  "name": "Rendezvous",
+  "shiki": [
+   169,
+   141,
+   223,
+   98
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1115,
+  "name": "Mutual_Attraction",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1116,
+  "name": "A_Cat's_Pleasure",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1117,
+  "name": "Bonded_with_You",
+  "shiki": null,
+  "onmyoji": null
+ },
+ {
+  "id": 1118,
+  "name": "Old_House",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1119,
+  "name": "Messages_of_Love",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1120,
+  "name": "Dream_Come_True",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1121,
+  "name": "Exotic_Wedding",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1122,
+  "name": "Lady_in_the_Snow",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1123,
+  "name": "First_Crush",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1124,
+  "name": "Flame_Reignited",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1125,
+  "name": "Narukami",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1126,
+  "name": "Senju",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1127,
+  "name": "Onmyo",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1128,
+  "name": "Flowering_Spirit",
+  "shiki": [
+   141
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1129,
+  "name": "Returning_Home",
+  "shiki": [
+   214
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1130,
+  "name": "Diverged_Path",
+  "shiki": [
+   241
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1131,
+  "name": "Peacefulness",
+  "shiki": [
+   241
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1132,
+  "name": "Loong's_Epiphany",
+  "shiki": [
+   241
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1133,
+  "name": "Hidden_Loong",
+  "shiki": [
+   241
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1134,
+  "name": "Purest_Devotion",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1135,
+  "name": "Momentary_Blossom",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1136,
+  "name": "Returning_Blossoms",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1137,
+  "name": "First_Bloom",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1138,
+  "name": "Well_of_Insight",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1139,
+  "name": "Unseen_Dreams",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1140,
+  "name": "Night_Recounts",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1141,
+  "name": "Bittersweet_Fate",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1142,
+  "name": "Shinigami",
+  "shiki": [
+   268
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1143,
+  "name": "Bitter_Wraithtide",
+  "shiki": [
+   125
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1144,
+  "name": "Yao_Bikuni",
+  "shiki": null,
+  "onmyoji": [
+   4
+  ]
+ },
+ {
+  "id": 1145,
+  "name": "Song_of_the_Mountaintop",
+  "shiki": [
+   17
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1146,
+  "name": "Demoniac_Feast",
+  "shiki": [
+   19
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1147,
+  "name": "Multi-faced_Fox",
+  "shiki": [
+   94
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1148,
+  "name": "No Name 28",
+  "shiki": [
+   1,
+   5,
+   17,
+   19,
+   35,
+   55,
+   60,
+   61,
+   64,
+   68,
+   78,
+   79,
+   84,
+   90,
+   91,
+   76
+  ],
+  "onmyoji": [
+   1,
+   2,
+   3,
+   4
+  ]
+ },
+ {
+  "id": 1149,
+  "name": "花火之都",
+  "shiki": [
+   2,
+   83,
+   87,
+   35,
+   5,
+   17,
+   18,
+   19
+  ],
+  "onmyoji": [
+   1,
+   2
+  ]
+ },
+ {
+  "id": 1150,
+  "name": "云游四方",
+  "shiki": [
+   95
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1151,
+  "name": "薰风南来",
+  "shiki": [
+   93
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1152,
+  "name": "风神之佑",
+  "shiki": [
+   68
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1153,
+  "name": "魍勉之卷",
+  "shiki": [
+   68
+  ],
+  "onmyoji": [
+   4
+  ]
+ },
+ {
+  "id": 1154,
+  "name": "眸中回忆",
+  "shiki": [
+   88
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1155,
+  "name": "祈愿之神",
+  "shiki": [
+   98
+  ],
+  "onmyoji": null
+ },
+ {
+  "id": 1156,
+  "name": "Tale_Teller",
+  "shiki": [
+   62
+  ],
+  "onmyoji": null
+ }
+]

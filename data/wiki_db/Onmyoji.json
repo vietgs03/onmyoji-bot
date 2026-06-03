@@ -1,0 +1,3540 @@
+[
+ {
+  "id": 1,
+  "name": {
+   "en": "Seimei",
+   "cn": [
+    "安倍晴明",
+    "Ānbèi Qíngmíng"
+   ],
+   "jp": [
+    "安倍晴明",
+    "Abe no Seimei"
+   ],
+   "vn": "An Bội Tình Minh",
+   "va": "Noriaki Sugiyama"
+  },
+  "stats": {
+   "HP": [
+    13847,
+    27140
+   ],
+   "ATK": [
+    3256,
+    6382
+   ],
+   "DEF": [
+    536,
+    1051
+   ],
+   "SPD": [
+    100,
+    128
+   ],
+   "Crit": [
+    0,
+    20
+   ]
+  },
+  "skills": [
+   {
+    "name": {
+     "en": "Basic Skill",
+     "cn": "基础术式",
+     "jp": "通常攻撃",
+     "vn": "Cơ Sở Thuật Thức"
+    },
+    "tags": [
+     1,
+     5
+    ],
+    "type": "Normal",
+    "cooldown": 0,
+    "description": {
+     "en": "Uses an amulet to attack the target. Deals damage equal to 100% of <r>1</r>'s ATK.",
+     "vn": "Sử dụng bùa chú để tấn công mục tiêu. Gây sát thương bằng 100% ATK của <r>1</r>."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Has a 50% chance of inflicting the <b>57</b> effect on the target. This decrease the damage ot deals by 20%. Last 2 turns."
+      },
+      {
+       "level": 3,
+       "effect": "The chance of inflicting the <a>57</a> effect increases to 100%."
+      },
+      {
+       "level": 4,
+       "effect": "<a>57</a> effect enhancement: Damage dealt decreases by 40%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 120%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Có 50% tỷ lệ gắn <b>57</b> cho mục tiêu, giảm 20% sát thương gây ra trong 2 lượt."
+      },
+      {
+       "level": 3,
+       "effect": "Tỷ lệ gắn <a>57</a> tăng thành 100%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng <a>57</a>: Giảm 40% sát thương gây ra."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 120%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Spell: Bind",
+     "cn": "言灵·缚",
+     "jp": "言霊・縛",
+     "vn": "Ngôn Linh: Trói"
+    },
+    "tags": [
+     7,
+     5
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "Binds the target with a field. This increases the <e>Debuff34</e> damage the target taken by 10%. Also inflicting <b>58</b> on the enemy. The bound enemy can use normal attacks to break the bind. The field inherits 5% of the onmyoji's HP.\nSkill cooldown is 2 turns.",
+     "vn": "Trói mục tiêu bằng kết giới, tăng 10% <e>Debuff34</e> sát thương nhận vào của mục tiêu. Đồng thời khiến kẻ địch bị <b>58</b>. Kẻ địch bị trói buộc có thể thực hiện đánh thường để phá giải hiệu ứng. Kết giới kế thừa 5% HP của âm dương sư.\nKỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "<m>2</m> effect enhancement: Increases the damage taken by 20%."
+      },
+      {
+       "level": 3,
+       "effect": "<m>2</m> effect enhancement: Increases the damage taken by 30%."
+      },
+      {
+       "level": 4,
+       "effect": "<m>2</m> effect enhancement: Increases the damage taken by 40%."
+      },
+      {
+       "level": 5,
+       "effect": "HP inherited by the energy barrier is equal to 10% of <r>1</r>'s HP."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hóa hiệu ứng <m>2</m>: Tăng 20% sát thương nhận vào."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hóa hiệu ứng <m>2</m>: Tăng 30% sát thương nhận vào."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng <m>2</m>: Tăng 40% sát thương nhận vào."
+      },
+      {
+       "level": 5,
+       "effect": "HP kế thừa của kết giới bằng 10% HP của <r>1</r>."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Spell: Protect",
+     "cn": "言灵·守",
+     "jp": "言霊・守",
+     "vn": "Ngôn Linh: Thủ"
+    },
+    "tags": [
+     17,
+     12
+    ],
+    "type": "Special",
+    "cooldown": 3,
+    "description": {
+     "en": "Forms a large defensive barrier so the enemy cannot damage allies. The barrier fails when the onmyoji moves 2 times or it has absorbs damage equal to 10% of the onmyoji's max HP.\nSkill cooldown is 3 turns.",
+     "vn": "Tạo một lá chắn phòng thủ lớn để kẻ địch không thể gây sát thương lên đồng đội. Lá chắn sẽ biến mất khi âm dương sư hành động 2 lần hoặc đã hấp thụ lượng sát thương bằng 10% HP tối đa của âm dương sư.\nKỹ năng hồi chiêu sau 3 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "The damage absorbed increases to 11% of the onmyoji's max HP."
+      },
+      {
+       "level": 3,
+       "effect": "The damage absorbed increases to 12% of the onmyoji's max HP."
+      },
+      {
+       "level": 4,
+       "effect": "The damage absorbed increases to 13% of the onmyoji's max HP."
+      },
+      {
+       "level": 5,
+       "effect": "The damage absorbed increases to 14% of the onmyoji's max HP."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương hấp thụ tăng thành 11% HP tối đa của âm dương sư."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương hấp thụ tăng thành 12% HP tối đa của âm dương sư."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương hấp thụ tăng thành 13% HP tối đa của âm dương sư."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương hấp thụ tăng thành 14% HP tối đa của âm dương sư."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Fox Whispers: Purge",
+     "cn": "狐言·一式",
+     "jp": "狐言・一式",
+     "vn": "Hồ Ngôn: Nhất Thức"
+    },
+    "tags": [
+     5,
+     7
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "Unlocks after <r>1</r> casts skills 5 times.\nWhen <r>1</r> uses a normal attack or skill during his turn, he additionally releases 3 amulets at 1 random enemy target, applying <b>57</b>, <b>60</b>, and a <b>58</b> effect with 100% <b>2</b>, lasting for 1 turn.",
+     "vn": "Mở khoá sau khi <r>1</r> dùng kỹ năng đủ 5 lần.\nKhi <r>1</r> thực hiện đòn đánh thường hoặc dùng kỹ năng trong lượt, sẽ phóng thêm 3 lá bùa vào 1 kẻ địch ngẫu nhiên, lần lượt là: <b>57</b>, <b>60</b> và hiệu ứng <b>58</b> với 100% <b>2</b> trong 1 lượt."
+    },
+    "levels": {
+     "en": "This skill cannot be leveled up.",
+     "vn": "Kỹ năng không thể tăng cấp."
+    }
+   },
+   {
+    "name": {
+     "en": "Amulet: Death",
+     "cn": "符咒·灭",
+     "jp": "霊符・滅",
+     "vn": "Phù Chú: Diệt"
+    },
+    "tags": [
+     5
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Inflicts <b>60</b> on all enemies. This increases the damage the target takes by 15%. The effect disappears after the target moves 2 times.",
+     "vn": "Gắn <b>60</b> cho toàn bộ kẻ địch, tăng 15% sát thương nhận vào. Hiệu ứng biến mất sau khi mục tiêu hành động 2 lần."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "<a>60</a> effect enhancement: Increases the damage the target takes by 20%."
+      },
+      {
+       "level": 3,
+       "effect": "<a>60</a> effect enhancement: Increases the damage the target takes by 25%."
+      },
+      {
+       "level": 4,
+       "effect": "<a>60</a> effect enhancement: Increases the damage the target takes by 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases duration of <a>60</a> by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hóa hiệu ứng <a>60</a>: Tăng 20% sát thương nhận vào của mục tiêu."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hóa hiệu ứng <a>60</a>: Tăng 25% sát thương nhận vào của mục tiêu."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng <a>60</a>: Tăng 30% sát thương nhận vào của mục tiêu."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực của <a>60</a> tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Amulet: Life",
+     "cn": "符咒·生",
+     "jp": "霊符・生",
+     "vn": "Phù Chú: Sinh"
+    },
+    "tags": [
+     3
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Gives allies <b>61</b>. This decreases the damage they take by 15%. Lasts 2 turns.",
+     "vn": "Cấp cho đồng minh <b>61</b>, giảm 15% sát thương nhận vào trong 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases duration of <a>61</a> by 1 turn."
+      },
+      {
+       "level": 3,
+       "effect": "<a>61</a> effect enhancement: Damage taken decreases by 20%."
+      },
+      {
+       "level": 4,
+       "effect": "<a>61</a> effect enhancement: Damage taken decreases by 30%."
+      },
+      {
+       "level": 5,
+       "effect": "The <a>61</a> effect also applies to the onmyoji."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Thời gian hiệu lực của <a>61</a> tăng thêm 1 lượt."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hóa hiệu ứng <a>61</a>: Giảm 20% sát thương nhận vào."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng <a>61</a>: Giảm 30% sát thương nhận vào."
+      },
+      {
+       "level": 5,
+       "effect": "Hiệu ứng <a>61</a> cũng áp dụng cho âm dương sư."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Divine Lightning",
+     "cn": "雷帝召来",
+     "jp": "雷光招来",
+     "vn": "Lôi Đế Chiêu Lai"
+    },
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "When <r>1</r> is attacked, there is a 10% chance that he will summon Shinryu. Shinryu invokes lightning that attacks all enemies. Deals damage equal to 100% of <r>1</r>'s ATK.",
+     "vn": "Khi <r>1</r> bị tấn công, có 10% tỷ lệ triệu hồi Long Thần. Long Thần sẽ phóng sét tấn công toàn bộ kẻ địch, gây sát thương bằng 100% ATK của <r>1</r>."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Has a 10% chance of inflicting <b>62</b> on the target for 1 turn."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 4,
+       "effect": "The chance of inflicting <a>62</a> increases to 20."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 120%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Có 10% tỷ lệ khiến mục tiêu bị <b>62</b> trong 1 lượt."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Tỷ lệ gây <a>62</a> tăng thành 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 120%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Spell: Star",
+     "cn": "言灵·星",
+     "jp": "言霊・星",
+     "vn": "Ngôn Linh: Tinh"
+    },
+    "tags": [
+     3
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Forms a pentagram that increases the <e>Buff51</e> damage all allies deal by 15%. Lasts 2 turns.",
+     "vn": "Tạo kết giới sao năm cánh, tăng 15% <e>Buff51</e> sát thương gây ra cho toàn bộ đồng minh trong 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "<m>8</m> effect enhancement: Damage dealt increases by 20%."
+      },
+      {
+       "level": 3,
+       "effect": "<m>8</m> effect enhancement: Damage dealt increases by 25%."
+      },
+      {
+       "level": 4,
+       "effect": "<m>8</m> effect enhancement: Damage dealt increases by 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases duration of <m>8</m> by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hóa hiệu ứng <m>8</m>: Tăng 20% sát thương gây ra."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hóa hiệu ứng <m>8</m>: Tăng 30% sát thương gây ra."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng <m>8</m>: Tăng 40% sát thương gây ra."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gia hiệu lực của <m>8</m> tăng thêm 1 lượt"
+      }
+     ]
+    }
+   }
+  ],
+  "skins": [
+   {
+    "name": {
+     "en": "Default",
+     "cn": "",
+     "vn": "Mặc Định"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Nature's Glory",
+     "cn": "森罗万象",
+     "vn": "Sâm La Vạn Tượng"
+    },
+    "artist": "HJW",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Dark Seimei",
+     "cn": "黒晴明",
+     "vn": "Hắc Tình Minh"
+    },
+    "artist": "",
+    "obtained": "Ebisu's Boutique"
+   },
+   {
+    "name": {
+     "en": "Gold Feathers",
+     "cn": "金月暗羽",
+     "vn": "Kim Nguyệt Ám Vũ"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Lunar Corona",
+     "cn": "月夜之羽衣",
+     "vn": "Nguyệt Dạ Chi Vũ Y"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Golden Maple",
+     "cn": "金楓尽染",
+     "vn": "Kim Phong Tẫn Nhiễm"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Young Prodigy",
+     "cn": "少年晴明",
+     "vn": "Thiếu Niên Tình Minh"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Wise Scholar",
+     "cn": "雅士之谋",
+     "vn": "Nhã Sĩ Chi Mưu"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   },
+   {
+    "name": {
+     "cn": "玉将无双",
+     "en": "Majestic Monarch",
+     "vn": "Ngọc Tướng Vô Song"
+    },
+    "artist": "懿肆琬兮",
+    "obtained": "Honor Shop"
+   },
+   {
+    "name": {
+     "en": "Demon Scrolls",
+     "cn": "卷录百鬼",
+     "vn": "Quyển Lục Bách Quỷ"
+    },
+    "artist": "懿肆琬兮",
+    "obtained": "Collab Event"
+   },
+   {
+    "name": {
+     "en": "Myrtle Mage",
+     "cn": "绿墨风烟",
+     "vn": "Lục Mặc Phong Yên"
+    },
+    "artist": "",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Icicle Plume",
+     "cn": "雪羽凝华",
+     "vn": "Tuyết Vũ Ngưng Hoa"
+    },
+    "artist": "CLAMP",
+    "obtained": "Collab Event"
+   },
+   {
+    "name": {
+     "en": "Composed Magnus",
+     "cn": "旋游奇戏",
+     "vn": "Toàn Du Kỳ Hí"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Ascended Hiker",
+     "cn": "羽化游峦",
+     "vn": "Vũ Hóa Du Loan"
+    },
+    "artist": "",
+    "obtained": "Premium Event"
+   },
+   {
+    "name": {
+     "en": "Astralisk Shade",
+     "cn": "星蛟宿影",
+     "vn": "Tinh Giao Túc Ảnh"
+    },
+    "artist": "",
+    "obtained": "Event"
+   }
+  ],
+  "totem": [
+   {
+    "name": {
+     "en": "Shinryu",
+     "cn": "龍神",
+     "vn": "Long Thần"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Nether Dragon",
+     "cn": "風雷翔龍",
+     "vn": "Phong Lôi Tường Long"
+    },
+    "artist": "",
+    "obtained": "Mystic Trader"
+   },
+   {
+    "name": {
+     "en": "Golden Scales",
+     "cn": "金鱗雲龍",
+     "vn": "Kim Lân Vân Long"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Whelp of Orbs",
+     "cn": "倏影腾龙",
+     "vn": "Thúc Ảnh Đằng Long"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Cloud Blazer",
+     "cn": "随云吟啸",
+     "vn": "Tùy Vân Ngâm Khiếu"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Revelling Flame",
+     "cn": "萦春绵火",
+     "vn": "Doanh Xuân Miên Hỏa"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Vibrant Cloud",
+     "cn": "栩生工霞",
+     "vn": "Hủ Sinh Công Hà"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   }
+  ]
+ },
+ {
+  "id": 2,
+  "name": {
+   "en": "Kagura",
+   "cn": [
+    "神乐",
+    "Shén Lè"
+   ],
+   "jp": [
+    "神乐",
+    "Kagura"
+   ],
+   "vn": "Thần Lạc",
+   "va": "Rie Kugimiya"
+  },
+  "stats": {
+   "HP": [
+    13847,
+    27140
+   ],
+   "ATK": [
+    3256,
+    6382
+   ],
+   "DEF": [
+    536,
+    1051
+   ],
+   "SPD": [
+    100,
+    128
+   ],
+   "Crit": [
+    0,
+    20
+   ]
+  },
+  "skills": [
+   {
+    "name": {
+     "en": "Umbrella Strike",
+     "cn": "伞击",
+     "jp": "傘たたき",
+     "vn": "Tản Kích"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Normal",
+    "cooldown": 0,
+    "description": {
+     "en": "Waves her umbrella to unleash spiritual power that attacks 1 enemy. Deals damage equal to 100% of her ATK.",
+     "vn": "Vung ô để giải phóng linh lực tấn công 1 kẻ địch, gây sát thương bằng 100% ATK."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 140%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 140%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Summon: Fish",
+     "cn": "召唤·鱼",
+     "jp": "召喚·風船金魚",
+     "vn": "Triệu Hồi: Ngư"
+    },
+    "tags": [
+     8
+    ],
+    "type": "Special",
+    "cooldown": 3,
+    "description": {
+     "en": "Summons a fish spirit called Kin lasting 3 turns. The fish inherits 10% of <r>2</r>'s HP and 100% of her ATK.",
+     "vn": "Triệu hồi linh hồn cá tên Kim tồn tại 3 lượt. Cá kế thừa 10% HP và 100% ATK của <r>2</r>."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "The HP inherited increases to 20%."
+      },
+      {
+       "level": 3,
+       "effect": "The ATK inherited increases to 110%."
+      },
+      {
+       "level": 4,
+       "effect": "The HP inherited increases to 30%."
+      },
+      {
+       "level": 5,
+       "effect": "The ATK inherited increases to 120%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Lượng HP kế thừa tăng thành 20%."
+      },
+      {
+       "level": 3,
+       "effect": "Lượng ATK kế thừa tăng thành 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Lượng HP kế thừa tăng thành 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Lượng ATK kế thừa tăng thành 120%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Channel: Storm",
+     "cn": "通灵·疾风",
+     "jp": "霊媒·疾風",
+     "vn": "Thông Linh: Tật Phong"
+    },
+    "tags": [
+     10,
+     3
+    ],
+    "type": "Special",
+    "cooldown": 1,
+    "description": {
+     "en": "Uses spirit channeling to grant Force of Wind to one ally, increasing their <e>Buff51</e> ATK by 10%. In battles against Onmyoji, swaps <r>2</r>'s and the target's Move Bar positions. In battles against monsters, grants the target an extra turn without triggering cooldown.",
+     "vn": "Dẫn yêu linh cấp Phong Chi Lực cho 1 đồng minh, tăng 10% <e>Buff51</e> ATK cho họ. Trong trận đấu với âm dương sư, hoán đổi vị trí thanh Hành Động của <r>2</r> và mục tiêu. Trong trận đấu với quái, lập tức cấp cho họ 1 lượt mà không kích hoạt hồi chiêu."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Storm effect enhancement: ATK increases by 15%."
+      },
+      {
+       "level": 3,
+       "effect": "Storm effect enhancement: ATK increases by 20%."
+      },
+      {
+       "level": 4,
+       "effect": "Storm effect enhancement: ATK increases by 25%."
+      },
+      {
+       "level": 5,
+       "effect": "Storm effect enhancement: ATK increases by 30%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hóa hiệu ứng Tật Phong: Tăng 15% ATK."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hóa hiệu ứng Tật Phong: Tăng 20% ATK."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng Tật Phong: Tăng 25% ATK."
+      },
+      {
+       "level": 5,
+       "effect": "Cường hóa hiệu ứng Tật Phong: Tăng 30% ATK."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Channel: Butterflies",
+     "cn": "通灵·冥蝶",
+     "jp": "霊媒·冥蝶",
+     "vn": "Thông Linh: Minh Điệp"
+    },
+    "tags": [
+     5,
+     7
+    ],
+    "type": "Special",
+    "cooldown": 1,
+    "description": {
+     "en": "Summons a swarm of butterflies that surround all enemies, reducing the <e>Debuff44</e> healing effects they receive by 30% for the next 2 turns. Also has a 10% chance of inflicting <b>21</b> lasting 1 turn on them.",
+     "vn": "Triệu hồi một đàn bươm bướm bao quanh toàn bộ kẻ địch, giảm 30% <e>Debuff44</e> hiệu quả hồi phục mà chúng nhận được trong 2 lượt kế tiếp. Đồng thời có 10% tỷ lệ khiến chúng <b>21</b> trong 1 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Butterflies: Heal Down effect enhancement: Healing effects received decreases by 40%."
+      },
+      {
+       "level": 3,
+       "effect": "The chance of inflicting <a>21</a> increases to 15%."
+      },
+      {
+       "level": 4,
+       "effect": "Butterflies: Heal Down effect enhancement: Healing effects received decreases by 50%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases Butterflies: Heal Down duration by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hoá hiệu ứng Minh Điệp: Giảm Hồi Phục: Giảm 40% hiệu quả hồi phục."
+      },
+      {
+       "level": 3,
+       "effect": "Tỷ lệ gây <a>21</a> tăng thành 15%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hoá hiệu ứng Minh Điệp: Giảm Hồi Phục: Giảm 50% hiệu quả hồi phục."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực của Minh Điệp: Giảm Hồi Phục tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Summon: Purgatory",
+     "cn": "召唤·炼狱",
+     "jp": "召喚·煉獄",
+     "vn": "Triệu Hồi: Luyện Ngục"
+    },
+    "tags": [
+     5
+    ],
+    "type": "Special",
+    "cooldown": 1,
+    "description": {
+     "en": "Summons souls of the dead to reach out their ghostly hands and attack all enemies 3 times. Each attack deals damage equal to 36% of her ATK. Also has a 20% chance of inflicting them with a random debuff that lasts 1 turn.\nRandom debuffs are the following: <e>Debuff35</e> reduced damage dealt, <e>Debuff34</e> increased received damage and <b>49</b>.",
+     "vn": "Triệu hồi linh hồn của người đã khuất, vươn những bàn tay ma quái tấn công toàn bộ kẻ địch 3 lần. Mỗi lần gây sát thương bằng 36% ATK. Mỗi đòn đánh có 20% tỷ lệ gây 1 hiệu ứng bất lợi ngẫu nhiên cho chúng trong 1 lượt.\nCác hiệu ứng bất lợi ngẫu nhiên bao gồm: <e>Debuff35</e> giảm sát thương gây ra, <e>Debuff34</e> tăng sát thương nhận vào và <b>49</b>."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases the skill damage by an additional 30%."
+      },
+      {
+       "level": 3,
+       "effect": "Deals double damage to shields."
+      },
+      {
+       "level": 4,
+       "effect": "The chance of inflicting debuffs increases to 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Ignores target's Soul effect."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương kỹ năng tăng thêm 30%."
+      },
+      {
+       "level": 3,
+       "effect": "Gây gấp đôi sát thương lên lá chắn."
+      },
+      {
+       "level": 4,
+       "effect": "Tỷ lệ gây hiệu ứng bất lợi tăng thành 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Bỏ qua hiệu ứng Ngự Hồn của mục tiêu."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Summon: Umbrella",
+     "cn": "召唤·伞",
+     "jp": "召喚·唐傘",
+     "vn": "Triệu Hồi: Tản"
+    },
+    "tags": [
+     3
+    ],
+    "type": "Passive",
+    "cooldown": 2,
+    "description": {
+     "en": "When any ally's HP falls below 60%, summons an enchanted umbrella to protect all allies, reducing <e>Buff53</e> damage taken by 20% for 1 turn. Triggers a 2-turn cooldown after activation.",
+     "vn": "Khi đồng minh dưới 60% HP, triệu hồi chiếc ô ma pháp bảo hộ toàn bộ đồng minh, giảm 20% <e>Buff53</e> sát thương nhận vào trong 1 lượt. Hiệu ứng hồi chiêu sau 2 lượt khi được kích hoạt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "<b>63</b> effect enhancement: Damage taken decreases by 25%."
+      },
+      {
+       "level": 3,
+       "effect": "<a>63</a> effect enhancement: Damage taken decreases by 30%."
+      },
+      {
+       "level": 4,
+       "effect": "<a>63</a> effect enhancement: Damage taken decreases by 35%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases <a>63</a> duration by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hóa hiệu ứng <b>63</b>: Giảm 25% sát thương nhận vào."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hóa hiệu ứng <a>63</a>: Giảm 30% sát thương nhận vào."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hóa hiệu ứng <a>63</a>: Giảm 35% sát thương nhận vào."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực của <a>63</a> tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Summon: Afterlife",
+     "cn": "召唤·续命",
+     "jp": "召喚·延命",
+     "vn": "Triệu Hồi: Tục Mệnh"
+    },
+    "tags": [
+     19,
+     12
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "Summons souls of dead to possess and protect the target. Lasts 2 turns. If the host is KO'd while possesed, it continues to exist as a spirit for 2 turns. Skill cooldown is 2 turns.",
+     "vn": "Triệu hồi linh hồn người đã khuất nhập vào và bảo hộ mục tiêu trong 2 lượt. Nếu chủ thể bị hạ gục khi đang bị nhập, linh hồn sẽ tiếp tục tồn tại dưới dạng vong linh trong 2 lượt nữa. Kỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": "This skill cannot be leveled up.",
+     "vn": "Kỹ năng không thể tăng cấp."
+    }
+   },
+   {
+    "name": {
+     "en": "Divine Fire",
+     "cn": "天狐神火",
+     "jp": "天狐神火",
+     "vn": "Thiên Hồ Thần Hỏa"
+    },
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "Every time <r>2</r> loses 15% of her starting HP, <k>110</k> casts <o>8</o> to attack all enemies, dealing damage equal to 100% of <r>2</r>'s ATK (limited to 4 times before <r>2</r>'s turn starts). Each time <r>2</r> uses a skill, her SPD permanently increases by 30, up to a maximum of 90.",
+     "vn": "Mỗi khi <r>2</r> mất 15% HP ban đầu, <k>110</k> dùng <o>8</o> tấn công tất cả kẻ địch, gây sát thương bằng 100% ATK của <r>2</r> (tối đa 4 lần trước khi <r>2</r> bắt đầu lượt). Mỗi khi <r>2</r> dùng kỹ năng, lập tức tăng 30 SPD, tối đa tăng 90."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "<o>8</o> reduces the target's DEF by 20% for 2 turns."
+      },
+      {
+       "level": 3,
+       "effect": "Increases <o>8</o>'s damage to 110%."
+      },
+      {
+       "level": 4,
+       "effect": "<b>64</b> effect enhancement: Decreases the target's DEF by 40%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases <o>8</o>'s damage to 120%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "<o>8</o> giảm 20% DEF của mục tiêu trong 2 lượt."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương của <o>8</o> tăng thành 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hoá hiệu ứng <b>64</b>: Giảm 40% DEF của mục tiêu."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương của <o>8</o> tăng thành 120%."
+      }
+     ]
+    }
+   }
+  ],
+  "skins": [
+   {
+    "name": {
+     "en": "Default",
+     "cn": "",
+     "vn": "Mặc Định"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Emerald Plume",
+     "cn": "青羽之鸟",
+     "vn": "Thanh Vũ Chi Điểu"
+    },
+    "artist": "HJW",
+    "obtained": "Steam EA Reward"
+   },
+   {
+    "name": {
+     "en": "Sakura Spring",
+     "cn": "燕鸣樱开",
+     "vn": "Yến Minh Anh Khai"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Pink Goldfish",
+     "cn": "金鱼和服",
+     "vn": "Kim Ngư Hòa Phục"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Golden Autumn",
+     "cn": "叠翠流金",
+     "vn": "Điệp Thúy Lưu Kim"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Valiant Maple",
+     "cn": "花颜猛姬",
+     "vn": "Hoa Nhan Mãnh Cơ"
+    },
+    "artist": "",
+    "obtained": "Honor Shop"
+   },
+   {
+    "name": {
+     "en": "Childhood Memories",
+     "cn": "雏姬记忆",
+     "vn": "Suy Cơ Ký Ức"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "",
+     "cn": "朝露繁花",
+     "vn": "Triêu Lộ Phồn Hoa"
+    },
+    "artist": "CP吸屁",
+    "obtained": "Skin Shop: Limited Time"
+   },
+   {
+    "name": {
+     "en": "Graceful Serenity",
+     "cn": "雅琼飞白",
+     "vn": "Nhã Quỳnh Phi Bạch"
+    },
+    "artist": "三目YYB",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Hello Cutie",
+     "cn": "今样黛心",
+     "vn": "Kim Dạng Đại Tâm"
+    },
+    "artist": "",
+    "obtained": "Collab Event"
+   },
+   {
+    "name": {
+     "en": "Redmoon Butterfly",
+     "cn": "绯月蝶影",
+     "vn": "Phi Nguyệt Điệp Ảnh"
+    },
+    "artist": "",
+    "obtained": "Ebisu's Boutique"
+   },
+   {
+    "name": {
+     "en": "Lacquered Waves",
+     "cn": "漆绘川行",
+     "vn": "Tất Hội Xuyên Hành"
+    },
+    "artist": "",
+    "obtained": "Printed Wonders Event"
+   },
+   {
+    "name": {
+     "en": "Golden Journey",
+     "cn": "金玉游丝",
+     "vn": "Kim Ngọc Du Ti"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Soaring Swallows",
+     "cn": "飞燕裁霞",
+     "vn": "Phi Yến Tài Hà"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   },
+   {
+    "name": {
+     "en": "Azure Phoenix - Vault",
+     "cn": "碧鸾空青·秘藏",
+     "vn": "Bích Loan Không Thanh - Bí Tàng"
+    },
+    "artist": "",
+    "obtained": "Fortune Vault"
+   }
+  ],
+  "totem": [
+   {
+    "name": {
+     "en": "Hakuzousu",
+     "cn": "白蔵主",
+     "vn": "Bạch Tàng Chủ"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Nether Vulpe",
+     "cn": "妖目狐影",
+     "vn": "Yêu Mục Hồ Ảnh"
+    },
+    "artist": "",
+    "obtained": "Mystic Trader"
+   },
+   {
+    "name": {
+     "en": "Golden Tails",
+     "cn": "金瞳妖狐",
+     "vn": "Kim Đồng Yêu Hồ"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Twin-tailed Pup",
+     "cn": "斑目梦影",
+     "vn": "Ban Mục Mộng Ảnh"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Branch Skulker",
+     "cn": "寇梢含枝",
+     "vn": "Khấu Sao Hàm Chi"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Thriving Breeze",
+     "cn": "繁野薰风",
+     "vn": "Phồn Dã Huân Phong"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Billowing Blossom",
+     "cn": "浪打樱枝",
+     "vn": "Lãng Đả Anh Chi"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   }
+  ]
+ },
+ {
+  "id": 3,
+  "name": {
+   "en": "Hiromasa",
+   "cn": [
+    "源博雅",
+    "Yuán Bóyǎ"
+   ],
+   "jp": [
+    "源博雅",
+    "Minamoto no Hiromasa"
+   ],
+   "vn": "Nguyên Bác Nhã",
+   "va": "Tatsuhisa Suzuki"
+  },
+  "stats": {
+   "HP": [
+    13847,
+    27140
+   ],
+   "ATK": [
+    3256,
+    6382
+   ],
+   "DEF": [
+    536,
+    1051
+   ],
+   "SPD": [
+    100,
+    128
+   ],
+   "Crit": [
+    0,
+    20
+   ]
+  },
+  "skills": [
+   {
+    "name": {
+     "en": "Celestial Arrow",
+     "cn": "破魔矢",
+     "jp": "破魔の矢",
+     "vn": "Phá Ma Tiễn"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Normal",
+    "cooldown": 0,
+    "description": {
+     "en": "<r>3</r> draws back his bowstring and releases a magical arrow that deals damage equal to 100% of his ATK on the enemy.",
+     "vn": "<r>3</r> kéo căng dây cung, bắn ra một mũi tên pháp lực gây sát thương bằng 100% ATK lên kẻ địch."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 140%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 140%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Double Release",
+     "cn": "多重箭",
+     "jp": "多重の矢",
+     "vn": "Liên Tiễn Song Phát"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Special",
+    "cooldown": 1,
+    "description": {
+     "en": "<r>3</r> draws back his bowstring and releases 2 magical arrows at 1 targeted enemy and 1 random enemy, dealing damage equal to 100% of his ATK for each arrow.",
+     "vn": "<r>3</r> kéo căng dây cung, bắn ra 2 mũi tên pháp lực, một mũi tên nhắm vào kẻ địch chỉ định và mũi tên còn lại nhắm vào kẻ địch ngẫu nhiên, mỗi mũi tên gây sát thương bằng 100% ATK."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Deals damage to 1 more target."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Gây sát thương lên thêm 1 mục tiêu."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Occult: Panther Eyes",
+     "cn": "秘术·豹眼",
+     "jp": "秘術・豹の目",
+     "vn": "Bí Thuật: Báo Nhãn"
+    },
+    "tags": [
+     3,
+     15,
+     9
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Panther joins the battle and uses its spiritual power to increase the <e>Buff57</e> Crit DMG of all allies by 15%. Lasts 2 turns. When an ally with this buff attacks, there is a 20% chance that Panther will use <c>8</c> on 1 random enemy.",
+     "vn": "Hắc Báo nhập trận, vận dụng linh lực gia tăng 15% <e>Buff57</e> Crit DMG cho toàn bộ đồng minh trong 2 lượt. Khi một đồng minh mang hiệu ứng này tấn công, có 20% tỷ lệ Hắc Báo dùng <c>8</c> lên 1 kẻ địch ngẫu nhiên."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases the Crit DMG boost to 20%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the trigger chance of <c>8</c> to 50%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases the Crit DMG boost to 30%."
+      },
+      {
+       "level": 5,
+       "effect": "When shadow clones exist, additionally raises all allies' Move Bar by 15%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Hiệu quả tăng Crit DMG tăng thành 20%."
+      },
+      {
+       "level": 3,
+       "effect": "Tỷ lệ kích hoạt <c>8</c> tăng thành 50%."
+      },
+      {
+       "level": 4,
+       "effect": "Hiệu quả tăng Crit DMG tăng thành 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Khi tồn tại Ảnh Phân Thân, tăng thêm 15% thanh Hành Động cho toàn bộ đồng minh."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Occult: Shadow Double",
+     "cn": "秘术·影分身",
+     "jp": "秘術·影分身",
+     "vn": "Bí Thuật: Ảnh Phân Thân"
+    },
+    "tags": [
+     8,
+     1,
+     3
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Creates a shadow clone that inherits 90% of <r>3</r>'s stats and becomes immune to attacks. Every 3 attacks by <r>3</r>, the shadow clone will the same skill <r>3</r> last used on the same target.",
+     "vn": "Tạo ra một Ảnh Phân Thân kế thừa 90% chỉ số của <r>3</r> và miễn nhiễm mọi đòn tấn công. Sau mỗi 3 lần <r>3</r> tấn công, Ảnh Phân Thân sẽ dùng lại kỹ năng cuối cùng đã dùng lên cùng mục tiêu."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases Crit by 30% after using the skill."
+      },
+      {
+       "level": 3,
+       "effect": "Inherited attributes increase to 100%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases SPD by 30 after using the skill."
+      },
+      {
+       "level": 5,
+       "effect": "Raises Move Bar by 70% after using the skill."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Tăng 30% Crit sau khi dùng kỹ năng."
+      },
+      {
+       "level": 3,
+       "effect": "Chỉ số kế thừa tăng thành 100%."
+      },
+      {
+       "level": 4,
+       "effect": "Tăng 30 SPD sau khi dùng kỹ năng."
+      },
+      {
+       "level": 5,
+       "effect": "Tăng 70% thanh Hành Động sau khi dùng kỹ năng."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Rapid Release",
+     "cn": "诛邪箭",
+     "jp": "3本の矢",
+     "vn": "Tru Tà Tiễn"
+    },
+    "tags": [
+     1,
+     15,
+     9
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "At the start of battle and at the end of each turn, gains 3 stacks of <b>65</b>. When an ally (other than the user) users a normal attack during their turn, consumes 1 stack of <a>65</a> for <b>351</b>ing and raises Move Bar by 10%.",
+     "vn": "Khi bắt đầu trận và khi kết thúc mỗi lượt, nhận 3 tầng <b>65</b>. Khi 1 đồng minh (trừ bản thân) thực hiện đòn đánh thường trong lượt của họ, tiêu hao 1 tầng <a>65</a> để <b>351</b> và tăng 10% thanh Hành Động."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Each arrow's damage increases to 55%."
+      },
+      {
+       "level": 3,
+       "effect": "Each arrow's damage increases to 60%."
+      },
+      {
+       "level": 4,
+       "effect": "Each arrow's damage increases to 65%."
+      },
+      {
+       "level": 5,
+       "effect": "Each arrow's damage increases to 70%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương mỗi mũi tên tăng thành 55%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương mỗi mũi tên tăng thành 60%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương mỗi mũi tên tăng thành 65%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương mỗi mũi tên tăng thành 70%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Occult: Panther Maul",
+     "cn": "秘术·豹袭",
+     "jp": "秘術·豹襲",
+     "vn": "Bí Thuật: Báo Tập"
+    },
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "<b>48</b>: Uses <m>6</m>. Panther will pounce on the enemy with the highest HP, dealing damage equal to 100% of <r>3</r>'s ATK.",
+     "vn": "<b>48</b>: Dùng <m>6</m>. Hắc Báo vồ thẳng vào kẻ địch có HP cao nhất, gây sát thương bằng 100% ATK của <r>3</r>."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 140%, and this damage does not trigger the Soul effects and passive skills of all enemies."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 120%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 130%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 140%, và sát thương này không kích hoạt hiệu ứng Ngự Hồn cũng như nội tại của toàn bộ kẻ địch."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Grief Roar",
+     "cn": "悲声哀嚎",
+     "jp": "悲声哀吼",
+     "vn": "Bi Thanh Ai Hống"
+    },
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "When <r>3</r> is KO'd, Panther roars with grief and increases all allies' <e>Buff51</e> damage by 60% and their <e>Buff00</e> SPD by 20. Effect lasts 1 turn.",
+     "vn": "Khi <r>3</r> bị hạ gục, Hắc Báo gầm vang trong bi thương, tăng 60% <e>Buff51</e> sát thương gây ra và 20 <e>Buff00</e> SPD cho toàn bộ đồng minh trong 1 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Additional increases SPD by 30."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the damage boost to 80%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases the SPD boost to 40."
+      },
+      {
+       "level": 5,
+       "effect": "Increase duration by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Hiệu quả tăng SPD tăng thành 30."
+      },
+      {
+       "level": 3,
+       "effect": "Hiệu quả tăng sát thương tăng thành 80%."
+      },
+      {
+       "level": 4,
+       "effect": "Hiệu quả tăng SPD tăng thành 40."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "cn": "秘术·穷追",
+     "en": "Occult: Pursuit",
+     "jp": "秘術·窮追",
+     "vn": "Bí Thuật: Tận Truy"
+    },
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "When <r>3</r> attacks with <c>1</c>, there is a 30% chance that Panther will join the battle, dealing damage equal to 100% of <r>3</r>'s ATK.",
+     "vn": "Khi <r>3</r> tấn công bằng <c>1</c>, có 30% tỷ lệ Hắc Báo nhập trận, gây sát thương bằng 100% ATK của <r>3</r>."
+    },
+    "levels": {
+     "en": "This skill cannot be leveled up.",
+     "vn": "Kỹ năng không thể tăng cấp."
+    }
+   }
+  ],
+  "skins": [
+   {
+    "name": {
+     "en": "Default",
+     "cn": "",
+     "vn": "Mặc Định"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Lush Splendor",
+     "cn": "直垂之绵",
+     "vn": "Trực Thùy Chi Miên"
+    },
+    "artist": "HJW",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Heroic Posture",
+     "cn": "勇气凛然",
+     "vn": "Dũng Khí Lẫm Nhiên"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Bamboo Archer",
+     "cn": "竹林微风",
+     "vn": "Trúc Lâm Vi Phong"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Golden Bow",
+     "cn": "金云弓羽",
+     "vn": "Kim Vân Cung Vũ"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Shining Arrow",
+     "cn": "炳焕之矢",
+     "vn": "Bỉnh Hoán Chi Thỉ"
+    },
+    "artist": "南城十二",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Myrtle Musician",
+     "cn": "乐逐飞墨",
+     "vn": "Lạc Trục Phi Mặc"
+    },
+    "artist": "一书想早睡早起",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Dashing Archer",
+     "cn": "疾羽行云",
+     "vn": "Tật Vũ Hành Vân"
+    },
+    "artist": "懿肆琬兮",
+    "obtained": "Honor Shop"
+   },
+   {
+    "name": {
+     "en": "Ashen Sharpshooter",
+     "cn": "毫锋芦染",
+     "vn": "Hào Phong Lô Nhiễm"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Savannah Hunter",
+     "cn": "锦摹狩野",
+     "vn": "Cẩm Mô Thú Dã Phái"
+    },
+    "artist": "",
+    "obtained": "Printed Wonders Event"
+   },
+   {
+    "name": {
+     "en": "Lone Arrow",
+     "cn": "孤箭孑行",
+     "vn": "Cô Tiễn Kiệt Hành"
+    },
+    "artist": "",
+    "obtained": "Ebisu's Boutique"
+   }
+  ],
+  "totem": [
+   {
+    "name": {
+     "en": "Panther",
+     "cn": "黑豹",
+     "vn": "Hắc Báo"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Winged Tiger",
+     "cn": "虎啸风翼",
+     "vn": "Hổ Khiếu Phong Dực"
+    },
+    "artist": "",
+    "obtained": "Mystic Trader"
+   },
+   {
+    "name": {
+     "en": "Golden Furs",
+     "cn": "御风金影",
+     "vn": "Ngự Phong Kim Ảnh"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Ink-jade Cub",
+     "cn": "胆纹墨玉",
+     "vn": "Đảm Văn Mặc Ngọc"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Shadowy Pouncer",
+     "cn": "影山豹行",
+     "vn": "Ảnh Sơn Báo Hành"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Cloud Crasher",
+     "cn": "踏朱穿云",
+     "vn": "Đạp Chu Xuyên Vân"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   },
+   {
+    "name": {
+     "en": "Billowing Blossom",
+     "cn": "裘锦踏春",
+     "vn": "Cầu Cẩm Đạp Xuân"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   }
+  ]
+ },
+ {
+  "id": 4,
+  "name": {
+   "en": "Yao Bikuni",
+   "cn": [
+    "八百比丘尼",
+    "Bābǎi Bǐqiūní"
+   ],
+   "jp": [
+    "八百比丘尼",
+    "Yaobikuni"
+   ],
+   "vn": "Bát Bách Bỉ Khâu Ni",
+   "va": "Miyuki Sawashiro"
+  },
+  "stats": {
+   "HP": [
+    13847,
+    27140
+   ],
+   "ATK": [
+    3256,
+    6382
+   ],
+   "DEF": [
+    536,
+    1051
+   ],
+   "SPD": [
+    100,
+    128
+   ],
+   "Crit": [
+    0,
+    20
+   ]
+  },
+  "skills": [
+   {
+    "name": {
+     "en": "Starlight",
+     "cn": "星之光",
+     "jp": "星の光",
+     "vn": "Tinh Chi Quang"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Normal",
+    "cooldown": 0,
+    "description": {
+     "en": "<r>4</r> waves her staff and focuses the power of starlight into a missile. Deals damage equal to 100% of her ATK.",
+     "vn": "<r>4</r> vung pháp trượng, tụ hội tinh quang thành quang tiễn, gây sát thương bằng 100% ATK."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 105%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 115%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 125%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 105%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 115%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 125%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Starlight Curse",
+     "cn": "星之咒",
+     "jp": "星の呪い",
+     "vn": "Tinh Chi Chú"
+    },
+    "tags": [
+     20
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "<r>4</r> curses the enemy and harnesses the power of starlight to <b>50</b> all enemies. Has a 25% chance of disabling the soul effects and passive skills of target shikigami for 2 turns.\nSkill cooldown for 2 turns.",
+     "vn": "<r>4</r> nguyền rủa kẻ địch, mượn sức mạnh tinh quang để <b>50</b> toàn bộ kẻ địch. Có 25% tỷ lệ vô hiệu hoá hiệu ứng Ngự Hồn và nội tại của thức thần chỉ định trong 2 lượt.\nKỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Chance of <a>50</a>ing increases to 30%."
+      },
+      {
+       "level": 3,
+       "effect": "Chance of <a>50</a>ing increases to 35%."
+      },
+      {
+       "level": 4,
+       "effect": "Chance of <a>50</a>ing increases to 40%."
+      },
+      {
+       "level": 5,
+       "effect": "Chance of <a>50</a>ing increases to 45%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Tỷ lệ <a>50</a> tăng thành 30%."
+      },
+      {
+       "level": 3,
+       "effect": "Tỷ lệ <a>50</a> tăng thành 35%."
+      },
+      {
+       "level": 4,
+       "effect": "Tỷ lệ <a>50</a> tăng thành 40%."
+      },
+      {
+       "level": 5,
+       "effect": "Tỷ lệ <a>50</a> tăng thành 45%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Clairvoyance",
+     "cn": "预知",
+     "jp": "予知",
+     "vn": "Dự Tri"
+    },
+    "tags": [
+     18
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "<r>4</r> prays to the Peacock and uses her clairvoyance to increase the protective effects of all allies for 2 turns. When an ally with a protective effects deals a critical hit, there is a 30% chance of restoring its HP by 10%. Skill cooldown for 2 turns.",
+     "vn": "<r>4</r> khấn nguyện với Khổng Tước, vận dụng thiên nhãn gia tăng hiệu quả bảo hộ cho toàn bộ đồng minh trong 2 lượt. Khi 1 đồng minh mang hiệu quả bảo hộ gây chí mạng, có 30% tỷ lệ hồi phục 10% HP. Kỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Enhancement: The proportion of HP restored increases to 15%."
+      },
+      {
+       "level": 3,
+       "effect": "Enhancement: The chance of triggering increases to 35%."
+      },
+      {
+       "level": 4,
+       "effect": "Enhancement: The proportion of HP restored increases to 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Enhancement: The chance of triggering increases to 40%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hoá: Lượng HP hồi phục tăng thành 15%."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hoá: Tỷ lệ kích hoạt tăng thành 35%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hoá: Lượng HP hồi phục tăng thành 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Cường hoá: Tỷ lệ kích hoạt tăng thành 40%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Starlight Shower",
+     "cn": "星陨",
+     "jp": "流れ星",
+     "vn": "Tinh Vẫn"
+    },
+    "tags": [
+     1,
+     5
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "<r>4</r> waves her hand, commanding starlight to shoot down from the sky and strike all enemies, dealing damage equal to 112% of her ATK. Has a 40% chance of <e>Debuff20</e> decreasing the targets' max HP by 20% for 2 turns (HP decreases by max 300% of <r>4</r>'s max HP). Skill cooldown for 2 turns.",
+     "vn": "<r>4</r> vung tay, dẫn tinh quang giáng xuống từ bầu trời, tấn công toàn bộ kẻ địch, gây sát thương bằng 112% ATK. Có 40% tỷ lệ <e>Debuff20</e> giảm 20% HP tối đa của mục tiêu trong 2 lượt (lượng HP giảm tối đa bằng 300% HP tối đa của <r>4</r>). Kỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 117%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 122%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 127%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 132%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 117%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 122%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 127%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 132%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Divination Sigil",
+     "cn": "占卜之印",
+     "jp": "占いの印",
+     "vn": "Chiêm Bốc Chi Ấn"
+    },
+    "tags": [
+     4
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "<r>4</r> uses a divination sigil to protect an ally for 1 turn. After being KO'd, the protected target is revived the next time they would take an action, and has 14% of their HP healed. Cannot be stacked. Skill cooldown for 2 turns.",
+     "vn": "<r>4</r> sử dụng Ấn Chiêm Bốc để bảo vệ 1 đồng minh trong 1 lượt. Khi đồng minh này bị hạ gục, họ sẽ được hồi sinh vào lượt hành động kế tiếp và được hồi 14% HP. Không thể cộng dồn. Kỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Enhancement: Increases the proportion of HP healed to 16%."
+      },
+      {
+       "level": 3,
+       "effect": "Enhancement: Increases the proportion of HP healed to 18%."
+      },
+      {
+       "level": 4,
+       "effect": "Enhancement: Increases the proportion of HP healed to 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases <o>5</o> duration by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hoá: Lượng HP hồi tăng thành 16%."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hoá: Lượng HP hồi tăng thành 18%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hoá: Lượng HP hồi tăng thành 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực của <o>5</o> tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Divination Sigil",
+     "cn": "占卜之印",
+     "jp": "占いの印",
+     "vn": "Chiêm Bốc Chi Ấn"
+    },
+    "tags": [
+     21
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "<r>4</r> uses a divination sigil to protect the target ally for 1 turn. When the protected target takes a direct single-target attack or <b>9</b>, it reflects 50% of the damage taken (AoE doesn't trigger this effect). Cannot be stacked.",
+     "vn": "<r>4</r> sử dụng Ấn Chiêm Bốc để bảo vệ 1 đồng minh trong 1 lượt. Khi đồng minh được bảo vệ chịu sát thương trực tiếp từ đòn đánh đơn mục tiêu hoặc <b>9</b>, sẽ phản hồi 50% lượng sát thương nhận vào (không kích hoạt với sát thương diện rộng). Không thể cộng dồn."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Enhancement: The proportion of damage reflected increases to 60%."
+      },
+      {
+       "level": 3,
+       "effect": "Enhancement: The proportion of damage reflected increases to 70%."
+      },
+      {
+       "level": 4,
+       "effect": "Enhancement: The proportion of damage reflected increases to 80%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases <o>6</o> duration by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hoá: Hệ số sát thương phản hồi tăng thành 60%."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hoá: Hệ số sát thương phản hồi tăng thành 70%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hoá: Hệ số sát thương phản hồi tăng thành 80%."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực của <o>6</o> tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Divination Sigil",
+     "cn": "占卜之印",
+     "jp": "占いの印",
+     "vn": "Chiêm Bốc Chi Ấn"
+    },
+    "tags": [
+     2
+    ],
+    "type": "Special",
+    "cooldown": 2,
+    "description": {
+     "en": "<r>4</r> uses a divination sigil to protect the target for 1 turn. After 1 turn, the protected target's HP is healed by 15% of their lost HP. Cannot be stacked. Skill cooldown for 2 turns.",
+     "vn": "<r>4</r> sử dụng Ấn Chiêm Bốc để bảo vệ 1 đồng minh trong 1 lượt. Sau 1 lượt, đồng minh được bảo vệ sẽ được hồi 15% HP đã mất. Không thể cộng dồn. Kỹ năng hồi chiêu sau 2 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Enhancement: Increases the proportion of HP healed to 20%."
+      },
+      {
+       "level": 3,
+       "effect": "Enhancement: Increases the proportion of HP healed to 25%."
+      },
+      {
+       "level": 4,
+       "effect": "Enhancement: Increases the proportion of HP healed to 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases <o>7</o> duration by 1 turn."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Cường hoá: Hệ số hồi máu tăng thành 20%."
+      },
+      {
+       "level": 3,
+       "effect": "Cường hoá: Hệ số hồi máu tăng thành 25%."
+      },
+      {
+       "level": 4,
+       "effect": "Cường hoá: Hệ số hồi máu tăng thành 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực của <o>7</o> tăng thêm 1 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Purification",
+     "cn": "净化",
+     "jp": "浄化",
+     "vn": "Tịnh Hóa"
+    },
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "When <r>4</r> moves, Peacock purifies a random ally by dispelling all debuffs from it.",
+     "vn": "Khi <r>4</r> hành động, Khổng Tước sẽ thanh tẩy 1 đồng minh ngẫu nhiên, xua tan tất cả hiệu ứng bất lợi trên người họ."
+    },
+    "levels": {
+     "en": "This skill cannot be leveled up.",
+     "vn": "Kỹ năng không thể tăng cấp."
+    }
+   }
+  ],
+  "skins": [
+   {
+    "name": {
+     "en": "Default",
+     "cn": "",
+     "vn": "Mặc Định"
+    },
+    "artist": "小雅粑粑",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Autumn Blaze",
+     "cn": "炎之赤",
+     "vn": "Viêm Chi Xích"
+    },
+    "artist": "HJW",
+    "obtained": "Ebisu's Boutique"
+   },
+   {
+    "name": {
+     "en": "Azure Maiden",
+     "cn": "羽之苍",
+     "vn": "Vũ Chi Thương"
+    },
+    "artist": "小雅粑粑",
+    "obtained": "Uber Boss Event"
+   },
+   {
+    "name": {
+     "en": "Autumn Return",
+     "cn": "雁归秋水",
+     "vn": "Nhạn Quy Thu Thủy"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Summer Breeze",
+     "cn": "盛夏之风车",
+     "vn": "Chân Hạ Chi Phong Xa"
+    },
+    "artist": "",
+    "obtained": "Skin Token Exchange"
+   },
+   {
+    "name": {
+     "en": "Golden Phoenix",
+     "cn": "金凰华叶",
+     "vn": "Kim Hoàng Hoa Diệp"
+    },
+    "artist": "Nine-八雲玖",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Nightsky Seer",
+     "cn": "士魂卜夜",
+     "vn": "Sĩ Hồn Bốc Dạ"
+    },
+    "artist": "Nine-八雲玖",
+    "obtained": "Honor Shop"
+   },
+   {
+    "name": {
+     "en": "Heart of the Sea",
+     "cn": "渔海之心",
+     "vn": "Ngư Hải Chi Tâm"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   },
+   {
+    "name": {
+     "en": "Myrtle Augury",
+     "cn": "墨染雅时",
+     "vn": "Mặc Nhiễm Nhã Thì"
+    },
+    "artist": "",
+    "obtained": "Event"
+   },
+   {
+    "name": {
+     "en": "Incandescent Feathers",
+     "cn": "丹笔翎华",
+     "vn": "Đan Bút Linh Hoa"
+    },
+    "artist": "",
+    "obtained": "Printed Wonders Event"
+   },
+   {
+    "name": {
+     "en": "Jadepeaks Vermeil",
+     "cn": "绛玉峦朱",
+     "vn": "Giáng Ngọc Loan Chu"
+    },
+    "artist": "",
+    "obtained": "Skin Shop: Limited (S-Jade)"
+   },
+   {
+    "name": {
+     "en": "Cloudpeaks Viridis · Vault",
+     "cn": "云岫丹阙·秘藏",
+     "vn": "Vân Tụ Đan Khuyết: Bí Tàng"
+    },
+    "artist": "",
+    "obtained": "Ebisu's Boutique"
+   },
+   {
+    "name": {
+     "en": "",
+     "cn": "露盏清荷",
+     "vn": "Lộ Trản Thanh Hà"
+    },
+    "artist": "",
+    "obtained": "Achievement"
+   }
+  ],
+  "totem": [
+   {
+    "name": {
+     "en": "Peacock",
+     "cn": "孔雀",
+     "vn": "Khổng Tước"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Hellfire Wings",
+     "cn": "冥火幽羽",
+     "vn": "Minh Hỏa U Vũ"
+    },
+    "artist": "",
+    "obtained": "Mystic Trader"
+   },
+   {
+    "name": {
+     "en": "Golden Feathers",
+     "cn": "凤鸣金羽",
+     "vn": "Phượng Minh Kim Vũ"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Crystal Peachick",
+     "cn": "琉璃翠羽",
+     "vn": "Lưu Ly Thúy Vũ"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Bell Nipper",
+     "cn": "青羽衔铃",
+     "vn": "Thanh Vũ Hàm Linh"
+    },
+    "artist": "",
+    "obtained": "Boutique Exchange"
+   },
+   {
+    "name": {
+     "en": "Flamboyant Firebird",
+     "cn": "翎舞衔芳",
+     "vn": "Linh Vũ Hàm Phương"
+    },
+    "artist": "",
+    "obtained": "Cosmetic Shop"
+   },
+   {
+    "name": {
+     "en": "Ardent Darktail",
+     "cn": "丹羽玄青",
+     "vn": "Đan Vũ Huyền Thanh"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   }
+  ]
+ },
+ {
+  "id": 5,
+  "name": {
+   "en": "Minamoto no Yorimitsu",
+   "cn": [
+    "源赖光",
+    "Yuán Làiguāng"
+   ],
+   "jp": [
+    "源頼光",
+    "Minamoto no Yorimitsu"
+   ],
+   "vn": "Nguyên Lại Quang",
+   "va": "Toshiyuki Morikawa"
+  },
+  "stats": {
+   "HP": [
+    13847,
+    20826
+   ],
+   "ATK": [
+    3256,
+    6382
+   ],
+   "DEF": [
+    536,
+    1051
+   ],
+   "SPD": [
+    100,
+    128
+   ],
+   "Crit": [
+    0,
+    20
+   ]
+  },
+  "skills": [
+   {
+    "name": {
+     "en": "Heavenly Blade",
+     "cn": "天剑",
+     "jp": "天剣",
+     "vn": "Thiên Kiếm"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Normal",
+    "cooldown": 0,
+    "description": {
+     "en": "Becomes one with his blade. Nimbly slashes 1 enemy with his blade, dealing damage equal to 100% of his ATK.",
+     "vn": "Hòa làm một với lưỡi kiếm, linh hoạt vung đao chém 1 kẻ địch, gây sát thương bằng 100% ATK."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 105%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 115%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 125%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 105%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 115%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 125%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Heavenly Purge",
+     "cn": "天诛·八华斩",
+     "jp": "天誅・八華斬",
+     "vn": "Thiên Tru: Bát Hoa Trảm"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "To end evil with evil, to end killing with killing. Launches a 3-strike attack on 1 enemy, dealing damage equal to 68% of his ATK. Then releases 5 waves of energy, each dealing damage equal to 120% of his ATK to 1 random enemy, prioritizing on those who haven't been damaged. Damage dealt is reduced by 50% for each subsequent strike on the same enemy.",
+     "vn": "Dùng ác trừ ác, dùng sát để kết sát. Tung 3 đòn tấn công vào 1 kẻ địch, gây sát thương bằng 68% ATK. Sau đó phóng ra 5 luồng năng lượng, mỗi luồng gây sát thương bằng 120% ATK lên 1 kẻ địch ngẫu nhiên, ưu tiên những mục tiêu chưa trúng đòn. Sát thương gây ra giảm 50% với mỗi đòn kế tiếp lặp lại cùng mục tiêu."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage dealt to the first enemy to 72%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the damage dealt to the random enemy to 126%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage dealt to the first enemy to 76%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases the damage dealt to the first enemy to 132%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương gây ra lên mục tiêu đầu tiên tăng thành 72%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương gây ra lên kẻ địch ngẫu nhiên tăng thành 126%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương gây ra lên mục tiêu đầu tiên tăng thành 76%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương gây ra lên kẻ địch ngẫu nhiên tăng thành 132%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Armor the World",
+     "cn": "天下布武",
+     "jp": "天下布武",
+     "vn": "Thiên Hạ Phổ Vũ"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "The three blades sound like the drums of war. Releases 3 waves of energy to attack 1 enemy, dealing damage equal to 100% of his ATK for each wave, and following up with 1 additional strike, inflicting <b>59</b> equal to 21% of HP the enemy has lost (max 350% of <r>5</r>'s starting ATK).",
+     "vn": "Ba lưỡi kiếm vang như tiếng trống trận. Phóng 3 luồng năng lượng tấn công 1 kẻ địch, mỗi luồng gây sát thương bằng 100% ATK, sau đó tung thêm 1 đòn, gây <b>59</b> bằng 21% HP đã mất của kẻ địch (không vượt quá 350% ATK ban đầu của <r>5</r>)."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage dealt to the enemy to 106%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the follow-up damage to 25% of HP the enemy has lost."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage dealt to the enemy to 112%."
+      },
+      {
+       "level": 5,
+       "effect": "When an enemy takes damage, if their HP is below 30%, automatically uses the skill on them (up to once before his next turn, ineffective against monsters)"
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương gây ra lên kẻ địch tăng thành 106%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương đòn đánh thêm tăng thành 25% HP đã mất của kẻ địch."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương gây ra lên kẻ địch tăng thành 112%."
+      },
+      {
+       "level": 5,
+       "effect": "Khi kẻ địch nhận sát thương, nếu dưới 30% HP, tự động dùng kỹ năng lên chúng (tối đa 1 lần trước lượt kế tiếp, vô hiệu với quái)."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Weaponized Demon",
+     "cn": "鬼神之策",
+     "jp": "鬼神の策",
+     "vn": "Quỷ Khí Chi Giáp"
+    },
+    "tags": [
+     5,
+     1
+    ],
+    "type": "Special",
+    "cooldown": 1,
+    "description": {
+     "en": "Ghost Armory, heed my command. Commands Ghost Armory to release a wave of energy, reducing the enemy's <e>Debuff34</e> DEF by 150 for 1 turn and inflicting 1 <b>66</b> stack on all enemies.",
+     "vn": "Quỷ Binh Bộ, nghe theo lệnh ta. Ra lệnh cho Quỷ Binh Bộ phóng một luồng năng lượng, giảm 150 <e>Debuff34</e> DEF của kẻ địch trong 1 lượt và gắn 1 tầng <b>66</b> cho toàn bộ kẻ địch."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Inflicts 2 <a>66</a> stacks on all enemies."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the DEF reduction duration to 2 turns."
+      },
+      {
+       "level": 4,
+       "effect": "Increases <a>66</a>'s damage multiplier to 90% of his ATK."
+      },
+      {
+       "level": 5,
+       "effect": "Reduces the enemy's DEF by 175."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Gắn 2 tầng <a>66</a> cho toàn bộ kẻ địch."
+      },
+      {
+       "level": 3,
+       "effect": "Thời gian hiệu lực giảm DEF tăng thành 2 lượt."
+      },
+      {
+       "level": 4,
+       "effect": "Hệ số sát thương của <a>66</a> tăng thành 90% ATK."
+      },
+      {
+       "level": 5,
+       "effect": "Hiệu quả giảm DEF của kẻ địch tăng thành 175."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Blood Pact",
+     "cn": "血之契",
+     "jp": "血之契",
+     "vn": "Huyết Chi Khế"
+    },
+    "tags": [
+     22,
+     3
+    ],
+    "type": "Special",
+    "cooldown": 3,
+    "description": {
+     "en": "<e>Unique61</e> Commands Ghost Armory to also attach to another ally, increasing his own <e>Buff54</e> Crit by 22%.",
+     "vn": "<e>Unique61</e> Ra lệnh cho Quỷ Binh Bộ liên kết thêm với một đồng minh khác, tăng 22% <e>Buff54</e> Crit của bản thân."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases the Crit boost to 26%."
+      },
+      {
+       "level": 3,
+       "effect": "Using the skill increases Ghost Armory's damage absorbed to 40% of his starting ATK."
+      },
+      {
+       "level": 4,
+       "effect": "Increases the Crit boost to 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Using the skill increases Ghost Armory's damage absorbed to 50% of his starting ATK."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Hiệu quả tăng Crit tăng thành 26%."
+      },
+      {
+       "level": 3,
+       "effect": "Khi dùng kỹ năng, hệ số hấp thụ sát thương của Quỷ Binh Bộ tăng thành 40% ATK ban đầu."
+      },
+      {
+       "level": 4,
+       "effect": "Hiệu quả tăng Crit tăng thành 30%."
+      },
+      {
+       "level": 5,
+       "effect": "Khi dùng kỹ năng, hệ số hấp thụ sát thương của Quỷ Binh Bộ tăng thành 50% ATK ban đầu."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Ghost Garb",
+     "cn": "鬼冑",
+     "jp": "鬼冑",
+     "vn": "Quỷ Giáp"
+    },
+    "tags": [
+     22
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "Attaches a Ghost Armory to <r>5</r>. Whenever he's attacked, absorbed damage equal to 30% of <r>5</r>'s starting ATK (up to 600% of his starting ATK, the limit refreshes at the start of <r>5</r>'s turn.",
+     "vn": "Liên kết Quỷ Binh Bộ với <r>5</r>. Khi bị tấn công, hấp thụ sát thương bằng 30% ATK ban đầu của <r>5</r> (không vượt quá 600% ATK ban đầu, giới hạn được đặt lại vào khi <r>5</r> bắt đầu lượt)."
+    },
+    "levels": {
+     "en": "This skill cannot be leveled up.",
+     "vn": "Kỹ năng không thể tăng cấp."
+    }
+   },
+   {
+    "name": {
+     "en": "Blade Bastion",
+     "cn": "剑之垒",
+     "jp": "剣之累",
+     "vn": "Kiếm Chi Lũy"
+    },
+    "tags": [
+     23,
+     1
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "With this weaponized armor as the cage, I shall end all evil thoughts. When the unit attached by Ghost Armory takes no damage from an attack, Ghost Armory slashes the source of the attack (up to 5 times before his next turn), dealing damage equal to 130% of his ATK. Each slash increases the damage multiplier by 10%. The boost evolves up to 2 times and lasts 1 turn.",
+     "vn": "Lấy giáp vũ trang này làm lồng giam, ta sẽ chấm dứt mọi tà niệm. Khi đơn vị được Quỷ Binh Bộ liên kết không nhận sát thương từ đòn tấn công, Quỷ Binh Bộ sẽ chém vào nguồn gây sát thương (tối đa 5 lần trước lượt kế tiếp), gây sát thương bằng 130% ATK. Mỗi nhát chém tăng thêm 10% hệ số sát thương. Hiệu ứng tăng này có thể cường hóa tối đa 2 lần và kéo dài 1 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Each slash increases the next slash's damage multiplier by 20%."
+      },
+      {
+       "level": 3,
+       "effect": "The third slash evolves the strike to attack all enemies."
+      },
+      {
+       "level": 4,
+       "effect": "Increases the slash's evolution duration to 2 turns."
+      },
+      {
+       "level": 5,
+       "effect": "Increases his slash's initial damage to 150%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Mỗi nhát chém tăng thêm 20% hệ số sát thương cho nhát chém kế tiếp."
+      },
+      {
+       "level": 3,
+       "effect": "Nhát chém thứ ba được cường hóa thành tấn công toàn bộ kẻ địch."
+      },
+      {
+       "level": 4,
+       "effect": "Thời gian duy trì trạng thái cường hoá của nhát chém tăng thành 2 lượt."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương cơ bản của nhát chém tăng thành 150% ATK."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Fearless",
+     "cn": "无畏",
+     "jp": "無畏",
+     "vn": "Vô Úy"
+    },
+    "tags": [
+     3
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "When an enemy is inflicted with a debuff, grants him 1 <b>67</b> stack, lasting 3 turns. When an enemy is KO'd, raises his Move Bar by 30%.",
+     "vn": "Khi 1 kẻ địch bị ảnh hưởng bởi hiệu ứng bất lợi, nhận 1 tầng <b>67</b> trong 3 lượt. Tăng 30% thanh Hành Động khi 1 kẻ địch bị hạ gục."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Each stack increases his Crit by 1%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases <a>67</a>'s max stacks to 18."
+      },
+      {
+       "level": 4,
+       "effect": "Each stack increases his SPD by 2%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases <a>67</a>'s max stacks to 24."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Mỗi tầng tăng 1% Crit."
+      },
+      {
+       "level": 3,
+       "effect": "Số tầng <a>67</a> tối đa tăng thành 18."
+      },
+      {
+       "level": 4,
+       "effect": "Mỗi tầng tăng 2% SPD."
+      },
+      {
+       "level": 5,
+       "effect": "Số tầng <a>67</a> tối đa tăng thành 24."
+      }
+     ]
+    }
+   }
+  ],
+  "skins": [
+   {
+    "name": {
+     "en": "Default",
+     "cn": "",
+     "vn": "Mặc Định"
+    },
+    "artist": "大白",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Lush Aristocrat",
+     "cn": "锦耀华赏",
+     "vn": "Cẩm Diệu Hoa Thưởng"
+    },
+    "artist": "",
+    "obtained": "Aristocratic Garment Event"
+   },
+   {
+    "name": {
+     "en": "Pine Armament",
+     "cn": "苍松兵藏",
+     "vn": "Thương Tùng Binh Tàng"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   },
+   {
+    "name": {
+     "en": "Soaring Crane: Vault",
+     "cn": "鹤唳九霄",
+     "vn": "Hạc Lệ Cửu Tiêu"
+    },
+    "artist": "",
+    "obtained": "Fortune Vault Event"
+   },
+   {
+    "name": {
+     "en": "Starwolf Bladechase",
+     "cn": "奎狼逐刃",
+     "vn": "Khuê Lang Truy Nhận"
+    },
+    "artist": "",
+    "obtained": "Event"
+   }
+  ],
+  "totem": [
+   {
+    "name": {
+     "en": "Ghost Armoury",
+     "cn": "鬼兵部",
+     "vn": "Quỷ Binh Bộ"
+    },
+    "artist": "",
+    "obtained": "Special Event"
+   },
+   {
+    "name": {
+     "en": "Spotless Sentinel",
+     "cn": "清光玉胄",
+     "vn": "Thanh Quang Ngọc Trủ"
+    },
+    "artist": "",
+    "obtained": "Fortune Shop"
+   }
+  ]
+ },
+ {
+  "id": 6,
+  "name": {
+   "en": "Fujiwara no Michinaga",
+   "cn": [
+    "源赖光",
+    "Téngyuán Dàocháng"
+   ],
+   "jp": [
+    "藤原道長",
+    "Fujiwara no Michinaga"
+   ],
+   "vn": "Đằng Nguyên Đạo Trường",
+   "va": "Shinichiro Miki"
+  },
+  "stats": {
+   "HP": [
+    13847,
+    20826
+   ],
+   "ATK": [
+    3256,
+    6382
+   ],
+   "DEF": [
+    536,
+    806
+   ],
+   "SPD": [
+    100,
+    142
+   ],
+   "Crit": [
+    0,
+    20
+   ]
+  },
+  "skills": [
+   {
+    "name": {
+     "en": "Admonition Notes",
+     "cn": "训诚之音",
+     "jp": "训诫之音",
+     "vn": "Huấn Giới Chi Âm"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Normal",
+    "cooldown": 0,
+    "description": {
+     "en": "No discourtesy allowed!\nMusical notes transform into white melo-birds that fly toward an enemy target, dealing damage equal to 100% of ATK.",
+     "vn": "Cấm vô lễ!\nNhững nốt nhạc hoá thành luật điểu lao về phía 1 kẻ địch, gây sát thương bằng 100% ATK."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases damage to 105%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases damage to 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases damage to 115%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases damage to 125%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương tăng thành 105%."
+      },
+      {
+       "level": 3,
+       "effect": "Sát thương tăng thành 110%."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương tăng thành 115%."
+      },
+      {
+       "level": 5,
+       "effect": "Sát thương tăng thành 125%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Frontbreach Prelude",
+     "cn": "破阵奏曲",
+     "jp": "破阵奏曲",
+     "vn": "Phá Trận Tấu Khúc"
+    },
+    "tags": [
+     1
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Channel spiritual energy into the strings-manifesting sonic blades.\nAttacks an enemy target 2 times, each dealing damage equal to 80% of ATK and lowering the target's Move Bar by 5%; then launches a Charged Attack against the target, dealing damage equal to 160% of ATK and lowering their Move Bar by 10%.",
+     "vn": "Dồn linh lực vào dây đàn, hoá thành lưỡi âm thanh.\nTấn công 1 kẻ địch 2 lần, mỗi lần gây sát thương bằng 80% ATK và đẩy lùi 5% thanh Hành Động của mục tiêu; sau đó tung ra đòn Súc Lực tấn công mục tiêu, gây sát thương bằng 160% ATK và đẩy lùi thêm 10% thanh Hành Động của mục tiêu. "
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases Charged Attack damage to 200%."
+      },
+      {
+       "level": 3,
+       "effect": "Gains 1 stack of <b>301</b> when cast."
+      },
+      {
+       "level": 4,
+       "effect": "Increases Charged Attack damage to 240%."
+      },
+      {
+       "level": 5,
+       "effect": "Charged Attack lowers the target's Move Bar by 20%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Sát thương đòn Súc Lực tăng thành 200%."
+      },
+      {
+       "level": 3,
+       "effect": "Nhận 1 tầng <b>301</b> khi dùng kỹ năng."
+      },
+      {
+       "level": 4,
+       "effect": "Sát thương đòn Súc Lực tăng thành 240%."
+      },
+      {
+       "level": 5,
+       "effect": "Súc Lực đẩy lùi 20% thanh Hành Động của mục tiêu."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Sonic Featherstring",
+     "cn": "神鸟惊弦",
+     "jp": "神鸟惊弦",
+     "vn": "Thần Điểu Kinh Huyền"
+    },
+    "tags": [
+     11,
+     7
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "<b>302</b>. Yatagarasu displays its divine might, consuming 3 stacks of <b>301</b>, lowering the selected enemy target's Move Bar by 50% and inflicting <b>303</b> for 1 turn.",
+     "vn": "<b>302</b>. Bát Chỉ Ô phô bày thần uy, tiêu hao 3 tầng <b>301</b>, đẩy lùi 50% thanh Hành Động của kẻ địch chỉ định và khiến chúng bị <b>303</b> trong 1 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Additionally reduces the target's starting ATK by 25% for 2 turns."
+      },
+      {
+       "level": 3,
+       "effect": "Additionally reduces the target's starting DEF by 25% for 2 turns."
+      },
+      {
+       "level": 4,
+       "effect": "Reduces the starting ATK by 50%."
+      },
+      {
+       "level": 5,
+       "effect": "Reduces the starting DEF by 50%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Đồng thời giảm 25% ATK ban đầu của mục tiêu trong 2 lượt."
+      },
+      {
+       "level": 3,
+       "effect": "Đồng thời giảm 25% DEF ban đầu của mục tiêu trong 2 lượt."
+      },
+      {
+       "level": 4,
+       "effect": "Giảm 50% ATK ban đầu."
+      },
+      {
+       "level": 5,
+       "effect": "Giảm 50% DEF ban đầu."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Elegant Chant",
+     "cn": "咏叹巧韵",
+     "jp": "咏叹巧韵",
+     "vn": "Vịnh Thán Xảo Vận"
+    },
+    "tags": [
+     3
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "Be at ease; enjoy the music and savor the tea.\nEnters a focused <b>304</b>, increasing all allies' ATK by 10% for 3 turns.",
+     "vn": "An tâm thưởng nhạc, nhấp chén trà thanh.\nBước vào <b>304</b>, tăng 10% ATK cho toàn bộ đồng minh trong 3 lượt."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases duration to 4 turns."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the ATK boost to 20%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases duration to 5 turns."
+      },
+      {
+       "level": 5,
+       "effect": "Increases the ATK boost to 30%."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Thời gian hiệu lực tăng thành 4 lượt."
+      },
+      {
+       "level": 3,
+       "effect": "Hiệu quả tăng ATK tăng thành 20%."
+      },
+      {
+       "level": 4,
+       "effect": "Thời gian hiệu lực tăng thành 5 lượt."
+      },
+      {
+       "level": 5,
+       "effect": "Hiệu quả tăng ATK tăng thành 30%."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Moontune Resonance",
+     "cn": "琴月齐鸣",
+     "jp": "琴月齐鸣",
+     "vn": "Cầm Nguyệt Tề Minh"
+    },
+    "tags": [
+     3,
+     16
+    ],
+    "type": "Special",
+    "cooldown": 0,
+    "description": {
+     "en": "<b>302</b>. Birds pay homage to the moon of incredible radiance.\nConsumes all <b>301</b>, increasing all allies' ATK by 10% per stack consumed (up to 10 stacks) for 1 turn. When 6 or more stacks of <a>301</a> are consumed, <b>22</b>s <b>18</b> from all allies.",
+     "vn": "<b>302</b>. Bách điểu triều bái vầng trăng rực rỡ. Tiêu hao tất cả các tầng <b>301</b>, mỗi tầng bị tiêu hao tăng 10% ATK cho toàn bộ đồng minh (tối đa 10 tầng) trong 1 lượt. Khi tiêu hao từ 6 tầng <a>301</a> trở lên, <b>22</b> <b>18</b> cho toàn bộ đồng minh."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases the ATK boost to 13%."
+      },
+      {
+       "level": 3,
+       "effect": "Increases the ATK boost to 16%."
+      },
+      {
+       "level": 4,
+       "effect": "Increases the ATK boost to 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases duration to 2 turns."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Hiệu quả tăng ATK tăng thành 13%."
+      },
+      {
+       "level": 3,
+       "effect": "Hiệu quả tăng ATK tăng thành 16%."
+      },
+      {
+       "level": 4,
+       "effect": "Hiệu quả tăng ATK tăng thành 20%."
+      },
+      {
+       "level": 5,
+       "effect": "Thời gian hiệu lực tăng thành 2 lượt."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Rhythm Mastery",
+     "cn": "诸律精通",
+     "jp": "诸律精通",
+     "vn": "Chử Luật Tinh Thông"
+    },
+    "tags": [
+     3
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "Spells dance to the rhythm around him.\nImmune to Move Bar lowering effects. At the start of his own turn, gains 1 stack of <b>301</b>. For each stack of <a>301</a> gained, permanently increases his own SPD by 5 and all allies' Crit DMG by 5%, with stacking limit equal to <a>301</a>'s max stacks.",
+     "vn": "Chú thuật uyển chuyển theo nhịp quanh thân hắn.\nMiễn nhhiễm với hiệu ứng đẩy lùi thanh Hành Động. Khi bắt đầu lượt, nhận 1 tầng <b>301</b>. Với mỗi tầng <a>301</a> nhận được, vĩnh viễn tăng 5 SPD cho bản thân và 5% Crit DMG cho toàn bộ đồng minh, giới hạn cộng dồn bằng số tầng tối đa của <a>301</a>."
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Increases the SPD by 8."
+      },
+      {
+       "level": 3,
+       "effect": "Before his turn starts, when inflicted by Move Bar lowering effects, gains 1/2/3 stacks of <a>301</a> in sequence (up to 3 times)."
+      },
+      {
+       "level": 4,
+       "effect": "Increases the Crit DMG by 8%."
+      },
+      {
+       "level": 5,
+       "effect": "Increases the <a>301</a> max stacks to 10."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Hiệu quả tăng SPD tăng thành 8."
+      },
+      {
+       "level": 3,
+       "effect": "Trước khi bắt đầu lượt, mỗi khi bị đẩy lùi thanh Hành Động, lần lượt nhận 1/2/3 tầng <a>301</a> (tối đa 3 lần)."
+      },
+      {
+       "level": 4,
+       "effect": "Hiệu quả tăng Crit DMG tăng thành 8%."
+      },
+      {
+       "level": 5,
+       "effect": "Số tầng <a>301</a> tối đa tăng thành 10."
+      }
+     ]
+    }
+   },
+   {
+    "name": {
+     "en": "Harmonious Tuning",
+     "cn": "调律润心",
+     "jp": "调律润心",
+     "vn": "Điều Luật Nhuận Tâm"
+    },
+    "tags": [
+     9
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "The pleasant melody has a soothing effect. \nFor each stack of Melodic Note consumed, raises the Move Bar of his own and the allied shikigami at the top of the turn order by 5%; when an enemy shikigami casts a skill, raises his own Move Bar by 10%.",
+     "vn": "Giai điệu êm dịu mang theo năng lực xoa dịu.\nVới mỗi tầng <b>301</b> bị tiêu hao, tăng 5% thanh Hành Động cho bản thân và đông minh đứng đầu thanh lượt. Khi thức thần kẻ địch dùng kỹ năng, tăng 10% thanh Hành Động cho bản thân."
+    },
+    "levels": {
+     "en": "This skill cannot be leveled up.",
+     "vn": "Kỹ năng không thể tăng cấp."
+    }
+   },
+   {
+    "name": {
+     "en": "Dream Echoes",
+     "cn": "余音入梦",
+     "jp": "余音入梦",
+     "vn": "Dư Âm Nhập Mộng"
+    },
+    "tags": [
+     12
+    ],
+    "type": "Passive",
+    "cooldown": 0,
+    "description": {
+     "en": "Time to fulfill the promise in the dream.\nUpon receiving lethal damage, removes all debuffs and transforms into Dream Consciousness remaining on the field for a number of turns equal to the current number of surviving allied shikigami.",
+     "vn": "Đã đến lúc thực hiện lời hứa trong mộng.\nKhi nhận sát thương kết liễu, loại bỏ tất cả hiệu ứng bất lợi và hoá thành Ý Thức Mộng Cảnh tồn tại trên sân với số lượt bằng số thức thần đồng minh còn sống. "
+    },
+    "levels": {
+     "en": [
+      {
+       "level": 2,
+       "effect": "Gains 1 stack of <b>301</b> when triggered."
+      },
+      {
+       "level": 3,
+       "effect": "Gains 2 stacks of <a>301</a> when triggered."
+      },
+      {
+       "level": 4,
+       "effect": "Gains 3 stacks of <a>301</a> when triggered."
+      },
+      {
+       "level": 5,
+       "effect": "Gains 4 stacks of <a>301</a> when triggered."
+      }
+     ],
+     "vn": [
+      {
+       "level": 2,
+       "effect": "Nhận 1 tầng <b>301</b> khi kích hoạt."
+      },
+      {
+       "level": 3,
+       "effect": "Nhận 2 tầng <a>301</a> khi kích hoạt."
+      },
+      {
+       "level": 4,
+       "effect": "Nhận 3 tầng <a>301</a> khi kích hoạt."
+      },
+      {
+       "level": 5,
+       "effect": "Nhận 4 tầng <a>301</a> khi kích hoạt."
+      }
+     ]
+    }
+   }
+  ],
+  "skins": [
+   {
+    "name": {
+     "en": "Default",
+     "cn": "",
+     "vn": "Mặc Định"
+    },
+    "artist": "大白",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Haloyon Orchidtune",
+     "cn": "闲问兰音",
+     "vn": "Nhàn Vấn Lan Âm"
+    },
+    "artist": "",
+    "obtained": "Event"
+   }
+  ],
+  "totem": [
+   {
+    "name": {
+     "en": "Yatagarasu",
+     "cn": "八咫乌",
+     "vn": "Bát Xích Ô"
+    },
+    "artist": "",
+    "obtained": ""
+   },
+   {
+    "name": {
+     "en": "Viridjade Envoy",
+     "cn": "苍玉之使",
+     "vn": "Thương Ngọc Chi Sứ"
+    },
+    "artist": "",
+    "obtained": "Event"
+   }
+  ]
+ }
+]

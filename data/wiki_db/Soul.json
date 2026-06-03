@@ -1,0 +1,1844 @@
+[
+ {
+  "id": 1,
+  "name": {
+   "en": "Snow Spirit",
+   "cn": [
+    "雪幽魂",
+    "Xuě Yōuhún"
+   ],
+   "jp": [
+    "雪幽魂",
+    "Setsu Yuukon"
+   ],
+   "vn": "Tuyết U Hồn"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 15% (30% if the target has <b>3</b>) <b>2</b> of inflicting <b>5</b> lasting 1 turn on them when dealing damage. When attacked, reduces attacker's <e>Debuff36</e> SPD by 30 for 1 turn.",
+    "vn": "Khi gây sát thương, có 15% (tăng thành 30% nếu mục tiêu đang bị <b>3</b>) <b>2</b> khiến mục tiêu chịu hiệu ứng <b>5</b> trong 1 lượt. Khi bị tấn công, giảm 30 <e>Debuff36</e> SPD của kẻ tấn công trong 1 lượt."
+   }
+  },
+  "obtainable": [
+   "Chapter 7",
+   "Soul Zones: Monday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 2,
+  "name": {
+   "en": "Jizo Statue",
+   "cn": [
+    "地藏像",
+    "Dìzàng Xiàng"
+   ],
+   "jp": [
+    "地蔵の像",
+    "Jizou no Zou"
+   ],
+   "vn": "Địa Tạng Tượng"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 100% chance of creating a <e>Buff52</e> shield (absorbing damage equal to 10% of max HP) lasting 1 turn when taking Crit (-60% if it's from a <b>187</b>ed target). Has a 30% chance of shielding allies.",
+    "vn": "Có 100% tỷ lệ tạo <e>Buff52</e> lá chắn (hấp thụ sát thương bằng 10% HP tối đa) trong 1 lượt khi nhận sát thương chí mạng (tỷ lệ giảm 60% nếu mục tiêu bị <b>187</b>). Có 30% tỷ lệ tạo lá chắn bảo vệ đồng minh."
+   }
+  },
+  "obtainable": [
+   "Chapter 26",
+   "Soul Zones: Monday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 3,
+  "name": {
+   "en": "Nightwing",
+   "cn": [
+    "蝠翼",
+    "Fú Yì"
+   ],
+   "jp": [
+    "蝙蝠の翼",
+    "Koumori no Tsubasa"
+   ],
+   "vn": "Bức Dực"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Grants 20% <b>20</b> when dealing damage.",
+    "vn": "Kèm theo 20% <b>20</b> khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Chapter 4",
+   "Soul Zones: Thursday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 4,
+  "name": {
+   "en": "Holy Flame",
+   "cn": [
+    "涅槃之火",
+    "Nièpán Zhī Huǒ"
+   ],
+   "jp": [
+    "再生の火",
+    "Saisei no Hi"
+   ],
+   "vn": "Niết Bàn Chi Hoả"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "Healed for 15% of max HP at the end of an action, if HP is less than 30%.",
+    "vn": "Nếu HP dưới 30%, hồi máu bằng 15% HP tối đa khi kết thúc hành động."
+   }
+  },
+  "obtainable": [
+   "Chapter 8",
+   "Soul Zones: Tueday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 5,
+  "name": {
+   "en": "Samisen",
+   "cn": [
+    "三味",
+    "Sānwèi"
+   ],
+   "jp": [
+    "三味",
+    "Shami"
+   ],
+   "vn": "Tam Vị"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "When an ally is under a <b>18</b> or is <b>19</b>ed, increases their <e>Buff00</e> SPD by 30 for 2 turns. Cannot be dispelled. Stacks up to 2 times.",
+    "vn": "Khi 1 đồng minh dính <b>18</b> hoặc bị <b>19</b>, tăng 30 <e>Buff00</e> SPD cho họ trong 2 lượt. Không thể bị xua tan. Cộng dồn tối đa 2 lần."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Monday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 6,
+  "name": {
+   "en": "Mimic",
+   "cn": [
+    "魍魉之匣",
+    "Wǎngliǎng Zhī Xiá"
+   ],
+   "jp": [
+    "魍魎の匣",
+    "Mouryou no Hako"
+   ],
+   "vn": "Võng Lượng Chi Hạp"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 25% <b>2</b> of inflicting <b>62</b>, <b>13</b>, 40% <b>8</b>, or <b>49</b> at random lasting 1 turn when dealing damage.",
+    "vn": "Có 25% <b>2</b> gây ngẫu nhiên trong các hiệu ứng <b>62</b>, <b>13</b>, <b>8</b><n>40%</n> hoặc <b>49</b> trong 1 lượt khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Chapter 15",
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 7,
+  "name": {
+   "en": "Boroboroton",
+   "cn": [
+    "被服",
+    "Bèifú"
+   ],
+   "jp": [
+    "暮露暮露団",
+    "Boroboroton"
+   ],
+   "vn": "Bị Phục"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "Reduces damage taken by 30%.",
+    "vn": "Giảm 30% sát thương nhận vào."
+   }
+  },
+  "obtainable": [
+   "Chapter 1",
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 8,
+  "name": {
+   "en": "Fortune Cat",
+   "cn": [
+    "招财猫",
+    "Zhāocái Māo"
+   ],
+   "jp": [
+    "招き猫",
+    "Maneki Neko"
+   ],
+   "vn": "Chiêu Tài Miêu"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 50% chance of gaining 2 orbs at the start of a turn.",
+    "vn": "Có 50% tỷ lệ nhận 2 quỷ hoả khi bắt đầu lượt."
+   }
+  },
+  "obtainable": [
+   "Chapter 16",
+   "Soul Zones: Tueday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 9,
+  "name": {
+   "en": "Shy Soul",
+   "cn": [
+    "反枕",
+    "Fǎn Zhěn"
+   ],
+   "jp": [
+    "枕返し",
+    "Makura-gaeshi"
+   ],
+   "vn": "Phản Chẩm"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 23% <b>2</b> of inflicting <b>21</b> lasting 1 turn on the target when dealing damage.",
+    "vn": "Có 23% <b>2</b> khiến mục tiêu bị <b>21</b> trong 1 lượt khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Chapter 17",
+   "Soul Zones: Thursday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 10,
+  "name": {
+   "en": "Soultaker",
+   "cn": [
+    "轮入道",
+    "Lún Rùdào"
+   ],
+   "jp": [
+    "輪入道",
+    "Wanyuudou"
+   ],
+   "vn": "Luân Nhập Đạo"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 20% chance of gaining an extra turn (triggers at end of turn).",
+    "vn": "Có 20% tỷ lệ nhận thêm 1 lượt (kích hoạt khi kết thúc lượt)."
+   }
+  },
+  "obtainable": [
+   "Chapter 6",
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 11,
+  "name": {
+   "en": "Dawn Fairy",
+   "cn": [
+    "日女巳时",
+    "Rìnǚ Sìshí"
+   ],
+   "jp": [
+    "日女巳時",
+    "Nichijo Mi no Toki"
+   ],
+   "vn": "Nhật Nữ Tỵ Thì"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 20% chance of lowering the target's Move Bar by 30%. Increases chance of triggering by 10% to targets with buffs or marks.",
+    "vn": "Có 20% tỷ lệ đẩy lùi 30% thanh Hành Động của mục tiêu. Tăng thêm 10% tỷ lệ với mục tiêu có hiệu ứng cường hoá hoặc ấn."
+   }
+  },
+  "obtainable": [
+   "Chapter 25",
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 12,
+  "name": {
+   "en": "Mirror Lady",
+   "cn": [
+    "镜姬",
+    "Jìng Jī"
+   ],
+   "jp": [
+    "鏡姫",
+    "Kagami Hime"
+   ],
+   "vn": "Kính Cơ"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 30% chance of inflicting 100% reflected damage on the attacker when taking damage (-60% if it's from a <b>187</b> target).",
+    "vn": "Có 30% tỷ lệ phản lại 100% sát thương lên kẻ tấn công (tỷ lệ giảm 60% nếu mục tiêu bị <b>187</b>)."
+   }
+  },
+  "obtainable": [
+   "Chapter 9",
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 13,
+  "name": {
+   "en": "Priestess",
+   "cn": [
+    "钟灵",
+    "Zhōng Líng"
+   ],
+   "jp": [
+    "钟灵",
+    "Shourei"
+   ],
+   "vn": "Chung Linh"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 10% <b>2</b> of inflicting <b>62</b> lasting 1 turn on the target when dealing damage. If no enemy is inflicted with <a>62</a>, changes the <a>2</a> to 20% instead.",
+    "vn": "Có 10% <b>2</b> khiến mục tiêu bị <b>62</b> khi gây sát thương. Nếu chưa có kẻ địch nào bị <a>62</a>, <a>2</a> sẽ tăng thành 20%."
+   }
+  },
+  "obtainable": [
+   "Chapter 12",
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 14,
+  "name": {
+   "en": "Scarlet",
+   "cn": [
+    "猙",
+    "Zhēng"
+   ],
+   "jp": [
+    "狰",
+    "Sou"
+   ],
+   "vn": "Tranh"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 35% chance of launching a counter-attack on the attacker when taking enemy damage (-60% if from a <b>187</b>ed target).",
+    "vn": "Khi nhận sát thương từ kẻ địch, có 35% tỷ lệ phản kích lại kẻ tấn công (tỷ lệ giảm 60% nếu mục tiêu bị <b>187</b>)."
+   }
+  },
+  "obtainable": [
+   "Chapter 5",
+   "Soul Zones: Tuesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 15,
+  "name": {
+   "en": "Azure Basan",
+   "cn": [
+    "火灵",
+    "Huǒlíng"
+   ],
+   "jp": [
+    "火霊",
+    "Karei"
+   ],
+   "vn": "Hoả Linh"
+  },
+  "type": "HIT",
+  "effects": {
+   "piece4": {
+    "en": "Grants 3 orbs at the start of battle.",
+    "vn": "Nhận 3 quỷ hoả khi bắt đầu trận."
+   }
+  },
+  "obtainable": [
+   "Soul Zones:  Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 16,
+  "name": {
+   "en": "House Imp",
+   "cn": [
+    "鸣屋",
+    "Míng Wū"
+   ],
+   "jp": [
+    "家鳴",
+    "Yanari"
+   ],
+   "vn": "Minh Ốc"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Increases damage by 45% when attacking a target with a <b>18</b>.",
+    "vn": "Tăng 45% sát thương khi tấn công mục tiêu dính <b>18</b>."
+   }
+  },
+  "obtainable": [
+   "Chapter 13",
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 17,
+  "name": {
+   "en": "Soul Edge",
+   "cn": [
+    "薙魂",
+    "Tì Hún"
+   ],
+   "jp": [
+    "薙魂",
+    "Teikon"
+   ],
+   "vn": "Thế Hồn"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. Grants a 50% chance of protecting an ally when they're attacked, reducing the single-target damage by 20% before sharing 50% of the damage until attack is completed. Triggers only once for each attack.",
+    "vn": "<b>32</b>. Có 50% tỷ lệ bảo vệ 1 đồng minh khi họ bị tấn công, giảm 20% sát thương đơn mục tiêu nhận vào trước khi chia sẻ 50% sát thương đó cho đến khi đòn đánh kết thúc. Kích hoạt tối đa 1 lần mỗi đòn tấn công."
+   }
+  },
+  "obtainable": [
+   "Chapter 20",
+   "Soul Zones: Sougenbi",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 18,
+  "name": {
+   "en": "Watcher",
+   "cn": [
+    "心眼",
+    "Xīn Yǎn"
+   ],
+   "jp": [
+    "心眼",
+    "Shingan"
+   ],
+   "vn": "Tâm Nhãn"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Increases damage by 10% for each 15% of target's HP reduced when dealing damage.",
+    "vn": "Tăng 10% sát thương với mỗi 15% HP mất đi của mục tiêu khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Chapter 10",
+   "Soul Zones: Thursday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 19,
+  "name": {
+   "en": "Tree Nymph",
+   "cn": [
+    "木魅",
+    "Mù Mèi"
+   ],
+   "jp": [
+    "玉樹",
+    "Gyokuju"
+   ],
+   "vn": "Mộc Mị"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 25% chance of removing 1 orb from their opponent when an ally takes damage. The chance is reduced by 60% for targets under a <b>187</b> effect. Triggers only once for each attack.",
+    "vn": "Có 20% tỷ lệ trừ 1 quỷ hoả của đối phương khi đồng minh gây sát thương. Tỷ lệ giảm 60% nếu mục tiêu đang bị <b>187</b>. Chỉ kích hoạt 1 lần mỗi đòn tấn công."
+   }
+  },
+  "obtainable": [
+   "Chapter 19",
+   "Soul Zones: Sougenbi",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 20,
+  "name": {
+   "en": "Tree Spirit",
+   "cn": [
+    "树妖",
+    "Shù Yāo"
+   ],
+   "jp": [
+    "樹妖",
+    "Juyou"
+   ],
+   "vn": "Thụ Yêu"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "Increases base healing by 20% (50% instead if target's HP is below 20%) when healing.",
+    "vn": "Tăng 20% hiệu quả hồi máu cơ bản (tăng thành 50% nếu HP của mục tiêu dưới 20%) khi hồi máu."
+   }
+  },
+  "obtainable": [
+   "Chapter 18",
+   "Soul Zones: Thursday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 21,
+  "name": {
+   "en": "Claws",
+   "cn": [
+    "网切",
+    "Wǎngqiè"
+   ],
+   "jp": [
+    "網切",
+    "Amikiri"
+   ],
+   "vn": "Võng Thiết"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 50% chance of ignoring 45% of DEF when attacking.",
+    "vn": "Có 50% tỷ lệ bỏ qua 45% DEF khi tấn công."
+   }
+  },
+  "obtainable": [
+   "Chapter 14",
+   "Soul Zones: Monday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 22,
+  "name": {
+   "en": "Harpy",
+   "cn": [
+    "阴摩罗",
+    "Yīn Mó Luó"
+   ],
+   "jp": [
+    "陰摩羅鬼",
+    "Onmoraki"
+   ],
+   "vn": "Âm Ma La"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Grants 3 orbs when KO'ing a target.",
+    "vn": "Nhận 3 quỷ hoả khi hạ gục 1 mục tiêu."
+   }
+  },
+  "obtainable": [
+   "Chapter 3",
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 23,
+  "name": {
+   "en": "Fenikkusu",
+   "cn": [
+    "伤魂鸟",
+    "Shānghún Niǎo"
+   ],
+   "jp": [
+    "悲鳴鳥",
+    "Himeidori"
+   ],
+   "vn": "Thương Hồn Điểu"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "When a non-monster target is KO'd, restores HP by 20% of max HP and increases <e>Unique16</e> damage by 20% (up to 120%) until the battle ends.",
+    "vn": "Khi mục tiêu không phải quái bị hạ gục, hồi phục HP bằng 20% HP tối đa, đồng thời tăng 20% (tối đa 120%) <e>Unique16</e> sát thương cho đến khi kết thúc trận."
+   }
+  },
+  "obtainable": [
+   "Chapter 22",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 24,
+  "name": {
+   "en": "Shadow",
+   "cn": [
+    "破势",
+    "Pò Shì"
+   ],
+   "jp": [
+    "破勢",
+    "Hasei"
+   ],
+   "vn": "Phá Thế"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "Increases damage by 40% if the target has more than 70% HP when dealing damage.",
+    "vn": "Tăng 40% sát thương nếu mục tiêu trên 70% HP khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Chapter 2",
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 25,
+  "name": {
+   "en": "Tomb Guard",
+   "cn": [
+    "镇墓兽",
+    "Zhèn Mù Shòu"
+   ],
+   "jp": [
+    "墓守り",
+    "Hakamori"
+   ],
+   "vn": "Trấn Mộ Thú"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "Amplifies <e>Buff57</e> Crit DMG by 0.5% for each 1% HP reduced.",
+    "vn": "Tăng 0.5% <e>Buff57</e> Crit DMG với mỗi 1% HP mất đi."
+   }
+  },
+  "obtainable": [
+   "Chapter 27",
+   "Chapter 28",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 26,
+  "name": {
+   "en": "Pearl",
+   "cn": [
+    "珍珠",
+    "Zhēnzhū"
+   ],
+   "jp": [
+    "真珠",
+    "Shinju"
+   ],
+   "vn": "Trân Châu"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Creates a shield (cannot be dispelled) lasting 2 turns when healed, absorbing damage equal to 30% of the base amount healed.",
+    "vn": "Tạo lá chắn (không thể bị xua tan) trong 2 lượt khi hồi máu, hấp thụ sát thương bằng 30% lượng hồi máu cơ bản."
+   }
+  },
+  "obtainable": [
+   "Chapter 23",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 27,
+  "name": {
+   "en": "Dice Sprite",
+   "cn": [
+    "骰子鬼",
+    "Tóuzi Guǐ"
+   ],
+   "jp": [
+    "骰子の鬼",
+    "Saikoro no Oni"
+   ],
+   "vn": "Xúc Tử Quỷ"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "When attempting to resist, launches a counter-attack at the source, inflicting an extra 50% damage. Raises Move Bar by 25% when inflicted with a <b>18</b> while under no <a>18</a>s.",
+    "vn": "Khi cố gắng kháng hiệu ứng, sẽ phản kích nguồn gây ra, gây thêm 50% sát thương. Nếu đang không dính <b>18</b> mà lại trúng <a>18</a>, sẽ tăng 25% thanh Hành Động."
+   }
+  },
+  "obtainable": [
+   "Chapter 24",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 28,
+  "name": {
+   "en": "Sea Sprite",
+   "cn": [
+    "蚌精",
+    "Bàng Jīng"
+   ],
+   "jp": [
+    "蛤の精",
+    "Hamaguri no Sei"
+   ],
+   "vn": "Bạng Tinh"
+  },
+  "type": "HIT",
+  "effects": {
+   "piece4": {
+    "en": "Creates a <e>Buff52</e> shield (cannot be dispelled) lasting 1 turn on each of the allies, absorbing damage equal to 10% max HP.",
+    "vn": "Tạo <e>Buff52</e> lá chắn (không thể bị xua tan) cho mỗi đồng minh trong 1 lượt, hấp thụ sát thương bằng 10% HP tối đa."
+   }
+  },
+  "obtainable": [
+   "Chapter 11",
+   "Soul Zones: Monday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 29,
+  "name": {
+   "en": "Temptress",
+   "cn": [
+    "魅妖",
+    "Mèi Yāo"
+   ],
+   "jp": [
+    "魅妖",
+    "Miyou"
+   ],
+   "vn": "Mị Yêu"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 25% <b>2</b> of inflicting <b>62</b> lasting 1 turn on the target when dealing damage.",
+    "vn": "Có 25% <b>2</b> khiến mục tiêu bị <b>62</b> trong 1 lượt khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 30,
+  "name": {
+   "en": "Seductress",
+   "cn": [
+    "针女",
+    "Zhēn Nǚ"
+   ],
+   "jp": [
+    "針女",
+    "Hari-onna"
+   ],
+   "vn": "Châm Nữ"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 40% chance of inflicting damage (ignores DEF) equal to 10% of the target's max HP when landing a critical hit. Up to 120% of own ATK.",
+    "vn": "Có 40% tỷ lệ gây sát thương (bỏ qua DEF) bằng 10% HP tối đa của mục tiêu khi gây chí mạng. Tối đa bằng 120% ATK."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Thursday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 31,
+  "name": {
+   "en": "Senecio",
+   "cn": [
+    "返魂香",
+    "Fǎn Hún Xiāng"
+   ],
+   "jp": [
+    "返魂香",
+    "Hangonkou"
+   ],
+   "vn": "Phản Hồn Hương"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 25% <b>2</b> of inflicting <b>62</b> lasting 1 turn on the attacker when taking damage (-60% if it's from a <b>187</b>ed target).",
+    "vn": "Có 25% <b>2</b> khiến kẻ tấn công bị <b>62</b> trong 1 lượt khi nhận sát thương (tỷ lệ giảm 60% nếu mục tiêu bị <b>187</b>)."
+   }
+  },
+  "obtainable": [
+   "Chapter 21",
+   "Soul Zones: Sougenbi",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 32,
+  "name": {
+   "en": "Kyoukotsu",
+   "cn": [
+    "狂骨",
+    "Kuáng Gǔ"
+   ],
+   "jp": [
+    "狂骨",
+    "Kyoukotsu"
+   ],
+   "vn": "Cuồng Cốt"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Grants an extra 8% damage for each orb available to you when dealing damage.",
+    "vn": "Tăng thêm 8% sát thương với mỗi quỷ hoả hiện có khi gây sát thương."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 33,
+  "name": {
+   "en": "Yamabiko",
+   "cn": [
+    "幽谷响",
+    "Yōu Gǔ Xiǎng"
+   ],
+   "jp": [
+    "幽谷响",
+    "Yamabiko"
+   ],
+   "vn": "U Cốc Hưởng"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "Grants a 50% chance of reflecting the effect back on the source when attempting to resist a <b>18</b> with a 100% chance of landing the reflected effect.",
+    "vn": "Khi kháng thành công <b>18</b>, có 50% tỷ lệ phản lại hiệu ứng đó về nguồn gây ra với 100% tỷ lệ trúng mục tiêu."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Tuesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Kraken/Enraged Kraken",
+   "Events"
+  ]
+ },
+ {
+  "id": 34,
+  "name": {
+   "en": "Tsuchigumo",
+   "cn": [
+    "土蜘蛛",
+    "Tǔzhī Zhū"
+   ],
+   "jp": [
+    "土蜘蛛",
+    "Tsuchigumo"
+   ],
+   "vn": "Thổ Chu Tri"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "Exclusive passive effect. When dealing damage to monsters, inflicts a layer of <e>Indirect10</e> Tsuchigumo mark (stacks up to 3 layers) on them, reducing their SPD by 10% and inflicting 10% <b>9</b> for 1 turn.",
+    "vn": "Hiệu quả nội tại duy nhất. Khi gây sát thương lên quái, gắn 1 ấn <e>Indirect10</e> Thổ Chu Tri (cộng dồn tối đa 5 tầng) cho chúng, giảm 10% SPD và gây 10% <b>9</b> trong 1 lượt."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 35,
+  "name": {
+   "en": "Oboroguruma",
+   "cn": [
+    "胧车",
+    "Lóng Chē"
+   ],
+   "jp": [
+    "朧車",
+    "Oboroguruma"
+   ],
+   "vn": "Lung Xa"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "Exclusive passive effect. When taking attacks from monsters, has a 50% chance of raising the Move Bar by 30%. Triggers only once for a single attack.",
+    "vn": "Hiệu quả nội tại duy nhất. Khi bị quái tấn công, có 50% tỷ lệ tăng 30% thanh Hành Động. Kích hoạt tối đa 1 lần cho 1 đòn tấn công."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 36,
+  "name": {
+   "en": "Odokuro",
+   "cn": [
+    "荒骷髅",
+    "Huāng Kū Lóu"
+   ],
+   "jp": [
+    "餓者髑髏",
+    "Gashadokuro"
+   ],
+   "vn": "Hoang Khô Lâu"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "Exclusive passive effect. Increases damage dealt to monsters by 10% for 1 turn. If attacked by monsters, increases the <e>Buff34</e> damage boost effect to 25%.",
+    "vn": "Hiệu ứng nội tại duy nhất. Tăng 10% sát thương gây ra cho quái trong 1 lượt. Nếu bị quái tấn công, <e>Buff34</e> hiệu quả tăng sát thương tăng thành 25%."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 37,
+  "name": {
+   "en": "Jishin Namazu",
+   "cn": [
+    "地震鲶",
+    "Dìzhèn Nián"
+   ],
+   "jp": [
+    "社鯰",
+    "Yashiro Namazu"
+   ],
+   "vn": "Địa Chấn Niệm"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "<b>32</b>. At the start of a battle against monsters, grants 60% damage reduction. When taking damage, transfer 6% damage reduction to 1.5% damage boost.\nTriggers only once for a single attack.",
+    "vn": "<b>32</b>. Khi bắt đầu trận đấu với quái, giảm 60% sát thương nhận vào. Khi nhận sát thương, sẽ chuyển 6% giảm sát thương thành tăng 1.5% sát thương gây ra.\nHiệu ứng chỉ kích hoạt 1 lần cho mỗi đòn tấn công."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 38,
+  "name": {
+   "en": "Shinkiro",
+   "cn": [
+    "蜃气楼",
+    "Shèn Qì Lóu"
+   ],
+   "jp": [
+    "蜃気楼",
+    "Shinkirou"
+   ],
+   "vn": "Thận Khí Lâu"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "Exclusive passive effect. At the start of a battle against monsters, grants a <e>Buff31</e> shelter. Shelter regenerates 5 turns after being lifted.",
+    "vn": "Hiệu quả nội tại duy nhất. Khi bắt đầu trận đấu với quái, nhận <e>Buff31</e> bảo hộ. Bảo hộ sẽ tự hồi lại sau 5 lượt kể từ khi bị phá."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 39,
+  "name": {
+   "en": "Kataha no Ashi",
+   "cn": [
+    "片叶之苇",
+    "Piànyè zhī Wěi"
+   ],
+   "jp": [
+    "片叶の葦",
+    "Kataha no Ashi"
+   ],
+   "vn": "Phiến Diệp Chi Vĩ"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "When the current HP equals max HP, damage dealt increases by 45%.",
+    "vn": "Khi HP hiện tại bằng HP tối đa, tăng 45% sát thương gây ra."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 40,
+  "name": {
+   "en": "Chirizuka",
+   "cn": [
+    "尘冢",
+    "Chén Zhǒng"
+   ],
+   "jp": [
+    "塵塚",
+    "Chirizuka"
+   ],
+   "vn": "Trần Trủng"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "When in action, damage increases by 25%. For each allied non-summoned target exceeding enemy count, <e>Buff51</e> damage further increases by 4%, up to 45%.",
+    "vn": "Khi hành động, tăng 25% sát thương. Với mỗi đồng minh không phải vật triệu hồi nhiều hơn số kẻ địch, <e>Buff51</e> sát thương tăng thêm 4%, tối đa tăng 45%."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Monday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 41,
+  "name": {
+   "en": "Abura-akago",
+   "cn": [
+    "油赤子",
+    "Yóu Chì Zǐ"
+   ],
+   "jp": [
+    "油赤子",
+    "Abura Akago"
+   ],
+   "vn": "Du Xích Tử"
+  },
+  "type": "HIT",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. Gain 2 stacks of Spirit Essence at the start of battle. Spirit Essence: Each stack increases all allies' DEF by 8%. If an ally does not have enough orbs when casting a skill, Spirit Essence can substitute an equal amount of orbs.",
+    "vn": "<b>32</b>. Nhận 2 tầng Linh Nguyên khi bắt đầu trận. Linh Nguyên: Mỗi tầng tăng 8% DEF cho toàn bộ đồng minh. Nếu đồng minh không đủ quỷ hoả khi dùng kỹ năng, có thể dùng Linh Nguyên thay thế lượng quỷ hoả tương ứng."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Friday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 42,
+  "name": {
+   "en": "Nakiishi",
+   "cn": [
+    "夜啼石",
+    "Dạ Đề Thạch"
+   ],
+   "jp": [
+    "夜啼石",
+    "Yonaki Ishi"
+   ],
+   "vn": "Yè Tí Shí"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. When a non-summoned ally dies, gain 30% of <e>Unique78</e> their starting ATK, DEF, and HP for 2 turns (max 5 stacks, and cannot exceed 150% of the bearer's initial stats).",
+    "vn": "<b>32</b>. Khi đồng minh không phải vật triệu hồi bị hạ gục, nhận 30% <e>Unique78</e> ATK, DEF và HP ban đầu của họ trong 2 lượt (tối đa 5 cộng dồn, và không vượt quá 150% chỉ số ban đầu của người trang bị)."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 43,
+  "name": {
+   "en": "Okuri-inu",
+   "cn": [
+    "夜送犬",
+    "Yè Sòng Quǎn"
+   ],
+   "jp": [
+    "夜送りの犬",
+    "Yookuri no Inu"
+   ],
+   "vn": "Dạ Tống Khuyển"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "When hit by enemy <b>18</b>s for the first time each turn, you gain one stack of Night Prowl.\nNight Prowl: Increases RES by 80%, stackable up to three times. Removed at the start of the carrier's turn if they're in <b>72</b>.",
+    "vn": "Khi lần đầu tiên trong mỗi lượt dính <b>18</b> từ kẻ địch, sẽ nhận 1 tầng Dạ Hành.\nDạ Hành: Tăng 80% Effect RES, cộng dồn tối đa 3 lần. Hiệu ứng bị loại bỏ khi bắt đầu lượt của người trang bị nếu đang ở <b>72</b>."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Tueday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 44,
+  "name": {
+   "en": "Amefurikozo",
+   "cn": [
+    "雨降",
+    "Yǔ Jiàng"
+   ],
+   "jp": [
+    "雨降り小僧",
+    "Amefuri Kozou"
+   ],
+   "vn": "Vũ Giáng"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "When HP first drops below 30%, reduces your max HP to 1 and gains 3 stacks of Rain. Rain: When taking damage, consumes 1 stack to absorb all damage during this action.",
+    "vn": "Khi HP lần đầu giảm xuống dưới 30%, sẽ giảm HP tối đa về 1 và nhận 3 tầng Vũ Lộ. Vũ Lộ: Khi nhận sát thương, tiêu hao 1 tầng để hấp thụ tất cả sát thương trong lần đó."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Thursday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 45,
+  "name": {
+   "en": "Enshyoujo",
+   "cn": [
+    "飞缘魔",
+    "Fēi Yuán Mó"
+   ],
+   "jp": [
+    "飛縁魔",
+    "Hinoenma"
+   ],
+   "vn": "Phi Duyên Ma"
+  },
+  "type": "HIT",
+  "effects": {
+   "piece4": {
+    "en": "When inflicting debuffs, ignores target's overall Effect RES by 30%.",
+    "vn": "Khi gây hiệu ứng bất lợi, bỏ qua 30% tổng Effect RES của mục tiêu."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Fallen Sun",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 46,
+  "name": {
+   "en": "Hyosube",
+   "cn": [
+    "兵主部",
+    "Bīng Zhǔ Bù"
+   ],
+   "jp": [
+    "兵主部",
+    "Hyousube"
+   ],
+   "vn": "Binh Chủ Bộ"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "When the turn ends, gains a <e>Buff09</e> Piercing Arrow [Buff, Status] stack, stacking up to 3 times. When dealing damage, each stack ignores the DEF of targets by 75.",
+    "vn": "Khi kết thúc lượt, nhận 1 tầng <e>Buff09</e> Binh Nhận [Buff, Status], cộng dồn tối đa 3 tầng. Khi gây sát thương, mỗi tầng sẽ bỏ qua 75 DEF của mục tiêu."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Fallen Sun",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 47,
+  "name": {
+   "en": "Aonyobo",
+   "cn": [
+    "青女房",
+    "Qīng Nǚ Fáng"
+   ],
+   "jp": [
+    "青女房",
+    "Aonyoubou"
+   ],
+   "vn": "Thanh Nữ Phòng"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "When taking lethal damage for the first time, removes all statuses and marks, <b>18</b>s HP by 100%, and inflicts <e>Buff11</e> Frozen on self for 1 turn. When under Frozen, DEF is increased by 100%, and gains immunity to all debuffs. If survived the Frozen, <a>18</a>s HP by 100% again. Triggers only once each round.",
+    "vn": "Khi lần đầu tiên nhận sát thương kết liễu, loại bỏ tất cả trạng thái và ấn ký, <b>18</b> 100% HP và khiến bản thân bị <e>Buff11</e> Băng Phong trong 1 lượt. Khi đang bị Băng Phong, DEF tăng 100% và miễn nhiễm với mọi hiệu ứng bất lợi. Nếu hồi sinh sau khi bị Băng Phong, <a>18</a> 100% HP thêm lần nữa. Chỉ kích hoạt 1 lần mỗi trận."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Fallen Sun",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 48,
+  "name": {
+   "en": "Nuribotoke",
+   "cn": [
+    "涂佛",
+    "Tú Fó"
+   ],
+   "jp": [
+    "塗仏",
+    "Nuribotoke"
+   ],
+   "vn": "Đồ Phật"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. Increases the <e>Buff50</e> Effect RES and <e>Buff51</e> damage of all allies by 15% (doubled for the bearer) at the end of a turn if the bearer launched a normal attack or was <b>39</b> in the turn. <b>5</b> for 2 turns.",
+    "vn": "<b>32</b>. Tăng 15% <e>Buff50</e> Effect RES và <e>Buff51</e> sát thương cho toàn bộ đồng minh (gấp đôi cho người trang bị) khi kết thúc lượt nếu người trang bị thực hiện đòn đánh thường hoặc <b>39</b> trong lượt, <b>5</b> 2 lượt."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Fallen Sun",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 49,
+  "name": {
+   "en": "Ghostly Songstress",
+   "cn": [
+    "鬼灵歌伎",
+    "Guǐ Líng Gē Jì"
+   ],
+   "jp": [
+    "鬼霊歌姫",
+    "Kiryou Utahime"
+   ],
+   "vn": "Quỷ Linh Ca Kỹ"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "Exclusive passive effect. After dealing damage to monsters 5 times, the next damage dealt to a monster inflicts damage equal to 20% of its max HP, ignoring its DEF, to a max of 255% of own ATK.",
+    "vn": "Hiệu quả nội tại duy nhất. Sau 5 lần gây sát thương cho quái, sát thương gây ra kế tiếp lên quái sẽ gây thêm sát thương bằng 20% HP tối đa của chúng, bỏ qua DEF, không vượt quá 255% ATK của bản thân."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 50,
+  "name": {
+   "en": "Wisp",
+   "cn": [
+    "遗念火",
+    "Yí Niàn Huǒ"
+   ],
+   "jp": [
+    "遺念火",
+    "Inenbi"
+   ],
+   "vn": "Di Niệm Hoả"
+  },
+  "type": "HIT",
+  "effects": {
+   "piece4": {
+    "en": "Grants a <e>Buff95</e> Thought stack (increases Effect RES by 15%; max 3 stacks) at the start of the turn. Thought stacks are consumed first before orbs when using Orb Skills.",
+    "vn": "Nhận 1 tầng <e>Buff95</e> Niệm Hoả (tăng 15% Effect RES, tối đa 3 tầng) khi bắt đầu lượt. Ưu tiên tiêu hao các tầng Niệm Hoả trước thay vì quỷ hoả khi dùng kỹ năng tốn quỷ hoả."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Monday, Wednesday, Sunday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 51,
+  "name": {
+   "en": "Merrow",
+   "cn": [
+    "共潜",
+    "Gòng Qián"
+   ],
+   "jp": [
+    "共潜",
+    "Tomogatsuki"
+   ],
+   "vn": "Cộng Tiềm"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "At the end of the turn, dispels 1 random debuff from allies. If no damage is dealt on the turn, dispels an additional 2 random debuffs from allies.",
+    "vn": "Khi kết thúc lượt, xua tan 1 hiệu ứng bất lợi cho đồng minh. Nếu không gây sát thương trong lượt, sẽ xua tan thêm 2 hiệu ứng bất lợi ngẫu nhiên cho đồng minh."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Monday, Friday, Sunday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 52,
+  "name": {
+   "en": "Leviathan",
+   "cn": [
+    "恶楼",
+    "È Lóu"
+   ],
+   "jp": [
+    "悪樓",
+    "Akuru"
+   ],
+   "vn": "Ác Lâu"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "At the start of battle, gains <e>Unique21</e> Leviathan Force (increases damage and damage reduction by 80%). Leviathan Force <e>Debuff63</e> fails in the first 8 turns.",
+    "vn": "Khi bắt đầu trận, nhận <e>Unique21</e> Ác Lâu Chi Lực (tăng 80% sát thương gây ra và giảm 80% sát thương nhận vào). Trong 8 lượt đầu tiên, Ác Lâu Chi Lực tạm thời bị <e>Debuff63</e> phong ấn."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Tuesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 53,
+  "name": {
+   "en": "Conch Blower",
+   "cn": [
+    "贝吹坊",
+    "Bèi Chuī Fāng"
+   ],
+   "jp": [
+    "貝吹坊",
+    "Kaibukibou"
+   ],
+   "vn": "Bối Xuy Phường"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "At the start of the turn, creates a <e>Unique20</e> Shell Shield to block damage once. While active, damage damage is increased by 25%.",
+    "vn": "Khi bắt đầu lượt, tạo <e>Unique20</e> Bối Giáp chặn một lần sát thương. Khi hiệu ứng tồn tại, tăng 25% sát thương gây ra."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Sea of Eternity",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 54,
+  "name": {
+   "en": "Wispzoa",
+   "cn": [
+    "海月火玉",
+    "Hǎiyuè Huǒyù"
+   ],
+   "jp": [
+    "海月の火の玉",
+    "Kurage no Hi no Tama"
+   ],
+   "vn": "Hải Nguyệt Hoả Ngọc"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "<e>Buff90</e> Orb skills cost 1 additional orb, <b>114</b>, or <b>392</b>, and damage increases by 40% when orbs, <A>114</a>, or <a>392</a>s are sufficient.",
+    "vn": "<e>Buff90</e> Kỹ năng tốn quỷ hoả sẽ tiêu hao thêm 1 quỷ hoả, <b>114</b> hoặc <b>392</b>. Tăng 45% sát thương khi đủ quỷ hoả, <a>114</a> hoặc <a>392</a>."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Wednesday, Friday, Sunday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 55,
+  "name": {
+   "en": "Oracle",
+   "cn": [
+    "出世螺",
+    "Chū Shì Luó"
+   ],
+   "jp": [
+    "出世螺",
+    "Shusse Bura"
+   ],
+   "vn": "Xuất Thế Loa"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "After taking damage, <b>78</b>s 10% HP of the damage. Grants <e>Unique22</e> Shell (max 1 stack) at the start of battle and before the action. Damage taken for each attack limited to 60% of the max HP if the damage exceeds 60% of the max HP, then Shell removes.",
+    "vn": "Sau khi nhận sát thương, <b>78</b> HP bằng 10% lượng sát thương đó. Nhận <e>Unique22</e> Vỏ Ốc (tối đa 1 tầng) khi bắt đầu trận và trước khi hành động. Mỗi lần nhận sát thương sẽ giới hạn bằng 60% HP tối đa, nếu sát thương vượt quá ngưỡng này, sẽ loại bỏ Vỏ Ốc."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Wednesday, Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 56,
+  "name": {
+   "en": "Tomb Robber",
+   "cn": [
+    "火之车",
+    "Huǒ zhī Chē"
+   ],
+   "jp": [
+    "火の車",
+    "Hi no Kuruma"
+   ],
+   "vn": "Hoả Chi Xa"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "Grants 1 <e>Buff129</e> Tomb Fire stack at the end of the equipped unit's turn. Upon reaching 4 stacks, clears all stacks to grant 1 turn. The Orb Cost is reduced by 1 orb in the extra turn.",
+    "vn": "Nhận 1 tầng <e>Buff129</e> Mộ Hoả khi đơn vị sở hữu kết thúc lượt. Khi đạt đủ 4 tầng, xoá tất cả các tầng để nhận thêm 1 lượt. Giảm 1 quỷ hoả tiêu hao trong lượt nhận thêm."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Weekends",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 57,
+  "name": {
+   "en": "Possesser",
+   "cn": [
+    "隐念",
+    "Yǐn Niàn"
+   ],
+   "jp": [
+    "隱念",
+    "Innen"
+   ],
+   "vn": "Ẩn Niệm"
+  },
+  "type": "ATK",
+  "effects": {
+   "piece4": {
+    "en": "Increases damage dealt by 20%. If it's dealt to the same target, increases the damage dealt by subsequent strikes by 40% and 60%, respectively. Damage boost loops 20%, 40%, 60% for further strikes.",
+    "vn": "Tăng 20% sát thương gây ra. Nếu tấn công cùng một mục tiêu, các đòn đánh tiếp theo sẽ lần lượt tăng thêm 40% và 60% sát thương.Hiệu ứng tăng sát thương sẽ lặp lại theo chu kỳ 20%, 40%, 60% cho các đòn đánh kế tiếp."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Thursday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 58,
+  "name": {
+   "en": "Tapper",
+   "cn": [
+    "叠叩",
+    "Dié Kòu"
+   ],
+   "jp": [
+    "畳叩",
+    "Tatamitataki"
+   ],
+   "vn": "Điệp Khấu"
+  },
+  "type": "HP",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. If the equipped unit's starting Crit is over 120%, reduces the Crit DMG taken by non-summoned ally entities by 15%.",
+    "vn": "<b>32</b>.\nNếu Crit ban đầu của đơn vị trang bị vượt quá 120%, sẽ giảm 15% Crit DMG nhận vào cho đồng minh không phải vật triệu hồi."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Tuesday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 59,
+  "name": {
+   "en": "Echoer",
+   "cn": [
+    "应声虫",
+    "Yìng Shēng Chóng"
+   ],
+   "jp": [
+    "応声虫",
+    "Ouseichuu"
+   ],
+   "vn": "Ứng Thanh Trùng"
+  },
+  "type": "Crit",
+  "effects": {
+   "piece4": {
+    "en": "Grants the equipped unit a 20% chance of <b>351</b>ing.",
+    "vn": "Cấp cho đơn vị trang bị 20% tỷ lệ <b>351</b>."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Friday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 60,
+  "name": {
+   "en": "Bell-Haunt",
+   "cn": [
+    "元兴寺",
+    "Yuánxīng Sì"
+   ],
+   "jp": [
+    "元興寺",
+    "Gagoze"
+   ],
+   "vn": "Nguyên Hưng Tự"
+  },
+  "type": "HIT",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. When the equipped unit lands a <b>18</b> on their turn, for each target, increases the <e>Buff51</e> damage dealt by non-summoned ally entities by 5%, up to 40% for 2 turns (triggers only once for multiple hits on the same target.)",
+    "vn": "<b>32</b>. Khi đơn vị mang hiệu ứng gây <b>18</b> trong lượt, với mỗi mục tiêu trúng hiệu ứng, tăng 5% <e>Buff51</e> sát thương gây ra cho các đồng minh không phải vật triệu hồi, tối đa tăng 40% trong 2 lượt (với các đòn đánh nhiều lần lên cùng một mục tiêu, hiệu ứng chỉ kích hoạt 1 lần)."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Monday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 61,
+  "name": {
+   "en": "Dangler",
+   "cn": [
+    "钓瓶火",
+    "Diào Píng Huǒ"
+   ],
+   "jp": [
+    "釣瓶火",
+    "Tsurubebi"
+   ],
+   "vn": "Điếu Bình Hỏa"
+  },
+  "type": "RES",
+  "effects": {
+   "piece4": {
+    "en": "Fills up the Orb Bar by an additional 1 slot and heals the HP of the non-summoned ally entity with the lowest proportion of HP by 700% of the equipped unit's DEF.",
+    "vn": "Làm đầy thêm 1 ô trên thanh Quỷ Hoả và hồi HP cho đồng minh không phải vật triệu hồi có tỷ lệ HP thấp nhất bằng 700% DEF của người trang bị."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Wednesday",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 62,
+  "name": {
+   "en": "Nightly Aramitama",
+   "cn": [
+    "夜荒魂",
+    "Yèhuāng Hún"
+   ],
+   "jp": [
+    "夜荒魂",
+    "Yoru Aramitama"
+   ],
+   "vn": "Dạ Hoang Hồn"
+  },
+  "type": "Random Stat",
+  "effects": {
+   "piece2": {
+    "en": "<b>32</b>. Where the equipped unit lands a <b>18</b> or <b>19</b>es a monster during their turn, for each target, and increases all non-summoned ally entities' SPD by 15, and up to a maximum of 90. <b>5</b> for 1 turn. Triggers only once for multiple hits on the same target.",
+    "vn": "<b>32</b>. Khi đơn vị trang bị gây <b>18</b> hoặc <b>19</b> cho quái trong lượt, tăng 15 SPD với mỗi mục tiêu cho toàn bộ đồng minh không phải vật triệu hồi, tối đa tăng 90, <b>5</b> 1 lượt (với các đòn đánh nhiều lần lên cùng một mục tiêu, hiệu ứng chỉ kích hoạt 1 lần)."
+   }
+  },
+  "obtainable": [
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Demon Encounter: Assembly Boss",
+   "Boss Soul Box"
+  ]
+ },
+ {
+  "id": 63,
+  "name": {
+   "en": "Mutodori",
+   "cn": [
+    "无刀取",
+    "Wú Dāo Qǔ"
+   ],
+   "jp": [
+    "無刀取り",
+    "Mutoudori"
+   ],
+   "vn": "Vô Đao Thủ"
+  },
+  "type": "Crit DMG",
+  "effects": {
+   "piece4": {
+    "en": "At the end of the turn, permanently increases <e>Buff184</e> damage by 15%, up to 45%.",
+    "vn": "Khi kết thúc lượt, vĩnh viễn tăng <e>Buff184</e> 15% sát thương, tối đa 45%."
+   }
+  },
+  "obtainable": [
+   "Soul Zones: Fallen Sun",
+   "Mystery Soul Shop",
+   "Mystic Trader",
+   "Events"
+  ]
+ },
+ {
+  "id": 64,
+  "name": {
+   "en": "Chartbringer",
+   "cn": [
+    "奉海図",
+    "Fèng Hǎi Tú"
+   ],
+   "jp": [
+    "奉海図",
+    "Houkaizu"
+   ],
+   "vn": "Phụng Hải Đồ"
+  },
+  "type": "DEF",
+  "effects": {
+   "piece4": {
+    "en": "<b>32</b>. When an ally is attacked, grants <e>Debuff123</e> Chart Protection lasting 1 turn on them. Chart Protection: Reduces 30% of the attack damage (max 35% of the equipped unit's max HP) and records it. When it fails, the ally loses HP equal to the recorded amount.",
+    "vn": "<b>32</b>. Khi đồng minh bị tấn công, cấp <e>Debuff123</e> Hải Đồ Thủ Hộ cho họ trong 1 lượt. Hải Đồ Thủ Hộ: Giảm 30% sát thương nhận vào (không vượt quá 35% HP tối đa của người trang bị) và ghi lại giá trị đó. Khi hiệu ứng kết thúc, đồng minh sẽ mất HP bằng với lượng sát thương đã ghi lại."
+   }
+  },
+  "obtainable": [
+   "Chapter 4",
+   "Soul: Thu (mainly)/Sat/Sun",
+   "Mall: Soul Shop",
+   "Events"
+  ]
+ }
+]

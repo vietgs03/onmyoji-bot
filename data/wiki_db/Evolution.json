@@ -1,0 +1,93 @@
+[
+ {
+  "id": 1,
+  "text": {
+   "en": "Stat improvement: ATK Bonus +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% ATK."
+  }
+ },
+ {
+  "id": 2,
+  "text": {
+   "en": "Unlock skill <c>{skill}</c>.",
+   "vn": "Mở khoá kỹ năng <c>{skill}</c>."
+  }
+ },
+ {
+  "id": 3,
+  "text": {
+   "en": "Evolution skill <c>{skill}</c> improvement.",
+   "vn": "Nâng cấp kỹ năng <c>{skill}</c> sau khi thức tỉnh."
+  }
+ },
+ {
+  "id": 4,
+  "text": {
+   "en": "Stat improvement: HP Bonus +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% HP."
+  }
+ },
+ {
+  "id": 5,
+  "text": {
+   "en": "Stat improvement: DMG Reduction +{count}%.",
+   "vn": "Cải thiện chỉ số: Giảm {count}% sát thương phải nhận."
+  }
+ },
+ {
+  "id": 6,
+  "text": {
+   "en": "Stat improvement: Crit +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% Crit."
+  }
+ },
+ {
+  "id": 7,
+  "text": {
+   "en": "Stat improvement: SPD +{count}.",
+   "vn": "Cải thiện chỉ số: Tăng {count} SPD."
+  }
+ },
+ {
+  "id": 8,
+  "text": {
+   "en": "Stat improvement: Ignores DEF +{count}.",
+   "vn": "Cải thiện chỉ số: Bỏ qua {count} DEF."
+  }
+ },
+ {
+  "id": 9,
+  "text": {
+   "en": "Stat improvement: Effect HIT +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% Effect HIT."
+  }
+ },
+ {
+  "id": 10,
+  "text": {
+   "en": "Stat improvement: Effect RES +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% Effect RES."
+  }
+ },
+ {
+  "id": 11,
+  "text": {
+   "en": "Stat improvement: Damage Bonus +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% sát thương."
+  }
+ },
+ {
+  "id": 12,
+  "text": {
+   "en": "Stat improvement: DEF Bonus +{count}%.",
+   "vn": "Cải thiện chỉ số: Tăng {count}% DEF."
+  }
+ },
+ {
+  "id": 13,
+  "text": {
+   "en": "Stat improvement: HP Steal +{count}%.",
+   "vn": "Cải thiện chỉ số: Kèm theo {count}% Hút Máu."
+  }
+ }
+]
