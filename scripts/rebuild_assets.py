@@ -16,7 +16,7 @@ Dung:
   python scripts/rebuild_assets.py --all
   python scripts/rebuild_assets.py ui sprites
 """
-import os, sys, shutil, subprocess, glob
+import os, sys, shutil, subprocess, glob, json
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 GAME = "/mnt/c/Program Files (x86)/Steam/steamapps/common/Onmyoji"
@@ -110,12 +110,35 @@ def step_wiki_db():
     _run([PY, "scripts/fetch_wiki_db.py"])
 
 
+def step_flow():
+    """FiresChain/onmyoji-flow -> 470 anh ripped in-game (270 shiki/137 yuhun/48 skill, id-based)."""
+    import urllib.request
+    api = "https://api.github.com/repos/FiresChain/onmyoji-flow/git/trees/HEAD?recursive=1"
+    req = urllib.request.Request(api, headers={"User-Agent": "Mozilla/5.0"})
+    tree = json.load(urllib.request.urlopen(req)).get("tree", [])
+    imgs = [x["path"] for x in tree
+            if x["path"].endswith((".png", ".webp", ".jpg")) and "assets/" in x["path"]]
+    raw = "https://raw.githubusercontent.com/FiresChain/onmyoji-flow/HEAD/"
+    n = 0
+    for p in imgs:
+        sub = p.split("public/assets/", 1)[-1]
+        dst = os.path.join(ROOT, "data/external/flow_assets", os.path.dirname(sub))
+        os.makedirs(dst, exist_ok=True)
+        out = os.path.join(dst, os.path.basename(p))
+        if os.path.exists(out):
+            continue
+        r = urllib.request.Request(raw + p, headers={"User-Agent": "Mozilla/5.0"})
+        open(out, "wb").write(urllib.request.urlopen(r).read())
+        n += 1
+    print(f"  flow_assets: {n} anh moi (tong {len(imgs)})")
+
+
 def step_oas():
     _run([PY, "scripts/extract_oas_tasks.py"])
 
 
 STEPS = {"ui": step_ui, "sprites": step_sprites, "assets_en": step_assets_en,
-         "fandom": step_fandom, "wiki": step_wiki, "qidu": step_qidu, "wiki_db": step_wiki_db, "oas": step_oas}
+         "fandom": step_fandom, "wiki": step_wiki, "qidu": step_qidu, "wiki_db": step_wiki_db, "flow": step_flow, "oas": step_oas}
 
 
 def main():
