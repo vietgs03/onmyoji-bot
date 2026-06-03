@@ -159,27 +159,36 @@ class MazeAgent:
                     heapq.heappush(pq, (ng + h(nxt), ng, nxt))
         return None
 
-    def navigate(self, start, goal, max_steps=100000):
-        """Di tu start->goal, HOC online khi gap tuong (gated). Tra (toi_dich, lich_su).
-        Tuong dam trong lan nay -> cam di lai (avoid) de khoi lap; van GHI vao stats
-        de lan SAU (navigate khac) da biet ne tu dau."""
+    def navigate(self, start, goal, max_steps=100000, learn=True, astar=True):
+        """Di tu start->goal, HOC online khi gap tuong (gated).
+        Tra dict metrics: reached, steps, bumps (so lan dam tuong), trail.
+        learn=False -> KHONG ghi stats (baseline: moi lan nhu lan dau).
+        Tuong dam trong lan nay -> cam di lai (avoid) de khoi lap; van GHI stats
+        de lan SAU da biet ne tu dau."""
         cur = start
         trail = [cur]
+        bumps = 0
         bumped = set()                               # canh da dam tuong trong lan nay
         for _ in range(max_steps):
             if cur == goal:
-                return True, trail
-            p = self.path(cur, goal, avoid=bumped)
+                return {"reached": True, "steps": len(trail) - 1,
+                        "bumps": bumps, "trail": trail}
+            p = self.path(cur, goal, avoid=bumped, astar=astar)
             if not p or len(p) < 2:
-                return False, trail                  # bi cô lap boi tuong da hoc
+                return {"reached": False, "steps": len(trail) - 1,
+                        "bumps": bumps, "trail": trail}
             nxt = p[1]
             if self.m.can_pass(cur, nxt):            # di duoc that
-                self.s.record(str(cur), str(nxt), True)
+                if learn:
+                    self.s.record(str(cur), str(nxt), True)
                 cur = nxt; trail.append(cur)
             else:                                    # GAP TUONG -> hoc + cam di lai
-                self.s.record(str(cur), str(nxt), False)
+                if learn:
+                    self.s.record(str(cur), str(nxt), False)
+                bumps += 1
                 bumped.add(frozenset((cur, nxt)))
-        return False, trail
+        return {"reached": False, "steps": len(trail) - 1,
+                "bumps": bumps, "trail": trail}
 
 
 # ======================================================================
@@ -229,35 +238,28 @@ def cmd_grid(w, h):
     if os.path.exists("/tmp/maze_grid.json"): os.remove("/tmp/maze_grid.json")
     a.s = EdgeStats("/tmp/maze_grid.json")
     start, goal = (0, 0), (h - 1, w - 1)
-    ok, trail = a.navigate(start, goal)
-    p = render(m, trail, start, goal, f"grid_{w}x{h}.png")
-    print(f"grid {w}x{h}: toi dich={ok}, so buoc={len(trail)}, "
-          f"tuong gated={len(m.gated)}, anh={p}")
+    res = a.navigate(start, goal)
+    p = render(m, res["trail"], start, goal, f"grid_{w}x{h}.png")
+    print(f"grid {w}x{h}: toi dich={res['reached']}, so buoc={res['steps']}, "
+          f"dam tuong={res['bumps']}, tuong gated={len(m.gated)}, anh={p}")
 
 
 def cmd_learn(w, h):
     """Demo HOC: chay 1 (gap nhieu tuong) vs chay 2 (da hoc -> it dam tuong)."""
     m = Maze(w, h, seed=3)
-    es = EdgeStats("/tmp/maze_learn.json")
     if os.path.exists("/tmp/maze_learn.json"): os.remove("/tmp/maze_learn.json")
     es = EdgeStats("/tmp/maze_learn.json")
     a = MazeAgent(m, es)
     start, goal = (0, 0), (h - 1, w - 1)
 
-    # lan 1: di mu
-    bumps1 = sum(v["fail"] for v in es.data.values())
-    ok1, trail1 = a.navigate(start, goal)
-    bumps1 = sum(v["fail"] for v in es.data.values())
-    render(m, trail1, start, goal, f"learn_{w}x{h}_run1.png")
-
-    # lan 2: cung dich, da co kinh nghiem -> it dam tuong hon
-    ok2, trail2 = a.navigate(start, goal)
-    bumps2 = sum(v["fail"] for v in es.data.values()) - bumps1
-    p2 = render(m, trail2, start, goal, f"learn_{w}x{h}_run2.png")
+    r1 = a.navigate(start, goal)                      # lan 1: di mu
+    render(m, r1["trail"], start, goal, f"learn_{w}x{h}_run1.png")
+    r2 = a.navigate(start, goal)                      # lan 2: da hoc -> it dam tuong
+    p2 = render(m, r2["trail"], start, goal, f"learn_{w}x{h}_run2.png")
     print(f"learn {w}x{h}: tuong gated={len(m.gated)}")
-    print(f"  lan 1 (di mu):     toi dich={ok1}, dam tuong={bumps1}, buoc={len(trail1)}")
-    print(f"  lan 2 (da hoc):    toi dich={ok2}, dam tuong THEM={bumps2}, buoc={len(trail2)}")
-    print(f"  => giam dam tuong: {bumps1} -> {bumps2} (hoc duoc tuong o dau). anh: {p2}")
+    print(f"  lan 1 (di mu):  toi dich={r1['reached']}, dam tuong={r1['bumps']}, buoc={r1['steps']}")
+    print(f"  lan 2 (da hoc): toi dich={r2['reached']}, dam tuong={r2['bumps']}, buoc={r2['steps']}")
+    print(f"  => dam tuong: {r1['bumps']} -> {r2['bumps']} (hoc duoc tuong o dau). anh: {p2}")
 
 
 def cmd_scale(n):
