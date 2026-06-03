@@ -154,14 +154,55 @@ def test_stats():
     return ok / tot if tot else 1.0
 
 
+def test_exit_coords():
+    """F. Exit center (screen_graph) co KHOP toa do click THAT (world.json) khong?
+    Phat hien edge bi dat sai toa do (vd HOME->town lech 568px da fix)."""
+    import math
+    from collections import defaultdict
+    print("\n=== F. TOA DO EXIT vs CLICK THAT (world.json) ===")
+    wpath = os.path.join(ROOT, "exploration", "world.json")
+    if not os.path.exists(wpath):
+        print("   (khong co world.json - bo qua)"); return 1.0
+    w = json.load(open(wpath))
+    id2lab = {k: v["label"] for k, v in w["states"].items()}
+    lab2node = {v: k for k, v in {
+        "HOME": "HOME", "exploration": "Explore", "town": "Town",
+        "summon": "Summon", "shikigami": "Shikigami", "friends": "Friends",
+        "shop": "Shop", "event": "Event", "settings": "Settings",
+        "guild": "Guild Hall", "shrine_pass": "Shrine Pass",
+        "cosmetics": "Cosmetics", "mentor": "Mentor"}.items()}
+    real = defaultdict(list)
+    for e in w["edges"]:
+        f = lab2node.get(id2lab.get(e["from"])); t = lab2node.get(id2lab.get(e["to"]))
+        if f and t and f != t:
+            real[(f, t)].append(tuple(e["click"]))
+    ok = bad = 0
+    for n, d in NODES.items():
+        for dst, info in d.get("exits", {}).items():
+            rk = real.get((n, dst))
+            if not rk:
+                continue          # action sau trong man - chua co data, can game ON
+            best = min(math.dist(info["center"], r) for r in rk)
+            if best < 40:
+                ok += 1
+            else:
+                bad += 1
+                print(f"   LECH {n}->{dst}: graph={info['center']} that~{rk[0]} d={best:.0f}px")
+    tot = ok + bad
+    print(f"   exit khop world.json: {ok}/{tot}"
+          f" (15 exit action-trong-man chua co data, can game ON)")
+    return ok / tot if tot else 1.0
+
+
 def main():
     a = test_tree()
     b = test_paths()
     c = test_where()
     d = test_overlay()
     e = test_stats()
+    f = test_exit_coords()
     print(f"\nTONG: cay={'OK' if a else 'LOI'}, path={'OK' if b else 'LOI'}, "
-          f"where={c:.3f}, overlay={d:.3f}, stats={e:.3f}")
+          f"where={c:.3f}, overlay={d:.3f}, stats={e:.3f}, exit_coord={f:.3f}")
 
 
 if __name__ == "__main__":

@@ -55,8 +55,8 @@ NODES: dict[str, dict] = {
         "avoid": ["Back"],
         "parent": None,
         "exits": {
-            "exploration": {"text": ["Explore"],   "center": [464, 144]},
-            "town":        {"text": ["Town"],       "center": [662, 262]},
+            "exploration": {"text": ["Explore"],   "center": [608, 192]},
+            "town":        {"text": ["Town"],       "center": [162, 602]},
             "summon":      {"text": ["Summon"],     "center": [991, 194]},
             "shikigami":   {"text": ["Shikigami"],  "center": [997, 586]},
             "onmyodo":     {"text": ["Onmyodo"],    "center": [881, 573]},
