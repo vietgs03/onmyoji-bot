@@ -1,0 +1,1586 @@
+{
+ "598": {
+  "en": "Everadiant Momo",
+  "zh": "灼华桃花妖",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/598.png"
+ },
+ "597": {
+  "en": "Kuzunoha",
+  "zh": "葛叶",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/597.png"
+ },
+ "596": {
+  "en": "Kannazuki",
+  "zh": "神无月",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/596.png"
+ },
+ "595": {
+  "en": "Hakuzosu Unbound",
+  "zh": "梦山白藏主",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/595.png"
+ },
+ "594": {
+  "en": "Dreambound Chocho",
+  "zh": "梦引蝴蝶精",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/594.png"
+ },
+ "593": {
+  "en": "Yoto Hime - Scarlet Nightedge",
+  "zh": "妖刀姬·绯夜猎刃",
+  "rarity": "UR",
+  "avatar": "/assets/Shikigami/ur/593.png"
+ },
+ "592": {
+  "en": "Taira no Masakado",
+  "zh": "平将门",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/592.png"
+ },
+ "591": {
+  "en": "Yuki Gozen",
+  "zh": "雪御前",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/591.png"
+ },
+ "590": {
+  "en": "Meowlord Kyuumei Neko",
+  "zh": "妙主九命猫",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/590.png"
+ },
+ "588": {
+  "en": "Syaoran Li",
+  "zh": "李小狼",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/588.png"
+ },
+ "587": {
+  "en": "Sakura Kinomoto",
+  "zh": "木之本樱",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/587.png"
+ },
+ "586": {
+  "en": "Lavaforged Fukengaku",
+  "zh": "云间不见岳",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/586.png"
+ },
+ "585": {
+  "en": "Odokuro",
+  "zh": "荒骷髅",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/585.png"
+ },
+ "584": {
+  "en": "Glorious Takiyashahime",
+  "zh": "时曜泷夜叉姬",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/584.png"
+ },
+ "583": {
+  "en": "Himiko",
+  "zh": "卑弥呼",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/583.png"
+ },
+ "582": {
+  "en": "Megurine Luka",
+  "zh": "巡音流歌",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/582.png"
+ },
+ "581": {
+  "en": "Karuta",
+  "zh": "歌留多",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/581.png"
+ },
+ "580": {
+  "en": " Sungraced Hiyoribou",
+  "zh": "晴思日和坊",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/580.png"
+ },
+ "579": {
+  "en": "Panharmonic Kinnara",
+  "zh": "瑶音紧那罗",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/579.png"
+ },
+ "578": {
+  "en": "Ambrosial Hoshiguma Doji",
+  "zh": "神酿星熊童子",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/578.png"
+ },
+ "577": {
+  "en": "Guijinyang",
+  "zh": "鬼金羊",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/577.png"
+ },
+ "576": {
+  "en": "Natsume & Nyanko-sensei",
+  "zh": "夏目&猫老师",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/576.png"
+ },
+ "575": {
+  "en": "Feng Yang",
+  "zh": "封阳君",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/575.png"
+ },
+ "574": {
+  "en": "Bosomboddy Inugami",
+  "zh": "心友犬神",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/574.png"
+ },
+ "573": {
+  "en": "Loongjue",
+  "zh": "龙珏",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/573.png"
+ },
+ "572": {
+  "en": "Nostalgic Enenra",
+  "zh": "遥念烟烟罗",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/572.png"
+ },
+ "571": {
+  "en": "湍津姬",
+  "zh": "湍津姬",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/571.png"
+ },
+ "570": {
+  "en": "Magatsuhi",
+  "zh": "祸津神",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/570.png"
+ },
+ "569": {
+  "en": "Nekogawa",
+  "zh": "猫川",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/569.png"
+ },
+ "568": {
+  "en": "Draconic Suzuka Gozen",
+  "zh": "龙吟铃鹿御前",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/568.png"
+ },
+ "567": {
+  "en": "Shentu Ziye",
+  "zh": "申屠子夜",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/567.png"
+ },
+ "566": {
+  "en": "Returner Ebisu",
+  "zh": "晨晖惠比寿",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/566.png"
+ },
+ "565": {
+  "en": "Fortunegiver Zashiki",
+  "zh": "福悦座敷童子",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/565.png"
+ },
+ "564": {
+  "en": "Kagamine Rin/Len",
+  "zh": "镜音铃·连",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/564.png"
+ },
+ "563": {
+  "en": "Hatsune Miku",
+  "zh": "初音未来",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/563.png"
+ },
+ "562": {
+  "en": "Senhime Resurgent",
+  "zh": "鲸汐千姬",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/562.png"
+ },
+ "561": {
+  "en": "Taki",
+  "zh": "泷",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/561.png"
+ },
+ "559": {
+  "en": "Trueself Mio",
+  "zh": "本真三尾狐",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/559.png"
+ },
+ "558": {
+  "en": "Nusubitogami",
+  "zh": "盗人神",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/558.png"
+ },
+ "557": {
+  "en": "Izanami",
+  "zh": "伊邪那美",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/557.png"
+ },
+ "556": {
+  "en": "Amaterasu",
+  "zh": "天照",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/556.png"
+ },
+ "555": {
+  "en": "Kusa Regrown",
+  "zh": "渺念萤草",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/555.png"
+ },
+ "554": {
+  "en": "Bondweaver Enmusubi",
+  "zh": "纺愿缘结神",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/554.png"
+ },
+ "553": {
+  "en": "Wenren Yixuan",
+  "zh": "闻人翊悬",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/553.png"
+ },
+ "552": {
+  "en": "Miakashi",
+  "zh": "慧明灯",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/552.png"
+ },
+ "551": {
+  "en": "Greenwarden Shishio",
+  "zh": "寻森小鹿男",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/551.png"
+ },
+ "550": {
+  "en": "Kujaku-Myoo",
+  "zh": "孔雀明王",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/550.png"
+ },
+ "500": {
+  "en": "Kagura & Sadaharu",
+  "zh": "神乐&定春",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/500.png"
+ },
+ "430": {
+  "en": "Miketsu Frog",
+  "zh": "御馔津呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/430.png"
+ },
+ "429": {
+  "en": "Tamamonomae Frog",
+  "zh": "玉藻前呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/429.png"
+ },
+ "428": {
+  "en": "Yuki Frog",
+  "zh": "雪童子呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/428.png"
+ },
+ "427": {
+  "en": "Higanbana Frog",
+  "zh": "彼岸花呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/427.png"
+ },
+ "426": {
+  "en": "Susabi Frog",
+  "zh": "荒呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/426.png"
+ },
+ "425": {
+  "en": "Kaguya Frog",
+  "zh": "辉夜姬呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/425.png"
+ },
+ "424": {
+  "en": "Hana Frog",
+  "zh": "花鸟卷呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/424.png"
+ },
+ "423": {
+  "en": "Ichimokuren Frog",
+  "zh": "一目连呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/423.png"
+ },
+ "422": {
+  "en": "Yoto Hime Frog",
+  "zh": "妖刀姬呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/422.png"
+ },
+ "421": {
+  "en": "Aoandon Frog",
+  "zh": "青行灯呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/421.png"
+ },
+ "420": {
+  "en": "Ibaraki Frog",
+  "zh": "茨木呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/420.png"
+ },
+ "419": {
+  "en": "Shishio Frog",
+  "zh": "小鹿男呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/419.png"
+ },
+ "418": {
+  "en": "Ryomen Frog",
+  "zh": "两面佛呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/418.png"
+ },
+ "417": {
+  "en": "Enma Frog",
+  "zh": "阎魔呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/417.png"
+ },
+ "416": {
+  "en": "Arakawa Frog",
+  "zh": "荒川呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/416.png"
+ },
+ "415": {
+  "en": "Shuten Frog",
+  "zh": "酒吞呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/415.png"
+ },
+ "414": {
+  "en": "Ootengu Frog",
+  "zh": "大天狗呱",
+  "rarity": "G",
+  "avatar": "/assets/Shikigami/g/414.png"
+ },
+ "409": {
+  "en": "Nurikabe",
+  "zh": "涂壁",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/409.png"
+ },
+ "408": {
+  "en": "Hahakigami",
+  "zh": "帚神",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/408.png"
+ },
+ "407": {
+  "en": "Blue Imp",
+  "zh": "天邪鬼青",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/407.png"
+ },
+ "406": {
+  "en": "Yellow Imp",
+  "zh": "天邪鬼黄",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/406.png"
+ },
+ "405": {
+  "en": "Red Imp",
+  "zh": "天邪鬼赤",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/405.png"
+ },
+ "404": {
+  "en": "Green Imp",
+  "zh": "天邪鬼绿",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/404.png"
+ },
+ "403": {
+  "en": "Umbrella",
+  "zh": "唐纸伞妖",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/403.png"
+ },
+ "401": {
+  "en": "Parasite",
+  "zh": "寄生魂",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/401.png"
+ },
+ "400": {
+  "en": "Grave Digger",
+  "zh": "盗墓小鬼",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/400.png"
+ },
+ "399": {
+  "en": "Kotodama",
+  "zh": "言灵",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/399.png"
+ },
+ "398": {
+  "en": "Amanozako",
+  "zh": "天逆每",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/398.png"
+ },
+ "397": {
+  "en": "Gintoki Sakata",
+  "zh": "坂田银时",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/397.png"
+ },
+ "396": {
+  "en": "Shura Kidomaru",
+  "zh": "修罗鬼童丸",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/396.png"
+ },
+ "395": {
+  "en": "Luminary Oitsuki",
+  "zh": "流光追月神",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/395.png"
+ },
+ "394": {
+  "en": "Tsukuyomi",
+  "zh": "月读",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/394.png"
+ },
+ "393": {
+  "en": "Zen Ungaikyo",
+  "zh": "禅心云外镜",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/393.png"
+ },
+ "392": {
+  "en": "Shiki",
+  "zh": "季",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/392.png"
+ },
+ "391": {
+  "en": "Jinkougyou",
+  "zh": "寻香行",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/391.png"
+ },
+ "390": {
+  "en": "Divine Prophet Susabi",
+  "zh": "神启荒",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/390.png"
+ },
+ "389": {
+  "en": "Susanoo",
+  "zh": "须佐之男",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/389.png"
+ },
+ "388": {
+  "en": "Heartseeker Momiji",
+  "zh": "心狩鬼女红叶",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/388.png"
+ },
+ "387": {
+  "en": "Inosuke Hashibira",
+  "zh": "嘴平伊之助",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/387.png"
+ },
+ "386": {
+  "en": "Zenitsu Agatsuma",
+  "zh": "我妻善逸",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/386.png"
+ },
+ "385": {
+  "en": "Yamalord Enma",
+  "zh": "大夜摩天阎魔",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/385.png"
+ },
+ "384": {
+  "en": "Oshiroibaba",
+  "zh": "粉婆婆",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/384.png"
+ },
+ "383": {
+  "en": "Fallen God Orochi",
+  "zh": "神堕八岐大蛇",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/383.png"
+ },
+ "382": {
+  "en": "Uminochou",
+  "zh": "灵海蝶",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/382.png"
+ },
+ "379": {
+  "en": "Fukengaku",
+  "zh": "不见岳",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/379.png"
+ },
+ "378": {
+  "en": "迦楼罗",
+  "zh": "迦楼罗",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/378.png"
+ },
+ "377": {
+  "en": "Ninja Yamausagi",
+  "zh": "梦寻山兔",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/377.png"
+ },
+ "376": {
+  "en": "Suzuhikohime",
+  "zh": "铃彦姬",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/376.png"
+ },
+ "375": {
+  "en": "Kagewani",
+  "zh": "影鳄",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/375.png"
+ },
+ "373": {
+  "en": "Yato no Kami",
+  "zh": "夜刀神",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/373.png"
+ },
+ "372": {
+  "en": "Inaba Kaguya Hime",
+  "zh": "因幡辉夜姬",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/372.png"
+ },
+ "371": {
+  "en": "Kawazaru",
+  "zh": "川猿",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/371.png"
+ },
+ "370": {
+  "en": "Mishige",
+  "zh": "饭笥",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/370.png"
+ },
+ "369": {
+  "en": "Shokurei",
+  "zh": "食灵",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/369.png"
+ },
+ "368": {
+  "en": "Amezaiku",
+  "zh": "饴细工",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/368.png"
+ },
+ "367": {
+  "en": "Virtuoso Hana",
+  "zh": "绘世花鸟卷",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/367.png"
+ },
+ "366": {
+  "en": "Void Menreiki",
+  "zh": "空相面灵气",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/366.png"
+ },
+ "365": {
+  "en": "Nyunai-suzume",
+  "zh": "入内雀",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/365.png"
+ },
+ "364": {
+  "en": "Asura",
+  "zh": "阿修罗",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/364.png"
+ },
+ "363": {
+  "en": "Taishakuten",
+  "zh": "帝释天",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/363.png"
+ },
+ "362": {
+  "en": "Frosty Yuki Onna",
+  "zh": "蝉冰雪女",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/362.png"
+ },
+ "361": {
+  "en": "Akaname",
+  "zh": "垢尝",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/361.png"
+ },
+ "360": {
+  "en": "Nezuko Kamado",
+  "zh": "灶门祢豆子",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/360.png"
+ },
+ "359": {
+  "en": "Tanjiro Kamado",
+  "zh": "灶门炭治郎",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/359.png"
+ },
+ "358": {
+  "en": "Nightveil Higanbana",
+  "zh": "夜溟彼岸花",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/358.png"
+ },
+ "357": {
+  "en": "Valiant Yamakaze",
+  "zh": "初翎山风",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/357.png"
+ },
+ "356": {
+  "en": "Senhime",
+  "zh": "千姬",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/356.png"
+ },
+ "355": {
+  "en": "Monumental Otakemaru",
+  "zh": "麓铭大岳丸",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/355.png"
+ },
+ "354": {
+  "en": "Guardian Ubume",
+  "zh": "待宵姑获鸟",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/354.png"
+ },
+ "353": {
+  "en": "Kinnara",
+  "zh": "紧那罗",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/353.png"
+ },
+ "352": {
+  "en": "Lovebound Kiyohime",
+  "zh": "缚骨清姬",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/352.png"
+ },
+ "351": {
+  "en": "Suzuka Gozen",
+  "zh": "铃鹿御前",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/351.png"
+ },
+ "350": {
+  "en": "Sasori",
+  "zh": "蝎女",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/350.png"
+ },
+ "349": {
+  "en": "Furi",
+  "zh": "风狸",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/349.png"
+ },
+ "348": {
+  "en": "Wordly Aoandon",
+  "zh": "浮世青行灯",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/348.png"
+ },
+ "347": {
+  "en": "Enmusubi",
+  "zh": "缘结神",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/347.png"
+ },
+ "346": {
+  "en": "Seawatch Kingyo",
+  "zh": "聆海金鱼姬",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/346.png"
+ },
+ "345": {
+  "en": "Kidomaru",
+  "zh": "鬼童丸",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/345.png"
+ },
+ "344": {
+  "en": "Ungaikyo",
+  "zh": "云外镜",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/344.png"
+ },
+ "343": {
+  "en": "Onikiri Reforged",
+  "zh": "天剑韧心鬼切",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/343.png"
+ },
+ "342": {
+  "en": "Hoshiguma Doji",
+  "zh": "星熊童子",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/342.png"
+ },
+ "341": {
+  "en": "Demoniac Shuten Doji",
+  "zh": "鬼王酒吞童子",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/341.png"
+ },
+ "340": {
+  "en": "Kamimai",
+  "zh": "纸舞",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/340.png"
+ },
+ "339": {
+  "en": "Blazing Tamamonomae",
+  "zh": "烬天玉藻前",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/339.png"
+ },
+ "338": {
+  "en": "Takiyashahime",
+  "zh": "泷夜叉姬",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/338.png"
+ },
+ "337": {
+  "en": "Ichigo Kurosaki",
+  "zh": "黑崎一护",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/337.png"
+ },
+ "336": {
+  "en": "Rukia Kuchiki",
+  "zh": "朽木露琪亚",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/336.png"
+ },
+ "335": {
+  "en": "Kanihime",
+  "zh": "蟹姬",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/335.png"
+ },
+ "334": {
+  "en": "Waverider Lord Arakawa",
+  "zh": "骁浪荒川之主",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/334.png"
+ },
+ "333": {
+  "en": "Otakemaru",
+  "zh": "大岳丸",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/333.png"
+ },
+ "332": {
+  "en": "Kujira",
+  "zh": "久次良",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/332.png"
+ },
+ "331": {
+  "en": "Vengeful Hannya",
+  "zh": "御怨般若",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/331.png"
+ },
+ "330": {
+  "en": "Shiranui",
+  "zh": "不知火",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/330.png"
+ },
+ "329": {
+  "en": "Kainin",
+  "zh": "海忍",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/329.png"
+ },
+ "328": {
+  "en": "Yoto Hime",
+  "zh": "赤影妖刀姬",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/328.png"
+ },
+ "327": {
+  "en": "Azurestorm Ichimokuren",
+  "zh": "苍风一目连",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/327.png"
+ },
+ "326": {
+  "en": "Divine Miketsu",
+  "zh": "稻荷神御馔津",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/326.png"
+ },
+ "325": {
+  "en": "Orochi",
+  "zh": "八岐大蛇",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/325.png"
+ },
+ "324": {
+  "en": "化鲸",
+  "zh": "化鲸",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/324.png"
+ },
+ "323": {
+  "en": "Tenjo-kudari",
+  "zh": "天井下",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/323.png"
+ },
+ "322": {
+  "en": "Inferno Ibaraki Doji",
+  "zh": "炼狱茨木童子",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/322.png"
+ },
+ "321": {
+  "en": "Okuribito",
+  "zh": "入殓师",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/321.png"
+ },
+ "320": {
+  "en": "Ittan-momen",
+  "zh": "一反木绵",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/320.png"
+ },
+ "319": {
+  "en": "Kikyo",
+  "zh": "桔梗",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/319.png"
+ },
+ "318": {
+  "en": "Okikumushi",
+  "zh": "於菊虫",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/318.png"
+ },
+ "317": {
+  "en": "Jinmenju",
+  "zh": "人面树",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/317.png"
+ },
+ "316": {
+  "en": "Hakuzosu",
+  "zh": "白藏主",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/316.png"
+ },
+ "315": {
+  "en": "Jr. Ootengu",
+  "zh": "少羽大天狗",
+  "rarity": "SP",
+  "avatar": "/assets/Shikigami/sp/315.png"
+ },
+ "314": {
+  "en": "Sesshomaru",
+  "zh": "杀生丸",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/314.png"
+ },
+ "313": {
+  "en": "Inuyasha",
+  "zh": "犬夜叉",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/313.png"
+ },
+ "312": {
+  "en": "Onikiri",
+  "zh": "鬼切",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/312.png"
+ },
+ "311": {
+  "en": "Menreiki",
+  "zh": "面灵气",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/311.png"
+ },
+ "310": {
+  "en": "Peach Maki & Karashi",
+  "zh": "蜜桃&芥子",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/310.png"
+ },
+ "309": {
+  "en": "Oko",
+  "zh": "阿香",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/309.png"
+ },
+ "308": {
+  "en": "Hozuki",
+  "zh": "鬼灯",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/308.png"
+ },
+ "307": {
+  "en": "Nekomata",
+  "zh": "猫掌柜",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/307.png"
+ },
+ "306": {
+  "en": "Mushishi",
+  "zh": "虫师",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/306.png"
+ },
+ "305": {
+  "en": "Medicine Seller",
+  "zh": "卖药郎",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/305.png"
+ },
+ "304": {
+  "en": "Miketsu",
+  "zh": "御馔津",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/304.png"
+ },
+ "303": {
+  "en": "Kisei",
+  "zh": "弈",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/303.png"
+ },
+ "302": {
+  "en": "Kosodenote",
+  "zh": "小袖之手",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/302.png"
+ },
+ "301": {
+  "en": "Juzu",
+  "zh": "数珠",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/301.png"
+ },
+ "300": {
+  "en": "Tamamonomae",
+  "zh": "玉藻前",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/300.png"
+ },
+ "298": {
+  "en": "Kaoru",
+  "zh": "薰",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/298.png"
+ },
+ "297": {
+  "en": "Hiyoribo",
+  "zh": "日和坊",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/297.png"
+ },
+ "296": {
+  "en": "Yamakaze",
+  "zh": "山风",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/296.png"
+ },
+ "295": {
+  "en": "Oitsuki",
+  "zh": "追月神",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/295.png"
+ },
+ "294": {
+  "en": "Nura Rikuo",
+  "zh": "奴良陆生",
+  "rarity": "L",
+  "avatar": "/assets/Shikigami/l/294.png"
+ },
+ "293": {
+  "en": "Dodomeki",
+  "zh": "百目鬼",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/293.png"
+ },
+ "292": {
+  "en": "Yuki",
+  "zh": "雪童子",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/292.png"
+ },
+ "291": {
+  "en": "Bukkuman",
+  "zh": "书翁",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/291.png"
+ },
+ "290": {
+  "en": "Komatsu",
+  "zh": "小松丸",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/290.png"
+ },
+ "289": {
+  "en": "Usagi",
+  "zh": "兔丸",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/289.png"
+ },
+ "288": {
+  "en": "Higanbana",
+  "zh": "彼岸花",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/288.png"
+ },
+ "287": {
+  "en": "Hako Shoujo",
+  "zh": "匣中少女",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/287.png"
+ },
+ "286": {
+  "en": "Itsumade",
+  "zh": "以津真天",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/286.png"
+ },
+ "285": {
+  "en": "Chin",
+  "zh": "鸩",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/285.png"
+ },
+ "283": {
+  "en": "Susabi",
+  "zh": "荒",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/283.png"
+ },
+ "282": {
+  "en": "Kingyo",
+  "zh": "金鱼姬",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/282.png"
+ },
+ "281": {
+  "en": "Enenra",
+  "zh": "烟烟罗",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/281.png"
+ },
+ "280": {
+  "en": "Kaguya",
+  "zh": "辉夜姬",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/280.png"
+ },
+ "279": {
+  "en": "Hana",
+  "zh": "花鸟卷",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/279.png"
+ },
+ "278": {
+  "en": "Shiro",
+  "zh": "白童子",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/278.png"
+ },
+ "277": {
+  "en": "Kuro",
+  "zh": "黑童子",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/277.png"
+ },
+ "276": {
+  "en": "Yasha",
+  "zh": "夜叉",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/276.png"
+ },
+ "275": {
+  "en": "Mannendake",
+  "zh": "万年竹",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/275.png"
+ },
+ "274": {
+  "en": "Koroka",
+  "zh": "古笼火",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/274.png"
+ },
+ "273": {
+  "en": "Aobozu",
+  "zh": "青坊主",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/273.png"
+ },
+ "272": {
+  "en": "Ichimokuren",
+  "zh": "一目连",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/272.png"
+ },
+ "271": {
+  "en": "Hannya",
+  "zh": "般若",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/271.png"
+ },
+ "270": {
+  "en": "Jorogumo",
+  "zh": "络新妇",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/270.png"
+ },
+ "269": {
+  "en": "Yoto Hime",
+  "zh": "妖刀姬",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/269.png"
+ },
+ "268": {
+  "en": "Ebisu",
+  "zh": "惠比寿",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/268.png"
+ },
+ "267": {
+  "en": "Sakura",
+  "zh": "樱花妖",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/267.png"
+ },
+ "266": {
+  "en": "Aoandon",
+  "zh": "青行灯",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/266.png"
+ },
+ "265": {
+  "en": "Ibaraki Doji",
+  "zh": "茨木童子",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/265.png"
+ },
+ "264": {
+  "en": "Hakuro",
+  "zh": "白狼",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/264.png"
+ },
+ "263": {
+  "en": "Futakuchi",
+  "zh": "二口女",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/263.png"
+ },
+ "262": {
+  "en": "Ubume",
+  "zh": "姑获鸟",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/262.png"
+ },
+ "261": {
+  "en": "Kamaitachi",
+  "zh": "镰鼬",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/261.png"
+ },
+ "260": {
+  "en": "Kiyohime",
+  "zh": "清姬",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/260.png"
+ },
+ "259": {
+  "en": "Shishio",
+  "zh": "小鹿男",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/259.png"
+ },
+ "258": {
+  "en": "Ryomen",
+  "zh": "两面佛",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/258.png"
+ },
+ "257": {
+  "en": "Yumekui",
+  "zh": "食梦貘",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/257.png"
+ },
+ "256": {
+  "en": "Maestro",
+  "zh": "妖琴师",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/256.png"
+ },
+ "255": {
+  "en": "Enma",
+  "zh": "阎魔",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/255.png"
+ },
+ "254": {
+  "en": "Youko",
+  "zh": "妖狐",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/254.png"
+ },
+ "253": {
+  "en": "Vampira",
+  "zh": "吸血姬",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/253.png"
+ },
+ "252": {
+  "en": "凤凰火",
+  "zh": "凤凰火",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/252.png"
+ },
+ "251": {
+  "en": "Hangan",
+  "zh": "判官",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/251.png"
+ },
+ "250": {
+  "en": "Jikikaeru",
+  "zh": "青蛙瓷器",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/250.png"
+ },
+ "249": {
+  "en": "Satori",
+  "zh": "觉",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/249.png"
+ },
+ "248": {
+  "en": "Lord Arakawa",
+  "zh": "荒川之主",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/248.png"
+ },
+ "247": {
+  "en": "Umibozu",
+  "zh": "海坊主",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/247.png"
+ },
+ "246": {
+  "en": "Akashita",
+  "zh": "赤舌",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/246.png"
+ },
+ "245": {
+  "en": "Lantern Boy",
+  "zh": "提灯小僧",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/245.png"
+ },
+ "244": {
+  "en": "Kubinashi",
+  "zh": "首无",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/244.png"
+ },
+ "243": {
+  "en": "Yamawaro",
+  "zh": "山童",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/243.png"
+ },
+ "242": {
+  "en": "Puppeteer",
+  "zh": "傀儡师",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/242.png"
+ },
+ "241": {
+  "en": "Chocho",
+  "zh": "蝴蝶精",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/241.png"
+ },
+ "238": {
+  "en": "Kusa",
+  "zh": "萤草",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/238.png"
+ },
+ "237": {
+  "en": "Yamausagi",
+  "zh": "山兔",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/237.png"
+ },
+ "236": {
+  "en": "Kanko",
+  "zh": "管狐",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/236.png"
+ },
+ "234": {
+  "en": "Shouzu",
+  "zh": "椒图",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/234.png"
+ },
+ "233": {
+  "en": "Kyonshi Ani",
+  "zh": "跳跳哥哥",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/233.png"
+ },
+ "232": {
+  "en": "Tesso",
+  "zh": "铁鼠",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/232.png"
+ },
+ "231": {
+  "en": "Momiji",
+  "zh": "鬼女红叶",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/231.png"
+ },
+ "230": {
+  "en": "Hitotsume",
+  "zh": "独眼小僧",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/230.png"
+ },
+ "228": {
+  "en": "Ushi no Toki",
+  "zh": "丑时之女",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/228.png"
+ },
+ "227": {
+  "en": "Samurai X",
+  "zh": "兵俑",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/227.png"
+ },
+ "226": {
+  "en": "Kyonshi Imoto",
+  "zh": "跳跳妹妹",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/226.png"
+ },
+ "225": {
+  "en": "Kyonshi Ototo",
+  "zh": "跳跳弟弟",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/225.png"
+ },
+ "224": {
+  "en": "Ame Onna",
+  "zh": "雨女",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/224.png"
+ },
+ "223": {
+  "en": "Hone Onna",
+  "zh": "骨女",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/223.png"
+ },
+ "222": {
+  "en": "Warrior Soul",
+  "zh": "武士之灵",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/222.png"
+ },
+ "221": {
+  "en": "Kamikui",
+  "zh": "食发鬼",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/221.png"
+ },
+ "220": {
+  "en": "Inugami",
+  "zh": "犬神",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/220.png"
+ },
+ "219": {
+  "en": "Shuten Doji",
+  "zh": "酒吞童子",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/219.png"
+ },
+ "218": {
+  "en": "Karasu Tengu",
+  "zh": "鸦天狗",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/218.png"
+ },
+ "217": {
+  "en": "Ootengu",
+  "zh": "大天狗",
+  "rarity": "SSR",
+  "avatar": "/assets/Shikigami/ssr/217.png"
+ },
+ "216": {
+  "en": "Kodokushi",
+  "zh": "巫蛊师",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/216.png"
+ },
+ "215": {
+  "en": "Mouba",
+  "zh": "孟婆",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/215.png"
+ },
+ "214": {
+  "en": "Gaki",
+  "zh": "饿鬼",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/214.png"
+ },
+ "213": {
+  "en": "Dojo",
+  "zh": "童女",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/213.png"
+ },
+ "212": {
+  "en": "Oguna",
+  "zh": "童男",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/212.png"
+ },
+ "211": {
+  "en": "Kuro Mujou",
+  "zh": "鬼使黑",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/211.png"
+ },
+ "210": {
+  "en": "Shiro Mujou",
+  "zh": "鬼使白",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/210.png"
+ },
+ "209": {
+  "en": "Kappa",
+  "zh": "河童",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/209.png"
+ },
+ "208": {
+  "en": "Tanuki",
+  "zh": "狸猫",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/208.png"
+ },
+ "207": {
+  "en": "Kyuumei Neko",
+  "zh": "九命猫",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/207.png"
+ },
+ "206": {
+  "en": "Koi",
+  "zh": "鲤鱼精",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/206.png"
+ },
+ "205": {
+  "en": "Zashiki",
+  "zh": "座敷童子",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/205.png"
+ },
+ "203": {
+  "en": "Lantern Soul",
+  "zh": "灯笼鬼",
+  "rarity": "N",
+  "avatar": "/assets/Shikigami/n/203.png"
+ },
+ "202": {
+  "en": "Mio",
+  "zh": "三尾狐",
+  "rarity": "R",
+  "avatar": "/assets/Shikigami/r/202.png"
+ },
+ "201": {
+  "en": "Yuki Onna",
+  "zh": "雪女",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/201.png"
+ },
+ "200": {
+  "en": "Momo",
+  "zh": "桃花妖",
+  "rarity": "SR",
+  "avatar": "/assets/Shikigami/sr/200.png"
+ }
+}
