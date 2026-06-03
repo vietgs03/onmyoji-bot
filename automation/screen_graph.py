@@ -53,8 +53,11 @@ NODES = {
         "parent": "HOME",
         "exits": {
             "realm_raid": {"via": "ocr", "text": ["Realm"], "center": [260, 621]},
-            "soul_zones": {"via": "ocr", "text": ["Soul"]},
-            "area_boss":  {"via": "ocr", "text": ["Boss"]},
+            "soul_zones": {"via": "ocr", "text": ["Soul"],  "center": [168, 620]},
+            "area_boss":  {"via": "ocr", "text": ["Boss"],  "center": [599, 623]},
+            "awake_zones":{"via": "ocr", "text": ["Awake"], "center": [80, 615]},
+            "secret_zones":{"via": "ocr", "text": ["Secret"], "center": [518, 616]},
+            "six_gates":  {"via": "ocr", "text": ["Gates"], "center": [859, 623]},
         },
     },
     "town": {
@@ -62,7 +65,9 @@ NODES = {
         "parent": "HOME",
         "exits": {
             "duel":            {"via": "ocr", "text": ["Duel"], "center": [701, 166]},
-            "demon_encounter": {"via": "ocr", "text": ["Encounter"]},
+            "demon_encounter": {"via": "ocr", "text": ["Encounter"], "center": [578, 162]},
+            "hunt":            {"via": "ocr", "text": ["Hunt"], "center": [448, 162]},
+            "hyakkisen":       {"via": "ocr", "text": ["Hyakki"], "center": [194, 168]},
         },
     },
     "summon":    {"identify": ["Summon", "Scrolls"], "parent": "HOME", "exits": {}},
@@ -70,12 +75,18 @@ NODES = {
     "onmyodo":   {"identify": ["Onmyodo"], "parent": "HOME", "exits": {}},
     "friends":   {"identify": ["Friends", "Guild"], "parent": "HOME", "exits": {}},
     "shop":      {"identify": ["Garment", "Mall", "Stellar Omen"], "parent": "HOME", "exits": {}},
-    # man con cap 2
-    "realm_raid": {"identify": ["Realm Raid", "Assault"], "parent": "exploration", "exits": {}},
-    "soul_zones": {"identify": ["Soul"], "parent": "exploration", "exits": {}},
-    "area_boss":  {"identify": ["Area Boss"], "parent": "exploration", "exits": {}},
-    "duel":       {"identify": ["Duel"], "parent": "town", "exits": {}},
+    # man con cap 2 - duoi exploration
+    "realm_raid":  {"identify": ["Realm Raid", "Assault"], "parent": "exploration", "exits": {}},
+    "soul_zones":  {"identify": ["Soul"], "parent": "exploration", "exits": {}},
+    "area_boss":   {"identify": ["Area Boss"], "parent": "exploration", "exits": {}},
+    "awake_zones": {"identify": ["Awake"], "parent": "exploration", "exits": {}},
+    "secret_zones":{"identify": ["Secret"], "parent": "exploration", "exits": {}},
+    "six_gates":   {"identify": ["Six", "Gates"], "parent": "exploration", "exits": {}},
+    # man con cap 2 - duoi town
+    "duel":            {"identify": ["Duel"], "parent": "town", "exits": {}},
     "demon_encounter": {"identify": ["Encounter"], "parent": "town", "exits": {}},
+    "hunt":            {"identify": ["Hunt"], "parent": "town", "exits": {}},
+    "hyakkisen":       {"identify": ["Hyakki"], "parent": "town", "exits": {}},
 }
 
 

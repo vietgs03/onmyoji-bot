@@ -93,12 +93,50 @@
      "via": "ocr",
      "text": [
       "Soul"
+     ],
+     "center": [
+      168,
+      620
      ]
     },
     "area_boss": {
      "via": "ocr",
      "text": [
       "Boss"
+     ],
+     "center": [
+      599,
+      623
+     ]
+    },
+    "awake_zones": {
+     "via": "ocr",
+     "text": [
+      "Awake"
+     ],
+     "center": [
+      80,
+      615
+     ]
+    },
+    "secret_zones": {
+     "via": "ocr",
+     "text": [
+      "Secret"
+     ],
+     "center": [
+      518,
+      616
+     ]
+    },
+    "six_gates": {
+     "via": "ocr",
+     "text": [
+      "Gates"
+     ],
+     "center": [
+      859,
+      623
      ]
     }
    }
@@ -125,6 +163,30 @@
      "via": "ocr",
      "text": [
       "Encounter"
+     ],
+     "center": [
+      578,
+      162
+     ]
+    },
+    "hunt": {
+     "via": "ocr",
+     "text": [
+      "Hunt"
+     ],
+     "center": [
+      448,
+      162
+     ]
+    },
+    "hyakkisen": {
+     "via": "ocr",
+     "text": [
+      "Hyakki"
+     ],
+     "center": [
+      194,
+      168
      ]
     }
    }
@@ -162,8 +224,9 @@
   },
   "shop": {
    "identify": [
-    "Shop",
-    "Mall"
+    "Garment",
+    "Mall",
+    "Stellar Omen"
    ],
    "parent": "HOME",
    "exits": {}
@@ -190,6 +253,28 @@
    "parent": "exploration",
    "exits": {}
   },
+  "awake_zones": {
+   "identify": [
+    "Awake"
+   ],
+   "parent": "exploration",
+   "exits": {}
+  },
+  "secret_zones": {
+   "identify": [
+    "Secret"
+   ],
+   "parent": "exploration",
+   "exits": {}
+  },
+  "six_gates": {
+   "identify": [
+    "Six",
+    "Gates"
+   ],
+   "parent": "exploration",
+   "exits": {}
+  },
   "duel": {
    "identify": [
     "Duel"
@@ -200,6 +285,20 @@
   "demon_encounter": {
    "identify": [
     "Encounter"
+   ],
+   "parent": "town",
+   "exits": {}
+  },
+  "hunt": {
+   "identify": [
+    "Hunt"
+   ],
+   "parent": "town",
+   "exits": {}
+  },
+  "hyakkisen": {
+   "identify": [
+    "Hyakki"
    ],
    "parent": "town",
    "exits": {}
