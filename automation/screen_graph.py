@@ -133,6 +133,35 @@ NODES: dict[str, dict] = {
 }
 
 
+# ======================================================================
+# OVERLAYS: trang thai KHONG phai dich dieu huong, can RESOLVE (cho qua / thoat).
+# Tach rieng NODES vi ban chat khac: ta khong "goto" toi overlay, ma phat hien
+# roi xu ly. where() check overlay TRUOC node (overlay che node ben duoi).
+#
+# kind:
+#   transient : man tam (Loading/Animation) -> CHO qua hoac Skip, khong dismiss.
+#   popup     : cua so noi (Showcase/Group Buying) -> dismiss (back/X/Cancel).
+# resolve:
+#   wait      : doi wait_stable (loading).
+#   skip      : OCR tim nut Skip roi bam.
+#   dismiss   : controls.find_dismiss (back/X/Cancel).
+# ======================================================================
+OVERLAYS: dict[str, dict] = {
+    "loading":   {"identify": ["Tap to"], "kind": "transient", "resolve": "wait"},
+    "animation": {"identify": ["Skip"],   "kind": "transient", "resolve": "skip"},
+    # popup che man -> dismiss ve man duoi
+    "char_showcase":  {"identify": ["Showcase", "Promote", "Liking"],
+                       "kind": "popup", "resolve": "dismiss"},
+    "group_buying":   {"identify": ["Group Buying"], "kind": "popup", "resolve": "dismiss"},
+    "select_champion":{"identify": ["Offensive", "Support", "Champion"],
+                       "kind": "popup", "resolve": "dismiss"},
+    "create_float":   {"identify": ["Create Float", "Greeting"],
+                       "kind": "popup", "resolve": "dismiss"},
+    "cosmetic_quests":{"identify": ["Realm Skins", "Blossom"],
+                       "kind": "popup", "resolve": "dismiss"},
+}
+
+
 class ScreenGraph:
     """Graph dieu huong. Toan bo logic qua Dijkstra/dismiss - khong if tung man.
 
@@ -166,39 +195,62 @@ class ScreenGraph:
         return d
 
     # ------------------------------------------------------------------
-    # NHAN DIEN: 1 ham chung quet moi node. Tra (node, confidence in [0,1]).
-    # confidence = (so identify khop) / (tong identify cua node) -> [0,1].
+    # NHAN DIEN: scan 1 bang (NODES hoac OVERLAYS) tim entry khop nhat.
+    # confidence = (so identify khop) / (tong identify cua entry) -> [0,1].
     # ------------------------------------------------------------------
+    @staticmethod
+    def _match(reader, table: dict, depth_fn=None) -> tuple[Optional[str], float]:
+        """Tra (ten, confidence) cua entry khop nhat trong `table`, hoac (None, 0).
+        depth_fn(name)->int de tie-break (entry sau hon thang khi bang diem)."""
+        best = None          # (hits, tiebreak, name)
+        best_total = 1
+        for name, d in table.items():
+            ident = d.get("identify", [])
+            if not ident or any(reader.has(w) for w in d.get("avoid", [])):
+                continue                                    # khong co identify / bi avoid
+            hits = sum(1 for w in ident if reader.has(w))
+            if hits == 0:
+                continue
+            tie = depth_fn(name) if depth_fn else 0
+            if best is None or (hits, tie) > best[:2]:
+                best, best_total = (hits, tie, name), len(ident)
+        if best is None:
+            return None, 0.0
+        return best[2], best[0] / best_total
+
     def where(self, reader=None) -> tuple[Optional[str], float]:
-        """Node hien tai = node co diem khop cao nhat.
-
-        Diem 1 node = so tu khoa identify xuat hien tren man. avoid co mat -> loai.
-        Tie-break khi bang diem: node SAU hon (con) thang (vd man Summon co chu
-        'Summon' nhung khong phai HOME). Tra (None, 0.0) neu khong nhan dien duoc.
-
-        `reader`: ScreenReader da co (tranh OCR lai). None -> tu doc tu agent.
+        """Node hien tai = node co diem khop cao nhat (tie-break: node con thang).
+        Tra (None, 0.0) neu khong nhan dien. `reader`: ScreenReader san (tranh OCR lai).
+        LUU Y: chi quet NODES (man dich). Overlay/popup dung detect_overlay().
         """
         r = reader if reader is not None else (self.a.read() if self.a else None)
         if r is None:
             return None, 0.0
+        return self._match(r, self.nodes, self._depth)
 
-        best = None          # (hits, depth, name)
-        best_total = 1
-        for name, d in self.nodes.items():
-            ident = d.get("identify", [])
-            if not ident:
-                continue
-            if any(r.has(w) for w in d.get("avoid", [])):
-                continue                                    # bi loai boi avoid
-            hits = sum(1 for w in ident if r.has(w))
-            if hits == 0:
-                continue
-            key = (hits, self._depth(name))
-            if best is None or key > best[:2]:
-                best, best_total = (hits, self._depth(name), name), len(ident)
-        if best is None:
+    # ------------------------------------------------------------------
+    # OVERLAY: trang thai tam/popup che man. Phat hien + xu ly rieng NODES.
+    # ------------------------------------------------------------------
+    def detect_overlay(self, reader=None) -> tuple[Optional[str], float]:
+        """Tra (ten overlay, conf) neu man dang bi overlay/popup che, else (None,0)."""
+        r = reader if reader is not None else (self.a.read() if self.a else None)
+        if r is None:
             return None, 0.0
-        return best[2], best[0] / best_total
+        return self._match(r, OVERLAYS)
+
+    def resolve_overlay(self, name: str) -> None:
+        """Xu ly 1 overlay theo 'resolve' khai bao trong DATA (wait/skip/dismiss)."""
+        if self.a is None:
+            return
+        how = OVERLAYS.get(name, {}).get("resolve", "dismiss")
+        if how == "wait":
+            self.a.wait_stable()                        # cho loading qua
+        elif how == "skip":
+            ok, _ = self.a.tap_text("Skip")
+            if not ok:
+                self.a.wait_stable()                    # khong co Skip -> cho
+        else:                                           # dismiss (popup)
+            self.a.back()
 
     # ------------------------------------------------------------------
     # TIM DUONG: Dijkstra trong so = chi phi/do tin cay canh.
@@ -260,14 +312,23 @@ class ScreenGraph:
 
     def goto(self, target: str, max_hops: int = 12, verbose: bool = True) -> bool:
         """Di toi `target` tu BAT KY dau. Re-plan moi hop (doc lai vi tri thuc).
-        Tu phuc hoi: khi lac (where None / conf thap / khong co duong) -> escape
-        ve HOME roi di lai. Tra True neu toi noi.
+        Moi hop: doc man 1 LAN -> (1) co overlay/popup? resolve roi tiep;
+        (2) lac/nghi ngo? escape; (3) tinh Dijkstra, di 1 hop. Tra True neu toi noi.
         """
         if target not in self.nodes:
             raise ValueError(f"node khong ton tai: {target}")
 
         for hop in range(max_hops):
-            cur, conf = self.where()
+            r = self.a.read() if self.a else None      # doc 1 lan, dung lai cho ca 2 check
+
+            ov, ovc = self.detect_overlay(reader=r)
+            if ov:                                     # overlay che man -> xu ly truoc
+                if verbose:
+                    print(f"[goto] hop {hop}: overlay '{ov}' (conf {ovc:.2f}) -> resolve")
+                self.resolve_overlay(ov)
+                continue                               # khong tinh la hop dieu huong
+
+            cur, conf = self.where(reader=r)
             if verbose:
                 print(f"[goto] hop {hop}: o '{cur}' (conf {conf:.2f}) -> '{target}'")
             if cur == target:

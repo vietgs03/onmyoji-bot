@@ -28,6 +28,13 @@ LBL2NODE = {
     "Shrine Pass": "shrine_pass", "Cosmetics": "cosmetics", "Mentor": "mentor",
 }
 
+# nhan world.json -> overlay (man tam/popup, KHONG phai node dieu huong)
+LBL2OVERLAY = {
+    "Character Showcase": "char_showcase", "Group Buying": "group_buying",
+    "Select Champion": "select_champion", "Create Float": "create_float",
+    "Cosmetic Quests": "cosmetic_quests",
+}
+
 # cac cap path mong doi (BFS)
 PATH_CASES = [
     ("HOME", "realm_raid", ["HOME", "exploration", "realm_raid"]),
@@ -78,12 +85,38 @@ def test_where():
     return ok / tot
 
 
+def test_overlay():
+    """D. detect_overlay() nhan dien overlay/popup tren anh that.
+    Va: overlay KHONG bi where() nham la node (tach bach 2 bang)."""
+    g = ScreenGraph()
+    w = json.load(open(WORLD))
+    seen = {}
+    for s in w["states"].values():
+        lbl, p = s.get("label"), s.get("screenshot")
+        if lbl in LBL2OVERLAY and lbl not in seen and p and os.path.exists(p):
+            seen[lbl] = p
+    ok = tot = 0
+    for lbl, p in sorted(seen.items()):
+        r = ScreenReader(cv2.imread(p))
+        got, conf = g.detect_overlay(reader=r)
+        exp = LBL2OVERLAY[lbl]
+        good = got == exp
+        ok += good
+        tot += 1
+        print(f"D. overlay {lbl:18} -> {str(got):16} (conf {conf:.2f}) "
+              f"mong={exp:16} {'OK' if good else 'SAI'}")
+    if tot:
+        print(f"   overlay accuracy: {ok}/{tot} = {ok/tot:.3f}")
+    return ok / tot if tot else 1.0
+
+
 def main():
     a = test_tree()
     b = test_paths()
     c = test_where()
+    d = test_overlay()
     print(f"\nTONG: cay={'OK' if a else 'LOI'}, path={'OK' if b else 'LOI'}, "
-          f"where={c:.3f}")
+          f"where={c:.3f}, overlay={d:.3f}")
 
 
 if __name__ == "__main__":
