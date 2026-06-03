@@ -266,21 +266,32 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
         # POLL cho den khi 'Challenge' xuat hien lai (= da ve man stage) hoac het gio.
         won = False
         t0 = time.time()
-        while time.time() - t0 < 120:                 # battle Soul + reward co the >75s
+        while time.time() - t0 < 150:                 # battle + reward/popup ngau nhien
             img = agent.shot()
             r2 = agent.read(img)
             if r2.has("Challenge"):                   # da ve man stage -> xong vong
                 won = True
                 break
-            # uu tien bam nut ket qua neu co, neu khong tap giua man de tien toi
+            # Popup event ngau nhien (vd 'Parade Privilege') -> bam X dong @ (975,135)
+            low = " ".join(str(t).lower() for t, *_ in
+                           ocr_words(img, roi=(300, 100, 600, 100), min_conf=35))
+            if "privilege" in low or "parade" in low:
+                agent.c.bgclick(975, 135)
+                time.sleep(1.5)
+                continue
+            # uu tien bam nut ket qua neu co, neu khong tap nhieu vung de tien toi
             tapped = False
             for w in ("Reward", "Confirm", "Continue", "OK", "Tap"):
                 if r2.has(w) and agent.tap_text(w, wait=1.2)[0]:
                     tapped = True
                     break
             if not tapped:
-                agent.c.bgclick(576, 340)             # tap giua man bo qua ket qua/animation
-            time.sleep(2.0)
+                # man reward dac biet ('New Skill'/'Tap to continue') + animation:
+                # tap ca 'Tap to continue' (duoi) lan giua man.
+                agent.c.bgclick(576, 620)             # vung 'Tap to continue'
+                time.sleep(0.8)
+                agent.c.bgclick(576, 340)             # giua man
+            time.sleep(1.8)
         dur = round(_time.time() - round_t0, 1)
         done += 1
         wins += 1 if won else 0
