@@ -27,6 +27,7 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "scripts"))
 sys.path.insert(0, os.path.join(ROOT, "ml"))
 sys.path.insert(0, os.path.join(ROOT, "knowledge"))
+sys.path.insert(0, os.path.join(ROOT, "automation"))
 
 from control_client import Controller
 from world_model import WorldModel
@@ -87,6 +88,58 @@ class Agent:
     # ---------- perception ----------
     def shot(self):
         return self.c.bgshot()
+
+    # ---------- doc man hinh DONG (ben voi event/man moi) ----------
+    def read(self, img=None, min_conf=55):
+        """Tra ScreenReader cua man hien tai (OCR text + tim element)."""
+        from screen_reader import ScreenReader
+        img = img if img is not None else self.shot()
+        return ScreenReader(img, min_conf=min_conf)
+
+    def wait_stable(self, max_wait=22.0, poll=1.0, min_buttons=2, settle=2):
+        """Doi man on dinh truoc khi doc. On dinh = 2 anh lien tiep gan giong
+        (dhash) + het loading toi + du element. Bo qua loading artwork (sang mau)."""
+        from screen_reader import ScreenReader
+        from perception import hamming
+        t = 0.0
+        prev_dh = None
+        stable_cnt = 0
+        last = None
+        while t < max_wait:
+            img = self.shot()
+            dh = dhash(img)
+            # on dinh khung hinh?
+            if prev_dh is not None and dh is not None and hamming(dh, prev_dh) <= 2:
+                stable_cnt += 1
+            else:
+                stable_cnt = 0
+            prev_dh = dh
+            if not is_loading(img):
+                r = ScreenReader(img)
+                taps = r.tappables()
+                # da on dinh (khung khong doi) VA du button -> xong
+                if stable_cnt >= settle and len(taps) >= min_buttons:
+                    return img, r
+                if len(taps) >= min_buttons:
+                    last = (img, r)
+            time.sleep(poll); t += poll
+        return last if last else (img, ScreenReader(img))
+
+    def tap_text(self, target, wait=2.0, fuzzy=0.8):
+        """Tim text tren man (OCR) roi click. Tra (True/False, ScreenReader moi)."""
+        r = self.read()
+        hit = r.find(target, fuzzy=fuzzy)
+        if not hit:
+            return False, r
+        self.c.bgclick(hit[1], hit[2])
+        time.sleep(wait)
+        return True, self.wait_stable()[1]
+
+    def back(self, wait=2.0):
+        """Click mui ten back goc tren-trai (chuan game). Tra ScreenReader moi."""
+        self.c.bgclick(62, 90)
+        time.sleep(wait)
+        return self.wait_stable()[1]
 
     def where(self, img=None):
         """Tra (sid, label, source). source='dhash' neu khop graph, 'clf' neu doan ML."""
