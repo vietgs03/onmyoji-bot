@@ -46,6 +46,14 @@ SOURCES = [
      "kind": "image", "desc": "44 button template (CN) - augment (vi tri/icon/mau giong, chu khac)", "regen": "rebuild_assets.py qidu"},
     {"name": "wiki_db", "path": "data/wiki_db", "for": ["KB analysis (team/skill/counter)"],
      "kind": "json", "desc": "271 shikigami (skill/stat/build) + 64 soul + 480 effect (Supabase, da ngon ngu en/vn)", "regen": "fetch_wiki_db.py"},
+    {"name": "wiki_images_en", "path": "data/external/wiki", "for": ["shikigami/skill recog (tuong lai)", "augment"],
+     "kind": "image", "desc": "~6005 anh EN (icon/image/skill/skin/shard/bio/soul/onmyoji) ten file = ten EN sach", "regen": "rebuild_assets.py wiki"},
+    {"name": "flow_assets", "path": "data/external/flow_assets", "for": ["shikigami/yuhun/skill recog (in-game ripped)", "augment"],
+     "kind": "image", "desc": "470 anh ripped in-game (270 shiki theo rarity + 137 yuhun + 48 skill, id-based; map id->name = flow_shikigami.json)", "regen": "rebuild_assets.py flow"},
+    {"name": "firechain_flow", "path": "data/external/firechain", "for": ["KB (id-map/skill/yuhun fallback)"],
+     "kind": "json", "desc": "flow_shikigami(id->rarity)/onmyojiSkill/yuhun json (zh) - fallback", "regen": "fetch fix"},
+    {"name": "strategy_guides_en", "path": "data/external/firechain/guides_en", "for": ["KB analysis (team/chien thuat)"],
+     "kind": "markdown", "desc": "4 guide EN thuc chien (Orochi speedrun/Yamabunny/Duel - team setup chi tiet)", "regen": "fetch fix"},
 ]
 
 MIN_PER_CLASS = 5  # nguong toi thieu mau / lop de train tin cay

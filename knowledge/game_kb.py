@@ -60,8 +60,35 @@ class KB:
         self.wdb_shiki = _load(os.path.join(WDB, "Shikigami.json"), [])
         self.wdb_soul = _load(os.path.join(WDB, "Soul.json"), [])
         self.wdb_effect = _load(os.path.join(WDB, "Effect.json"), [])
+        # strategy guides EN (FiresChain/onmyoji-wiki) - chien thuat thuc chien
+        self.guides = self._load_guides(os.path.join(ROOT, "data", "external", "firechain", "guides_en"))
         # index nhanh shikigami_full theo ten
         self._sfull = {s.get("name", "").lower(): s for s in self.shikigami_full}
+
+    @staticmethod
+    def _load_guides(path):
+        """Load markdown guides EN -> list {title, tags, summary, body}."""
+        guides = []
+        if not os.path.isdir(path):
+            return guides
+        for fn in sorted(os.listdir(path)):
+            if not fn.endswith(".md") or fn == "index.md":
+                continue
+            raw = open(os.path.join(path, fn), encoding="utf-8").read().lstrip("\ufeff")
+            meta, body = {}, raw
+            m = re.match(r"^---\n(.*?)\n---\n(.*)$", raw, re.DOTALL)
+            if m:
+                for line in m.group(1).splitlines():
+                    if ":" in line:
+                        k, v = line.split(":", 1)
+                        meta[k.strip()] = v.strip()
+                body = m.group(2)
+            body = re.sub(r"[#*`>\-]+", " ", body)
+            body = re.sub(r"\s+", " ", body).strip()
+            guides.append({"file": fn, "title": meta.get("title", fn),
+                           "tags": meta.get("tags", ""), "summary": meta.get("summary", ""),
+                           "body": body})
+        return guides
 
     # ---------- tra cuu ----------
     def shikigami(self, q):
@@ -232,6 +259,12 @@ class KB:
                     f"2-set: {_clean(str(p2), 300)}. 4-set: {_clean(str(p4), 400)}.")
             docs.append({"id": f"wsoul:{s.get('id')}", "type": "soul_db",
                          "title": title, "text": text, "meta": {"type": s.get("type")}})
+        # strategy guides EN (chien thuat thuc chien: team setup/speed tuning)
+        for g in self.guides:
+            text = (f"Strategy guide: {g['title']}. {g['summary']} "
+                    f"Tags: {g['tags']}. {_clean(g['body'], 1500)}")
+            docs.append({"id": f"guide:{g['file']}", "type": "strategy",
+                         "title": g["title"], "text": text, "meta": {"tags": g["tags"]}})
         return docs
 
     def stats(self):
@@ -248,6 +281,7 @@ class KB:
             "wikidb_shikigami": len(self.wdb_shiki),
             "wikidb_soul": len(self.wdb_soul),
             "wikidb_effect": len(self.wdb_effect),
+            "strategy_guides": len(self.guides),
             "screens_labeled": len({st.get("label") for st in self.world["states"].values()
                                     if st.get("label")}),
             "documents": len(self.documents()),
