@@ -260,35 +260,57 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
             print(f"  vong {i+1}/{times}: [DRY] se Challenge @ {_CHALLENGE_XY} -> battle -> reward")
             done += 1; continue
         round_t0 = _time.time()
+        c_before = _read_counter(img)                 # counter TRUOC khi danh
         agent.click(*_CHALLENGE_XY)
         time.sleep(3.0)
-        # Cho battle xong: tap deu vao vung trong de bo qua animation/man thuong,
-        # POLL cho den khi 'Challenge' xuat hien lai (= da ve man stage) hoac het gio.
+        # Cho battle xong. THANG = counter TANG (dang tin hon 'thay Challenge', vi
+        # cac dialog/popup co the de 'Challenge' hien ma battle CHUA chay).
         won = False
         t0 = time.time()
+        saw_battle = False                            # da roi khoi man stage chua
         while time.time() - t0 < 150:                 # battle + reward/popup ngau nhien
             img = agent.shot()
             r2 = agent.read(img)
-            if r2.has("Challenge"):                   # da ve man stage -> xong vong
+            c_now = _read_counter(img)
+            has_ch = r2.has("Challenge")
+            # ve man stage VA counter da tang -> thang that
+            if has_ch and c_before is not None and c_now is not None and c_now > c_before:
                 won = True
                 break
-            # Popup event ngau nhien (vd 'Parade Privilege') -> bam X dong @ (975,135)
-            low = " ".join(str(t).lower() for t, *_ in
+            # ve man stage nhung counter chua doc duoc / chua tang:
+            #  - neu da tung roi khoi stage (saw_battle) -> coi nhu xong (counter OCR loi)
+            #  - neu CHUA tung roi stage -> battle chua chay (dialog chan) -> xu ly dialog
+            if has_ch and saw_battle:
+                won = True
+                break
+            if not has_ch:
+                saw_battle = True
+            # --- Dialog 'Bonus ... Enable it again?' -> Confirm @ (664,414) ---
+            body = " ".join(str(t).lower() for t, *_ in
+                            ocr_words(img, roi=(300, 230, 600, 130), min_conf=35))
+            if "bonus" in body and ("enable" in body or "disabled" in body):
+                agent.c.bgclick(664, 414)
+                time.sleep(1.5)
+                # neu battle chua chay (van o stage), bam lai Challenge
+                if r2.has("Challenge"):
+                    agent.c.bgclick(*_CHALLENGE_XY)
+                    time.sleep(2.5)
+                continue
+            # --- Popup event (vd 'Parade Privilege') -> X dong @ (975,135) ---
+            top = " ".join(str(t).lower() for t, *_ in
                            ocr_words(img, roi=(300, 100, 600, 100), min_conf=35))
-            if "privilege" in low or "parade" in low:
+            if "privilege" in top or "parade" in top:
                 agent.c.bgclick(975, 135)
                 time.sleep(1.5)
                 continue
-            # uu tien bam nut ket qua neu co, neu khong tap nhieu vung de tien toi
+            # --- Nut ket qua / man reward dac biet ---
             tapped = False
-            for w in ("Reward", "Confirm", "Continue", "OK", "Tap"):
+            for w in ("Reward", "Confirm", "Continue", "OK"):
                 if r2.has(w) and agent.tap_text(w, wait=1.2)[0]:
                     tapped = True
                     break
             if not tapped:
-                # man reward dac biet ('New Skill'/'Tap to continue') + animation:
-                # tap ca 'Tap to continue' (duoi) lan giua man.
-                agent.c.bgclick(576, 620)             # vung 'Tap to continue'
+                agent.c.bgclick(576, 620)             # 'Tap to continue'
                 time.sleep(0.8)
                 agent.c.bgclick(576, 340)             # giua man
             time.sleep(1.8)
