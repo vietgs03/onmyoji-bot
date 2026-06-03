@@ -40,6 +40,10 @@ SOURCES = [
      "kind": "image", "desc": "260 loading art EN", "regen": "rebuild_assets.py assets_en"},
     {"name": "ui_sprites", "path": "data/game_assets/res_npk/png", "for": ["template match (tuong lai)"],
      "kind": "image", "desc": "370 UI sprite", "regen": "rebuild_assets.py sprites"},
+    {"name": "wiki_icons_en", "path": "data/external/wiki/shikigami_icons", "for": ["shikigami recog (icon nho trong UI)"],
+     "kind": "image", "desc": "461 shikigami icon EN (+65 soul +38 stats +12 onmyoji +6 rarity)", "regen": "rebuild_assets.py wiki"},
+    {"name": "qidu_templates", "path": "data/external/qidu_templates", "for": ["augment button recog"],
+     "kind": "image", "desc": "44 button template (CN) - augment (vi tri/icon/mau giong, chu khac)", "regen": "rebuild_assets.py qidu"},
 ]
 
 MIN_PER_CLASS = 5  # nguong toi thieu mau / lop de train tin cay

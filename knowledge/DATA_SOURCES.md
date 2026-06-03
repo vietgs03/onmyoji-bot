@@ -42,3 +42,13 @@ Giai ma tu **res.npk** (NetEase NXPK, key XOR=150 + flag&1 zlib, ref `zhouhang95
 - `script.npk`: NeoX VM bytecode -> can decompile sau, it gia tri thuc tien cho bot.
 - HuggingFace/Kaggle: khong co dataset Onmyoji.
 - Cac bot khac (AcademicDog 380*, yys-auto): deu CN/Android, anh CN -> chi augment.
+
+## 6. Nguon anh EN BO SUNG (GitHub - tim phien 2)
+| Nguon | So luong | Server | Dung de | Vi tri |
+|-------|----------|--------|---------|--------|
+| trmzaiu/onmyoji_wiki | **582** (461 shiki icon + 65 soul + 38 stats + 12 onmyoji + 6 rarity) | **EN** | nhan dien shikigami/soul icon nho trong UI | `data/external/wiki/` |
+| qiduQD/Onmyoji-Auto-Assistant | 44 button template | CN | augment button recog | `data/external/qidu_templates/` |
+
+Repo `trmzaiu/onmyoji_wiki` co TONG 6005 anh EN (ten file = ten EN chuan):
+shikigami icons(461)/images(458)/skills(933)/skins(713)/shards(270)/bios(61) + souls + onmyoji + effects(373).
+Co the keo them skill/skins neu can. Regen: `rebuild_assets.py wiki`.

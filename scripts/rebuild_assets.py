@@ -68,12 +68,49 @@ def step_fandom():
     _run([PY, "scripts/fetch_fandom_images.py"])
 
 
+def step_wiki():
+    """trmzaiu/onmyoji_wiki -> 582 anh EN (shikigami/soul/onmyoji icons + stats + rarity)."""
+    import urllib.request
+    UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    api = "https://api.github.com/repos/trmzaiu/onmyoji_wiki/git/trees/HEAD?recursive=1"
+    req = urllib.request.Request(api, headers={"User-Agent": UA})
+    import json as _j
+    tree = _j.load(urllib.request.urlopen(req, timeout=30))["tree"]
+    keep = [x["path"] for x in tree if x["type"] == "blob" and x["path"].endswith(".webp")
+            and any(s in x["path"] for s in ["shikigami/icons/", "souls/icons/",
+                    "onmyoji/icons/", "images/stats/", "images/rarity/"])]
+    open("/tmp/wiki_imgs.txt", "w").write("\n".join(keep))
+    _run([PY, "scripts/fetch_wiki_images.py", "/tmp/wiki_imgs.txt"])
+
+
+def step_qidu():
+    """qiduQD/Onmyoji-Auto-Assistant -> 44 button template (CN, dung augment)."""
+    import urllib.request, json as _j
+    UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64)"
+    out = os.path.join(ROOT, "data/external/qidu_templates")
+    os.makedirs(out, exist_ok=True)
+    api = "https://api.github.com/repos/qiduQD/Onmyoji-Auto-Assistant/git/trees/HEAD?recursive=1"
+    req = urllib.request.Request(api, headers={"User-Agent": UA})
+    tree = _j.load(urllib.request.urlopen(req, timeout=30))["tree"]
+    raw = "https://raw.githubusercontent.com/qiduQD/Onmyoji-Auto-Assistant/HEAD/"
+    n = 0
+    for x in tree:
+        if x["path"].endswith(".png"):
+            dst = os.path.join(out, os.path.basename(x["path"]))
+            if os.path.exists(dst):
+                n += 1; continue
+            r = urllib.request.Request(raw + x["path"], headers={"User-Agent": UA})
+            open(dst, "wb").write(urllib.request.urlopen(r, timeout=20).read())
+            n += 1
+    print(f"  qidu_templates: {n} files")
+
+
 def step_oas():
     _run([PY, "scripts/extract_oas_tasks.py"])
 
 
 STEPS = {"ui": step_ui, "sprites": step_sprites, "assets_en": step_assets_en,
-         "fandom": step_fandom, "oas": step_oas}
+         "fandom": step_fandom, "wiki": step_wiki, "qidu": step_qidu, "oas": step_oas}
 
 
 def main():
