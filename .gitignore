@@ -5,3 +5,4 @@ research/OAS/
 __pycache__/
 *.pyc
 ml/models/*.pkl
+knowledge/vectordb/*.pkl
