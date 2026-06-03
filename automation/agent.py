@@ -131,16 +131,25 @@ class Agent:
         return True, self.wait_stable()[1]
 
     def back(self, wait=2.0):
-        """Thoat man hien tai THONG MINH: uu tien nut X (find_close_button) cho
-        popup, fallback mui ten back goc tren-trai. Tra ScreenReader moi."""
-        from perception import find_close_button
+        """Thoat man hien tai THONG MINH:
+          1. Neu co nut X (popup) -> bam X (find_close_button)
+          2. Nguoc lai bam mui ten back goc tren-trai. Vi tri back khac nhau
+             theo man (Town~90, Summon~55) -> thu vung (55..95) neu lan dau khong doi."""
+        from perception import find_close_button, dhash, hamming
         img = self.shot()
         cb = find_close_button(img)
         if cb:
             self.c.bgclick(cb[0], cb[1])
-        else:
-            self.c.bgclick(62, 90)  # mui ten back chuan game
-        time.sleep(wait)
+            time.sleep(wait)
+            return self.wait_stable()[1]
+        before = dhash(img)
+        for bx, by in ((60, 90), (45, 48), (58, 55), (60, 72)):
+            self.c.bgclick(bx, by)
+            time.sleep(1.2)
+            after = dhash(self.shot())
+            if before is None or after is None or hamming(before, after) > 4:
+                break  # man da doi -> back co tac dung
+        time.sleep(max(0.0, wait - 1.2))
         return self.wait_stable()[1]
 
     def where(self, img=None):
