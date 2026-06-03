@@ -55,6 +55,11 @@ class KB:
         self.progression = _load(os.path.join(FANDOM, "progression_guide.json"), {})
         self.features = _load(os.path.join(os.path.dirname(__file__), "oas_features.json"), [])
         self.world = _load(os.path.join(EXP, "world.json"), {"states": {}, "edges": []})
+        # wiki_db (Supabase trmzaiu) - shikigami/soul/effect co cau truc, da ngon ngu
+        WDB = os.path.join(ROOT, "data", "wiki_db")
+        self.wdb_shiki = _load(os.path.join(WDB, "Shikigami.json"), [])
+        self.wdb_soul = _load(os.path.join(WDB, "Soul.json"), [])
+        self.wdb_effect = _load(os.path.join(WDB, "Effect.json"), [])
         # index nhanh shikigami_full theo ten
         self._sfull = {s.get("name", "").lower(): s for s in self.shikigami_full}
 
@@ -192,6 +197,41 @@ class KB:
                 title = sec.splitlines()[0].strip("# ")
                 docs.append({"id": f"learn:{title[:40]}", "type": "learning",
                              "title": title, "text": _clean(sec, 1500), "meta": {}})
+        # 7) wiki_db: shikigami giau (skill structured + stats + build/team) - nguon tot nhat
+        def _en(n):
+            if isinstance(n, dict):
+                return n.get("en") or (n.get("cn", [""])[0] if isinstance(n.get("cn"), list) else n.get("cn"))
+            return n
+
+        for s in self.wdb_shiki:
+            title = _en(s.get("name")) or f"shiki-{s.get('id')}"
+            sk = s.get("skills") or []
+            skill_txt = "; ".join(
+                f"{_en(k.get('name'))} ({k.get('type','')}, onibi {k.get('onibi',0)}, cd {k.get('cooldown',0)}): "
+                f"{_en(k.get('description')) or ''}"[:160] for k in sk[:4])
+            st = s.get("stats") or {}
+            stat_txt = ", ".join(f"{k} {v}" for k, v in st.items()) if isinstance(st, dict) else ""
+            builds = s.get("build") or []
+            build_txt = "; ".join(
+                f"role {b.get('role')}: souls {b.get('souls')}, sub {b.get('substats')}"
+                for b in builds[:3]) if isinstance(builds, list) else ""
+            prof = _en(s.get("profile")) or ""
+            text = (f"Shikigami {title}, rarity {s.get('rarity')}. "
+                    f"Stats(min,max): {stat_txt}. Skills: {skill_txt}. "
+                    f"Team build: {build_txt}. {prof[:300]}")
+            docs.append({"id": f"wshiki:{s.get('id')}", "type": "shikigami_db",
+                         "title": title, "text": text.strip()[:1900],
+                         "meta": {"rarity": s.get("rarity")}})
+        # 7b) wiki_db souls (structured effects)
+        for s in self.wdb_soul:
+            title = _en(s.get("name"))
+            eff = s.get("effects") or {}
+            p2 = _en(eff.get("piece2", {})) if isinstance(eff, dict) else ""
+            p4 = _en(eff.get("piece4", {})) if isinstance(eff, dict) else ""
+            text = (f"Soul/Mitama {title}, type {s.get('type')}. "
+                    f"2-set: {_clean(str(p2), 300)}. 4-set: {_clean(str(p4), 400)}.")
+            docs.append({"id": f"wsoul:{s.get('id')}", "type": "soul_db",
+                         "title": title, "text": text, "meta": {"type": s.get("type")}})
         return docs
 
     def stats(self):
@@ -205,6 +245,9 @@ class KB:
             "battle_pages": len(self.battle),
             "progression_pages": len(self.progression),
             "game_features": len(self.features),
+            "wikidb_shikigami": len(self.wdb_shiki),
+            "wikidb_soul": len(self.wdb_soul),
+            "wikidb_effect": len(self.wdb_effect),
             "screens_labeled": len({st.get("label") for st in self.world["states"].values()
                                     if st.get("label")}),
             "documents": len(self.documents()),
