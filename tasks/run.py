@@ -244,10 +244,18 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
     wins = 0
     durations = []
     for i in range(times):
-        img = agent.shot()
-        rr = agent.read(img)
-        if not rr.has("Challenge"):
-            print(f"  vong {i+1}: khong thay Challenge -> dung (het luot/sai man)."); break
+        # Cho man stage on dinh + tim Challenge (retry: vua ra khoi battle co the
+        # con dang load lai man stage -> dung break ngay).
+        on_stage = False
+        for _ in range(6):
+            img = agent.shot()
+            rr = agent.read(img)
+            if rr.has("Challenge"):
+                on_stage = True
+                break
+            time.sleep(2.0)
+        if not on_stage:
+            print(f"  vong {i+1}: khong thay Challenge sau 6 thu -> dung (het luot/sai man)."); break
         if dry:
             print(f"  vong {i+1}/{times}: [DRY] se Challenge @ {_CHALLENGE_XY} -> battle -> reward")
             done += 1; continue
@@ -258,7 +266,7 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
         # POLL cho den khi 'Challenge' xuat hien lai (= da ve man stage) hoac het gio.
         won = False
         t0 = time.time()
-        while time.time() - t0 < 75:                  # 1 tran Soul ~ 30-60s
+        while time.time() - t0 < 120:                 # battle Soul + reward co the >75s
             img = agent.shot()
             r2 = agent.read(img)
             if r2.has("Challenge"):                   # da ve man stage -> xong vong
