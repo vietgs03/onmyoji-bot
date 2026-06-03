@@ -131,8 +131,15 @@ class Agent:
         return True, self.wait_stable()[1]
 
     def back(self, wait=2.0):
-        """Click mui ten back goc tren-trai (chuan game). Tra ScreenReader moi."""
-        self.c.bgclick(62, 90)
+        """Thoat man hien tai THONG MINH: uu tien nut X (find_close_button) cho
+        popup, fallback mui ten back goc tren-trai. Tra ScreenReader moi."""
+        from perception import find_close_button
+        img = self.shot()
+        cb = find_close_button(img)
+        if cb:
+            self.c.bgclick(cb[0], cb[1])
+        else:
+            self.c.bgclick(62, 90)  # mui ten back chuan game
         time.sleep(wait)
         return self.wait_stable()[1]
 
