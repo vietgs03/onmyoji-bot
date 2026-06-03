@@ -2,59 +2,91 @@
 """
 parse_ui_layout.py - Trich UI LAYOUT goc cua game tu res.npk (CocoStudio widgetTree).
 
-res.npk chua 2184 file UI layout: moi file la 1 panel/man hinh voi cay widget
-(Button/Label/ImageView...) kem TOA DO chinh xac (designWidth 1136 x designHeight 640).
-Day la "ban thiet ke UI goc" -> bot biet chinh xac nut nao o dau, ten gi, anh gi.
+CocoStudio: moi widget co (x,y) tuong doi voi CHA + anchorPoint + scale.
+Goc toa do CocoStudio = duoi-trai (y len tren). Client Steam = tren-trai (y xuong).
 
-Quan trong: toa do la he 1136x640 (goc duoi-trai, CocoStudio). Client Steam cua ban
-1152x679 -> can scale + flip Y khi dung. Script nay chi TRICH; viec map sang toa do
-man hinh thuc lam khi co screenshot.
+Script nay:
+  1. Duyet cay widget, CONG DON toa do cha -> toa do TUYET DOI trong canvas designW x designH.
+  2. Tinh CENTER cua moi widget (de click).
+  3. Flip Y: y_top = designH - y_bottom  -> he tren-trai chuan man hinh.
+  4. Xuat ca toa do chuan-hoa (cx_norm, cy_norm in [0,1]) -> map sang BAT KY do phan giai
+     client bang cach nhan voi (client_w, client_h). KHONG phu thuoc res cu the.
 
-Ra: knowledge/ui_layouts.json  (list panel -> widgets[name,class,x,y,w,h,image])
+Ra: knowledge/ui_layouts.json
+  panel -> buttons[{name, class, cx_norm, cy_norm, w_norm, h_norm, img, text}]
 
-Dung:
-  python parse_ui_layout.py <thumuc_json_da_extract>   # vd /tmp/res_json/json
+Dung: python parse_ui_layout.py <thumuc_json_da_extract>
 """
 import os, sys, json, glob
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 OUT = os.path.join(ROOT, "knowledge", "ui_layouts.json")
 
-# class widget dang chu y (tuong tac)
-INTERACTIVE = {"Button", "CheckBox", "Slider", "ListView", "ScrollView"}
+INTERACTIVE = {"Button", "CheckBox", "Slider", "ListView", "ScrollView", "ImageView"}
 
 
-def widget_info(node):
+def _f(o, *keys, default=0.0):
+    for k in keys:
+        v = o.get(k)
+        if v is not None:
+            try:
+                return float(v)
+            except (TypeError, ValueError):
+                pass
+    return default
+
+
+def _img(o):
+    for key in ("normalData", "fileNameData", "fileData", "backGroundImageData"):
+        d = o.get(key)
+        if isinstance(d, dict) and d.get("path"):
+            return d["path"]
+    return None
+
+
+def walk(node, parent_x, parent_y, parent_sx, parent_sy, design_w, design_h, out):
+    """Cong don toa do; (parent_x,parent_y) = goc duoi-trai cua vung cha (absolute)."""
     o = node.get("options", {})
     cls = node.get("classname") or o.get("classname")
+
+    x = _f(o, "x", "positionX")
+    y = _f(o, "y", "positionY")
+    w = _f(o, "width")
+    h = _f(o, "height")
+    ax = _f(o, "anchorPointX")
+    ay = _f(o, "anchorPointY")
+    sx = _f(o, "scaleX", default=1.0) or 1.0
+    sy = _f(o, "scaleY", default=1.0) or 1.0
+
+    # vi tri absolute cua goc duoi-trai widget = cha + offset*scale_cha
+    abs_x = parent_x + x * parent_sx
+    abs_y = parent_y + y * parent_sy
+    eff_w = w * parent_sx * sx
+    eff_h = h * parent_sy * sy
+
+    # widget chiem [abs_x - ax*eff_w, abs_x - ax*eff_w + eff_w]
+    left = abs_x - ax * eff_w
+    bottom = abs_y - ay * eff_h
+    cx = left + eff_w / 2.0
+    cy_bottom = bottom + eff_h / 2.0  # tu goc duoi
+    cy_top = design_h - cy_bottom     # flip sang goc tren-trai
+
     name = o.get("name") or node.get("name")
-    info = {
-        "class": cls,
-        "name": name,
-        "x": o.get("x") or o.get("positionX"),
-        "y": o.get("y") or o.get("positionY"),
-        "w": o.get("width") or o.get("scaleWidth"),
-        "h": o.get("height") or o.get("scaleHeight"),
-    }
-    # anh dai dien
-    nd = o.get("normalData") or {}
-    if nd.get("path"):
-        info["image"] = nd["path"]
-    fd = o.get("fileNameData") or o.get("fileData") or {}
-    if isinstance(fd, dict) and fd.get("path"):
-        info["image"] = fd["path"]
-    # text label
-    if o.get("text"):
-        info["text"] = o["text"]
-    return info
+    if cls in INTERACTIVE and name and design_w and design_h:
+        out.append({
+            "name": name,
+            "class": cls,
+            "cx_norm": round(cx / design_w, 4),
+            "cy_norm": round(cy_top / design_h, 4),
+            "w_norm": round(eff_w / design_w, 4),
+            "h_norm": round(eff_h / design_h, 4),
+            "img": _img(o),
+            "text": o.get("text") or None,
+        })
 
-
-def flatten(node, out, panel_name=None):
-    info = widget_info(node)
-    if info.get("class"):
-        out.append(info)
+    # con: goc cua chung tinh tu (left, bottom) cua widget nay
     for c in node.get("children", []):
-        flatten(c, out, panel_name)
+        walk(c, left, bottom, parent_sx * sx, parent_sy * sy, design_w, design_h, out)
 
 
 def parse_file(path):
@@ -64,40 +96,45 @@ def parse_file(path):
         return None
     if not isinstance(d, dict) or "widgetTree" not in d:
         return None
-    widgets = []
-    flatten(d["widgetTree"], widgets)
-    # chi giu cac widget co ten (co y nghia)
-    named = [w for w in widgets if w.get("name")]
-    interactive = [w for w in named if w["class"] in INTERACTIVE]
+    dw = d.get("designWidth") or 1136
+    dh = d.get("designHeight") or 640
+    out = []
+    walk(d["widgetTree"], 0.0, 0.0, 1.0, 1.0, dw, dh, out)
+    # chi giu trong khung [0,1] (loai widget an / scroll content ngoai man)
+    out = [b for b in out if -0.05 <= b["cx_norm"] <= 1.05 and -0.05 <= b["cy_norm"] <= 1.05]
+    if not out:
+        return None
     return {
         "file": os.path.basename(path),
-        "designW": d.get("designWidth"),
-        "designH": d.get("designHeight"),
+        "designW": dw, "designH": dh,
         "textures": d.get("textures", []),
-        "n_widgets": len(widgets),
-        "interactive": interactive,
-        "named_widgets": named,
+        "n_btn": len(out),
+        "buttons": out,
     }
 
 
 def main():
-    src = sys.argv[1] if len(sys.argv) > 1 else "/tmp/res_json/json"
+    src = sys.argv[1] if len(sys.argv) > 1 else "/tmp/uijson/json"
     files = glob.glob(os.path.join(src, "*.json"))
     print(f"quet {len(files)} json...")
-    out = []
-    for f in files:
-        r = parse_file(f)
-        if r and r["named_widgets"]:
-            out.append(r)
-    # de-dup theo (textures + n_widgets) - res.npk thuong co ban CN va EN trung
-    out.sort(key=lambda z: -z["n_widgets"])
+    out = [r for f in files if (r := parse_file(f))]
+
+    # de-dup: panel CN va EN trung textures+layout -> giu ban co 'en' trong textures
+    seen = {}
+    for r in out:
+        key = (tuple(sorted(t for t in r["textures"] if "en" not in t.lower())), r["n_btn"])
+        prev = seen.get(key)
+        has_en = any("en" in t.lower() for t in r["textures"])
+        if prev is None or (has_en and not any("en" in t.lower() for t in prev["textures"])):
+            seen[key] = r
+    out = sorted(seen.values(), key=lambda z: -z["n_btn"])
+
     json.dump(out, open(OUT, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
-    n_btn = sum(len(r["interactive"]) for r in out)
-    print(f"trich {len(out)} UI panel, {n_btn} widget tuong tac co ten -> {OUT}\n")
-    for r in out[:12]:
-        names = ", ".join(w["name"] for w in r["interactive"][:5])
-        print(f"  {r['file']} [{r['designW']}x{r['designH']}] "
-              f"{len(r['interactive'])} btn: {names}  tex={r['textures'][:1]}")
+    n_btn = sum(r["n_btn"] for r in out)
+    print(f"trich {len(out)} panel, {n_btn} button (toa do chuan-hoa 0..1) -> {OUT}\n")
+    for r in out[:10]:
+        names = ", ".join(f"{b['name']}({b['cx_norm']},{b['cy_norm']})" for b in r["buttons"][:4])
+        print(f"  {r['file']} {r['n_btn']}btn: {names}")
 
 
 if __name__ == "__main__":
