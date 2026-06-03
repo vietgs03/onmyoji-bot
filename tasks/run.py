@@ -285,21 +285,19 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
                 break
             if not has_ch:
                 saw_battle = True
+            # OCR full anh 1 lan (crop ROI nho lam OCR fail) -> dung chung cho detect
+            full = " ".join(str(t).lower() for t, *_ in ocr_words(img, min_conf=35))
             # --- Dialog 'Bonus ... Enable it again?' -> Confirm @ (664,414) ---
-            body = " ".join(str(t).lower() for t, *_ in
-                            ocr_words(img, roi=(300, 230, 600, 130), min_conf=35))
-            if "bonus" in body and ("enable" in body or "disabled" in body):
-                agent.c.bgclick(664, 414)
-                time.sleep(1.5)
-                # neu battle chua chay (van o stage), bam lai Challenge
-                if r2.has("Challenge"):
+            if "bonus" in full and ("enable" in full or "disabled" in full):
+                agent.c.bgclick(664, 414)             # Confirm bat bonus (15') -> het hoi lai
+                time.sleep(2.0)
+                # battle chua chay (van o stage) -> bam lai Challenge
+                if agent.read().has("Challenge"):
                     agent.c.bgclick(*_CHALLENGE_XY)
                     time.sleep(2.5)
                 continue
             # --- Popup event (vd 'Parade Privilege') -> X dong @ (975,135) ---
-            top = " ".join(str(t).lower() for t, *_ in
-                           ocr_words(img, roi=(300, 100, 600, 100), min_conf=35))
-            if "privilege" in top or "parade" in top:
+            if "privilege" in full or "parade" in full:
                 agent.c.bgclick(975, 135)
                 time.sleep(1.5)
                 continue
