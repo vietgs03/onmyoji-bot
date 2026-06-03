@@ -26,6 +26,7 @@ import heapq
 import json
 import os
 import sys
+import time
 from collections import defaultdict
 from typing import Optional
 
@@ -168,9 +169,14 @@ class ScreenGraph:
     `agent` co the None (test offline cac thuat toan tinh: path/tree/where-voi-reader).
     """
 
-    def __init__(self, agent=None, nodes: Optional[dict] = None):
+    def __init__(self, agent=None, nodes: Optional[dict] = None, stats=None):
         self.a = agent
         self.nodes = nodes if nodes is not None else NODES
+        # Kho thong ke canh (hoc online do tin cay). None -> tu tao.
+        if stats is None:
+            from edge_stats import EdgeStats
+            stats = EdgeStats()
+        self.stats = stats
 
     # ------------------------------------------------------------------
     # Tien ich cau truc cay
@@ -253,14 +259,20 @@ class ScreenGraph:
             self.a.back()
 
     # ------------------------------------------------------------------
-    # TIM DUONG: Dijkstra trong so = chi phi/do tin cay canh.
-    # Vi sao Dijkstra (khong chi BFS): cac canh KHONG bang nhau - nut nho hay
-    # truot OCR thi dat; canh lui de gap popup thi dat. Cost=1 deu -> == BFS.
+    # TIM DUONG: Dijkstra tren do thi XAC SUAT (Stochastic Shortest Path).
+    # Cost canh = cost tinh (base) + rui ro hoc duoc (-log P_success) + latency.
+    # Canh bi CHAN (gated/het han) -> cost COST_CEIL (rat dat, chi di neu BAT BUOC).
+    # -> Dijkstra TU NE tuong va chon duong tin cay nhat. base=1 + chua co data
+    # -> ~ Dijkstra cu (tuong thich nguoc).
     # ------------------------------------------------------------------
-    def _edge_cost(self, src: str, dst: str, btn: Optional[dict]) -> float:
+    def _base_cost(self, src: str, dst: str, btn: Optional[dict]) -> float:
         if btn and "cost" in btn:
             return btn["cost"]
         return COST_BACK if self._is_back_edge(src, dst) else COST_DEFAULT
+
+    def _edge_cost(self, src: str, dst: str, btn: Optional[dict]) -> float:
+        """Cost cuoi = base dieu chinh boi thong ke hoc duoc (do tin cay/latency)."""
+        return self.stats.learned_cost(src, dst, self._base_cost(src, dst, btn))
 
     def _neighbors(self, name: str) -> dict:
         """Canh tien (exits) + canh LUI (ve parent). Tra {dst: btn|None}."""
@@ -313,10 +325,16 @@ class ScreenGraph:
     def goto(self, target: str, max_hops: int = 12, verbose: bool = True) -> bool:
         """Di toi `target` tu BAT KY dau. Re-plan moi hop (doc lai vi tri thuc).
         Moi hop: doc man 1 LAN -> (1) co overlay/popup? resolve roi tiep;
-        (2) lac/nghi ngo? escape; (3) tinh Dijkstra, di 1 hop. Tra True neu toi noi.
+        (2) lac/nghi ngo? escape; (3) tinh Dijkstra, di 1 hop.
+
+        HOC ONLINE: moi hop ta biet vi tri THUC sau hop truoc -> cham diem canh vua
+        di (toi dung dst = success, khong = fail) + latency. Stats cap nhat -> lan
+        sau Dijkstra ne canh hay fail / tuong chan. Tra True neu toi noi.
         """
         if target not in self.nodes:
             raise ValueError(f"node khong ton tai: {target}")
+
+        pending = None      # (src, dst, t0) canh vua di, cho cham diem o hop sau
 
         for hop in range(max_hops):
             r = self.a.read() if self.a else None      # doc 1 lan, dung lai cho ca 2 check
@@ -329,9 +347,20 @@ class ScreenGraph:
                 continue                               # khong tinh la hop dieu huong
 
             cur, conf = self.where(reader=r)
+
+            # cham diem canh da di o hop truoc (biet vi tri thuc bay gio = cur)
+            if pending is not None:
+                src, dst, t0 = pending
+                ok = (cur == dst)
+                self.stats.record(src, dst, ok, latency=time.time() - t0)
+                if verbose and not ok:
+                    print(f"[goto]   canh {src}->{dst} FAIL (toi '{cur}') -> tang cost")
+                pending = None
+
             if verbose:
                 print(f"[goto] hop {hop}: o '{cur}' (conf {conf:.2f}) -> '{target}'")
             if cur == target:
+                self.stats.save()
                 return True
 
             # lac duong: khong ro vi tri, hoac qua nghi ngo -> ve HOME lam moc.
@@ -348,9 +377,16 @@ class ScreenGraph:
                 self.escape()
                 continue
 
+            pending = (p[0], p[1], time.time())        # nho de cham diem hop sau
             self._go_edge(p[0], p[1])
-        # het hop: kiem tra lan cuoi
-        return self.where()[0] == target
+
+        # het hop: cham diem canh cuoi + ket luan
+        final = self.where()[0]
+        if pending is not None:
+            src, dst, t0 = pending
+            self.stats.record(src, dst, final == dst, latency=time.time() - t0)
+        self.stats.save()
+        return final == target
 
     def escape(self, max_steps: int = 8) -> Optional[str]:
         """Dismiss lien tuc ve HOME (Agent.back home=True lo nhieu lop/tab)."""

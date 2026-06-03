@@ -110,13 +110,58 @@ def test_overlay():
     return ok / tot if tot else 1.0
 
 
+def test_stats():
+    """E. HOC ONLINE: cost canh thich nghi + ne TUONG (Stochastic Shortest Path).
+    Kiem tra: (1) canh fail nhieu -> blocked; (2) Dijkstra ne tuong, chon duong vong;
+    (3) thanh cong reset block. Day la cot loi 'biet tuong chan o dau'."""
+    from edge_stats import EdgeStats
+    print("\n=== E. HOC ONLINE (edge stats) ===")
+    if os.path.exists("/tmp/es_eval.json"):
+        os.remove("/tmp/es_eval.json")             # bat dau sach -> test deterministic
+    ok = tot = 0
+
+    def chk(name, cond):
+        nonlocal ok, tot
+        tot += 1; ok += bool(cond)
+        print(f"E. {name:40} {'OK' if cond else 'SAI'}")
+
+    es = EdgeStats("/tmp/es_eval.json")
+    # do thi do choi: A->B (ngan) | A->C->B (vong). B la dich.
+    toy = {
+        "A": {"identify": ["A"], "exits": {"B": {"text": ["x"], "cost": 1.0},
+                                            "C": {"text": ["x"], "cost": 1.0}}, "parent": None},
+        "B": {"identify": ["B"], "exits": {}, "parent": "A"},
+        "C": {"identify": ["C"], "exits": {"B": {"text": ["x"], "cost": 1.0}}, "parent": "A"},
+    }
+    g = ScreenGraph(nodes=toy, stats=es)
+    chk("truoc tuong: di duong ngan A->B", g.path("A", "B") == ["A", "B"])
+
+    for _ in range(3):
+        es.record("A", "B", ok=False)               # gap tuong 3 lan
+    chk("3 fail -> canh A->B bi danh dau blocked", es.is_blocked("A", "B"))
+    chk("sau tuong: Dijkstra ne, di vong A->C->B", g.path("A", "B") == ["A", "C", "B"])
+
+    es.record("A", "B", ok=True)                     # tuong mo lai (event)
+    chk("thanh cong -> bo chan, ve lai duong ngan", g.path("A", "B") == ["A", "B"])
+
+    # cost don dieu theo do tin cay
+    c_good = es.learned_cost("A", "C", 1.0)
+    es.record("A", "C", ok=False); es.record("A", "C", ok=False)
+    c_bad = es.learned_cost("A", "C", 1.0)
+    chk("canh hay fail -> cost tang", c_bad > c_good)
+
+    print(f"   stats logic: {ok}/{tot} = {ok/tot:.3f}")
+    return ok / tot if tot else 1.0
+
+
 def main():
     a = test_tree()
     b = test_paths()
     c = test_where()
     d = test_overlay()
+    e = test_stats()
     print(f"\nTONG: cay={'OK' if a else 'LOI'}, path={'OK' if b else 'LOI'}, "
-          f"where={c:.3f}, overlay={d:.3f}")
+          f"where={c:.3f}, overlay={d:.3f}, stats={e:.3f}")
 
 
 if __name__ == "__main__":
