@@ -78,9 +78,10 @@
         "your_screenshots": "exploration/screens/ - 130 EN (ground truth)"
       },
       "ui_layout": {
-        "file": "knowledge/ui_layouts.json (944KB) - BAN THIET KE UI GOC",
-        "content": "1579 panel + 11252 button co ten+toa do+anh (he 1136x640 CocoStudio goc duoi-trai)",
-        "WARN": "phai scale + flip-Y sang client 1152x679 truoc khi dung - CHUA verify tren screenshot that",
+        "file": "knowledge/ui_layouts.json - BAN THIET KE UI GOC",
+        "content": "1205 panel + 25291 button toa do CHUAN HOA 0..1 (da cong don hierarchy + anchor + flip-Y)",
+        "lookup": "knowledge/ui_lookup.py - UILookup(1152,679).find('auto')/click_point('button_auto')/panel_buttons('combat')",
+        "verified": "VERIFY LOGIC OK: button_auto=(56,622) dung goc combat, btn_close goc tren-phai, btn_back tren-trai. neox.xml xac nhan game render native 1136x640 = dung design res. Con verify pixel tren screenshot that toi nay",
         "decrypt": "scripts/nxpk_extract.py (NXPK key XOR=150 +zlib) + scripts/parse_ui_layout.py"
       },
       "game_folder": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Onmyoji (27GB): res.npk/tex_res.npk(5GB)/script.npk/model2.npk/sound.npk"
@@ -92,6 +93,16 @@
         "automation/agent.py": "where/goto/tap/resources/ask - where() dung dhash->screen_ocr@0.15->screen_clf",
         "tasks/run.py": "khung task"
       }
+    },
+    "7_tooling": {
+      "desc": "Cong cu tai tao + danh gia data",
+      "files": {
+        "scripts/rebuild_assets.py": "tai tao MOI asset tu game+web (ui/sprites/assets_en/fandom/oas) --all",
+        "ml/dataset_registry.py": "dang ky 9 nguon data + danh gia chat luong (phan bo lop, cho thieu); 'gaps' = cho can thu them",
+        "knowledge/memory.py": "query cay nho (find/path/render)",
+        "scripts/label_states.py": "label man hinh; lenh 'suggest' = screen_ocr tu de xuat nhan"
+      },
+      "data_gaps": "12 lop <5 mau (Animation/Shikigami/Shrine Pass/Town/Friends/Mentor/Shop/Summon/World...) -> thu them toi nay"
     }
   },
   "external_repos": {
