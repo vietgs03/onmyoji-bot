@@ -46,12 +46,12 @@ Giai ma tu **res.npk** (NetEase NXPK, key XOR=150 + flag&1 zlib, ref `zhouhang95
 ## 6. Nguon anh EN BO SUNG (GitHub - tim phien 2)
 | Nguon | So luong | Server | Dung de | Vi tri |
 |-------|----------|--------|---------|--------|
-| trmzaiu/onmyoji_wiki | **582** (461 shiki icon + 65 soul + 38 stats + 12 onmyoji + 6 rarity) | **EN** | nhan dien shikigami/soul icon nho trong UI | `data/external/wiki/` |
+| trmzaiu/onmyoji_wiki | **~6005** (icon461 + image458 + skill933 + skin713 + shard270 + bio61 + soul + onmyoji234 + stats38 + rarity6) | **EN** | nhan dien shikigami/soul/skill - ten file = ten EN sach | `data/external/wiki/` |
+| FiresChain/onmyoji-flow | **470** (270 shiki theo rarity + 137 yuhun + 48 skill) | id-based | anh RIPPED IN-GAME - augment recog; map id->name = flow_shikigami.json | `data/external/flow_assets/` |
 | qiduQD/Onmyoji-Auto-Assistant | 44 button template | CN | augment button recog | `data/external/qidu_templates/` |
 
-Repo `trmzaiu/onmyoji_wiki` co TONG 6005 anh EN (ten file = ten EN chuan):
-shikigami icons(461)/images(458)/skills(933)/skins(713)/shards(270)/bios(61) + souls + onmyoji + effects(373).
-Co the keo them skill/skins neu can. Regen: `rebuild_assets.py wiki`.
+Repo `trmzaiu/onmyoji_wiki` co TONG 6005 anh EN (ten file = ten EN chuan). Regen: `rebuild_assets.py wiki`.
+`FiresChain/onmyoji-flow` = anh ripped tu game (id-based, phan theo rarity). Regen: `rebuild_assets.py flow`.
 
 ## 7. DATABASE day du (Supabase wiki - PHIEN 2, GIA TRI CAO NHAT cho phan tich)
 Wiki trmzaiu dung Supabase (REST API mo, anon key public read-only). Keo TOAN BO:
@@ -65,6 +65,12 @@ Wiki trmzaiu dung Supabase (REST API mo, anon key public read-only). Keo TOAN BO
 | Evolution | 13 | evolution chains |
 | Illustration | 1156 | metadata tranh |
 
--> `data/wiki_db/*.json` (TRACKED, 2.7MB). Nap vao KB (shikigami_db/soul_db) -> 817 docs.
+-> `data/wiki_db/*.json` (TRACKED, 2.7MB). Nap vao KB (shikigami_db/soul_db) -> 821 docs.
 Cho phep xay chuc nang PHAN TICH: team builder, skill lookup, soul recommend, counter.
 Regen: `scripts/fetch_wiki_db.py` (URL+anon key trong script).
+
+## 8. Strategy guides EN (FiresChain/onmyoji-wiki - chien thuat thuc chien)
+4 guide markdown EN co team setup chi tiet (Orochi Floor10 speedrun, Yamabunny budget/full-clear, Duel Advanced).
+-> `data/external/firechain/guides_en/*.md` (TRACKED). Nap vao KB (type `strategy`) -> KB 821 docs.
+Vector search query "orochi speedrun team" tra dung guide (0.59). Co the keo them guide zh (nhieu stage).
+Cung tu FiresChain: `flow_shikigami.json`(id->rarity, 598=SP), `flow_onmyojiSkill.json`, `flow_yuhun.json` (zh - fallback id-map).
