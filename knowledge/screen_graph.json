@@ -66,6 +66,33 @@
       785,
       582
      ]
+    },
+    "event": {
+     "text": [
+      "Event"
+     ],
+     "center": [
+      1078,
+      195
+     ]
+    },
+    "shop": {
+     "text": [
+      "Shop"
+     ],
+     "center": [
+      624,
+      625
+     ]
+    },
+    "guild": {
+     "text": [
+      "Guild"
+     ],
+     "center": [
+      525,
+      625
+     ]
     }
    }
   },
@@ -204,8 +231,9 @@
   },
   "friends": {
    "identify": [
-    "Friends",
-    "Guild"
+    "Add Friend",
+    "Guild Invite",
+    "Recommended"
    ],
    "parent": "HOME"
   },
@@ -214,6 +242,47 @@
     "Garment",
     "Mall",
     "Stellar Omen"
+   ],
+   "parent": "HOME"
+  },
+  "event": {
+   "identify": [
+    "Version Event",
+    "Memory Scroll",
+    "Gilded Echoes"
+   ],
+   "parent": "HOME"
+  },
+  "settings": {
+   "identify": [
+    "Settings",
+    "Audio",
+    "Nameplate"
+   ],
+   "parent": "HOME"
+  },
+  "guild": {
+   "identify": [
+    "Guild Grounds",
+    "Guild Hall"
+   ],
+   "parent": "HOME"
+  },
+  "shrine_pass": {
+   "identify": [
+    "Shrine Pass",
+    "Mystic Scroll"
+   ],
+   "parent": "HOME"
+  },
+  "cosmetics": {
+   "identify": [
+    "Cosmetic",
+    "Frame",
+    "Ranking"
+   ],
+   "avoid": [
+    "Garment"
    ],
    "parent": "HOME"
   },
@@ -284,6 +353,17 @@
     "Hyakki"
    ],
    "parent": "town"
+  },
+  "mentor": {
+   "identify": [
+    "Mentorship",
+    "Apprentices"
+   ],
+   "avoid": [
+    "Add Friend",
+    "Guild Invite"
+   ],
+   "parent": "friends"
   }
  }
 }

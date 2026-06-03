@@ -60,6 +60,9 @@ NODES: dict[str, dict] = {
             "shikigami":   {"text": ["Shikigami"],  "center": [997, 586]},
             "onmyodo":     {"text": ["Onmyodo"],    "center": [881, 573]},
             "friends":     {"text": ["Friends"],    "center": [785, 582]},
+            "event":       {"text": ["Event"],      "center": [1078, 195]},
+            "shop":        {"text": ["Shop"],       "center": [624, 625]},
+            "guild":       {"text": ["Guild"],      "center": [525, 625]},
         },
     },
     "exploration": {
@@ -90,8 +93,24 @@ NODES: dict[str, dict] = {
     "summon":    {"identify": ["Summon", "Scrolls"],   "parent": "HOME"},
     "shikigami": {"identify": ["Shikigami", "Preset"], "parent": "HOME"},
     "onmyodo":   {"identify": ["Onmyodo"],             "parent": "HOME"},
-    "friends":   {"identify": ["Friends", "Guild"],    "parent": "HOME"},
+    # friends: tab ban be (Add Friend / Guild Invite / Recommended). Mentor la
+    # tab ke ben (cung co Apprentices) -> phan biet bang nut dac trung friends.
+    "friends":   {"identify": ["Add Friend", "Guild Invite", "Recommended"],
+                  "parent": "HOME"},
     "shop":      {"identify": ["Garment", "Mall", "Stellar Omen"], "parent": "HOME"},
+    # --- man tien ich / su kien (duoi HOME) ---
+    # Event: banner su kien (Version Event, Memory Scroll...). Nut Event goc phai HOME.
+    "event":     {"identify": ["Version Event", "Memory Scroll", "Gilded Echoes"],
+                  "parent": "HOME"},
+    # Settings: bang cai dat (Audio/Music/SFX/Nameplate). Mo tu gear goc HOME.
+    "settings":  {"identify": ["Settings", "Audio", "Nameplate"], "parent": "HOME"},
+    # Guild: san guild (Guild Grounds, decorations). Nut Guild day HOME.
+    "guild":     {"identify": ["Guild Grounds", "Guild Hall"], "parent": "HOME"},
+    # Shrine Pass: battle pass (Mystic Scroll, Knowledge). Vao tu banner.
+    "shrine_pass": {"identify": ["Shrine Pass", "Mystic Scroll"], "parent": "HOME"},
+    # Cosmetics: skin/frame shop (Cosmetic Scene/Skin/Frame). Tranh nham Shop.
+    "cosmetics": {"identify": ["Cosmetic", "Frame", "Ranking"],
+                  "avoid": ["Garment"], "parent": "HOME"},
     # --- man con cap 2 (duoi exploration) ---
     "realm_raid":   {"identify": ["Realm Raid", "Assault"], "parent": "exploration"},
     "soul_zones":   {"identify": ["Soul Zones", "Harvest"], "parent": "exploration"},
@@ -107,6 +126,10 @@ NODES: dict[str, dict] = {
                         "avoid": ["Arena", "Mystic Trader"], "parent": "town"},
     "hunt":            {"identify": ["Hunt"],               "parent": "town"},
     "hyakkisen":       {"identify": ["Hyakki"],             "parent": "town"},
+    # Mentor: tab su phu (Mentorship Channel/Notice, No Recommendation). Ke ben
+    # tab Friends; phan biet bang avoid nut chi-Friends (Add Friend/Guild Invite).
+    "mentor":          {"identify": ["Mentorship", "Apprentices"],
+                        "avoid": ["Add Friend", "Guild Invite"], "parent": "friends"},
 }
 
 

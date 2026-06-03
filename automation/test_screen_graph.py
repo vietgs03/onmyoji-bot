@@ -24,6 +24,8 @@ WORLD = os.path.join(ROOT, "exploration", "world.json")
 LBL2NODE = {
     "HOME": "HOME", "Explore": "exploration", "Town": "town", "Summon": "summon",
     "Shikigami": "shikigami", "Friends": "friends", "Shop": "shop",
+    "Event": "event", "Settings": "settings", "Guild Hall": "guild",
+    "Shrine Pass": "shrine_pass", "Cosmetics": "cosmetics", "Mentor": "mentor",
 }
 
 # cac cap path mong doi (BFS)
