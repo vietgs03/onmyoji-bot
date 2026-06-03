@@ -61,12 +61,46 @@ def ci95(xs):
     return m, 1.96 * sd / math.sqrt(len(xs))
 
 
+def _far_pair(m, size, rng, min_frac=0.5, tries=40):
+    """Random 1 cap (start,goal) co loi giai VA cach nhau XA (>= min_frac*duong cheo).
+    Ep duong dai de test NANG, tranh start/goal sat nhau (test nhe).
+    Toi uu: uoc luong Manhattan TRUOC, chi BFS khi du xa (BFS dat tren maze lon)."""
+    want = int((size * 2) * min_frac)           # nguong do dai toi thieu
+    best = None
+    for _ in range(tries):
+        s = (rng.randrange(size), rng.randrange(size))
+        g = (rng.randrange(size), rng.randrange(size))
+        if s == g:
+            continue
+        if abs(s[0]-g[0]) + abs(s[1]-g[1]) < want:
+            continue                            # Manhattan < want -> chac chan khong du xa
+        opt = bfs_optimal(m, s, g)              # chi BFS khi co tiem nang
+        if opt is None:
+            continue
+        if opt >= want:
+            return s, g, opt
+        if best is None or opt > best[2]:
+            best = (s, g, opt)
+    if best:
+        return best
+    # fallback: lay bat ky cap co loi giai (maze gated nang co the it cap xa)
+    for _ in range(tries):
+        s = (rng.randrange(size), rng.randrange(size))
+        g = (rng.randrange(size), rng.randrange(size))
+        if s == g:
+            continue
+        opt = bfs_optimal(m, s, g)
+        if opt:
+            return s, g, opt
+    return None
+
+
 # ----------------------------------------------------------------------
 # A. BATTERY random
 # ----------------------------------------------------------------------
-def battery(n_mazes=40, n_pairs=5, size=25, gated=0.15, seed0=1000):
-    print(f"=== A. BATTERY RANDOM: {n_mazes} me cung x {n_pairs} cap (start,goal), "
-          f"{size}x{size}, gated~{gated:.0%} ===")
+def battery(n_mazes=20, n_pairs=4, size=50, gated=0.22, seed0=1000):
+    print(f"=== A. BATTERY RANDOM: {n_mazes} me cung x {n_pairs} cap (start,goal) XA, "
+          f"{size}x{size}={size*size} node, gated~{gated:.0%} ===", flush=True)
     modes = {
         "no-learn ": dict(learn=False, astar=False),
         "learn-Dij": dict(learn=True,  astar=False),
@@ -76,13 +110,14 @@ def battery(n_mazes=40, n_pairs=5, size=25, gated=0.15, seed0=1000):
 
     rng = random.Random(seed0)
     for i in range(n_mazes):
+        if i % 5 == 0:
+            print(f"  ...maze {i}/{n_mazes}", flush=True)
         m = Maze(size, size, gated_frac=gated, seed=seed0 + i)
         pairs = []
         while len(pairs) < n_pairs:
-            s = (rng.randrange(size), rng.randrange(size))
-            g = (rng.randrange(size), rng.randrange(size))
-            if s != g and bfs_optimal(m, s, g) is not None:   # chi cap co loi giai
-                pairs.append((s, g))
+            pr = _far_pair(m, size, rng)         # cap XA nhau, co loi giai
+            if pr:
+                pairs.append((pr[0], pr[1]))
         for mode, opt in modes.items():
             # MOI mode lam lai tu stats sach tren CUNG me cung+pairs (cong bang).
             for (s, g) in pairs:
@@ -106,19 +141,21 @@ def battery(n_mazes=40, n_pairs=5, size=25, gated=0.15, seed0=1000):
 # ----------------------------------------------------------------------
 # B. LEARNING CURVE
 # ----------------------------------------------------------------------
-def curve(size=30, gated=0.18, episodes=8, n_mazes=20, seed0=2000):
-    print(f"\n=== B. LEARNING CURVE: {n_mazes} me cung, moi cung chay {episodes} "
-          f"episode (giu stats) - do dam tuong giam dan ===")
+def curve(size=50, gated=0.22, episodes=8, n_mazes=15, seed0=2000):
+    print(f"\n=== B. LEARNING CURVE: {n_mazes} me cung {size}x{size}, moi cung {episodes} "
+          f"episode (giu stats), start/goal RANDOM moi episode - dam tuong giam ===")
     # trung binh bumps theo episode tren nhieu me cung
     per_ep = [[] for _ in range(episodes)]
     per_ep_reach = [[] for _ in range(episodes)]
+    rng = random.Random(seed0)
     for i in range(n_mazes):
         m = Maze(size, size, gated_frac=gated, seed=seed0 + i)
-        s, g = (0, 0), (size - 1, size - 1)
-        if bfs_optimal(m, s, g) is None:
-            continue
         a = MazeAgent(m, fresh_stats())                 # GIU stats qua cac episode
         for ep in range(episodes):
+            pr = _far_pair(m, size, rng)                # RANDOM cap moi episode
+            if not pr:
+                continue
+            s, g, _ = pr
             r = a.navigate(s, g, learn=True, astar=True)
             per_ep[ep].append(r["bumps"])
             per_ep_reach[ep].append(1.0 if r["reached"] else 0.0)
@@ -139,28 +176,36 @@ def curve(size=30, gated=0.18, episodes=8, n_mazes=20, seed0=2000):
 # ----------------------------------------------------------------------
 # C. VERSION GAIN (nhieu vong huan luyen -> do cai thien)
 # ----------------------------------------------------------------------
-def version_gain(size=28, gated=0.2, versions=5, train_runs=4, n_mazes=15, seed0=3000):
-    print(f"\n=== C. VERSION GAIN: {n_mazes} me cung, {versions} version "
-          f"(moi version = +{train_runs} vong train) - do nhan dien tang ===")
-    print(f"\n{'version':>8} {'reach% (eval)':>14} {'bumps (eval)':>14}")
+def version_gain(size=50, gated=0.25, versions=5, train_runs=5, n_mazes=12, seed0=3000):
+    print(f"\n=== C. VERSION GAIN: {n_mazes} me cung {size}x{size}, {versions} version "
+          f"(moi version = +{train_runs} vong train, cap RANDOM) ===")
+    print("    Train tren cap start/goal RANDOM, EVAL tren cap RANDOM KHAC")
+    print("    -> do TONG QUAT HOA (hoc ban do tuong chung), khong overfit 1 duong.\n")
+    print(f"{'version':>8} {'reach% (eval)':>14} {'bumps (eval)':>14}")
     for v in range(versions):
         reach, bumps = [], []
+        rng_eval = random.Random(seed0 + 777)      # cap EVAL co dinh moi version (cong bang)
         for i in range(n_mazes):
             m = Maze(size, size, gated_frac=gated, seed=seed0 + i)
-            s, g = (0, 0), (size - 1, size - 1)
-            if bfs_optimal(m, s, g) is None:
-                continue
             a = MazeAgent(m, fresh_stats())
-            for _ in range(v * train_runs):             # train v*train_runs vong
-                a.navigate(s, g, learn=True, astar=True)
-            r = a.navigate(s, g, learn=False, astar=True)   # EVAL (khong hoc them)
+            rng_train = random.Random(seed0 + 100 + i)
+            for _ in range(v * train_runs):         # train tren cap RANDOM khac nhau
+                pr = _far_pair(m, size, rng_train)
+                if pr:
+                    a.navigate(pr[0], pr[1], learn=True, astar=True)
+            # EVAL tren cap random rieng (KHONG trung train) -> tong quat hoa
+            pe = _far_pair(m, size, rng_eval)
+            if not pe:
+                continue
+            r = a.navigate(pe[0], pe[1], learn=False, astar=True)
             reach.append(1.0 if r["reached"] else 0.0)
             bumps.append(r["bumps"])
         print(f"{v:8} {statistics.mean(reach)*100:13.1f}% {statistics.mean(bumps):13.2f}")
-    print("  => qua tung version (train nhieu hon), bumps giam = model nhan dien tuong tot hon.")
+    print("  => version cao (train nhieu cap khac nhau) -> bumps eval giam = model")
+    print("     hoc duoc BAN DO TUONG, tong quat sang cap moi (khong chi thuoc 1 duong).")
 
 
-def correctness(n_mazes=50, n_pairs=10, size=20, gated=0.0, seed0=9000):
+def correctness(n_mazes=50, n_pairs=10, size=40, gated=0.0, seed0=9000):
     """KIEM DUNG: tren me cung KHONG gated, navigate phai cho do dai = BFS optimal
     (vi cost=1 deu -> Dijkstra/A* == BFS). Random nhieu case de bat sai sot."""
     print(f"=== D. CORRECTNESS: {n_mazes}x{n_pairs} cap random (no gated) "

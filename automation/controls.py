@@ -192,7 +192,7 @@ class ControlFinder:
         H, W = g.shape
         # nguong rieng theo loai (back an toan o nguong thap nho vung hep)
         if min_score is None:
-            min_score = 0.72 if kind == "back" else 0.82
+            min_score = 0.70 if kind == "back" else 0.82
         if region is None:
             if kind == "back":
                 region = (0, 0, int(W * 0.18), int(H * 0.20))      # goc tren-trai
