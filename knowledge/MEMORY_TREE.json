@@ -1,125 +1,152 @@
 {
-  "project": "onmyoji-bot",
-  "target": "Onmyoji Global/EN - Steam PC (appid 551170), NOT emulator",
-  "host": "WSL/Linux dieu khien Windows game qua powershell.exe + Win32",
-  "updated": "2026-06-03",
-  "tree": {
-    "1_control": {
-      "desc": "Dieu khien game window tu WSL",
-      "status": "DONE - on dinh",
-      "files": {
-        "ps/server.ps1": "PowerShell server: ping/info/bgshot/bgclick/fgclick/pmclick/restore/quit",
-        "scripts/control_client.py": "client goi server",
-        "scripts/onmyoji.sh": "wrapper shell"
-      },
-      "infra": {
-        "server_path": "C:\\Users\\Public\\onmyoji_server.ps1",
-        "screenshot": "C:\\Users\\Public\\onmyoji_srv.png",
-        "window": "1152x679 @ (2093,58), process Client/Client.exe",
-        "WARN": "NEVER click (1115,78)=game X; bgclick=foreground click"
-      }
+ "project": "onmyoji-bot",
+ "target": "Onmyoji Global/EN - Steam PC (appid 551170), NOT emulator",
+ "host": "WSL/Linux dieu khien Windows game qua powershell.exe + Win32",
+ "updated": "phase2: them wiki_db Supabase(271 shiki structured)+6005 anh wiki EN+470 anh flow ripped+4 guide EN. KB 482->821 docs. 18 nguon dang ky",
+ "tree": {
+  "1_control": {
+   "desc": "Dieu khien game window tu WSL",
+   "status": "DONE - on dinh",
+   "files": {
+    "ps/server.ps1": "PowerShell server: ping/info/bgshot/bgclick/fgclick/pmclick/restore/quit",
+    "scripts/control_client.py": "client goi server",
+    "scripts/onmyoji.sh": "wrapper shell"
+   },
+   "infra": {
+    "server_path": "C:\\Users\\Public\\onmyoji_server.ps1",
+    "screenshot": "C:\\Users\\Public\\onmyoji_srv.png",
+    "window": "1152x679 @ (2093,58), process Client/Client.exe",
+    "WARN": "NEVER click (1115,78)=game X; bgclick=foreground click"
+   }
+  },
+  "2_perception": {
+   "desc": "Tri giac man hinh + ban do trang thai",
+   "status": "DONE",
+   "files": {
+    "scripts/perception.py": "dhash, detect buttons, loading, X close",
+    "scripts/world_model.py": "graph trang thai",
+    "scripts/explorer.py": "tu kham pha + ne tran dau",
+    "scripts/label_states.py": "gan nhan man hinh",
+    "scripts/build_graph.py": "build logical graph"
+   },
+   "data": {
+    "exploration/graph_logical.json": "18 logical states / functions mapped",
+    "exploration/observations.jsonl": "613 observations",
+    "exploration/screens/": "130 screenshot EN (ground truth - QUAN TRONG NHAT)",
+    "exploration/world.json": "world state graph"
+   }
+  },
+  "3_ml_perception": {
+   "desc": "ML nhan thuc (CPU, scikit-learn, KHONG can GPU)",
+   "status": "DONE - co metric",
+   "models": {
+    "affordance": {
+     "file": "ml/affordance.py -> models/affordance.pkl",
+     "metric": "AUC 0.765, acc 0.737 (baseline 0.655), f1 0.587, 594 mau"
     },
-    "2_perception": {
-      "desc": "Tri giac man hinh + ban do trang thai",
-      "status": "DONE",
-      "files": {
-        "scripts/perception.py": "dhash, detect buttons, loading, X close",
-        "scripts/world_model.py": "graph trang thai",
-        "scripts/explorer.py": "tu kham pha + ne tran dau",
-        "scripts/label_states.py": "gan nhan man hinh",
-        "scripts/build_graph.py": "build logical graph"
-      },
-      "data": {
-        "exploration/graph_logical.json": "18 logical states / functions mapped",
-        "exploration/observations.jsonl": "613 observations",
-        "exploration/screens/": "130 screenshot EN (ground truth - QUAN TRONG NHAT)",
-        "exploration/world.json": "world state graph"
-      }
+    "screen_clf": {
+     "file": "ml/screen_clf.py -> models/screen_clf.pkl",
+     "metric": "CV acc 0.697 (grid features), 88 mau / 18 lop"
     },
-    "3_ml_perception": {
-      "desc": "ML nhan thuc (CPU, scikit-learn, KHONG can GPU)",
-      "status": "DONE - co metric",
-      "models": {
-        "affordance": {"file": "ml/affordance.py -> models/affordance.pkl", "metric": "AUC 0.765, acc 0.737 (baseline 0.655), f1 0.587, 594 mau"},
-        "screen_clf": {"file": "ml/screen_clf.py -> models/screen_clf.pkl", "metric": "CV acc 0.697 (grid features), 88 mau / 18 lop"},
-        "screen_ocr": {"file": "ml/screen_ocr.py -> knowledge/screen_text.json", "metric": "acc 0.852 (OCR text fingerprint EN) - TOT NHAT, uu tien trong agent.where()"},
-        "ocr": {"file": "ml/ocr.py", "engine": "PaddleOCR (ppocr-onnx, CPU, CN+EN) primary + tesseract fallback", "metric": "doc chuan EN: vang 14.62M/AP 32/sushi 13.4K conf 99-100, load 0.4s, 1.8s/img"}
-      },
-      "pipeline": "ml/train.py (chay ~25s, 300MB RAM)",
-      "dataset": "ml/dataset.py"
+    "screen_ocr": {
+     "file": "ml/screen_ocr.py -> knowledge/screen_text.json",
+     "metric": "acc 0.852 (OCR text fingerprint EN) - TOT NHAT, uu tien trong agent.where()"
     },
-    "4_knowledge": {
-      "desc": "Knowledge base + vector semantic search",
-      "status": "DONE - 482 docs",
-      "files": {
-        "knowledge/game_kb.py": "KB thong nhat, CLI: stats/docs/shikigami/soul/mode/screen/skill/features",
-        "knowledge/vectordb.py": "TF-IDF semantic search -> vectordb/index.pkl",
-        "knowledge/DATA_SOURCES.md": "tai lieu moi nguon data",
-        "knowledge/LEARNINGS.md": "moi bai hoc chi tiet",
-        "knowledge/PLAN.md": "ke hoach"
-      },
-      "stats": {
-        "documents": 482, "shikigami": 269, "skills": 913, "souls": 69,
-        "modes": 26, "battle_pages": 9, "progression_pages": 24,
-        "game_features": 52, "screens_labeled": 18
-      }
-    },
-    "5_data_sources": {
-      "desc": "Cac nguon data thu thap (chi tiet: DATA_SOURCES.md)",
-      "text_kb": {
-        "fandom_en": "data/fandom/*.json - 269 shikigami, 913 skills, 69 souls, 26 modes, battle, progression (EN 100%)",
-        "oas_features": "knowledge/oas_features.json - 52 chuc nang game tu OAS (CN, dich CN->EN)"
-      },
-      "images": {
-        "fandom_portrait": "data/fandom_images/ - 265 anh shikigami EN (gitignored)",
-        "game_loading_en": "data/game_assets/en_loading/ - 257 loading art EN (gitignored)",
-        "res_npk_sprite": "data/game_assets/res_npk/png/ - 370 UI sprite (gitignored)",
-        "face_headicon": "data/game_assets/face_big + headicon - 41 avatar EN",
-        "your_screenshots": "exploration/screens/ - 130 EN (ground truth)"
-      },
-      "ui_layout": {
-        "file": "knowledge/ui_layouts.json - BAN THIET KE UI GOC",
-        "content": "1205 panel + 25291 button toa do CHUAN HOA 0..1 (da cong don hierarchy + anchor + flip-Y)",
-        "lookup": "knowledge/ui_lookup.py - UILookup(1152,679).find('auto')/click_point('button_auto')/panel_buttons('combat')",
-        "verified": "VERIFY LOGIC OK: button_auto=(56,622) dung goc combat, btn_close goc tren-phai, btn_back tren-trai. neox.xml xac nhan game render native 1136x640 = dung design res. Con verify pixel tren screenshot that toi nay",
-        "decrypt": "scripts/nxpk_extract.py (NXPK key XOR=150 +zlib) + scripts/parse_ui_layout.py"
-      },
-      "game_folder": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Onmyoji (27GB): res.npk/tex_res.npk(5GB)/script.npk/model2.npk/sound.npk"
-    },
-    "6_automation": {
-      "desc": "Dieu phoi + task framework",
-      "status": "KHUNG xong, chua chay nhieu",
-      "files": {
-        "automation/agent.py": "where/goto/tap/resources/ask - where() dung dhash->screen_ocr@0.15->screen_clf",
-        "tasks/run.py": "khung task"
-      }
-    },
-    "7_tooling": {
-      "desc": "Cong cu tai tao + danh gia data",
-      "files": {
-        "scripts/rebuild_assets.py": "tai tao MOI asset tu game+web (ui/sprites/assets_en/fandom/oas) --all",
-        "ml/dataset_registry.py": "dang ky 9 nguon data + danh gia chat luong (phan bo lop, cho thieu); 'gaps' = cho can thu them",
-        "knowledge/memory.py": "query cay nho (find/path/render)",
-        "scripts/label_states.py": "label man hinh; lenh 'suggest' = screen_ocr tu de xuat nhan"
-      },
-      "data_gaps": "12 lop <5 mau (Animation/Shikigami/Shrine Pass/Town/Friends/Mentor/Shop/Summon/World...) -> thu them toi nay"
+    "ocr": {
+     "file": "ml/ocr.py",
+     "engine": "PaddleOCR (ppocr-onnx, CPU, CN+EN) primary + tesseract fallback",
+     "metric": "doc chuan EN: vang 14.62M/AP 32/sushi 13.4K conf 99-100, load 0.4s, 1.8s/img"
     }
+   },
+   "pipeline": "ml/train.py (chay ~25s, 300MB RAM)",
+   "dataset": "ml/dataset.py"
   },
-  "external_repos": {
-    "research/OAS/": "Onmyoji bot CN (hybrid + ALAS) - mined 52 features (gitignored)",
-    "research/neox_tools/": "zhouhang95/neox_tools - NPK decryptor reference (gitignored)"
+  "4_knowledge": {
+   "desc": "Knowledge base + vector semantic search",
+   "status": "DONE - 482 docs",
+   "files": {
+    "knowledge/game_kb.py": "KB thong nhat, CLI: stats/docs/shikigami/soul/mode/screen/skill/features",
+    "knowledge/vectordb.py": "TF-IDF semantic search -> vectordb/index.pkl",
+    "knowledge/DATA_SOURCES.md": "tai lieu moi nguon data",
+    "knowledge/LEARNINGS.md": "moi bai hoc chi tiet",
+    "knowledge/PLAN.md": "ke hoach"
+   },
+   "stats": {
+    "documents": 821,
+    "shikigami": 269,
+    "skills": 913,
+    "souls": 69,
+    "modes": 26,
+    "battle_pages": 9,
+    "progression_pages": 24,
+    "game_features": 52,
+    "screens_labeled": 18,
+    "wikidb_shikigami": 271,
+    "strategy_guides": 4
+   }
   },
-  "evaluated_not_used": {
-    "tex_res.npk": "texture KTX/PVR GPU-encoded + atlas plist -> cong lon gia tri thap",
-    "script.npk": "NeoX VM bytecode -> can decompiler, it gia tri",
-    "huggingface_kaggle": "khong co dataset Onmyoji",
-    "cn_bots": "AcademicDog 380*, yys-auto deu CN/Android -> chi augment"
+  "5_data_sources": {
+   "desc": "Cac nguon data thu thap (chi tiet: DATA_SOURCES.md)",
+   "text_kb": {
+    "fandom_en": "data/fandom/*.json - 269 shikigami, 913 skills, 69 souls, 26 modes, battle, progression (EN 100%)",
+    "oas_features": "knowledge/oas_features.json - 52 chuc nang game tu OAS (CN, dich CN->EN)",
+    "wiki_db_supabase": "data/wiki_db/*.json - SUPABASE OPEN API (trmzaiu): 271 shikigami (skill/onibi/cooldown/stat ATK-HP-DEF-SPD-Crit min-max/build role-souls-substats/evolution/skin), 64 soul, 6 onmyoji, 480 effect, 33 tag, da ngon ngu en/cn/jp/vn. TRACKED git. Regen: fetch_wiki_db.py",
+    "strategy_guides_en": "data/external/firechain/guides_en/*.md - 4 guide EN thuc chien (Orochi Floor10 speedrun/Yamabunny/Duel Advanced) co team setup chi tiet. Da nap vao KB (type 'strategy'). TRACKED",
+    "firechain_flow": "data/external/firechain/*.json - flow_shikigami(id->rarity 598=SP)/onmyojiSkill/yuhun (zh) - fallback id-map. TRACKED"
+   },
+   "images": {
+    "fandom_portrait": "data/fandom_images/ - 265 anh shikigami EN (gitignored)",
+    "game_loading_en": "data/game_assets/en_loading/ - 257 loading art EN (gitignored)",
+    "res_npk_sprite": "data/game_assets/res_npk/png/ - 370 UI sprite (gitignored)",
+    "face_headicon": "data/game_assets/face_big + headicon - 41 avatar EN",
+    "your_screenshots": "exploration/screens/ - 130 EN (ground truth)",
+    "wiki_images_en": "data/external/wiki/ - ~6005 anh EN (icon461/image458/skill933/skin713/shard270/bio61/soul/onmyoji234/stats38) ten file = ten EN sach. gitignored. Regen: rebuild_assets.py wiki",
+    "flow_assets_ingame": "data/external/flow_assets/ - 470 anh RIPPED IN-GAME (270 shiki theo rarity sp/ssr/sr/r/n + 137 yuhun + 48 skill, id-based; map id->name=flow_shikigami.json). gitignored. Regen: rebuild_assets.py flow"
+   },
+   "ui_layout": {
+    "file": "knowledge/ui_layouts.json - BAN THIET KE UI GOC",
+    "content": "1205 panel + 25291 button toa do CHUAN HOA 0..1 (da cong don hierarchy + anchor + flip-Y)",
+    "lookup": "knowledge/ui_lookup.py - UILookup(1152,679).find('auto')/click_point('button_auto')/panel_buttons('combat')",
+    "verified": "VERIFY LOGIC OK: button_auto=(56,622) dung goc combat, btn_close goc tren-phai, btn_back tren-trai. neox.xml xac nhan game render native 1136x640 = dung design res. Con verify pixel tren screenshot that toi nay",
+    "decrypt": "scripts/nxpk_extract.py (NXPK key XOR=150 +zlib) + scripts/parse_ui_layout.py"
+   },
+   "game_folder": "C:\\Program Files (x86)\\Steam\\steamapps\\common\\Onmyoji (27GB): res.npk/tex_res.npk(5GB)/script.npk/model2.npk/sound.npk",
+   "supabase_access": "KY THUAT: trich supabaseUrl+anonKey tu site Nuxt deployed (grep _nuxt/*.js 'supabaseUrl/supabaseKey'). REST: GET {url}/rest/v1/{Table}?select=*&order=id&limit=1000&offset=N, headers apikey+Bearer. anon key public read-only. Dung lai cho nguon Supabase khac"
   },
-  "tech_notes": {
-    "venv": "PHAI dung .venv/bin/python cho cv2/ML/PaddleOCR; cd ~/onmyoji-bot truoc",
-    "no_gpu": "moi ML la scikit-learn/TF-IDF CPU; GPU chi can neu Tier3 deep RL (KHONG khuyen)",
-    "subagents": "Agent tool BLOCKED - research truc tiep qua curl/Bash",
-    "apis": "Fandom/GitHub API can header User-Agent: Mozilla/5.0",
-    "buffering": "python -u khi redirect; bash foreground timeout 120s"
+  "6_automation": {
+   "desc": "Dieu phoi + task framework",
+   "status": "KHUNG xong, chua chay nhieu",
+   "files": {
+    "automation/agent.py": "where/goto/tap/resources/ask - where() dung dhash->screen_ocr@0.15->screen_clf",
+    "tasks/run.py": "khung task"
+   }
+  },
+  "7_tooling": {
+   "desc": "Cong cu tai tao + danh gia data",
+   "files": {
+    "scripts/rebuild_assets.py": "tai tao MOI asset tu game+web (ui/sprites/assets_en/fandom/oas) --all",
+    "ml/dataset_registry.py": "dang ky 9 nguon data + danh gia chat luong (phan bo lop, cho thieu); 'gaps' = cho can thu them",
+    "knowledge/memory.py": "query cay nho (find/path/render)",
+    "scripts/label_states.py": "label man hinh; lenh 'suggest' = screen_ocr tu de xuat nhan"
+   },
+   "data_gaps": "12 lop <5 mau (Animation/Shikigami/Shrine Pass/Town/Friends/Mentor/Shop/Summon/World...) -> thu them toi nay"
   }
+ },
+ "external_repos": {
+  "research/OAS/": "Onmyoji bot CN (hybrid + ALAS) - mined 52 features (gitignored)",
+  "research/neox_tools/": "zhouhang95/neox_tools - NPK decryptor reference (gitignored)"
+ },
+ "evaluated_not_used": {
+  "tex_res.npk": "texture KTX/PVR GPU-encoded + atlas plist -> cong lon gia tri thap",
+  "script.npk": "NeoX VM bytecode -> can decompiler, it gia tri",
+  "huggingface_kaggle": "khong co dataset Onmyoji",
+  "cn_bots": "AcademicDog 380*, yys-auto deu CN/Android -> chi augment"
+ },
+ "tech_notes": {
+  "venv": "PHAI dung .venv/bin/python cho cv2/ML/PaddleOCR; cd ~/onmyoji-bot truoc",
+  "no_gpu": "moi ML la scikit-learn/TF-IDF CPU; GPU chi can neu Tier3 deep RL (KHONG khuyen)",
+  "subagents": "Agent tool BLOCKED - research truc tiep qua curl/Bash",
+  "apis": "Fandom/GitHub API can header User-Agent: Mozilla/5.0",
+  "buffering": "python -u khi redirect; bash foreground timeout 120s"
+ }
 }
