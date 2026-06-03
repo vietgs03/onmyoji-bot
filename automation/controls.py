@@ -227,6 +227,91 @@ class ControlFinder:
                 out[kind] = hit
         return out
 
+    # === Nut THOAT dang CHU (game Steam EN) - tim bang OCR, khong template ===
+    # Cac nut huy/thoat trong game EN la CHU tieng Anh (template OAS la chu TQ,
+    # khong match). Vd: popup "Download Illustration" co nut Cancel; xac nhan
+    # roi tran co Leave/Quit/Give Up; ...
+    # Phan loai theo TAC DUNG -> agent biet bam gi de THOAT/HUY an toan.
+    EXIT_WORDS = {
+        # tu khoa (lowercase) -> loai. 'dismiss' = bam de thoat/huy/tu choi an toan.
+        "cancel": "cancel", "no": "cancel", "later": "cancel",
+        "exit": "exit", "quit": "exit", "leave": "exit", "give up": "exit",
+        "close": "close", "back": "back", "return": "back",
+        "skip": "skip",
+        # luu y: KHONG coi 'confirm/ok/yes/download' la thoat (do la dong y/tiep tuc)
+    }
+
+    # Tu khoa nut THOAT dang chu (EN). Chi nhung tu RO RANG la nut huy/thoat.
+    # Bo 'no'/'return'/'back' khoi text-match (de nham 'No.5', 'Fest Return',
+    # ten event) - icon back-arrow da lo viec back roi.
+    EXIT_WORDS = {
+        "cancel": "cancel", "exit": "exit", "quit": "exit",
+        "leave": "exit", "skip": "skip", "later": "cancel",
+    }
+    # 'give up' xu ly rieng (cum 2 tu)
+    _EXIT_PHRASES = {"give up": "exit"}
+
+    def find_text_button(self, img, want=None, reader=None):
+        """Tim nut THOAT/HUY dang CHU (EN) bang OCR. Tra list
+        [{'word','kind','center':(x,y),'conf'}] sap theo do tin.
+        want: loc theo loai ('cancel'/'exit'/'skip') hoac None=tat ca.
+        reader: ScreenReader co san (tranh OCR lai). Neu None se tu OCR.
+
+        CHI khop nhan NGAN dung tu khoa ('Cancel','Exit','Quit','Leave','Skip',
+        'Give Up'). KHONG khop cum dai (ten/mo ta) -> tranh FP 'Skill Close-up',
+        'Returner Ebisu', 'Fest Return'."""
+        import re as _re
+        import sys as _sys
+        _sys.path.insert(0, os.path.join(ROOT, "scripts"))
+        _sys.path.insert(0, os.path.join(ROOT, "ml"))
+        if reader is None:
+            from screen_reader import ScreenReader
+            reader = ScreenReader(img)
+        hits = []
+        for word, x, y, *rest in reader.tappables():
+            toks = _re.findall(r"[a-z]+", word.strip().lower())
+            joined = " ".join(toks)
+            kind = None
+            if joined in self._EXIT_PHRASES:           # cum 'give up'
+                kind = self._EXIT_PHRASES[joined]
+            elif len(toks) == 1 and toks[0] in self.EXIT_WORDS:  # nut 1-tu
+                kind = self.EXIT_WORDS[toks[0]]
+            if kind is None or (want and kind != want):
+                continue
+            conf = rest[-1] if rest else 80
+            hits.append({"word": word, "kind": kind, "center": (x, y),
+                         "conf": conf})
+        hits.sort(key=lambda h: -h["conf"])
+        return hits
+
+    def find_dismiss(self, img, reader=None):
+        """Tim 1 nut THOAT/HUY tot nhat de bam (icon X/back HOAC chu Cancel/Exit).
+        Uu tien: close-X (>=0.9) > back-arrow > chu Cancel/Exit > red-circle.
+        Tra dict {'type','center':(x,y),'conf','via'} hoac None.
+        Day la API chinh cho Agent: 'lam sao thoat man nay an toan'."""
+        # 1. icon back/close bang template (dang tin nhat)
+        close = self.find(img, kind="close")
+        back = self.find(img, kind="back")
+        if close and close[2] >= 0.9:
+            return {"type": "close", "center": (close[0], close[1]),
+                    "conf": close[2], "via": close[3]}
+        if back:
+            return {"type": "back", "center": (back[0], back[1]),
+                    "conf": back[2], "via": back[3]}
+        if close:
+            return {"type": "close", "center": (close[0], close[1]),
+                    "conf": close[2], "via": close[3]}
+        # 2. nut chu Cancel/Exit/Skip (popup EN khong co icon)
+        txt = self.find_text_button(img, reader=reader)
+        # uu tien cancel > exit > skip (cancel an toan nhat de thoat popup)
+        order = {"cancel": 0, "exit": 1, "skip": 2}
+        txt.sort(key=lambda h: (order.get(h["kind"], 9), -h["conf"]))
+        if txt:
+            h = txt[0]
+            return {"type": h["kind"], "center": h["center"],
+                    "conf": h["conf"] / 100.0, "via": "ocr:" + h["word"]}
+        return None
+
 
 def build():
     cf = ControlFinder()

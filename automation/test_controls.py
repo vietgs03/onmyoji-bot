@@ -70,6 +70,38 @@ def main(min_score=None, verbose=True):
         print("\n--- loi (FP=bao nham, FN=bo sot) ---")
         for typ, kind, tag, hit in errs:
             print(f"  [{typ}] {kind:6} {tag} {hit if hit else ''}")
+
+    # === Phan 2: nut THOAT dang CHU (Cancel/Exit/Skip) + find_dismiss ===
+    # Ground-truth text-button (gan bang vision/OCR): man -> tu khoa nut thoat-chu.
+    TEXT_GT = {
+        "189ca95eec": "cancel",      # popup Download Illustration
+        "257dfee8a8": "skip", "92f58d44ed": "skip",
+        "1c7ba0e2cd": "skip", "e701a70fef": "skip",   # cutscene
+    }
+    print("\n=== nut THOAT dang CHU (find_text_button, OCR) ===")
+    tok = tow = 0
+    for tag, want in TEXT_GT.items():
+        p = tag2path.get(tag)
+        if not p:
+            continue
+        img = cv2.imread(p)
+        hits = cf.find_text_button(img)
+        got = hits[0]["kind"] if hits else None
+        ok = got == want
+        tow += 1
+        tok += ok
+        print(f"  {tag} mong={want:7} got={str(got):7} "
+              f"{'OK' if ok else 'SAI'} {hits[0]['center'] if hits else ''}")
+    # FP: man KHONG co nut thoat-chu khong duoc bao
+    fp_text = 0
+    for tag in list(tag2path)[:60]:
+        if tag in TEXT_GT:
+            continue
+        hits = cf.find_text_button(cv2.imread(tag2path[tag]))
+        if hits:
+            fp_text += 1
+            print(f"  [FP-text] {tag}: {[h['word'] for h in hits]}")
+    print(f"  text-button: {tok}/{tow} dung, {fp_text} FP")
     return sum(macro) / len(macro)
 
 

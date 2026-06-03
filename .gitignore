@@ -12,3 +12,7 @@ knowledge/screen_text.json.tokcache.json
 data/game_assets/
 data/fandom_images/*.png
 data/external/
+captures/
+research/
+knowledge/_ocr_tokens/
+data/fandom_images/

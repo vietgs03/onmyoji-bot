@@ -203,14 +203,15 @@ class Agent:
         return Agent._ctrl or None
 
     def back(self, wait=2.0, home=False):
-        """Thoat man hien tai - dung TEMPLATE MATCH (controls.py) tim CHINH XAC nut:
-          1. Nut X dong popup (close) - uu tien (popup phai dong bang X, khong phai back).
-          2. Mui ten back goc tren-trai (yellow/blue/green - template match dung vi tri).
+        """Thoat man hien tai - dung find_dismiss (controls.py) tim CHINH XAC nut thoat:
+          1. Icon back (mui ten) / close (X popup) bang TEMPLATE MATCH.
+          2. Nut CHU thoat/huy (Cancel/Exit/Quit/Leave/Skip) bang OCR - cho popup EN
+             khong co icon (vd 'Download Illustration' -> Cancel, cutscene -> Skip).
           3. Fallback: find_close_button HSV + cac vi tri doan cu.
         home=True: lap den khi ve HOME (xu ly man nhieu lop/tab nhu Summon Room).
 
-        Bai hoc: truoc day doan mu vi tri back -> ket Summon Room. Gio template match
-        cho back@(55,62) Summon, close@(917,115) Group Buying... score 0.95-0.99."""
+        Bai hoc: nut thoat KHONG chi la back/X - con co Cancel/Exit/Skip dang chu.
+        find_dismiss gop het: back@(55,62) Summon, Cancel@(437,488) popup, Skip cutscene."""
         from perception import find_close_button, dhash, hamming
         from screen_reader import ScreenReader
         cf = self.controls()
@@ -223,17 +224,11 @@ class Agent:
 
             clicked = None
             if cf:
-                # Tim ca close (X popup) va back (mui ten). back P=1.0 rat dang tin;
-                # close co the FP -> chi uu tien close khi score CAO (>=0.9, chac chan
-                # la X popup that). Nguoc lai uu tien back.
-                close = cf.find(img, kind='close')
-                back = cf.find(img, kind='back')
-                if close and close[2] >= 0.9:
-                    clicked = (close[0], close[1])
-                elif back:
-                    clicked = (back[0], back[1])
-                elif close:
-                    clicked = (close[0], close[1])
+                # find_dismiss: icon back/close (template) HOAC chu Cancel/Exit/Skip
+                # (OCR). Tai dung ScreenReader r de tranh OCR lai.
+                d = cf.find_dismiss(img, reader=r)
+                if d:
+                    clicked = d["center"]
             if clicked is None:
                 cb = find_close_button(img)
                 if cb:
