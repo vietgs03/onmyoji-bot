@@ -115,8 +115,13 @@ _EXPLORE_SOUL_XY = (175, 620)        # icon 'Soul' footer trong man Explore
 
 
 def _ensure_soul_screen(agent, max_try=4):
-    """Tu BAT KY dau -> man Soul (4 zone). Khong dung graph nav (chua map tier-2):
-    ve HOME -> Explore -> click icon Soul. Verify bang OCR ('Orochi' xuat hien)."""
+    """Tu BAT KY dau -> man Soul (4 zone).
+
+    UU TIEN: nav.goto('soul_zones') - HE THONG HOC ONLINE (Dijkstra cost hoc tu
+    thuc te, tu record success/fail moi canh vao edge_stats, tu resolve overlay
+    nhu dialog Bonus/Parade). Moi lan chay bot CANG NHO duong di tot.
+    FALLBACK: neu goto that bai (graph chua map du) -> HOME->Explore->Soul hardcode.
+    Verify cuoi cung bang OCR ('Soul' header + 'Challenge')."""
     from ocr import ocr_words
 
     def on_soul(img):
@@ -131,7 +136,14 @@ def _ensure_soul_screen(agent, max_try=4):
         img = agent.shot()
         if on_soul(img):
             return True
-        # ve HOME truoc cho chac (escape moi overlay/man con)
+        # (1) THU HE THONG HOC: goto soul_zones (re-plan moi hop, record canh,
+        #     tu resolve overlay). Day la "tu nho" - khong if/else hardcode.
+        try:
+            if agent.nav.goto("soul_zones", verbose=False) and on_soul(agent.shot()):
+                return True
+        except Exception as e:
+            print(f"  (nav.goto soul_zones loi: {e} -> fallback hardcode)")
+        # (2) FALLBACK hardcode: ve HOME -> Explore -> Soul.
         agent.nav.goto("HOME")
         time.sleep(1.0)
         agent.click(*_HOME_EXPLORE_XY); time.sleep(3.5)   # -> Explore (co the loading)
@@ -273,9 +285,14 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
             r2 = agent.read(img)
             c_now = _read_counter(img)
             has_ch = r2.has("Challenge")
-            # OCR full anh 1 lan (crop ROI nho lam OCR fail) -> dung chung cho detect
-            full = " ".join(str(t).lower() for t, *_ in ocr_words(img, min_conf=35))
-            is_dialog = ("enable it again" in full) or ("privilege" in full) or ("parade" in full)
+            # HE THONG OVERLAY (tu nho): detect_overlay doc OVERLAYS (bonus_enable,
+            # parade_privilege, ...) -> resolve_overlay tu xu ly (click@toa-do).
+            # CHI lay dialog can chan (bonus/parade); KHONG dung 'loading'/'animation'
+            # vi man reward cung co 'Tap to'/'Skip' -> de he duoi tu xu (tap continue).
+            ov, ovc = agent.nav.detect_overlay(reader=r2)
+            if ov not in ("bonus_enable", "parade_privilege"):
+                ov = None
+            is_dialog = ov is not None
             # ve man stage VA counter da tang -> thang that (dang tin nhat)
             if has_ch and c_before is not None and c_now is not None and c_now > c_before:
                 won = True
@@ -287,25 +304,14 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
             # 'roi stage' chi tinh khi KHONG phai dialog (dialog cung an Challenge)
             if not has_ch and not is_dialog:
                 saw_battle = True
-            # --- Dialog 'Bonus ... Enable it again?' -> Confirm @ (660,410) ---
-            # (hitbox nut nho/lech: 660,410 trung, 667,416 KHONG trung)
-            if "bonus" in full and ("enable" in full or "disabled" in full):
-                for cxy in ((660, 410), (655, 408), (665, 413), (483, 410)):
-                    agent.c.bgclick(*cxy)
-                    time.sleep(1.5)
-                    if "enable it again" not in " ".join(
-                            str(t).lower() for t, *_ in ocr_words(agent.shot(), min_conf=35)):
-                        break
-                time.sleep(0.5)
-                # battle chua chay (van o stage) -> bam lai Challenge
-                if agent.read().has("Challenge"):
+            # --- Overlay da biet (bonus/parade/...) -> resolve qua he thong ---
+            if ov is not None:
+                agent.nav.resolve_overlay(ov)
+                time.sleep(0.8)
+                # neu bonus dialog -> battle chua chay (van o stage) -> bam lai Challenge
+                if ov == "bonus_enable" and agent.read().has("Challenge"):
                     agent.c.bgclick(*_CHALLENGE_XY)
                     time.sleep(3.0)
-                continue
-            # --- Popup event (vd 'Parade Privilege') -> X dong @ (975,135) ---
-            if "privilege" in full or "parade" in full:
-                agent.c.bgclick(975, 135)
-                time.sleep(1.5)
                 continue
             # --- Nut ket qua / man reward dac biet ---
             tapped = False

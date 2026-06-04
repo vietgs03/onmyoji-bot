@@ -157,6 +157,7 @@ NODES: dict[str, dict] = {
 #   wait      : doi wait_stable (loading).
 #   skip      : OCR tim nut Skip roi bam.
 #   dismiss   : controls.find_dismiss (back/X/Cancel).
+#   click@x,y : bam toa do co dinh (vd nut Confirm/X co hitbox lech, OCR khong bat).
 # ======================================================================
 OVERLAYS: dict[str, dict] = {
     "loading":   {"identify": ["Tap to"], "detector": "loading",
@@ -172,6 +173,15 @@ OVERLAYS: dict[str, dict] = {
                        "kind": "popup", "resolve": "dismiss"},
     "cosmetic_quests":{"identify": ["Realm Skins", "Blossom"],
                        "kind": "popup", "resolve": "dismiss"},
+    # Dialog 'Bonus ... Enable it again?' (pop khi vao battle sau bonus tat 15').
+    # Confirm hitbox LECH @ (660,410) - OCR/dismiss thuong KHONG bat -> click toa do.
+    # identify dung tu DON (OCR hay tach cum -> has() khop tung tu, tranh miss).
+    # 'Enable' la tin hieu MANH cua dialog bonus (man khac hiem khi co tu nay).
+    "bonus_enable":   {"identify": ["Enable"], "kind": "popup",
+                       "resolve": "click@660,410"},
+    # Popup event 'Parade Privilege' / 'Soul Zone Privileges' -> X dong @ (975,135).
+    "parade_privilege":{"identify": ["Privilege", "Privileges"],
+                       "kind": "popup", "resolve": "click@975,135"},
 }
 
 
@@ -249,10 +259,14 @@ class ScreenGraph:
     # ------------------------------------------------------------------
     # OVERLAY: trang thai tam/popup che man. Phat hien + xu ly rieng NODES.
     # ------------------------------------------------------------------
-    def detect_overlay(self, reader=None) -> tuple[Optional[str], float]:
+    def detect_overlay(self, reader=None, min_conf: float = 0.5) -> tuple[Optional[str], float]:
         """Tra (ten overlay, conf) neu man dang bi overlay/popup che, else (None,0).
         Mot so overlay (loading) KHONG co text dac trung -> dung detector rieng
-        (dhash) khai bao qua field 'detector' thay vi OCR keyword."""
+        (dhash) khai bao qua field 'detector' thay vi OCR keyword.
+
+        min_conf: nguong (so keyword khop / tong) de tin la overlay THAT. Mac dinh
+        0.5 -> overlay nhieu keyword can >=1/2 khop (tranh false-positive nhu man
+        Explore co 'Champion' lam khop le select_champion 1/3)."""
         r = reader if reader is not None else (self.a.read() if self.a else None)
         if r is None:
             return None, 0.0
@@ -262,8 +276,11 @@ class ScreenGraph:
                 det = d.get("detector")
                 if det == "loading" and self.a.is_loading_screen(r.img):
                     return name, 1.0
-        # 2) OCR keyword nhu binh thuong.
-        return self._match(r, OVERLAYS)
+        # 2) OCR keyword - chi nhan khi conf >= min_conf (du keyword khop).
+        name, conf = self._match(r, OVERLAYS)
+        if name is not None and conf < min_conf:
+            return None, 0.0
+        return name, conf
 
     def resolve_overlay(self, name: str) -> None:
         """Xu ly 1 overlay theo 'resolve' khai bao trong DATA (wait/skip/dismiss)."""
@@ -276,6 +293,10 @@ class ScreenGraph:
             ok, _ = self.a.tap_text("Skip")
             if not ok:
                 self.a.wait_stable()                    # khong co Skip -> cho
+        elif how.startswith("click@"):                  # bam toa do co dinh (hitbox lech)
+            x, y = (int(v) for v in how[len("click@"):].split(","))
+            self.a.click(x, y)
+            self.a.wait_stable()
         else:                                           # dismiss (popup)
             self.a.back()
 

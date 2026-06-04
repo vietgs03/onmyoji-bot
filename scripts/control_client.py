@@ -54,6 +54,12 @@ class Controller:
         return cv2.imread(WIN_SHOT_WSL)
 
     def bgclick(self, x, y):
+        # NeoX (game Onmyoji) BO QUA PostMessage (async) -> dung sendclick
+        # (SendMessage dong bo) moi an. Giu ten bgclick cho tuong thich API.
+        return self._cmd(f"sendclick {int(x)} {int(y)}")
+
+    def pmclick(self, x, y):
+        """PostMessage click (async, NeoX hay bo qua). Giu lai de test/so sanh."""
         return self._cmd(f"bgclick {int(x)} {int(y)}")
 
     def bgdrag(self, x0, y0, x1, y1, steps=12):

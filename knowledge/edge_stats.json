@@ -1,1 +1,10 @@
-{}
+{
+ "summon->HOME": {
+  "success": 1,
+  "fail": 0,
+  "fail_streak": 0,
+  "lat_sum": 13.049234867095947,
+  "lat_n": 1,
+  "blocked_until": 0.0
+ }
+}
