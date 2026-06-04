@@ -378,6 +378,18 @@ class Explorer:
         return best
 
     # ---- doc man hinh hien tai -> ExploreNode (tao moi neu chua thay) ----
+    # ---- man hinh transient (loading/chuyen canh) -> KHONG tao node rac ----
+    @staticmethod
+    def _is_transient(reader, fp):
+        toks = fp[0]
+        if not toks:
+            return True
+        # chi co 'onmyoji' (logo) + toi da 1 token la, va RAT it tappable thuc
+        non_logo = {t for t in toks if t != "onmyoji"}
+        if "onmyoji" in toks and len(non_logo) <= 1:
+            return True
+        return False
+
     def observe(self, hint_label=None):
         img = self.a.shot()
         if img is None:
@@ -385,6 +397,17 @@ class Explorer:
             img = self.a.shot()
         r = ScreenReader(img)
         fp = fingerprint(r, img)
+        # FIX1: bo qua man loading/chuyen canh -> doi roi doc lai (toi da 3 lan).
+        # Tranh tao node rac "onmyoji/lowng" lam phong graph + lac duong.
+        if hint_label is None:
+            for _ in range(3):
+                if not self._is_transient(r, fp):
+                    break
+                time.sleep(1.0)
+                img2 = self.a.shot()
+                if img2 is not None:
+                    img, r = img2, ScreenReader(img2)
+                    fp = fingerprint(r, img)
         # tim node trung trong memory (theo same_screen, ko chi sig_key)
         for k, nd in self.nodes.items():
             if same_screen(fp, nd.fp):
@@ -500,29 +523,59 @@ class Explorer:
             return False
         return True
 
+    # Tu khoa MENU CHINH (loi game) - uu tien click TRUOC banner event.
+    # Bang chung: 9/12 edge Home di vao popup/loading vi click banner goc phai.
+    MENU_WORDS = {
+        "explore", "soul", "souls", "shikigami", "shop", "summon", "team",
+        "guild", "town", "realm", "quest", "quests", "battle", "duel", "arena",
+        "story", "chapter", "exploration", "draw", "evolve", "awaken", "book",
+        "friends", "mail", "event", "bounty", "secret", "tower", "abyss",
+    }
+
     def _order(self, cands):
-        """Thu tu thu: icon truoc (hay bi bo sot) roi text co nghia.
-        Tra list (idx, x, y, label, src) da loc rac."""
+        """Thu tu thu uu tien (da loc rac). DATA cho thay: click icon banner goc
+        phai (x>900) toan dan vao popup event/loading. Vi vay uu tien:
+          0) TEXT chua tu khoa MENU CHINH (loi game)
+          1) ICON o GIUA/DAY man (x<900 hoac y>560) = tab menu, KHONG phai banner
+          2) text khac co nghia
+          3) ICON banner goc phai-tren (x>=900, y<560) = quang cao -> thu CUOI
+        Tra list (idx, x, y, label, src)."""
         scored = []
         for idx, (x, y, clabel, src) in enumerate(cands):
             if not self._worthy(clabel, src):
                 continue
-            pri = 0 if src == "icon" else 1
+            n = _norm(clabel)
+            is_menu_word = any(w in n for w in self.MENU_WORDS)
+            is_banner = (src == "icon" and x >= 900 and y < 560)
+            if is_menu_word:
+                pri = 0
+            elif src == "icon" and not is_banner:
+                pri = 1
+            elif src == "text":
+                pri = 2
+            else:                       # icon banner goc phai
+                pri = 3
             scored.append((pri, idx, x, y, clabel, src))
         scored.sort(key=lambda s: (s[0], s[1]))
         return [(idx, x, y, l, s) for _p, idx, x, y, l, s in scored]
 
-    def explore(self, node, depth, max_depth, max_actions):
+    def explore(self, node, depth, max_depth, max_actions, max_per_node=None):
         if self._budget_done(max_actions) or depth > max_depth:
             return
+        # FIX3: cap so cand thu MOI LAN o 1 node (per-node) de KHONG ngon het
+        # budget o Home -> frontier loop kich hoat som, lan toi vung khac.
+        done_here = 0
         # thu tung ung vien CHUA thu (da loc rac + sap uu tien). Khoa = cand_sig
         # (ben vung qua run: node.tried co the da nap tu global graph).
         for idx, x, y, clabel, src in self._order(node.cands):
             if self._budget_done(max_actions):
                 return
+            if max_per_node is not None and done_here >= max_per_node:
+                return
             csig = cand_sig(clabel, x, y)
             if csig in node.tried:
                 continue
+            done_here += 1
             node.tried[csig] = "pending"
             self.n_actions += 1
             # ICON header/footer hay can politeclick; text dung sendclick truoc
@@ -551,7 +604,7 @@ class Explorer:
             self.save_graph()                       # luu NGAY (khong mat khi ket/kill)
             # de quy vao man moi (neu moi & con ngan sach)
             if is_new and depth + 1 <= max_depth:
-                self.explore(after_nd, depth + 1, max_depth, max_actions)
+                self.explore(after_nd, depth + 1, max_depth, max_actions, max_per_node)
             # backtrack ve node hien tai
             ok = self._back_to(node.key)
             if not ok:
@@ -562,7 +615,7 @@ class Explorer:
                 if self.cur_key in self.nodes:
                     new_root = self.nodes[self.cur_key]
                     if new_root.key != node.key:
-                        self.explore(new_root, depth, max_depth, max_actions)
+                        self.explore(new_root, depth, max_depth, max_actions, max_per_node)
                 return
 
     def _click(self, x, y, src, method=None):
@@ -639,7 +692,7 @@ class Explorer:
             same_screen(self.nodes[self.cur_key].fp, target_node.fp)
 
     def run(self, max_actions=50, max_depth=3, start_label=None, budget_sec=300,
-            do_merge=True):
+            do_merge=True, max_per_node=6):
         self.deadline = time.time() + budget_sec
         # 1) RESET ve Home (hub) -> khong ket goc nho nhu map_loop thu dong
         ok_home, r = self._escape_to_home()
@@ -647,7 +700,7 @@ class Explorer:
         self.log(ev="start", root=nd.key, label=nd.label, budget_sec=budget_sec,
                  glob_loaded=getattr(self, "glob_loaded", 0), at_home=ok_home)
         # 2) vet can tu Home truoc (bung het cac nhanh hub)
-        self.explore(nd, 0, max_depth, max_actions)
+        self.explore(nd, 0, max_depth, max_actions, max_per_node)
         # 3) FRONTIER-DRIVEN: lap - ve Home, chon node nhieu cand chua thu nhat,
         #    navigate toi do, explore tiep. Pha tran "ket 1 goc".
         while not self._budget_done(max_actions):
@@ -661,14 +714,14 @@ class Explorer:
                 self.log(ev="nav_fail", target=tgt.key, label=tgt.label)
                 cur = self.nodes.get(self.cur_key)
                 if cur and cur.key != tgt.key:
-                    self.explore(cur, 0, max_depth, max_actions)
+                    self.explore(cur, 0, max_depth, max_actions, max_per_node)
                 # tranh chon lai cung node ket: danh dau cand chua thu cua tgt = skip
                 for c in tgt.cands:
                     cs = cand_sig(c[2], c[0], c[1])
                     tgt.tried.setdefault(cs, "unreached")
                 continue
             self.log(ev="frontier_reached", target=tgt.key, label=tgt.label)
-            self.explore(self.nodes[self.cur_key], 0, max_depth, max_actions)
+            self.explore(self.nodes[self.cur_key], 0, max_depth, max_actions, max_per_node)
         self.save_graph()
         if do_merge:
             self.merge_global()             # hop nhat vao ky uc tich luy
@@ -725,6 +778,8 @@ def main():
                     help="khong hop nhat vao global graph")
     ap.add_argument("--show-frontier", action="store_true",
                     help="chi in frontier global roi thoat (khong can game)")
+    ap.add_argument("--max-per-node", type=int, default=6,
+                    help="cap so cand thu moi lan o 1 node (bat frontier loop som)")
     args = ap.parse_args()
     if args.show_frontier:
         _print_frontier()
@@ -736,7 +791,8 @@ def main():
                         max_depth=args.max_depth,
                         start_label=args.start_label,
                         budget_sec=args.budget_sec,
-                        do_merge=not args.no_merge)
+                        do_merge=not args.no_merge,
+                        max_per_node=args.max_per_node)
     finally:
         os._exit(0)
 
