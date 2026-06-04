@@ -1,0 +1,708 @@
+{
+ "nodes": {
+  "T:10342f6f5c8f": {
+   "label": "skip/meowiordkyuumeineko/meowdearaudience",
+   "shot": "213000_T:10342f6f5c8f.png",
+   "sig": [
+    "meowdearaudience",
+    "meowiordkyuumeineko",
+    "onmyaji",
+    "skip"
+   ],
+   "dhash": "124c58a632527288",
+   "n_cands": 0,
+   "edges": {
+    "T:62945b89283e": {
+     "via": "icon@89,511",
+     "x": 89,
+     "y": 511
+    }
+   },
+   "tried": {
+    "icon@89,511@2,13": "T:62945b89283e"
+   }
+  },
+  "T:62945b89283e": {
+   "label": "meowlordkyuumeineko/skip/onmyoji",
+   "shot": "213000_T:62945b89283e.png",
+   "sig": [
+    "meowlordkyuumeineko",
+    "onmyoji",
+    "skip"
+   ],
+   "dhash": "124c586612527268",
+   "n_cands": 0,
+   "edges": {
+    "T:10342f6f5c8f": {
+     "via": "icon@798,353",
+     "x": 798,
+     "y": 353
+    }
+   },
+   "tried": {
+    "icon@86,509@2,13": "noop",
+    "icon@798,353@20,9": "T:10342f6f5c8f"
+   }
+  },
+  "T:08ae29444b26": {
+   "label": "rewards/dailyloginrewards/possibledrops",
+   "shot": "213000_T:08ae29444b26.png",
+   "sig": [
+    "cclaimed",
+    "dailyloginrewards",
+    "day07",
+    "invitation",
+    "material",
+    "onmyoji",
+    "perforimance",
+    "possibledrops",
+    "rewards",
+    "ssrsp",
+    "x100kperfoimance"
+   ],
+   "dhash": "e0d0c4da5662cab3",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:c3fa1898ed3d": {
+   "label": "possible/10times/drawno1503",
+   "shot": "213000_T:c3fa1898ed3d.png",
+   "sig": [
+    "10times",
+    "15times",
+    "20times",
+    "25times",
+    "30times",
+    "35times",
+    "40times",
+    "45times",
+    "50times",
+    "55times",
+    "5times",
+    "60times",
+    "65times",
+    "asp",
+    "daily",
+    "drawno1503",
+    "materal",
+    "material",
+    "onmyoji",
+    "overview",
+    "performances0",
+    "possible",
+    "rewards",
+    "srsp",
+    "theafer",
+    "x100kperfoimance"
+   ],
+   "dhash": "e1a8a26c6cd4aabd",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:0668fd321009": {
+   "label": "battle/rewards/possibledrops",
+   "shot": "213000_T:0668fd321009.png",
+   "sig": [
+    "battle",
+    "dailyloginrewardsx15",
+    "day27",
+    "material",
+    "onmyoji",
+    "ontour",
+    "possibledrops",
+    "rewards",
+    "showtime",
+    "story",
+    "x100kperfoimance"
+   ],
+   "dhash": "e1d0ec9a2c68e8bf",
+   "n_cands": 0,
+   "edges": {
+    "T:f78c6d1af906": {
+     "via": "icon@64,625",
+     "x": 64,
+     "y": 625
+    }
+   },
+   "tried": {
+    "icon@64,625@2,16": "T:f78c6d1af906"
+   }
+  },
+  "T:f78c6d1af906": {
+   "label": "rewards/bringingyouhelp/drawno1",
+   "shot": "213000_T:f78c6d1af906.png",
+   "sig": [
+    "bewidespreadintheworld",
+    "bringingyouhelp",
+    "carefree",
+    "dailyloginrewardsx15",
+    "day27",
+    "days",
+    "drawno1",
+    "fullbowl",
+    "insummer",
+    "material",
+    "middleblessing",
+    "onmyoji",
+    "possibledrop",
+    "returning",
+    "rewards",
+    "screechingwithnewsf",
+    "thegeesehome",
+    "warmin",
+    "whenwildgeesecome",
+    "wintercool",
+    "x100kperfoimance"
+   ],
+   "dhash": "a1c88898a8ece8b9",
+   "n_cands": 0,
+   "edges": {
+    "T:0668fd321009": {
+     "via": "warmin",
+     "x": 197,
+     "y": 320
+    }
+   },
+   "tried": {
+    "icon@379,303@9,8": "noop",
+    "drawno1@20,4": "noop",
+    "middleblessing@20,5": "noop",
+    "returning@20,7": "noop",
+    "warmin@5,8": "T:0668fd321009"
+   }
+  },
+  "T:d7843fd9252a": {
+   "label": "onmyoji/nmyg",
+   "shot": "213000_T:d7843fd9252a.png",
+   "sig": [
+    "nmyg",
+    "onmyoji"
+   ],
+   "dhash": "a7df5a6995cb52ab",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:a51a2d2a0b6b": {
+   "label": "explore/town/team",
+   "shot": "213428_T:a51a2d2a0b6b.png",
+   "sig": [
+    "bonut",
+    "event",
+    "explore",
+    "guild",
+    "onmiyoji",
+    "onmyoji",
+    "rienas",
+    "seal",
+    "shikigami",
+    "shop",
+    "summon",
+    "talismanpass",
+    "team",
+    "town",
+    "vew"
+   ],
+   "dhash": "ac549661466bab6d",
+   "n_cands": 0,
+   "edges": {
+    "T:2f95b1fa4dc8": {
+     "via": "icon@986,227",
+     "x": 986,
+     "y": 227
+    },
+    "T:2c26ae50ab2d": {
+     "via": "icon@988,227",
+     "x": 988,
+     "y": 227
+    },
+    "T:c57d1185a835": {
+     "via": "icon@1119,149",
+     "x": 1119,
+     "y": 149
+    },
+    "T:3aec03148f4b": {
+     "via": "icon@1079,179",
+     "x": 1079,
+     "y": 179
+    },
+    "T:324f0a0ee0c8": {
+     "via": "icon@1077,312",
+     "x": 1077,
+     "y": 312
+    },
+    "T:66f1fbcd6f7b": {
+     "via": "icon@479,465",
+     "x": 479,
+     "y": 465
+    }
+   },
+   "tried": {
+    "icon@986,227@25,6": "T:2f95b1fa4dc8",
+    "icon@988,227@25,6": "T:2c26ae50ab2d",
+    "icon@1119,155@28,4": "T:c57d1185a835",
+    "icon@1082,176@27,4": "T:3aec03148f4b",
+    "icon@619,605@15,15": "noop",
+    "icon@1119,149@28,4": "T:c57d1185a835",
+    "icon@1079,179@27,4": "T:3aec03148f4b",
+    "icon@1083,463@27,12": "noop",
+    "icon@1077,312@27,8": "T:324f0a0ee0c8",
+    "icon@479,465@12,12": "T:66f1fbcd6f7b"
+   }
+  },
+  "T:2f95b1fa4dc8": {
+   "label": "onmyoji",
+   "shot": "213428_T:2f95b1fa4dc8.png",
+   "sig": [
+    "am",
+    "onmyoji"
+   ],
+   "dhash": "ac956995ecfaea35",
+   "n_cands": 0,
+   "edges": {
+    "T:7e30688713ea": {
+     "via": "icon@362,502",
+     "x": 362,
+     "y": 502
+    }
+   },
+   "tried": {
+    "icon@362,502@9,13": "T:7e30688713ea"
+   }
+  },
+  "T:7e30688713ea": {
+   "label": "summon/new/friendly",
+   "shot": "213428_T:7e30688713ea.png",
+   "sig": [
+    "free11",
+    "friendly",
+    "guarantee",
+    "jade",
+    "new",
+    "normal",
+    "onmyoji",
+    "radiance",
+    "rcom",
+    "scrolls",
+    "shop",
+    "shrine",
+    "sspomoikanechanceup",
+    "ssrsp",
+    "summon",
+    "summons",
+    "timeremaining3d14h24m",
+    "valued"
+   ],
+   "dhash": "611593924ac2c931",
+   "n_cands": 0,
+   "edges": {
+    "T:9351704f19d0": {
+     "via": "icon@567,577",
+     "x": 567,
+     "y": 577
+    },
+    "T:7f157c7fa33f": {
+     "via": "icon@423,589",
+     "x": 423,
+     "y": 589
+    }
+   },
+   "tried": {
+    "icon@567,577@14,14": "T:9351704f19d0",
+    "icon@423,589@11,15": "T:7f157c7fa33f"
+   }
+  },
+  "T:9351704f19d0": {
+   "label": "voicesummon/10draws/free11",
+   "shot": "213428_T:9351704f19d0.png",
+   "sig": [
+    "10draws",
+    "1draw",
+    "free11",
+    "onmyoji",
+    "voicesummon"
+   ],
+   "dhash": "617173322a69f132",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:7f157c7fa33f": {
+   "label": "tapanywheretoskip/onmyoji",
+   "shot": "213428_T:7f157c7fa33f.png",
+   "sig": [
+    "onmyoji",
+    "tapanywheretoskip"
+   ],
+   "dhash": "611553522a62e030",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:b4faffd75ddf": {
+   "label": "again/onmyoji/summoningattempts",
+   "shot": "213428_T:b4faffd75ddf.png",
+   "sig": [
+    "again",
+    "ok",
+    "onmyoji",
+    "summoningattempts"
+   ],
+   "dhash": "6115754a5275d430",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {
+    "icon@543,411@14,10": "noop",
+    "icon@799,223@20,6": "noop",
+    "icon@415,223@10,6": "noop",
+    "icon@664,377@17,9": "noop",
+    "icon@939,481@23,12": "noop",
+    "icon@683,173@17,4": "noop",
+    "icon@736,232@18,6": "noop",
+    "icon@825,472@21,12": "noop",
+    "icon@869,442@22,11": "noop",
+    "icon@1085,490@27,12": "noop"
+   }
+  },
+  "T:2c26ae50ab2d": {
+   "label": "onmyoji/lowng",
+   "shot": "213834_T:2c26ae50ab2d.png",
+   "sig": [
+    "lowng",
+    "onmyoji"
+   ],
+   "dhash": "b8e8526151f0d148",
+   "n_cands": 0,
+   "edges": {
+    "T:0dadb4f902a6": {
+     "via": "icon@344,174",
+     "x": 344,
+     "y": 174
+    }
+   },
+   "tried": {
+    "icon@344,174@9,4": "T:0dadb4f902a6"
+   }
+  },
+  "T:0dadb4f902a6": {
+   "label": "increasedto/chanceup/60timessummonsguarantee",
+   "shot": "213834_T:0dadb4f902a6.png",
+   "sig": [
+    "60timessummonsguarantee",
+    "chanceup",
+    "dle",
+    "firstsharegrants",
+    "increasedto",
+    "onmyoji",
+    "ssrspshikigami",
+    "summonnow",
+    "tutorial",
+    "umimap",
+    "valued",
+    "wisdomflames",
+    "wish"
+   ],
+   "dhash": "465c6b4a54d095ba",
+   "n_cands": 0,
+   "edges": {
+    "T:7e30688713ea": {
+     "via": "icon@53,69",
+     "x": 53,
+     "y": 69
+    }
+   },
+   "tried": {
+    "icon@668,634@17,16": "noop",
+    "icon@63,203@2,5": "noop",
+    "icon@53,69@1,2": "T:7e30688713ea"
+   }
+  },
+  "T:6415440c570d": {
+   "label": "audio/music/name",
+   "shot": "213834_T:6415440c570d.png",
+   "sig": [
+    "audio",
+    "autoplav",
+    "av",
+    "birth",
+    "change",
+    "day",
+    "eo",
+    "ex",
+    "extra",
+    "facebooktwitter",
+    "games",
+    "guila",
+    "house",
+    "interact",
+    "link",
+    "modeloutline",
+    "music",
+    "name",
+    "nameplate",
+    "newfeature",
+    "newinterface",
+    "noinput",
+    "notif",
+    "onmyaji",
+    "onmyoji",
+    "pack",
+    "progress",
+    "send",
+    "settings",
+    "sfx",
+    "shikigami",
+    "shop",
+    "skillcloseup",
+    "talismanpass",
+    "tapto",
+    "team",
+    "th",
+    "thomas",
+    "video",
+    "view"
+   ],
+   "dhash": "ac80b19085c0c0b1",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:c57d1185a835": {
+   "label": "onmyoji",
+   "shot": "213834_T:c57d1185a835.png",
+   "sig": [
+    "onmyoji"
+   ],
+   "dhash": "284002414a0a0001",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:3aec03148f4b": {
+   "label": "ummoningevent/wisdom/springparade",
+   "shot": "213834_T:3aec03148f4b.png",
+   "sig": [
+    "awakened",
+    "eprintedwonders",
+    "excitingevents",
+    "lebrationskinreturr",
+    "material",
+    "memoryscroll",
+    "new",
+    "newskins",
+    "onmyoji",
+    "onmyojiskinreturn",
+    "possibledropss",
+    "shop",
+    "springparade",
+    "springsmentor",
+    "srsp",
+    "toevent",
+    "ujiwaranomichi",
+    "ummoningevent",
+    "versionevent",
+    "wisdom"
+   ],
+   "dhash": "e960e0d26ec8505a",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:03f908d78cd1": {
+   "label": "onmyoji/onmyct",
+   "shot": "214043_T:03f908d78cd1.png",
+   "sig": [
+    "onmyct",
+    "onmyoji"
+   ],
+   "dhash": "debc73fa76e3b9f7",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:324f0a0ee0c8": {
+   "label": "namahage/skip/onmyoji",
+   "shot": "214043_T:324f0a0ee0c8.png",
+   "sig": [
+    "namahage",
+    "onmyoji",
+    "skip"
+   ],
+   "dhash": "62d2a2ecc286b2f0",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {
+    "skip@26,2": "noop",
+    "namahage@8,14": "noop"
+   }
+  },
+  "T:ac00dfd46770": {
+   "label": "ashin/unlocksafter/persuadingtheprevious",
+   "shot": "214043_T:ac00dfd46770.png",
+   "sig": [
+    "ashin",
+    "dneun",
+    "kaneko",
+    "kosuke",
+    "lkeda",
+    "material",
+    "materual",
+    "onmyoji",
+    "persuadingtheprevious",
+    "possibledrops",
+    "progress",
+    "shizumi",
+    "sslstan",
+    "unlocksafter",
+    "unlockson65",
+    "unlockson66",
+    "unlockson67"
+   ],
+   "dhash": "90cab565aa6aea78",
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:66f1fbcd6f7b": {
+   "label": "customize/1ykm/quests",
+   "shot": "214043_T:66f1fbcd6f7b.png",
+   "sig": [
+    "10ykm",
+    "1ykm",
+    "2ykm",
+    "3ykm",
+    "4ykm",
+    "5ykm",
+    "70ykm",
+    "benetits",
+    "bonus",
+    "customize",
+    "decors",
+    "festreturn",
+    "idlemileage",
+    "materal",
+    "mymileage0ykm",
+    "onmyoji",
+    "purchasespringride",
+    "quests",
+    "record",
+    "rewardsoverview",
+    "snuog"
+   ],
+   "dhash": "eac41a56e8d05ad9",
+   "n_cands": 0,
+   "edges": {
+    "T:28f260180b1b": {
+     "via": "icon@987,613",
+     "x": 987,
+     "y": 613
+    }
+   },
+   "tried": {
+    "icon@110,64@3,2": "noop",
+    "icon@987,613@25,15": "T:28f260180b1b"
+   }
+  },
+  "T:28f260180b1b": {
+   "label": "ephemera/rank/frostdream",
+   "shot": "214043_T:28f260180b1b.png",
+   "sig": [
+    "adancedfloat",
+    "advancedfloat",
+    "afterpurchase",
+    "choice",
+    "developmentifems",
+    "ephemera",
+    "frostdream",
+    "getimmediately",
+    "materia",
+    "material",
+    "onmyoji",
+    "or",
+    "possibledrops",
+    "purchase",
+    "quests",
+    "rank",
+    "supply",
+    "wwards",
+    "yuki"
+   ],
+   "dhash": "4092b69a96b4c440",
+   "n_cands": 32,
+   "edges": {},
+   "tried": {
+    "icon@70,86@2,2": "noop",
+    "wards@5,2": "noop",
+    "material@19,6": "noop",
+    "choice@17,6": "noop",
+    "advancedfloat@21,6": "noop",
+    "supply@28,7": "noop",
+    "or@9,7": "noop",
+    "developmentltems@20,7": "noop",
+    "choice@7,8": "noop",
+    "frostdream@1,9": "noop",
+    "ephemera@2,9": "noop",
+    "material@22,9": "noop",
+    "quests@28,9": "noop",
+    "yuki@1,10": "noop",
+    "material@19,10": "noop",
+    "material@22,10": "noop",
+    "icon@92,495@2,12": "noop",
+    "developmentifems@20,7": "noop",
+    "ac0@21,11": "noop",
+    "getimmediately@20,11": "noop",
+    "possibledrops@12,12": "noop",
+    "rank@28,12": "noop",
+    "afterpurchase@20,12": "noop",
+    "materia@7,13": "noop",
+    "adancodfloat@20,13": "noop",
+    "purchase@25,15": "noop",
+    "rwards@5,2": "noop",
+    "580sjade@14,6": "noop",
+    "erial@19,6": "noop",
+    "adyangedfloat@21,6": "noop",
+    "proceedto@21,7": "noop",
+    "sjadeshop@21,8": "noop",
+    "inthe@18,8": "noop",
+    "frostdream@2,9": "noop",
+    "sjadeshop@13,9": "noop",
+    "ephemera@1,9": "noop",
+    "immediately@20,11": "noop",
+    "erpurchase@20,12": "noop",
+    "adwanoedfloat@20,13": "noop",
+    "nards@5,2": "noop",
+    "rostdream@2,9": "noop",
+    "adancedfloat@20,13": "noop",
+    "icon@75,412@2,10": "noop"
+   },
+   "cands": [
+    "wards@5,2",
+    "material@19,6",
+    "choice@17,6",
+    "advancedfloat@21,6",
+    "supply@28,7",
+    "or@9,7",
+    "developmentltems@20,7",
+    "choice@7,8",
+    "frostdream@1,9",
+    "ephemera@2,9",
+    "material@22,9",
+    "quests@28,9",
+    "yuki@1,10",
+    "material@19,10",
+    "material@22,10",
+    "getimmediately@20,11",
+    "possibledrops@12,12",
+    "rank@28,12",
+    "afterpurchase@20,12",
+    "materia@7,13",
+    "adancodfloat@20,13",
+    "purchase@25,15",
+    "icon@75,412@2,10"
+   ]
+  }
+ },
+ "schema": 1
+}
