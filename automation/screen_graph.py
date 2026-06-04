@@ -302,6 +302,28 @@ OVERLAYS: dict[str, dict] = {
 }
 
 
+def _expand_identify(tables) -> None:
+    """OCR THAT tach cum nhieu tu ('Soul Zones'->'Soul'+'Zones'), nen identify dung
+    cum 2+ tu se KHONG BAO GIO match -> node khong duoc nhan dien -> goto loop dai.
+    Ham nay tach moi cum thanh cac tu don (giu thu tu, bo trung) cho moi node/overlay.
+    Goi 1 lan luc import; ket qua dung cho ca runtime (NODES) lan build (JSON)."""
+    for tbl in tables:
+        for d in tbl.values():
+            ids = d.get("identify")
+            if not ids:
+                continue
+            out, seen = [], set()
+            for tok in ids:
+                for w in str(tok).split():
+                    if w not in seen:
+                        seen.add(w)
+                        out.append(w)
+            d["identify"] = out
+
+
+_expand_identify([NODES, OVERLAYS])
+
+
 class ScreenGraph:
     """Graph dieu huong. Toan bo logic qua Dijkstra/dismiss - khong if tung man.
 

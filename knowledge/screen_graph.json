@@ -205,8 +205,10 @@
    "verified": true,
    "identify": [
     "Arena",
-    "Mystic Trader",
-    "Demon Parade"
+    "Mystic",
+    "Trader",
+    "Demon",
+    "Parade"
    ],
    "avoid": [
     "Back"
@@ -301,7 +303,8 @@
    "verified": true,
    "identify": [
     "Co-op",
-    "Friend Pts",
+    "Friend",
+    "Pts",
     "Send",
     "Online",
     "Latest"
@@ -326,7 +329,8 @@
    "identify": [
     "Garment",
     "Mall",
-    "Stellar Omen",
+    "Stellar",
+    "Omen",
     "Consignment",
     "General"
    ],
@@ -337,9 +341,12 @@
    "category": "event",
    "verified": true,
    "identify": [
-    "Version Event",
-    "Memory Scroll",
-    "Gilded Echoes",
+    "Version",
+    "Event",
+    "Memory",
+    "Scroll",
+    "Gilded",
+    "Echoes",
     "Overview",
     "Mileage",
     "Benefits",
@@ -376,8 +383,9 @@
    "category": "social",
    "verified": true,
    "identify": [
-    "Guild Grounds",
-    "Guild Hall"
+    "Guild",
+    "Grounds",
+    "Hall"
    ],
    "parent": "HOME",
    "exits": {
@@ -393,8 +401,10 @@
    "category": "util",
    "verified": true,
    "identify": [
-    "Shrine Pass",
-    "Mystic Scroll"
+    "Shrine",
+    "Pass",
+    "Mystic",
+    "Scroll"
    ],
    "parent": "event"
   },
@@ -417,7 +427,8 @@
    "category": "combat",
    "verified": true,
    "identify": [
-    "Realm Raid",
+    "Realm",
+    "Raid",
     "Assault"
    ],
    "parent": "exploration",
@@ -435,7 +446,8 @@
    "category": "combat",
    "verified": true,
    "identify": [
-    "Soul Zones",
+    "Soul",
+    "Zones",
     "Harvest"
    ],
    "parent": "exploration"
@@ -445,7 +457,8 @@
    "category": "combat",
    "verified": true,
    "identify": [
-    "Area Boss"
+    "Area",
+    "Boss"
    ],
    "parent": "exploration"
   },
@@ -464,7 +477,8 @@
    "category": "combat",
    "verified": true,
    "identify": [
-    "Secret Zone"
+    "Secret",
+    "Zone"
    ],
    "parent": "exploration"
   },
@@ -473,7 +487,8 @@
    "category": "combat",
    "verified": true,
    "identify": [
-    "Six Gates"
+    "Six",
+    "Gates"
    ],
    "parent": "exploration"
   },
@@ -492,7 +507,8 @@
    "category": "combat",
    "verified": true,
    "identify": [
-    "Demon Encounter"
+    "Demon",
+    "Encounter"
    ],
    "avoid": [
     "Arena",
@@ -546,7 +562,8 @@
    "verified": false,
    "identify": [
     "Goryou",
-    "Spirit Beast"
+    "Spirit",
+    "Beast"
    ],
    "parent": "exploration"
   },
@@ -555,7 +572,7 @@
    "category": "combat",
    "verified": false,
    "identify": [
-    "Hero Trial",
+    "Hero",
     "Trial"
    ],
    "parent": "exploration"
@@ -576,7 +593,8 @@
    "verified": false,
    "identify": [
     "Heian",
-    "Strange Tales"
+    "Strange",
+    "Tales"
    ],
    "parent": "exploration"
   },
@@ -595,7 +613,7 @@
    "category": "event",
    "verified": false,
    "identify": [
-    "Hyakki Yakou",
+    "Hyakki",
     "Yakou"
    ],
    "parent": "town"
@@ -614,8 +632,8 @@
    "category": "pvp",
    "verified": false,
    "identify": [
-    "Draft Duel",
-    "Draft"
+    "Draft",
+    "Duel"
    ],
    "parent": "town"
   },
@@ -624,7 +642,7 @@
    "category": "combat",
    "verified": false,
    "identify": [
-    "Kekkai Toppa",
+    "Kekkai",
     "Toppa"
    ],
    "parent": "realm_raid"
@@ -635,7 +653,8 @@
    "verified": false,
    "identify": [
     "Realworld",
-    "Real World"
+    "Real",
+    "World"
    ],
    "parent": "demon_encounter"
   },
@@ -645,7 +664,7 @@
    "verified": false,
    "identify": [
     "Dokan",
-    "Ryou Dokan"
+    "Ryou"
    ],
    "parent": "guild"
   },
@@ -655,7 +674,8 @@
    "verified": false,
    "identify": [
     "Records",
-    "Encounter Log"
+    "Encounter",
+    "Log"
    ],
    "parent": "HOME"
   },
@@ -664,7 +684,7 @@
    "category": "util",
    "verified": false,
    "identify": [
-    "Daily Quests",
+    "Daily",
     "Quests"
    ],
    "parent": "HOME"

@@ -72,6 +72,20 @@ def run_tour(name: str = "daily") -> None:
                 f.write(json.dumps(rec) + "\n")
             mark = "OK" if ok else "FAIL"
             print(f"    {mark} | {dur:.1f}s | ket thuc o: {where_end}\n")
+
+            # KHAO SAT node chua verified: neu toi dung -> ghi token that de sau nang
+            # verified=True (hoc identify chinh xac thay vi suy doan). Anh -> /tmp.
+            if ok and not verified:
+                r = a.read()
+                toks = sorted({t for t, _, _ in r.words if 3 <= len(t) <= 18})
+                import cv2
+                cv2.imwrite(os.path.join("/tmp", f"survey_{goal}.png"), r.img)
+                survey = {"node": goal, "reached_via_goto": True,
+                          "tokens": toks, "shot": f"/tmp/survey_{goal}.png"}
+                with open(os.path.join(ROOT, "logs", "node_survey.jsonl"), "a") as f:
+                    f.write(json.dumps(survey, ensure_ascii=False) + "\n")
+                print(f"    [survey] {goal}: {len(toks)} token -> logs/node_survey.jsonl")
+
             # ve HOME truoc chang sau (do tung chang doc lap tu HOME)
             g.escape()
             time.sleep(1)
