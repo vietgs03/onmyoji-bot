@@ -44,13 +44,14 @@ STATES = {
     # 'Tapto'/'continue' -> bat ca 2 dang. 'ClearTime' = man ket qua battle.
     "RESULT":   ["Victory", "Defeat", "Tapto", "continue", "ClearTime",
                  "Settlement", "Battle Result"],
-    # dan doi hinh truoc tran -> bam Ready/Battle de vao danh
-    "PREPARE":  ["Ready", "Prepare", "Start Battle", "Auto Battle"],
-    # dang danh -> CHO (man co 'Auto'/'Skill'/'Speed'; co timer + thanh HP).
-    # Khong tap luc nay (de battle tu chay, nhat la khi Auto bat).
-    "FIGHTING": ["Surrender", "Speed", "Pause", "Skill", "Victories"],
-    # man chon tran/level -> bam vao tran de bat dau
-    "SELECT":   ["Challenge", "Battle", "Sweep", "Quick", "Enter"],
+    # man chon tran/level -> bam vao tran. UU TIEN truoc FIGHTING vi man chon co nut
+    # 'Skills'/'Challenge' de nham 'Skill'. Co 'Challenge'/'Lineup'/'Rewards Preview'
+    # = chac chan man chon (KHONG dang danh).
+    "SELECT":   ["Challenge", "Sweep", "Quick", "Rewards Preview", "Lineup"],
+    # dan doi hinh truoc tran -> bam Ready/Start (man rieng truoc battle).
+    "PREPARE":  ["Ready", "Prepare", "Start Battle"],
+    # dang danh -> CHO. 'Surrender' chi xuat hien khi DANG danh (dac trung tuyet doi).
+    "FIGHTING": ["Surrender", "Pause"],
 }
 
 # HANH DONG cho moi trang thai. (kind, arg)
