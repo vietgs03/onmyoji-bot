@@ -48,9 +48,30 @@ CONF_MIN = 0.5
 # DATA: khai bao NODE. Day la NGUON SU THAT. Them man = them o day.
 # Toa do center la fallback 1152x679; uu tien click theo OCR text (ben voi event).
 # ======================================================================
+# ----------------------------------------------------------------------
+# PHAN LOAI NODE (theo yeu cau user). Moi node mang 2 nhan de agent HIEU
+# ban chat man, khong chi dieu huong mu:
+#   kind     : khong gian hien thi
+#       "flat"    = 1 frame chua TRON man (menu/battle/select) -> state = 1 anh.
+#       "spatial" = khong gian RONG hon man, pan/scroll lo them (HOME courtyard,
+#                   board game) -> can ghep panorama/mosaic, KHONG coi moi goc nhin
+#                   la 1 state khac. (xem PROMPT_OPUS_BATTLE_GRAPH.md insight SLAM)
+#   category : chuc nang -> giup agent gom nhom muc tieu, chon viec.
+#       hub        : man trung chuyen (HOME/exploration/town) - chi de di tiep.
+#       combat     : danh PvE farm (soul/boss/raid...).
+#       pvp        : danh nguoi (duel/draft).
+#       event      : su kien theo mua (heian/fairyland/hyakkiyakou).
+#       util       : tien ich (shop/team/collection/settings/daily).
+#       social     : xa hoi (friends/guild/mentor).
+#       idle       : farm thu dong (delegation).
+# verified : True = identify/toa do da kiem chung LIVE; False = suy tu OAS/ten game,
+#            bot phai tu xac minh & sua khi toi noi (KHONG tin mu).
+# ----------------------------------------------------------------------
 NODES: dict[str, dict] = {
     "HOME": {
         # HOME dac trung: co dong thoi nhieu nut menu chinh + KHONG co nut Back.
+        # spatial: courtyard rong hon man, pan lo Forum/Support... (da do dx=-285px).
+        "kind": "spatial", "category": "hub", "verified": True,
         "identify": ["Explore", "Summon", "Friends", "Shikigami"],
         "avoid": ["Back"],
         "parent": None,
@@ -70,6 +91,7 @@ NODES: dict[str, dict] = {
         },
     },
     "exploration": {
+        "kind": "flat", "category": "hub", "verified": True,
         "identify": ["Chapter", "Realm Raid", "Soul Zones"],
         "parent": "HOME",
         "exits": {
@@ -79,10 +101,17 @@ NODES: dict[str, dict] = {
             "awake_zones":  {"text": ["Awake"],  "center": [80, 615]},
             "secret_zones": {"text": ["Secret"], "center": [518, 616]},
             "six_gates":    {"text": ["Gates"],  "center": [859, 623]},
+            # --- canh bo sung tu OAS (chua kiem chung toa do -> bot tu tim qua OCR text) ---
+            "goryou_realm": {"text": ["Goryou"]},
+            "delegation":   {"text": ["Delegation"]},
+            "heian_kitan":  {"text": ["Heian", "Strange"]},
+            "bondling_fairyland": {"text": ["Fairyland", "Bondling"]},
+            "hero_test":    {"text": ["Hero Trial", "Trial"]},
         },
     },
     "town": {
         # Town = co dong thoi nhieu nut hoat dong + KHONG co Back (la hub cap 1).
+        "kind": "flat", "category": "hub", "verified": True,
         "identify": ["Arena", "Mystic Trader", "Demon Parade"],
         "avoid": ["Back"],
         "parent": "HOME",
@@ -91,57 +120,132 @@ NODES: dict[str, dict] = {
             "demon_encounter": {"text": ["Encounter"], "center": [578, 162]},
             "hunt":            {"text": ["Hunt"],      "center": [448, 162]},
             "hyakkisen":       {"text": ["Hyakki"],    "center": [194, 168]},
+            # --- canh bo sung tu OAS ---
+            "hunt_kirin":      {"text": ["Kirin"]},
+            "draft_duel":      {"text": ["Draft"]},
+            "hyakkiyakou":     {"text": ["Yakou"]},
         },
     },
-    # --- man con cap 1 (duoi HOME) ---
-    "summon":    {"identify": ["Summon", "Scrolls"],   "parent": "HOME"},
-    "shikigami": {"identify": ["Shikigami", "Preset"], "parent": "HOME"},
-    "onmyodo":   {"identify": ["Onmyodo"],             "parent": "HOME"},
+    # --- man con cap 1 (duoi HOME). verified=True = da kiem chung LIVE ---
+    "summon":    {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Summon", "Scrolls"],   "parent": "HOME"},
+    "shikigami": {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Shikigami", "Preset"], "parent": "HOME"},
+    "onmyodo":   {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Onmyodo"],             "parent": "HOME"},
     # friends: tab ban be (Add Friend / Guild Invite / Recommended). Mentor la
     # tab ke ben (cung co Apprentices) -> phan biet bang nut dac trung friends.
-    "friends":   {"identify": ["Add Friend", "Guild Invite", "Recommended"],
+    "friends":   {"kind": "flat", "category": "social", "verified": True,
+                  "identify": ["Add Friend", "Guild Invite", "Recommended"],
                   "parent": "HOME",
                   # Mentor (Mentorship) mo tu trong man Friends -> forward edge.
                   "exits": {"mentor": {"text": ["Mentorship"], "center": [928, 314]}}},
-    "shop":      {"identify": ["Garment", "Mall", "Stellar Omen", "Consignment", "General"],
+    "shop":      {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Garment", "Mall", "Stellar Omen", "Consignment", "General"],
                   "parent": "HOME"},
     # --- man tien ich / su kien (duoi HOME) ---
     # Event: banner su kien. 16 anh that = NHIEU sub-man (Event/Overview/Mileage/...)
     # -> identify rong de phu cac tab (Overview/Mileage/Benefits/Record tu OCR that).
     # Shrine Pass mo tu trong Event (banner goc duoi phai) -> forward edge.
-    "event":     {"identify": ["Version Event", "Memory Scroll", "Gilded Echoes",
+    "event":     {"kind": "flat", "category": "event", "verified": True,
+                  "identify": ["Version Event", "Memory Scroll", "Gilded Echoes",
                                "Overview", "Mileage", "Benefits", "Record"],
                   "parent": "HOME",
                   "exits": {"shrine_pass": {"text": ["Shrine"], "center": [955, 601]}}},
     # Settings: bang cai dat (Audio/Music/SFX/Nameplate). Mo tu gear goc HOME.
-    "settings":  {"identify": ["Settings", "Audio", "Nameplate", "Notif", "Music"],
+    "settings":  {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Settings", "Audio", "Nameplate", "Notif", "Music"],
                   "parent": "HOME"},
     # Guild: san guild (Guild Grounds, decorations). Nut Guild day HOME.
-    "guild":     {"identify": ["Guild Grounds", "Guild Hall"], "parent": "HOME"},
+    "guild":     {"kind": "spatial", "category": "social", "verified": True,
+                  "identify": ["Guild Grounds", "Guild Hall"], "parent": "HOME",
+                  # Dokan (Ryou Dokan, dao quan dot pha) mo tu trong Guild.
+                  "exits": {"dokan": {"text": ["Dokan"]}}},
     # Shrine Pass: battle pass (Mystic Scroll, Knowledge). Vao tu banner.
-    "shrine_pass": {"identify": ["Shrine Pass", "Mystic Scroll"], "parent": "event"},
+    "shrine_pass": {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Shrine Pass", "Mystic Scroll"], "parent": "event"},
     # Cosmetics: skin/frame shop (Cosmetic Scene/Skin/Frame). Tranh nham Shop.
-    "cosmetics": {"identify": ["Cosmetic", "Frame", "Ranking"],
+    "cosmetics": {"kind": "flat", "category": "util", "verified": True,
+                  "identify": ["Cosmetic", "Frame", "Ranking"],
                   "avoid": ["Garment"], "parent": "HOME"},
     # --- man con cap 2 (duoi exploration) ---
-    "realm_raid":   {"identify": ["Realm Raid", "Assault"], "parent": "exploration"},
-    "soul_zones":   {"identify": ["Soul Zones", "Harvest"], "parent": "exploration"},
-    "area_boss":    {"identify": ["Area Boss"],            "parent": "exploration"},
-    "awake_zones":  {"identify": ["Awaken", "Awake"],      "parent": "exploration"},
-    "secret_zones": {"identify": ["Secret Zone"],         "parent": "exploration"},
-    "six_gates":    {"identify": ["Six Gates"],           "parent": "exploration"},
+    "realm_raid":   {"kind": "flat", "category": "combat", "verified": True,
+                     "identify": ["Realm Raid", "Assault"], "parent": "exploration",
+                     "exits": {"kekkai_toppa": {"text": ["Kekkai", "Toppa"]}}},
+    "soul_zones":   {"kind": "flat", "category": "combat", "verified": True,
+                     "identify": ["Soul Zones", "Harvest"], "parent": "exploration"},
+    "area_boss":    {"kind": "flat", "category": "combat", "verified": True,
+                     "identify": ["Area Boss"],            "parent": "exploration"},
+    "awake_zones":  {"kind": "flat", "category": "combat", "verified": True,
+                     "identify": ["Awaken", "Awake"],      "parent": "exploration"},
+    "secret_zones": {"kind": "flat", "category": "combat", "verified": True,
+                     "identify": ["Secret Zone"],         "parent": "exploration"},
+    "six_gates":    {"kind": "flat", "category": "combat", "verified": True,
+                     "identify": ["Six Gates"],           "parent": "exploration"},
     # --- man con cap 2 (duoi town) ---
-    "duel":            {"identify": ["Duel", "Season"],     "parent": "town"},
+    "duel":            {"kind": "flat", "category": "pvp", "verified": True,
+                        "identify": ["Duel", "Season"],     "parent": "town"},
     # demon_encounter: man trong; tranh nham voi nut "Demon Parade" cua Town
     # bang avoid cac nut hub Town (Arena/Mystic). Title that = "Demon Encounter".
-    "demon_encounter": {"identify": ["Demon Encounter"],
-                        "avoid": ["Arena", "Mystic Trader"], "parent": "town"},
-    "hunt":            {"identify": ["Hunt"],               "parent": "town"},
-    "hyakkisen":       {"identify": ["Hyakki"],             "parent": "town"},
+    "demon_encounter": {"kind": "flat", "category": "combat", "verified": True,
+                        "identify": ["Demon Encounter"],
+                        "avoid": ["Arena", "Mystic Trader"], "parent": "town",
+                        "exits": {"demon_encounter_realworld": {"text": ["Realworld", "Real World"]}}},
+    "hunt":            {"kind": "flat", "category": "combat", "verified": True,
+                        "identify": ["Hunt"],               "parent": "town"},
+    "hyakkisen":       {"kind": "flat", "category": "combat", "verified": True,
+                        "identify": ["Hyakki"],             "parent": "town"},
     # Mentor: tab su phu (Mentorship Channel/Notice, No Recommendation). Ke ben
     # tab Friends; phan biet bang avoid nut chi-Friends (Add Friend/Guild Invite).
-    "mentor":          {"identify": ["Mentorship", "Apprentices"],
+    "mentor":          {"kind": "flat", "category": "social", "verified": True,
+                        "identify": ["Mentorship", "Apprentices"],
                         "avoid": ["Add Friend", "Guild Invite"], "parent": "friends"},
+
+    # ==================================================================
+    # NODE BO SUNG tu OAS pagegraph (38 page). verified=False: identify suy
+    # tu ten game EN/desc OAS, CHUA kiem chung LIVE -> bot tu xac minh khi toi
+    # (cap nhat identify/them exits + dat verified=True sau khi thay that).
+    # ==================================================================
+    # -- combat farm (duoi exploration) --
+    "goryou_realm":   {"kind": "flat", "category": "combat", "verified": False,
+                       "identify": ["Goryou", "Spirit Beast"], "parent": "exploration"},
+    "hero_test":      {"kind": "flat", "category": "combat", "verified": False,
+                       "identify": ["Hero Trial", "Trial"], "parent": "exploration"},
+    # Delegation = uy thac farm thu dong (idle).
+    "delegation":     {"kind": "flat", "category": "idle", "verified": False,
+                       "identify": ["Delegation", "Delegate"], "parent": "exploration"},
+    # -- event (duoi exploration/town) --
+    "heian_kitan":    {"kind": "flat", "category": "event", "verified": False,
+                       "identify": ["Heian", "Strange Tales"], "parent": "exploration"},
+    # Fairyland: vuon co tich, co the la man co khong gian (board) -> spatial?
+    "bondling_fairyland": {"kind": "spatial", "category": "event", "verified": False,
+                       "identify": ["Fairyland", "Bondling"], "parent": "exploration"},
+    # Hyakki Yakou: dem tram quy = board game co ban do -> spatial.
+    "hyakkiyakou":    {"kind": "spatial", "category": "event", "verified": False,
+                       "identify": ["Hyakki Yakou", "Yakou"], "parent": "town"},
+    # -- combat/pvp (duoi town) --
+    "hunt_kirin":     {"kind": "flat", "category": "combat", "verified": False,
+                       "identify": ["Kirin"], "parent": "town"},
+    "draft_duel":     {"kind": "flat", "category": "pvp", "verified": False,
+                       "identify": ["Draft Duel", "Draft"], "parent": "town"},
+    # -- man con cap 3 --
+    "kekkai_toppa":   {"kind": "flat", "category": "combat", "verified": False,
+                       "identify": ["Kekkai Toppa", "Toppa"], "parent": "realm_raid"},
+    "demon_encounter_realworld": {"kind": "flat", "category": "combat", "verified": False,
+                       "identify": ["Realworld", "Real World"], "parent": "demon_encounter"},
+    "dokan":          {"kind": "flat", "category": "combat", "verified": False,
+                       "identify": ["Dokan", "Ryou Dokan"], "parent": "guild"},
+    # -- tien ich (duoi HOME, mo tu footer) --
+    "shikigami_records": {"kind": "flat", "category": "util", "verified": False,
+                       "identify": ["Records", "Encounter Log"], "parent": "HOME"},
+    "daily":          {"kind": "flat", "category": "util", "verified": False,
+                       "identify": ["Daily Quests", "Quests"], "parent": "HOME"},
+    "team":           {"kind": "flat", "category": "util", "verified": False,
+                       "identify": ["Team", "Lineup"], "parent": "HOME"},
+    "collection":     {"kind": "flat", "category": "util", "verified": False,
+                       "identify": ["Collection"], "parent": "HOME"},
+    "travel":         {"kind": "flat", "category": "util", "verified": False,
+                       "identify": ["Traveler", "Travel"], "parent": "HOME"},
 }
 
 
@@ -478,17 +582,27 @@ def build() -> None:
 
 
 def show_tree() -> None:
-    """In cay node (parent -> con) de de doi chieu, khong lan man."""
+    """In cay node (parent -> con) kem PHAN LOAI (kind/category/verified)."""
     children = defaultdict(list)
     for n, d in NODES.items():
         children[d.get("parent")].append(n)
 
     def rec(node: str, depth: int) -> None:
-        print("  " * depth + node)
+        d = NODES.get(node, {})
+        kind = d.get("kind", "?")[:4]
+        cat = d.get("category", "?")
+        vmark = "" if d.get("verified", False) else "  [chua kiem chung]"
+        print("  " * depth + f"{node:24s} <{kind}|{cat}>{vmark}")
         for c in sorted(children.get(node, [])):
             rec(c, depth + 1)
 
     rec(HOME, 0)
+    # thong ke phan loai
+    from collections import Counter
+    kc = Counter(d.get("kind", "?") for d in NODES.values())
+    cc = Counter(d.get("category", "?") for d in NODES.values())
+    nv = sum(1 for d in NODES.values() if not d.get("verified", False))
+    print(f"\nTONG {len(NODES)} node | kind={dict(kc)} | category={dict(cc)} | chua kiem chung={nv}")
 
 
 def _make_agent():

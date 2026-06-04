@@ -117,3 +117,22 @@ Routine doc tu `knowledge/daily_tasks.json` (NGUON SU THAT, them task moi vao fi
 - `fgclick`: real mouse foreground. Cho modal cung, NHUNG doi khi tra OK ma popup
   khong dong -> uu tien politeclick.
 - ClientToScreen thay GetWindowRect (GetWindowRect gom title bar -> lech ~30px).
+
+## 10. Cay menu day du + PHAN LOAI node (screen_graph 40 node)
+Da MERGE cau truc cha-con tu OAS pagegraph (38 page) vao `automation/screen_graph.py`
+(truoc 24 node, gio 40). KHONG lam lai tu dau - cay dieu huong da co san (Dijkstra
+goto/path/where/escape). Chi bo sung node thieu + them PHAN LOAI.
+
+Moi node co 3 nhan moi (de agent HIEU ban chat, khong dieu huong mu):
+- `kind`: "flat" (1 frame = tron man, da so) | "spatial" (khong gian rong hon man,
+  pan lo them -> can panorama/SLAM; chi HOME/guild/fairyland/hyakkiyakou).
+- `category`: hub|combat|pvp|event|util|social|idle -> gom nhom muc tieu.
+- `verified`: True = identify/toa do kiem chung LIVE; False = suy tu OAS/ten game EN,
+  bot PHAI tu xac minh & sua khi toi (16 node con False, vd goryou/kekkai/dokan).
+
+Phan bo: kind={spatial:4, flat:36}, category={combat:15, util:12, event:4, hub:3,
+social:3, pvp:2, idle:1}. 16 node chua kiem chung (toa do exit bo trong -> bot tim
+qua OCR text khi den hub cha).
+
+Quan trong: them man = them 1 entry DATA trong NODES (khong sua thuat toan). Node
+moi verified=False -> khi bot toi noi & nhan dien dung thi nang len True (hoc dan).

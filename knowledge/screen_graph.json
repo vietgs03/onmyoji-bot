@@ -2,6 +2,9 @@
  "home": "HOME",
  "nodes": {
   "HOME": {
+   "kind": "spatial",
+   "category": "hub",
+   "verified": true,
    "identify": [
     "Explore",
     "Summon",
@@ -18,8 +21,8 @@
       "Explore"
      ],
      "center": [
-      464,
-      144
+      608,
+      192
      ]
     },
     "town": {
@@ -27,8 +30,8 @@
       "Town"
      ],
      "center": [
-      662,
-      262
+      162,
+      602
      ]
     },
     "summon": {
@@ -93,10 +96,27 @@
       525,
       625
      ]
+    },
+    "settings": {
+     "text": [],
+     "center": [
+      59,
+      88
+     ]
+    },
+    "cosmetics": {
+     "text": [],
+     "center": [
+      309,
+      628
+     ]
     }
    }
   },
   "exploration": {
+   "kind": "flat",
+   "category": "hub",
+   "verified": true,
    "identify": [
     "Chapter",
     "Realm Raid",
@@ -157,10 +177,41 @@
       859,
       623
      ]
+    },
+    "goryou_realm": {
+     "text": [
+      "Goryou"
+     ]
+    },
+    "delegation": {
+     "text": [
+      "Delegation"
+     ]
+    },
+    "heian_kitan": {
+     "text": [
+      "Heian",
+      "Strange"
+     ]
+    },
+    "bondling_fairyland": {
+     "text": [
+      "Fairyland",
+      "Bondling"
+     ]
+    },
+    "hero_test": {
+     "text": [
+      "Hero Trial",
+      "Trial"
+     ]
     }
    }
   },
   "town": {
+   "kind": "flat",
+   "category": "hub",
+   "verified": true,
    "identify": [
     "Arena",
     "Mystic Trader",
@@ -206,10 +257,28 @@
       194,
       168
      ]
+    },
+    "hunt_kirin": {
+     "text": [
+      "Kirin"
+     ]
+    },
+    "draft_duel": {
+     "text": [
+      "Draft"
+     ]
+    },
+    "hyakkiyakou": {
+     "text": [
+      "Yakou"
+     ]
     }
    }
   },
   "summon": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Summon",
     "Scrolls"
@@ -217,6 +286,9 @@
    "parent": "HOME"
   },
   "shikigami": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Shikigami",
     "Preset"
@@ -224,58 +296,119 @@
    "parent": "HOME"
   },
   "onmyodo": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Onmyodo"
    ],
    "parent": "HOME"
   },
   "friends": {
+   "kind": "flat",
+   "category": "social",
+   "verified": true,
    "identify": [
     "Add Friend",
     "Guild Invite",
     "Recommended"
    ],
-   "parent": "HOME"
+   "parent": "HOME",
+   "exits": {
+    "mentor": {
+     "text": [
+      "Mentorship"
+     ],
+     "center": [
+      928,
+      314
+     ]
+    }
+   }
   },
   "shop": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Garment",
     "Mall",
-    "Stellar Omen"
+    "Stellar Omen",
+    "Consignment",
+    "General"
    ],
    "parent": "HOME"
   },
   "event": {
+   "kind": "flat",
+   "category": "event",
+   "verified": true,
    "identify": [
     "Version Event",
     "Memory Scroll",
-    "Gilded Echoes"
+    "Gilded Echoes",
+    "Overview",
+    "Mileage",
+    "Benefits",
+    "Record"
    ],
-   "parent": "HOME"
+   "parent": "HOME",
+   "exits": {
+    "shrine_pass": {
+     "text": [
+      "Shrine"
+     ],
+     "center": [
+      955,
+      601
+     ]
+    }
+   }
   },
   "settings": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Settings",
     "Audio",
-    "Nameplate"
+    "Nameplate",
+    "Notif",
+    "Music"
    ],
    "parent": "HOME"
   },
   "guild": {
+   "kind": "spatial",
+   "category": "social",
+   "verified": true,
    "identify": [
     "Guild Grounds",
     "Guild Hall"
    ],
-   "parent": "HOME"
+   "parent": "HOME",
+   "exits": {
+    "dokan": {
+     "text": [
+      "Dokan"
+     ]
+    }
+   }
   },
   "shrine_pass": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Shrine Pass",
     "Mystic Scroll"
    ],
-   "parent": "HOME"
+   "parent": "event"
   },
   "cosmetics": {
+   "kind": "flat",
+   "category": "util",
+   "verified": true,
    "identify": [
     "Cosmetic",
     "Frame",
@@ -287,13 +420,27 @@
    "parent": "HOME"
   },
   "realm_raid": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Realm Raid",
     "Assault"
    ],
-   "parent": "exploration"
+   "parent": "exploration",
+   "exits": {
+    "kekkai_toppa": {
+     "text": [
+      "Kekkai",
+      "Toppa"
+     ]
+    }
+   }
   },
   "soul_zones": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Soul Zones",
     "Harvest"
@@ -301,12 +448,18 @@
    "parent": "exploration"
   },
   "area_boss": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Area Boss"
    ],
    "parent": "exploration"
   },
   "awake_zones": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Awaken",
     "Awake"
@@ -314,18 +467,27 @@
    "parent": "exploration"
   },
   "secret_zones": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Secret Zone"
    ],
    "parent": "exploration"
   },
   "six_gates": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Six Gates"
    ],
    "parent": "exploration"
   },
   "duel": {
+   "kind": "flat",
+   "category": "pvp",
+   "verified": true,
    "identify": [
     "Duel",
     "Season"
@@ -333,6 +495,9 @@
    "parent": "town"
   },
   "demon_encounter": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Demon Encounter"
    ],
@@ -340,21 +505,38 @@
     "Arena",
     "Mystic Trader"
    ],
-   "parent": "town"
+   "parent": "town",
+   "exits": {
+    "demon_encounter_realworld": {
+     "text": [
+      "Realworld",
+      "Real World"
+     ]
+    }
+   }
   },
   "hunt": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Hunt"
    ],
    "parent": "town"
   },
   "hyakkisen": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": true,
    "identify": [
     "Hyakki"
    ],
    "parent": "town"
   },
   "mentor": {
+   "kind": "flat",
+   "category": "social",
+   "verified": true,
    "identify": [
     "Mentorship",
     "Apprentices"
@@ -364,6 +546,164 @@
     "Guild Invite"
    ],
    "parent": "friends"
+  },
+  "goryou_realm": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": false,
+   "identify": [
+    "Goryou",
+    "Spirit Beast"
+   ],
+   "parent": "exploration"
+  },
+  "hero_test": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": false,
+   "identify": [
+    "Hero Trial",
+    "Trial"
+   ],
+   "parent": "exploration"
+  },
+  "delegation": {
+   "kind": "flat",
+   "category": "idle",
+   "verified": false,
+   "identify": [
+    "Delegation",
+    "Delegate"
+   ],
+   "parent": "exploration"
+  },
+  "heian_kitan": {
+   "kind": "flat",
+   "category": "event",
+   "verified": false,
+   "identify": [
+    "Heian",
+    "Strange Tales"
+   ],
+   "parent": "exploration"
+  },
+  "bondling_fairyland": {
+   "kind": "spatial",
+   "category": "event",
+   "verified": false,
+   "identify": [
+    "Fairyland",
+    "Bondling"
+   ],
+   "parent": "exploration"
+  },
+  "hyakkiyakou": {
+   "kind": "spatial",
+   "category": "event",
+   "verified": false,
+   "identify": [
+    "Hyakki Yakou",
+    "Yakou"
+   ],
+   "parent": "town"
+  },
+  "hunt_kirin": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": false,
+   "identify": [
+    "Kirin"
+   ],
+   "parent": "town"
+  },
+  "draft_duel": {
+   "kind": "flat",
+   "category": "pvp",
+   "verified": false,
+   "identify": [
+    "Draft Duel",
+    "Draft"
+   ],
+   "parent": "town"
+  },
+  "kekkai_toppa": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": false,
+   "identify": [
+    "Kekkai Toppa",
+    "Toppa"
+   ],
+   "parent": "realm_raid"
+  },
+  "demon_encounter_realworld": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": false,
+   "identify": [
+    "Realworld",
+    "Real World"
+   ],
+   "parent": "demon_encounter"
+  },
+  "dokan": {
+   "kind": "flat",
+   "category": "combat",
+   "verified": false,
+   "identify": [
+    "Dokan",
+    "Ryou Dokan"
+   ],
+   "parent": "guild"
+  },
+  "shikigami_records": {
+   "kind": "flat",
+   "category": "util",
+   "verified": false,
+   "identify": [
+    "Records",
+    "Encounter Log"
+   ],
+   "parent": "HOME"
+  },
+  "daily": {
+   "kind": "flat",
+   "category": "util",
+   "verified": false,
+   "identify": [
+    "Daily Quests",
+    "Quests"
+   ],
+   "parent": "HOME"
+  },
+  "team": {
+   "kind": "flat",
+   "category": "util",
+   "verified": false,
+   "identify": [
+    "Team",
+    "Lineup"
+   ],
+   "parent": "HOME"
+  },
+  "collection": {
+   "kind": "flat",
+   "category": "util",
+   "verified": false,
+   "identify": [
+    "Collection"
+   ],
+   "parent": "HOME"
+  },
+  "travel": {
+   "kind": "flat",
+   "category": "util",
+   "verified": false,
+   "identify": [
+    "Traveler",
+    "Travel"
+   ],
+   "parent": "HOME"
   }
  }
 }
