@@ -83,18 +83,21 @@ def fingerprint(reader, img):
     return text_signature(reader), dhash(img)
 
 
-def same_screen(fp1, fp2, jacc=0.7, hd=12):
-    """2 fingerprint co phai cung mot man? Uu tien NGHIA (text overlap Jaccard),
-    fallback hinh anh (hamming dhash) khi it/khong co text."""
+def same_screen(fp1, fp2, jacc=0.6, hd=12, abs_overlap=8):
+    """2 fingerprint co phai cung mot man? Uu tien NGHIA (text overlap).
+    - Jaccard >= jacc -> cung man.
+    - HOAC so token chu CHUNG >= abs_overlap (man nhieu token nhu Home/Town,
+      OCR nhieu nhe lam Jaccard tut nhung van chung phan lon noi dung).
+    - inter/union < 0.3 -> chac chan khac man.
+    Fallback hinh anh (hamming dhash) khi it/khong co text."""
     s1, h1 = fp1
     s2, h2 = fp2
     if s1 or s2:
         inter = len(s1 & s2)
         union = len(s1 | s2) or 1
-        if inter / union >= jacc:
+        if inter / union >= jacc or inter >= abs_overlap:
             return True
-        # text khac nhieu -> khac man (du hinh giong)
-        if inter / union < 0.35:
+        if inter / union < 0.30:
             return False
     # it text -> dua vao hinh
     return _ham(h1, h2) <= hd
@@ -278,48 +281,79 @@ class Explorer:
         return nd, r, img, True
 
     def _auto_label(self, reader):
-        """Dat ten tam cho man tu vai text noi bat nhat (ngan, gan top)."""
-        toks = [t for t in reader.tappables() if len(_norm(t[0])) >= 3]
-        toks.sort(key=lambda t: (t[2], -t[3]))   # tren cao + conf cao
-        return "/".join(_norm(t[0]) for t in toks[:3]) or "?"
+        """Dat ten tam cho man tu vai text CHU noi bat (bo token so/tien/level).
+        Vd Home -> 'explore/event/shikigami' chu khong phai '287/1432m/120k'."""
+        def is_word(t):
+            n = _norm(t)
+            if len(n) < 3:
+                return False
+            digits = sum(c.isdigit() for c in n)
+            return digits < len(n) * 0.5
+        toks = [t for t in reader.tappables() if is_word(t[0])]
+        # uu tien token to (button) + tren cao
+        toks.sort(key=lambda t: (-t[3], t[2]))
+        seen, picked = set(), []
+        for t in toks:
+            n = _norm(t[0])
+            if n in seen:
+                continue
+            seen.add(n)
+            picked.append(n)
+            if len(picked) >= 3:
+                break
+        return "/".join(picked) or "?"
 
     # ---- backtrack ve node muc tieu bang back/escape ----
     def _back_to(self, target_key, max_steps=4):
-        """Quay ve target. Xu ly:
+        """Quay ve target NHANH (ton trong deadline toan cuc). Xu ly:
           1. Dialog xac nhan thoat (Confirm/Cancel) - vd Summon hoi 'Confirm to
-             quit?'. Phai bam Confirm/Yes/OK de back THUC SU (neu chi back-arrow
-             se ket vong, nhu da gap voi Summon).
-          2. back-arrow goc tren trai (45,68) + Agent.back.
+             quit?'. Phai bam Confirm de back THUC SU (chi back-arrow se ket vong).
+          2. Nut dismiss (back-arrow/X) qua controls.find_dismiss neu co, fallback
+             back-arrow trai (45,68).
+        Tranh Agent.back() day du (cham 10-20s/lan vi wait_stable+fallback loop).
         Verify bang same_screen voi fp cua target."""
         target_fp = self.nodes[target_key].fp if target_key in self.nodes else None
+        cf = self.a.controls()
         nd = None
         for step in range(max_steps):
-            r = ScreenReader(self.a.shot())
-            # 1) neu co dialog confirm-quit -> bam Confirm de thoat that su
+            # ton trong watchdog: het gio thi thoi backtrack (de run() ket thuc)
+            if self.deadline is not None and time.time() > self.deadline:
+                return False
+            img = self.a.shot()
+            r = ScreenReader(img)
+            # 1) dialog confirm-quit -> bam Confirm
             if r.has("Confirm") and (r.has("Cancel") or r.has("quit")):
                 hit = r.find("Confirm")
                 if hit:
                     self.a.c.bgclick(hit[1], hit[2])
-                    time.sleep(1.6)
+                    time.sleep(1.4)
                     nd, _r, _i, _n = self.observe()
-                    if nd.key == target_key or (target_fp and
-                                                same_screen(target_fp, nd.fp)):
+                    if self._reached(target_key, target_fp, nd):
                         return True
                     continue
-            # 2) back-arrow trai + Agent.back
-            try:
-                self.a.c.bgclick(45, 68)
-            except Exception:
-                pass
-            time.sleep(0.7)
-            self.a.back()
-            time.sleep(1.0)
+            # 2) nut dismiss chinh xac (template/OCR) -> fallback back-arrow trai
+            clicked = None
+            if cf:
+                try:
+                    d = cf.find_dismiss(img, reader=r)
+                    if d:
+                        clicked = d["center"]
+                except Exception:
+                    pass
+            if clicked is None:
+                clicked = (45, 68)
+            self.a.c.bgclick(clicked[0], clicked[1])
+            time.sleep(1.3)
             nd, r, img, _new = self.observe()
-            if nd.key == target_key:
-                return True
-            if target_fp is not None and same_screen(target_fp, nd.fp):
+            if self._reached(target_key, target_fp, nd):
                 return True
         return False
+
+    @staticmethod
+    def _reached(target_key, target_fp, nd):
+        if nd.key == target_key:
+            return True
+        return target_fp is not None and same_screen(target_fp, nd.fp)
 
     # ---- DFS de quy ----
     @staticmethod
