@@ -1,0 +1,2 @@
+{"node":"demon_encounter","issue":"canh town->demon_encounter text 'Encounter'@(652,165) la NHAN TINH trong Town, click (send/polite/banner) deu KHONG mo man. OAS dat sai. 'Demon Encounter' co the la game-mode rieng (Soul Hunt/魂土) hoac la Bestiary. CAN dieu tra dung vi tri/ten EN that.","verified_live":false}
+{"node":"kekkai_toppa","issue":"DA GO: 'Kekkai Toppa'=ten Nhat cua chinh Realm Raid (PvP pha ket gioi). Node trung lap voi realm_raid -> xoa.","resolved":true}

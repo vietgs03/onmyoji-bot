@@ -431,15 +431,7 @@
     "Raid",
     "Assault"
    ],
-   "parent": "exploration",
-   "exits": {
-    "kekkai_toppa": {
-     "text": [
-      "Kekkai",
-      "Toppa"
-     ]
-    }
-   }
+   "parent": "exploration"
   },
   "soul_zones": {
    "kind": "flat",
@@ -505,7 +497,7 @@
   "demon_encounter": {
    "kind": "flat",
    "category": "combat",
-   "verified": true,
+   "verified": false,
    "identify": [
     "Demon",
     "Encounter"
@@ -636,16 +628,6 @@
     "Duel"
    ],
    "parent": "town"
-  },
-  "kekkai_toppa": {
-   "kind": "flat",
-   "category": "combat",
-   "verified": false,
-   "identify": [
-    "Kekkai",
-    "Toppa"
-   ],
-   "parent": "realm_raid"
   },
   "demon_encounter_realworld": {
    "kind": "flat",

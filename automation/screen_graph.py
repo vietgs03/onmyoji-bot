@@ -178,8 +178,9 @@ NODES: dict[str, dict] = {
                   "avoid": ["Garment"], "parent": "HOME"},
     # --- man con cap 2 (duoi exploration) ---
     "realm_raid":   {"kind": "flat", "category": "combat", "verified": True,
-                     "identify": ["Realm Raid", "Assault"], "parent": "exploration",
-                     "exits": {"kekkai_toppa": {"text": ["Kekkai", "Toppa"]}}},
+                     # 'Kekkai Toppa' (突破結界) la TEN NHAT cua chinh man Realm Raid
+                     # (PvP pha ket gioi). OAS tach thanh 2 node -> da gop, bo trung.
+                     "identify": ["Realm Raid", "Assault"], "parent": "exploration"},
     "soul_zones":   {"kind": "flat", "category": "combat", "verified": True,
                      "identify": ["Soul Zones", "Harvest"], "parent": "exploration"},
     "area_boss":    {"kind": "flat", "category": "combat", "verified": True,
@@ -193,9 +194,10 @@ NODES: dict[str, dict] = {
     # --- man con cap 2 (duoi town) ---
     "duel":            {"kind": "flat", "category": "pvp", "verified": True,
                         "identify": ["Duel", "Season"],     "parent": "town"},
-    # demon_encounter: man trong; tranh nham voi nut "Demon Parade" cua Town
-    # bang avoid cac nut hub Town (Arena/Mystic). Title that = "Demon Encounter".
-    "demon_encounter": {"kind": "flat", "category": "combat", "verified": True,
+    # demon_encounter: CHUA xac minh LIVE - canh town->demon (text 'Encounter') tro
+    # vao NHAN TINH trong Town, click khong mo. Can tim dung ten/vi tri EN that.
+    # (xem logs/node_survey.jsonl). De verified=False de bot tu kiem chung lai.
+    "demon_encounter": {"kind": "flat", "category": "combat", "verified": False,
                         "identify": ["Demon Encounter"],
                         "avoid": ["Arena", "Mystic Trader"], "parent": "town",
                         "exits": {"demon_encounter_realworld": {"text": ["Realworld", "Real World"]}}},
@@ -237,8 +239,6 @@ NODES: dict[str, dict] = {
     "draft_duel":     {"kind": "flat", "category": "pvp", "verified": False,
                        "identify": ["Draft Duel", "Draft"], "parent": "town"},
     # -- man con cap 3 --
-    "kekkai_toppa":   {"kind": "flat", "category": "combat", "verified": False,
-                       "identify": ["Kekkai Toppa", "Toppa"], "parent": "realm_raid"},
     "demon_encounter_realworld": {"kind": "flat", "category": "combat", "verified": False,
                        "identify": ["Realworld", "Real World"], "parent": "demon_encounter"},
     "dokan":          {"kind": "flat", "category": "combat", "verified": False,
