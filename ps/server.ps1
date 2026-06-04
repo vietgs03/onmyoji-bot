@@ -21,6 +21,7 @@ public class Native {
   [DllImport("user32.dll")] public static extern bool IsIconic(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool ShowWindow(IntPtr hWnd, int n);
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
+  [DllImport("user32.dll")] public static extern bool SetWindowPos(IntPtr hWnd, IntPtr hWndInsertAfter, int X, int Y, int cx, int cy, uint uFlags);
   [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
   [DllImport("user32.dll")] public static extern bool GetCursorPos(out POINT lpPoint);
   [DllImport("user32.dll")] public static extern bool ClientToScreen(IntPtr hWnd, ref POINT lpPoint);
@@ -217,6 +218,18 @@ while ($true) {
         Restore-Win $hwnd
         $r = New-Object Native+RECT; [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
         Write-Output ("OK restore {0} {1}" -f ($r.Right-$r.Left),($r.Bottom-$r.Top))
+      }
+      "movewin" {
+        # Dua cua so ve toa do tren man chinh (mac dinh 0,0). Giu nguyen kich thuoc.
+        # Fix GOC: cua so off-screen (vd 4047,-72) lam politeclick footer that bai.
+        # SWP_NOSIZE=0x1, SWP_NOZORDER=0x4, SWP_SHOWWINDOW=0x40 -> chi DOI vi tri.
+        $px = if ($parts.Count -gt 1) { [int]$parts[1] } else { 0 }
+        $py = if ($parts.Count -gt 2) { [int]$parts[2] } else { 0 }
+        Restore-Win $hwnd
+        [Native]::SetWindowPos($hwnd, [IntPtr]::Zero, $px, $py, 0, 0, 0x45) | Out-Null
+        Start-Sleep -Milliseconds 120
+        $r = New-Object Native+RECT; [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
+        Write-Output ("OK movewin {0} {1}" -f $r.Left, $r.Top)
       }
       "quit"   { Write-Output "OK bye"; break }
       default  { Write-Output ("ERR unknown {0}" -f $cmd) }

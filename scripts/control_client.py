@@ -93,6 +93,12 @@ class Controller:
     def info(self):
         return self._cmd("info")
 
+    def movewin(self, x=0, y=0):
+        """Dua cua so game ve toa do (x,y) tren man chinh (mac dinh 0,0).
+        FIX GOC: cua so off-screen (4047,-72) lam politeclick footer that bai.
+        Goi truoc khi can click chinh xac bang chuot that (footer/header)."""
+        return self._cmd(f"movewin {int(x)} {int(y)}")
+
     def ping(self):
         return self._cmd("ping")
 

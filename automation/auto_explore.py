@@ -698,6 +698,14 @@ class Explorer:
     def run(self, max_actions=50, max_depth=3, start_label=None, budget_sec=300,
             do_merge=True, max_per_node=6):
         self.deadline = time.time() + budget_sec
+        # B2: dua cua so ve (0,0) tren man chinh TRUOC khi explore. FIX GOC:
+        # window off-screen (4047,-72) lam politeclick footer/header that bai ->
+        # menu chinh (summon/town/team/shop) noop. Sau move, click chuot that an.
+        try:
+            mv = self.a.c.movewin(0, 0)
+            self.log(ev="movewin", res=str(mv))
+        except Exception as e:
+            self.log(ev="movewin_err", err=str(e))
         # 1) RESET ve Home (hub) -> khong ket goc nho nhu map_loop thu dong
         ok_home, r = self._escape_to_home()
         nd, r, img, _ = self.observe(hint_label=start_label)
