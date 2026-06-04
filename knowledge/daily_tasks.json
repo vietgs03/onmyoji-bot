@@ -1,0 +1,54 @@
+{
+  "_doc": "BO NHO DAILY TASK - cac viec lam HANG NGAY tren HOME. Bot doc file nay luc chay 'daily' de KHONG QUEN. Khong hardcode toa do - moi task la phuong phap NHAN DIEN + GIAI (semantic). Cap nhat khi hoc them.",
+  "updated": "2026-06-04",
+  "routine": [
+    {
+      "id": "claim_dolls",
+      "name": "Nhan qua tu cac DOLL CAM QUA trong san HOME",
+      "how": "perception.detect_courtyard_dolls() tim con doll than trang cam vat pham (hop go 'Lot'=diem danh, the do=task/reward). Click tung doll -> doc man hien ra -> nhan thuong neu co.",
+      "discovered": [
+        {"doll_item": "hop go 'Lot'", "opens": "Daily Lot", "action": "tap giua rut omikuji + tap-to-continue", "reward": "Today's Luckiest Reward (vd 100 jade)"},
+        {"doll_item": "the do (letter)", "opens": "Claim Gifts -> Exclusive Gifts", "action": "politeclick 'Claim Gifts' roi 'Claim'", "reward": "AR Amulet, Demon Parade Pass, AP50, Orochi Scale50, Bones, Fresh Fish..."},
+        {"doll_item": "the do", "opens": "Claim Reward", "action": "politeclick 'Claim'", "reward": "10000 coin"}
+      ],
+      "skip": "doll mo menu Interact/Wish/Decors (decor), Characters (nhan vat nguoi choi), Mentorship Notice (apprentice) -> KHONG phai qua, bo qua.",
+      "click_type": "politeclick (tin cay hon fgclick cho modal nhan thuong; fgclick doi khi tra OK nhung popup khong dong)",
+      "task_fn": "tasks/run.py claim_dolls --live",
+      "log": "logs/claim_dolls.jsonl"
+    },
+    {
+      "id": "claim_mail",
+      "name": "Nhan het thu trong Mailbox",
+      "how": "Click icon mail goc tren phai (~1049,53 sendclick, vi tri co the doi -> nen detect badge do o top-right). Trong Mailbox co nut 'Claim All' (doll ~75,575). Bam -> dialog OK/Cancel hien reward -> bam OK.",
+      "discovered": [
+        {"button": "Claim All", "reward": "Talisman Pass coins, Guild Benefits..."},
+        {"note": "Mailbox co tab System/Special Mail, Read All, Delete Read"}
+      ],
+      "click_type": "Claim All = sendclick OK; dialog OK xac nhan = fgclick/politeclick (sendclick+tap_text bi bo qua)",
+      "task_fn": "tasks/run.py claim_home --live (quet badge do, gom ca mail)"
+    },
+    {
+      "id": "claim_home_badges",
+      "name": "Quet badge do tren HOME va claim het",
+      "how": "perception.detect_red_badges(ui_only=True) -> badge do = dau hieu co the claim (mail, task xong, qua chua nhan). Tap gan badge -> popup claim -> bam Claim/Receive/OK.",
+      "task_fn": "tasks/run.py claim_home --live",
+      "log": "logs/claim_home.jsonl"
+    }
+  ],
+  "navigation": {
+    "home_signature": ["Explore", "Summon"],
+    "reach_home": "automation/state_solver.py StateSolver.solve(['Explore','Summon']) - chu yeu bang 'back'. Hoac back_home() trong task biet CLAIM popup thay vi back mu.",
+    "idle_screensaver": "neu man courtyard idle (nhan vat nghi duoi sakura) -> tap center (576,340) de wake, roi back qua cac popup event."
+  },
+  "click_methods": {
+    "sendclick": "SendMessage - dieu huong thuong (NeoX an SendMessage, BO QUA PostMessage)",
+    "politeclick": "real mouse + tra chuot ve cho user - TIN CAY NHAT cho modal nhan thuong",
+    "fgclick": "real mouse foreground - cho modal cung, nhung doi khi khong dong duoc popup",
+    "pmclick": "PostMessage - NeoX hay bo qua, chi de test"
+  },
+  "next": [
+    "Doll Mentorship (apprentice request) chua xu ly dung - can flow rieng.",
+    "Khi nhieu letter 'Claim Gifts' xep hang (event returnee) -> claim lap nhieu lop.",
+    "Ghep tat ca thanh 1 lenh 'dn HOME moi ngay': mail + doll + daily task + free summon + friend love."
+  ]
+}

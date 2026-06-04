@@ -94,3 +94,26 @@ Chiến lược chống kẹt đã hoạt động:
 - Python stdout block-buffered khi redirect -> chạy explorer với `python -u`.
 - Commit theo từng bước. `.pyc`, `.venv`, `research/OAS/`, `captures/*.png` gitignored.
 - Người dùng giao tiếp tiếng Việt -> trả lời tiếng Việt.
+
+## 9. DAILY TASK (hang ngay tren HOME) - LUU O knowledge/daily_tasks.json
+Chay: `.venv/bin/python tasks/run.py daily --live` (hoac --dry de xem truoc).
+Routine doc tu `knowledge/daily_tasks.json` (NGUON SU THAT, them task moi vao file la xong).
+
+**Cac viec hang ngay da hoc:**
+1. **claim_dolls** - cac con DOLL CAM QUA trong san HOME (KHONG hardcode toa do):
+   - `perception.detect_courtyard_dolls()` nhan dien doll than trang cam vat pham
+     (hop go 'Lot' = diem danh, the do = task/reward) bang dac trung anh.
+   - Doll 'Lot' -> Daily Lot (rut omikuji, ~100 jade). Doll the do -> Claim Gifts
+     (Exclusive Gifts: AR Amulet/Demon Parade Pass/AP50/Orochi Scale50...) hoac
+     Claim Reward (10000 coin).
+   - Bo qua: doll Interact/Wish/Decors (decor), Characters (nhan vat), Mentorship.
+2. **claim_mail** - mail goc tren phai -> 'Claim All' -> dialog OK (fgclick/politeclick).
+3. **claim_home_badges** - quet badge do `detect_red_badges(ui_only=True)` -> tap -> Claim.
+
+**3 LOAI CLICK (rat quan trong, NeoX dac thu):**
+- `sendclick` (SendMessage): dieu huong thuong. NeoX BO QUA PostMessage (`pmclick`).
+- `politeclick`: real mouse + tra chuot ve cho user. TIN CAY NHAT cho modal nhan
+  thuong (vd 'Claim' Exclusive Gifts). Dung ClientToScreen (chinh xac).
+- `fgclick`: real mouse foreground. Cho modal cung, NHUNG doi khi tra OK ma popup
+  khong dong -> uu tien politeclick.
+- ClientToScreen thay GetWindowRect (GetWindowRect gom title bar -> lech ~30px).

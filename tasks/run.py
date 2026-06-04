@@ -569,7 +569,50 @@ def claim_dolls(agent: Agent, dry: bool = True):
     return True
 
 
+def daily(agent: Agent, dry: bool = True):
+    """DAILY ROUTINE - chay TAT CA viec hang ngay theo bo nho knowledge/daily_tasks.json.
+
+    Doc routine tu file (de KHONG QUEN) roi chay tung task theo thu tu. Moi muc routine
+    map toi 1 ham trong TASKS. File la NGUON SU THAT - them task moi vao file la xong.
+    """
+    import json as _json
+    kb = os.path.join(ROOT, "knowledge", "daily_tasks.json")
+    routine = []
+    if os.path.exists(kb):
+        try:
+            routine = _json.load(open(kb, encoding="utf-8")).get("routine", [])
+        except Exception as e:
+            print(f"  [warn] khong doc duoc {kb}: {e}")
+    if not routine:
+        # fallback: thu tu mac dinh neu file thieu
+        routine = [{"id": "claim_dolls"}, {"id": "claim_home"}]
+    print(f"=== DAILY (dry={dry}) - {len(routine)} task tu bo nho ===")
+    done = []
+    ran_fns = set()
+    for item in routine:
+        tid = item.get("id")
+        # map id routine -> ham task (claim_mail/claim_home_badges deu dung claim_home)
+        fn = TASKS.get(tid) or TASKS.get({"claim_mail": "claim_home",
+                                          "claim_home_badges": "claim_home"}.get(tid, ""))
+        if not fn:
+            print(f"  - bo qua '{tid}' (chua co ham task)")
+            continue
+        if fn in ran_fns:               # tranh chay trung ham (mail+badges chung fn)
+            print(f"  - '{tid}' dung chung ham da chay -> bo qua")
+            continue
+        ran_fns.add(fn)
+        print(f"  >>> chay '{tid}': {item.get('name', tid)}")
+        try:
+            fn(agent, dry=dry)
+            done.append(tid)
+        except Exception as e:
+            print(f"  [err] '{tid}' loi: {e}")
+    print(f"=== DAILY xong: {done} ===")
+    return True
+
+
 TASKS = {
+    "daily": daily,
     "daily_signin": daily_signin,
     "farm_realm": farm_realm,
     "farm_soul": farm_soul,
