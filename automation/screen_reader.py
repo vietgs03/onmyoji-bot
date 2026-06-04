@@ -94,7 +94,10 @@ class ScreenReader:
                 if tn in _norm(c[0]) or
                 difflib.SequenceMatcher(None, tn, _norm(c[0])).ratio() >= 0.8]
 
-    def has(self, target, fuzzy=0.8):
+    def has(self, target, fuzzy=0.86):
+        # fuzzy 0.86: chan false-positive token gan giong khac nghia
+        # ('Friends'~'Friendly'=0.80) nhung van dung sai OCR 1 ky tu
+        # ('Realm'~'Realmm'=0.91, 'Encounter'~'Encounfer'=0.89). Dung cho identify.
         return self.find(target, fuzzy) is not None
 
     def tappables(self):

@@ -386,13 +386,17 @@ class ScreenGraph:
             if hits == 0:
                 continue
             vflag = 1 if d.get("verified", True) else 0     # overlay khong co field -> coi nhu tin
+            cov = hits / len(ident)                          # ti le identify khop het
             tie = depth_fn(name) if depth_fn else 0
-            key = (hits, vflag, tie)
-            if best is None or key > best[:3]:
-                best, best_total = (hits, vflag, tie, name), len(ident)
+            # xep hang: hits > verified > COVERAGE > depth. Coverage chong node co
+            # identify generic khop 1 phan (vd shrine_pass 'Shrine'+'Scroll'=2/4 tren
+            # man Summon) cuop dich cua node khop het (summon 'Summon'+'Scrolls'=2/2).
+            key = (hits, vflag, cov, tie)
+            if best is None or key > best[:4]:
+                best, best_total = (hits, vflag, cov, tie, name), len(ident)
         if best is None:
             return None, 0.0
-        return best[3], best[0] / best_total
+        return best[4], best[0] / best_total
 
     def where(self, reader=None) -> tuple[Optional[str], float]:
         """Node hien tai = node co diem khop cao nhat (tie-break: node con thang).

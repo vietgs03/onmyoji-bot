@@ -188,6 +188,8 @@ class ControlFinder:
                  it nhieu -> nguong thap (0.68) van P=1.0, bat duoc back muon ve.
         - close: template-match (xac nhan mau do) HOAC HSV red-circle (bat X muon ve).
                  Nguong cao hon (0.82) vi vung rong, de nham icon."""
+        if img is None or getattr(img, "size", 0) == 0:
+            return None                 # shot loi/trong (ps server busy) -> khong crash
         g = cv2.cvtColor(img, cv2.COLOR_BGR2GRAY)
         H, W = g.shape
         # nguong rieng theo loai (back an toan o nguong thap nho vung hep)
