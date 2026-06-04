@@ -255,3 +255,51 @@ def detect_red_badges(img, min_area=25, max_area=900, max_wh=40, ui_only=True):
             spots.append((int(cent[i][0]), int(cent[i][1]), int(area)))
     spots.sort(key=lambda s: -s[2])
     return spots
+
+
+def detect_courtyard_dolls(img, min_item_px=60, merge_r=58):
+    """Tim cac DOLL DANG CAM QUA trong san HOME (courtyard) - khong hardcode toa do.
+
+    Theo de bai cua user: tren HOME co cac con doll than TRANG nho dung trong san,
+    moi con CAM 1 vat pham mau (hop go nau 'Lot' = diem danh, the do = task/clear
+    daily). Click vao doll -> mo man nhan qua tuong ung. Cac doll DOI CHO moi ngay
+    nen KHONG the hardcode -> phai NHAN DIEN bang dac trung hinh anh.
+
+    Dac trung: blob TRANG (S thap, V cao) o vung san (y 380-585, x 150-1000), kich
+    thuoc nho, GAN do co dom mau (nau go / do) = vat pham doll dang cam.
+
+    Tra list (cx, cy, area, item_px) sap theo item_px giam (nhieu mau = qua ro hon).
+    Co the co false-positive (nhan vat nguoi choi) nhung luong explore se click thu
+    va ghi 'no-change' -> tu loc."""
+    if img is None or img.size == 0:
+        return []
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    wood = cv2.inRange(hsv, (8, 80, 80), (28, 255, 230))         # hop go/cam
+    red1 = cv2.inRange(hsv, (0, 110, 90), (10, 255, 255))
+    red2 = cv2.inRange(hsv, (168, 110, 90), (180, 255, 255))
+    item = wood | red1 | red2
+    white = cv2.inRange(hsv, (0, 0, 165), (180, 60, 255))        # than doll trang
+    H, W = white.shape
+    zone = np.zeros_like(white)
+    zone[380:585, 150:1000] = 1                                  # vung san, bo footer
+    white = white * zone
+    n, _, stats, cent = cv2.connectedComponentsWithStats(white, 8)
+    raw = []
+    for i in range(1, n):
+        x, y, w, h, ar = stats[i]
+        if (200 <= ar <= 2500 and 14 <= w <= 70 and 16 <= h <= 80
+                and 0.4 <= w / max(h, 1) <= 1.4):
+            cx, cy = int(cent[i][0]), int(cent[i][1])
+            x0, x1 = max(0, x - 10), min(W, x + w + 12)
+            y0, y1 = max(0, y - 5), min(H, y + h + 18)
+            ic = int(item[y0:y1, x0:x1].sum() / 255)
+            if ic >= min_item_px:
+                raw.append((cx, cy, int(ar), ic))
+    raw.sort(key=lambda r: -r[2])                                # blob lon truoc
+    dolls = []
+    for cx, cy, ar, ic in raw:                                   # gop cum gan nhau
+        if all(abs(cx - dx) > merge_r or abs(cy - dy) > merge_r
+               for dx, dy, _, _ in dolls):
+            dolls.append((cx, cy, ar, ic))
+    dolls.sort(key=lambda d: -d[3])
+    return dolls

@@ -455,11 +455,125 @@ def claim_home(agent: Agent, rounds: int = 3, dry: bool = True):
     return True
 
 
+# ---- claim_dolls: nhan qua tu cac DOLL CAM QUA trong san HOME (courtyard) ----
+# Tu duy (theo user): tren HOME co cac con DOLL than trang dung trong san, moi con
+# CAM 1 vat pham (hop go 'Lot' = diem danh, the do = task/clear daily). Doll DOI CHO
+# moi ngay -> KHONG hardcode toa do. Detect doll bang dac trung anh
+# (perception.detect_courtyard_dolls) roi CLICK tung con -> doc man hien ra:
+#  - "Claim Reward"/"Claim Gifts"/"Daily Lot"... -> nhan thuong, dong popup, back.
+#  - khong doi gi (nhan vat nguoi choi) -> bo qua. Bot TU HOC doll nao co qua.
+_DOLL_CLAIM = ("Claim", "Receive", "Collect", "Get", "Daily", "Lot", "Sign", "Tap to")
+
+
+def claim_dolls(agent: Agent, dry: bool = True):
+    """Quet san HOME tim doll cam qua, click tung con, nhan thuong neu co.
+
+    dry=True: chi BAO CAO doll phat hien + man hien ra, KHONG bam nut nhan.
+    dry=False (--live): bam nut Claim/Daily that su.
+    """
+    import time as _t
+    from datetime import datetime as _dt
+    import json as _json
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+    from state_solver import StateSolver
+    from perception import detect_courtyard_dolls
+    from screen_reader import ocr_words
+
+    LOG = os.path.join(ROOT, "logs", "claim_dolls.jsonl")
+    os.makedirs(os.path.dirname(LOG), exist_ok=True)
+    run_id = _dt.utcnow().strftime("%Y%m%dT%H%M%S")
+
+    solver = getattr(agent, "_solver", None) or StateSolver(agent)
+    agent._solver = solver
+
+    def words(img=None):
+        return [str(t) for t, *_ in ocr_words(img if img is not None else agent.shot(),
+                                              min_conf=40)]
+
+    def at_home():
+        ws = [w.lower() for w in words()]
+        return any("explore" in w for w in ws) and any("summon" in w for w in ws)
+
+    def claim_popup():
+        """Neu dang co popup nhan thuong (Claim/Claim Gifts/Receive) -> bam nhan.
+        Tra True neu da bam. Dung fgclick (nut nhan thuong hay la modal cung dau)."""
+        r = agent.read()
+        for w in ("Claim Gifts", "Claim All", "Claim", "Receive", "Collect"):
+            if r.has(w):
+                hit = r.find(w.split()[0])
+                if hit:
+                    agent.c.fgclick(hit[1], hit[2])
+                    _t.sleep(2.0)
+                    agent.c._cmd("sendclick 576 620")  # tap-to-continue neu co
+                    _t.sleep(1.0)
+                    return True
+        return False
+
+    def back_home():
+        for _ in range(5):
+            if at_home():
+                return True
+            if claim_popup():        # popup nhan thuong -> nhan thay vi back
+                continue
+            agent.back(wait=1.2)
+        return solver.solve(["Explore", "Summon"], need_all=True,
+                            max_steps=10, verbose=False)
+
+    print(f"=== claim_dolls (dry={dry}) - run {run_id} ===")
+    back_home()
+    img = agent.shot()
+    dolls = detect_courtyard_dolls(img)
+    print(f"  phat hien {len(dolls)} doll cam qua")
+    claimed = 0
+    for cx, cy, ar, ic in dolls:
+        before = set(words())
+        if dry:
+            print(f"    [DRY] doll @ ({cx},{cy}) item_px={ic}")
+            continue
+        agent.c._cmd(f"sendclick {cx} {cy}")
+        _t.sleep(2.2)
+        after = words()
+        new = set(after) - before
+        opened = any(any(k.lower() in w.lower() for k in _DOLL_CLAIM) for w in after)
+        got = False
+        if opened:
+            # man qua mo ra -> nhan thuong (Claim/Claim Gifts/Receive...) bang fgclick.
+            # co the can nhan 2 lop (vd letter 'Claim Gifts' -> bang 'Claim').
+            for _try in range(3):
+                if claim_popup():
+                    got = True
+                else:
+                    break
+            # man "Daily Lot": tap giua de rut omikuji roi tap-to-continue
+            if any("lot" in w.lower() or "tap to" in w.lower() or "daily" in w.lower()
+                   for w in words()):
+                agent.c._cmd("sendclick 576 300"); _t.sleep(1.5)
+                agent.c._cmd("sendclick 576 620"); _t.sleep(1.2)
+                got = True
+            if got:
+                claimed += 1
+                print(f"    + doll@({cx},{cy}) -> NHAN: {[w for w in new][:4]}")
+            else:
+                print(f"    . doll@({cx},{cy}) mo man nhung chua ro nut: {list(new)[:4]}")
+        else:
+            print(f"    - doll@({cx},{cy}) khong doi (bo qua)")
+        with open(LOG, "a") as f:
+            f.write(_json.dumps({
+                "run": run_id, "doll": [cx, cy], "item_px": ic,
+                "opened": opened, "claimed": got,
+                "new_words": list(new)[:8],
+                "ts": _dt.utcnow().isoformat() + "Z"}) + "\n")
+        back_home()
+    print(f"  hoan tat: nhan {claimed} doll. Log: {LOG}")
+    return True
+
+
 TASKS = {
     "daily_signin": daily_signin,
     "farm_realm": farm_realm,
     "farm_soul": farm_soul,
     "claim_home": claim_home,
+    "claim_dolls": claim_dolls,
 }
 
 
