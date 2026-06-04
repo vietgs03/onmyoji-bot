@@ -35,12 +35,15 @@ WIN_W, WIN_H = 1152, 679          # cua so game; center = giua man (tap qua resu
 # Xep theo do uu tien khi nhieu trang thai cung khop (RESULT/BLOCKED truoc).
 # ---------------------------------------------------------------------------
 STATES = {
-    # het tai nguyen -> dung han (uu tien cao nhat de khong danh vo ich)
+    # het tai nguyen -> dung han (uu tien cao nhat de khong danh vo ich).
+    # Dung cum RO RANG cua POPUP het luot (tranh 'Stamina' tran hien o thanh tai nguyen).
     "BLOCKED":  ["No more", "Insufficient", "not enough", "depleted",
-                 "Stamina", "tickets left", "Get more"],
-    # ket qua tran -> tap qua (Victory/Defeat/reward/continue)
-    "RESULT":   ["Victory", "Defeat", "Reward", "Tap to", "Continue",
-                 "Obtained", "EXP", "Settlement"],
+                 "tickets left", "Get more", "used up"],
+    # ket qua tran -> tap qua. Keyword DAC TRUNG man ket qua (tranh 'Reward'/'EXP'
+    # tran vi 'Rewards Preview' co o man chon). OCR doc 'Tap to continue' DINH thanh
+    # 'Tapto'/'continue' -> bat ca 2 dang. 'ClearTime' = man ket qua battle.
+    "RESULT":   ["Victory", "Defeat", "Tapto", "continue", "ClearTime",
+                 "Settlement", "Battle Result"],
     # dan doi hinh truoc tran -> bam Ready/Battle de vao danh
     "PREPARE":  ["Ready", "Prepare", "Start Battle", "Auto Battle"],
     # dang danh -> CHO (it text dang ke; nhan qua 'Auto'/'Speed'/'Surrender')
@@ -61,6 +64,13 @@ ACTIONS = {
     "FIGHTING": ("wait", 3.0),                   # cho danh xong
     "SELECT":   ("tap_text", ["Challenge", "Battle", "Enter", "Sweep"]),
     None:       ("tap_center", None),            # khong ro -> tap giua, doc lai
+}
+
+# ENTRY action rieng tung mode: vai mode (Soul Zones) co man LIST truoc man battle,
+# can chon 1 muc (realm) de mo man co nut Challenge. Khai bao tap_text de tu lam.
+# Khong co = vao thang battle loop (mode 1 man nhu Realm Raid grid).
+MODE_ENTRY = {
+    "soul_zones": [("tap_text", ["Orochi", "Sougenbi", "Himiko", "Daily Souls"])],
 }
 
 
@@ -101,6 +111,18 @@ class Farmer:
         if not self.g.goto(self.mode, verbose=False):
             self._log(ev="goto_fail", mode=self.mode)
             return {"ok": False, "reason": "khong toi duoc man", "battles": 0}
+
+        # 1b) ENTRY: mode co man LIST -> chon 1 muc de mo man battle (Soul Zones)
+        for kind, arg in MODE_ENTRY.get(self.mode, []):
+            if kind == "tap_text":
+                for txt in arg:
+                    res = self.a.tap_text(txt)
+                    ok = res[0] if isinstance(res, tuple) else res
+                    if ok:
+                        if verbose:
+                            print(f"[farm] entry: tap '{txt}' de mo man battle")
+                        break
+                time.sleep(2.5)
 
         battles, loops = 0, 0
         last_state = None
