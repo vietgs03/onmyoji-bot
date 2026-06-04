@@ -118,9 +118,11 @@
    "category": "hub",
    "verified": true,
    "identify": [
-    "Chapter",
-    "Realm Raid",
-    "Soul Zones"
+    "Dispatch",
+    "Totem",
+    "Venture",
+    "Realm",
+    "Soul"
    ],
    "parent": "HOME",
    "exits": {

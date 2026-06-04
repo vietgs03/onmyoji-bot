@@ -92,7 +92,10 @@ NODES: dict[str, dict] = {
     },
     "exploration": {
         "kind": "flat", "category": "hub", "verified": True,
-        "identify": ["Chapter", "Realm Raid", "Soul Zones"],
+        # identify = nut footer DAC TRUNG cua man Explore (Dispatch/Totem/Venture chi
+        # co o day). Tranh dung ten farm-mode (Realm/Soul...) vi node con cung mang ten
+        # do -> de bi node con cuop nhan dien (xem bug bondling_fairyland 2026-06-04).
+        "identify": ["Dispatch", "Totem", "Venture", "Realm", "Soul"],
         "parent": "HOME",
         "exits": {
             "realm_raid":   {"text": ["Realm"],  "center": [260, 621]},
@@ -333,8 +336,15 @@ class ScreenGraph:
     @staticmethod
     def _match(reader, table: dict, depth_fn=None) -> tuple[Optional[str], float]:
         """Tra (ten, confidence) cua entry khop nhat trong `table`, hoac (None, 0).
-        depth_fn(name)->int de tie-break (entry sau hon thang khi bang diem)."""
-        best = None          # (hits, tiebreak, name)
+
+        Xep hang theo (hits, verified, depth):
+          1) hits     : so identify khop (nhieu = chac hon).
+          2) verified : node DA KIEM CHUNG LIVE thang node suy doan (verified=False).
+             -> tranh bug node con verified=False (vd 'bondling_fairyland' co nut
+             'Fairyland' o footer man cha) CUOP nhan dien cua man cha verified.
+          3) depth    : bang nhau thi node SAU (con) thang (vao sau = cu the hon).
+        """
+        best = None          # (hits, verified, tiebreak, name)
         best_total = 1
         for name, d in table.items():
             ident = d.get("identify", [])
@@ -343,12 +353,14 @@ class ScreenGraph:
             hits = sum(1 for w in ident if reader.has(w))
             if hits == 0:
                 continue
+            vflag = 1 if d.get("verified", True) else 0     # overlay khong co field -> coi nhu tin
             tie = depth_fn(name) if depth_fn else 0
-            if best is None or (hits, tie) > best[:2]:
-                best, best_total = (hits, tie, name), len(ident)
+            key = (hits, vflag, tie)
+            if best is None or key > best[:3]:
+                best, best_total = (hits, vflag, tie, name), len(ident)
         if best is None:
             return None, 0.0
-        return best[2], best[0] / best_total
+        return best[3], best[0] / best_total
 
     def where(self, reader=None) -> tuple[Optional[str], float]:
         """Node hien tai = node co diem khop cao nhat (tie-break: node con thang).
