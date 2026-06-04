@@ -1,4 +1,4 @@
-# TỔNG KẾT KIẾN THỨC - Onmyoji Bot (cập nhật 2026-06-03)
+# TỔNG KẾT KIẾN THỨC - Onmyoji Bot (cập nhật 2026-06-04)
 
 > Tài liệu tổng hợp MỌI thứ đã học để bot/người tiếp tục. Nguồn sự thật duy nhất
 > (single source of truth) cho hệ thống. Đọc file này trước khi làm bất cứ gì.
@@ -216,3 +216,75 @@ DA VERIFY LIVE 1 tran day du (logs): SELECT(3)->tap Challenge->None x4 (timer 0:
 HA TANG: ps server hay BUSY/tranh chap khi co 2+ process python cung chay (jsonl
 trong, shot None, etime cho thay process cu chua chet). LUON pkill SACH + doi
 server hoi (shot True) TRUOC khi chay process moi. Tranh chay 2 farm/debug song song.
+
+## 14. AUTO-EXPLORER vet can + GRAPH TICH LUY + PHA TRAN - 2026-06-04
+
+Pivot lon: bo "doan toa do nut Bonus" -> xay thuat toan VET CAN tu phat trien
+(automation/auto_explore.py). Bot KHONG dung toa do cung; no LANG nghe man hinh
+(OCR + CV blob) roi click thu tat ca, ghi graph toi dau.
+
+### 14.1 Nhan dien man hinh (fingerprint)
+- fingerprint(reader,img) = (text_signature, dhash).
+  text_signature = set token OCR tappable da chuan hoa, BO token nhieu so
+  (HP/timer/coin: digits>=50% do dai bi loai) -> chi giu NGHIA.
+  dhash = perceptual hash 64-bit (CHUOI HEX, dung _ham int(x,16) so sanh).
+- same_screen(fp1,fp2): "cung man" neu Jaccard>=0.6 HOAC >=8 token chung
+  (chiu noise OCR tren man nhieu chu nhu Home), HOAC dhash hamming<=12 khi
+  it chu. inter/union<0.30 -> chac chan khac.
+
+### 14.2 ICON-BLOB detector (DOT PHA - bat nut KHONG co chu)
+- _icon_blobs: CV contour (Otsu + morph + loc aspect/fill) tim nut sang gon
+  KHONG phai text. Day la kha nang OCR bo sot. candidates() = OCR tappable
+  (source=text) + icon blob (source=icon). Loc title-bar (y<34) + nut close
+  cua so (x 1100-1152, y<34) de KHONG tat game.
+
+### 14.3 GRAPH TICH LUY qua nhieu run (explore_graph_global.json)
+- _load_global nap ky uc cu vao self.nodes, KHOI PHUC fp tu sig+dhash ->
+  observe() match duoc man da biet + tried tai dung (KHONG thu lai cand cu).
+- cand_sig(label,x,y) = "label@<o luoi 40px>" lam khoa "da thu" BEN VUNG qua
+  run (idx OCR doi moi run nen TUYET DOI khong dung idx lam khoa).
+- merge_global() serialize lai toan bo (global cu + node moi). Luu 'cands'
+  da quan sat -> tinh FRONTIER = node con cand CHUA thu.
+- Bug da fix: dhash luu HEX string, _load_global cu ep int() -> crash IM
+  trong __init__ (os._exit(0) o finally nuot exception -> launch "im lang
+  chet"). Luon chay FOREGROUND ra file de bat loi init.
+
+### 14.4 PHA TRAN: thu dong 23 node -> chu dong 38 node (do bang DATA)
+HAN CHE map_loop thu dong (8 phien): TRAN o 23 node, frontier->0 tu phien 4.
+Nguyen nhan do duoc:
+  (1) bot bi hut vao summon/event popup, KHONG tu ve Home -> ket goc nho;
+  (2) noop danh dau VINH VIEN -> duong "chet" gia (nut that su an bang
+      politeclick nhung bgclick noop);
+  (3) frontier=0 la GIA (con Soul/Exploration/Shop chua cham, chi khong
+      reachable tu cho ket).
+3 CAI TIEN pha tran (live 23->30->38 node, 28 edge):
+  - _escape_to_home(): dau moi phien bam back/dismiss ve HUB (Home nhan dien
+    qua HOME_TOK = explore/town/shikigami/summon/shop, >=3 token). at_home=true
+    ngay phien dau. Xu ly dialog confirm-quit (Summon ket vong -> bam Confirm).
+  - noop-retry: truoc khi bo cand, thu method NGUOC lai (polite<->bg).
+  - frontier-driven: _pick_frontier_node (node nhieu cand chua thu nhat) +
+    _bfs_path (duong di qua edges da biet tu Home) + _navigate_to.
+
+### 14.5 ROOT-CAUSE moi treo: control_client._readline
+timeout DUOC KHAI BAO nhung KHONG dung -> blocking readline() treo vo han khi
+PS server busy. Fix: select.select([fd],[],[],remain), tra None khi het gio.
+Day la nguyen nhan GOC cua MOI "process treo mai" toan du an.
+
+### 14.6 CONG CU & PATTERN
+- scripts/run_explore.sh: launcher tin cay (Bash tool hay NUOT setsid trong
+  compound command). Doc tien do qua logs/explore_run.log + jsonl, KHONG qua stdout.
+- scripts/map_loop.sh N BUDGET ACTIONS DEPTH: lap N phien, merge global, in tom tat.
+- python automation/auto_explore.py --show-frontier: in node con duong chua
+  kham pha (KHONG can game).
+- Watchdog: --budget-sec + deadline kiem moi vong (backtrack/escape/nav deu
+  ton trong deadline) -> KHONG treo qua gio.
+- Ban do tich luy artifact: knowledge/maps/game_map.json (38 node, commit duoc;
+  logs/ bi gitignore).
+
+### 14.7 CON DANG DO
+- Window OFF-SCREEN (rect 4047,-72, man phu tren man chinh) -> nghi SetForeground
+  fail -> politeclick header/footer hay khong an (nut Bonus noop moi cach click).
+- frontier loop chua kich hoat manh: explore Home dung het action truoc khi vao
+  loop. Tang budget/action hoac uu tien frontier som hon de loop chay.
+- 'unreached' danh dau cand khi nav fail -> co the bo sot khi sau nay reachable.
+- Tiep: chay them phien day len 50+ node; HOAC tich hop graph vao screen_graph.py.
