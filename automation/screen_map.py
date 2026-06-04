@@ -82,7 +82,11 @@ class ScreenMap:
 
     @staticmethod
     def is_claim(text):
-        t = text.lower()
+        # nut nhan thuong = chu NGAN gon (<=14 ky tu) chua tu khoa claim, KHONG phai
+        # cau dai (vd 'Pass Daily Rewards' la TIEU DE thu, khong phai nut).
+        t = text.lower().strip()
+        if len(t) > 14 or len(t.split()) > 2:
+            return False
         return any(h in t for h in CLAIM_HINT)
 
     def observe(self):
@@ -151,11 +155,15 @@ class ScreenMap:
                 claimed += 1
                 if verbose:
                     print(f"   + CLAIM '{a['text'] or akey}' -> nhan thuong")
-            # ve lai man dang kham pha
+            # ve lai man dang kham pha (back_to: callable dua bot ve dung man nay)
             if back_to:
                 back_to()
             elif moved or confirmed:
-                self.a.back(wait=1.5)
+                # back nhieu lan cho den khi ve dung man goc (key trung lai)
+                for _ in range(3):
+                    self.a.back(wait=1.2)
+                    if self.observe()[2] == skey:
+                        break
             self.save()
         if verbose:
             print(f"[map] xong: claim {claimed} muc o '{label or skey}'")

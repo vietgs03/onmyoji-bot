@@ -1,20 +1,13 @@
 {
- "b423adce3949": {
+ "62c10764c578": {
   "label": "mailbox",
   "affordances": {
-   "pass daily rewards": {
-    "text": "Pass Daily Rewards",
-    "tried": 1,
-    "kind": "text",
-    "claim": true,
-    "effect": "claimed"
-   },
    "claim": {
     "text": "Claim",
     "tried": 1,
     "kind": "text",
     "claim": true,
-    "effect": "opened"
+    "effect": "claimed"
    },
    "badge@1,14": {
     "text": "",
@@ -24,13 +17,6 @@
     "effect": "opened"
    },
    "badge@27,5": {
-    "text": "",
-    "tried": 1,
-    "kind": "badge",
-    "claim": false,
-    "effect": "opened"
-   },
-   "badge@26,3": {
     "text": "",
     "tried": 1,
     "kind": "badge",
