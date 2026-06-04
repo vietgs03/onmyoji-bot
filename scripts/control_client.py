@@ -62,6 +62,11 @@ class Controller:
         """PostMessage click (async, NeoX hay bo qua). Giu lai de test/so sanh."""
         return self._cmd(f"bgclick {int(x)} {int(y)}")
 
+    def fgclick(self, x, y):
+        """Foreground click THAT (focus + di chuot + bam). Tin cay tren modal ma
+        ca PostMessage lan SendMessage bi bo qua (vd dialog Claim All Mailbox)."""
+        return self._cmd(f"fgclick {int(x)} {int(y)}")
+
     def bgdrag(self, x0, y0, x1, y1, steps=12):
         """Keo/scroll KHONG chiem chuot (SendMessage down->moves->up)."""
         return self._cmd(f"senddrag {int(x0)} {int(y0)} {int(x1)} {int(y1)} {int(steps)}")

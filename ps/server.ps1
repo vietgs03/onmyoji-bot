@@ -23,6 +23,7 @@ public class Native {
   [DllImport("user32.dll")] public static extern bool SetForegroundWindow(IntPtr hWnd);
   [DllImport("user32.dll")] public static extern bool SetCursorPos(int X, int Y);
   [DllImport("user32.dll")] public static extern bool GetCursorPos(out POINT lpPoint);
+  [DllImport("user32.dll")] public static extern bool ClientToScreen(IntPtr hWnd, ref POINT lpPoint);
   [DllImport("user32.dll")] public static extern void mouse_event(uint dwFlags, uint dx, uint dy, uint dwData, IntPtr dwExtraInfo);
   [StructLayout(LayoutKind.Sequential)] public struct RECT { public int Left, Top, Right, Bottom; }
   [StructLayout(LayoutKind.Sequential)] public struct POINT { public int X, Y; }
@@ -123,10 +124,13 @@ function Do-SendClick($hwnd, $x, $y) {
 
 function Do-FgClick($hwnd, $x, $y) {
   # Click thuc (foreground): focus cua so + di chuot toi toa do man hinh + bam.
-  # Tin cay tren MOI popup/modal (PostMessage bi mot so modal bo qua).
-  $r = New-Object Native+RECT
-  [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
-  $sx = $r.Left + $x; $sy = $r.Top + $y
+  # Tin cay tren MOI popup/modal (PostMessage/SendMessage bi mot so modal bo qua).
+  # FIX: dung ClientToScreen (toa do anh = CLIENT area, PrintWindow chup client)
+  # thay vi GetWindowRect.Left (bao gom title bar/border -> lech ~30px len tren).
+  $pt = New-Object Native+POINT
+  $pt.X = [int]$x; $pt.Y = [int]$y
+  [Native]::ClientToScreen($hwnd, [ref]$pt) | Out-Null
+  $sx = $pt.X; $sy = $pt.Y
   [Native]::SetForegroundWindow($hwnd) | Out-Null
   Start-Sleep -Milliseconds 40
   [Native]::SetCursorPos($sx, $sy) | Out-Null
