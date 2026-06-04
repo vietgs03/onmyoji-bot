@@ -1,0 +1,4 @@
+{"run": 1780565718, "tour": "daily", "i": 1, "goal": "exploration", "verified": true, "reached": true, "hops_dur_s": 19.3, "where_end": "exploration"}
+{"run": 1780565718, "tour": "daily", "i": 2, "goal": "town", "verified": true, "reached": true, "hops_dur_s": 20.1, "where_end": "town"}
+{"run": 1780565718, "tour": "daily", "i": 3, "goal": "friends", "verified": true, "reached": true, "hops_dur_s": 20.7, "where_end": "friends"}
+{"run": 1780565718, "tour": "daily", "i": 4, "goal": "shop", "verified": true, "reached": true, "hops_dur_s": 22.0, "where_end": "shop"}

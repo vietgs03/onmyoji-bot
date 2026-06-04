@@ -188,3 +188,31 @@ Chay tour 'full' (sau khi co OCR cache + footer politeclick) lo them 5 bug. Da f
 
 KET QUA: 6/6 chang daily OK ~20-29s. Node con exploration (soul_zones/realm_raid) OK.
 39 node (sau xoa kekkai). 16 node con verified=False can kiem chung tiep.
+
+## 13. Farm engine - may trang thai battle qua OCR (automation/farm.py) - 2026-06-04
+Build engine farm GENERIC (khong hardcode toa do): moi vong doc OCR -> nhan TRANG
+THAI battle -> chon HANH DONG (data-driven ACTIONS). 5 trang thai chung moi che do:
+  SELECT (co Challenge/Lineup/Rewards Preview) -> tap Challenge vao tran
+  PREPARE (Ready/Start) -> tap Ready
+  FIGHTING (Surrender; dang danh) -> CHO (None state cung = dang danh -> wait)
+  RESULT (Tapto/continue/ClearTime) -> tap qua, DEM +1 tran
+  BLOCKED (No more/tickets left) -> DUNG
+
+BUG QUAN TRONG khi build (do bang OCR that, KHONG doan):
+1. 'Tap to continue' OCR doc DINH thanh 'Tapto'+'continue' -> keyword phai bat ca 2.
+2. man CHON co nut 'Skills'/'Lineup'/'Rewards Preview' -> 'Skill' lam FIGHTING nham
+   man chon thanh dang-danh -> khong bao gio tap Challenge -> battles=0 mai.
+   FIX: SELECT uu tien TRUOC FIGHTING; FIGHTING chi dung 'Surrender' (dac trung
+   tuyet doi, chi co khi dang danh); bo 'Skill'/'Victories' (co ca o man chon).
+3. man dang danh detect None la BINH THUONG (it keyword on dinh) -> action None=wait
+   (KHONG tap center, keo bo lo man RESULT). None>5 vong moi tap pha ket.
+4. Soul Zones co man LIST truoc man battle -> MODE_ENTRY['soul_zones'] tap realm
+   (Orochi...) de mo man co Challenge. Mode 1-man (Realm Raid) khong can entry.
+5. 'Reward'/'Stamina' generic (co o man chon/thanh tai nguyen) -> bo khoi RESULT/BLOCKED.
+
+DA VERIFY LIVE 1 tran day du (logs): SELECT(3)->tap Challenge->None x4 (timer 0:05
+->0:15, Auto bat tu danh)->RESULT(ClearTime 00:18). May trang thai DUNG.
+
+HA TANG: ps server hay BUSY/tranh chap khi co 2+ process python cung chay (jsonl
+trong, shot None, etime cho thay process cu chua chet). LUON pkill SACH + doi
+server hoi (shot True) TRUOC khi chay process moi. Tranh chay 2 farm/debug song song.

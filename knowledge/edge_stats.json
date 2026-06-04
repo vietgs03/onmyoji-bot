@@ -1,10 +1,122 @@
 {
  "summon->HOME": {
+  "success": 2,
+  "fail": 0,
+  "fail_streak": 0,
+  "lat_sum": 30.34707760810852,
+  "lat_n": 2,
+  "blocked_until": 0.0
+ },
+ "HOME->exploration": {
+  "success": 24,
+  "fail": 26,
+  "fail_streak": 0,
+  "lat_sum": 735.3159549236298,
+  "lat_n": 45,
+  "blocked_until": 0.0
+ },
+ "bondling_fairyland->exploration": {
+  "success": 0,
+  "fail": 6,
+  "fail_streak": 6,
+  "lat_sum": 104.99540257453918,
+  "lat_n": 6,
+  "blocked_until": 1780581387.566154
+ },
+ "HOME->town": {
+  "success": 11,
+  "fail": 1,
+  "fail_streak": 0,
+  "lat_sum": 343.79954051971436,
+  "lat_n": 12,
+  "blocked_until": 0.0
+ },
+ "HOME->friends": {
+  "success": 5,
+  "fail": 49,
+  "fail_streak": 0,
+  "lat_sum": 572.2102346420288,
+  "lat_n": 34,
+  "blocked_until": 0.0
+ },
+ "HOME->shop": {
+  "success": 3,
+  "fail": 0,
+  "fail_streak": 0,
+  "lat_sum": 35.14703130722046,
+  "lat_n": 3,
+  "blocked_until": 0.0
+ },
+ "HOME->summon": {
+  "success": 2,
+  "fail": 11,
+  "fail_streak": 0,
+  "lat_sum": 173.43514490127563,
+  "lat_n": 13,
+  "blocked_until": 0.0
+ },
+ "HOME->shikigami": {
+  "success": 2,
+  "fail": 11,
+  "fail_streak": 0,
+  "lat_sum": 233.76913332939148,
+  "lat_n": 8,
+  "blocked_until": 0.0
+ },
+ "exploration->soul_zones": {
+  "success": 6,
+  "fail": 3,
+  "fail_streak": 0,
+  "lat_sum": 126.12952971458435,
+  "lat_n": 9,
+  "blocked_until": 0.0
+ },
+ "exploration->realm_raid": {
+  "success": 5,
+  "fail": 18,
+  "fail_streak": 5,
+  "lat_sum": 288.67491269111633,
+  "lat_n": 23,
+  "blocked_until": 1780593595.9595468
+ },
+ "shikigami->HOME": {
+  "success": 0,
+  "fail": 3,
+  "fail_streak": 3,
+  "lat_sum": 43.40070176124573,
+  "lat_n": 3,
+  "blocked_until": 1780593765.3097532
+ },
+ "town->demon_encounter": {
+  "success": 0,
+  "fail": 17,
+  "fail_streak": 17,
+  "lat_sum": 144.17614912986755,
+  "lat_n": 7,
+  "blocked_until": 1780585693.4196877
+ },
+ "friends->HOME": {
   "success": 1,
   "fail": 0,
   "fail_streak": 0,
-  "lat_sum": 13.049234867095947,
+  "lat_sum": 9.54749345779419,
   "lat_n": 1,
   "blocked_until": 0.0
+ },
+ "shrine_pass->event": {
+  "success": 0,
+  "fail": 3,
+  "fail_streak": 3,
+  "lat_sum": 46.254090547561646,
+  "lat_n": 3,
+  "blocked_until": 1780587883.9948227
+ },
+ "team->HOME": {
+  "success": 0,
+  "fail": 3,
+  "fail_streak": 3,
+  "lat_sum": 41.41266703605652,
+  "lat_n": 3,
+  "blocked_until": 1780596040.1638932
  }
 }
