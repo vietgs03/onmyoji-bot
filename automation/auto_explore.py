@@ -384,9 +384,13 @@ class Explorer:
         toks = fp[0]
         if not toks:
             return True
-        # chi co 'onmyoji' (logo) + toi da 1 token la, va RAT it tappable thuc
-        non_logo = {t for t in toks if t != "onmyoji"}
-        if "onmyoji" in toks and len(non_logo) <= 1:
+        # 'onmyoj*' deu la LOGO (OCR doc lech: onmyoji/onmyojil/onmyg/onmg/nmyg...).
+        # Man chi co logo + toi da 1 token la -> loading/chuyen canh.
+        def is_logo(t):
+            return t.startswith("onmyoj") or t in ("onmg", "nmyg", "omnyoji",
+                                                    "ommgt", "lowng", "lownc")
+        non_logo = {t for t in toks if not is_logo(t)}
+        if any(is_logo(t) for t in toks) and len(non_logo) <= 1:
             return True
         return False
 

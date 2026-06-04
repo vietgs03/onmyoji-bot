@@ -206,7 +206,7 @@
     "vew"
    ],
    "dhash": "ac549661466bab6d",
-   "n_cands": 36,
+   "n_cands": 37,
    "edges": {
     "T:2f95b1fa4dc8": {
      "via": "icon@986,227",
@@ -224,9 +224,9 @@
      "y": 449
     },
     "T:3aec03148f4b": {
-     "via": "icon@1097,154",
-     "x": 1097,
-     "y": 154
+     "via": "event",
+     "x": 1079,
+     "y": 196
     },
     "T:324f0a0ee0c8": {
      "via": "icon@1077,312",
@@ -267,6 +267,11 @@
      "via": "icon@926,423",
      "x": 926,
      "y": 423
+    },
+    "T:c6ae98ff3557": {
+     "via": "explore",
+     "x": 611,
+     "y": 196
     }
    },
    "tried": {
@@ -295,40 +300,47 @@
     "icon@972,532@24,13": "T:eb1f0c1af1f2",
     "icon@1032,72@26,2": "noop",
     "icon@1092,71@27,2": "noop",
-    "icon@926,423@23,11": "T:c3422093e6de"
+    "icon@926,423@23,11": "T:c3422093e6de",
+    "explore@15,5": "T:c6ae98ff3557",
+    "event@27,5": "T:3aec03148f4b",
+    "summon@25,6": "noop",
+    "town@17,7": "noop",
+    "team@10,16": "noop",
+    "shop@15,16": "noop"
    },
    "cands": [
-    "thoma@4,2",
-    "bonu@9,2",
+    "thur@4,1",
+    "1031est@6,1",
+    "bonus@9,2",
     "explore@15,5",
     "event@27,5",
     "seal@6,6",
     "summon@25,6",
     "town@17,7",
-    "shop@16,16",
-    "team@11,16",
-    "frienas@21,16",
+    "new@21,14",
+    "team@10,16",
+    "shop@15,16",
+    "fhienas@20,16",
     "onmiyoji@23,16",
     "guild@13,16",
     "talismanpass@18,16",
-    "shikigami@26,16",
-    "icon@1097,154@27,4",
-    "icon@531,536@13,13",
-    "icon@619,605@15,15",
-    "icon@1076,449@27,11",
-    "icon@423,602@11,15",
-    "icon@978,507@24,13",
-    "icon@68,185@2,5",
-    "icon@698,470@17,12",
+    "shikigami@25,16",
+    "icon@1097,156@27,4",
+    "icon@608,605@15,15",
+    "icon@1077,449@27,11",
+    "icon@411,602@10,15",
+    "icon@1079,239@27,6",
+    "icon@977,517@24,13",
+    "icon@698,467@17,12",
+    "icon@325,245@8,6",
+    "icon@56,185@1,5",
+    "icon@1078,394@27,10",
     "icon@970,385@24,10",
-    "icon@972,532@24,13",
-    "icon@1032,72@26,2",
+    "icon@1032,71@26,2",
     "icon@1092,71@27,2",
+    "icon@763,329@19,8",
     "icon@926,423@23,11",
-    "icon@874,437@22,11",
-    "icon@762,330@19,8",
-    "icon@630,134@16,3",
-    "icon@984,57@25,1"
+    "icon@874,437@22,11"
    ]
   },
   "T:2f95b1fa4dc8": {
@@ -544,9 +556,57 @@
     "view"
    ],
    "dhash": "ac80b19085c0c0b1",
-   "n_cands": 0,
+   "n_cands": 50,
    "edges": {},
-   "tried": {}
+   "tried": {
+    "facebooktwitter@5,14": "noop"
+   },
+   "cands": [
+    "th@4,2",
+    "settings@14,3",
+    "audio@18,4",
+    "progress@4,4",
+    "newfeature@11,5",
+    "music@15,5",
+    "av@26,5",
+    "change@8,6",
+    "nameplate@11,6",
+    "sfx@14,7",
+    "interact@27,7",
+    "name@5,8",
+    "th@6,8",
+    "deo@7,8",
+    "video@15,8",
+    "birth@4,9",
+    "noinput@6,9",
+    "day@4,9",
+    "notif@26,9",
+    "audio@15,10",
+    "extra@5,11",
+    "nm@27,11",
+    "link@7,11",
+    "view@18,11",
+    "pack@5,12",
+    "modeloutline@16,13",
+    "skillcloseup@22,13",
+    "tapto@2,13",
+    "ex@6,13",
+    "games@26,13",
+    "send@2,13",
+    "onmyoji@9,14",
+    "facebooktwitter@5,14",
+    "autoplav@15,14",
+    "newinterface@22,14",
+    "guila@13,16",
+    "team@10,16",
+    "shop@15,16",
+    "talismanpass@18,16",
+    "onmiyaji@23,16",
+    "house@8,16",
+    "shikigami@25,16",
+    "icon@105,128@3,3",
+    "icon@994,119@25,3"
+   ]
   },
   "T:c57d1185a835": {
    "label": "onmyoji",
@@ -555,21 +615,9 @@
     "onmyoji"
    ],
    "dhash": "284002414a0a0001",
-   "n_cands": 10,
+   "n_cands": 0,
    "edges": {},
-   "tried": {},
-   "cands": [
-    "icon@106,610@3,15",
-    "icon@751,528@19,13",
-    "icon@222,122@6,3",
-    "icon@868,148@22,4",
-    "icon@1126,632@28,16",
-    "icon@24,631@1,16",
-    "icon@414,656@10,16",
-    "icon@520,67@13,2",
-    "icon@384,652@10,16",
-    "icon@646,135@16,3"
-   ]
+   "tried": {}
   },
   "T:3aec03148f4b": {
    "label": "ummoningevent/wisdom/springparade",
@@ -597,37 +645,49 @@
     "wisdom"
    ],
    "dhash": "e960e0d26ec8505a",
-   "n_cands": 27,
+   "n_cands": 40,
    "edges": {},
    "tried": {},
    "cands": [
-    "versionevent@3,4",
-    "awakened@21,6",
-    "new@5,5",
-    "ummoningevent@3,6",
-    "new@5,7",
-    "wisdom@21,8",
-    "memoryscroll@3,8",
-    "newskins@2,9",
-    "eprintedwonders@3,10",
-    "onmyojiskinreturn@3,10",
-    "new@5,11",
-    "springsmentor@3,11",
-    "lebrationskinreturr@3,12",
-    "excitingevents@2,13",
-    "ujiwaranomichi@3,14",
-    "possibledropss@8,14",
-    "springparade@3,15",
-    "toevent@26,15",
-    "material@11,16",
-    "shop@22,16",
-    "icon@280,611@7,15",
-    "icon@498,611@12,15",
-    "icon@32,614@1,15",
-    "icon@110,64@3,2",
-    "icon@185,180@5,4",
-    "icon@35,552@1,14",
-    "icon@564,601@14,15"
+    "new@5,4",
+    "lmnadtima@21,4",
+    "retur@17,4",
+    "retum@21,4",
+    "memoryscroll@3,4",
+    "newskins@2,6",
+    "printed@7,7",
+    "printedwonders@3,7",
+    "onmyojiskinreturn@3,7",
+    "wonders@8,8",
+    "new@5,8",
+    "springsmentor@3,8",
+    "lebrationskinretur@3,9",
+    "midnighthuntpanther@26,9",
+    "excitingevents@2,9",
+    "exclusive@7,10",
+    "springparade@3,12",
+    "kaguralacqueredwaves@12,13",
+    "record@27,12",
+    "new@5,13",
+    "timelitprelude@3,14",
+    "onlycosts@11,14",
+    "bonus@6,14",
+    "3witha@12,14",
+    "prizepool@27,14",
+    "voucher@11,14",
+    "new@5,15",
+    "eowmeowthea@3,15",
+    "wish@14,15",
+    "wish@21,15",
+    "x1@16,15",
+    "collect2skins@7,16",
+    "shop@27,16",
+    "icon@32,489@1,12",
+    "icon@36,550@1,14",
+    "icon@111,64@3,2",
+    "icon@35,613@1,15",
+    "icon@35,426@1,11",
+    "icon@991,66@25,2"
    ]
   },
   "T:03f908d78cd1": {
@@ -948,9 +1008,19 @@
     "onmyojil"
    ],
    "dhash": "755271d55ad4cca1",
-   "n_cands": 0,
+   "n_cands": 8,
    "edges": {},
-   "tried": {}
+   "tried": {},
+   "cands": [
+    "icon@1097,315@27,8",
+    "icon@429,268@11,7",
+    "icon@108,171@3,4",
+    "icon@253,302@6,8",
+    "icon@1118,189@28,5",
+    "icon@1074,357@27,9",
+    "icon@44,657@1,16",
+    "icon@17,472@0,12"
+   ]
   },
   "T:62902bfe923b": {
    "label": "lightning/fallen/yondertime",
@@ -1000,7 +1070,7 @@
     "onmyoji"
    ],
    "dhash": "7c35d864e46973b9",
-   "n_cands": 6,
+   "n_cands": 0,
    "edges": {
     "T:5b188d08a4b5": {
      "via": "icon@46,143",
@@ -1010,15 +1080,7 @@
    },
    "tried": {
     "icon@46,143@1,4": "T:5b188d08a4b5"
-   },
-   "cands": [
-    "lownc@11,3",
-    "icon@46,143@1,4",
-    "icon@859,518@21,13",
-    "icon@1113,479@28,12",
-    "icon@83,432@2,11",
-    "icon@711,225@18,6"
-   ]
+   }
   },
   "T:5b188d08a4b5": {
    "label": "team/action/wish",
@@ -1038,7 +1100,7 @@
     "wish"
    ],
    "dhash": "966c645a6b744648",
-   "n_cands": 18,
+   "n_cands": 0,
    "edges": {
     "T:0f69250a5283": {
      "via": "icon@54,70",
@@ -1048,27 +1110,7 @@
    },
    "tried": {
     "icon@54,70@1,2": "T:0f69250a5283"
-   },
-   "cands": [
-    "jia@14,1",
-    "l8@14,2",
-    "guildgrounds@27,5",
-    "new@28,6",
-    "decors@27,7",
-    "team@11,15",
-    "shrine@20,16",
-    "wish@22,16",
-    "realm@25,16",
-    "interact@7,16",
-    "action@9,16",
-    "guildinfo@27,16",
-    "icon@54,70@1,2",
-    "icon@23,391@1,10",
-    "icon@122,70@3,2",
-    "icon@1054,62@26,2",
-    "icon@998,63@25,2",
-    "icon@1111,64@28,2"
-   ]
+   }
   },
   "T:0f69250a5283": {
    "label": "onmyoji/onmyg",
@@ -1078,13 +1120,9 @@
     "onmyoji"
    ],
    "dhash": "b7ad536bb2c5ee56",
-   "n_cands": 2,
+   "n_cands": 0,
    "edges": {},
-   "tried": {},
-   "cands": [
-    "onmyg@21,13",
-    "icon@798,173@20,4"
-   ]
+   "tried": {}
   },
   "T:db1fa93121c8": {
    "label": "onmyoji/daksna53r/onmg",
@@ -1095,23 +1133,9 @@
     "onmyoji"
    ],
    "dhash": "e626165e2a54ee78",
-   "n_cands": 12,
+   "n_cands": 0,
    "edges": {},
-   "tried": {},
-   "cands": [
-    "daksna53r@12,2",
-    "onmg@6,13",
-    "icon@398,294@10,7",
-    "icon@22,270@1,7",
-    "icon@155,182@4,5",
-    "icon@204,330@5,8",
-    "icon@762,71@19,2",
-    "icon@134,433@3,11",
-    "icon@126,374@3,9",
-    "icon@180,142@4,4",
-    "icon@821,210@21,5",
-    "icon@330,347@8,9"
-   ]
+   "tried": {}
   },
   "T:eb1f0c1af1f2": {
    "label": "expired/rewards/recommended",
@@ -1136,33 +1160,9 @@
     "thoma"
    ],
    "dhash": "92585d46ec4c6280",
-   "n_cands": 23,
+   "n_cands": 0,
    "edges": {},
-   "tried": {},
-   "cands": [
-    "new@22,1",
-    "recommended@18,2",
-    "requestlist@21,2",
-    "log@24,2",
-    "apprentices@18,2",
-    "rewards@1,4",
-    "neejang@20,4",
-    "allday@20,5",
-    "3inone@20,7",
-    "thoma@12,7",
-    "alday@20,8",
-    "expired@27,10",
-    "kyawhong@20,10",
-    "allday@20,11",
-    "mentorshipnotice@4,12",
-    "expired@27,12",
-    "luxpain39@20,13",
-    "noapprentices@4,15",
-    "icon@45,68@1,2",
-    "icon@553,481@14,12",
-    "icon@624,486@16,12",
-    "icon@265,590@7,15"
-   ]
+   "tried": {}
   },
   "T:eae96f3b6ab9": {
    "label": "special/quick/done",
@@ -1189,40 +1189,9 @@
     "you"
    ],
    "dhash": "c2c8cc25ececccc8",
-   "n_cands": 34,
+   "n_cands": 0,
    "edges": {},
-   "tried": {},
-   "cands": [
-    "dailyfree@10,4",
-    "daily@26,4",
-    "summon@10,5",
-    "iclalmed@14,5",
-    "done@23,5",
-    "slackingtime@3,6",
-    "special@26,7",
-    "guildgroup@10,7",
-    "quest@10,8",
-    "iclalmed@14,8",
-    "iclalmed@16,8",
-    "cclalmed@17,8",
-    "done@23,8",
-    "mecollectrewardsfor@3,8",
-    "you@1,9",
-    "petcare@10,10",
-    "cclalmed@14,10",
-    "iclalmed@16,10",
-    "ilalmed@17,10",
-    "iclalmed@19,10",
-    "done@23,10",
-    "dailylot@10,13",
-    "config@26,13",
-    "cclalmed@14,13",
-    "dones@23,13",
-    "quick@26,14",
-    "done@26,15",
-    "icon@994,57@25,1",
-    "icon@41,584@1,15"
-   ]
+   "tried": {}
   },
   "T:c3422093e6de": {
    "label": "pethouse/gotobackyard/new",
@@ -1234,7 +1203,7 @@
     "pethouse"
    ],
    "dhash": "f4d8198a42d8f964",
-   "n_cands": 16,
+   "n_cands": 0,
    "edges": {
     "T:1c9965a4cb64": {
      "via": "icon@863,479",
@@ -1252,25 +1221,7 @@
     "icon@251,165@6,4": "noop",
     "icon@56,70@1,2": "noop",
     "icon@863,479@22,12": "T:1c9965a4cb64"
-   },
-   "cands": [
-    "pethouse@14,2",
-    "new@28,14",
-    "gotobackyard@2,16",
-    "icon@1047,540@26,14",
-    "icon@630,447@16,11",
-    "icon@239,515@6,13",
-    "icon@1068,618@27,15",
-    "icon@57,202@1,5",
-    "icon@349,172@9,4",
-    "icon@251,165@6,4",
-    "icon@56,70@1,2",
-    "icon@863,479@22,12",
-    "icon@857,510@21,13",
-    "icon@460,160@12,4",
-    "icon@760,311@19,8",
-    "icon@1091,179@27,4"
-   ]
+   }
   },
   "T:1c9965a4cb64": {
    "label": "hide/bmouth/full",
@@ -1285,36 +1236,297 @@
     "onmyoji"
    ],
    "dhash": "66662abae7d74ae8",
-   "n_cands": 29,
+   "n_cands": 0,
+   "edges": {},
+   "tried": {}
+  },
+  "T:c6ae98ff3557": {
+   "label": "onmyojil/onmg",
+   "shot": "223120_T:c6ae98ff3557.png",
+   "sig": [
+    "onmg",
+    "onmyojil"
+   ],
+   "dhash": "adae6c755ae2cbe7",
+   "n_cands": 4,
+   "edges": {
+    "T:4a09d05838fb": {
+     "via": "icon@886,653",
+     "x": 886,
+     "y": 653
+    }
+   },
+   "tried": {
+    "icon@886,653@22,16": "T:4a09d05838fb"
+   },
+   "cands": [
+    "onmg@5,11",
+    "icon@902,454@23,11",
+    "icon@886,653@22,16",
+    "icon@973,376@24,9"
+   ]
+  },
+  "T:4a09d05838fb": {
+   "label": "main/area/zone",
+   "shot": "223120_T:4a09d05838fb.png",
+   "sig": [
+    "area",
+    "bondling",
+    "bondlingfairyland",
+    "bonus",
+    "boss",
+    "champion",
+    "dispatch",
+    "eil",
+    "evo",
+    "fairyland",
+    "gameplay",
+    "gates",
+    "main",
+    "material",
+    "moonrisepass",
+    "new",
+    "ohoraguruma",
+    "onmyoji",
+    "orochisschome",
+    "raid",
+    "realm",
+    "realms",
+    "secret",
+    "secrets",
+    "six",
+    "soul",
+    "spiit",
+    "todaysdrops",
+    "totem",
+    "trial",
+    "ultimateorochi",
+    "venlure",
+    "zone"
+   ],
+   "dhash": "a35ae5ce55a49359",
+   "n_cands": 52,
+   "edges": {
+    "T:6cdd32d6410d": {
+     "via": "secrets",
+     "x": 985,
+     "y": 519
+    },
+    "T:92c48e55a672": {
+     "via": "realm",
+     "x": 260,
+     "y": 623
+    },
+    "T:cfcbfc3caa04": {
+     "via": "realms",
+     "x": 856,
+     "y": 623
+    }
+   },
+   "tried": {
+    "soul@24,8": "noop",
+    "secrets@25,13": "T:6cdd32d6410d",
+    "realm@6,16": "T:92c48e55a672",
+    "realms@21,16": "T:cfcbfc3caa04"
+   },
+   "cands": [
+    "bonus@9,2",
+    "eil@26,4",
+    "orochisschome@21,5",
+    "main@25,5",
+    "gameplay@27,5",
+    "moonrisepass@25,7",
+    "soul@24,8",
+    "todaysdrops@25,10",
+    "ultimateorochi@25,11",
+    "secrets@25,13",
+    "bondlingfairyland@5,13",
+    "ohoraguruma@2,14",
+    "new@11,15",
+    "six@22,15",
+    "zone@26,15",
+    "evo@2,16",
+    "realm@6,16",
+    "champion@19,16",
+    "realms@21,16",
+    "secret@13,16",
+    "spiit@17,16",
+    "area@15,16",
+    "bondling@23,16",
+    "totem@9,16",
+    "zone@13,16",
+    "boss@15,16",
+    "venlure@17,16",
+    "gates@21,16",
+    "material@2,16",
+    "soul@4,16",
+    "raid@6,16",
+    "dispatch@11,16",
+    "trial@19,16",
+    "fairyland@23,16",
+    "icon@1068,640@27,16",
+    "icon@719,281@18,7",
+    "icon@761,455@19,11",
+    "icon@110,64@3,2",
+    "icon@179,613@4,15",
+    "icon@386,619@10,15",
+    "icon@62,373@2,9",
+    "icon@252,456@6,11",
+    "icon@1005,69@25,2",
+    "icon@1094,69@27,2",
+    "icon@676,604@17,15",
+    "icon@973,267@24,7",
+    "icon@443,481@11,12",
+    "icon@33,477@1,12",
+    "icon@425,598@11,15"
+   ]
+  },
+  "T:6cdd32d6410d": {
+   "label": "dailysouls/soul/dropcalendar",
+   "shot": "223120_T:6cdd32d6410d.png",
+   "sig": [
+    "dailysouls",
+    "dropcalendar",
+    "hweekly030",
+    "onmyoji",
+    "orochi",
+    "soul",
+    "uweekiy050",
+    "wdaily050"
+   ],
+   "dhash": "8cca98a91cda2c16",
+   "n_cands": 23,
    "edges": {},
    "tried": {},
    "cands": [
-    "hide@27,3",
-    "bmouth@24,4",
-    "full@21,11",
-    "full@24,11",
-    "full@26,11",
-    "new@24,12",
-    "acc@22,14",
-    "changepet@26,14",
-    "icon@1026,524@26,13",
-    "icon@894,519@22,13",
-    "icon@45,100@1,2",
-    "icon@47,171@1,4",
-    "icon@692,268@17,7",
-    "icon@1047,417@26,10",
-    "icon@961,421@24,11",
-    "icon@781,227@20,6",
-    "icon@1088,91@27,2",
-    "icon@864,419@22,10",
-    "icon@451,58@11,1",
-    "icon@909,97@23,2",
-    "icon@626,57@16,1",
-    "icon@521,242@13,6",
-    "icon@39,229@1,6",
-    "icon@791,53@20,1",
-    "icon@763,420@19,10",
-    "icon@757,381@19,10"
+    "soul@4,2",
+    "orochi@7,6",
+    "hweekly030@25,10",
+    "uweekiy050@18,10",
+    "dailysouls@12,11",
+    "dailysouls@25,11",
+    "wdaily050@18,11",
+    "dailysouls@5,12",
+    "dailysouls@19,12",
+    "dropcalendar@27,16",
+    "icon@196,350@5,9",
+    "icon@1027,347@26,9",
+    "icon@46,67@1,2",
+    "icon@110,65@3,2",
+    "icon@829,155@21,4",
+    "icon@1094,66@27,2",
+    "icon@1005,66@25,2",
+    "icon@792,52@20,1",
+    "icon@1070,177@27,4",
+    "icon@762,123@19,3",
+    "icon@713,134@18,3",
+    "icon@475,360@12,9"
+   ]
+  },
+  "T:92c48e55a672": {
+   "label": "tongjed/zumaka/manateea",
+   "shot": "223120_T:92c48e55a672.png",
+   "sig": [
+    "assistant",
+    "defenselog",
+    "guild",
+    "individual",
+    "ineup",
+    "jcy",
+    "killswa12",
+    "ko",
+    "lineup",
+    "manateea",
+    "n3vermind",
+    "onmyoji",
+    "pufferx",
+    "raidlog",
+    "rank",
+    "refresh",
+    "shikigami",
+    "showcase",
+    "shreyas671",
+    "snuog",
+    "sweetiiiiii",
+    "tongjed",
+    "weekly",
+    "zumaka"
+   ],
+   "dhash": "ec939c40d678cc01",
+   "n_cands": 30,
+   "edges": {},
+   "tried": {},
+   "cands": [
+    "snuog@2,5",
+    "zumaka@6,5",
+    "n3vermind@14,5",
+    "ko@17,5",
+    "manateea@21,5",
+    "lineup@27,5",
+    "assistant@27,6",
+    "showcase@2,8",
+    "killswa12@7,8",
+    "tongjed@14,8",
+    "jcy@21,8",
+    "individual@28,8",
+    "sweetiiiiii@7,11",
+    "weekly@2,11",
+    "shreyas671@14,11",
+    "pufferx@21,11",
+    "guild@27,11",
+    "rank@1,14",
+    "raidlog@5,14",
+    "ineup@20,14",
+    "refresh@23,14",
+    "shikigami@28,16",
+    "defenselog@4,16",
+    "icon@390,444@10,11",
+    "icon@1101,593@28,15",
+    "icon@32,490@1,12",
+    "icon@1079,150@27,4",
+    "icon@72,152@2,4"
+   ]
+  },
+  "T:cfcbfc3caa04": {
+   "label": "change/marks/peacackkingdom",
+   "shot": "223120_T:cfcbfc3caa04.png",
+   "sig": [
+    "change",
+    "marks",
+    "onmyoji",
+    "peacackkingdom",
+    "seniry"
+   ],
+   "dhash": "32f0f1e1e676b031",
+   "n_cands": 5,
+   "edges": {},
+   "tried": {},
+   "cands": [
+    "change@8,4",
+    "peacackkingdom@8,5",
+    "seniry@22,6",
+    "marks@27,16",
+    "icon@39,67@1,2"
+   ]
+  },
+  "T:2614b589d806": {
+   "label": "onmyojil/nmyg",
+   "shot": "223120_T:2614b589d806.png",
+   "sig": [
+    "nmyg",
+    "onmyojil"
+   ],
+   "dhash": "aaa6f8f4c6eb7415",
+   "n_cands": 6,
+   "edges": {},
+   "tried": {},
+   "cands": [
+    "nmyg@6,8",
+    "icon@691,172@17,4",
+    "icon@551,417@14,10",
+    "icon@1083,339@27,8",
+    "icon@358,88@9,2",
+    "icon@846,317@21,8"
    ]
   }
  },
