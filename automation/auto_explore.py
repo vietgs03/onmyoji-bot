@@ -323,6 +323,60 @@ class Explorer:
         if self.verbose:
             print(json.dumps(kw, ensure_ascii=False), flush=True)
 
+    # ---- nhan dien HUB (man Home) de reset moi phien ----
+    # Home la man DUY NHAT co cum token nay cung luc (explore/town + summon/shop).
+    HOME_TOK = {"explore", "town", "shikigami", "summon", "shop"}
+
+    @classmethod
+    def _is_home(cls, reader):
+        toks = {_norm(t[0]) for t in reader.tappables()}
+        return len(cls.HOME_TOK & toks) >= 3
+
+    def _escape_to_home(self, max_steps=10):
+        """Bam back/dismiss lien tiep cho den khi ve Home (hub).
+        Xu ly dialog confirm-quit (Summon ket vong). Tra (ok, reader_o_home).
+        DUNG dau moi phien -> KHONG bi ket goc nho nhu map_loop truoc."""
+        cf = self.a.controls()
+        for step in range(max_steps):
+            if self.deadline is not None and time.time() > self.deadline:
+                return False, None
+            img = self.a.shot()
+            r = ScreenReader(img)
+            if self._is_home(r):
+                return True, r
+            # dialog confirm-quit -> Confirm
+            if r.has("Confirm") and (r.has("Cancel") or r.has("quit")):
+                h = r.find("Confirm")
+                if h:
+                    self.a.c.bgclick(h[1], h[2]); time.sleep(1.4); continue
+            # nut dismiss (X/back-arrow) -> fallback back-arrow trai
+            spot = (45, 68)
+            if cf:
+                try:
+                    d = cf.find_dismiss(img, reader=r)
+                    if d:
+                        spot = d["center"]
+                except Exception:
+                    pass
+            self.a.c.bgclick(spot[0], spot[1])
+            time.sleep(1.2)
+        return False, None
+
+    def _pick_frontier_node(self):
+        """Chon node con NHIEU cand chua thu nhat (frontier) trong memory.
+        Tra ExploreNode hoac None. Bo qua node khong co edge tu Home (kho toi)."""
+        best, best_n = None, 0
+        for nd in self.nodes.values():
+            if not nd.cands:
+                continue
+            tried = set(nd.tried.keys())
+            unexp = [c for c in nd.cands
+                     if self._worthy(c[2], c[3])
+                     and cand_sig(c[2], c[0], c[1]) not in tried]
+            if len(unexp) > best_n:
+                best, best_n = nd, len(unexp)
+        return best
+
     # ---- doc man hinh hien tai -> ExploreNode (tao moi neu chua thay) ----
     def observe(self, hint_label=None):
         img = self.a.shot()
@@ -476,6 +530,13 @@ class Explorer:
             self._click(x, y, src)
             time.sleep(1.6)
             after_nd, r2, img2, is_new = self.observe()
+            # NOOP-RETRY: truoc khi bo vinh vien, thu method NGUOC lai (politeclick
+            # vs bgclick). Nhieu nut footer/header chi an bang politeclick that su.
+            if same_screen(before, after_nd.fp):
+                alt = "bg" if src == "icon" else "polite"
+                self._click(x, y, src, method=alt)
+                time.sleep(1.6)
+                after_nd, r2, img2, is_new = self.observe()
             if same_screen(before, after_nd.fp):
                 node.tried[csig] = "noop"
                 self.log(ev="try", frm=node.key, idx=idx, label=clabel,
@@ -504,26 +565,110 @@ class Explorer:
                         self.explore(new_root, depth, max_depth, max_actions)
                 return
 
-    def _click(self, x, y, src):
-        # icon (header/footer) -> politeclick tin cay hon; text -> sendclick
-        if src == "icon":
-            try:
-                self.a.c.politeclick(x, y)
-                return
-            except Exception:
-                pass
+    def _click(self, x, y, src, method=None):
+        """Click 1 diem. method ep buoc ('polite'|'bg'); mac dinh suy tu src.
+        icon (header/footer) -> politeclick tin cay hon; text -> sendclick."""
+        m = method or ("polite" if src == "icon" else "bg")
         try:
-            self.a.c.bgclick(x, y)
+            if m == "polite":
+                self.a.c.politeclick(x, y)
+            else:
+                self.a.c.bgclick(x, y)
         except Exception:
             pass
+
+    def _home_node(self):
+        """Tra ExploreNode ung voi Home (hub) trong memory, neu co."""
+        for nd in self.nodes.values():
+            toks = nd.fp[0]
+            if len(self.HOME_TOK & toks) >= 3:
+                return nd
+        return None
+
+    def _bfs_path(self, src_key, dst_key):
+        """Duong di ngan nhat src->dst theo edges da biet. List[(node_key, cand)].
+        cand = (label,x,y) de click tu node truoc. None neu khong co duong."""
+        if src_key == dst_key:
+            return []
+        from collections import deque
+        prev = {src_key: None}
+        q = deque([src_key])
+        while q:
+            k = q.popleft()
+            nd = self.nodes.get(k)
+            if not nd:
+                continue
+            for dst, via in nd.edges.items():
+                if dst not in prev:
+                    prev[dst] = (k, via)
+                    if dst == dst_key:
+                        # truy nguoc
+                        path = []
+                        cur = dst_key
+                        while prev[cur] is not None:
+                            pk, via = prev[cur]
+                            path.append((cur, via))
+                            cur = pk
+                        path.reverse()
+                        return path
+                    q.append(dst)
+        return None
+
+    def _navigate_to(self, target_node):
+        """Di tu Home toi target_node qua edges da biet. Tra True neu toi noi.
+        Click tung edge, verify bang same_screen sau moi buoc."""
+        home = self._home_node()
+        if home is None:
+            return False
+        path = self._bfs_path(home.key, target_node.key)
+        if path is None:
+            self.log(ev="nav_nopath", target=target_node.key)
+            return False
+        for dst_key, (clabel, x, y) in path:
+            if self.deadline is not None and time.time() > self.deadline:
+                return False
+            src = "icon" if clabel.startswith("icon@") else "text"
+            self._click(x, y, src)
+            time.sleep(1.6)
+            nd, r, img, _ = self.observe()
+            if nd.key != dst_key and not (
+                    dst_key in self.nodes and same_screen(nd.fp, self.nodes[dst_key].fp)):
+                self.log(ev="nav_lost", want=dst_key, now=nd.key)
+                return False
+        return self.cur_key == target_node.key or \
+            same_screen(self.nodes[self.cur_key].fp, target_node.fp)
 
     def run(self, max_actions=50, max_depth=3, start_label=None, budget_sec=300,
             do_merge=True):
         self.deadline = time.time() + budget_sec
+        # 1) RESET ve Home (hub) -> khong ket goc nho nhu map_loop thu dong
+        ok_home, r = self._escape_to_home()
         nd, r, img, _ = self.observe(hint_label=start_label)
         self.log(ev="start", root=nd.key, label=nd.label, budget_sec=budget_sec,
-                 glob_loaded=getattr(self, "glob_loaded", 0))
+                 glob_loaded=getattr(self, "glob_loaded", 0), at_home=ok_home)
+        # 2) vet can tu Home truoc (bung het cac nhanh hub)
         self.explore(nd, 0, max_depth, max_actions)
+        # 3) FRONTIER-DRIVEN: lap - ve Home, chon node nhieu cand chua thu nhat,
+        #    navigate toi do, explore tiep. Pha tran "ket 1 goc".
+        while not self._budget_done(max_actions):
+            tgt = self._pick_frontier_node()
+            if tgt is None:
+                self.log(ev="frontier_empty")
+                break
+            self._escape_to_home()
+            if not self._navigate_to(tgt):
+                # khong toi duoc -> danh dau de khong lap vo han (thu cand tu cho dung)
+                self.log(ev="nav_fail", target=tgt.key, label=tgt.label)
+                cur = self.nodes.get(self.cur_key)
+                if cur and cur.key != tgt.key:
+                    self.explore(cur, 0, max_depth, max_actions)
+                # tranh chon lai cung node ket: danh dau cand chua thu cua tgt = skip
+                for c in tgt.cands:
+                    cs = cand_sig(c[2], c[0], c[1])
+                    tgt.tried.setdefault(cs, "unreached")
+                continue
+            self.log(ev="frontier_reached", target=tgt.key, label=tgt.label)
+            self.explore(self.nodes[self.cur_key], 0, max_depth, max_actions)
         self.save_graph()
         if do_merge:
             self.merge_global()             # hop nhat vao ky uc tich luy
