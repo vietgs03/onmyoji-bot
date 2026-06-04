@@ -159,3 +159,32 @@ KET QUA tour daily 6 chang (truoc/sau):
              summon 21s, shikigami 21s. TB ~24s/chang.
 => Bai hoc: graph/cay menu dung la chua du - tang THUC THI (click type dung, cache
 OCR, thoat ket som, identify khong trung overlay) moi cho bot chay task dai on dinh.
+
+## 12. Action dai 'full' (11 chang) lan 2 - bug NHAN DIEN + cau truc cay - 2026-06-04
+Chay tour 'full' (sau khi co OCR cache + footer politeclick) lo them 5 bug. Da fix het:
+
+1. **identify cum 2 tu KHONG BAO GIO match** (anh huong 21 node). OCR tach
+   'Soul Zones'->'Soul'+'Zones', nhung identify luu nguyen cum -> node con cua
+   exploration (soul_zones, realm_raid...) loop 200-250s. FIX: `_expand_identify()`
+   tach moi cum thanh tu don luc import (NODES+OVERLAYS). soul_zones 204s-FAIL -> 42s-OK.
+2. **overlay 1-token-fuzzy false-positive**: group_buying['Group','Buying'] khop oan
+   rac OCR o HOME (conf 0.5 = 1/2 token) -> resolve thay vi click footer -> friends
+   loop 147s. FIX: detect_overlay yeu cau >=2 token khop (field `min_hits`, default 2
+   cho overlay >=2 token; =1 cho bien the cung tu nhu Privilege/Privileges).
+   friends 147s -> 18s.
+3. **node generic CUOP dich**: man Summon co 'shrine'+'Scrolls' -> shrine_pass
+   (identify Shrine/Pass/Mystic/Scroll) khop 2/4 = thang summon 2/2 vi depth sau hon.
+   FIX: them COVERAGE (hits/len_identify) vao rank `_match`:
+   (hits, verified, coverage, depth). Node khop HET thang node khop 1 phan.
+   summon 179s-FAIL(lac shrine_pass) -> 29s-OK.
+4. **fuzzy 0.80 qua long**: 'Friends'~'Friendly'=0.80 khop oan. FIX: has() default
+   fuzzy 0.80 -> 0.86 (van dung sai OCR 1 ky tu: 'Realm'~'Realmm'=0.91).
+5. **cau truc cay OAS sai**: (a) kekkai_toppa = TEN NHAT cua chinh Realm Raid (突破結界
+   PvP) -> node TRUNG -> xoa. (b) demon_encounter: canh town->demon text 'Encounter'
+   tro vao NHAN TINH trong Town, click khong mo -> ha verified=False, ghi survey.
+   => Bai hoc: node verified=False tu OAS CO THE bia/trung/sai parent. Action dai la
+   cach DUY NHAT phat hien (goto loop dai = co bug). Da them survey node chua verified
+   vao nav_tour (logs/node_survey.jsonl) de tu hoc token that.
+
+KET QUA: 6/6 chang daily OK ~20-29s. Node con exploration (soul_zones/realm_raid) OK.
+39 node (sau xoa kekkai). 16 node con verified=False can kiem chung tiep.
