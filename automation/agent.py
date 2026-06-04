@@ -169,14 +169,21 @@ class Agent:
             return True  # so/icon, khong tinh la button text
         return all(w in self._WATERMARK for w in words)
 
-    def click(self, x, y, wait=2.5, settle_buttons=2):
+    def click(self, x, y, wait=2.5, settle_buttons=2, polite=False):
         """Click 1 toa do roi DOI cho qua loading + on dinh. Dung cho MOI click
         co the chuyen canh (vd vao 1 page moi). Tra ScreenReader man moi.
 
         Vi sao can: moi click co the trigger LOADING screen (chuyen canh). Neu doc
         ngay se doc nham watermark. Ta click -> ngu ngan -> wait_stable (bo qua
-        loading ca 2 loai) -> tra man dich on dinh."""
-        self.c.bgclick(x, y)
+        loading ca 2 loai) -> tra man dich on dinh.
+
+        polite=True: dung politeclick (chuot that + tra ve cho cu). Mot so nut
+        (footer HOME: Friends/Shop/Guild...) NeoX KHONG nhan SendMessage -> can
+        chuot that. politeclick tin cay nhat cho cac nut nay (xem LEARNINGS muc 7)."""
+        if polite and hasattr(self.c, "politeclick"):
+            self.c.politeclick(x, y)
+        else:
+            self.c.bgclick(x, y)
         time.sleep(wait)
         return self.wait_stable(min_buttons=settle_buttons)[1]
 

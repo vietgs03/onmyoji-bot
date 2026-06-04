@@ -44,31 +44,24 @@
      ]
     },
     "shikigami": {
-     "text": [
-      "Shikigami"
-     ],
      "center": [
-      997,
-      586
-     ]
+      1011,
+      600
+     ],
+     "polite": true
     },
     "onmyodo": {
-     "text": [
-      "Onmyodo"
-     ],
      "center": [
       881,
       573
      ]
     },
     "friends": {
-     "text": [
-      "Friends"
-     ],
      "center": [
-      785,
-      582
-     ]
+      813,
+      600
+     ],
+     "polite": true
     },
     "event": {
      "text": [
@@ -80,22 +73,18 @@
      ]
     },
     "shop": {
-     "text": [
-      "Shop"
-     ],
      "center": [
-      624,
-      625
-     ]
+      613,
+      600
+     ],
+     "polite": true
     },
     "guild": {
-     "text": [
-      "Guild"
-     ],
      "center": [
-      525,
-      625
-     ]
+      520,
+      600
+     ],
+     "polite": true
     },
     "settings": {
      "text": [],
@@ -311,9 +300,11 @@
    "category": "social",
    "verified": true,
    "identify": [
-    "Add Friend",
-    "Guild Invite",
-    "Recommended"
+    "Co-op",
+    "Friend Pts",
+    "Send",
+    "Online",
+    "Latest"
    ],
    "parent": "HOME",
    "exits": {

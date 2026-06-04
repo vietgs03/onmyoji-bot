@@ -79,12 +79,14 @@ NODES: dict[str, dict] = {
             "exploration": {"text": ["Explore"],   "center": [608, 192]},
             "town":        {"text": ["Town"],       "center": [162, 602]},
             "summon":      {"text": ["Summon"],     "center": [991, 194]},
-            "shikigami":   {"text": ["Shikigami"],  "center": [997, 586]},
-            "onmyodo":     {"text": ["Onmyodo"],    "center": [881, 573]},
-            "friends":     {"text": ["Friends"],    "center": [785, 582]},
+            # footer icons (y~600-630): NeoX KHONG nhan SendMessage o footer -> polite.
+            # tap_text co the click trung label o cho khac -> bo text, dung center+polite.
+            "shikigami":   {"center": [1011, 600], "polite": True},
+            "onmyodo":     {"center": [881, 573]},
+            "friends":     {"center": [813, 600],  "polite": True},
             "event":       {"text": ["Event"],      "center": [1078, 195]},
-            "shop":        {"text": ["Shop"],       "center": [624, 625]},
-            "guild":       {"text": ["Guild"],      "center": [525, 625]},
+            "shop":        {"center": [613, 600],  "polite": True},
+            "guild":       {"center": [520, 600],  "polite": True},
             # gear goc tren trai -> Settings; nut goc duoi -> Cosmetics (toa do tu world.json).
             "settings":    {"text": [],             "center": [59, 88]},
             "cosmetics":   {"text": [],             "center": [309, 628]},
@@ -139,7 +141,10 @@ NODES: dict[str, dict] = {
     # friends: tab ban be (Add Friend / Guild Invite / Recommended). Mentor la
     # tab ke ben (cung co Apprentices) -> phan biet bang nut dac trung friends.
     "friends":   {"kind": "flat", "category": "social", "verified": True,
-                  "identify": ["Add Friend", "Guild Invite", "Recommended"],
+                  # man Friends that: tab Friends/Latest, nut Add/Co-op/Page/Send,
+                  # 'Friend Pts', 'Online', 'Group'. Tranh dung 'Friends' don (HOME
+                  # footer cung co) -> dung to hop Co-op+Send+Online dac trung.
+                  "identify": ["Co-op", "Friend Pts", "Send", "Online", "Latest"],
                   "parent": "HOME",
                   # Mentor (Mentorship) mo tu trong man Friends -> forward edge.
                   "exits": {"mentor": {"text": ["Mentorship"], "center": [928, 314]}}},
@@ -462,9 +467,14 @@ class ScreenGraph:
     # ------------------------------------------------------------------
     # THAO TAC: dung lop chung (controls/ocr/wait). 1 hop = 1 lan doc lai.
     # ------------------------------------------------------------------
-    def _go_edge(self, src: str, dst: str) -> None:
+    def _go_edge(self, src: str, dst: str, retry: int = 0) -> None:
         """Di 1 hop src->dst. LUI -> dismiss; TIEN -> click theo OCR (fallback xy).
         KHONG kiem tra ket qua o day - goto() doc where() 1 lan/hop de re-plan.
+
+        retry: so lan canh nay da FAIL lien tiep. retry>0 -> DOI cach click:
+          - lan dau (retry=0): uu tien OCR text (ben voi event), fallback center.
+          - retry>=1: OCR co the click trung text o cho khac (vd 'Friends' trong
+            world-chat) -> uu tien CENTER (toa do footer co dinh) truoc.
         """
         if self._is_back_edge(src, dst):
             self.a.back()                                   # lui = dismiss (controls)
@@ -472,15 +482,22 @@ class ScreenGraph:
         btn = self._exits(src).get(dst)
         if not btn:
             return
-        # uu tien OCR text (ben voi event); chi click 1 nut tim thay dau tien.
+        center = btn.get("center")
+        polite = btn.get("polite", False)               # nut footer NeoX can chuot that
+        # retry>=1 & co toa do center -> click center truoc (OCR text co the lac).
+        if retry >= 1 and center:
+            self.a.click(*center, polite=polite)
+            return
+        # binh thuong: uu tien OCR text, fallback toa do center.
         for kw in btn.get("text", []):
             ok, _ = self.a.tap_text(kw)
             if ok:
                 return
-        if btn.get("center"):                               # fallback toa do
-            self.a.click(*btn["center"])
+        if center:                                          # fallback toa do
+            self.a.click(*center, polite=polite)
 
-    def goto(self, target: str, max_hops: int = 12, verbose: bool = True) -> bool:
+    def goto(self, target: str, max_hops: int = 12, verbose: bool = True,
+             max_stuck: int = 3) -> bool:
         """Di toi `target` tu BAT KY dau. Re-plan moi hop (doc lai vi tri thuc).
         Moi hop: doc man 1 LAN -> (1) co overlay/popup? resolve roi tiep;
         (2) lac/nghi ngo? escape; (3) tinh Dijkstra, di 1 hop.
@@ -488,11 +505,18 @@ class ScreenGraph:
         HOC ONLINE: moi hop ta biet vi tri THUC sau hop truoc -> cham diem canh vua
         di (toi dung dst = success, khong = fail) + latency. Stats cap nhat -> lan
         sau Dijkstra ne canh hay fail / tuong chan. Tra True neu toi noi.
+
+        PHAT HIEN KET (chong lap 12 lan vo ich): neu di 1 canh ma vi tri KHONG doi
+        (cur == src cu) -> dem stuck. Lan stuck dau doi cach click (center). Sau
+        `max_stuck` lan lien tiep tren CUNG canh -> tang cost manh + escape (re-plan
+        duong khac). Het cach -> bo som thay vi lap het max_hops.
         """
         if target not in self.nodes:
             raise ValueError(f"node khong ton tai: {target}")
 
         pending = None      # (src, dst, t0) canh vua di, cho cham diem o hop sau
+        stuck_edge = None   # (src, dst) canh dang ket
+        stuck_n = 0         # so lan ket lien tiep tren canh do
 
         for hop in range(max_hops):
             r = self.a.read() if self.a else None      # doc 1 lan, dung lai cho ca 2 check
@@ -511,8 +535,18 @@ class ScreenGraph:
                 src, dst, t0 = pending
                 ok = (cur == dst)
                 self.stats.record(src, dst, ok, latency=time.time() - t0)
-                if verbose and not ok:
-                    print(f"[goto]   canh {src}->{dst} FAIL (toi '{cur}') -> tang cost")
+                # PHAT HIEN KET: di canh src->dst nhung van o src (khong nhuc nhich).
+                if not ok and cur == src:
+                    if stuck_edge == (src, dst):
+                        stuck_n += 1
+                    else:
+                        stuck_edge, stuck_n = (src, dst), 1
+                    if verbose:
+                        print(f"[goto]   canh {src}->{dst} KET lan {stuck_n} (van o '{cur}')")
+                else:
+                    stuck_edge, stuck_n = None, 0      # co tien trien -> reset
+                    if verbose and not ok:
+                        print(f"[goto]   canh {src}->{dst} lech (toi '{cur}') -> tang cost")
                 pending = None
 
             if verbose:
@@ -535,8 +569,21 @@ class ScreenGraph:
                 self.escape()
                 continue
 
-            pending = (p[0], p[1], time.time())        # nho de cham diem hop sau
-            self._go_edge(p[0], p[1])
+            nxt = p[1]
+            # canh sap di dang KET qua nhieu lan -> phat cost nang + escape re-plan.
+            if stuck_edge == (cur, nxt) and stuck_n >= max_stuck:
+                if verbose:
+                    print(f"[goto]   canh {cur}->{nxt} ket {stuck_n} lan -> phat cost + escape")
+                for _ in range(5):                     # phat manh: ghi them fail
+                    self.stats.record(cur, nxt, False, latency=0.0)
+                stuck_edge, stuck_n = None, 0
+                self.escape()
+                continue
+
+            pending = (p[0], nxt, time.time())         # nho de cham diem hop sau
+            # neu canh nay dang ket -> doi cach click (retry>=1 dung center).
+            retry = stuck_n if stuck_edge == (cur, nxt) else 0
+            self._go_edge(p[0], nxt, retry=retry)
 
         # het hop: cham diem canh cuoi + ket luan
         final = self.where()[0]

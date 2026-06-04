@@ -55,7 +55,41 @@ def _crop(img, roi):
     return img[y0:y1, x0:x1], x0, y0
 
 
+# ----------------------------------------------------------------------
+# CACHE OCR: cung 1 anh thuong duoc OCR NHIEU lan trong 1 hop (wait_stable,
+# where, back deu tao ScreenReader tu cung shot). OCR full ~5s -> cache theo
+# hash noi dung anh giam manh thoi gian. LRU nho (16 anh gan nhat).
+# ----------------------------------------------------------------------
+_OCR_CACHE: "dict[tuple, list]" = {}
+_OCR_CACHE_ORDER: list = []
+_OCR_CACHE_MAX = 16
+
+
+def _img_key(img, roi, min_conf):
+    """Khoa cache = (hash noi dung anh, roi, min_conf). Hash nhanh: ha mau anh
+    32x32 -> bytes (đu phan biet man khac nhau, re hon md5 toan anh)."""
+    small = cv2.resize(img, (32, 32), interpolation=cv2.INTER_AREA)
+    return (small.tobytes(), roi, min_conf)
+
+
 def ocr_words(img, roi=None, min_conf=40):
+    """Tra list (text, (x,y,w,h) trong toa do GOC anh, conf 0..100). CO CACHE."""
+    if img is None:
+        return []
+    key = _img_key(img, tuple(roi) if roi else None, min_conf)
+    cached = _OCR_CACHE.get(key)
+    if cached is not None:
+        return cached
+    out = _ocr_words_raw(img, roi, min_conf)
+    _OCR_CACHE[key] = out
+    _OCR_CACHE_ORDER.append(key)
+    if len(_OCR_CACHE_ORDER) > _OCR_CACHE_MAX:
+        old = _OCR_CACHE_ORDER.pop(0)
+        _OCR_CACHE.pop(old, None)
+    return out
+
+
+def _ocr_words_raw(img, roi=None, min_conf=40):
     """Tra list (text, (x,y,w,h) trong toa do GOC anh, conf 0..100)."""
     if img is None:
         return []
