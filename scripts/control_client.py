@@ -10,7 +10,7 @@ Dung:
     ctl.bgclick(x, y)
     ctl.close()
 """
-import subprocess, os, time, shutil
+import subprocess, os, time, shutil, select
 import cv2
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
@@ -37,10 +37,22 @@ class Controller:
             raise RuntimeError(f"server khong san sang: {line!r}")
 
     def _readline(self, timeout=15):
-        # readline blocking; bufsize=1 line-buffered nen on
-        self.proc.stdout.flush() if self.proc.stdout else None
-        line = self.proc.stdout.readline()
-        return line.strip() if line else None
+        """Doc 1 dong tu server CO TIMEOUT thuc (select tren fd).
+        Tranh treo vo han khi server PowerShell busy/chet (vd ket popup Summon,
+        contention nhieu process). Tra None khi timeout -> caller xu ly nhe nhang."""
+        if self.proc.stdout is None:
+            return None
+        fd = self.proc.stdout.fileno()
+        end = time.time() + timeout
+        while True:
+            remain = end - time.time()
+            if remain <= 0:
+                return None
+            r, _, _ = select.select([fd], [], [], remain)
+            if not r:
+                return None
+            line = self.proc.stdout.readline()
+            return line.strip() if line else None
 
     def _cmd(self, line):
         self.proc.stdin.write(line + "\n")

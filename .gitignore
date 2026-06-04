@@ -22,3 +22,6 @@ knowledge/_ocr_tokens/
 research/hypothesis/
 research/nav_cases/
 research/daily_realm/
+logs/explore_*
+logs/explore_shots/
+logs/bp_*.png
