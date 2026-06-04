@@ -67,6 +67,13 @@ class Controller:
         ca PostMessage lan SendMessage bi bo qua (vd dialog Claim All Mailbox)."""
         return self._cmd(f"fgclick {int(x)} {int(y)}")
 
+    def politeclick(self, x, y):
+        """Click 'lich su': focus game + di chuot toi + bam + TRA chuot ve cho user
+        ngay. Thuc nghiem cho thay TIN CAY HON fgclick tren cac modal nhan thuong
+        (vd 'Claim' Exclusive Gifts) ma fgclick doi khi khong an. Nen dung mac dinh
+        cho cac nut nhan thuong / dong popup."""
+        return self._cmd(f"politeclick {int(x)} {int(y)}")
+
     def bgdrag(self, x0, y0, x1, y1, steps=12):
         """Keo/scroll KHONG chiem chuot (SendMessage down->moves->up)."""
         return self._cmd(f"senddrag {int(x0)} {int(y0)} {int(x1)} {int(y1)} {int(steps)}")

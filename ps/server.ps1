@@ -148,9 +148,11 @@ function Do-PoliteClick($hwnd, $x, $y) {
   # DirectX bo qua PostMessage) nhung tra focus/chuot ngay sau.
   $orig = New-Object Native+POINT
   [Native]::GetCursorPos([ref]$orig) | Out-Null      # nho cho chuot user
-  $r = New-Object Native+RECT
-  [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
-  $sx = $r.Left + $x; $sy = $r.Top + $y
+  # FIX: ClientToScreen (toa do anh = client area) thay GetWindowRect (gom title bar)
+  $pt = New-Object Native+POINT
+  $pt.X = [int]$x; $pt.Y = [int]$y
+  [Native]::ClientToScreen($hwnd, [ref]$pt) | Out-Null
+  $sx = $pt.X; $sy = $pt.Y
   [Native]::SetForegroundWindow($hwnd) | Out-Null
   Start-Sleep -Milliseconds 30
   [Native]::SetCursorPos($sx, $sy) | Out-Null

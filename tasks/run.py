@@ -496,13 +496,14 @@ def claim_dolls(agent: Agent, dry: bool = True):
 
     def claim_popup():
         """Neu dang co popup nhan thuong (Claim/Claim Gifts/Receive) -> bam nhan.
-        Tra True neu da bam. Dung fgclick (nut nhan thuong hay la modal cung dau)."""
+        Tra True neu da bam. Dung politeclick (tin cay hon fgclick tren modal nhan
+        thuong nhu Exclusive Gifts)."""
         r = agent.read()
         for w in ("Claim Gifts", "Claim All", "Claim", "Receive", "Collect"):
             if r.has(w):
                 hit = r.find(w.split()[0])
                 if hit:
-                    agent.c.fgclick(hit[1], hit[2])
+                    agent.c.politeclick(hit[1], hit[2])
                     _t.sleep(2.0)
                     agent.c._cmd("sendclick 576 620")  # tap-to-continue neu co
                     _t.sleep(1.0)
