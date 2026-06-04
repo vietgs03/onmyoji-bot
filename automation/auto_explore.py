@@ -207,6 +207,15 @@ def candidates(reader, img):
 
 
 # ======================================================================
+# CANDIDATE SIGNATURE - khoa ben vung qua nhieu run (label + vung toa do).
+# idx doi giua cac run (OCR khac thu tu) nen KHONG dung idx lam khoa 'da thu'.
+# ======================================================================
+def cand_sig(clabel, x, y):
+    """Chu ky 1 ung vien: nhan + o luoi 40px. Ben vung qua run/OCR nhieu nhe."""
+    return f"{clabel}@{round(x/40)},{round(y/40)}"
+
+
+# ======================================================================
 # 3) EXPLORER - DFS vet can co backtrack
 # ======================================================================
 class ExploreNode:
@@ -217,7 +226,7 @@ class ExploreNode:
         self.fp = fp
         self.label = label
         self.cands = cands            # [(x,y,label,source)]
-        self.tried = {}               # idx -> result ('noop'|dest_key|'lost')
+        self.tried = {}               # cand_sig -> result ('noop'|dest_key)
         self.edges = {}               # dest_key -> (cand_label, x, y)
         self.shot = shot
 
@@ -233,6 +242,70 @@ class Explorer:
         self.n_actions = 0
         self.cur_key = None        # node man hinh dang dung (cap nhat moi observe)
         self.deadline = None       # wall-clock budget (set trong run)
+        self.global_path = os.path.join(LOGDIR, "explore_graph_global.json")
+        self._load_global()        # nap ky uc tich luy cac run truoc
+
+    def _load_global(self):
+        """Nap graph tich luy (explore_graph_global.json) vao self.nodes.
+        Moi node co fp khoi phuc tu 'sig'/'dhash' -> observe() match duoc man
+        da biet & tried duoc tai dung (KHONG thu lai cand da thu run truoc).
+        Node nap ve khong co cands thuc (se duoc bo sung khi observe lai man do)."""
+        if not os.path.exists(self.global_path):
+            self.glob_loaded = 0
+            return
+        try:
+            g = json.load(open(self.global_path))
+        except Exception:
+            self.glob_loaded = 0
+            return
+        n = 0
+        for k, j in g.get("nodes", {}).items():
+            # dhash la chuoi HEX (xem ham dhash/_ham), KHONG ep int
+            fp = (set(j.get("sig", [])), j.get("dhash", "0" * 16))
+            nd = ExploreNode(k, fp, j.get("label", "?"), [], j.get("shot", ""))
+            nd.edges = {dst: (e["via"], e["x"], e["y"])
+                        for dst, e in j.get("edges", {}).items()}
+            nd.tried = dict(j.get("tried", {}))   # cand_sig -> result
+            self.nodes[k] = nd
+            n += 1
+        self.glob_loaded = n
+        if self.verbose:
+            print(f"nap global graph: {n} node tich luy", flush=True)
+
+    def merge_global(self):
+        """Hop nhat ky uc run nay vao explore_graph_global.json.
+        self.nodes da chua CA global cu (nap luc init) + node moi run nay
+        -> chi can serialize toan bo. Hop nhat 'cands' moi quan sat duoc de
+        biet frontier (cand chua thu)."""
+        g = {"nodes": {}, "schema": 1}
+        for k, nd in self.nodes.items():
+            j = self._node_json(nd)
+            # luu danh sach cand (sig) da QUAN SAT duoc -> tinh frontier sau nay
+            if nd.cands:
+                j["cands"] = [cand_sig(c[2], c[0], c[1]) for c in nd.cands
+                              if self._worthy(c[2], c[3])]
+            g["nodes"][k] = j
+        tmp = self.global_path + ".tmp"
+        json.dump(g, open(tmp, "w"), indent=1, ensure_ascii=False)
+        os.replace(tmp, self.global_path)
+        # thong ke frontier
+        front = self._frontier(g)
+        if self.verbose:
+            print(f"merge global: {len(g['nodes'])} node tong, "
+                  f"{len(front)} node con frontier (cand chua thu)", flush=True)
+        self.log(ev="merge", n_nodes=len(g["nodes"]), n_frontier=len(front))
+
+    @staticmethod
+    def _frontier(g):
+        """Node con candidate da quan sat nhung CHUA thu (con duong de di)."""
+        out = []
+        for k, j in g["nodes"].items():
+            tried = set(j.get("tried", {}).keys())
+            cands = set(j.get("cands", []))
+            if cands - tried:
+                out.append((k, j.get("label", "?"), len(cands - tried)))
+        out.sort(key=lambda x: -x[2])
+        return out
 
     def _budget_done(self, max_actions):
         """True khi het ngan sach: so action HOAC qua thoi gian (watchdog).
@@ -262,6 +335,10 @@ class Explorer:
         for k, nd in self.nodes.items():
             if same_screen(fp, nd.fp):
                 self.cur_key = nd.key
+                # node nap tu global co the chua co cands thuc (cands=[]) ->
+                # bo sung tu anh hien tai de explore() co gi de thu (frontier).
+                if not nd.cands:
+                    nd.cands = candidates(r, img)
                 return nd, r, img, False
         key = sig_key(fp)
         # tranh dung key (hiem) -> them hau to
@@ -384,13 +461,15 @@ class Explorer:
     def explore(self, node, depth, max_depth, max_actions):
         if self._budget_done(max_actions) or depth > max_depth:
             return
-        # thu tung ung vien CHUA thu (da loc rac + sap uu tien)
+        # thu tung ung vien CHUA thu (da loc rac + sap uu tien). Khoa = cand_sig
+        # (ben vung qua run: node.tried co the da nap tu global graph).
         for idx, x, y, clabel, src in self._order(node.cands):
             if self._budget_done(max_actions):
                 return
-            if idx in node.tried:
+            csig = cand_sig(clabel, x, y)
+            if csig in node.tried:
                 continue
-            node.tried[idx] = "pending"
+            node.tried[csig] = "pending"
             self.n_actions += 1
             # ICON header/footer hay can politeclick; text dung sendclick truoc
             before = node.fp
@@ -398,12 +477,12 @@ class Explorer:
             time.sleep(1.6)
             after_nd, r2, img2, is_new = self.observe()
             if same_screen(before, after_nd.fp):
-                node.tried[idx] = "noop"
+                node.tried[csig] = "noop"
                 self.log(ev="try", frm=node.key, idx=idx, label=clabel,
                          src=src, xy=[x, y], result="noop")
                 continue
             # man da doi -> ghi edge
-            node.tried[idx] = after_nd.key
+            node.tried[csig] = after_nd.key
             node.edges[after_nd.key] = (clabel, x, y)
             self.log(ev="edge", frm=node.key, to=after_nd.key,
                      via=clabel, src=src, xy=[x, y], to_label=after_nd.label,
@@ -438,31 +517,56 @@ class Explorer:
         except Exception:
             pass
 
-    def run(self, max_actions=50, max_depth=3, start_label=None, budget_sec=300):
+    def run(self, max_actions=50, max_depth=3, start_label=None, budget_sec=300,
+            do_merge=True):
         self.deadline = time.time() + budget_sec
         nd, r, img, _ = self.observe(hint_label=start_label)
-        self.log(ev="start", root=nd.key, label=nd.label, budget_sec=budget_sec)
+        self.log(ev="start", root=nd.key, label=nd.label, budget_sec=budget_sec,
+                 glob_loaded=getattr(self, "glob_loaded", 0))
         self.explore(nd, 0, max_depth, max_actions)
         self.save_graph()
+        if do_merge:
+            self.merge_global()             # hop nhat vao ky uc tich luy
         self.log(ev="done", n_nodes=len(self.nodes), n_actions=self.n_actions,
                  timed_out=time.time() > self.deadline)
 
     def save_graph(self):
+        # luu graph RUN nay (snapshot) - de debug 1 phien
         g = {"nodes": {}, "run": self.run_id}
         for k, nd in self.nodes.items():
-            g["nodes"][k] = {
-                "label": nd.label,
-                "shot": os.path.basename(nd.shot),
-                "n_cands": len(nd.cands),
-                "edges": {dst: {"via": v[0], "x": v[1], "y": v[2]}
-                          for dst, v in nd.edges.items()},
-                "noop": [nd.cands[i][2] for i, res in nd.tried.items()
-                         if res == "noop" and i < len(nd.cands)],
-            }
+            g["nodes"][k] = self._node_json(nd)
         path = os.path.join(LOGDIR, f"explore_graph_{self.run_id}.json")
         json.dump(g, open(path, "w"), indent=1, ensure_ascii=False)
         if self.verbose:
             print(f"luu graph {path}: {len(self.nodes)} node", flush=True)
+
+    @staticmethod
+    def _node_json(nd):
+        """Serialize 1 node (gom sig de nap lai fingerprint + tried/edges).
+        sig = list token chu (text_signature) -> khoi phuc same_screen qua run."""
+        return {
+            "label": nd.label,
+            "shot": os.path.basename(nd.shot),
+            "sig": sorted(nd.fp[0]),       # text_signature (set token chu)
+            "dhash": nd.fp[1],
+            "n_cands": len(nd.cands),
+            "edges": {dst: {"via": v[0], "x": v[1], "y": v[2]}
+                      for dst, v in nd.edges.items()},
+            "tried": {cs: (res if isinstance(res, str) else str(res))
+                      for cs, res in nd.tried.items() if res != "pending"},
+        }
+
+
+def _print_frontier():
+    """In frontier tu explore_graph_global.json (KHONG can game)."""
+    p = os.path.join(LOGDIR, "explore_graph_global.json")
+    if not os.path.exists(p):
+        print("chua co global graph"); return
+    g = json.load(open(p))
+    front = Explorer._frontier(g)
+    print(f"GLOBAL: {len(g['nodes'])} node, {len(front)} node con frontier\n")
+    for k, lbl, n in front[:30]:
+        print(f"  [{n:2} cand chua thu] {lbl[:46]}")
 
 
 def main():
@@ -472,14 +576,22 @@ def main():
     ap.add_argument("--max-actions", type=int, default=50)
     ap.add_argument("--max-depth", type=int, default=3)
     ap.add_argument("--budget-sec", type=int, default=300)
+    ap.add_argument("--no-merge", action="store_true",
+                    help="khong hop nhat vao global graph")
+    ap.add_argument("--show-frontier", action="store_true",
+                    help="chi in frontier global roi thoat (khong can game)")
     args = ap.parse_args()
+    if args.show_frontier:
+        _print_frontier()
+        return
     from agent import Agent
     a = Agent()
     try:
         Explorer(a).run(max_actions=args.max_actions,
                         max_depth=args.max_depth,
                         start_label=args.start_label,
-                        budget_sec=args.budget_sec)
+                        budget_sec=args.budget_sec,
+                        do_merge=not args.no_merge)
     finally:
         os._exit(0)
 
