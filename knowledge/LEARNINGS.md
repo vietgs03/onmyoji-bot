@@ -136,3 +136,26 @@ qua OCR text khi den hub cha).
 
 Quan trong: them man = them 1 entry DATA trong NODES (khong sua thuat toan). Node
 moi verified=False -> khi bot toi noi & nhan dien dung thi nang len True (hoc dan).
+
+## 11. Toi uu THUC THI nav (sau action dai do hieu qua) - 2026-06-04
+Chay nav_tour.py (action dai giong scheduler OAS) phat hien 3 diem yeu THUC THI
+(graph dung nhung cham/fail). Da fix het, do duoc:
+
+1. **OCR la nut that** (~5-7s/lan, goi nhieu lan/hop). FIX: cache OCR theo hash
+   noi dung anh (ml/ocr.py `_OCR_CACHE` LRU 16). Cung anh OCR lai: 7.68s -> 0.012s.
+2. **Footer HOME (Friends/Shop/Guild/Shikigami) KHONG nhan SendMessage** -> can
+   politeclick (chuot that). FIX: Agent.click(polite=True) + danh dau exit footer
+   `"polite": True`. Bo `text` o footer (tap_text click trung label cho khac).
+3. **goto lap 12 hop vo ich khi ket** (click khong doi man). FIX: phat hien stuck
+   (di canh ma cur==src cu) -> lan dau doi cach click (center), >=3 lan -> phat cost
+   nang + escape re-plan. Bo som thay vi 170s.
+4. **Bug nhan dien**: man Shikigami THAT co tu 'Showcase/Promote/Liking' trung
+   overlay char_showcase -> bi dismiss oan -> loop. FIX: char_showcase avoid
+   'Preset'/'Shikigami'. (Tuong tu friends: identify cu sai, doi sang Co-op/Send/Online.)
+
+KET QUA tour daily 6 chang (truoc/sau):
+  truoc fix: 1/3 toi dich, ~138s/chang, friends treo 165s.
+  sau fix:   6/6 toi dich. exploration 42s, town 34s, friends 16s, shop 13s,
+             summon 21s, shikigami 21s. TB ~24s/chang.
+=> Bai hoc: graph/cay menu dung la chua du - tang THUC THI (click type dung, cache
+OCR, thoat ket som, identify khong trung overlay) moi cho bot chay task dai on dinh.

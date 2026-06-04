@@ -275,8 +275,13 @@ OVERLAYS: dict[str, dict] = {
     "loading":   {"identify": ["Tap to"], "detector": "loading",
                   "kind": "transient", "resolve": "wait"},
     "animation": {"identify": ["Skip"],   "kind": "transient", "resolve": "skip"},
-    # popup che man -> dismiss ve man duoi
+    # popup che man -> dismiss ve man duoi.
+    # char_showcase = popup khoe nhan vat (Showcase/Promote/Liking). NHUNG man
+    # Shikigami THAT cung co cac tu nay (la noi dung chinh, KHONG phai popup) ->
+    # avoid 'Preset'/'Shikigami' (nhan dac trung man Shikigami) de khong nham &
+    # dismiss oan -> tranh loop thoat man Shikigami (bug tour daily 2026-06-04).
     "char_showcase":  {"identify": ["Showcase", "Promote", "Liking"],
+                       "avoid": ["Preset", "Shikigami"],
                        "kind": "popup", "resolve": "dismiss"},
     "group_buying":   {"identify": ["Group Buying"], "kind": "popup", "resolve": "dismiss"},
     "select_champion":{"identify": ["Offensive", "Support", "Champion"],
