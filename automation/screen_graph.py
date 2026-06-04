@@ -297,7 +297,7 @@ OVERLAYS: dict[str, dict] = {
     "bonus_enable":   {"identify": ["Enable"], "kind": "popup",
                        "resolve": "click@660,410"},
     # Popup event 'Parade Privilege' / 'Soul Zone Privileges' -> X dong @ (975,135).
-    "parade_privilege":{"identify": ["Privilege", "Privileges"],
+    "parade_privilege":{"identify": ["Privilege", "Privileges"], "min_hits": 1,
                        "kind": "popup", "resolve": "click@975,135"},
 }
 
@@ -425,8 +425,21 @@ class ScreenGraph:
                 if det == "loading" and self.a.is_loading_screen(r.img):
                     return name, 1.0
         # 2) OCR keyword - chi nhan khi conf >= min_conf (du keyword khop).
+        # YEU CAU >=2 token khop neu overlay co >=2 identify (tranh false-positive
+        # 1-token-fuzzy: 'group_buying'['Group','Buying'] khop oan rac OCR o HOME ->
+        # loop khong vao duoc footer). Overlay 1-token thi giu nguong conf.
         name, conf = self._match(r, OVERLAYS)
-        if name is not None and conf < min_conf:
+        if name is None:
+            return None, 0.0
+        ident = OVERLAYS[name].get("identify", [])
+        hits = round(conf * len(ident))
+        # min_hits: so token toi thieu phai khop. Mac dinh 2 cho overlay >=2 token
+        # (chong 1-token-fuzzy). Override =1 cho overlay co cac token la BIEN THE cung
+        # 1 tu (vd 'Privilege'/'Privileges') ma OCR chi doc duoc 1 dang.
+        min_hits = OVERLAYS[name].get("min_hits", 2 if len(ident) >= 2 else 1)
+        if hits < min_hits:
+            return None, 0.0
+        if conf < min_conf:
             return None, 0.0
         return name, conf
 
