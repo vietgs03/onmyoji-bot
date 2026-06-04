@@ -117,12 +117,13 @@ _EXPLORE_SOUL_XY = (175, 620)        # icon 'Soul' footer trong man Explore
 def _ensure_soul_screen(agent, max_try=4):
     """Tu BAT KY dau -> man Soul (4 zone).
 
-    UU TIEN: nav.goto('soul_zones') - HE THONG HOC ONLINE (Dijkstra cost hoc tu
-    thuc te, tu record success/fail moi canh vao edge_stats, tu resolve overlay
-    nhu dialog Bonus/Parade). Moi lan chay bot CANG NHO duong di tot.
-    FALLBACK: neu goto that bai (graph chua map du) -> HOME->Explore->Soul hardcode.
-    Verify cuoi cung bang OCR ('Soul' header + 'Challenge')."""
+    DUNG StateSolver (giai man hinh huong-dich, hoc theo chu ky trang thai):
+      1) solve(['Explore','Summon']) -> ve HOME du dang ket o idle/courtyard/popup
+         (solver tu hoc back/wake/pan thay vi hardcode). Day la "tu nho".
+      2) tu HOME: tap 'Explore' (OCR tim, khong hardcode toa do) -> man Soul.
+    Verify bang OCR ('Soul' header + 'Challenge'). Fallback nav.goto neu can."""
     from ocr import ocr_words
+    from state_solver import StateSolver
 
     def on_soul(img):
         # Dau hieu CHAC CHAN cua man Soul (tranh false-positive o HOME):
@@ -132,22 +133,28 @@ def _ensure_soul_screen(agent, max_try=4):
         body = " ".join(str(t).lower() for t, *_ in ocr_words(img, roi=(0, 40, 1152, 640), min_conf=35))
         return ("soul" in head) and ("challenge" in body)
 
+    solver = getattr(agent, "_solver", None) or StateSolver(agent)
+    agent._solver = solver
+
     for _ in range(max_try):
         img = agent.shot()
         if on_soul(img):
             return True
-        # (1) THU HE THONG HOC: goto soul_zones (re-plan moi hop, record canh,
-        #     tu resolve overlay). Day la "tu nho" - khong if/else hardcode.
-        try:
-            if agent.nav.goto("soul_zones", verbose=False) and on_soul(agent.shot()):
-                return True
-        except Exception as e:
-            print(f"  (nav.goto soul_zones loi: {e} -> fallback hardcode)")
-        # (2) FALLBACK hardcode: ve HOME -> Explore -> Soul.
-        agent.nav.goto("HOME")
-        time.sleep(1.0)
-        agent.click(*_HOME_EXPLORE_XY); time.sleep(3.5)   # -> Explore (co the loading)
-        agent.click(*_EXPLORE_SOUL_XY); time.sleep(3.5)   # -> Soul
+        # (1) GIAI ve HOME (solver tu thoat idle/courtyard/popup, hoc theo trang thai).
+        if not solver.solve(["Explore", "Summon"], need_all=True,
+                            max_steps=12, verbose=False):
+            # solver bo tay -> thu goto HOME (graph) lam moc cuoi.
+            agent.nav.goto("HOME")
+        time.sleep(0.8)
+        # (2) tu HOME: tap dung chu 'Explore' (khong hardcode toa do) -> Soul.
+        ok, _ = agent.tap_text("Explore", wait=3.5)
+        if not ok:
+            agent.click(*_HOME_EXPLORE_XY)        # fallback toa do cu
+            time.sleep(3.5)
+        if on_soul(agent.shot()):
+            return True
+        # neu Explore mo ra danh sach (chua vao Soul) -> tap icon Soul footer.
+        agent.tap_text("Soul", wait=3.5)
         if on_soul(agent.shot()):
             return True
     return False
@@ -360,10 +367,99 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
     return True
 
 
+# ---- claim_home: nhan het thuong tren HOME (mail, daily check-in, task xong) ----
+# Tu duy: man HOME = ma tran trang thai; DICH = "het badge do co the claim".
+# Khong hardcode toa do tung muc -> detect badge do (perception.detect_red_badges)
+# roi GIAI tung cai: tap badge -> popup claim? -> tap nut Claim/Receive/OK -> back.
+# HOC: nho (theo chu ky trang thai) badge nao cho claim that, badge nao vo ich.
+_CLAIM_WORDS = ("Claim", "Receive", "Confirm", "Collect", "Get", "OK", "Sign", "Tap to")
+
+
+def claim_home(agent: Agent, rounds: int = 3, dry: bool = True):
+    """Quet HOME tim badge do va claim het (mail / diem danh / task xong).
+
+    rounds: so vong quet lai (badge moi co the hien sau khi claim cai khac).
+    dry=True: chi BAO CAO badge + thu mo, KHONG bam nut Claim (an toan xem truoc).
+    dry=False (--live): bam Claim that.
+    """
+    import time as _t
+    from datetime import datetime as _dt
+    import json as _json
+    sys.path.insert(0, os.path.join(ROOT, "scripts"))
+    from state_solver import StateSolver
+    from perception import detect_red_badges
+    from screen_reader import ocr_words
+
+    LOG = os.path.join(ROOT, "logs", "claim_home.jsonl")
+    os.makedirs(os.path.dirname(LOG), exist_ok=True)
+    run_id = _dt.utcnow().strftime("%Y%m%dT%H%M%S")
+
+    solver = getattr(agent, "_solver", None) or StateSolver(agent)
+    agent._solver = solver
+
+    def at_home():
+        ws = [str(t).lower() for t, *_ in ocr_words(agent.shot(), min_conf=40)]
+        return any("explore" in w for w in ws) and any("summon" in w for w in ws)
+
+    def back_home():
+        if not at_home():
+            solver.solve(["Explore", "Summon"], need_all=True, max_steps=10, verbose=False)
+
+    print(f"=== claim_home (dry={dry}) - run {run_id} ===")
+    back_home()
+    claimed = 0
+    seen = set()
+    for rnd in range(rounds):
+        img = agent.shot()
+        badges = detect_red_badges(img)
+        # bo badge trung lap gan nhau (gom theo o luoi 30px)
+        uniq = []
+        for cx, cy, ar in badges:
+            key = (cx // 30, cy // 30)
+            if key not in seen:
+                seen.add(key)
+                uniq.append((cx, cy, ar))
+        print(f"  vong {rnd+1}: {len(badges)} badge ({len(uniq)} moi)")
+        for cx, cy, ar in uniq:
+            # badge thuong o GOC TREN icon -> diem tap = hoi xuong duoi tam icon
+            tx, ty = cx, min(cy + 18, 660)
+            if dry:
+                print(f"    [DRY] badge @ ({cx},{cy}) area={ar} -> se tap ({tx},{ty})")
+                continue
+            agent.click(tx, ty, wait=2.0)
+            time.sleep(1.0)
+            # sau khi tap: tim nut claim trong popup
+            r = agent.read()
+            got = False
+            for w in _CLAIM_WORDS:
+                if r.has(w):
+                    ok, _ = agent.tap_text(w, wait=1.5)
+                    if ok:
+                        got = True
+                        claimed += 1
+                        print(f"    + claim '{w}' @ badge ({cx},{cy})")
+                        break
+            # tap-continue cho man qua (nhan vat dac/reward)
+            if got:
+                agent.c.bgclick(576, 620); time.sleep(0.6)
+            # ve HOME truoc khi xu badge tiep (popup co the day man khac)
+            back_home()
+            # ghi log
+            with open(LOG, "a") as f:
+                f.write(_json.dumps({
+                    "run": run_id, "round": rnd + 1, "badge": [cx, cy],
+                    "area": ar, "claimed": got,
+                    "ts": _dt.utcnow().isoformat() + "Z"}) + "\n")
+        back_home()
+    print(f"  hoan tat: claim {claimed} muc. Log: {LOG}")
+    return True
+
+
 TASKS = {
     "daily_signin": daily_signin,
     "farm_realm": farm_realm,
     "farm_soul": farm_soul,
+    "claim_home": claim_home,
 }
 
 

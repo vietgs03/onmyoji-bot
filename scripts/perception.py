@@ -217,3 +217,41 @@ if __name__ == "__main__":
     os.makedirs(os.path.dirname(out), exist_ok=True)
     cv2.imwrite(out, vis)
     print(f"vis -> {out}")
+
+
+def detect_red_badges(img, min_area=25, max_area=900, max_wh=40, ui_only=True):
+    """Tim cac BADGE DO (chấm đỏ thông báo) tren man - dau hieu "co the claim/nhan".
+    Tra list (cx, cy, area) sap xep area giam. Dung HSV 2 dai hue do, S/V cao.
+
+    Badge do la dau hieu PHO QUAT trong game: mail moi, nhiem vu xong, qua chua nhan...
+    -> task claim chi viec tap vao gan badge va xu ly popup hien ra.
+
+    ui_only=True: BO vung trung tam (nhan vat dong + cay sakura + ribbon do) de tranh
+    false-positive. Badge that nam tren ICON ria man (mail goc phai, cot mode phai,
+    avatar/seal goc trai, footer). Vung loai = giua-duoi noi nhan vat dung."""
+    if img is None or img.size == 0:
+        return []
+    hsv = cv2.cvtColor(img, cv2.COLOR_BGR2HSV)
+    m1 = cv2.inRange(hsv, (0, 120, 120), (10, 255, 255))
+    m2 = cv2.inRange(hsv, (170, 120, 120), (180, 255, 255))
+    mask = m1 | m2
+    if ui_only:
+        # zero-hoa vung TRUNG TAM dong (nhan vat/cay/ribbon) - khong phai badge UI.
+        # giu: top bar (y<55 mail/currency), cot phai (x>970), ria trai hep (x<70),
+        #      footer (y>600). Bo phan con lai o giua.
+        h, w = mask.shape
+        keep = np.zeros_like(mask)
+        keep[0:55, :] = 1                  # top bar (mail, currency badge)
+        keep[:, 970:] = 1                  # cot mode ben phai
+        keep[:, :70] = 1                   # ria trai (avatar/seal it dong)
+        keep[600:, :] = 1                  # footer
+        mask = mask * keep
+    n, _, stats, cent = cv2.connectedComponentsWithStats(mask, 8)
+    spots = []
+    for i in range(1, n):
+        x, y, w, h, area = stats[i]
+        if (min_area <= area <= max_area and w <= max_wh and h <= max_wh
+                and 0.4 <= w / max(h, 1) <= 2.5):
+            spots.append((int(cent[i][0]), int(cent[i][1]), int(area)))
+    spots.sort(key=lambda s: -s[2])
+    return spots
