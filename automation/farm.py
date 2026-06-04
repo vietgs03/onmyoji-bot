@@ -46,8 +46,9 @@ STATES = {
                  "Settlement", "Battle Result"],
     # dan doi hinh truoc tran -> bam Ready/Battle de vao danh
     "PREPARE":  ["Ready", "Prepare", "Start Battle", "Auto Battle"],
-    # dang danh -> CHO (it text dang ke; nhan qua 'Auto'/'Speed'/'Surrender')
-    "FIGHTING": ["Surrender", "Speed", "Pause"],
+    # dang danh -> CHO (man co 'Auto'/'Skill'/'Speed'; co timer + thanh HP).
+    # Khong tap luc nay (de battle tu chay, nhat la khi Auto bat).
+    "FIGHTING": ["Surrender", "Speed", "Pause", "Skill", "Victories"],
     # man chon tran/level -> bam vao tran de bat dau
     "SELECT":   ["Challenge", "Battle", "Sweep", "Quick", "Enter"],
 }
@@ -63,8 +64,8 @@ ACTIONS = {
     "PREPARE":  ("tap_text", ["Ready", "Battle", "Start"]),
     "FIGHTING": ("wait", 3.0),                   # cho danh xong
     "SELECT":   ("tap_text", ["Challenge", "Battle", "Enter", "Sweep"]),
-    None:       ("tap_center", None),            # khong ro -> tap giua, doc lai
-}
+    None:       ("wait", 1.5),                    # khong ro = dang danh -> CHO ngan, doc lai
+}                                                 # (KHONG tap center keo bo lo man RESULT)
 
 # ENTRY action rieng tung mode: vai mode (Soul Zones) co man LIST truoc man battle,
 # can chon 1 muc (realm) de mo man co nut Challenge. Khai bao tap_text de tu lam.
@@ -127,6 +128,7 @@ class Farmer:
         battles, loops = 0, 0
         last_state = None
         stuck = 0
+        none_run = 0
         while battles < max_battles and loops < max_loops:
             loops += 1
             r = self.a.read()
@@ -149,9 +151,16 @@ class Farmer:
                     break
             else:
                 stuck = 0
+            # None keo dai = battle chay lau HOAC ket man trung gian -> dem rieng
+            none_run = none_run + 1 if state is None else 0
             last_state = state
 
             kind, arg = ACTIONS.get(state, ACTIONS[None])
+            # None qua lau (>5 vong ~ 13s) co the ket o man la -> tap center pha ket
+            if state is None and none_run > 5:
+                self.a.tap(WIN_W // 2, WIN_H // 2)
+                time.sleep(1.5)
+                continue
             if kind == "stop":
                 self._log(ev="blocked")
                 if verbose:
