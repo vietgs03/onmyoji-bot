@@ -37,17 +37,47 @@ EPS = 0.25           # ti le tham hiem (thu hanh dong moi)
 
 
 # ----------------------------------------------------------------------
-# CHU KY TRANG THAI: dhash (bo cuc) + tap OCR token noi bat -> gom man tuong tu.
+# CHU KY TRANG THAI: CHI cac nhan UI co dinh (bo dhash + token nhieu) -> on dinh.
 # ----------------------------------------------------------------------
+import re
+
+# Tu khoa DONG (nhieu) - PHAI LOAI khoi state_sig vi doi tung frame/giay:
+#  - dong chat the gioi (got/lucky/drew/opened/challenging/requested/wishes...)
+#  - dong ho (mon/tue/wed.../est/utc), tien/so (chua chu so), ten nguoi choi.
+# Neu de chung vao chu ky thi MOI FRAME ra 1 state-key khac -> Q-learning vo dung.
+_NOISE_WORDS = {
+    "got", "lucky", "drew", "opened", "returnee", "received", "challenging",
+    "requested", "others", "join", "wishes", "become", "apprentice", "triggered",
+    "zone", "add", "them", "friend", "frienas", "master", "thomas", "thomag",
+    "homas", "homd", "homg", "mon", "tue", "wed", "thu", "fri", "sat", "sun",
+    "thur", "est", "utc", "gmt", "new", "tap", "spirit", "coin", "shard", "box",
+    "and", "has", "the", "you", "are", "back", "not", "long", "ago", "this",
+    "with", "news", "your", "loyal",
+}
+_TIME_RE = re.compile(r"\d|:")          # token co chu so / dau ':' = dong ho/so lieu
+
+
+def ui_tokens(ocr_words_list) -> set[str]:
+    """Tap nhan UI ON DINH cua 1 man: token NGAN (3-15 ky tu), 1 tu, conf cao (>=70),
+    khong chu so/':', khong trong _NOISE_WORDS. Conf cao -> bot OCR jitter."""
+    out = set()
+    for t, _box, c in ocr_words_list:
+        s = str(t).strip().lower()
+        if (3 <= len(s) <= 15 and any(ch.isalpha() for ch in s)
+                and " " not in s and not _TIME_RE.search(s)
+                and s not in _NOISE_WORDS and float(c) >= 70):
+            out.add(s)
+    return out
+
+
 def state_sig(img, ocr_tokens: list[str]) -> str:
-    """Chu ky on dinh cho 1 man: 16-bit dhash + bag-of-words (token chinh, sap xep).
-    Cac man hinh GIONG NHAU ve bo cuc + chu -> cung chu ky -> chia se kinh nghiem."""
-    dh = dhash(img) or ""        # chuoi bit (perception.dhash) hoac '' neu hong
-    # lay token chu (>=3 ky tu, chu cai), bo trung, gioi han - dac trung man.
-    toks = sorted({t.lower() for t in ocr_tokens
-                   if len(t) >= 3 and any(c.isalpha() for c in t)})[:12]
-    raw = f"{dh[:24]}|{'|'.join(toks)}"
-    return hashlib.md5(raw.encode()).hexdigest()[:12]
+    """Chu ky on dinh (giu API cu) - hash tap nhan UI. NHUNG so khop chinh nen dung
+    match_state (Jaccard) vi OCR jitter lam tap doi nhe -> hash exact van le."""
+    ui = sorted({t.lower() for t in ocr_tokens
+                 if 3 <= len(t) <= 15 and any(c.isalpha() for c in t)
+                 and " " not in t.strip() and not _TIME_RE.search(t)
+                 and t.lower() not in _NOISE_WORDS})[:10]
+    return hashlib.md5("|".join(ui).encode()).hexdigest()[:12]
 
 
 class StateSolver:
@@ -56,23 +86,56 @@ class StateSolver:
     def __init__(self, agent):
         self.a = agent
         self.q: dict[str, dict[str, float]] = {}
+        # toks[state_id] = tap nhan UI dai dien -> so khop Jaccard (chong OCR jitter)
+        self.toks: dict[str, list[str]] = {}
         if os.path.exists(QFILE):
             try:
-                self.q = json.load(open(QFILE, encoding="utf-8"))
+                blob = json.load(open(QFILE, encoding="utf-8"))
+                # ho tro ca format cu (chi q) lan moi ({q, toks})
+                if isinstance(blob, dict) and "q" in blob:
+                    self.q = blob.get("q", {})
+                    self.toks = {k: list(v) for k, v in blob.get("toks", {}).items()}
+                else:
+                    self.q = blob
             except Exception:
                 self.q = {}
 
     def save(self):
         os.makedirs(os.path.dirname(QFILE), exist_ok=True)
-        json.dump(self.q, open(QFILE, "w", encoding="utf-8"),
-                  ensure_ascii=False, indent=1)
+        json.dump({"q": self.q, "toks": {k: sorted(v) for k, v in self.toks.items()}},
+                  open(QFILE, "w", encoding="utf-8"), ensure_ascii=False, indent=1)
+
+    @staticmethod
+    def _jaccard(a: set, b: set) -> float:
+        if not a and not b:
+            return 1.0
+        u = a | b
+        return len(a & b) / len(u) if u else 0.0
+
+    def match_state(self, ui: set[str], thresh: float = 0.5) -> str:
+        """So khop tap nhan UI hien tai voi state DA BIET bang Jaccard. Neu trung
+        >= thresh -> tai su dung state-id cu (chia se Q). Nguoc lai tao state-id moi.
+        Day la chia khoa: OCR jitter (onmyoji/onmyojt) chi lam Jaccard giam nhe, van
+        khop -> bot HOC duoc thay vi moi frame 1 state."""
+        best_id, best = None, 0.0
+        for sid, toks in self.toks.items():
+            j = self._jaccard(ui, set(toks))
+            if j > best:
+                best, best_id = j, sid
+        if best_id is not None and best >= thresh:
+            return best_id
+        # state moi: id = hash tap ui (on dinh tuong doi)
+        sid = hashlib.md5("|".join(sorted(ui)).encode()).hexdigest()[:12]
+        self.toks[sid] = sorted(ui)
+        return sid
 
     # ----- quan sat -----
     def observe(self):
         img = self.a.shot()
         words = ocr_words(img, min_conf=40)
         toks = [str(t) for t, *_ in words]
-        sig = state_sig(img, toks)
+        ui = ui_tokens(words)                 # tap nhan UI on dinh
+        sig = self.match_state(ui)            # Jaccard match -> state-id chia se Q
         return img, words, toks, sig
 
     # ----- sinh hanh dong kha di tai 1 trang thai -----
