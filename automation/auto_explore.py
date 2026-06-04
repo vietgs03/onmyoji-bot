@@ -279,12 +279,19 @@ class Explorer:
         biet frontier (cand chua thu)."""
         g = {"nodes": {}, "schema": 1}
         for k, nd in self.nodes.items():
+            # FIX1b: KHONG luu node loading/transient (lam sach graph tu dong).
+            if self._is_transient(None, nd.fp):
+                continue
             j = self._node_json(nd)
             # luu danh sach cand (sig) da QUAN SAT duoc -> tinh frontier sau nay
             if nd.cands:
                 j["cands"] = [cand_sig(c[2], c[0], c[1]) for c in nd.cands
                               if self._worthy(c[2], c[3])]
             g["nodes"][k] = j
+        # bo edge tro toi node loading da loai
+        valid = set(g["nodes"].keys())
+        for j in g["nodes"].values():
+            j["edges"] = {d: e for d, e in j["edges"].items() if d in valid}
         tmp = self.global_path + ".tmp"
         json.dump(g, open(tmp, "w"), indent=1, ensure_ascii=False)
         os.replace(tmp, self.global_path)
