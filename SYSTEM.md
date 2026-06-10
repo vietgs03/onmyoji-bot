@@ -11,8 +11,11 @@ graph LR
     end
     subgraph PERCEPT[2. Tri giác + Bản đồ]
         CC --> P[perception.py<br/>dhash/buttons/loading]
+        P --> SM[state_matrix.py<br/>ma trận 3 chiều AUC .9997]
+        SM --> GM[graph_memory.py<br/>node/edge/index/path]
         P --> WM[world_model.py<br/>graph 105 state/185 edge]
         WM --> EXP[explorer.py<br/>tự khám phá + né trận]
+        GM -.thay dần.-> WM
     end
     subgraph ML[3. ML/Training]
         OBS[594 click samples] --> AFF[affordance AUC.77]
@@ -51,8 +54,9 @@ graph LR
 - **ML**: affordance AUC 0.765, screen classifier acc 0.697 (vượt baseline rõ rệt).
 - **Vector DB**: TF-IDF 430 docs, vocab ~30k, trả lời ngữ nghĩa tốt.
 
-## Việc cho tối nay (khi game chạy)
-1. Chạy explorer phủ nốt game (label thêm state, thu thêm data ML).
-2. Re-train ML với data mới (affordance/screen_clf sẽ tốt hơn).
-3. Học thao tác từng mode (Exploration/Soul Zone farm) -> viết task thật.
-4. (Tùy) nâng vector DB lên embedding thật (sentence-transformers) nếu cần độ chính xác cao hơn.
+## Việc cho phiên live tới (khi game chạy)
+1. Sanity-check trước MỌI experiment: `bgshot` trả ảnh? đồng hồ OCR chạy? (LEARNINGS §15 - ảnh stale).
+2. Chạy `map_loop.sh` với explorer mới (đã ghi edge back) → graph 2 chiều, đẩy 38→50+ node.
+3. Nối explorer observe() vào `graph_memory.py` (thay fingerprint Jaccard 1 chiều).
+4. Task farm thật đầu tiên: realm_raid (xem `knowledge/game_tasks.json` priority) - DRY trước, `--live` sau.
+5. Experiment Bonus/foreground chạy LẠI (kết quả cũ vô hiệu vì ảnh stale).
