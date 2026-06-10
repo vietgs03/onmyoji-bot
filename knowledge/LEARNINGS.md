@@ -288,3 +288,13 @@ Day la nguyen nhan GOC cua MOI "process treo mai" toan du an.
   loop. Tang budget/action hoac uu tien frontier som hon de loop chay.
 - 'unreached' danh dau cand khi nav fail -> co the bo sot khi sau nay reachable.
 - Tiep: chay them phien day len 50+ node; HOAC tich hop graph vao screen_graph.py.
+
+## 15. BUG STALE SCREENSHOT (2026-06-10, fix scripts/control_client.py)
+Game KHONG chay nhung bot van "nhin thay" man hinh va click lia lia:
+- server tra `OK 0x0 pw=False` (PrintWindow fail, w=h=0) nhung bgshot() chi
+  check prefix "OK" roi imread FILE ANH CU con tren disk (onmyoji_srv.png).
+- Trieu chung nhan biet: dong ho OCR DUNG YEN (Thur.10:49 EST mai), frame
+  diff giua 2 lan chup = 0.0 tuyet doi, info tra `rect 0 0 0 0`.
+- Fix: parse kich thuoc trong reply bgshot, w<=0 hoac h<=0 -> return None.
+- BAI HOC: moi experiment live PHAI sanity-check "the gioi con song khong"
+  truoc (clock doi? frame diff > 0? rect hop le?) roi moi tin ket qua click.

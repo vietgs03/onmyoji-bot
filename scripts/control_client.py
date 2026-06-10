@@ -63,6 +63,17 @@ class Controller:
         r = self._cmd(f"bgshot {WIN_SHOT}")
         if not r or not r.startswith("OK"):
             return None
+        # BUG da gap: game KHONG chay -> server tra 'OK 0x0 pw=False' nhung file
+        # anh CU van con tren disk -> cv2.imread doc anh STALE (bot "nhin" man
+        # hinh ngay cu, click noop toan bo). Phai check kich thuoc that.
+        parts = r.split()
+        if len(parts) >= 2 and "x" in parts[1]:
+            try:
+                w, h = parts[1].split("x")
+                if int(w) <= 0 or int(h) <= 0:
+                    return None  # game khong chay / window khong ton tai
+            except ValueError:
+                pass
         return cv2.imread(WIN_SHOT_WSL)
 
     def bgclick(self, x, y):
