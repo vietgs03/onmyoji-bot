@@ -298,3 +298,20 @@ Game KHONG chay nhung bot van "nhin thay" man hinh va click lia lia:
 - Fix: parse kich thuoc trong reply bgshot, w<=0 hoac h<=0 -> return None.
 - BAI HOC: moi experiment live PHAI sanity-check "the gioi con song khong"
   truoc (clock doi? frame diff > 0? rect hop le?) roi moi tin ket qua click.
+
+## 16. STATE-MATRIX DA CHIEU + GRAPH MEMORY (2026-06-10, PHAN B+C cua prompt)
+- automation/state_matrix.py: moi man = 3 chieu doc lap
+  (1) SEMANTIC ui_tokens, (2) SPATIAL luoi 6x4 token-theo-cell,
+  (3) STRUCTURAL dhash tung cell. TRONG SO THICH NGHI: it/khong token
+  (loading, man toi) -> don trong so sang struct, vi Jaccard 2 tap rong = 1.0 AO
+  (day chinh la loi khien matcher cu gop moi man loading lam mot).
+- VALIDATE quan trong: KHONG dung state-id explorer cu lam ground truth -
+  no tach nham >= 5 cap (cung man pixel-diff < 7 van ra 2 id do OCR jitter).
+  Dung pixel-diff (mean abs < 12) lam GT khach quan tren anh tinh.
+  Ket qua 91 anh / 4095 cap: AUC 0.9997, @0.72 TPR 33/38 FP 0/4057.
+- automation/graph_memory.py: node=FeatureMatrix, edge=action ngu nghia
+  (ok/fail dem rieng), path=Dijkstra 1/reliability (tu ne canh hay fail),
+  index = inverted token + LSH banding cell-dhash -> nearest 0.84ms.
+  Import 91 anh -> 70 node, precision .946 / recall .921 vs pixel-GT.
+- Buoc sau: noi observe() cua auto_explore vao GraphMemory (thay fingerprint
+  rieng), ghi add_transition tu cac log explore_*.jsonl cu de co edge.
