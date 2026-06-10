@@ -334,3 +334,44 @@ noi chuyen qua automation/agent_bus.py) DA CHAY THAT va tim ra bug lon:
 - Realm Raid flow hoc duoc: Explore -> RealmRaid footer -> tap o doi thu
   -> dialog Attack (vi tri nut Attack DOI theo vi tri o, doc OCR moi lan)
   -> battle auto ~60s -> ve man luoi, o doi thu thanh KO.
+
+## 18. PHIEN 3-AGENT: XAC MINH FIX CLIENT-AREA + BANG STATE REALMRAID (2026-06-10)
+Phien MASTER/MENTOR/OPERATOR, 1 ve raid, 1 tran end-to-end thanh cong.
+
+### 18.1 XAC MINH FIX CLIENT-AREA
+- Anh bgshot moi: 1136x640, KHONG title bar/border (truoc: 1152x679).
+- Toa do anh = toa do click TRUC TIEP, khong can offset (-8,-31) nua.
+- Kiem chung live: bgclick (546,285) mo dialog Tongjed, bgclick (637,469)
+  an nut Attack modal NGAY LAN DAU - bug "Attack khong an" da het han.
+- Ket luan cuoi: nguyen nhan goc cua moi click truot la offset title bar
+  +31px (muc 17), KHONG phai stale image (muc 15 la bug khac, doc lap).
+
+### 18.2 FLOW REALMRAID DAY DU (xac nhan bang anh tung buoc)
+select -> dialog Attack -> prep -> battle (auto, <15s voi fodder)
+-> reward -> artwork splash -> ve select (ve -1, o doi thu KO).
+Bang chung Victory tran nay: ve 28->27, Tongjed KO moi xuat hien,
+Raid log 4->5, Weekly 4->6, Rank 3626->3296.
+
+### 18.3 BANG NHAN DIEN STATE (toa do client 1136x640)
+- SELECT: header "Realm Raid" ~(505-625,75-95); ve "N/30" goc phai-tren
+  ~(1020-1100,18-35); luoi 3x3: cot x ~130-410 / 425-710 / 720-1005,
+  hang y ~130-230 / 250-350 / 370-470; o da KO = tem do "KO" + nen xam;
+  Refresh ~(930,533); Raid log + daruma 3/6/9 day duoi; Lineup Assistant,
+  Individual/Guild canh phai; nut X dong goc phai-tren ~(1070,125).
+- DIALOG attack: modal giua ~(400-735,225-510), avatar+ten doi thu y~285,
+  5 thumbnail shikigami y~385, "Use <n>" + nut Attack cam vien nau
+  (lan nay bbox 597,456,80x26 tam 637,469). VI TRI ATTACK DOI THEO O
+  da tap -> PHAI doc OCR moi lan, khong hardcode.
+- PREP: nut Ready tren trong den goc phai-duoi ~(1042,519); Preset (45,605),
+  Bonus (133,605). Voi Auto "Always" da bat, prep TU SKIP - khong can
+  click Ready, battle bat dau va ket thuc <15s (fodder team).
+- FIGHTING: hang Skill x5-6 goc phai-duoi, "Auto" goc trai-duoi ~(32,610),
+  onibi n/8 day duoi, HP bar do tren dau dich. (Anh tu lieu la anh cu
+  1152x679 co title bar - doi chieu toa do phai tru (8,31).)
+- REWARD: "Tap to continue" giua-duoi ~(495-655,610), grid 2-3 item
+  kem so luong o giua-tren. Tap bat ky de qua.
+- ARTWORK: splash full-screen chi co logo ONMYOJI - tap de ve select.
+- Victory detect cho farm engine: ve giam 1 + o doi thu thanh KO
+  + Weekly tang (3 tin hieu doc lap, khong can doc man reward).
+Anh state luu logs/duplex/state_*.png (select / dialog / prep / fighting /
+reward / artwork / select_after).
