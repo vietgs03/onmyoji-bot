@@ -1,0 +1,123 @@
+{
+  "_meta": {
+    "desc": "Ban do cac mode battle/farm cua Onmyoji (PHAN A prompt). Trich tu knowledge/oas_features.json (52 task OAS) + oas_pagegraph.json (topology). nav = duong page OAS; bot ta dung graph_memory de hoc duong THAT tuong ung.",
+    "created": "2026-06-10",
+    "priority_order": ["realm_raid", "exploration", "orochi", "sougenbi", "eternity_sea", "area_boss", "demon_encounter", "wanted_quests"],
+    "battle_flow_generic": {
+      "desc": "Flow chung moi tran (tu OAS GeneralBattle + farm.py FSM da verify live)",
+      "states": ["SELECT (chon muc tieu/level, co Challenge/Lineup)", "PREPARE (man chuan bi, highlight team, bam ready)", "FIGHTING (dang danh, co Skill/Surrender, auto)", "RESULT (Victory/Failed + 'Tap to continue')", "REWARD (man qua, random-click de nhan)"],
+      "notes": "SELECT uu tien truoc FIGHTING khi nhan dien ('Skills' man chon de nham 'Skill' man danh - FIGHTING chi tin 'Surrender'). RESULT bat qua Tapto/continue/ClearTime."
+    }
+  },
+  "tasks": {
+    "exploration": {
+      "name": "Exploration (探索) - farm EXP/coin/scroll + soul boss",
+      "goal": "Farm exp cho shikigami fodder + danh boss chapter; mo khoa soul zones",
+      "nav": ["page_main", "page_exploration", "(chon chapter, vd 28)"],
+      "flow": ["vao chapter -> man co quai thuong + boss", "danh tung quai (tap quai -> battle)", "boss xuat hien sau khi het quai -> danh boss", "nhan reward, co the xuat hien ruong/scroll", "het 7 luot (current_exploration_count) thi ra"],
+      "win": "thang moi tran battle; chapter xong khi boss chet",
+      "reward": "EXP, coin, awake material, treasure box",
+      "cost": "stamina (AP)",
+      "oas_options": ["friend_1", "find_mode", "scrolls_enable", "current_exploration_count=7", "minions_cnt"],
+      "risk": "thua neu team yeu; AP can"
+    },
+    "realm_raid": {
+      "name": "Realm Raid (结界突破) - danh ket gioi nguoi choi khac",
+      "goal": "Pha 9 o ket gioi de lay medal + reward; uu tien lam DAU TIEN (flow ngan, kiem chung battle FSM)",
+      "nav": ["page_main", "page_exploration", "page_realm_raid"],
+      "flow": ["man 3x3 (9 o doi thu)", "chon o (uu tien o yeu/da thua) -> Attack", "battle -> win/lose", "win: o vo, medal tang; lose: o danh dau", "3 lan thua co the refresh (three_refresh)", "het 9 o hoac het ve thi dung"],
+      "win": "thang tran -> pha o; du 9 o co the nhan thuong chuong",
+      "reward": "realm medal, coin, exp",
+      "cost": "ve raid (8 ve/ngay, check is_ticket)",
+      "oas_options": ["raid_mode", "attack_number", "order_attack", "three_refresh", "when_attack_fail", "exit_four"],
+      "oas_methods_hint": ["execute_round", "ensure_lock", "partition", "find_one"],
+      "risk": "thua lien tuc neu xep hang cao; co frog boss (is_frog) ngau nhien"
+    },
+    "orochi": {
+      "name": "Orochi (八岐大蛇) - soul zone farm chinh",
+      "goal": "Farm soul (vong 10/11) - nguon soul chinh cua game",
+      "nav": ["page_main", "page_exploration", "page_soul_zones", "(chon Orochi)"],
+      "flow": ["chon layer (10/11)", "check lock team (check_lock)", "Challenge -> battle (co the to doi: leader/member/alone)", "win -> man soul reward (random-click nhan)", "lap theo limit_count"],
+      "win": "thang tran orochi layer da chon",
+      "reward": "soul (vong 10: soul 6*), exp",
+      "cost": "ve orochi (mua bang medal/jade hoac nhan daily)",
+      "oas_options": ["layer", "limit_count", "soul_buff_enable", "auto_switch_soul", "ten_switch"],
+      "oas_methods_hint": ["orochi_enter", "check_layer", "check_lock", "run_alone", "battle_wait"],
+      "risk": "ton ve; can team du manh cho layer 11"
+    },
+    "sougenbi": {
+      "name": "Sougenbi (业原火/草原火) - soul zone phu",
+      "goal": "Farm soul dinh huong (chon loai soul theo category)",
+      "nav": ["page_main", "page_exploration", "page_soul_zones", "(chon Sougenbi)"],
+      "flow": ["chon difficulty", "Challenge -> battle", "win -> soul reward", "lap theo limit_count"],
+      "win": "thang tran",
+      "reward": "soul theo nhom da chon",
+      "cost": "ve sougenbi",
+      "oas_options": ["limit_count"],
+      "risk": "it - flow don gian nhat trong soul zones"
+    },
+    "eternity_sea": {
+      "name": "Eternity Sea (永生之海) - soul zone cao cap",
+      "goal": "Farm soul 6* ti le cao hon orochi (can team manh)",
+      "nav": ["page_main", "page_exploration", "page_soul_zones", "(chon Eternity Sea)"],
+      "flow": ["chon layer", "Challenge -> battle (ho tro to doi)", "win -> soul reward", "lap theo limit_count"],
+      "win": "thang tran",
+      "reward": "soul 6*, nguyen lieu",
+      "cost": "ve (chung pool voi orochi?)",
+      "oas_options": ["user_status", "layer", "limit_count"],
+      "oas_methods_hint": ["eternitysea_enter", "_navigate_to_soul_zones", "_two_teams_switch_sous"],
+      "risk": "kho hon orochi; chi lam khi team du manh"
+    },
+    "area_boss": {
+      "name": "Area Boss (地域鬼王) - boss vung daily",
+      "goal": "Danh 3 boss vung moi ngay lay reward (xep hang theo damage)",
+      "nav": ["page_main", "page_exploration", "page_area_boss"],
+      "flow": ["man danh sach boss", "chon boss (switch_to_level_60 / difficulty)", "Challenge -> battle", "fight_reward_boss: nhan thuong sau danh"],
+      "win": "boss chet hoac het gio (van co reward theo damage)",
+      "reward": "coin, dau hon (demon coin), ofuda",
+      "cost": "mien phi 3 lan/ngay",
+      "oas_methods_hint": ["boss_fight", "switch_difficulty", "get_difficulty", "switch_to_floor_1"],
+      "risk": "thap - khong mat gi khi thua"
+    },
+    "demon_encounter": {
+      "name": "Demon Encounter (逢魔之时) - guild demon daily",
+      "goal": "Danh quy guild 1 lan/ngay (19h-21h thuong mo)",
+      "nav": ["page_main", "page_town", "page_demon_encounter"],
+      "flow": ["chon quy (3 loai)", "Challenge -> battle 1 tran", "reward theo damage + guild tong"],
+      "win": "1 tran duy nhat, reward theo damage",
+      "reward": "demon coin -> doi shop",
+      "cost": "mien phi 1 lan/ngay",
+      "risk": "canh OAS ghi 'tro nhan tinh khong mo' - kiem tra gio mo cua"
+    },
+    "wanted_quests": {
+      "name": "Wanted Quests (悬赏封印) - truy na daily",
+      "goal": "Hoan thanh cac don truy na (danh quai chi dinh) lay reward",
+      "nav": ["page_main", "(bang truy na ben trai man chinh)"],
+      "flow": ["mo bang quest", "moi quest chi noi quai o dau (exploration chapter/soul zone...)", "di den noi do danh du so luong", "nhan reward tung don"],
+      "win": "du so quai yeu cau",
+      "reward": "AP, coin, dau hon, jade (tuy don)",
+      "cost": "AP khi danh exploration",
+      "risk": "ton thoi gian dieu huong nhieu noi - lam SAU khi nav graph tot"
+    },
+    "goryou_realm": {
+      "name": "Goryou Realm (御灵之境) - farm material thuc tinh vu khi",
+      "goal": "Farm nguyen lieu goryou (4 loai theo thu)",
+      "nav": ["page_main", "page_exploration", "page_goryou_realm"],
+      "flow": ["chon loai goryou dang mo", "Challenge -> battle", "lap"],
+      "win": "thang tran",
+      "reward": "goryou material",
+      "cost": "mien phi (gioi han luot/ngay?)",
+      "risk": "thap"
+    },
+    "duel": {
+      "name": "Duel (斗技) - PvP xep hang",
+      "goal": "Danh PvP lay diem honor + xep hang mua",
+      "nav": ["page_main", "page_town", "page_duel"],
+      "flow": ["matchmaking -> ban/pick", "battle PvP", "win/lose doi diem"],
+      "win": "thang doi thu that",
+      "reward": "honor, fame, qua mua",
+      "cost": "mien phi",
+      "risk": "CAO - PvP that, KHONG auto khi chua chac chan; de sau cung"
+    }
+  }
+}
