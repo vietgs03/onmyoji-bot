@@ -15,6 +15,7 @@ using System;
 using System.Runtime.InteropServices;
 public class Native {
   [DllImport("user32.dll")] public static extern bool GetWindowRect(IntPtr hWnd, out RECT lpRect);
+  [DllImport("user32.dll")] public static extern bool GetClientRect(IntPtr hWnd, out RECT lpRect);
   [DllImport("user32.dll")] public static extern bool PrintWindow(IntPtr hWnd, IntPtr hdcBlt, uint nFlags);
   [DllImport("user32.dll")] public static extern bool PostMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
   [DllImport("user32.dll")] public static extern IntPtr SendMessage(IntPtr hWnd, uint Msg, IntPtr wParam, IntPtr lParam);
@@ -73,8 +74,27 @@ function Do-BgShot($hwnd, $path) {
   $ok = [Native]::PrintWindow($hwnd, $hdc, 2)
   $g.ReleaseHdc($hdc)
   if (-not $ok) { $hdc2 = $g.GetHdc(); [Native]::PrintWindow($hwnd, $hdc2, 0) | Out-Null; $g.ReleaseHdc($hdc2) }
+  $g.Dispose()
+  # FIX BUG LECH 31px (phien duplex 2026-06-10 phat hien): PrintWindow chup CA
+  # WINDOW (title bar ~31px + border 8px) nhung click dung toa do CLIENT
+  # (ClientToScreen/SendMessage lParam) -> toa do doc tu ANH lech +8,+31 so voi
+  # client. Fix tai GOC: CAT anh ve dung CLIENT AREA truoc khi luu -> toa do
+  # anh == toa do client, moi loai click dung truc tiep, OCR khong lech.
+  $cr = New-Object Native+RECT
+  [Native]::GetClientRect($hwnd, [ref]$cr) | Out-Null
+  $cw = $cr.Right; $ch = $cr.Bottom
+  $pt = New-Object Native+POINT; $pt.X = 0; $pt.Y = 0
+  [Native]::ClientToScreen($hwnd, [ref]$pt) | Out-Null
+  $offX = $pt.X - $r.Left; $offY = $pt.Y - $r.Top
+  if ($cw -gt 0 -and $ch -gt 0 -and ($offX -gt 0 -or $offY -gt 0) -and
+      ($offX + $cw) -le $w -and ($offY + $ch) -le $h) {
+    $rect = New-Object System.Drawing.Rectangle $offX, $offY, $cw, $ch
+    $clip = $bmp.Clone($rect, $bmp.PixelFormat)
+    $clip.Save($path); $clip.Dispose(); $bmp.Dispose()
+    return @($cw,$ch,$ok)
+  }
   $bmp.Save($path)
-  $g.Dispose(); $bmp.Dispose()
+  $bmp.Dispose()
   return @($w,$h,$ok)
 }
 
