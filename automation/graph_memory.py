@@ -201,20 +201,79 @@ class GraphMemory:
 # --------------------------------------------------------------------- CLI
 
 def _import_shots():
-    """Nap 91 anh logs/explore_shots vao graph (dung feat cache cua state_matrix)."""
+    """Nap 91 anh logs/explore_shots vao graph (dung feat cache cua state_matrix).
+    Tra mapping T-key (state-id explorer cu) -> node_id moi (qua ten file shot)."""
     from state_matrix import _load_feats
     shot_dir = os.path.join(ROOT, "logs", "explore_shots")
     paths = [os.path.join(shot_dir, f) for f in sorted(os.listdir(shot_dir))
              if f.endswith(".png")]
     feats = _load_feats(paths)
     gm = GraphMemory.load()
-    mapping = {}
+    mapping = {}          # ten file -> node_id
+    tkey_map = {}         # T:xxx -> node_id (1 T-key co the nhieu shot, lay dau)
     for p, f in feats.items():
-        mapping[os.path.basename(p)] = gm.observe(feat=f)
+        base = os.path.basename(p)
+        nid = gm.observe(feat=f)
+        mapping[base] = nid
+        tkey = base.split("_", 1)[1].rsplit(".png", 1)[0]
+        tkey_map.setdefault(tkey, nid)
     gm.save()
     n_uniq = len(set(mapping.values()))
     print(f"import {len(mapping)} anh -> {n_uniq} node (gop {len(mapping) - n_uniq} trung)")
     print("stats:", gm.stats())
+    return gm, tkey_map
+
+
+def _import_logs():
+    """Nap EDGE + nhan tu cac log explore cu (logs/explore_*.jsonl) vao graph.
+
+    - ev=edge: frm --tap:<via>--> to (ok). xy luu lam hint.
+    - ev=try result=noop: ghi canh fail tu-vong (frm -> frm) de affordance
+      hoc 'nut nay khong an' (path se ne vi to=frm khong giup di dau).
+    - ev=new_screen: cap nhat label nguoi-doc-duoc cho node.
+    T-key cu -> node moi: qua ten file shot (timestamp_Tkey.png).
+    """
+    import glob
+    gm, tkey_map = _import_shots()
+    n_edge = n_noop = n_label = n_skip = 0
+    for lf in sorted(glob.glob(os.path.join(ROOT, "logs", "explore_*.jsonl"))):
+        with open(lf) as fh:
+            for line in fh:
+                try:
+                    d = json.loads(line)
+                except json.JSONDecodeError:
+                    continue
+                ev = d.get("ev")
+                if ev == "edge":
+                    a, b = tkey_map.get(d["frm"]), tkey_map.get(d["to"])
+                    if a is None or b is None or a == b:
+                        n_skip += 1
+                        continue
+                    gm.add_transition(a, f"tap:{d.get('via', '?')}", b,
+                                      ok=True, hint_xy=d.get("xy"))
+                    n_edge += 1
+                elif ev == "try" and d.get("result") == "noop":
+                    a = tkey_map.get(d["frm"])
+                    if a is None:
+                        n_skip += 1
+                        continue
+                    gm.add_transition(a, f"tap:{d.get('label', '?')}", a,
+                                      ok=False, hint_xy=d.get("xy"))
+                    n_noop += 1
+                elif ev == "new_screen":
+                    nid = tkey_map.get(d.get("key"))
+                    if nid and gm.nodes[nid]["label"].startswith(("(", "onmyoji")):
+                        gm.nodes[nid]["label"] = d.get("label", gm.nodes[nid]["label"])
+                        n_label += 1
+    gm.save()
+    print(f"edges ok={n_edge} noop={n_noop} label={n_label} skip={n_skip}")
+    print("stats:", gm.stats())
+    # kiem tra dieu huong: tu moi node co duong toi node nhieu canh ra nhat (hub)?
+    hub = max(gm.edges, key=lambda n: len(gm.edges[n]), default=None)
+    if hub:
+        ok = sum(1 for n in gm.nodes if gm.path(n, hub) is not None)
+        print(f"hub={hub} ({gm.nodes[hub]['label'][:30]}): "
+              f"{ok}/{len(gm.nodes)} node co duong toi hub")
 
 
 def _self_test():
@@ -285,6 +344,8 @@ def main():
         print(GraphMemory.load().stats())
     elif cmd == "import-shots":
         _import_shots()
+    elif cmd == "import-logs":
+        _import_logs()
     elif cmd == "test":
         _self_test()
     else:
