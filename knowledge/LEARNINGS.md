@@ -315,3 +315,22 @@ Game KHONG chay nhung bot van "nhin thay" man hinh va click lia lia:
   Import 91 anh -> 70 node, precision .946 / recall .921 vs pixel-GT.
 - Buoc sau: noi observe() cua auto_explore vao GraphMemory (thay fingerprint
   rieng), ghi add_transition tu cac log explore_*.jsonl cu de co edge.
+
+## 17. PHIEN DUPLEX MENTOR/OPERATOR: BUG LECH CLICK +8,+31 (2026-06-10)
+Kien truc 2 agent (mentor co thi giac doc anh + operator tay OCR/click,
+noi chuyen qua automation/agent_bus.py) DA CHAY THAT va tim ra bug lon:
+- PrintWindow chup CA WINDOW: title bar ~31px (mau ~249 sang) + border 8px.
+  Moi click (bgclick lParam, politeclick/fgclick ClientToScreen) dung toa
+  do CLIENT -> toa do lay tu ANH (OCR box, CV contour) lech +8,+31.
+- Trieu chung lich su: "nut Attack modal khong an", "Bonus noop", click
+  cham me nut. Cang nut NHO cang de truot (lech 31px doc > nua chieu cao nut).
+- Kiem chung: tru offset (x-8,y-31) -> bgclick an PERFECT tren modal
+  RealmRaid, thang 2 tran live lien tiep (ve 30->28, doi thu KO).
+- FIX GOC o ps/server.ps1 Do-BgShot: GetClientRect + ClientToScreen(0,0)
+  -> cat bitmap ve client area. Anh moi 1136x640 (truoc 1152x679).
+- HE QUA: cac toa do hardcode cu theo anh-window (45,68 back-arrow...)
+  gio phai hieu la toa do client; cac fingerprint/dhash cu chup theo anh
+  window cu se KHAC anh moi (kich thuoc doi) -> graph cu can rebuild dan.
+- Realm Raid flow hoc duoc: Explore -> RealmRaid footer -> tap o doi thu
+  -> dialog Attack (vi tri nut Attack DOI theo vi tri o, doc OCR moi lan)
+  -> battle auto ~60s -> ve man luoi, o doi thu thanh KO.
