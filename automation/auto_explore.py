@@ -476,16 +476,30 @@ class Explorer:
           2. Nut dismiss (back-arrow/X) qua controls.find_dismiss neu co, fallback
              back-arrow trai (45,68).
         Tranh Agent.back() day du (cham 10-20s/lan vi wait_stable+fallback loop).
-        Verify bang same_screen voi fp cua target."""
+        Verify bang same_screen voi fp cua target.
+        GHI EDGE 'back' khi man doi: truoc day back KHONG thanh canh -> graph
+        1 chieu (32/53 hub->n nhung chi 4/53 n->hub), khong dieu huong nguoc."""
         target_fp = self.nodes[target_key].fp if target_key in self.nodes else None
         cf = self.a.controls()
         nd = None
+
+        def _log_back_edge(frm_key, to_nd, via, xy):
+            """Back lam doi man -> ghi canh dieu huong nguoc (frm --back--> to)."""
+            if frm_key == to_nd.key or frm_key not in self.nodes:
+                return
+            frm_nd = self.nodes[frm_key]
+            if to_nd.key not in frm_nd.edges:
+                frm_nd.edges[to_nd.key] = (via, xy[0], xy[1])
+                self.log(ev="edge", frm=frm_key, to=to_nd.key, via=via,
+                         src="back", xy=list(xy), to_label=to_nd.label, new=False)
+
         for step in range(max_steps):
             # ton trong watchdog: het gio thi thoi backtrack (de run() ket thuc)
             if self.deadline is not None and time.time() > self.deadline:
                 return False
             img = self.a.shot()
             r = ScreenReader(img)
+            frm_key = self.cur_key
             # 1) dialog confirm-quit -> bam Confirm
             if r.has("Confirm") and (r.has("Cancel") or r.has("quit")):
                 hit = r.find("Confirm")
@@ -493,6 +507,7 @@ class Explorer:
                     self.a.c.bgclick(hit[1], hit[2])
                     time.sleep(1.4)
                     nd, _r, _i, _n = self.observe()
+                    _log_back_edge(frm_key, nd, "confirm-quit", (hit[1], hit[2]))
                     if self._reached(target_key, target_fp, nd):
                         return True
                     continue
@@ -510,6 +525,7 @@ class Explorer:
             self.a.c.bgclick(clicked[0], clicked[1])
             time.sleep(1.3)
             nd, r, img, _new = self.observe()
+            _log_back_edge(frm_key, nd, "back", clicked)
             if self._reached(target_key, target_fp, nd):
                 return True
         return False
