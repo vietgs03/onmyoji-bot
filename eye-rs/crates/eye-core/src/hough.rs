@@ -38,23 +38,76 @@ fn to_gray(img: &Image) -> Mat1 {
 }
 
 /// medianBlur kernel 5x5 (khop cv2.medianBlur ksize=5). Bien: nhan ban (replicate).
+///
+/// Thuat toan Huang (sliding histogram): thay vi sort 25 phan tu MOI pixel
+/// (cham), giu 1 histogram 256-bin truot ngang. Moi buoc chi them/bot 1 cot (5px)
+/// va dich trung vi (mdn) vai bac. Ket qua BIT-EXACT voi ban sort cu (cung la
+/// thong ke thu tu thu 13), nhung nhanh hon nhieu (73ms -> ~10ms).
 fn median_blur5(src: &Mat1) -> Mat1 {
     let (w, h) = (src.w, src.h);
     let mut out = Mat1::new(w, h);
-    let mut window = [0u8; 25];
+    if w == 0 || h == 0 {
+        return out;
+    }
+    const TH: i32 = 13; // trung vi cua 25 = thong ke thu tu thu 13
+    let wi = w as i32;
+    let hi = h as i32;
+    let mut hist = [0i32; 256];
     for y in 0..h {
-        for x in 0..w {
-            let mut idx = 0;
-            for dy in -2i32..=2 {
-                for dx in -2i32..=2 {
-                    let xx = (x as i32 + dx).clamp(0, w as i32 - 1) as usize;
-                    let yy = (y as i32 + dy).clamp(0, h as i32 - 1) as usize;
-                    window[idx] = src.at(xx, yy);
-                    idx += 1;
+        // 5 hang trong cua so (clamp doc theo BORDER_REPLICATE)
+        let ry = [
+            (y as i32 - 2).clamp(0, hi - 1) as usize,
+            (y as i32 - 1).clamp(0, hi - 1) as usize,
+            y,
+            (y as i32 + 1).clamp(0, hi - 1) as usize,
+            (y as i32 + 2).clamp(0, hi - 1) as usize,
+        ];
+        // reset histogram
+        hist.iter_mut().for_each(|c| *c = 0);
+        // nap cua so tai x=0: cac cot clamp(-2..2)
+        for dx in -2i32..=2 {
+            let cx = dx.clamp(0, wi - 1) as usize;
+            for &yy in &ry {
+                hist[src.at(cx, yy) as usize] += 1;
+            }
+        }
+        // trung vi ban dau (di tu 0 len)
+        let mut mdn: i32 = 0;
+        let mut ltcount: i32 = 0; // so pixel < mdn
+        while ltcount + hist[mdn as usize] < TH {
+            ltcount += hist[mdn as usize];
+            mdn += 1;
+        }
+        out.set(0, y, mdn as u8);
+
+        // truot ngang: x = 1..w-1
+        for x in 1..w {
+            let xi = x as i32;
+            // bot cot roi khoi cua so = clamp(x-3); them cot moi = clamp(x+2)
+            let lcol = (xi - 3).clamp(0, wi - 1) as usize;
+            let rcol = (xi + 2).clamp(0, wi - 1) as usize;
+            for &yy in &ry {
+                let v = src.at(lcol, yy) as i32;
+                hist[v as usize] -= 1;
+                if v < mdn {
+                    ltcount -= 1;
+                }
+                let v2 = src.at(rcol, yy) as i32;
+                hist[v2 as usize] += 1;
+                if v2 < mdn {
+                    ltcount += 1;
                 }
             }
-            window.sort_unstable();
-            out.set(x, y, window[12]); // trung vi cua 25
+            // dich trung vi ve dung vi tri thu 13
+            while ltcount >= TH {
+                mdn -= 1;
+                ltcount -= hist[mdn as usize];
+            }
+            while ltcount + hist[mdn as usize] < TH {
+                ltcount += hist[mdn as usize];
+                mdn += 1;
+            }
+            out.set(x, y, mdn as u8);
         }
     }
     out
