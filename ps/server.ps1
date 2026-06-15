@@ -57,6 +57,29 @@ function Restore-Win($hwnd) {
   Start-Sleep -Milliseconds 120
 }
 
+function Set-ClientSize($hwnd, $cw, $ch) {
+  # Dat CLIENT AREA (vung ve game) ve dung $cw x $ch px. Perception cua bot duoc
+  # hieu chinh theo 1152x679 (xem knowledge/oas_pagegraph) nen game PHAI dung size
+  # nay, neu khong toa do detect/click se lech (bot production KHONG resize anh).
+  # Window size = client size + vien (title bar + border). Tinh chenh roi cong bu.
+  Restore-Win $hwnd
+  $wr = New-Object Native+RECT; [Native]::GetWindowRect($hwnd, [ref]$wr) | Out-Null
+  $cr = New-Object Native+RECT; [Native]::GetClientRect($hwnd, [ref]$cr) | Out-Null
+  $curCW = $cr.Right; $curCH = $cr.Bottom
+  $curWW = $wr.Right - $wr.Left; $curWH = $wr.Bottom - $wr.Top
+  # vien = window - client (khong doi khi resize, voi cung window style)
+  $borderW = $curWW - $curCW
+  $borderH = $curWH - $curCH
+  $newWW = $cw + $borderW
+  $newWH = $ch + $borderH
+  # SWP_NOMOVE=0x2, SWP_NOZORDER=0x4, SWP_SHOWWINDOW=0x40 -> chi DOI kich thuoc
+  [Native]::SetWindowPos($hwnd, [IntPtr]::Zero, 0, 0, $newWW, $newWH, 0x46) | Out-Null
+  Start-Sleep -Milliseconds 150
+  # doc lai client that su (co the bi gioi han min-size)
+  $cr2 = New-Object Native+RECT; [Native]::GetClientRect($hwnd, [ref]$cr2) | Out-Null
+  return @($cr2.Right, $cr2.Bottom)
+}
+
 function Do-BgShot($hwnd, $path) {
   $r = New-Object Native+RECT
   [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
@@ -238,6 +261,14 @@ while ($true) {
         Restore-Win $hwnd
         $r = New-Object Native+RECT; [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
         Write-Output ("OK restore {0} {1}" -f ($r.Right-$r.Left),($r.Bottom-$r.Top))
+      }
+      "sizewin" {
+        # Dat client area = 1152x679 (mac dinh) hoac WxH neu truyen tham so.
+        # Game PHAI dung size nay de toa do detect/click khop perception.
+        $cw = if ($parts.Count -gt 1) { [int]$parts[1] } else { 1152 }
+        $ch = if ($parts.Count -gt 2) { [int]$parts[2] } else { 679 }
+        $res = Set-ClientSize $hwnd $cw $ch
+        Write-Output ("OK sizewin {0}x{1}" -f $res[0], $res[1])
       }
       "movewin" {
         # Dua cua so ve toa do tren man chinh (mac dinh 0,0). Giu nguyen kich thuoc.
