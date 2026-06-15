@@ -119,6 +119,32 @@ impl Image {
         let i = (y * self.width + x) * 3;
         (self.data[i], self.data[i + 1], self.data[i + 2])
     }
+
+    /// Encode RGB8 -> PNG bytes. Dung de LUU frame cho LLM agent NHIN (vision),
+    /// hoac debug. Nen muc tieu thap (compression nhanh) vi day la hot path.
+    pub fn encode_png(&self) -> Result<Vec<u8>, ImageError> {
+        let mut out = Vec::new();
+        {
+            let mut enc = png::Encoder::new(&mut out, self.width as u32, self.height as u32);
+            enc.set_color(png::ColorType::Rgb);
+            enc.set_depth(png::BitDepth::Eight);
+            // nen NHANH (Fast) - frame cho agent xem, khong can nho toi da.
+            enc.set_compression(png::Compression::Fast);
+            let mut writer = enc
+                .write_header()
+                .map_err(|e| ImageError::Decode(e.to_string()))?;
+            writer
+                .write_image_data(&self.data)
+                .map_err(|e| ImageError::Decode(e.to_string()))?;
+        }
+        Ok(out)
+    }
+
+    /// Luu PNG ra duong dan (cho agent vision doc bang file path).
+    pub fn save_png(&self, path: &str) -> Result<(), ImageError> {
+        let bytes = self.encode_png()?;
+        std::fs::write(path, bytes).map_err(|e| ImageError::Decode(e.to_string()))
+    }
 }
 
 #[cfg(test)]

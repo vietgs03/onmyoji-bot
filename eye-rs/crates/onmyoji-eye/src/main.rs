@@ -32,6 +32,7 @@ fn main() -> ExitCode {
         Some("inspect") => cmd_inspect(&args),
         Some("serve") => cmd_serve(&args),
         Some("bench") => cmd_bench(&args),
+        Some("som") => cmd_som(&args),
         // tuong thich nguoc: `onmyoji-eye <anh.png>` = inspect
         Some(p) if !p.starts_with('-') && p.ends_with(".png") => {
             cmd_inspect_path(p)
@@ -107,6 +108,56 @@ fn cmd_bench(args: &[String]) -> ExitCode {
     println!("tong med: {:5.1} ms  ({last})", gmed + omed);
     ExitCode::SUCCESS
 }
+
+/// som: doc PNG -> Set-of-Mark (ve box+so) -> luu anh annotate + in legend JSON.
+/// Dung de LLM agent vision NHIN anh da danh dau roi chon SO (toa do tu legend).
+///   onmyoji-eye som <in.png> [out.png]
+fn cmd_som(args: &[String]) -> ExitCode {
+    let inp = match args.get(2) {
+        Some(p) => p.clone(),
+        None => {
+            eprintln!("som: thieu <in.png>");
+            return ExitCode::from(2);
+        }
+    };
+    let outp = args
+        .get(3)
+        .cloned()
+        .unwrap_or_else(|| inp.replace(".png", "_som.png"));
+    let bytes = match std::fs::read(&inp) {
+        Ok(b) => b,
+        Err(e) => {
+            eprintln!("khong doc duoc {inp}: {e}");
+            return ExitCode::FAILURE;
+        }
+    };
+    let img = match Image::decode_png(&bytes) {
+        Ok(i) => i,
+        Err(e) => {
+            eprintln!("decode that bai: {e}");
+            return ExitCode::FAILURE;
+        }
+    };
+    let t = std::time::Instant::now();
+    let (marks, annotated) = eye_core::annotate(&img);
+    let dt = t.elapsed().as_secs_f64() * 1000.0;
+    if let Err(e) = annotated.save_png(&outp) {
+        eprintln!("luu {outp} loi: {e}");
+        return ExitCode::FAILURE;
+    }
+    // legend JSON cho agent map so -> toa do
+    println!("{{\"marks\":[");
+    for (i, m) in marks.iter().enumerate() {
+        let comma = if i + 1 < marks.len() { "," } else { "" };
+        println!(
+            "  {{\"id\":{},\"cx\":{},\"cy\":{},\"x\":{},\"y\":{},\"w\":{},\"h\":{},\"score\":{:.2}}}{}",
+            m.id, m.cx, m.cy, m.x, m.y, m.w, m.h, m.score, comma
+        );
+    }
+    println!("],\"count\":{},\"image\":\"{}\",\"ms\":{:.1}}}", marks.len(), outp, dt);
+    ExitCode::SUCCESS
+}
+
 
 /// inspect: chay perception tren 1 PNG, in ket qua de doi chieu Python.
 fn cmd_inspect(args: &[String]) -> ExitCode {
