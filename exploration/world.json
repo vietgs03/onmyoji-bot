@@ -3540,6 +3540,79 @@
           "label": "back"
         }
       ]
+    },
+    "f985b233c5": {
+      "dhash": "1010110110100001100100011010001011010010100010101101101011101110",
+      "label": "AreaBoss",
+      "desc": "Boss Khu Vuc (地域鬼王 Area Boss) - ban do the gioi chia theo vung dia ly (vd N.America). San boss khu vuc cung nguoi choi gan ban. Co Filter, Top in the Area (xep hang vung), Assembly Area (tap hop), Day (lich). Vao tu Exploration>AreaBoss.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 1004,
+          "cy": 44,
+          "label": "Filter"
+        },
+        {
+          "cx": 569,
+          "cy": 215,
+          "label": "NAmericaFlag"
+        },
+        {
+          "cx": 65,
+          "cy": 579,
+          "label": "AssemblyArea"
+        },
+        {
+          "cx": 47,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "1714520ac0": {
+      "dhash": "1000100010001010011110100000000111001100110011001101110111101011",
+      "label": "SpiritVenture",
+      "desc": "Spirit Venture - hub farm tai nguyen HANG NGAY (moi mode 2/2 luot/ngay). 6 mode: EXP Spirit (farm kinh nghiem), Coin Spirit (farm vang/kim tien), Kraken Zone (boss bach tuoc drop Soul/Evo), Enraged Kraken (cuoi tuan, manh hon), Mentorship Trial (thu thach su do), Shards (manh thuc than). Vao tu Exploration>SpiritVenture.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 166,
+          "cy": 220,
+          "label": "EXPSpirit"
+        },
+        {
+          "cx": 172,
+          "cy": 436,
+          "label": "CoinSpirit"
+        },
+        {
+          "cx": 619,
+          "cy": 219,
+          "label": "KrakenZone"
+        },
+        {
+          "cx": 560,
+          "cy": 427,
+          "label": "EnragedKraken"
+        },
+        {
+          "cx": 966,
+          "cy": 194,
+          "label": "MentorshipTrial"
+        },
+        {
+          "cx": 967,
+          "cy": 435,
+          "label": "Shards"
+        },
+        {
+          "cx": 37,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
     }
   },
   "edges": [
