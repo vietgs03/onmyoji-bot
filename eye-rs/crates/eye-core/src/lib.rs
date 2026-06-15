@@ -4,9 +4,13 @@
 //! Moi ham co tinh "khop Python" deu duoc validate so voi goldens trong
 //! `tests/golden_dhash.rs` (sinh tu Python, nguon su that).
 
+pub mod cv;
+pub mod detect;
+pub mod hough;
 pub mod image;
 pub mod md5;
 pub mod perception;
 
+pub use detect::{detect_buttons, Button};
 pub use image::{Image, ImageError};
 pub use perception::{dhash, hamming, is_loading, state_id, H, W};
