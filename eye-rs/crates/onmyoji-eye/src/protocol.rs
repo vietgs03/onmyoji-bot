@@ -24,6 +24,21 @@ pub struct Button {
     pub text: Option<String>,
 }
 
+/// 1 Set-of-Mark element cho LLM agent vision: id + tam (toa do click) + bbox.
+/// Agent chon SO trong anh marked -> he thong tra toa do (cx,cy) chinh xac.
+#[derive(Debug, Clone, Serialize, Deserialize)]
+pub struct Mark {
+    pub id: u32,
+    /// tam = diem click (toa do client-area)
+    pub cx: i32,
+    pub cy: i32,
+    pub x: i32,
+    pub y: i32,
+    pub w: i32,
+    pub h: i32,
+    pub score: f64,
+}
+
 /// Tai nguyen OCR (vang/AP/ngoc). null = chua doc duoc. Khop schema `Resources`.
 #[derive(Debug, Clone, Default, Serialize, Deserialize)]
 pub struct Resources {
@@ -63,6 +78,12 @@ pub struct Observation {
     /// Score template cua page (TM_CCOEFF_NORMED) neu co `page`.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub page_score: Option<f64>,
+    /// Set-of-Mark: cac element da danh so (cho LLM agent vision chon SO).
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub marks: Vec<Mark>,
+    /// Duong dan anh DA DANH SO (marked) de agent NHIN. None neu khong render SoM.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub marked_path: Option<String>,
     #[serde(default = "default_true")]
     pub alive: bool,
     #[serde(default)]
@@ -87,6 +108,8 @@ impl Observation {
             buttons: Vec::new(),
             page: None,
             page_score: None,
+            marks: Vec::new(),
+            marked_path: None,
             alive: false,
             resources: Resources::default(),
             frame_path: None,
@@ -123,6 +146,21 @@ impl Observation {
         with_buttons: bool,
         with_page: bool,
     ) -> Self {
+        Self::perceive(
+            img,
+            ts,
+            &PerceiveOpts {
+                frame_path,
+                with_buttons,
+                with_page,
+                som_dir: None,
+            },
+        )
+    }
+
+    /// perceive: ham loi, dieu khien bang `PerceiveOpts`. Tao Set-of-Mark cho LLM
+    /// agent vision khi opts.som_dir = Some(dir) (luu anh marked + tra marks).
+    pub fn perceive(img: &Image, ts: f64, opts: &PerceiveOpts) -> Self {
         let size = Size {
             w: img.width as i32,
             h: img.height as i32,
@@ -144,7 +182,7 @@ impl Observation {
         let loading = is_loading(img);
         // Page detection (landmark template match) CHI khi with_page=true (nang
         // ~300ms cho 32 page). Robust hon dhash voi man DONG/3D. Default OFF.
-        let (page, page_score) = if with_page {
+        let (page, page_score) = if opts.with_page {
             match crate::pages_embed::detector().detect(img) {
                 Some(h) => (Some(h.page), Some(h.score)),
                 None => (None, None),
@@ -153,7 +191,7 @@ impl Observation {
             (None, None)
         };
         // man dang loading HOAC tier nav (with_buttons=false) -> bo qua detect.
-        let buttons = if loading || !with_buttons {
+        let buttons = if loading || !opts.with_buttons {
             Vec::new()
         } else {
             detect_buttons(img, false)
@@ -168,6 +206,29 @@ impl Observation {
                 })
                 .collect()
         };
+        // Set-of-Mark cho LLM agent vision (chi khi som_dir Some): danh so element
+        // + ve box+so len anh -> luu PNG cho agent NHIN. Tra marks (so->toa do).
+        let (marks, marked_path) = if let Some(dir) = &opts.som_dir {
+            let (ms, annotated) = eye_core::annotate(img);
+            let path = format!("{dir}/eye_som_{}.png", (ts * 1000.0) as i64);
+            let marked = annotated.save_png(&path).ok().map(|_| path);
+            let marks_out = ms
+                .into_iter()
+                .map(|m| Mark {
+                    id: m.id,
+                    cx: m.cx,
+                    cy: m.cy,
+                    x: m.x,
+                    y: m.y,
+                    w: m.w,
+                    h: m.h,
+                    score: m.score as f64,
+                })
+                .collect();
+            (marks_out, marked)
+        } else {
+            (Vec::new(), None)
+        };
         Observation {
             ts,
             state_id: sid,
@@ -177,11 +238,26 @@ impl Observation {
             buttons,
             page,
             page_score,
+            marks,
+            marked_path,
             alive: true,
             resources: Resources::default(),
-            frame_path,
+            frame_path: opts.frame_path.clone(),
         }
     }
+}
+
+/// Tuy chon perceive: bat/tat tung tang chi phi.
+#[derive(Debug, Clone, Default)]
+pub struct PerceiveOpts {
+    /// duong dan anh debug (khong bat buoc)
+    pub frame_path: Option<String>,
+    /// chay detect_buttons (false = tier nav nhanh)
+    pub with_buttons: bool,
+    /// chay page detection (landmark, ~300ms)
+    pub with_page: bool,
+    /// Some(dir) = tao Set-of-Mark, luu anh marked vao dir cho LLM agent vision.
+    pub som_dir: Option<String>,
 }
 
 /// Loai hanh dong. Khop enum schema `Action.kind`.
@@ -252,6 +328,10 @@ pub struct Request {
     /// (nang, chi bat khi can xac dinh man/dieu huong).
     #[serde(default)]
     pub with_page: bool,
+    /// observe: true = tao Set-of-Mark (danh so element + luu anh marked) cho LLM
+    /// agent vision. Mac dinh false (chi bat khi agent can NHIN de quyet dinh).
+    #[serde(default)]
+    pub with_som: bool,
 }
 
 /// EYE -> BRAIN qua socket (1 dong NDJSON). Khop schema `Response`.

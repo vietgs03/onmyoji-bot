@@ -22,7 +22,7 @@ import time
 from typing import Optional
 
 from onmyoji.domain.entities import (
-    Observation, Action, ActionResult, Button, Resources, Size,
+    Observation, Action, ActionResult, Button, Mark, Resources, Size,
 )
 from onmyoji.domain.ports import EyePort
 
@@ -140,6 +140,12 @@ class RustEye(EyePort):
             dhash=o.get("dhash"),
             page=o.get("page"),
             page_score=o.get("page_score"),
+            marks=tuple(
+                Mark(id=m["id"], cx=m["cx"], cy=m["cy"], x=m["x"], y=m["y"],
+                     w=m["w"], h=m["h"], score=float(m.get("score", 0.0)))
+                for m in o.get("marks", [])
+            ),
+            marked_path=o.get("marked_path"),
         )
 
     # ---------- EyePort ----------
@@ -163,6 +169,19 @@ class RustEye(EyePort):
         resp = self._rpc({"op": "observe", "with_buttons": False, "with_page": True})
         if not resp.get("ok", False) and "observation" not in resp:
             raise RustEyeError(resp.get("error") or "observe_page that bai")
+        return self._obs_from_resp(resp)
+
+    def observe_som(self, with_page: bool = False) -> Observation:
+        """Observe cho LLM AGENT VISION: tao Set-of-Mark (danh so element + luu
+        anh marked). Tra Observation co .marks (so->toa do) + .marked_path (anh
+        da danh so de agent NHIN). Agent chon SO -> click_mark dung toa do.
+        marks = UNG VIEN (CV co the sot/rac) -> agent VERIFY tren anh goc."""
+        req = {"op": "observe", "with_som": True}
+        if with_page:
+            req["with_page"] = True
+        resp = self._rpc(req)
+        if not resp.get("ok", False) and "observation" not in resp:
+            raise RustEyeError(resp.get("error") or "observe_som that bai")
         return self._obs_from_resp(resp)
 
     def act(self, action: Action) -> ActionResult:

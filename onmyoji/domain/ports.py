@@ -36,6 +36,13 @@ class EyePort(ABC):
         Mac dinh = observe() (adapter ho tro page se override)."""
         return self.observe()
 
+    def observe_som(self, with_page: bool = False) -> Observation:
+        """Tier "agent vision": tao Set-of-Mark (danh so element + luu anh marked)
+        cho LLM agent NHIN va chon SO -> click dung toa do. Tra Observation co
+        .marks + .marked_path. marks = UNG VIEN (CV co the sot/rac), agent VERIFY
+        tren anh goc. Mac dinh = observe() (adapter ho tro SoM se override)."""
+        return self.observe()
+
     @abstractmethod
     def act(self, action: Action) -> ActionResult:
         """Thuc thi 1 action len game, tra ket qua + observation moi."""

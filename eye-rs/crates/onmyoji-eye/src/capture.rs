@@ -49,6 +49,26 @@ pub trait Backend {
         }
     }
 
+    /// observe cho LLM agent vision: tao Set-of-Mark (danh so element + luu anh
+    /// marked vao `som_dir`). Tra Observation co marks + marked_path de agent NHIN
+    /// roi chon SO. with_page tuy chon (xac dinh man).
+    fn observe_som(&mut self, som_dir: &str, with_page: bool) -> Observation {
+        let ts = now_ts();
+        match self.grab() {
+            Some(img) => Observation::perceive(
+                &img,
+                ts,
+                &crate::protocol::PerceiveOpts {
+                    frame_path: None,
+                    with_buttons: true,
+                    with_page,
+                    som_dir: Some(som_dir.to_string()),
+                },
+            ),
+            None => Observation::dead(ts, Size { w: 0, h: 0 }),
+        }
+    }
+
     /// act = dispatch + observe lai (giong PythonEye.act).
     fn act(&mut self, action: &Action) -> ActionResult {
         match self.dispatch(action) {

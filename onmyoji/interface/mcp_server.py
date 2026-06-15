@@ -88,6 +88,49 @@ def wait_stable() -> dict:
 
 
 @mcp.tool()
+def observe_marked() -> dict:
+    """Chup man hinh + danh so cac element clickable (Set-of-Mark) cho BAN NHIN.
+
+    Dung khi can NHIN man hinh de quyet dinh click gi (man moi/la, hoac observe()
+    khong du). Tra ve:
+      - marked_path: duong dan anh DA DANH SO (mo anh nay de NHIN cac so tren nut).
+      - marks: [{id, cx, cy, w, h, score}] - id tren anh -> toa do (cx,cy) de click.
+      - state_id, page, loading, size nhu observe().
+
+    LUU Y QUAN TRONG: marks la UNG VIEN do CV detect, CO THE SOT (vd nut Explore/
+    Summon phuc tap) HOAC co RAC. Hay MO anh marked_path de NHIN, doi chieu:
+      - Mark dung element -> click_mark(id).
+      - Element BI SOT (khong co so) -> uoc toa do tu anh roi click(x,y).
+      - Mark la RAC -> bo qua.
+    Sau khi xac dinh, dung click_mark(id) hoac click(x,y).
+    """
+    obs = get_container().eye.observe_som()
+    return obs.to_dict()
+
+
+@mcp.tool()
+def click_mark(mark_id: int) -> dict:
+    """Click vao element theo SO (mark id) tu observe_marked().
+
+    Tien loi + CHINH XAC: ban chi can chon SO nhin thay tren anh marked, he thong
+    tu tra toa do tam (cx,cy) chinh xac de click. Tranh phai uoc luong pixel.
+
+    Tham so:
+        mark_id: so tren anh marked (tu observe_marked().marks[].id).
+    Tra ve dict Observation MOI sau click. Loi neu mark_id khong ton tai (hay
+    observe_marked() lai roi chon so dung).
+    """
+    eye = get_container().eye
+    obs = eye.observe_som()
+    mark = next((m for m in obs.marks if m.id == mark_id), None)
+    if mark is None:
+        ids = [m.id for m in obs.marks]
+        return {"error": f"mark_id {mark_id} khong ton tai. Cac id co: {ids}",
+                "marks": [m.__dict__ if hasattr(m, "__dict__") else m for m in obs.marks]}
+    return get_container().act().execute(Action.click(mark.cx, mark.cy)).to_dict()
+
+
+@mcp.tool()
 def click(x: int, y: int) -> dict:
     """Click chuot trai tai toa do (x, y) tren man hinh game.
 

@@ -32,6 +32,25 @@ class Resources:
 
 
 @dataclass(frozen=True, slots=True)
+class Mark:
+    """1 Set-of-Mark element cho LLM agent vision: id + tam (toa do click) + bbox.
+    Agent chon SO trong anh marked -> click theo (cx,cy). marks = UNG VIEN (CV co
+    the sot/rac) -> agent VERIFY tren anh goc."""
+    id: int
+    cx: int
+    cy: int
+    x: int
+    y: int
+    w: int
+    h: int
+    score: float
+
+    @property
+    def center(self) -> tuple[int, int]:
+        return (self.cx, self.cy)
+
+
+@dataclass(frozen=True, slots=True)
 class Size:
     w: int
     h: int
@@ -55,10 +74,15 @@ class Observation:
     # voi man DONG/3D. None neu khong chay page detection / khong khop.
     page: Optional[str] = None
     page_score: Optional[float] = None
+    # Set-of-Mark cho LLM agent vision: cac element da danh so + anh marked.
+    # marks = UNG VIEN (CV co the sot/rac), agent VERIFY tren anh goc.
+    marks: tuple[Mark, ...] = ()
+    marked_path: Optional[str] = None
 
     def to_dict(self) -> dict:
         d = asdict(self)
         d["buttons"] = [asdict(b) for b in self.buttons]
+        d["marks"] = [asdict(m) for m in self.marks]
         return d
 
     @classmethod
@@ -76,6 +100,8 @@ class Observation:
             dhash=d.get("dhash"),
             page=d.get("page"),
             page_score=d.get("page_score"),
+            marks=tuple(Mark(**m) for m in d.get("marks", [])),
+            marked_path=d.get("marked_path"),
         )
 
 

@@ -70,6 +70,14 @@ fn handle_conn(stream: TcpStream, backend: &mut impl Backend) -> bool {
     false
 }
 
+/// Thu muc luu anh Set-of-Mark cho LLM agent vision. Mac dinh /tmp (WSL ext4
+/// nhanh; agent doc duoc qua file path). Chinh qua env ONMYOJI_EYE_SOM_DIR.
+fn som_dir() -> &'static str {
+    use std::sync::OnceLock;
+    static D: OnceLock<String> = OnceLock::new();
+    D.get_or_init(|| std::env::var("ONMYOJI_EYE_SOM_DIR").unwrap_or_else(|_| "/tmp".to_string()))
+}
+
 /// Phan tich 1 dong JSON, chay op, tao Response. Tra (resp, can_shutdown).
 fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
     let req: Request = match serde_json::from_str(line) {
@@ -79,10 +87,16 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
     let id = req.id.clone();
     match req.op {
         Op::Ping => (Response::obs(id, backend.observe()), false),
-        Op::Observe => (
-            Response::obs(id, backend.observe_full(req.with_buttons, req.with_page)),
-            false,
-        ),
+        Op::Observe => {
+            // with_som -> tao Set-of-Mark cho LLM agent vision (luu anh marked
+            // vao thu muc tam). Nguoc lai: observe thuong (buttons/page).
+            let obs = if req.with_som {
+                backend.observe_som(som_dir(), req.with_page)
+            } else {
+                backend.observe_full(req.with_buttons, req.with_page)
+            };
+            (Response::obs(id, obs), false)
+        }
         Op::Act => match req.action {
             Some(a) => (Response::act(id, backend.act(&a)), false),
             None => (Response::err(id, "op=act thieu truong 'action'"), false),

@@ -45,7 +45,22 @@
         "resources": {"$ref": "#/definitions/Resources"},
         "page": {"type": ["string", "null"], "description": "Page UI nhan bang landmark template match (vd 'page_main'). Robust hon dhash voi man DONG/3D. null neu khong khop page nao."},
         "page_score": {"type": ["number", "null"], "description": "Score template (TM_CCOEFF_NORMED) cua page, neu co."},
+        "marks": {"type": "array", "description": "Set-of-Mark cho LLM agent vision: element da danh so. marks = UNG VIEN (CV co the sot/rac), agent VERIFY tren anh goc.", "items": {"$ref": "#/definitions/Mark"}},
+        "marked_path": {"type": ["string", "null"], "description": "Duong dan anh DA DANH SO de agent NHIN. null neu khong tao SoM."},
         "frame_path": {"type": ["string", "null"], "description": "duong dan anh DEBUG tuy chon (khong dung trong hot loop)"}
+      }
+    },
+    "Mark": {
+      "type": "object",
+      "description": "1 Set-of-Mark element: id tren anh marked -> toa do tam (cx,cy) de click.",
+      "required": ["id", "cx", "cy", "x", "y", "w", "h", "score"],
+      "properties": {
+        "id": {"type": "integer", "description": "so hien tren anh marked"},
+        "cx": {"type": "integer", "description": "tam X (toa do click)"},
+        "cy": {"type": "integer", "description": "tam Y (toa do click)"},
+        "x": {"type": "integer"}, "y": {"type": "integer"},
+        "w": {"type": "integer"}, "h": {"type": "integer"},
+        "score": {"type": "number", "description": "do tin cay 0..1 (cao=chac, thap=nghi, agent verify)"}
       }
     },
     "Action": {
