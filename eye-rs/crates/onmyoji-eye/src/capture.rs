@@ -69,6 +69,13 @@ pub trait Backend {
         }
     }
 
+    /// SNAP toa do tho -> tam element gan nhat (cho agent click chinh xac khi CV
+    /// sot element). Tra (x,y,snapped,dist). None neu khong chup duoc.
+    fn snap(&mut self, rx: i32, ry: i32, radius: i32) -> Option<eye_core::Snap> {
+        let img = self.grab()?;
+        Some(eye_core::snap_to_element(&img, rx, ry, radius))
+    }
+
     /// act = dispatch + observe lai (giong PythonEye.act).
     fn act(&mut self, action: &Action) -> ActionResult {
         match self.dispatch(action) {

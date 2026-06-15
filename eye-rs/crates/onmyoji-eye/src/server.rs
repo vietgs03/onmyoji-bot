@@ -101,6 +101,25 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
             Some(a) => (Response::act(id, backend.act(&a)), false),
             None => (Response::err(id, "op=act thieu truong 'action'"), false),
         },
+        Op::Snap => {
+            let (rx, ry) = (req.x.unwrap_or(0), req.y.unwrap_or(0));
+            let radius = req.radius.unwrap_or(40);
+            match backend.snap(rx, ry, radius) {
+                Some(s) => (
+                    Response::snap(
+                        id,
+                        crate::protocol::SnapResult {
+                            x: s.x,
+                            y: s.y,
+                            snapped: s.snapped,
+                            dist: s.dist as f64,
+                        },
+                    ),
+                    false,
+                ),
+                None => (Response::err(id, "snap: khong chup duoc (game tat?)"), false),
+            }
+        }
         Op::Shutdown => (
             Response {
                 ok: true,
@@ -108,6 +127,7 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
                 error: None,
                 observation: None,
                 result: None,
+                snap: None,
             },
             true,
         ),

@@ -286,6 +286,104 @@ pub fn annotate(img: &Image) -> (Vec<Mark>, Image) {
     (marks, annotated)
 }
 
+/// Ket qua snap: toa do tinh (snapped) + nguon.
+#[derive(Clone, Copy, Debug, PartialEq)]
+pub struct Snap {
+    pub x: i32,
+    pub y: i32,
+    /// "mark" = trung tam element CV gan nhat; "raw" = giu nguyen (khong co element gan)
+    pub snapped: bool,
+    /// khoang cach tu diem tho toi element snapped (px)
+    pub dist: f32,
+}
+
+/// SNAP toa do THO cua agent ve TAM element gan nhat (trong ban kinh `radius`).
+/// Dung khi agent uoc toa do tu anh -> snap ve element that de click chinh xac.
+///
+/// 2 nguon (uu tien giam dan):
+///   1. mark gan nhat (element CV da detect) trong radius / chua diem.
+///   2. neu khong co mark: snap ve TAM cum tuong phan cuc bo quanh diem (bat ca
+///      element CV SOT nhu Explore/Summon - khong gioi han marks).
+///   3. khong co gi: giu nguyen toa do tho (raw).
+pub fn snap_to_element(img: &Image, rx: i32, ry: i32, radius: i32) -> Snap {
+    let marks = marks_from_buttons(img);
+    let mut best: Option<(f32, &Mark)> = None;
+    for m in &marks {
+        // trong bbox -> distance = 0 (uu tien tuyet doi)
+        let inside = rx >= m.x && rx < m.x + m.w && ry >= m.y && ry < m.y + m.h;
+        let dx = (rx - m.cx) as f32;
+        let dy = (ry - m.cy) as f32;
+        let d = if inside { 0.0 } else { (dx * dx + dy * dy).sqrt() };
+        if d <= radius as f32 && best.map(|(bd, _)| d < bd).unwrap_or(true) {
+            best = Some((d, m));
+        }
+    }
+    if let Some((d, m)) = best {
+        return Snap {
+            x: m.cx,
+            y: m.cy,
+            snapped: true,
+            dist: d,
+        };
+    }
+    // khong co mark gan -> snap ve tam cum tuong phan cuc bo (element CV sot)
+    if let Some((sx, sy)) = local_contrast_center(img, rx, ry, radius) {
+        let dx = (rx - sx) as f32;
+        let dy = (ry - sy) as f32;
+        return Snap {
+            x: sx,
+            y: sy,
+            snapped: true,
+            dist: (dx * dx + dy * dy).sqrt(),
+        };
+    }
+    Snap {
+        x: rx.clamp(0, img.width as i32 - 1),
+        y: ry.clamp(0, img.height as i32 - 1),
+        snapped: false,
+        dist: f32::INFINITY,
+    }
+}
+
+/// Tam "khoi luong" cua tuong phan cuc bo quanh (rx,ry) trong cua so `radius`.
+/// Tinh gradient (|dx|+|dy| tho) lam trong so -> centroid. Bat element CV sot.
+/// None neu vung phang (khong co element -> khong nen snap).
+fn local_contrast_center(img: &Image, rx: i32, ry: i32, radius: i32) -> Option<(i32, i32)> {
+    let (iw, ih) = (img.width as i32, img.height as i32);
+    let x0 = (rx - radius).max(1);
+    let y0 = (ry - radius).max(1);
+    let x1 = (rx + radius).min(iw - 2);
+    let y1 = (ry + radius).min(ih - 2);
+    if x1 <= x0 || y1 <= y0 {
+        return None;
+    }
+    let lum = |x: i32, y: i32| -> i32 {
+        let i = ((y as usize) * img.width + x as usize) * 3;
+        img.data[i] as i32 + img.data[i + 1] as i32 + img.data[i + 2] as i32
+    };
+    let mut sw = 0f64;
+    let mut sx = 0f64;
+    let mut sy = 0f64;
+    for y in y0..=y1 {
+        for x in x0..=x1 {
+            let gx = (lum(x + 1, y) - lum(x - 1, y)).abs();
+            let gy = (lum(x, y + 1) - lum(x, y - 1)).abs();
+            let g = (gx + gy) as f64;
+            sw += g;
+            sx += g * x as f64;
+            sy += g * y as f64;
+        }
+    }
+    // nguong: tong gradient phai du lon (co element), tranh snap vao vung phang.
+    // vung phang gradient ~0; element (vien + text/texture) gradient lon. area*4
+    // du de loai phang ma van bat element vien mong.
+    let area = ((x1 - x0 + 1) * (y1 - y0 + 1)) as f64;
+    if sw < area * 4.0 {
+        return None; // vung phang -> khong snap
+    }
+    Some(((sx / sw).round() as i32, (sy / sw).round() as i32))
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -339,5 +437,34 @@ mod tests {
         // so 1 phai co it nhat vai pixel trang
         let white = img.data.chunks_exact(3).filter(|p| p[0] == 255).count();
         assert!(white > 0, "phai ve duoc chu so");
+    }
+
+    #[test]
+    fn snap_vung_phang_giu_raw() {
+        // anh phang (khong element) -> snap giu nguyen toa do tho
+        let img = blank(200, 200);
+        let s = snap_to_element(&img, 100, 100, 40);
+        assert!(!s.snapped, "vung phang khong nen snap: {s:?}");
+        assert_eq!((s.x, s.y), (100, 100));
+    }
+
+    #[test]
+    fn snap_ve_tam_element_sang() {
+        // nen toi + 1 o sang 20x20 tai (120..140, 60..80) -> tam (130,70).
+        // diem tho (110,55) gan do -> snap ve ~tam o sang.
+        let mut d = vec![20u8; 200 * 200 * 3];
+        for y in 60..80 {
+            for x in 120..140 {
+                let i = (y * 200 + x) * 3;
+                d[i] = 240;
+                d[i + 1] = 240;
+                d[i + 2] = 240;
+            }
+        }
+        let img = Image::from_rgb(200, 200, d).unwrap();
+        let s = snap_to_element(&img, 110, 55, 50);
+        assert!(s.snapped, "phai snap vao element sang: {s:?}");
+        // tam snap nam trong/gan o sang (120..140, 60..80)
+        assert!((110..150).contains(&s.x) && (50..90).contains(&s.y), "snap sai: {s:?}");
     }
 }

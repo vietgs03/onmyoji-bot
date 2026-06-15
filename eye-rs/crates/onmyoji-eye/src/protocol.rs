@@ -309,6 +309,9 @@ pub struct ActionResult {
 pub enum Op {
     Observe,
     Act,
+    /// SNAP toa do tho -> tam element gan nhat (cho agent click chinh xac khi CV
+    /// sot element). Tra ket qua trong Response.snap.
+    Snap,
     Ping,
     Shutdown,
 }
@@ -332,6 +335,22 @@ pub struct Request {
     /// agent vision. Mac dinh false (chi bat khi agent can NHIN de quyet dinh).
     #[serde(default)]
     pub with_som: bool,
+    /// snap: toa do tho can snap (op=snap). radius = ban kinh tim element.
+    #[serde(default)]
+    pub x: Option<i32>,
+    #[serde(default)]
+    pub y: Option<i32>,
+    #[serde(default)]
+    pub radius: Option<i32>,
+}
+
+/// Ket qua snap toa do tho -> tam element gan nhat. Khop schema `SnapResult`.
+#[derive(Debug, Clone, Serialize)]
+pub struct SnapResult {
+    pub x: i32,
+    pub y: i32,
+    pub snapped: bool,
+    pub dist: f64,
 }
 
 /// EYE -> BRAIN qua socket (1 dong NDJSON). Khop schema `Response`.
@@ -346,6 +365,8 @@ pub struct Response {
     pub observation: Option<Observation>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub result: Option<ActionResult>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub snap: Option<SnapResult>,
 }
 
 impl Response {
@@ -356,6 +377,7 @@ impl Response {
             error: Some(msg.into()),
             observation: None,
             result: None,
+            snap: None,
         }
     }
 
@@ -366,6 +388,7 @@ impl Response {
             error: None,
             observation: Some(observation),
             result: None,
+            snap: None,
         }
     }
 
@@ -376,6 +399,19 @@ impl Response {
             error: None,
             observation: None,
             result: Some(result),
+            snap: None,
+        }
+    }
+
+    /// Response cho op snap.
+    pub fn snap(id: Option<serde_json::Value>, snap: SnapResult) -> Self {
+        Response {
+            ok: true,
+            id,
+            error: None,
+            observation: None,
+            result: None,
+            snap: Some(snap),
         }
     }
 }

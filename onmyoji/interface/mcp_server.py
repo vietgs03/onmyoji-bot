@@ -131,6 +131,27 @@ def click_mark(mark_id: int) -> dict:
 
 
 @mcp.tool()
+def click_at(x: int, y: int, snap: bool = True) -> dict:
+    """Click tai toa do (x,y) ban UOC LUONG tu anh, voi SNAP tu dong (mac dinh).
+
+    Dung khi element BI SOT (khong co mark trong observe_marked) -> ban nhin anh,
+    uoc toa do tho, goi click_at(x,y). He thong tu SNAP ve tam element gan nhat
+    (trong ban kinh ~40px) -> click chinh xac du ban uoc hoi lech. snap=False de
+    click dung (x,y) khong chinh.
+
+    Tham so:
+        x, y: toa do uoc luong tu anh marked/goc.
+        snap: True (mac dinh) = snap ve element gan nhat; False = click nguyen xy.
+    Tra ve dict Observation MOI sau click.
+    """
+    eye = get_container().eye
+    sx, sy = x, y
+    if snap and hasattr(eye, "snap"):
+        sx, sy, _ = eye.snap(x, y)
+    return get_container().act().execute(Action.click(sx, sy)).to_dict()
+
+
+@mcp.tool()
 def click(x: int, y: int) -> dict:
     """Click chuot trai tai toa do (x, y) tren man hinh game.
 

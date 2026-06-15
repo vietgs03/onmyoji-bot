@@ -184,6 +184,16 @@ class RustEye(EyePort):
             raise RustEyeError(resp.get("error") or "observe_som that bai")
         return self._obs_from_resp(resp)
 
+    def snap(self, x: int, y: int, radius: int = 40) -> tuple[int, int, bool]:
+        """SNAP toa do tho (x,y) ve tam element gan nhat (cho click chinh xac khi
+        CV sot element). Tra (sx, sy, snapped). snapped=False -> giu nguyen (x,y)
+        (khong co element gan -> agent van click cho do)."""
+        resp = self._rpc({"op": "snap", "x": int(x), "y": int(y), "radius": int(radius)})
+        s = resp.get("snap") or {}
+        if not s:
+            return (int(x), int(y), False)
+        return (int(s.get("x", x)), int(s.get("y", y)), bool(s.get("snapped", False)))
+
     def act(self, action: Action) -> ActionResult:
         resp = self._rpc({"op": "act", "action": action.to_dict()})
         result = resp.get("result") or {}

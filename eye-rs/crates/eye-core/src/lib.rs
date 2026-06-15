@@ -21,5 +21,5 @@ pub use image::{Image, ImageError};
 pub use motion::{analyze_movability, diff_ratio, shift_x, shift_y, Movability};
 pub use page::{PageDetector, PageHit, PageTemplate};
 pub use perception::{dhash, hamming, is_loading, resize_rgb, state_id, H, W};
-pub use som::{annotate, marks_from_buttons, render_marks, Mark};
+pub use som::{annotate, marks_from_buttons, render_marks, snap_to_element, Mark, Snap};
 pub use template::{match_template, match_template_roi, MatchResult, Roi};
