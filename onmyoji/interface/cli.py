@@ -42,6 +42,8 @@ def main(argv: list[str] | None = None) -> int:
     pc = sub.add_parser("polite-click"); pc.add_argument("x", type=int); pc.add_argument("y", type=int)
     d = sub.add_parser("drag"); [d.add_argument(a, type=int) for a in ("x0", "y0", "x1", "y1")]
     k = sub.add_parser("key"); k.add_argument("key")
+    g = sub.add_parser("goto", help="navigate toi man co label"); g.add_argument("label")
+    a = sub.add_parser("ask", help="tra cuu KB"); a.add_argument("query", nargs="+")
 
     args = p.parse_args(argv)
     if args.eye:
@@ -67,6 +69,12 @@ def main(argv: list[str] | None = None) -> int:
         elif args.cmd == "key":
             obs = container.act().execute(Action.key_press(args.key))
             _print(obs.to_dict())
+        elif args.cmd == "goto":
+            ok = container.navigate().execute(args.label)
+            _print({"goto": args.label, "ok": ok})
+        elif args.cmd == "ask":
+            results = container.ask_knowledge().execute(" ".join(args.query))
+            _print(results)
         else:
             p.print_help(); return 2
     finally:
