@@ -36,6 +36,7 @@ const T28: &[u8] = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../as
 const T29: &[u8] = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/pages/page_team.png"));
 const T30: &[u8] = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/pages/page_town.png"));
 const T31: &[u8] = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/pages/page_travel.png"));
+const T32: &[u8] = include_bytes!(concat!(env!("CARGO_MANIFEST_DIR"), "/../../assets/pages/page_town_live.png"));
 
 pub fn template_bytes(name: &str) -> Option<&'static [u8]> {
     match name {
@@ -71,6 +72,7 @@ pub fn template_bytes(name: &str) -> Option<&'static [u8]> {
         "page_team.png" => Some(T29),
         "page_town.png" => Some(T30),
         "page_travel.png" => Some(T31),
+        "page_town_live.png" => Some(T32),
         _ => None,
     }
 }

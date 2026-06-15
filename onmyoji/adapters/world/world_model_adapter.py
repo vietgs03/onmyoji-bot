@@ -89,23 +89,33 @@ class WorldModelAdapter(WorldModelPort):
         lan hoc lai sinh 1 node moc coi khac -> verified elements PHAN MANH, recall
         hen xui. Page detector (landmark template) KHONG troi -> dung lam neo chinh.
 
-        Thu tu uu tien:
-          1. dhash match 1 state da hoc (hamming<=CANON_THR) -> sid do, confirmed.
-          2. page -> resolve_label -> node da co label do (HOME) -> sid CHUAN, confirmed.
-             (cac frame HOME khac dhash van hoi tu ve 1 node logic).
-          3. chi co page (chua co node label) -> (state_id, confirmed=True) - se tao
-             node moi NHUNG da xac nhan (page robust).
-          4. khong dhash-match, khong page -> (state_id, confirmed=False) - man LA.
+        Thu tu uu tien (NEO theo do BEN nhat + uu tien node CO LABEL vi verified
+        elements gom theo label):
+          1. dhash match 1 state da hoc VA state do CO label -> sid do, confirmed.
+          2. page -> resolve_label -> node da co label do -> sid CHUAN, confirmed.
+             (uu tien hon dhash-match-vao-node-KHONG-label: man dong dhash co the
+             trung 1 frame cu chua label -> verified elements nam o node co label,
+             phai tra node do moi recall duoc).
+          3. dhash match nhung node KHONG label (chua page) -> sid do, confirmed.
+          4. chi co page (chua co node label) -> (state_id, confirmed=True).
+          5. khong dhash, khong page -> (state_id, confirmed=False) - man LA.
         """
         matched = self.match_state(dhash, state_id)
-        if matched is not None:
+        # 1) dhash match VA node co label -> tin ngay (node dung, co the co elements)
+        if matched is not None and self._wm.states.get(matched, {}).get("label"):
             return matched, True
+        # 2) page -> label -> node da co label (uu tien hon dhash-match-node-khong-label
+        #    vi verified elements gom theo label; man dong dhash trung node cu chua
+        #    label se MAT elements neu khong neo qua label)
         label = self.resolve_page(page) if page else None
         if label:
             anchor = self._label_to_state(label)
             if anchor is not None:
                 return anchor, True
             return state_id, True  # co page nhung chua co node -> tao moi, da xac nhan
+        # 3) dhash match node khong label (chua hoc page) -> van dung duoc
+        if matched is not None:
+            return matched, True
         return state_id, False  # man LA
 
     def _label_to_state(self, label: str) -> Optional[str]:

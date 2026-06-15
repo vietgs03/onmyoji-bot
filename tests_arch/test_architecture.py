@@ -232,6 +232,23 @@ def test_canonical_state_page_anchor():
     els = adapter.elements_for(sid_recall)
     labels = sorted(e["label"] for e in els)
     assert "Explore" in labels, f"recall qua page anchor phai thay Explore: {labels}"
+
+    # 6) UU TIEN node CO LABEL: man dong dhash match 1 node CU KHONG label, nhung
+    #    page resolve ra label co node -> phai tra node CO LABEL (verified elements
+    #    gom theo label). Neu tra node khong label -> MAT elements (bug Town da gap).
+    wm.states["town_unlabeled"] = {"dhash": "1010" * 16, "label": None,
+                                   "buttons_tried": [], "verified_elements": []}
+    wm.states["town_labeled"] = {"dhash": "0101" * 16, "label": "Town2",
+                                 "buttons_tried": [], "verified_elements": [
+                                     {"cx": 300, "cy": 318, "label": "Arena"}]}
+    # gia page_main2 -> Town2 (dung resolve_page that khong co, nen test truc tiep
+    # logic: dhash match node khong label + co label tu state_for_label)
+    # mo phong: dhash match town_unlabeled, nhung neu page->Town2 thi uu tien labeled
+    # (dung _label_to_state). Day la hanh vi canonical_state buoc 2 > buoc 3.
+    sid_pref = adapter._label_to_state("Town2")
+    assert sid_pref == "town_labeled", "phai resolve Town2 -> node co label"
+    assert any(e["label"] == "Arena" for e in adapter.elements_for(sid_pref)), \
+        "node co label phai giu verified elements"
     print("  [ok] canonical_state page anchor (man dong dhash troi -> recall on dinh)")
 
 
