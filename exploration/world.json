@@ -3210,6 +3210,92 @@
           "label": "back"
         }
       ]
+    },
+    "911e8f9a8a": {
+      "dhash": "1010101010101010011000100110011010001001100101010111110001100110",
+      "label": "OnmyojiInfo",
+      "desc": "Chi tiet ONMYOJI chinh (阴阳师, vd Kagura/Seimei). Xem chi so (ATK/HP/DEF/Speed/Crit), Skills (ky nang), Totem, Bios (tieu su), Sentry. Switch doi onmyoji. Stats xem chi tiet, Skin doi trang phuc. Vao tu HOME>Onmyoji.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 1080,
+          "cy": 222,
+          "label": "SkillsTab"
+        },
+        {
+          "cx": 1068,
+          "cy": 325,
+          "label": "TotemTab"
+        },
+        {
+          "cx": 1068,
+          "cy": 427,
+          "label": "BiosTab"
+        },
+        {
+          "cx": 51,
+          "cy": 358,
+          "label": "Switch"
+        },
+        {
+          "cx": 736,
+          "cy": 580,
+          "label": "Stats"
+        },
+        {
+          "cx": 906,
+          "cy": 582,
+          "label": "Skin"
+        },
+        {
+          "cx": 39,
+          "cy": 28,
+          "label": "back"
+        }
+      ]
+    },
+    "10317f054b": {
+      "dhash": "0011010101010101100010011101111011111011111101100100110011010011",
+      "label": "Town",
+      "desc": "Thi tran 平安京 (Heian-Kyo Town) - HUB lon nhieu mode PvP/event. Co: Arena (斗技 dau truong PvP), Demon Parade (百鬼夜行 dieu hanh quy), Retrospect (hoi tuong), Encounter, Itachiland, Mystic Trader (神秘商人). Thanh day = HUD co dinh giong HOME. Pan ngang duoc. Vao tu HOME>Town.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": []
+    },
+    "4db20b0266": {
+      "dhash": "1100100100011010100111101000000100100010110111010111100000010100",
+      "label": null,
+      "desc": null,
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 300,
+          "cy": 318,
+          "label": "Arena"
+        },
+        {
+          "cx": 610,
+          "cy": 306,
+          "label": "DemonParade"
+        },
+        {
+          "cx": 642,
+          "cy": 402,
+          "label": "MysticTrader"
+        },
+        {
+          "cx": 398,
+          "cy": 156,
+          "label": "Retrospect"
+        },
+        {
+          "cx": 680,
+          "cy": 142,
+          "label": "Encounter"
+        }
+      ]
     }
   },
   "edges": [
