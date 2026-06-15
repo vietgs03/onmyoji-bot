@@ -255,6 +255,43 @@ function Do-SendClick($hwnd, $x, $y) {
   [Native]::SendMessage($hwnd, $WM_LBUTTONUP, [IntPtr]::Zero, $lparam) | Out-Null
 }
 
+function Get-VKCode($name) {
+  # Anh xa ten phim -> virtual-key code (VK_*). Ho tro phim hay dung trong game.
+  switch ($name.ToLower()) {
+    "esc"       { 0x1B }  "escape" { 0x1B }
+    "enter"     { 0x0D }  "return" { 0x0D }
+    "space"     { 0x20 }
+    "tab"       { 0x09 }
+    "backspace" { 0x08 }
+    "up"        { 0x26 }  "down" { 0x28 }  "left" { 0x25 }  "right" { 0x27 }
+    "f1" {0x70} "f2" {0x71} "f3" {0x72} "f4" {0x73} "f5" {0x74} "f6" {0x75}
+    "f7" {0x76} "f8" {0x77} "f9" {0x78} "f10" {0x79} "f11" {0x7A} "f12" {0x7B}
+    default {
+      # 1 ky tu chu/so -> VK = ma hoa ASCII (A-Z, 0-9 trung VK code)
+      if ($name.Length -eq 1) {
+        $c = [char]::ToUpper($name[0])
+        if (($c -ge 'A' -and $c -le 'Z') -or ($c -ge '0' -and $c -le '9')) {
+          [int][byte][char]$c
+        } else { -1 }
+      } else { -1 }
+    }
+  }
+}
+
+function Do-SendKey($hwnd, $name) {
+  # Gui phim KHONG CHIEM FOCUS: PostMessage WM_KEYDOWN + WM_KEYUP vao hwnd game.
+  # Tra $true neu ten phim hop le, $false neu khong nhan ra.
+  $vk = Get-VKCode $name
+  if ($vk -lt 0) { return $false }
+  $WM_KEYDOWN = 0x0100; $WM_KEYUP = 0x0101
+  # lParam: bit 0-15 repeat=1; bit 16-23 scan code; don gian dung 1 cho keydown.
+  [Native]::PostMessage($hwnd, $WM_KEYDOWN, [IntPtr]$vk, [IntPtr]0x00000001) | Out-Null
+  Start-Sleep -Milliseconds (Get-Random -Minimum 40 -Maximum 90)
+  # keyup: bit 30 (truoc do nhan) + bit 31 (nha) = 0xC0000001
+  [Native]::PostMessage($hwnd, $WM_KEYUP, [IntPtr]$vk, [IntPtr]0xC0000001) | Out-Null
+  return $true
+}
+
 function Do-FgClick($hwnd, $x, $y) {
   # Click thuc (foreground): focus cua so + di chuot toi toa do man hinh + bam.
   # Tin cay tren MOI popup/modal (PostMessage/SendMessage bi mot so modal bo qua).
@@ -349,6 +386,16 @@ while ($true) {
       "fgclick" {
         Do-FgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
         Write-Output ("OK fgclick {0} {1}" -f $parts[1],$parts[2])
+      }
+      "key" {
+        # Gui phim (PostMessage WM_KEYDOWN/UP). vd: key esc / key enter / key a
+        if ($parts.Count -lt 2) {
+          Write-Output "ERR key thieu ten phim"
+        } else {
+          $ok = Do-SendKey $hwnd $parts[1]
+          if ($ok) { Write-Output ("OK key {0}" -f $parts[1]) }
+          else { Write-Output ("ERR key khong nhan ra: {0}" -f $parts[1]) }
+        }
       }
       "pmclick" {
         Do-BgClick $hwnd ([int]$parts[1]) ([int]$parts[2])
