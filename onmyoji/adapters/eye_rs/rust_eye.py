@@ -43,7 +43,11 @@ class RustEye(EyePort):
     """
 
     def __init__(self, addr: Optional[str] = None, *, spawn: Optional[bool] = None,
-                 binary: Optional[str] = None, connect_timeout: float = 8.0):
+                 binary: Optional[str] = None, connect_timeout: float = 30.0):
+        # connect_timeout 30s: khi spawn=1, `serve --ps` phai khoi dong PowerShell
+        # (PsBridge) + cho ".NET/NeoX JIT warmup ~11s lan dau lanh" TRUOC khi bind
+        # port -> 8s cu khong du, gay timeout gia. 30s du an toan; co the chinh qua
+        # ONMYOJI_EYE_CONNECT_TIMEOUT.
         self._addr = addr or os.environ.get("ONMYOJI_EYE_ADDR", _DEFAULT_ADDR)
         self._host, _, port = self._addr.partition(":")
         self._port = int(port or "8765")
@@ -51,6 +55,13 @@ class RustEye(EyePort):
         if spawn is None:
             spawn = os.environ.get("ONMYOJI_EYE_SPAWN", "0") == "1"
         self._spawn = spawn
+        # cho phep chinh timeout qua env (vd may cham can lau hon)
+        env_to = os.environ.get("ONMYOJI_EYE_CONNECT_TIMEOUT")
+        if env_to:
+            try:
+                connect_timeout = float(env_to)
+            except ValueError:
+                pass
         self._proc: Optional[subprocess.Popen] = None
         self._sock: Optional[socket.socket] = None
         self._f = None  # file-like cho readline
