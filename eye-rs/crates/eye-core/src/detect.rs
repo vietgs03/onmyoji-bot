@@ -87,13 +87,18 @@ fn saturation_candidates(img: &Image) -> Vec<Box> {
 /// detect_buttons: tra danh sach Button (cx,cy,w,h,score) sap theo score giam.
 /// `suppress_center=true` ha diem cac box roi vao vung nhan vat (HOME).
 pub fn detect_buttons(img: &Image, suppress_center: bool) -> Vec<Button> {
+    // 2 nhanh doc lap, chay SONG SONG (Hough ~34ms vs saturation ~16ms):
+    //   1) icon tron (Hough circles)  2) vung saturation cao
+    // thread::scope thuan std (khong them crate). Gop ket qua sau khi xong.
     let mut cands: Vec<Box> = Vec::new();
-
-    // 1) icon tron (Hough circles)
-    cands.extend(crate::hough::hough_circle_candidates(img));
-
-    // 2) saturation
-    cands.extend(saturation_candidates(img));
+    std::thread::scope(|sc| {
+        let h = sc.spawn(|| crate::hough::hough_circle_candidates(img));
+        let sat = saturation_candidates(img); // chay ngay tren luong hien tai
+        let hough = h.join().unwrap_or_default();
+        cands.reserve(hough.len() + sat.len());
+        cands.extend(hough);
+        cands.extend(sat);
+    });
 
     let boxes = nms(cands, 0.35);
 

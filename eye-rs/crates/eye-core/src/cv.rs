@@ -134,92 +134,72 @@ pub fn threshold_binary(src: &Mat1, thr: u8) -> Mat1 {
     out
 }
 
-/// Dilation hinh vuong (k x k) - tach roi (separable): max theo hang roi theo cot.
-/// O(N*k) thay vi O(N*k^2). Kernel vuong nen tach duoc.
+/// Dilate hinh vuong (k x k) cho anh NHI PHAN (0/255) - O(N) khong phu thuoc k.
+///
+/// Tach roi (separable: ngang roi doc). Vi input nhi phan, dung PREFIX-SUM dem so
+/// pixel foreground trong cua so [x0,x1]: >0 -> 255 (max). Tuong duong hoan toan
+/// ban min/max O(N*k) cu nhung nhanh hon khi k lon (k=9: ~2x).
+/// Tien dieu kien: src chi gom 0 hoac 255 (dau ra threshold_binary).
 fn dilate(src: &Mat1, k: usize) -> Mat1 {
-    let r = k / 2;
-    let (w, h) = (src.w, src.h);
-    // pass ngang
-    let mut tmp = Mat1::new(w, h);
-    for y in 0..h {
-        let row = &src.data[y * w..y * w + w];
-        let out = &mut tmp.data[y * w..y * w + w];
-        for x in 0..w {
-            let x0 = x.saturating_sub(r);
-            let x1 = (x + r).min(w - 1);
-            let mut v = 0u8;
-            for &p in &row[x0..=x1] {
-                if p > v {
-                    v = p;
-                    if v == 255 {
-                        break;
-                    }
-                }
-            }
-            out[x] = v;
-        }
-    }
-    // pass doc
-    let mut out = Mat1::new(w, h);
-    for x in 0..w {
-        for y in 0..h {
-            let y0 = y.saturating_sub(r);
-            let y1 = (y + r).min(h - 1);
-            let mut v = 0u8;
-            for yy in y0..=y1 {
-                let p = tmp.data[yy * w + x];
-                if p > v {
-                    v = p;
-                    if v == 255 {
-                        break;
-                    }
-                }
-            }
-            out.data[y * w + x] = v;
-        }
-    }
-    out
+    morph_binary(src, k, true)
 }
 
-/// Erosion hinh vuong (k x k) - tach roi (separable): min theo hang roi theo cot.
+/// Erode hinh vuong (k x k) cho anh NHI PHAN (0/255) - O(N).
+/// Cua so [x0,x1] foreground HET (count == do rong) -> 255, nguoc lai 0 (min).
 fn erode(src: &Mat1, k: usize) -> Mat1 {
-    let r = k / 2;
+    morph_binary(src, k, false)
+}
+
+/// Loi chung cho dilate/erode nhi phan, separable, prefix-sum.
+/// `dilate=true`: out=255 neu CO it nhat 1 foreground; `false` (erode): out=255 neu TOAN BO foreground.
+fn morph_binary(src: &Mat1, k: usize, dilate: bool) -> Mat1 {
+    let r = (k / 2) as isize;
     let (w, h) = (src.w, src.h);
+    if w == 0 || h == 0 {
+        return Mat1::new(w, h);
+    }
+    // pass NGANG: tung hang, prefix-sum so foreground.
     let mut tmp = Mat1::new(w, h);
+    let mut pre = vec![0u32; w + 1];
     for y in 0..h {
         let row = &src.data[y * w..y * w + w];
+        for x in 0..w {
+            pre[x + 1] = pre[x] + (row[x] != 0) as u32;
+        }
         let out = &mut tmp.data[y * w..y * w + w];
         for x in 0..w {
-            let x0 = x.saturating_sub(r);
-            let x1 = (x + r).min(w - 1);
-            let mut v = 255u8;
-            for &p in &row[x0..=x1] {
-                if p < v {
-                    v = p;
-                    if v == 0 {
-                        break;
-                    }
-                }
-            }
-            out[x] = v;
+            let x0 = (x as isize - r).max(0) as usize;
+            let x1 = (x as isize + r).min(w as isize - 1) as usize;
+            let cnt = pre[x1 + 1] - pre[x0];
+            let span = (x1 - x0 + 1) as u32;
+            out[x] = if dilate {
+                if cnt > 0 { 255 } else { 0 }
+            } else if cnt == span {
+                255
+            } else {
+                0
+            };
         }
     }
+    // pass DOC: tung cot, prefix-sum so foreground.
     let mut out = Mat1::new(w, h);
+    let mut prec = vec![0u32; h + 1];
     for x in 0..w {
         for y in 0..h {
-            let y0 = y.saturating_sub(r);
-            let y1 = (y + r).min(h - 1);
-            let mut v = 255u8;
-            for yy in y0..=y1 {
-                let p = tmp.data[yy * w + x];
-                if p < v {
-                    v = p;
-                    if v == 0 {
-                        break;
-                    }
-                }
-            }
-            out.data[y * w + x] = v;
+            prec[y + 1] = prec[y] + (tmp.data[y * w + x] != 0) as u32;
+        }
+        for y in 0..h {
+            let y0 = (y as isize - r).max(0) as usize;
+            let y1 = (y as isize + r).min(h as isize - 1) as usize;
+            let cnt = prec[y1 + 1] - prec[y0];
+            let span = (y1 - y0 + 1) as u32;
+            out.data[y * w + x] = if dilate {
+                if cnt > 0 { 255 } else { 0 }
+            } else if cnt == span {
+                255
+            } else {
+                0
+            };
         }
     }
     out

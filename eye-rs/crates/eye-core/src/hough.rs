@@ -234,7 +234,13 @@ fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
     let mut accum = vec![0i32; aw * ah];
 
     // vote: tai moi edge pixel, di doc gradient tu minR den maxR (ca 2 chieu).
-    // Toi uu: buoc incremental (cong delta thay vi nhan r), bo qua cell trung lap lien tiep.
+    // Toi uu: buoc bang FIXED-POINT i64 (16 bit phan le) thay vi float -> tranh
+    // 2 lan float->int (cvttss2si) moi buoc, von la phan dat nhat. Toa do vote
+    // luon duong nen (q >> 16) = floor = truncate, khop ban float cu.
+    const FP: i64 = 16;
+    const ONE: f32 = 65536.0;
+    let aw_i = aw as i32;
+    let ah_i = ah as i32;
     for y in 0..h {
         for x in 0..w {
             let i = y * w + x;
@@ -248,19 +254,25 @@ fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
                 continue;
             }
             let inv_mag = 1.0 / mag2.sqrt();
-            // delta cho moi buoc r (don vi accumulator)
-            let sdx = gx * inv_mag * inv_dp;
-            let sdy = gy * inv_mag * inv_dp;
-            for &sign in &[1.0f32, -1.0f32] {
-                let ddx = sign * sdx;
-                let ddy = sign * sdy;
-                // diem bat dau tai r = MIN_RADIUS
-                let mut fx = (x as f32 + sign * gx * inv_mag * MIN_RADIUS as f32) * inv_dp;
-                let mut fy = (y as f32 + sign * gy * inv_mag * MIN_RADIUS as f32) * inv_dp;
+            // delta cho moi buoc r (don vi accumulator), dang fixed-point
+            let ddx_q = (gx * inv_mag * inv_dp * ONE) as i64;
+            let ddy_q = (gy * inv_mag * inv_dp * ONE) as i64;
+            for &sign in &[1i64, -1i64] {
+                let ddx = sign * ddx_q;
+                let ddy = sign * ddy_q;
+                // diem bat dau tai r = MIN_RADIUS (fixed-point)
+                let mut fx = ((x as f32
+                    + sign as f32 * gx * inv_mag * MIN_RADIUS as f32)
+                    * inv_dp
+                    * ONE) as i64;
+                let mut fy = ((y as f32
+                    + sign as f32 * gy * inv_mag * MIN_RADIUS as f32)
+                    * inv_dp
+                    * ONE) as i64;
                 for _ in MIN_RADIUS..=MAX_RADIUS {
-                    let ax = fx as i32;
-                    let ay = fy as i32;
-                    if ax >= 0 && ay >= 0 && (ax as usize) < aw && (ay as usize) < ah {
+                    let ax = (fx >> FP) as i32;
+                    let ay = (fy >> FP) as i32;
+                    if ax >= 0 && ay >= 0 && ax < aw_i && ay < ah_i {
                         accum[ay as usize * aw + ax as usize] += 1;
                     }
                     fx += ddx;
