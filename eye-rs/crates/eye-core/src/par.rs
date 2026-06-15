@@ -20,3 +20,9 @@ pub fn nthreads(work_rows: usize) -> usize {
     let by_rows = (work_rows / MIN_ROWS).max(1);
     by_rows.min(num_cpus()).max(1)
 }
+
+/// Nhu `nthreads` nhung gioi han them so band toi da `cap` (cho cac op co chi phi
+/// merge ti le voi so band, vi du vote accumulator).
+pub fn nthreads_capped(work_rows: usize, cap: usize) -> usize {
+    nthreads(work_rows).min(cap.max(1))
+}

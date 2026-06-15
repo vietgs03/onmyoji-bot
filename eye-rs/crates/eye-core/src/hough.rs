@@ -409,11 +409,41 @@ fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
     let ah = ((h as f32 * inv_dp).ceil() as usize).max(1);
 
     // vote: tai moi edge pixel, di doc gradient tu minR den maxR (ca 2 chieu).
-    // Giu TUAN TU: thu nghiem chia band + cong don accumulator bi cham hon do
-    // chi phi merge (aw*ah*nbands phep cong) + oversubscription (median da spawn,
-    // nhanh saturation chay song song). vote_band tach rieng cho de doc/test.
-    let mut accum = vec![0i32; aw * ah];
-    vote_band(&edges, &dx, &dy, w, 0, h, aw, ah, &mut accum);
+    // Chia band theo hang chay song song. Moi luong vote vao accumulator rieng
+    // roi cong don (cong so nguyen = ket hop -> BIT-EXACT). Gioi han it luong
+    // (VOTE_BANDS) de chi phi merge (aw*ah*nbands phep cong) khong an het loi.
+    const VOTE_BANDS: usize = 4;
+    let nt = crate::par::nthreads_capped(h, VOTE_BANDS);
+    let accum = if nt <= 1 {
+        let mut a = vec![0i32; aw * ah];
+        vote_band(&edges, &dx, &dy, w, 0, h, aw, ah, &mut a);
+        a
+    } else {
+        let band = h.div_ceil(nt);
+        let parts: Vec<Vec<i32>> = std::thread::scope(|sc| {
+            let mut handles = Vec::new();
+            let mut y0 = 0usize;
+            while y0 < h {
+                let y1 = (y0 + band).min(h);
+                let (edges_r, dx_r, dy_r) = (&edges, &dx[..], &dy[..]);
+                handles.push(sc.spawn(move || {
+                    let mut a = vec![0i32; aw * ah];
+                    vote_band(edges_r, dx_r, dy_r, w, y0, y1, aw, ah, &mut a);
+                    a
+                }));
+                y0 = y1;
+            }
+            handles.into_iter().map(|h| h.join().unwrap()).collect()
+        });
+        // cong don cac accumulator (thu tu co dinh -> deterministic, bit-exact)
+        let mut a = vec![0i32; aw * ah];
+        for part in &parts {
+            for (dst, &v) in a.iter_mut().zip(part.iter()) {
+                *dst += v;
+            }
+        }
+        a
+    };
 
     // tim tam: cell > PARAM2 va la local-max trong 3x3
     let t_vote = t0.elapsed();
