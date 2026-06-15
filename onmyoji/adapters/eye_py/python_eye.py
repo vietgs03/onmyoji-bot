@@ -43,6 +43,13 @@ class PythonEye(EyePort):
 
     # ---------- EyePort ----------
     def observe(self) -> Observation:
+        return self._observe(with_buttons=True)
+
+    def observe_nav(self) -> Observation:
+        # Tier nav: bo detect_buttons (~144ms) -> chi ~19ms. Dieu huong dung.
+        return self._observe(with_buttons=False)
+
+    def _observe(self, with_buttons: bool = True) -> Observation:
         import cv2
         from perception import dhash, is_loading, state_id, detect_buttons
         img = self._c.bgshot()
@@ -68,7 +75,8 @@ class PythonEye(EyePort):
         # khop 1:1 voi client area, khong bi scale lech.
         loading = bool(is_loading(img))
         buttons: tuple[Button, ...] = ()
-        if not loading:
+        # tier nav (with_buttons=False) HOAC dang loading -> bo detect_buttons.
+        if with_buttons and not loading:
             raw = detect_buttons(img)  # list (cx, cy, w, h, score)
             buttons = tuple(
                 Button(x=int(cx), y=int(cy), w=int(bw), h=int(bh), score=float(sc))

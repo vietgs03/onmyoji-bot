@@ -19,7 +19,16 @@ class EyePort(ABC):
 
     @abstractmethod
     def observe(self) -> Observation:
-        """Chup + phan tich man hinh hien tai -> Observation (khong anh raw)."""
+        """Chup + phan tich man hinh hien tai -> Observation (khong anh raw).
+
+        Mac dinh day du (co detect_buttons). Dung observe_nav() khi chi can
+        dieu huong (state_id/loading) de nhanh hon ~9x."""
+
+    def observe_nav(self) -> Observation:
+        """Tier "nav": chup + chi tinh dhash/state_id/loading, BO detect_buttons
+        (~88% chi phi). Dung cho dieu huong khi chua can toa do nut.
+        Mac dinh = observe() (adapter co the override de nhanh hon)."""
+        return self.observe()
 
     @abstractmethod
     def act(self, action: Action) -> ActionResult:

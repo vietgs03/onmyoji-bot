@@ -78,6 +78,7 @@
       "properties": {
         "op": {"type": "string", "enum": ["observe", "act", "ping", "shutdown"]},
         "action": {"$ref": "#/definitions/Action"},
+        "with_buttons": {"type": "boolean", "default": true, "description": "observe: false = tier 'nav' (bo detect_buttons, ~9x nhanh), chi state_id/loading. Mac dinh true (day du)."},
         "id": {"type": ["integer", "string", "null"], "description": "id tuy chon de client ghep request<->response"}
       }
     },

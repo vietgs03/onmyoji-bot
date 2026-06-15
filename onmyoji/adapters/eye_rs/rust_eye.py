@@ -136,6 +136,13 @@ class RustEye(EyePort):
             raise RustEyeError(resp.get("error") or "observe that bai")
         return self._obs_from_resp(resp)
 
+    def observe_nav(self) -> Observation:
+        # Tier nav: bao Rust BO detect_buttons (~9x nhanh). Chi state_id/loading.
+        resp = self._rpc({"op": "observe", "with_buttons": False})
+        if not resp.get("ok", False) and "observation" not in resp:
+            raise RustEyeError(resp.get("error") or "observe_nav that bai")
+        return self._obs_from_resp(resp)
+
     def act(self, action: Action) -> ActionResult:
         resp = self._rpc({"op": "act", "action": action.to_dict()})
         result = resp.get("result") or {}

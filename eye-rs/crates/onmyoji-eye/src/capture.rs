@@ -30,9 +30,15 @@ pub trait Backend {
 
     /// observe = grab + chay perception. Mac dinh, impl khong can override.
     fn observe(&mut self) -> Observation {
+        self.observe_opts(true)
+    }
+
+    /// observe co tuy chon: with_buttons=false -> tier "nav" (~9x nhanh, bo
+    /// detect_buttons), chi dhash/state_id/loading cho dieu huong.
+    fn observe_opts(&mut self, with_buttons: bool) -> Observation {
         let ts = now_ts();
         match self.grab() {
-            Some(img) => Observation::from_frame(&img, ts, None),
+            Some(img) => Observation::from_frame_opts(&img, ts, None, with_buttons),
             None => Observation::dead(ts, Size { w: 0, h: 0 }),
         }
     }

@@ -87,6 +87,18 @@ impl Observation {
     /// Phan tich 1 frame RGB -> Observation day du (state_id, loading, buttons).
     /// Day la "bo nao" cua EYE: chay perception thuan tren anh da chup.
     pub fn from_frame(img: &Image, ts: f64, frame_path: Option<String>) -> Self {
+        Self::from_frame_opts(img, ts, frame_path, true)
+    }
+
+    /// Nhu from_frame nhung co the BO QUA detect_buttons (nang ~88% chi phi).
+    /// `with_buttons=false` -> tier "nav" (~19ms): chi dhash/state_id/loading,
+    /// dung cho dieu huong khi chua can toa do nut. `true` = day du (default).
+    pub fn from_frame_opts(
+        img: &Image,
+        ts: f64,
+        frame_path: Option<String>,
+        with_buttons: bool,
+    ) -> Self {
         let size = Size {
             w: img.width as i32,
             h: img.height as i32,
@@ -106,8 +118,8 @@ impl Observation {
         // loading + buttons tinh tren anh GOC (native client) -> toa do click
         // khop 1:1 voi client area, khong bi scale lech.
         let loading = is_loading(img);
-        // man dang loading -> bo qua detect (giong PythonEye)
-        let buttons = if loading {
+        // man dang loading HOAC tier nav (with_buttons=false) -> bo qua detect.
+        let buttons = if loading || !with_buttons {
             Vec::new()
         } else {
             detect_buttons(img, false)
@@ -197,6 +209,9 @@ pub struct Request {
     pub action: Option<Action>,
     #[serde(default)]
     pub id: Option<serde_json::Value>,
+    /// observe: false = tier "nav" (bo detect_buttons, ~9x nhanh). Mac dinh true.
+    #[serde(default = "default_true")]
+    pub with_buttons: bool,
 }
 
 /// EYE -> BRAIN qua socket (1 dong NDJSON). Khop schema `Response`.
@@ -242,5 +257,45 @@ impl Response {
             observation: None,
             result: Some(result),
         }
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+    use eye_core::Image;
+
+    /// Anh test 1136x640 (client) toan mau de chay perception that.
+    fn test_img() -> Image {
+        // doc anh that neu co, neu khong tao anh phang
+        if let Ok(bytes) = std::fs::read("/tmp/xval.png") {
+            if let Ok(img) = Image::decode_png(&bytes) {
+                return img;
+            }
+        }
+        Image::from_rgb(1136, 640, vec![128u8; 1136 * 640 * 3]).unwrap()
+    }
+
+    #[test]
+    fn nav_tier_bo_buttons_giu_state_id() {
+        let img = test_img();
+        let full = Observation::from_frame_opts(&img, 0.0, None, true);
+        let nav = Observation::from_frame_opts(&img, 0.0, None, false);
+        // nav PHAI giong state_id/dhash/loading nhung KHONG co buttons
+        assert_eq!(full.state_id, nav.state_id);
+        assert_eq!(full.dhash, nav.dhash);
+        assert_eq!(full.loading, nav.loading);
+        assert!(nav.buttons.is_empty(), "nav khong duoc co buttons");
+    }
+
+    #[test]
+    fn request_with_buttons_mac_dinh_true() {
+        // thieu truong -> default true (tuong thich nguoc)
+        let r: Request = serde_json::from_str(r#"{"op":"observe"}"#).unwrap();
+        assert!(r.with_buttons);
+        // co truong false -> nav
+        let r2: Request =
+            serde_json::from_str(r#"{"op":"observe","with_buttons":false}"#).unwrap();
+        assert!(!r2.with_buttons);
     }
 }

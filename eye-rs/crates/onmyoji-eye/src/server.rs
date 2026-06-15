@@ -79,7 +79,10 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
     let id = req.id.clone();
     match req.op {
         Op::Ping => (Response::obs(id, backend.observe()), false),
-        Op::Observe => (Response::obs(id, backend.observe()), false),
+        Op::Observe => (
+            Response::obs(id, backend.observe_opts(req.with_buttons)),
+            false,
+        ),
         Op::Act => match req.action {
             Some(a) => (Response::act(id, backend.act(&a)), false),
             None => (Response::err(id, "op=act thieu truong 'action'"), false),

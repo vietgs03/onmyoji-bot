@@ -69,7 +69,8 @@ class NavigateUseCase:
 
     def execute(self, target_label: str) -> bool:
         for _ in range(self._max_steps):
-            obs = self._eye.observe()
+            # nav chi can state_id/label, KHONG can buttons -> observe_nav (~9x nhanh)
+            obs = self._eye.observe_nav()
             # khop MO theo dhash -> sid chuan da luu (chiu lech bit Rust/Python)
             sid = self._world.match_state(obs.dhash, obs.state_id) or obs.state_id
             if self._world.resolve_label(sid) == target_label:
