@@ -355,6 +355,52 @@ def ask_kb(query: str, k: int = 5) -> list[dict]:
     return get_container().ask_knowledge().execute(query, k=k)
 
 
+@mcp.tool()
+def learn_screen(label: str, function: str, farms: str = "", note: str = "") -> dict:
+    """DAY HE THONG ve man hinh hien tai (sau khi BAN da NHIN va hieu no la gi).
+
+    Self-learning cot loi: khi gap man MOI (observe_marked tra screen_confirmed=
+    False), ban NHIN anh -> hieu "day la man gi, lam gi, farm gi" -> goi ham nay.
+    He thong luu 2 noi:
+      1. NGU NGHIA -> vector DB (lan sau ask_kb tim duoc 'man X lam gi/farm gi').
+      2. NHAN DIEN -> world_model gan label cho dhash man nay (lan sau observe
+         tu biet dang o '<label>', screen_confirmed=True).
+    -> Lan sau gap lai KHONG can NHIN/hoi lai nua, thich nghi tot hon.
+
+    Tham so:
+        label: ten ngan cho man (vd 'Soul Zone', 'Courtyard Affairs').
+        function: chuc nang man lam gi (vd 'nhan thuong daily', 'farm ngoc hon').
+        farms: (tuy chon) farm/thu duoc gi o day (vd 'ngoc hon, kim tien').
+        note: (tuy chon) ghi chu them (nut quan trong, luu y).
+    Tra ve: {ok, label, state_id, doc_id, learned_kb}.
+    """
+    c = get_container()
+    world = c.world
+    knowledge = c.knowledge
+    # 1) xac dinh state hien tai (dhash) de gan label nhan dien
+    obs = c.eye.observe_som(with_page=True)
+    sid = (world.match_state(obs.dhash, obs.state_id) if world else None) or obs.state_id
+    # 2) NGU NGHIA -> vector DB (doc_id theo label de cap nhat duoc)
+    text = f"Man hinh game '{label}': {function}."
+    if farms:
+        text += f" Farm/thu duoc: {farms}."
+    if note:
+        text += f" Ghi chu: {note}."
+    doc_id = f"screen:{label.lower().replace(' ', '_')}"
+    learned_kb = {}
+    if knowledge is not None:
+        learned_kb = knowledge.learn(title=label, text=text, doc_type="screen",
+                                     doc_id=doc_id, meta={"state_id": sid, "farms": farms})
+    # 3) NHAN DIEN -> world_model gan label cho dhash (tao node neu chua co)
+    if world is not None and hasattr(world, "label_state"):
+        world.label_state(sid, label, desc=function, dhash=obs.dhash)
+        if hasattr(world, "save"):
+            world.save()
+    return {"ok": True, "label": label, "state_id": sid, "doc_id": doc_id,
+            "function": function, "farms": farms,
+            "learned_kb": bool(learned_kb)}
+
+
 def main() -> None:
     """Chay MCP server qua stdio (transport mac dinh cho jcode/Claude)."""
     mcp.run()

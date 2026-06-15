@@ -38,3 +38,9 @@ class KnowledgeAdapter(KnowledgePort):
             }
             for r in results
         ]
+
+    def learn(self, title: str, text: str, doc_type: str = "learned",
+              doc_id=None, meta=None) -> dict:
+        """Ghi tri thuc agent vua hoc vao vector DB (append-only + search ngay)."""
+        return self._db().add(title=title, text=text, doc_type=doc_type,
+                              doc_id=doc_id, meta=meta)

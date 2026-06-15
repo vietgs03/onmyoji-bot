@@ -127,6 +127,23 @@ class WorldModel:
             out.extend(self.states.get(s, {}).get("verified_elements", []))
         return out
 
+    def label_state(self, sid, label, desc=None, dhash=None):
+        """Gan label + mo ta (ngu nghia) cho state - agent DAY he thong man nay
+        la gi. Self-learning: lan sau dhash match -> resolve_label tra <label>.
+        Tao node moi neu state chua co (man dong/moi) va co dhash."""
+        st = self.states.get(sid)
+        if st is None:
+            if not dhash:
+                return
+            self.states[sid] = {
+                "dhash": dhash, "label": label, "desc": desc,
+                "screenshot": None, "buttons_tried": [], "verified_elements": [],
+            }
+            return
+        st["label"] = label
+        if desc:
+            st["desc"] = desc
+
     def neighbors(self, sid):
         return [(tuple(e["click"]), e["to"]) for e in self.edges if e["from"] == sid]
 

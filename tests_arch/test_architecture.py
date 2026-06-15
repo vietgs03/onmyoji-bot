@@ -224,6 +224,36 @@ def test_observe_marked_confirm_screen():
     print("  [ok] observe_marked xac nhan man (man LA -> khong khoanh tum lum)")
 
 
+def test_knowledge_learn_selflearning():
+    """Agent DAY tri thuc moi (vd 'screen X = farm Y') -> KnowledgePort.learn ->
+    ask_kb tim duoc ngay. Self-learning ngu nghia (KHONG hardcode KB)."""
+    from onmyoji.domain.ports import KnowledgePort
+
+    class _KB(KnowledgePort):
+        def __init__(self):
+            self.docs = []
+        def ask(self, query, k=5):
+            # tra doc co tu khoa trong query (gia lap semantic)
+            ql = query.lower()
+            return [d for d in self.docs
+                    if any(w in (d["title"] + d["text"]).lower() for w in ql.split())][:k]
+        def learn(self, title, text, doc_type="learned", doc_id=None, meta=None):
+            doc = {"title": title, "text": text, "type": doc_type, "id": doc_id or title}
+            self.docs = [d for d in self.docs if d["id"] != doc["id"]] + [doc]
+            return doc
+
+    kb = _KB()
+    kb.learn("Soul Zone", "Man farm ngoc hon cho shikigami", doc_type="screen",
+             doc_id="screen:soul_zone")
+    # ask lai -> tim duoc
+    res = kb.ask("ngoc hon farm", k=3)
+    assert any(d["title"] == "Soul Zone" for d in res), "phai tim duoc tri thuc da hoc"
+    # update cung id -> khong nhan doi
+    kb.learn("Soul Zone", "cap nhat", doc_type="screen", doc_id="screen:soul_zone")
+    assert len([d for d in kb.docs if d["id"] == "screen:soul_zone"]) == 1
+    print("  [ok] knowledge learn (agent day -> ask_kb tim duoc, self-learning ngu nghia)")
+
+
 def test_match_state_fuzzy_dhash():
     """Rust EYE cho dhash lech vai bit -> state_id md5 KHAC HAN. match_state phai
     khop MO theo dhash (hamming<=12) -> tra dung sid Python da luu.

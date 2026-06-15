@@ -28,3 +28,4 @@ logs/bp_*.png
 
 # eye-rs Rust build
 eye-rs/target/
+knowledge/vectordb/learned.json

@@ -108,6 +108,12 @@ class KnowledgePort(ABC):
     def ask(self, query: str, k: int = 5) -> list[dict]:
         """Tra cuu ngu nghia -> list document lien quan."""
 
+    def learn(self, title: str, text: str, doc_type: str = "learned",
+              doc_id: Optional[str] = None, meta: Optional[dict] = None) -> dict:
+        """GHI tri thuc agent VUA HOC (vd 'screen Soul Zone = farm ngoc hon').
+        Search duoc ngay sau do. doc_id trung -> cap nhat. Mac dinh: no-op."""
+        return {}
+
 
 class GoalPort(ABC):
     """Muc tieu/reward cho moi mode (vd Realm Raid = farm soul)."""
