@@ -79,8 +79,9 @@ Use case / domain / harness KHONG doi 1 dong.
 
 - [x] **B1**: contract + domain (entities, ports) + test
 - [x] **B2**: PythonEye adapter (boc code cu) + FakeEye + CLI + container
-- [ ] **B3**: WorldModelAdapter + KnowledgeAdapter (boc world_model.py, vectordb.py)
-- [ ] **B4**: MCP/tool interface cho jcode (harness agent goi truc tiep)
+- [x] **B3**: WorldModelAdapter + KnowledgeAdapter (boc world_model.py, vectordb.py)
+- [x] **B4**: MCP server cho jcode (8 tools: observe/wait_stable/click/polite_click/
+      drag/key/goto/ask_kb). Launcher `scripts/onmyoji-mcp.sh` + `.jcode/mcp.json`.
 - [ ] **B5**: `eye-rs/` Cargo crate (onmyoji-eye.exe) + RustEye adapter
 - [ ] **B6**: Goal/reward model (objective_for moi mode tu KB)
 
