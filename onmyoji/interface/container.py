@@ -17,8 +17,9 @@ from onmyoji.application.use_cases import (
 def build_eye() -> EyePort:
     """Chon impl Eye theo env. Mac dinh PythonEye (cv2).
 
-    ONMYOJI_EYE=python  -> PythonEye (cv2 + PowerShell, hien tai)
-    ONMYOJI_EYE=rust    -> RustEye (socket toi onmyoji-eye.exe) [chua co]
+    ONMYOJI_EYE=python  -> PythonEye (cv2 + PowerShell, mac dinh)
+    ONMYOJI_EYE=rust    -> RustEye (socket toi onmyoji-eye, perception thuan Rust)
+                           Dat ONMYOJI_EYE_SPAWN=1 de tu khoi dong onmyoji-eye --ps.
     ONMYOJI_EYE=fake    -> FakeEye (test, khong can game)
     """
     kind = os.environ.get("ONMYOJI_EYE", "python").lower()
