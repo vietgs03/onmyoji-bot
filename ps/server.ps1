@@ -80,7 +80,11 @@ function Set-ClientSize($hwnd, $cw, $ch) {
   return @($cr2.Right, $cr2.Bottom)
 }
 
-function Do-BgShot($hwnd, $path) {
+function Capture-ClientBitmap($hwnd) {
+  # Chup window qua PrintWindow roi CAT ve CLIENT AREA. Tra @($bmp, $cw, $ch, $ok)
+  # hoac @($null,0,0,$false) neu loi. NGUOI GOI phai Dispose $bmp.
+  # Dung chung cho Do-BgShot (luu PNG) va Do-BgShotRaw (gui raw stdout) -> 1 nguon
+  # logic capture+crop da kiem chung (fix lech 31px phien 2026-06-10).
   $r = New-Object Native+RECT
   [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
   $w = $r.Right - $r.Left; $h = $r.Bottom - $r.Top
@@ -90,7 +94,7 @@ function Do-BgShot($hwnd, $path) {
     [Native]::GetWindowRect($hwnd, [ref]$r) | Out-Null
     $w = $r.Right - $r.Left; $h = $r.Bottom - $r.Top
   }
-  if ($w -le 0 -or $h -le 0) { return @(0,0,$false) }
+  if ($w -le 0 -or $h -le 0) { return @($null, 0, 0, $false) }
   $bmp = New-Object System.Drawing.Bitmap $w, $h
   $g = [System.Drawing.Graphics]::FromImage($bmp)
   $hdc = $g.GetHdc()
@@ -101,8 +105,7 @@ function Do-BgShot($hwnd, $path) {
   # FIX BUG LECH 31px (phien duplex 2026-06-10 phat hien): PrintWindow chup CA
   # WINDOW (title bar ~31px + border 8px) nhung click dung toa do CLIENT
   # (ClientToScreen/SendMessage lParam) -> toa do doc tu ANH lech +8,+31 so voi
-  # client. Fix tai GOC: CAT anh ve dung CLIENT AREA truoc khi luu -> toa do
-  # anh == toa do client, moi loai click dung truc tiep, OCR khong lech.
+  # client. Fix tai GOC: CAT anh ve dung CLIENT AREA -> toa do anh == client.
   $cr = New-Object Native+RECT
   [Native]::GetClientRect($hwnd, [ref]$cr) | Out-Null
   $cw = $cr.Right; $ch = $cr.Bottom
@@ -113,13 +116,99 @@ function Do-BgShot($hwnd, $path) {
       ($offX + $cw) -le $w -and ($offY + $ch) -le $h) {
     $rect = New-Object System.Drawing.Rectangle $offX, $offY, $cw, $ch
     $clip = $bmp.Clone($rect, $bmp.PixelFormat)
-    $clip.Save($path); $clip.Dispose(); $bmp.Dispose()
-    return @($cw,$ch,$ok)
+    $bmp.Dispose()
+    return @($clip, $cw, $ch, $ok)
   }
+  return @($bmp, $w, $h, $ok)
+}
+
+function Do-BgShot($hwnd, $path) {
+  $res = Capture-ClientBitmap $hwnd
+  $bmp = $res[0]; $cw = $res[1]; $ch = $res[2]; $ok = $res[3]
+  if ($null -eq $bmp) { return @(0, 0, $false) }
   $bmp.Save($path)
   $bmp.Dispose()
-  return @($w,$h,$ok)
+  return @($cw, $ch, $ok)
 }
+
+function Do-BgShotRaw($hwnd) {
+  # Chup -> gui RAW BGR24 ra STDOUT (binary), bo qua encode PNG + file 9P.
+  # Header ASCII 1 dong "RAW <w> <h> <nbytes>\n" roi <nbytes> byte BGR (top-down,
+  # row-major, stride = w*3 KHONG padding). CA header VA binary deu ghi qua RAW
+  # stream (OpenStandardOutput) de tranh PowerShell text-pipeline doi encoding/
+  # CRLF/thu tu buffer. Phia WSL doc header roi nuot dung so byte -> numpy.
+  # Tra @($cw,$ch,$ok).
+  $stdout = [System.Console]::OpenStandardOutput()
+  $res = Capture-ClientBitmap $hwnd
+  $bmp = $res[0]; $cw = $res[1]; $ch = $res[2]; $ok = $res[3]
+  if ($null -eq $bmp) {
+    $hdr = [System.Text.Encoding]::ASCII.GetBytes("RAW 0 0 0`n")
+    $stdout.Write($hdr, 0, $hdr.Length); $stdout.Flush()
+    return @(0, 0, $false)
+  }
+  $rect = New-Object System.Drawing.Rectangle 0, 0, $cw, $ch
+  $data = $bmp.LockBits($rect, [System.Drawing.Imaging.ImageLockMode]::ReadOnly,
+                        [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+  $stride = $data.Stride
+  $rowBytes = $cw * 3
+  $total = $rowBytes * $ch
+  $hdr = [System.Text.Encoding]::ASCII.GetBytes("RAW $cw $ch $total`n")
+  $stdout.Write($hdr, 0, $hdr.Length)
+  if ($stride -eq $rowBytes) {
+    # Khong padding: copy 1 phat
+    $buf = New-Object byte[] $total
+    [System.Runtime.InteropServices.Marshal]::Copy($data.Scan0, $buf, 0, $total)
+    $stdout.Write($buf, 0, $total)
+  } else {
+    # Co padding cuoi hang (stride > w*3): copy tung hang, loai byte padding
+    $rowBuf = New-Object byte[] $rowBytes
+    for ($y = 0; $y -lt $ch; $y++) {
+      $ptr = [IntPtr]::Add($data.Scan0, $y * $stride)
+      [System.Runtime.InteropServices.Marshal]::Copy($ptr, $rowBuf, 0, $rowBytes)
+      $stdout.Write($rowBuf, 0, $rowBytes)
+    }
+  }
+  $stdout.Flush()
+  $bmp.UnlockBits($data)
+  $bmp.Dispose()
+  return @($cw, $ch, $ok)
+}
+
+function Do-BgShotBoth($hwnd, $path) {
+  # CHAN DOAN (dev): chup 1 bitmap, vua LUU PNG vua GUI RAW cua CHINH bitmap do
+  # -> kiem transport raw KHONG mat byte (so PNG decode == raw, byte-exact).
+  # Header "RAW w h n\n" + binary, GIONG bgshot_raw. KHONG dung production.
+  $stdout = [System.Console]::OpenStandardOutput()
+  $res = Capture-ClientBitmap $hwnd
+  $bmp = $res[0]; $cw = $res[1]; $ch = $res[2]
+  if ($null -eq $bmp) {
+    $hdr = [System.Text.Encoding]::ASCII.GetBytes("RAW 0 0 0`n")
+    $stdout.Write($hdr, 0, $hdr.Length); $stdout.Flush(); return
+  }
+  $bmp.Save($path)  # luu PNG cua dung bitmap nay
+  $rect = New-Object System.Drawing.Rectangle 0, 0, $cw, $ch
+  $data = $bmp.LockBits($rect, [System.Drawing.Imaging.ImageLockMode]::ReadOnly,
+                        [System.Drawing.Imaging.PixelFormat]::Format24bppRgb)
+  $stride = $data.Stride; $rowBytes = $cw * 3; $total = $rowBytes * $ch
+  $hdr = [System.Text.Encoding]::ASCII.GetBytes("RAW $cw $ch $total`n")
+  $stdout.Write($hdr, 0, $hdr.Length)
+  if ($stride -eq $rowBytes) {
+    $buf = New-Object byte[] $total
+    [System.Runtime.InteropServices.Marshal]::Copy($data.Scan0, $buf, 0, $total)
+    $stdout.Write($buf, 0, $total)
+  } else {
+    $rowBuf = New-Object byte[] $rowBytes
+    for ($y = 0; $y -lt $ch; $y++) {
+      $ptr = [IntPtr]::Add($data.Scan0, $y * $stride)
+      [System.Runtime.InteropServices.Marshal]::Copy($ptr, $rowBuf, 0, $rowBytes)
+      $stdout.Write($rowBuf, 0, $rowBytes)
+    }
+  }
+  $stdout.Flush()
+  $bmp.UnlockBits($data)
+  $bmp.Dispose()
+}
+
 
 function Do-BgClick($hwnd, $x, $y) {
   $WM_MOUSEMOVE=0x0200; $WM_LBUTTONDOWN=0x0201; $WM_LBUTTONUP=0x0202
@@ -231,6 +320,14 @@ while ($true) {
       "bgshot" {
         $res = Do-BgShot $hwnd $parts[1]
         Write-Output ("OK {0}x{1} pw={2}" -f $res[0],$res[1],$res[2])
+      }
+      "bgshot_raw" {
+        # KHONG Write-Output them: Do-BgShotRaw da tu ghi "RAW w h n\n" + binary.
+        [void](Do-BgShotRaw $hwnd)
+      }
+      "bgshot_both" {
+        # CHAN DOAN: luu PNG ($parts[1]) + gui raw cua cung bitmap. KHONG OK them.
+        Do-BgShotBoth $hwnd $parts[1]
       }
       "bgclick" {
         Do-SendClick $hwnd ([int]$parts[1]) ([int]$parts[2])
