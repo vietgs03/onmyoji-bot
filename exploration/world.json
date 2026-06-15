@@ -3296,6 +3296,64 @@
       "screenshot": null,
       "buttons_tried": [],
       "verified_elements": []
+    },
+    "dd298238ba": {
+      "dhash": "1110101010101010011001101011000000010001000100111011010111011101",
+      "label": "ArenaHub",
+      "desc": "Sanh PvP (斗技 Arena) - chon che do dau. 3 mode: Daruma Arena (dau truong Daruma), Duel (dau don 1v1 xep hang), Draft Duel (dau draft chon luot, ban/pick). Vao tu Town>Arena.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 276,
+          "cy": 223,
+          "label": "DarumaArena"
+        },
+        {
+          "cx": 564,
+          "cy": 279,
+          "label": "Duel"
+        },
+        {
+          "cx": 868,
+          "cy": 253,
+          "label": "DraftDuel"
+        },
+        {
+          "cx": 50,
+          "cy": 43,
+          "label": "back"
+        }
+      ]
+    },
+    "c1cc1aaca8": {
+      "dhash": "1100110001001100001101101000101000100010000111010101110000110101",
+      "label": "DemonParade",
+      "desc": "Event 百鬼夜行 (Demon Parade) - keo the/trieu hoi quy theo luot. Co Chance up (luot con lai), Invite friend (moi ban cung keo), Records (lich su), Enter (vao keo). Diem/ve hien thi (4764). Vao tu Town>DemonParade.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 995,
+          "cy": 533,
+          "label": "Enter"
+        },
+        {
+          "cx": 170,
+          "cy": 584,
+          "label": "InviteFriend"
+        },
+        {
+          "cx": 293,
+          "cy": 582,
+          "label": "Records"
+        },
+        {
+          "cx": 45,
+          "cy": 74,
+          "label": "back"
+        }
+      ]
     }
   },
   "edges": [
