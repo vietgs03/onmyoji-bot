@@ -58,6 +58,37 @@ def get_container() -> Container:
 # Moi tool di qua Container -> UseCase -> Port. KHONG truy cap chi tiet ben duoi.
 
 
+def _dhash_bitdiff(a: str | None, b: str | None) -> int:
+    """So bit khac giua 2 dhash (chuoi '0'/'1' cung do dai). 999 neu khong so duoc.
+    Dung de doi man ON DINH (dhash ngung doi) - khong import perception (Clean Arch)."""
+    if not a or not b or len(a) != len(b):
+        return 999
+    return sum(1 for x, y in zip(a, b) if x != y)
+
+
+def _wait_settle(eye, need: int = 3, max_poll: int = 18, poll_s: float = 0.35):
+    """Doi man ON DINH (dhash ngung doi <=2 bit qua `need` lan lien tiep) roi tra
+    Observation cuoi. Tranh bat trung giua animation chuyen canh (cong xoay sang
+    KHAC is_loading man toi). Tra (obs, settled)."""
+    import time as _t
+    prev = None
+    stable = 0
+    obs = None
+    observe_fn = eye.observe_nav if hasattr(eye, "observe_nav") else eye.observe
+    for _ in range(max_poll):
+        obs = observe_fn()
+        dh = getattr(obs, "dhash", None)
+        if prev is not None and _dhash_bitdiff(dh, prev) <= 2:
+            stable += 1
+        else:
+            stable = 0
+        prev = dh
+        if stable >= need:
+            return obs, True
+        _t.sleep(poll_s)
+    return obs, False
+
+
 @mcp.tool()
 def observe() -> dict:
     """Chup + phan tich man hinh game HIEN TAI, tra ve Observation.
@@ -245,22 +276,27 @@ def click_at(x: int, y: int, snap: bool = True, screen: str = "") -> dict:
             src_sid = None
     # CLICK
     obs_after = c.act().execute(Action.click(sx, sy))
+    # DICH + ghi edge (chi khi ca hai nhan dien duoc -> tranh edge rac).
+    # DOI man ON DINH truoc (animation chuyen canh sang -> observe ngay se bat
+    # trung loading frame -> dst khong nhan dien -> mat edge). Sau on dinh moi
+    # observe co page de neo dst chac chan + tra ve cho agent man THAT.
     d = obs_after.to_dict()
-    # DICH + ghi edge (chi khi ca hai nhan dien duoc -> tranh edge rac)
     edge = None
-    if world is not None and src_sid is not None and hasattr(world, "record_transition"):
+    if world is not None and hasattr(world, "record_transition"):
         try:
-            dst_sid, dst_conf = (world.canonical_state(obs_after.dhash, obs_after.state_id,
-                                                       obs_after.page)
-                                 if hasattr(world, "canonical_state")
-                                 else (None, False))
-            if dst_sid is not None and dst_conf and dst_sid != src_sid:
-                world.record_transition(src_sid, Action.click(sx, sy), dst_sid)
-                if hasattr(world, "save"):
-                    world.save()
-                edge = {"from": src_sid, "click": [sx, sy], "to": dst_sid,
-                        "from_label": world.resolve_label(src_sid) if hasattr(world, "resolve_label") else None,
-                        "to_label": world.resolve_label(dst_sid) if hasattr(world, "resolve_label") else None}
+            _wait_settle(eye)
+            dst_obs = eye.observe_page() if hasattr(eye, "observe_page") else obs_after
+            d = dst_obs.to_dict()  # tra man da on dinh (khong phai loading frame)
+            if src_sid is not None and hasattr(world, "canonical_state"):
+                dst_sid, dst_conf = world.canonical_state(
+                    dst_obs.dhash, dst_obs.state_id, getattr(dst_obs, "page", None))
+                if dst_sid is not None and dst_conf and dst_sid != src_sid:
+                    world.record_transition(src_sid, Action.click(sx, sy), dst_sid)
+                    if hasattr(world, "save"):
+                        world.save()
+                    edge = {"from": src_sid, "click": [sx, sy], "to": dst_sid,
+                            "from_label": world.resolve_label(src_sid) if hasattr(world, "resolve_label") else None,
+                            "to_label": world.resolve_label(dst_sid) if hasattr(world, "resolve_label") else None}
         except Exception:  # noqa: BLE001
             edge = None
     if edge:

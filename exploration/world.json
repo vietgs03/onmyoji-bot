@@ -3048,7 +3048,12 @@
       "label": "Exploration",
       "desc": "Man Tham Hiem (探索) - HUB FARM CHINH. Vao cac mode: Soul (御魂 farm ngoc hon trang bi), Realm Raid (突破 dot pha cuop tai nguyen), Secret Zone (秘闻 farm material), Area Boss, Spirit Venture, Champion Trial, Six Realms Gates. Ban do KEO ngang+doc duoc. Vao tu HOME>Explore.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          168,
+          590
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 168,
@@ -3397,8 +3402,8 @@
     },
     "32499ccb88": {
       "dhash": "1101001111000101000100000000100010000000000001101110110110101101",
-      "label": "RealmRaid",
-      "desc": "Dot pha (突破 Realm Raid) - tan cong doi hinh phong thu cua nguoi choi khac de cuop tai nguyen + vinh du. Tab Individual (ca nhan) / Guild (bang hoi). Co 9 muc tieu/luot, Refresh lam moi danh sach. Weekly tien do + Rank. Vao tu Exploration>RealmRaid.",
+      "label": "PlayerProfile",
+      "desc": "Popup HO SO nguoi choi (mo khi click avatar doi thu o RealmRaid/danh sach). Xem: ten, so likes, nut Message (nhan tin), Add Friend (ket ban), Page (xem trang ca nhan), Guild Invite (moi vao bang). close de dong. Mo tu RealmRaid>click avatar.",
       "screenshot": null,
       "buttons_tried": [],
       "verified_elements": [
@@ -3430,6 +3435,31 @@
         {
           "cx": 1072,
           "cy": 116,
+          "label": "close"
+        },
+        {
+          "cx": 199,
+          "cy": 221,
+          "label": "Message"
+        },
+        {
+          "cx": 174,
+          "cy": 306,
+          "label": "AddFriend"
+        },
+        {
+          "cx": 174,
+          "cy": 306,
+          "label": "Page"
+        },
+        {
+          "cx": 202,
+          "cy": 391,
+          "label": "GuildInvite"
+        },
+        {
+          "cx": 1014,
+          "cy": 118,
           "label": "close"
         }
       ]
@@ -4915,6 +4945,14 @@
         70
       ],
       "to": "300e45f1cc"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        168,
+        590
+      ],
+      "to": "2cea68932c"
     }
   ]
 }
