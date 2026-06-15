@@ -169,6 +169,95 @@ fn sobel(src: &Mat1) -> (Vec<i32>, Vec<i32>) {
     (dx, dy)
 }
 
+/// NMS cho 1 pixel (x,y): tra ve 0 (none), 1 (weak), hoac 2 (strong).
+/// Tach rieng de dung chung cho ban tuan tu va ban song song.
+#[inline]
+fn nms_pixel(mag: &[f32], dx: &[i32], dy: &[i32], w: usize, x: usize, y: usize, low: f32, high: f32) -> u8 {
+    let i = y * w + x;
+    let m = mag[i];
+    if m < low {
+        return 0;
+    }
+    let gx = dx[i] as f32;
+    let gy = dy[i] as f32;
+    let (ax, ay) = (gx.abs(), gy.abs());
+    let (m1, m2);
+    if ax >= ay {
+        // ngang chiem uu the
+        let slope = if ax == 0.0 { 0.0 } else { ay / ax };
+        let sign = if (gx > 0.0) == (gy > 0.0) { 1i32 } else { -1i32 };
+        let a = mag[i + 1];
+        let b = mag[i - 1];
+        let c = mag[(y as i32 + sign) as usize * w + x + 1];
+        let d = mag[(y as i32 - sign) as usize * w + x - 1];
+        m1 = a * (1.0 - slope) + c * slope;
+        m2 = b * (1.0 - slope) + d * slope;
+    } else {
+        let slope = if ay == 0.0 { 0.0 } else { ax / ay };
+        let sign = if (gx > 0.0) == (gy > 0.0) { 1i32 } else { -1i32 };
+        let a = mag[(y + 1) * w + x];
+        let b = mag[(y - 1) * w + x];
+        let c = mag[(y + 1) * w + (x as i32 + sign) as usize];
+        let d = mag[(y - 1) * w + (x as i32 - sign) as usize];
+        m1 = a * (1.0 - slope) + c * slope;
+        m2 = b * (1.0 - slope) + d * slope;
+    }
+    if m >= m1 && m >= m2 {
+        if m >= high { 2 } else { 1 }
+    } else {
+        0
+    }
+}
+
+/// NMS dai hang [y0, y1): ghi vao `strong` toan cuc theo chi so tuyet doi.
+#[allow(clippy::too_many_arguments)]
+fn nms_band(
+    mag: &[f32],
+    dx: &[i32],
+    dy: &[i32],
+    w: usize,
+    _h: usize,
+    low: f32,
+    high: f32,
+    y0: usize,
+    y1: usize,
+    strong: &mut [u8],
+) {
+    for y in y0..y1 {
+        for x in 1..w - 1 {
+            let v = nms_pixel(mag, dx, dy, w, x, y, low, high);
+            if v != 0 {
+                strong[y * w + x] = v;
+            }
+        }
+    }
+}
+
+/// NMS dai hang [y0, y1): ghi vao `chunk` (da offset san, chi so = hang tuong doi).
+#[allow(clippy::too_many_arguments)]
+fn nms_band_into(
+    mag: &[f32],
+    dx: &[i32],
+    dy: &[i32],
+    w: usize,
+    _h: usize,
+    low: f32,
+    high: f32,
+    y0: usize,
+    y1: usize,
+    chunk: &mut [u8],
+) {
+    for y in y0..y1 {
+        let row_off = (y - y0) * w;
+        for x in 1..w - 1 {
+            let v = nms_pixel(mag, dx, dy, w, x, y, low, high);
+            if v != 0 {
+                chunk[row_off + x] = v;
+            }
+        }
+    }
+}
+
 /// Canny don gian (L1 magnitude + double-threshold + hysteresis) dung dx,dy co san.
 /// low = high/2 (theo perception: param1=high, OpenCV mac dinh low=high/2).
 fn canny_edges(dx: &[i32], dy: &[i32], w: usize, h: usize, high: f32) -> Mat1 {
@@ -179,43 +268,34 @@ fn canny_edges(dx: &[i32], dy: &[i32], w: usize, h: usize, high: f32) -> Mat1 {
         .map(|(&gx, &gy)| ((gx * gx + gy * gy) as f32).sqrt())
         .collect();
 
-    // non-maximum suppression theo huong gradient
+    // non-maximum suppression theo huong gradient.
+    // Moi pixel chi GHI strong[i] cua chinh no, doc mag/dx/dy (chia se, read-only)
+    // -> chia band theo hang chay song song, KHONG can merge (khac vote).
     let mut strong = vec![0u8; w * h]; // 0 = none, 1 = weak, 2 = strong
-    for y in 1..h - 1 {
-        for x in 1..w - 1 {
-            let i = y * w + x;
-            let m = mag[i];
-            if m < low {
-                continue;
-            }
-            let gx = dx[i] as f32;
-            let gy = dy[i] as f32;
-            // huong -> chon 2 lang gieng theo octant
-            let (ax, ay) = (gx.abs(), gy.abs());
-            let (m1, m2);
-            if ax >= ay {
-                // ngang chiem uu the
-                let slope = if ax == 0.0 { 0.0 } else { ay / ax };
-                let sign = if (gx > 0.0) == (gy > 0.0) { 1i32 } else { -1i32 };
-                let a = mag[i + 1];
-                let b = mag[i - 1];
-                let c = mag[(y as i32 + sign) as usize * w + x + 1];
-                let d = mag[(y as i32 - sign) as usize * w + x - 1];
-                m1 = a * (1.0 - slope) + c * slope;
-                m2 = b * (1.0 - slope) + d * slope;
-            } else {
-                let slope = if ay == 0.0 { 0.0 } else { ax / ay };
-                let sign = if (gx > 0.0) == (gy > 0.0) { 1i32 } else { -1i32 };
-                let a = mag[(y + 1) * w + x];
-                let b = mag[(y - 1) * w + x];
-                let c = mag[(y + 1) * w + (x as i32 + sign) as usize];
-                let d = mag[(y - 1) * w + (x as i32 - sign) as usize];
-                m1 = a * (1.0 - slope) + c * slope;
-                m2 = b * (1.0 - slope) + d * slope;
-            }
-            if m >= m1 && m >= m2 {
-                strong[i] = if m >= high { 2 } else { 1 };
-            }
+    if h > 2 {
+        let nt = crate::par::nthreads(h - 2);
+        if nt <= 1 {
+            nms_band(&mag, dx, dy, w, h, low, high, 1, h - 1, &mut strong);
+        } else {
+            // chia hang trong [1, h-1) thanh band; tach slice strong theo bien hang
+            let inner = h - 2; // so hang xu ly (1..h-1)
+            let band = inner.div_ceil(nt);
+            std::thread::scope(|sc| {
+                // bo qua hang 0 (khong xu ly), roi cap phat tung band
+                let (_row0, mut rest) = strong.split_at_mut(w);
+                let mut y0 = 1usize;
+                while y0 < h - 1 {
+                    let y1 = (y0 + band).min(h - 1);
+                    let rows = y1 - y0;
+                    let (chunk, tail) = rest.split_at_mut(rows * w);
+                    rest = tail;
+                    let (mag_r, dx_r, dy_r) = (&mag, &dx[..], &dy[..]);
+                    sc.spawn(move || {
+                        nms_band_into(mag_r, dx_r, dy_r, w, h, low, high, y0, y1, chunk);
+                    });
+                    y0 = y1;
+                }
+            });
         }
     }
 
