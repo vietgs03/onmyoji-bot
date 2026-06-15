@@ -1,0 +1,194 @@
+{
+  "page_area_boss": {
+    "score": 0.213828,
+    "x": 22,
+    "y": 288,
+    "thr": 0.8
+  },
+  "page_awake_zones": {
+    "score": 0.321373,
+    "x": 205,
+    "y": 481,
+    "thr": 0.8
+  },
+  "page_collection": {
+    "score": 0.326987,
+    "x": 171,
+    "y": 556,
+    "thr": 0.8
+  },
+  "page_daily": {
+    "score": 0.2929,
+    "x": 76,
+    "y": 506,
+    "thr": 0.8
+  },
+  "page_delegation": {
+    "score": 0.131149,
+    "x": 745,
+    "y": 117,
+    "thr": 0.8
+  },
+  "page_demon_encounter": {
+    "score": -0.093357,
+    "x": 136,
+    "y": 14,
+    "thr": 0.8
+  },
+  "page_demon_encounter_realworld": {
+    "score": 0.38258,
+    "x": 53,
+    "y": 581,
+    "thr": 0.8
+  },
+  "page_draft_duel": {
+    "score": 0.253473,
+    "x": 952,
+    "y": 565,
+    "thr": 0.8
+  },
+  "page_duel": {
+    "score": 0.238818,
+    "x": 141,
+    "y": 22,
+    "thr": 0.8
+  },
+  "page_exploration": {
+    "score": 0.190989,
+    "x": 593,
+    "y": 12,
+    "thr": 0.8
+  },
+  "page_friends": {
+    "score": -0.036121,
+    "x": 66,
+    "y": 558,
+    "thr": 0.8
+  },
+  "page_goryou_realm": {
+    "score": -0.410985,
+    "x": 782,
+    "y": 15,
+    "thr": 0.8
+  },
+  "page_guild": {
+    "score": 0.042514,
+    "x": 951,
+    "y": 560,
+    "thr": 0.8
+  },
+  "page_heian_kitan": {
+    "score": -0.216223,
+    "x": 24,
+    "y": 43,
+    "thr": 0.8
+  },
+  "page_hero_test": {
+    "score": 0.106024,
+    "x": 138,
+    "y": 15,
+    "thr": 0.8
+  },
+  "page_hunt": {
+    "score": 0.227816,
+    "x": 492,
+    "y": 32,
+    "thr": 0.7
+  },
+  "page_hunt_kirin": {
+    "score": 0.169541,
+    "x": 295,
+    "y": 216,
+    "thr": 0.7
+  },
+  "page_hyakkisen": {
+    "score": 0.15853,
+    "x": 877,
+    "y": 533,
+    "thr": 0.8
+  },
+  "page_hyakkiyakou": {
+    "score": 0.045944,
+    "x": 270,
+    "y": 484,
+    "thr": 0.8
+  },
+  "page_kekkai_toppa": {
+    "score": -0.118709,
+    "x": 945,
+    "y": 3,
+    "thr": 0.8
+  },
+  "page_login": {
+    "score": 0.197314,
+    "x": 84,
+    "y": 458,
+    "thr": 0.8
+  },
+  "page_main": {
+    "score": 0.989274,
+    "x": 632,
+    "y": 96,
+    "thr": 0.8
+  },
+  "page_onmyodo": {
+    "score": 0.202748,
+    "x": 1035,
+    "y": 104,
+    "thr": 0.8
+  },
+  "page_realm_raid": {
+    "score": 0.284029,
+    "x": 92,
+    "y": 529,
+    "thr": 0.7
+  },
+  "page_secret_zones": {
+    "score": 0.163771,
+    "x": 1016,
+    "y": 526,
+    "thr": 0.8
+  },
+  "page_shikigami_records": {
+    "score": -0.031492,
+    "x": 239,
+    "y": 63,
+    "thr": 0.8
+  },
+  "page_six_gates": {
+    "score": -0.123787,
+    "x": 1042,
+    "y": 552,
+    "thr": 0.8
+  },
+  "page_soul_zones": {
+    "score": 0.420537,
+    "x": 1070,
+    "y": 548,
+    "thr": 0.8
+  },
+  "page_summon": {
+    "score": 0.378021,
+    "x": 713,
+    "y": 529,
+    "thr": 0.8
+  },
+  "page_team": {
+    "score": 0.106989,
+    "x": 28,
+    "y": 520,
+    "thr": 0.8
+  },
+  "page_town": {
+    "score": 0.519005,
+    "x": 741,
+    "y": 99,
+    "thr": 0.8
+  },
+  "page_travel": {
+    "score": -0.033871,
+    "x": 1006,
+    "y": 518,
+    "thr": 0.8
+  }
+}

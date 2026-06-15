@@ -1,0 +1,456 @@
+{
+  "game_w": 1136,
+  "game_h": 640,
+  "scale_x": 0.8875,
+  "scale_y": 0.8888888888888888,
+  "pages": [
+    {
+      "page": "page_area_boss",
+      "asset": "I_CHECK_AREA_BOSS",
+      "roi": [
+        18,
+        284,
+        133,
+        116
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 59,
+      "tmpl_h": 67,
+      "file": "page_area_boss.png"
+    },
+    {
+      "page": "page_awake_zones",
+      "asset": "I_CHECK_AWAKE",
+      "roi": [
+        110,
+        466,
+        175,
+        106
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 37,
+      "tmpl_h": 36,
+      "file": "page_awake_zones.png"
+    },
+    {
+      "page": "page_collection",
+      "asset": "I_CHECK_COLLECTION",
+      "roi": [
+        105,
+        556,
+        1031,
+        84
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 56,
+      "tmpl_h": 68,
+      "file": "page_collection.png"
+    },
+    {
+      "page": "page_daily",
+      "asset": "I_CHECK_DAILY",
+      "roi": [
+        1,
+        433,
+        137,
+        129
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 51,
+      "tmpl_h": 55,
+      "file": "page_daily.png"
+    },
+    {
+      "page": "page_delegation",
+      "asset": "I_CHECK_DELEGATION",
+      "roi": [
+        745,
+        117,
+        43,
+        40
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 43,
+      "tmpl_h": 40,
+      "file": "page_delegation.png"
+    },
+    {
+      "page": "page_demon_encounter",
+      "asset": "I_CHECK_DEMON_ENCOUNTER",
+      "roi": [
+        136,
+        14,
+        114,
+        34
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 114,
+      "tmpl_h": 34,
+      "file": "page_demon_encounter.png"
+    },
+    {
+      "page": "page_demon_encounter_realworld",
+      "asset": "I_CHECK_DEMON_ENCOUNTER_REALWORLD",
+      "roi": [
+        2,
+        550,
+        89,
+        89
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 37,
+      "tmpl_h": 38,
+      "file": "page_demon_encounter_realworld.png"
+    },
+    {
+      "page": "page_draft_duel",
+      "asset": "I_CHECK_DRAFT_DUEL",
+      "roi": [
+        913,
+        528,
+        89,
+        89
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 50,
+      "tmpl_h": 52,
+      "file": "page_draft_duel.png"
+    },
+    {
+      "page": "page_duel",
+      "asset": "I_CHECK_DUEL",
+      "roi": [
+        118,
+        0,
+        98,
+        66
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 57,
+      "tmpl_h": 34,
+      "file": "page_duel.png"
+    },
+    {
+      "page": "page_exploration",
+      "asset": "I_CHECK_EXPLORATION",
+      "roi": [
+        587,
+        0,
+        62,
+        54
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 24,
+      "tmpl_h": 32,
+      "file": "page_exploration.png"
+    },
+    {
+      "page": "page_friends",
+      "asset": "I_CHECK_FRIENDS",
+      "roi": [
+        66,
+        558,
+        51,
+        59
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 51,
+      "tmpl_h": 59,
+      "file": "page_friends.png"
+    },
+    {
+      "page": "page_goryou_realm",
+      "asset": "I_CHECK_GORYOU",
+      "roi": [
+        782,
+        15,
+        27,
+        35
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 27,
+      "tmpl_h": 35,
+      "file": "page_goryou_realm.png"
+    },
+    {
+      "page": "page_guild",
+      "asset": "I_CHECK_GUILD",
+      "roi": [
+        951,
+        560,
+        43,
+        41
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 43,
+      "tmpl_h": 41,
+      "file": "page_guild.png"
+    },
+    {
+      "page": "page_heian_kitan",
+      "asset": "I_CHECK_HEIAN_KITAN",
+      "roi": [
+        24,
+        43,
+        42,
+        35
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 42,
+      "tmpl_h": 35,
+      "file": "page_heian_kitan.png"
+    },
+    {
+      "page": "page_hero_test",
+      "asset": "I_CHECK_HERO_TEST",
+      "roi": [
+        122,
+        0,
+        139,
+        63
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 118,
+      "tmpl_h": 43,
+      "file": "page_hero_test.png"
+    },
+    {
+      "page": "page_hunt",
+      "asset": "I_CHECK_HUNT",
+      "roi": [
+        491,
+        1,
+        72,
+        60
+      ],
+      "threshold": 0.7,
+      "tmpl_w": 41,
+      "tmpl_h": 22,
+      "file": "page_hunt.png"
+    },
+    {
+      "page": "page_hunt_kirin",
+      "asset": "I_CHECK_HUNT_KIRIN",
+      "roi": [
+        291,
+        208,
+        72,
+        60
+      ],
+      "threshold": 0.7,
+      "tmpl_w": 27,
+      "tmpl_h": 48,
+      "file": "page_hunt_kirin.png"
+    },
+    {
+      "page": "page_hyakkisen",
+      "asset": "I_CHECK_HYAKKISEN",
+      "roi": [
+        875,
+        522,
+        89,
+        89
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 47,
+      "tmpl_h": 49,
+      "file": "page_hyakkisen.png"
+    },
+    {
+      "page": "page_hyakkiyakou",
+      "asset": "I_CHECK_KYAKKIYAKOU",
+      "roi": [
+        248,
+        484,
+        89,
+        89
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 50,
+      "tmpl_h": 57,
+      "file": "page_hyakkiyakou.png"
+    },
+    {
+      "page": "page_kekkai_toppa",
+      "asset": "I_KEKKAI_TOPPA",
+      "roi": [
+        945,
+        3,
+        180,
+        54
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 180,
+      "tmpl_h": 54,
+      "file": "page_kekkai_toppa.png"
+    },
+    {
+      "page": "page_login",
+      "asset": "I_CHECK_LOGIN_FORM",
+      "roi": [
+        1,
+        444,
+        355,
+        133
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 45,
+      "tmpl_h": 50,
+      "file": "page_login.png"
+    },
+    {
+      "page": "page_main",
+      "asset": "I_CHECK_MAIN",
+      "roi": [
+        43,
+        87,
+        917,
+        54
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 67,
+      "tmpl_h": 40,
+      "file": "page_main.png"
+    },
+    {
+      "page": "page_onmyodo",
+      "asset": "I_CHECK_ONMYODO",
+      "roi": [
+        1035,
+        104,
+        75,
+        486
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 75,
+      "tmpl_h": 486,
+      "file": "page_onmyodo.png"
+    },
+    {
+      "page": "page_realm_raid",
+      "asset": "I_CHECK_REALM_RAID",
+      "roi": [
+        59,
+        468,
+        207,
+        167
+      ],
+      "threshold": 0.7,
+      "tmpl_w": 46,
+      "tmpl_h": 43,
+      "file": "page_realm_raid.png"
+    },
+    {
+      "page": "page_secret_zones",
+      "asset": "I_CHECK_SECRET_ZONES",
+      "roi": [
+        1016,
+        526,
+        98,
+        106
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 98,
+      "tmpl_h": 106,
+      "file": "page_secret_zones.png"
+    },
+    {
+      "page": "page_shikigami_records",
+      "asset": "I_CHECK_RECORDS",
+      "roi": [
+        239,
+        63,
+        49,
+        44
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 49,
+      "tmpl_h": 44,
+      "file": "page_shikigami_records.png"
+    },
+    {
+      "page": "page_six_gates",
+      "asset": "I_CHECK_SIX_GATES",
+      "roi": [
+        1042,
+        552,
+        49,
+        39
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 49,
+      "tmpl_h": 39,
+      "file": "page_six_gates.png"
+    },
+    {
+      "page": "page_soul_zones",
+      "asset": "I_CHECK_SOUL_ZONES",
+      "roi": [
+        1004,
+        525,
+        132,
+        114
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 36,
+      "tmpl_h": 36,
+      "file": "page_soul_zones.png"
+    },
+    {
+      "page": "page_summon",
+      "asset": "I_CHECK_SUMMON",
+      "roi": [
+        666,
+        516,
+        311,
+        107
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 27,
+      "tmpl_h": 25,
+      "file": "page_summon.png"
+    },
+    {
+      "page": "page_team",
+      "asset": "I_CHECK_TEAM",
+      "roi": [
+        28,
+        520,
+        73,
+        80
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 73,
+      "tmpl_h": 80,
+      "file": "page_team.png"
+    },
+    {
+      "page": "page_town",
+      "asset": "I_CHECK_TOWN",
+      "roi": [
+        679,
+        87,
+        357,
+        85
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 60,
+      "tmpl_h": 73,
+      "file": "page_town.png"
+    },
+    {
+      "page": "page_travel",
+      "asset": "I_CHECK_TRAVEL",
+      "roi": [
+        1006,
+        518,
+        69,
+        68
+      ],
+      "threshold": 0.8,
+      "tmpl_w": 69,
+      "tmpl_h": 68,
+      "file": "page_travel.png"
+    }
+  ]
+}
