@@ -1,0 +1,74 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "onmyoji-bot Eye<->Brain contract",
+  "description": "Nguon chan ly DUY NHAT cho ranh gioi giua EYE (perception, se port sang Rust) va BODY/MIND (Python). Moi message qua socket localhost deu theo schema nay. Doi schema = sua ca Rust lan Python trong 1 commit.",
+  "version": "1.0.0",
+  "definitions": {
+    "Button": {
+      "type": "object",
+      "description": "Mot vung kha nang click duoc tren man hinh (do EYE phat hien bang CV).",
+      "required": ["x", "y", "w", "h", "score"],
+      "properties": {
+        "x": {"type": "integer", "description": "tam X (toa do client-area)"},
+        "y": {"type": "integer", "description": "tam Y (toa do client-area)"},
+        "w": {"type": "integer"},
+        "h": {"type": "integer"},
+        "score": {"type": "number", "description": "do tin cay 0..1"},
+        "text": {"type": ["string", "null"], "description": "OCR text neu co"}
+      }
+    },
+    "Resources": {
+      "type": "object",
+      "description": "Tai nguyen doc tu OCR (vang, ve, AP...). null = chua doc duoc.",
+      "properties": {
+        "gold": {"type": ["integer", "null"]},
+        "ap": {"type": ["integer", "null"]},
+        "jade": {"type": ["integer", "null"]}
+      }
+    },
+    "Observation": {
+      "type": "object",
+      "description": "EYE -> BRAIN. Mot quan sat tai 1 thoi diem. KHONG chua anh raw (chi metadata vai KB).",
+      "required": ["ts", "state_id", "loading", "buttons", "size"],
+      "properties": {
+        "ts": {"type": "number", "description": "epoch seconds khi chup"},
+        "state_id": {"type": "string", "description": "dhash/fingerprint man hinh -> ID on dinh"},
+        "loading": {"type": "boolean", "description": "man hinh dang loading/chuyen canh"},
+        "alive": {"type": "boolean", "description": "game co dang chay (chong anh stale)"},
+        "size": {
+          "type": "object",
+          "required": ["w", "h"],
+          "properties": {"w": {"type": "integer"}, "h": {"type": "integer"}}
+        },
+        "buttons": {"type": "array", "items": {"$ref": "#/definitions/Button"}},
+        "resources": {"$ref": "#/definitions/Resources"},
+        "frame_path": {"type": ["string", "null"], "description": "duong dan anh DEBUG tuy chon (khong dung trong hot loop)"}
+      }
+    },
+    "Action": {
+      "type": "object",
+      "description": "BRAIN -> EYE. Mot hanh dong tac dong len game.",
+      "required": ["kind"],
+      "properties": {
+        "kind": {"type": "string", "enum": ["click", "polite_click", "fg_click", "drag", "key", "wait", "noop"]},
+        "x": {"type": ["integer", "null"]},
+        "y": {"type": ["integer", "null"]},
+        "x1": {"type": ["integer", "null"], "description": "diem cuoi cho drag"},
+        "y1": {"type": ["integer", "null"]},
+        "steps": {"type": ["integer", "null"], "description": "so buoc drag"},
+        "key": {"type": ["string", "null"], "description": "vd ESC, ENTER"},
+        "duration_ms": {"type": ["integer", "null"], "description": "cho wait"}
+      }
+    },
+    "ActionResult": {
+      "type": "object",
+      "description": "EYE -> BRAIN. Ket qua sau khi thuc thi action (kem observation moi).",
+      "required": ["ok"],
+      "properties": {
+        "ok": {"type": "boolean"},
+        "error": {"type": ["string", "null"]},
+        "observation": {"$ref": "#/definitions/Observation"}
+      }
+    }
+  }
+}
