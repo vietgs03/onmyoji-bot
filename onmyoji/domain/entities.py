@@ -48,6 +48,9 @@ class Observation:
     alive: bool = True
     resources: Resources = field(default_factory=Resources)
     frame_path: Optional[str] = None
+    # 64-bit dhash chuoi '0'/'1'. BRAIN dung khop mo (hamming<=12) khi state_id
+    # khong trung (md5 khuech dai 1 bit dhash -> id khac han). None = anh sai size.
+    dhash: Optional[str] = None
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -66,6 +69,7 @@ class Observation:
             alive=d.get("alive", True),
             resources=Resources(**d.get("resources", {})),
             frame_path=d.get("frame_path"),
+            dhash=d.get("dhash"),
         )
 
 

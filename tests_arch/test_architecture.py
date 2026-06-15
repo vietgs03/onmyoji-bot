@@ -106,6 +106,41 @@ def test_navigate_usecase_with_stub_world():
     print("  [ok] NavigateUseCase di HOME->SHOP qua Port (swap-able)")
 
 
+def test_match_state_fuzzy_dhash():
+    """Rust EYE cho dhash lech vai bit -> state_id md5 KHAC HAN. match_state phai
+    khop MO theo dhash (hamming<=12) -> tra dung sid Python da luu.
+
+    Day la cau noi song con cho viec swap EYE sang Rust: neu chi so khop state_id
+    chinh xac, moi frame Rust se 'lac' state du man hinh y het."""
+    import hashlib
+    from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
+
+    py_dh = "0101010010101010011001011001111010100110010110100100101011010011"
+    py_sid = hashlib.md5(py_dh.encode()).hexdigest()[:10]
+
+    class _WM:  # world toi thieu cho adapter (khong dung WorldModel that)
+        def __init__(self):
+            self.states = {py_sid: {"dhash": py_dh, "label": "HOME"}}
+
+    adapter = WorldModelAdapter(world=_WM())
+
+    # Rust: lech 1 bit -> sid khac han
+    rust_dh = "0101010000101010011001011001111010100110010110100100101011010011"
+    rust_sid = hashlib.md5(rust_dh.encode()).hexdigest()[:10]
+    assert rust_sid != py_sid, "md5 phai khuech dai 1 bit thanh sid khac"
+
+    # khop chinh xac theo sid Rust -> truot
+    assert adapter.resolve_label(rust_sid) is None
+    # khop mo theo dhash -> ra dung sid Python
+    matched = adapter.match_state(rust_dh, rust_sid)
+    assert matched == py_sid, "match_state phai khop mo ve sid Python"
+    assert adapter.resolve_label(matched) == "HOME"
+    # khong co dhash -> chi khop chinh xac (giu hanh vi cu, an toan)
+    assert adapter.match_state(None, rust_sid) is None
+    assert adapter.match_state(None, py_sid) == py_sid
+    print("  [ok] match_state khop mo dhash (Rust lech bit van resolve dung state)")
+
+
 def run_all():
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     print(f"\n=== Chay {len(tests)} test kien truc Clean Architecture ===")

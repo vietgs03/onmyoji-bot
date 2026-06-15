@@ -48,7 +48,8 @@ class PythonEye(EyePort):
             )
         h, w = img.shape[:2]
         self._last_size = Size(w, h)
-        sid = state_id(dhash(img))
+        dh = dhash(img)
+        sid = state_id(dh)
         loading = bool(is_loading(img))
         buttons: tuple[Button, ...] = ()
         if not loading:
@@ -60,7 +61,7 @@ class PythonEye(EyePort):
         return Observation(
             ts=ts, state_id=sid, loading=loading,
             size=Size(w, h), buttons=buttons, alive=True,
-            resources=self._read_resources(img),
+            resources=self._read_resources(img), dhash=dh,
         )
 
     def act(self, action: Action) -> ActionResult:

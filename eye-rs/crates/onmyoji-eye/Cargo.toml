@@ -7,6 +7,9 @@ description = "Binary EYE: capture man hinh + CV + socket server (theo contracts
 
 [dependencies]
 eye-core = { path = "../eye-core" }
+# JSON cho giao thuc socket (theo contracts/schema.json). Pure Rust, khong native deps.
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 
 [[bin]]
 name = "onmyoji-eye"

@@ -32,7 +32,8 @@
       "required": ["ts", "state_id", "loading", "buttons", "size"],
       "properties": {
         "ts": {"type": "number", "description": "epoch seconds khi chup"},
-        "state_id": {"type": "string", "description": "dhash/fingerprint man hinh -> ID on dinh"},
+        "state_id": {"type": "string", "description": "md5(dhash)[:10] -> ID on dinh, KHOP CHINH XAC (md5 khuech dai 1 bit -> id khac han)"},
+        "dhash": {"type": ["string", "null"], "description": "64-bit dhash dang chuoi '0'/'1'. BRAIN dung de KHOP MO (hamming<=12) khi state_id khong trung. Bat buoc cho world_model.canonicalize."},
         "loading": {"type": "boolean", "description": "man hinh dang loading/chuyen canh"},
         "alive": {"type": "boolean", "description": "game co dang chay (chong anh stale)"},
         "size": {
@@ -68,6 +69,28 @@
         "ok": {"type": "boolean"},
         "error": {"type": ["string", "null"]},
         "observation": {"$ref": "#/definitions/Observation"}
+      }
+    },
+    "Request": {
+      "type": "object",
+      "description": "BRAIN -> EYE qua socket NDJSON (1 dong JSON / 1 request). EYE tra ve 1 dong JSON tuong ung (Observation cho observe/ping, ActionResult cho act).",
+      "required": ["op"],
+      "properties": {
+        "op": {"type": "string", "enum": ["observe", "act", "ping", "shutdown"]},
+        "action": {"$ref": "#/definitions/Action"},
+        "id": {"type": ["integer", "string", "null"], "description": "id tuy chon de client ghep request<->response"}
+      }
+    },
+    "Response": {
+      "type": "object",
+      "description": "EYE -> BRAIN qua socket NDJSON. Boc ket qua + loi cap giao thuc.",
+      "required": ["ok"],
+      "properties": {
+        "ok": {"type": "boolean"},
+        "id": {"type": ["integer", "string", "null"]},
+        "error": {"type": ["string", "null"], "description": "loi cap giao thuc (parse/op khong hop le)"},
+        "observation": {"$ref": "#/definitions/Observation"},
+        "result": {"$ref": "#/definitions/ActionResult"}
       }
     }
   }

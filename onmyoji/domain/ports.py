@@ -36,6 +36,16 @@ class WorldModelPort(ABC):
     def resolve_label(self, state_id: str) -> Optional[str]:
         """state_id (dhash) -> label logic (vd 'HOME', 'SHOP')."""
 
+    def match_state(self, dhash: Optional[str], state_id: str) -> Optional[str]:
+        """Tra ve state_id CHUAN da luu khop voi quan sat hien tai.
+
+        Vi sao can: state_id = md5(dhash)[:10]. md5 khuech dai 1 bit dhash thanh
+        id KHAC HAN -> so khop state_id chinh xac se truot du man hinh giong nhau
+        (vd Rust EYE lech 1 bit dhash so Python). World model goc khop MO bang
+        hamming(dhash) <= 12. Method nay tra sid chuan de resolve_label/path_to
+        dung tiep. Mac dinh (khong co dhash): chi khop chinh xac state_id."""
+        return state_id
+
     @abstractmethod
     def path_to(self, from_state: str, to_label: str) -> Optional[list[Action]]:
         """Tra chuoi Action de di tu state hien tai toi man co label dich."""

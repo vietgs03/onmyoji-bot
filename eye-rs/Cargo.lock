@@ -84,6 +84,8 @@ name = "onmyoji-eye"
 version = "0.1.0"
 dependencies = [
  "eye-core",
+ "serde",
+ "serde_json",
 ]
 
 [[package]]

@@ -29,7 +29,11 @@ class PerceiveUseCase:
 
     def execute(self) -> GameContext:
         obs = self._eye.observe()
-        label = self._world.resolve_label(obs.state_id) if self._world else None
+        label = None
+        if self._world:
+            # khop MO theo dhash -> sid chuan (chiu duoc lech bit Rust/Python)
+            sid = self._world.match_state(obs.dhash, obs.state_id)
+            label = self._world.resolve_label(sid) if sid else None
         return GameContext(observation=obs, label=label)
 
 
@@ -66,9 +70,11 @@ class NavigateUseCase:
     def execute(self, target_label: str) -> bool:
         for _ in range(self._max_steps):
             obs = self._eye.observe()
-            if self._world.resolve_label(obs.state_id) == target_label:
+            # khop MO theo dhash -> sid chuan da luu (chiu lech bit Rust/Python)
+            sid = self._world.match_state(obs.dhash, obs.state_id) or obs.state_id
+            if self._world.resolve_label(sid) == target_label:
                 return True
-            path = self._world.path_to(obs.state_id, target_label)
+            path = self._world.path_to(sid, target_label)
             if not path:
                 return False
             action = path[0]
@@ -76,9 +82,9 @@ class NavigateUseCase:
             if not result.ok:
                 return False
             if result.observation:
-                self._world.record_transition(
-                    obs.state_id, action, result.observation.state_id
-                )
+                to_obs = result.observation
+                to_sid = self._world.match_state(to_obs.dhash, to_obs.state_id) or to_obs.state_id
+                self._world.record_transition(sid, action, to_sid)
         return False
 
 

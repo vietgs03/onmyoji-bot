@@ -32,6 +32,30 @@ class WorldModelAdapter(WorldModelPort):
         st = self._wm.states.get(state_id)
         return st.get("label") if st else None
 
+    def match_state(self, dhash: Optional[str], state_id: str) -> Optional[str]:
+        """Khop MO theo dhash (hamming <= CANON_THR) -> tra sid CHUAN da luu.
+
+        Day la cau noi quan trong giua EYE (Rust/Python) va world model: 2 lop CV
+        co the cho dhash lech vai bit (Rust vs cv2) -> state_id md5 khac han. Ham
+        nay dua vao logic goc cua world_model (hamming) de van nhan ra cung man.
+        Khong co dhash -> chi khop chinh xac (giu hanh vi cu)."""
+        # khop chinh xac truoc (nhanh, va dung khi EYE chinh la Python goc)
+        if state_id in self._wm.states:
+            return state_id
+        if not dhash:
+            return None
+        from perception import hamming  # noqa: PLC0415
+        from world_model import CANON_THR  # noqa: PLC0415
+        best_sid, best_d = None, CANON_THR + 1
+        for sid, st in self._wm.states.items():
+            stored = st.get("dhash")
+            if not stored:
+                continue
+            d = hamming(dhash, stored)
+            if d <= CANON_THR and d < best_d:
+                best_sid, best_d = sid, d
+        return best_sid
+
     def _label_to_state(self, label: str) -> Optional[str]:
         for sid, st in self._wm.states.items():
             if st.get("label") == label:
