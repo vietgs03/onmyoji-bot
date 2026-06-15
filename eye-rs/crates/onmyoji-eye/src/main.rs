@@ -33,6 +33,7 @@ fn main() -> ExitCode {
         Some("serve") => cmd_serve(&args),
         Some("bench") => cmd_bench(&args),
         Some("som") => cmd_som(&args),
+        Some("probe") => cmd_probe(&args),
         // tuong thich nguoc: `onmyoji-eye <anh.png>` = inspect
         Some(p) if !p.starts_with('-') && p.ends_with(".png") => {
             cmd_inspect_path(p)
@@ -158,6 +159,79 @@ fn cmd_som(args: &[String]) -> ExitCode {
     ExitCode::SUCCESS
 }
 
+
+/// probe: chup -> drag thu giua man -> chup lai -> phan tich kha nang DI CHUYEN.
+/// Cach SENIOR (active probe) de biet man co scroll/drag duoc khong (list, ban do
+/// 3D parallax) thay vi doan. In Movability JSON.
+///   onmyoji-eye probe [dx dy]   (mac dinh keo ngang -200px giua man)
+fn cmd_probe(args: &[String]) -> ExitCode {
+    use crate::capture::Backend;
+    use crate::protocol::{Action, ActionKind};
+    use eye_core::{analyze_movability, motion::Rect};
+    let dx: i32 = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(-200);
+    let dy: i32 = args.get(3).and_then(|s| s.parse().ok()).unwrap_or(0);
+    let mut bridge = match PsBridge::spawn() {
+        Ok(b) => b,
+        Err(e) => {
+            eprintln!("spawn PsBridge that bai: {e}");
+            return ExitCode::FAILURE;
+        }
+    };
+    for _ in 0..3 {
+        let _ = bridge.grab();
+    }
+    let before = match bridge.grab() {
+        Some(i) => i,
+        None => {
+            eprintln!("grab None (game khong chay?)");
+            return ExitCode::FAILURE;
+        }
+    };
+    // keo tu giua man (tranh thanh cong cu mep)
+    let (cx, cy) = (before.width as i32 / 2, before.height as i32 / 2);
+    let drag = Action {
+        kind: ActionKind::Drag,
+        x: Some(cx),
+        y: Some(cy),
+        x1: Some(cx + dx),
+        y1: Some(cy + dy),
+        steps: Some(12),
+        key: None,
+        duration_ms: None,
+    };
+    if let Err(e) = bridge.dispatch(&drag) {
+        eprintln!("drag loi: {e}");
+        return ExitCode::FAILURE;
+    }
+    std::thread::sleep(std::time::Duration::from_millis(250));
+    let after = match bridge.grab() {
+        Some(i) => i,
+        None => {
+            eprintln!("grab sau drag None");
+            return ExitCode::FAILURE;
+        }
+    };
+    // vung giua man (40%..60% chieu cao, toan be ngang) - noi noi dung di chuyen
+    let roi = Rect {
+        x: before.width / 10,
+        y: before.height * 4 / 10,
+        w: before.width * 8 / 10,
+        h: before.height * 2 / 10,
+    };
+    let mv = analyze_movability(&before, &after, roi, dx.abs().max(dy.abs()).clamp(8, 40));
+    println!(
+        "{{\"movable\":{},\"dx\":{},\"dx_score\":{:.2},\"dy\":{},\"dy_score\":{:.2},\"diff\":{:.3},\"dragged\":[{},{}]}}",
+        mv.is_movable(),
+        mv.dx,
+        mv.dx_score,
+        mv.dy,
+        mv.dy_score,
+        mv.diff,
+        dx,
+        dy
+    );
+    ExitCode::SUCCESS
+}
 
 /// inspect: chay perception tren 1 PNG, in ket qua de doi chieu Python.
 fn cmd_inspect(args: &[String]) -> ExitCode {

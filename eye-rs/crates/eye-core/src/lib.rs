@@ -9,6 +9,7 @@ pub mod detect;
 pub mod hough;
 pub mod image;
 pub mod md5;
+pub mod motion;
 pub mod page;
 pub mod par;
 pub mod perception;
@@ -17,6 +18,7 @@ pub mod template;
 
 pub use detect::{detect_buttons, Button};
 pub use image::{Image, ImageError};
+pub use motion::{analyze_movability, diff_ratio, shift_x, shift_y, Movability};
 pub use page::{PageDetector, PageHit, PageTemplate};
 pub use perception::{dhash, hamming, is_loading, resize_rgb, state_id, H, W};
 pub use som::{annotate, marks_from_buttons, render_marks, Mark};

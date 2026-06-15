@@ -13,6 +13,7 @@
 //! Khop triet ly self-learning: eye-rust (CV) biet O DAU (pixel chinh xac),
 //! LLM (vision) hieu CAI GI (ngu nghia) -> tu gan label, KHONG hardcode template.
 
+use crate::cv;
 use crate::detect::{detect_buttons, Button};
 use crate::image::Image;
 
@@ -36,11 +37,78 @@ const MARK_RGB: (u8, u8, u8) = (255, 40, 40); // do tuoi - noi bat tren game
 const LABEL_BG: (u8, u8, u8) = (255, 220, 0); // nen so: vang
 const LABEL_FG: (u8, u8, u8) = (0, 0, 0); // chu so: den
 
-/// Sinh danh sach Mark tu detect_buttons (loc + danh so theo thu tu tren->duoi,
+/// Sinh danh sach Mark tu detect element (loc + danh so theo thu tu tren->duoi,
 /// trai->phai de LLM doc tu nhien). Tra Vec<Mark>.
+///
+/// Detect element cho SoM uu tien COVERAGE (bat het cai clickable) hon la precision:
+///   1. detect_buttons (icon tron + nut mau) - chinh xac cho nut
+///   2. vung SANG/tuong phan cao (icon/chu tren nen toi) - bat menu/panel
+/// Gop NMS, loc kich thuoc UI hop ly.
 pub fn marks_from_buttons(img: &Image) -> Vec<Mark> {
-    let btns = detect_buttons(img, false);
-    sort_and_number(btns)
+    let mut cands: Vec<Button> = detect_buttons(img, false);
+    cands.extend(bright_region_elements(img));
+    let merged = nms_buttons(cands, 0.45);
+    sort_and_number(merged)
+}
+
+/// Element tu vung SANG/tuong phan (value channel cao) - bat icon/chu/panel ma
+/// detect_buttons (tron + saturation) bo sot. Loc theo kich thuoc UI element.
+fn bright_region_elements(img: &Image) -> Vec<Button> {
+    let val = cv::hsv_value(img);
+    // nguong sang: element UI (chu/icon trang, panel sang) noi tren nen toi game
+    let th = cv::threshold_binary(&val, 170);
+    // close de gom net chu/icon roi rac thanh 1 khoi
+    let closed = cv::morph_close(&th, 11);
+    let comps = cv::connected_components(&closed);
+    let mut out = Vec::new();
+    for c in comps {
+        let (w, h) = (c.w as i32, c.h as i32);
+        let area = w * h;
+        let aspect = w as f32 / h.max(1) as f32;
+        // kich thuoc UI element hop ly: khong qua nho (nhieu) khong qua to (nen)
+        // fill ratio: pixel thuc / bbox -> loai vung rong (vien)
+        let fill = c.area as f32 / area.max(1) as f32;
+        if (700..90_000).contains(&area)
+            && (0.18..7.0).contains(&aspect)
+            && fill > 0.30
+        {
+            out.push(Button {
+                cx: c.x as i32 + w / 2,
+                cy: c.y as i32 + h / 2,
+                w,
+                h,
+                score: 0.6,
+            });
+        }
+    }
+    out
+}
+
+/// NMS tren Button (theo score giam) - gop ung vien trung tu nhieu detector.
+fn nms_buttons(mut bs: Vec<Button>, iou_thr: f32) -> Vec<Button> {
+    bs.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
+    let mut keep: Vec<Button> = Vec::new();
+    for b in bs {
+        if keep.iter().all(|k| iou_btn(&b, k) < iou_thr) {
+            keep.push(b);
+        }
+    }
+    keep
+}
+
+fn iou_btn(a: &Button, b: &Button) -> f32 {
+    let (ax0, ay0) = (a.cx - a.w / 2, a.cy - a.h / 2);
+    let (bx0, by0) = (b.cx - b.w / 2, b.cy - b.h / 2);
+    let x1 = ax0.max(bx0);
+    let y1 = ay0.max(by0);
+    let x2 = (ax0 + a.w).min(bx0 + b.w);
+    let y2 = (ay0 + a.h).min(by0 + b.h);
+    let inter = (x2 - x1).max(0) * (y2 - y1).max(0);
+    if inter == 0 {
+        return 0.0;
+    }
+    let union = a.w * a.h + b.w * b.h - inter;
+    inter as f32 / union.max(1) as f32
 }
 
 /// Sap xep button theo lo (row band) roi trai->phai, danh so 1..n.
