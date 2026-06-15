@@ -3394,6 +3394,45 @@
       "screenshot": null,
       "buttons_tried": [],
       "verified_elements": []
+    },
+    "32499ccb88": {
+      "dhash": "1101001111000101000100000000100010000000000001101110110110101101",
+      "label": "RealmRaid",
+      "desc": "Dot pha (突破 Realm Raid) - tan cong doi hinh phong thu cua nguoi choi khac de cuop tai nguyen + vinh du. Tab Individual (ca nhan) / Guild (bang hoi). Co 9 muc tieu/luot, Refresh lam moi danh sach. Weekly tien do + Rank. Vao tu Exploration>RealmRaid.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 1092,
+          "cy": 296,
+          "label": "IndividualTab"
+        },
+        {
+          "cx": 1092,
+          "cy": 351,
+          "label": "GuildTab"
+        },
+        {
+          "cx": 932,
+          "cy": 533,
+          "label": "Refresh"
+        },
+        {
+          "cx": 744,
+          "cy": 528,
+          "label": "Lineup"
+        },
+        {
+          "cx": 199,
+          "cy": 531,
+          "label": "RaidLog"
+        },
+        {
+          "cx": 1072,
+          "cy": 116,
+          "label": "close"
+        }
+      ]
     }
   },
   "edges": [
