@@ -291,6 +291,9 @@ fn nms_band_into(
 /// low = high/2 (theo perception: param1=high, OpenCV mac dinh low=high/2).
 fn canny_edges(dx: &[i32], dy: &[i32], w: usize, h: usize, high: f32) -> Mat1 {
     let low = high / 2.0;
+    // magnitude L2: sqrt tren ~780K phan tu. Giu TUAN TU - thu chia band tiet kiem
+    // ~2ms nhung them bien dong (spawn 12 luong dat, canh tranh voi nhanh saturation
+    // dang chay song song). Khong dang.
     let mag: Vec<f32> = dx
         .iter()
         .zip(dy.iter())
