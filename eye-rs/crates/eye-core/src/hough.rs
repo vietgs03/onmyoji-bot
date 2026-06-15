@@ -145,12 +145,42 @@ fn sobel(src: &Mat1) -> (Vec<i32>, Vec<i32>) {
     let (w, h) = (src.w, src.h);
     let mut dx = vec![0i32; w * h];
     let mut dy = vec![0i32; w * h];
+    // Moi hang ghi dx/dy cua chinh no (doc src chia se) -> chia band, khong merge.
+    let nt = crate::par::nthreads(h);
+    if nt <= 1 {
+        sobel_band(src, 0, h, &mut dx, &mut dy);
+        return (dx, dy);
+    }
+    let band = h.div_ceil(nt);
+    std::thread::scope(|sc| {
+        let mut dx_rest = dx.as_mut_slice();
+        let mut dy_rest = dy.as_mut_slice();
+        let mut y0 = 0usize;
+        while y0 < h {
+            let rows = band.min(h - y0);
+            let (dxc, dxt) = dx_rest.split_at_mut(rows * w);
+            let (dyc, dyt) = dy_rest.split_at_mut(rows * w);
+            dx_rest = dxt;
+            dy_rest = dyt;
+            let start = y0;
+            sc.spawn(move || sobel_band(src, start, rows, dxc, dyc));
+            y0 += rows;
+        }
+    });
+    (dx, dy)
+}
+
+/// Sobel cho dai hang [start, start+rows): ghi vao dxc/dyc (chi so = hang tuong doi).
+fn sobel_band(src: &Mat1, start: usize, rows: usize, dxc: &mut [i32], dyc: &mut [i32]) {
+    let (w, h) = (src.w, src.h);
     let at = |x: i32, y: i32| -> i32 {
         let xx = x.clamp(0, w as i32 - 1) as usize;
         let yy = y.clamp(0, h as i32 - 1) as usize;
         src.at(xx, yy) as i32
     };
-    for y in 0..h as i32 {
+    for ry in 0..rows {
+        let y = (start + ry) as i32;
+        let row_off = ry * w;
         for x in 0..w as i32 {
             let p00 = at(x - 1, y - 1);
             let p01 = at(x, y - 1);
@@ -162,11 +192,10 @@ fn sobel(src: &Mat1) -> (Vec<i32>, Vec<i32>) {
             let p22 = at(x + 1, y + 1);
             let gx = (p02 + 2 * p12 + p22) - (p00 + 2 * p10 + p20);
             let gy = (p20 + 2 * p21 + p22) - (p00 + 2 * p01 + p02);
-            dx[(y as usize) * w + x as usize] = gx;
-            dy[(y as usize) * w + x as usize] = gy;
+            dxc[row_off + x as usize] = gx;
+            dyc[row_off + x as usize] = gy;
         }
     }
-    (dx, dy)
 }
 
 /// NMS cho 1 pixel (x,y): tra ve 0 (none), 1 (weak), hoac 2 (strong).
