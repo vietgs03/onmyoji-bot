@@ -124,17 +124,18 @@ def _merge_verified(obs) -> dict:
     khoanh sai cho."""
     d = obs.to_dict()
     world = get_container().world
-    # xac nhan man: chi dung sid khi dhash THUC SU match (khong fallback raw id)
-    sid = world.match_state(obs.dhash, obs.state_id) if world else None
-    confirmed = sid is not None or bool(obs.page)
+    # NEO man theo do ben nhat: dhash match -> page->label->node -> (LA: confirmed
+    # False). Page (landmark) khong troi nhu dhash man dong -> verified KHONG phan manh.
+    if world is None:
+        d["screen_confirmed"] = False
+        return d
+    sid, confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page)
     d["screen_confirmed"] = confirmed
     if not confirmed:
         # man LA -> bao agent NHIN, KHONG gop verified (tranh khoanh sai)
         d["screen_hint"] = ("Man LA (dhash chua hoc + khong khop page nao). "
                             "Hay NHIN anh marked de nhan dien; element CV la UNG VIEN.")
         return d
-    if sid is None:
-        return d  # co page nhung chua co node dhash -> khong co verified de gop
     learned = world.elements_for(sid)
     if not learned:
         return d
@@ -242,17 +243,25 @@ def learn_element(label: str, x: int, y: int) -> dict:
     # element 'mo coi' khoanh sai cho). Uu tien dhash match (state da hoc), neu
     # khong thi page (landmark robust). Man LA hoan toan -> tu tao node tu dhash
     # NHUNG canh bao agent (dhash man dong co the khong lap lai).
+    # Xac dinh man hien tai cho CHAC + NEO ON DINH (tranh phan manh):
+    # canonical_state uu tien dhash-match, roi page->label->node da co. Man dong
+    # (HOME) dhash troi moi frame NHUNG page khong troi -> moi lan hoc hoi tu ve
+    # CUNG 1 node logic, verified elements khong rai rac.
     obs = c.eye.observe_som(with_page=True)
-    matched = world.match_state(obs.dhash, obs.state_id)
-    sid = matched or obs.state_id
+    sid, confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page)
     # snap toa do ve element that cho chuan
     sx, sy = x, y
     if hasattr(c.eye, "snap"):
         sx, sy, _ = c.eye.snap(x, y)
     world.record_element(sid, sx, sy, label, dhash=obs.dhash)
+    # neo node theo page-label (neu co) de cac frame sau hoi tu -> recall on dinh
+    page_label = world.resolve_page(obs.page) if obs.page else None
+    if page_label and hasattr(world, "label_state"):
+        cur = world.resolve_label(sid) if hasattr(world, "resolve_label") else None
+        if not cur:
+            world.label_state(sid, page_label, dhash=obs.dhash)
     if hasattr(world, "save"):
         world.save()
-    confirmed = matched is not None or bool(obs.page)
     out = {"ok": True, "state_id": sid, "page": obs.page, "label": label,
            "saved_at": [sx, sy], "screen_confirmed": confirmed,
            "learned": world.elements_for(sid)}
@@ -377,9 +386,10 @@ def learn_screen(label: str, function: str, farms: str = "", note: str = "") -> 
     c = get_container()
     world = c.world
     knowledge = c.knowledge
-    # 1) xac dinh state hien tai (dhash) de gan label nhan dien
+    # 1) xac dinh state hien tai + NEO ON DINH (page anchor) de gan label nhan dien.
+    # Man dong dhash troi -> canonical_state hoi tu cac frame ve cung node logic.
     obs = c.eye.observe_som(with_page=True)
-    sid = (world.match_state(obs.dhash, obs.state_id) if world else None) or obs.state_id
+    sid, _confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page) if world else (obs.state_id, False)
     # 2) NGU NGHIA -> vector DB (doc_id theo label de cap nhat duoc)
     text = f"Man hinh game '{label}': {function}."
     if farms:
@@ -426,7 +436,7 @@ def explore_status() -> dict:
         return {"ok": False, "error": "WorldModel khong kha dung"}
     # man hien tai
     obs = c.eye.observe_som(with_page=True)
-    sid = world.match_state(obs.dhash, obs.state_id) or obs.state_id
+    sid, _confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page)
     label = world.resolve_label(sid) if hasattr(world, "resolve_label") else None
     untried_here = world.untried_elements(sid)
     frontier = world.frontier()

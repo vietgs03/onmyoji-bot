@@ -81,6 +81,33 @@ class WorldModelAdapter(WorldModelPort):
                 best_sid, best_d = sid, d
         return best_sid
 
+    def canonical_state(self, dhash: Optional[str], state_id: str,
+                        page: Optional[str] = None) -> tuple[Optional[str], bool]:
+        """Tra (sid_chuan, confirmed) cho quan sat hien tai - NEO theo do BEN nhat.
+
+        Van de goc: man DONG (vd HOME) co dhash troi >CANON_THR moi frame -> moi
+        lan hoc lai sinh 1 node moc coi khac -> verified elements PHAN MANH, recall
+        hen xui. Page detector (landmark template) KHONG troi -> dung lam neo chinh.
+
+        Thu tu uu tien:
+          1. dhash match 1 state da hoc (hamming<=CANON_THR) -> sid do, confirmed.
+          2. page -> resolve_label -> node da co label do (HOME) -> sid CHUAN, confirmed.
+             (cac frame HOME khac dhash van hoi tu ve 1 node logic).
+          3. chi co page (chua co node label) -> (state_id, confirmed=True) - se tao
+             node moi NHUNG da xac nhan (page robust).
+          4. khong dhash-match, khong page -> (state_id, confirmed=False) - man LA.
+        """
+        matched = self.match_state(dhash, state_id)
+        if matched is not None:
+            return matched, True
+        label = self.resolve_page(page) if page else None
+        if label:
+            anchor = self._label_to_state(label)
+            if anchor is not None:
+                return anchor, True
+            return state_id, True  # co page nhung chua co node -> tao moi, da xac nhan
+        return state_id, False  # man LA
+
     def _label_to_state(self, label: str) -> Optional[str]:
         for sid, st in self._wm.states.items():
             if st.get("label") == label:
@@ -108,6 +135,13 @@ class WorldModelAdapter(WorldModelPort):
         dhash cho phep tu tao node neu man chua hoc (man dong/moi)."""
         if hasattr(self._wm, "add_verified_element"):
             self._wm.add_verified_element(state_id, cx, cy, label, dhash=dhash)
+
+    def label_state(self, state_id: str, label: str, desc: str | None = None,
+                    dhash: str | None = None) -> None:
+        """Gan label + mo ta (ngu nghia) cho state. Tao node moi neu chua co
+        (man dong/moi) va co dhash. Self-learning: agent DAY he thong man nay la gi."""
+        if hasattr(self._wm, "label_state"):
+            self._wm.label_state(state_id, label, desc=desc, dhash=dhash)
 
     def elements_for(self, state_id: str) -> list[dict]:
         if hasattr(self._wm, "verified_elements"):

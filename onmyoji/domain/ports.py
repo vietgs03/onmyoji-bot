@@ -81,6 +81,18 @@ class WorldModelPort(ABC):
         dung tiep. Mac dinh (khong co dhash): chi khop chinh xac state_id."""
         return state_id
 
+    def canonical_state(self, dhash: Optional[str], state_id: str,
+                        page: Optional[str] = None) -> tuple[Optional[str], bool]:
+        """Tra (sid_chuan, confirmed) - NEO man hinh theo do BEN nhat.
+
+        Man DONG (vd HOME 3D) co dhash troi moi frame -> neo theo dhash khong on
+        dinh (verified elements phan manh). `page` (landmark template) khong troi
+        -> dung lam neo chinh: page -> label -> node da co. Tra confirmed=False
+        khi khong dhash-match VA khong co page (man LA, dung de canh bao agent).
+        Mac dinh: chi dua vao match_state (khong co page anchor)."""
+        sid = self.match_state(dhash, state_id)
+        return (sid, True) if sid is not None else (state_id, False)
+
     @abstractmethod
     def path_to(self, from_state: str, to_label: str) -> Optional[list[Action]]:
         """Tra chuoi Action de di tu state hien tai toi man co label dich."""
@@ -94,6 +106,13 @@ class WorldModelPort(ABC):
         """Ghi 1 element DA DUOC AGENT XAC NHAN (vision verify) cho state: toa do
         + label. Self-learning: lan sau gap lai man (cung label) -> dung luon,
         khong can CV/agent lai. `dhash` cho phep tu tao node neu man chua hoc.
+        Mac dinh: khong lam gi (adapter override)."""
+
+    def label_state(self, state_id: str, label: str, desc: Optional[str] = None,
+                    dhash: Optional[str] = None) -> None:
+        """Gan label + mo ta (ngu nghia) cho state - agent DAY he thong man nay la
+        gi. Self-learning: lan sau dhash/page match -> resolve_label tra <label>.
+        Tao node moi neu state chua co (man dong/moi) va co dhash.
         Mac dinh: khong lam gi (adapter override)."""
 
     def elements_for(self, state_id: str) -> list[dict]:

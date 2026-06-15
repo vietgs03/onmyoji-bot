@@ -186,19 +186,89 @@ def test_verified_elements_selflearning():
     print("  [ok] verified elements (agent verify -> world_model nho, self-learning)")
 
 
+def test_canonical_state_page_anchor():
+    """canonical_state NEO man theo do BEN nhat de man DONG (dhash troi moi frame)
+    KHONG phan manh verified elements. Day la fix goc: truoc day moi lan hoc HOME
+    sinh node moc coi khac (dhash khac) -> recall hen xui. Page (landmark) khong
+    troi -> moi frame HOME hoi tu ve CUNG 1 node logic."""
+    import sys, os
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    from world_model import WorldModel
+    from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
+    import json as _json
+
+    wm = WorldModel()
+    # node HOME da hoc voi 1 dhash cu the
+    home_dh = "0" * 64
+    wm.states = {"home1": {"dhash": home_dh, "label": "HOME", "buttons_tried": [], "verified_elements": []}}
+    wm.edges = []
+    # page_map that (page_main -> HOME) da co trong knowledge/page_label_map.json
+    adapter = WorldModelAdapter(world=wm)
+
+    # 1) dhash KHOP -> tra chinh node do, confirmed
+    sid, conf = adapter.canonical_state(home_dh, "irrelevant", page="page_main")
+    assert sid == "home1" and conf is True, f"dhash match phai tra node cu: {sid},{conf}"
+
+    # 2) dhash TROI (khac >12 bit, man dong) NHUNG page=page_main -> neo ve HOME node
+    drift = "1" * 64  # rat xa home_dh
+    sid2, conf2 = adapter.canonical_state(drift, "newid", page="page_main")
+    assert sid2 == "home1" and conf2 is True, f"page anchor phai hoi tu ve HOME: {sid2},{conf2}"
+
+    # 3) dhash troi + page None (man LA) -> confirmed False (canh bao agent NHIN)
+    sid3, conf3 = adapter.canonical_state(drift, "newid", page=None)
+    assert conf3 is False, f"man LA phai confirmed=False: {sid3},{conf3}"
+
+    # 4) page chua co node (vd page_summon, HOME chua map summon) -> tao node moi
+    #    NHUNG confirmed=True (page robust). Element hoc se nam tren node moi nhat quan.
+    sid4, conf4 = adapter.canonical_state(drift, "sumid", page="page_summon")
+    assert conf4 is True, f"page co map nhung chua co node -> confirmed van True: {sid4},{conf4}"
+
+    # 5) THUC TE quan trong: hoc element qua page anchor -> recall on dinh du dhash troi
+    sid_learn, _ = adapter.canonical_state(drift, "frameA", page="page_main")
+    adapter.record_element(sid_learn, 708, 163, "Explore", dhash=drift)
+    # frame sau dhash troi KHAC -> van recall duoc Explore (cung HOME node)
+    drift2 = "0011" * 16
+    sid_recall, _ = adapter.canonical_state(drift2, "frameB", page="page_main")
+    els = adapter.elements_for(sid_recall)
+    labels = sorted(e["label"] for e in els)
+    assert "Explore" in labels, f"recall qua page anchor phai thay Explore: {labels}"
+    print("  [ok] canonical_state page anchor (man dong dhash troi -> recall on dinh)")
+
+
 def test_observe_marked_confirm_screen():
     """observe_marked PHAI xac nhan man truoc khi gop verified (tranh khoanh tum
     lum tren man LA). Man LA (dhash khong match + page none) -> screen_confirmed
     False + hint + KHONG gop verified. Man co page -> confirmed."""
     from onmyoji.interface import mcp_server as M
     from onmyoji.domain.entities import Observation, Size, Mark
+    from onmyoji.domain.ports import WorldModelPort
 
-    class _W:
+    class _W(WorldModelPort):
+        # canonical_state: man LA (page None) -> confirmed False (mac dinh port).
+        # man co page_main -> resolve_page tra 'HOME' -> co node -> confirmed True.
         def match_state(self, dh, sid):
-            return None  # khong match (man chua hoc)
+            return None  # dhash khong match (man chua hoc / man dong troi)
+
+        def resolve_page(self, page):
+            return "HOME" if page == "page_main" else None
+
+        def canonical_state(self, dh, sid, page=None):
+            label = self.resolve_page(page)
+            if label:
+                return ("home_node", True)  # page -> label -> node da co (neo on dinh)
+            return (sid, False)  # man LA
+
+        def resolve_label(self, sid):
+            return "HOME" if sid == "home_node" else None
+
+        def path_to(self, frm, to):
+            return None
+
+        def record_transition(self, frm, action, to):
+            pass
 
         def elements_for(self, sid):
-            return [{"cx": 100, "cy": 100, "label": "X"}]  # co verified (khong duoc gop neu man LA)
+            return [{"cx": 100, "cy": 100, "label": "X"}]  # verified (gop khi confirmed)
 
     class _C:
         world = _W()
