@@ -26,8 +26,8 @@ def build_eye() -> EyePort:
         from onmyoji.adapters.eye_py.fake_eye import FakeEye
         return FakeEye()
     if kind == "rust":
-        # TODO: from onmyoji.adapters.eye_rs.rust_eye import RustEye
-        raise NotImplementedError("RustEye chua implement - dung ONMYOJI_EYE=python")
+        from onmyoji.adapters.eye_rs.rust_eye import RustEye
+        return RustEye()
     from onmyoji.adapters.eye_py.python_eye import PythonEye
     return PythonEye()
 
