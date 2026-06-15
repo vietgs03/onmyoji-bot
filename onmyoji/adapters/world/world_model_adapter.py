@@ -114,6 +114,21 @@ class WorldModelAdapter(WorldModelPort):
             return list(self._wm.verified_elements(state_id))
         return []
 
+    def untried_elements(self, state_id: str) -> list[dict]:
+        if hasattr(self._wm, "untried_elements"):
+            return list(self._wm.untried_elements(state_id))
+        return []
+
+    def frontier(self) -> list[dict]:
+        if hasattr(self._wm, "frontier_labels"):
+            return list(self._wm.frontier_labels())
+        return []
+
+    def explore_stats(self) -> dict:
+        if hasattr(self._wm, "explore_stats"):
+            return dict(self._wm.explore_stats())
+        return {}
+
     def save(self) -> None:
         self._wm.save()
 

@@ -254,6 +254,34 @@ def test_knowledge_learn_selflearning():
     print("  [ok] knowledge learn (agent day -> ask_kb tim duoc, self-learning ngu nghia)")
 
 
+def test_explore_frontier():
+    """Vong kham pha: world_model theo doi element CHUA thu (frontier) de agent
+    di het cay ban do. Click element -> mark tried -> frontier giam."""
+    import sys, os
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    from world_model import WorldModel
+    from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
+    from onmyoji.domain.entities import Action
+
+    wm = WorldModel()
+    wm.states = {"h1": {"dhash": "0" * 64, "label": "HOME", "buttons_tried": [],
+                        "verified_elements": [
+                            {"cx": 430, "cy": 165, "label": "Explore"},
+                            {"cx": 820, "cy": 230, "label": "Summon"}]}}
+    wm.edges = []
+    ad = WorldModelAdapter(world=wm)
+    # ban dau: 2 element chua thu
+    assert len(ad.untried_elements("h1")) == 2
+    fr = ad.frontier()
+    assert fr and fr[0]["label"] == "HOME" and fr[0]["untried"] == 2
+    # agent click Explore -> record_transition -> mark tried
+    ad.record_transition("h1", Action.click(430, 165), "explore_sid")
+    assert len(ad.untried_elements("h1")) == 1, "click roi phai bot 1 untried"
+    st = ad.explore_stats()
+    assert st["frontier_untried_total"] == 1
+    print("  [ok] explore frontier (theo doi element chua thu -> di het ban do)")
+
+
 def test_match_state_fuzzy_dhash():
     """Rust EYE cho dhash lech vai bit -> state_id md5 KHAC HAN. match_state phai
     khop MO theo dhash (hamming<=12) -> tra dung sid Python da luu.

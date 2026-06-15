@@ -401,6 +401,52 @@ def learn_screen(label: str, function: str, farms: str = "", note: str = "") -> 
             "learned_kb": bool(learned_kb)}
 
 
+@mcp.tool()
+def explore_status() -> dict:
+    """Tong quan tien do KHAM PHA ban do game + GOI Y di dau tiep.
+
+    Dung de kham pha co he thong (di het cay man hinh tu HOME). Tra ve:
+      - stats: {states, labeled, described, edges, frontier_screens,
+                frontier_untried_total} - da map bao nhieu, con bao nhieu.
+      - current: man hien tai {state_id, label, untried_here:[{cx,cy,label}]}.
+      - frontier: [{label, sid, untried}] - cac man CON element chua thu (sap
+        theo so element chua di giam dan). Di toi day de map tiep.
+      - suggestion: goi y hanh dong tiep theo.
+
+    CACH DUNG (vong kham pha):
+      1. explore_status() -> xem current.untried_here.
+      2. Neu CON untried_here: click element do (click_mark/click_at) -> sang man
+         moi -> observe_marked -> NHIN -> learn_screen + learn_element.
+      3. Neu HET untried_here: goto(frontier[0].label) roi lam tiep.
+      4. Lap den khi frontier rong = da phu het ban do.
+    """
+    c = get_container()
+    world = c.world
+    if world is None:
+        return {"ok": False, "error": "WorldModel khong kha dung"}
+    # man hien tai
+    obs = c.eye.observe_som(with_page=True)
+    sid = world.match_state(obs.dhash, obs.state_id) or obs.state_id
+    label = world.resolve_label(sid) if hasattr(world, "resolve_label") else None
+    untried_here = world.untried_elements(sid)
+    frontier = world.frontier()
+    stats = world.explore_stats()
+    if untried_here:
+        sug = (f"Man nay con {len(untried_here)} element chua thu -> click 1 cai "
+               f"(click_at theo cx,cy) de map tiep.")
+    elif not label:
+        sug = ("Man nay CHUA hoc -> observe_marked + NHIN + learn_screen/learn_element "
+               "truoc khi di tiep.")
+    elif frontier:
+        sug = (f"Man nay da het element -> goto('{frontier[0]['label']}') "
+               f"(con {frontier[0]['untried']} element chua thu) de map tiep.")
+    else:
+        sug = "Frontier rong -> da phu het ban do da nhan dien. Tiep tuc tim man moi neu can."
+    return {"ok": True, "stats": stats,
+            "current": {"state_id": sid, "label": label, "untried_here": untried_here},
+            "frontier": frontier[:8], "suggestion": sug}
+
+
 def main() -> None:
     """Chay MCP server qua stdio (transport mac dinh cho jcode/Claude)."""
     mcp.run()

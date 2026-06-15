@@ -100,6 +100,19 @@ class WorldModelPort(ABC):
         """Tra cac element da verify cho state ([{cx,cy,label}]). Mac dinh rong."""
         return []
 
+    def untried_elements(self, state_id: str) -> list[dict]:
+        """Element da verify nhung CHUA click thu (frontier cap element). Rong = mac dinh."""
+        return []
+
+    def frontier(self) -> list[dict]:
+        """Cac man da nhan dien nhung con element chua kham pha het ([{label,sid,
+        untried}]). Dung de agent biet di dau tiep -> phu het cay ban do."""
+        return []
+
+    def explore_stats(self) -> dict:
+        """Tong quan tien do kham pha (states/labeled/described/frontier)."""
+        return {}
+
 
 class KnowledgePort(ABC):
     """Tri thuc game (KB + vector search)."""

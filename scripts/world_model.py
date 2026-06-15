@@ -180,3 +180,45 @@ class WorldModel:
     def stats(self):
         return {"states": len(self.states), "edges": len(self.edges),
                 "labeled": sum(1 for s in self.states.values() if s.get("label"))}
+
+    # ---------- ho tro KHAM PHA (exploration) ----------
+    def untried_elements(self, sid):
+        """Cac verified element o state nay CHUA duoc click thu (chua co edge ra
+        tu toa do do). Day la 'frontier' o cap element: agent nen click de map tiep.
+        Tra [{cx,cy,label}]."""
+        out = []
+        for e in self.verified_elements(sid):
+            cx, cy = e["cx"], e["cy"]
+            if not self.is_tried(sid, (cx, cy)):
+                out.append(e)
+        return out
+
+    def frontier_labels(self):
+        """Cac man (theo label) DA NHAN DIEN nhung CON element chua kham pha het.
+        Dung de agent biet di dau tiep -> phu het cay ban do. Tra [{label, sid,
+        untried: n}]. Sap theo untried giam dan (uu tien man nhieu cho chua di)."""
+        seen = {}
+        for sid, st in self.states.items():
+            lab = st.get("label")
+            if not lab:
+                continue
+            n = len(self.untried_elements(sid))
+            if lab not in seen or n > seen[lab]["untried"]:
+                seen[lab] = {"label": lab, "sid": sid, "untried": n}
+        return sorted([v for v in seen.values() if v["untried"] > 0],
+                      key=lambda x: -x["untried"])
+
+    def explore_stats(self):
+        """Tong quan tien do kham pha cho agent: bao nhieu man da hoc, da gan
+        nghia (label+desc), con frontier bao nhieu."""
+        labeled = [s for s in self.states.values() if s.get("label")]
+        described = [s for s in labeled if s.get("desc")]
+        frontier = self.frontier_labels()
+        return {
+            "states": len(self.states),
+            "labeled": len(labeled),
+            "described": len(described),
+            "edges": len(self.edges),
+            "frontier_screens": len(frontier),
+            "frontier_untried_total": sum(f["untried"] for f in frontier),
+        }
