@@ -169,15 +169,17 @@ class GraphMemory:
             if cur in seen:
                 continue
             seen.add(cur)
+            # FIX: kiem dst khi POP (da chac chi phi nho nhat), KHONG khi discover.
+            # return-on-discover lam Dijkstra co weight tra duong KHONG toi uu
+            # (vd duong truc tiep DAT thay vi duong vong RE) -> pha muc dich weight.
+            if cur == dst:
+                return trail
             for action, e in self.edges.get(cur, {}).items():
                 to = e["to"]
                 rel = (e["ok"] + 1) / (e["ok"] + e["fail"] + 2)  # Laplace
                 nc = cost + 1.0 / rel
-                nt = trail + [(cur, action)]
-                if to == dst:
-                    return nt
                 if to not in seen:
-                    heapq.heappush(pq, (nc, to, nt))
+                    heapq.heappush(pq, (nc, to, trail + [(cur, action)]))
         return None
 
     def graph_features(self, nid: str, hub: str | None = None) -> dict:
