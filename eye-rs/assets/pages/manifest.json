@@ -475,7 +475,7 @@
         400,
         100
       ],
-      "threshold": 0.7,
+      "threshold": 0.6,
       "tmpl_w": 360,
       "tmpl_h": 85,
       "file": "page_exploration_live.png"
