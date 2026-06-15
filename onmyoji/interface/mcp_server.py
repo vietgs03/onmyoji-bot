@@ -152,6 +152,38 @@ def click_at(x: int, y: int, snap: bool = True) -> dict:
 
 
 @mcp.tool()
+def learn_element(label: str, x: int, y: int) -> dict:
+    """GHI NHO 1 element ban DA XAC NHAN bang mat (vision) cho man hinh hien tai.
+
+    Self-learning: sau khi ban NHIN anh (observe_marked) va xac dinh "cho (x,y) la
+    nut <label>", goi ham nay de luu vao ban do. LAN SAU gap lai man nay, he thong
+    biet ngay <label> o dau - KHONG can CV/ban nhin lai. Day la cach bot tu hoc
+    game thay vi hardcode.
+
+    Tham so:
+        label: ten ngu nghia (vd 'Summon', 'Explore', 'Shop', 'back').
+        x, y: toa do element (nen lay tu mark.cx/cy hoac sau khi snap).
+    Tra ve: {ok, state_id, label, learned: [cac element da hoc cho man nay]}.
+    """
+    c = get_container()
+    world = c.world
+    if world is None:
+        return {"ok": False, "error": "WorldModel khong kha dung"}
+    # xac dinh state hien tai (dhash)
+    obs = c.eye.observe_nav()
+    sid = world.match_state(obs.dhash, obs.state_id) or obs.state_id
+    # snap toa do ve element that cho chuan
+    sx, sy = x, y
+    if hasattr(c.eye, "snap"):
+        sx, sy, _ = c.eye.snap(x, y)
+    world.record_element(sid, sx, sy, label)
+    if hasattr(world, "save"):
+        world.save()
+    return {"ok": True, "state_id": sid, "label": label,
+            "saved_at": [sx, sy], "learned": world.elements_for(sid)}
+
+
+@mcp.tool()
 def click(x: int, y: int) -> dict:
     """Click chuot trai tai toa do (x, y) tren man hinh game.
 

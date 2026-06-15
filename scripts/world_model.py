@@ -96,6 +96,27 @@ class WorldModel:
                     return True
         return False
 
+    def add_verified_element(self, sid, cx, cy, label, tol=18):
+        """Ghi 1 element DA DUOC AGENT XAC NHAN (vision verify) cho state: toa do
+        + label ngu nghia. Self-learning: lan sau gap lai man nay (cung label) ->
+        dung element da verify, KHONG can CV/agent lai. Gop theo label (man logic).
+        Khong them trung (cung label, toa do gan tol)."""
+        st = self.states.get(sid)
+        if st is None:
+            return
+        ve = st.setdefault("verified_elements", [])
+        for e in self.verified_elements(sid):
+            if e["label"] == label and abs(e["cx"] - cx) <= tol and abs(e["cy"] - cy) <= tol:
+                return  # da co
+        ve.append({"cx": int(cx), "cy": int(cy), "label": str(label)})
+
+    def verified_elements(self, sid):
+        """Tra cac element da verify cho state (gop TAT CA state cung label logic)."""
+        out = []
+        for s in self._same_label_sids(sid):
+            out.extend(self.states.get(s, {}).get("verified_elements", []))
+        return out
+
     def neighbors(self, sid):
         return [(tuple(e["click"]), e["to"]) for e in self.edges if e["from"] == sid]
 

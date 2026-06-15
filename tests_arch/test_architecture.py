@@ -158,6 +158,34 @@ def test_navigate_page_fallback():
     print("  [ok] NavigateUseCase page fallback (dhash fail -> page detector)")
 
 
+def test_verified_elements_selflearning():
+    """Agent verify element (vision) -> luu world_model -> lan sau dung lai.
+    Self-learning: KHONG hardcode, agent xac nhan 1 lan, he thong nho mai."""
+    import sys, os
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    from world_model import WorldModel
+    from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
+
+    wm = WorldModel()
+    wm.states = {
+        "h1": {"dhash": "0" * 64, "label": "HOME", "buttons_tried": []},
+        "h2": {"dhash": "1" * 64, "label": "HOME", "buttons_tried": []},
+    }
+    wm.edges = []
+    adapter = WorldModelAdapter(world=wm)
+    # agent verify 2 element tren HOME (qua state h1)
+    adapter.record_element("h1", 568, 600, "Summon")
+    adapter.record_element("h2", 100, 100, "back")
+    # truy van qua h1 phai gop ca 2 (cung label HOME logic)
+    els = adapter.elements_for("h1")
+    labels = sorted(e["label"] for e in els)
+    assert labels == ["Summon", "back"], f"sai: {labels}"
+    # ghi trung khong tang
+    adapter.record_element("h1", 568, 600, "Summon")
+    assert len(adapter.elements_for("h1")) == 2, "khong duoc ghi trung"
+    print("  [ok] verified elements (agent verify -> world_model nho, self-learning)")
+
+
 def test_match_state_fuzzy_dhash():
     """Rust EYE cho dhash lech vai bit -> state_id md5 KHAC HAN. match_state phai
     khop MO theo dhash (hamming<=12) -> tra dung sid Python da luu.

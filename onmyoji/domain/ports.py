@@ -89,6 +89,15 @@ class WorldModelPort(ABC):
     def record_transition(self, frm: str, action: Action, to: str) -> None:
         """Ghi nho edge: o state frm, lam action -> toi state to."""
 
+    def record_element(self, state_id: str, cx: int, cy: int, label: str) -> None:
+        """Ghi 1 element DA DUOC AGENT XAC NHAN (vision verify) cho state: toa do
+        + label. Self-learning: lan sau gap lai man (cung label) -> dung luon,
+        khong can CV/agent lai. Mac dinh: khong lam gi (adapter override)."""
+
+    def elements_for(self, state_id: str) -> list[dict]:
+        """Tra cac element da verify cho state ([{cx,cy,label}]). Mac dinh rong."""
+        return []
+
 
 class KnowledgePort(ABC):
     """Tri thuc game (KB + vector search)."""
