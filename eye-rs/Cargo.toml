@@ -1,0 +1,19 @@
+[workspace]
+resolver = "2"
+members = [
+    "crates/eye-core",
+    "crates/onmyoji-eye",
+]
+
+[workspace.package]
+version = "0.1.0"
+edition = "2021"
+license = "MIT"
+
+# Toi uu cho hot-loop: build release nhanh + nho
+[profile.release]
+opt-level = 3
+lto = "thin"
+codegen-units = 1
+panic = "abort"
+strip = true

@@ -1,0 +1,4 @@
+# Rust build artifacts
+/target
+/crates/*/target
+# Cargo.lock GIU LAI (co binary onmyoji-eye -> can build tai lap)

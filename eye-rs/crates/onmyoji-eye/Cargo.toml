@@ -1,0 +1,13 @@
+[package]
+name = "onmyoji-eye"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+description = "Binary EYE: capture man hinh + CV + socket server (theo contracts/schema.json)"
+
+[dependencies]
+eye-core = { path = "../eye-core" }
+
+[[bin]]
+name = "onmyoji-eye"
+path = "src/main.rs"
