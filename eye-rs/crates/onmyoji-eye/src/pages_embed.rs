@@ -41,12 +41,7 @@ pub fn load_embedded() -> PageDetector {
         let bytes = embedded::template_bytes(file)
             .unwrap_or_else(|| panic!("thieu template nhung: {file}"));
         let template = Image::decode_png(bytes).unwrap();
-        det.add(PageTemplate {
-            page,
-            roi,
-            threshold,
-            template,
-        });
+        det.add(PageTemplate::new(page, roi, threshold, template));
     }
     det
 }

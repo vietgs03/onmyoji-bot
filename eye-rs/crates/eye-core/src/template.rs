@@ -199,6 +199,47 @@ pub fn match_template_roi(img: &Image, tmpl: &Image, roi: Roi) -> Option<MatchRe
     Some(best)
 }
 
+/// Thu nho anh theo he so nguyen `f` bang trung binh box f*f (cho landmark match
+/// nhanh hon ~f^4 lan). Vien le (khong chia het) bi bo. Tra anh moi (w/f, h/f).
+pub fn downscale_box(img: &Image, f: usize) -> Image {
+    let f = f.max(1);
+    let nw = img.width / f;
+    let nh = img.height / f;
+    let mut out = vec![0u8; nw * nh * 3];
+    let area = (f * f) as u32;
+    for oy in 0..nh {
+        for ox in 0..nw {
+            let mut acc = [0u32; 3];
+            for dy in 0..f {
+                let sy = oy * f + dy;
+                let base = (sy * img.width + ox * f) * 3;
+                for dx in 0..f {
+                    let p = base + dx * 3;
+                    acc[0] += img.data[p] as u32;
+                    acc[1] += img.data[p + 1] as u32;
+                    acc[2] += img.data[p + 2] as u32;
+                }
+            }
+            let o = (oy * nw + ox) * 3;
+            out[o] = (acc[0] / area) as u8;
+            out[o + 1] = (acc[1] / area) as u8;
+            out[o + 2] = (acc[2] / area) as u8;
+        }
+    }
+    Image::from_rgb(nw, nh, out).unwrap()
+}
+
+/// Cat vung `roi` cua anh thanh anh moi (roi da nam trong bien -> caller dam bao
+/// hoac dung Roi::clamp truoc). Dung de thu nho rieng 1 vung truoc khi match.
+pub fn crop(img: &Image, roi: Roi) -> Image {
+    let mut out = Vec::with_capacity(roi.w * roi.h * 3);
+    for ry in 0..roi.h {
+        let row = ((roi.y + ry) * img.width + roi.x) * 3;
+        out.extend_from_slice(&img.data[row..row + roi.w * 3]);
+    }
+    Image::from_rgb(roi.w, roi.h, out).unwrap()
+}
+
 #[cfg(test)]
 mod tests {
     use super::*;
@@ -236,6 +277,37 @@ mod tests {
         let img = Image::from_rgb(4, 4, vec![0u8; 48]).unwrap();
         let tmpl = Image::from_rgb(5, 5, vec![0u8; 75]).unwrap();
         assert!(match_template(&img, &tmpl).is_none());
+    }
+
+    #[test]
+    fn downscale_box_trung_binh_dung() {
+        // 2x2 RGB -> 1x1: moi kenh = trung binh 4 pixel
+        let data = vec![
+            10, 20, 30, /* */ 30, 40, 50, /* hang 0 */
+            50, 60, 70, /* */ 70, 80, 90, /* hang 1 */
+        ];
+        let img = Image::from_rgb(2, 2, data).unwrap();
+        let ds = downscale_box(&img, 2);
+        assert_eq!((ds.width, ds.height), (1, 1));
+        // R = (10+30+50+70)/4 = 40 ; G = (20+40+60+80)/4=50 ; B=(30+50+70+90)/4=60
+        assert_eq!(ds.rgb(0, 0), (40, 50, 60));
+    }
+
+    #[test]
+    fn crop_lay_dung_vung() {
+        let mut data = Vec::new();
+        for i in 0..4 * 4 {
+            data.push(i as u8);
+            data.push(0);
+            data.push(0);
+        }
+        let img = Image::from_rgb(4, 4, data).unwrap();
+        let c = crop(&img, Roi { x: 1, y: 1, w: 2, h: 2 });
+        assert_eq!((c.width, c.height), (2, 2));
+        // pixel (1,1) goc = index 5 -> R=5
+        assert_eq!(c.rgb(0, 0).0, 5);
+        assert_eq!(c.rgb(1, 0).0, 6);
+        assert_eq!(c.rgb(0, 1).0, 9);
     }
 
     #[test]

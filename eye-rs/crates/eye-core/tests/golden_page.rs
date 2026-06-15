@@ -26,7 +26,8 @@ fn load_detector(eye_rs: &Path) -> PageDetector {
     let txt = fs::read_to_string(&manifest_path)
         .unwrap_or_else(|e| panic!("doc manifest {manifest_path:?}: {e}"));
     let m: Value = serde_json::from_str(&txt).unwrap();
-    let mut det = PageDetector::new();
+    // scale=1 (full) de KHOP cv2 golden chinh xac (golden tinh o full-res).
+    let mut det = PageDetector::new().with_scale(1);
     for p in m["pages"].as_array().unwrap() {
         let page = p["page"].as_str().unwrap().to_string();
         let roi = p["roi"].as_array().unwrap();
@@ -40,12 +41,7 @@ fn load_detector(eye_rs: &Path) -> PageDetector {
         let file = p["file"].as_str().unwrap();
         let png = fs::read(eye_rs.join("assets/pages").join(file)).unwrap();
         let template = Image::decode_png(&png).unwrap();
-        det.add(PageTemplate {
-            page,
-            roi,
-            threshold,
-            template,
-        });
+        det.add(PageTemplate::new(page, roi, threshold, template));
     }
     det
 }

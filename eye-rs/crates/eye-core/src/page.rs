@@ -11,7 +11,7 @@
 //! detect(): tra page khop manh nhat (score >= threshold), hoac None.
 
 use crate::image::Image;
-use crate::template::{match_template_roi, Roi};
+use crate::template::{crop, downscale_box, match_template_roi, MatchResult, Roi};
 
 /// 1 page can nhan: ten + ROI tim + template + nguong.
 #[derive(Clone)]
@@ -20,6 +20,20 @@ pub struct PageTemplate {
     pub roi: Roi,
     pub threshold: f64,
     pub template: Image,
+    /// template da thu nho (cache theo `scale` cua detector). None = chua build.
+    template_ds: Option<Image>,
+}
+
+impl PageTemplate {
+    pub fn new(page: String, roi: Roi, threshold: f64, template: Image) -> Self {
+        PageTemplate {
+            page,
+            roi,
+            threshold,
+            template,
+            template_ds: None,
+        }
+    }
 }
 
 /// Ket qua detect 1 page: ten + score + vi tri landmark tim thay.
@@ -32,17 +46,44 @@ pub struct PageHit {
 }
 
 /// Bo detector chua nhieu page template.
-#[derive(Clone, Default)]
+///
+/// `scale` (mac dinh 2): thu nho ca frame-ROI lan template truoc khi match ->
+/// nhanh ~scale^4 lan. Landmark UI giu duoc score (do diem dac trung lon), da
+/// kiem: page_main 0.989->0.977, page tot nhat khong doi. scale=1 = full (chinh xac).
+#[derive(Clone)]
 pub struct PageDetector {
     pub pages: Vec<PageTemplate>,
+    pub scale: usize,
+}
+
+impl Default for PageDetector {
+    fn default() -> Self {
+        PageDetector {
+            pages: Vec::new(),
+            scale: 2,
+        }
+    }
 }
 
 impl PageDetector {
     pub fn new() -> Self {
-        PageDetector { pages: Vec::new() }
+        PageDetector::default()
     }
 
-    pub fn add(&mut self, p: PageTemplate) {
+    /// Dat he so thu nho (1 = full chinh xac, 2 = nhanh ~16x). Build lai cache.
+    pub fn with_scale(mut self, scale: usize) -> Self {
+        self.scale = scale.max(1);
+        for p in &mut self.pages {
+            p.template_ds = None;
+        }
+        self
+    }
+
+    pub fn add(&mut self, mut p: PageTemplate) {
+        // build cache template thu nho ngay (1 lan)
+        if self.scale > 1 {
+            p.template_ds = Some(downscale_box(&p.template, self.scale));
+        }
         self.pages.push(p);
     }
 
@@ -93,12 +134,43 @@ impl PageDetector {
     }
 
     fn scan_one(&self, img: &Image, p: &PageTemplate) -> Option<PageHit> {
-        let m = match_template_roi(img, &p.template, p.roi)?;
+        let m = self.match_one(img, p)?;
         Some(PageHit {
             page: p.page.clone(),
             score: m.score,
             x: m.x,
             y: m.y,
+        })
+    }
+
+    /// Match 1 page: dung template thu nho (scale>1) tren ROI da thu nho de nhanh,
+    /// roi anh xa vi tri ve toa do GOC. scale=1 -> match truc tiep full.
+    fn match_one(&self, img: &Image, p: &PageTemplate) -> Option<MatchResult> {
+        if self.scale <= 1 || p.template_ds.is_none() {
+            return match_template_roi(img, &p.template, p.roi);
+        }
+        let f = self.scale;
+        let tmpl_ds = p.template_ds.as_ref().unwrap();
+        // crop ROI goc -> thu nho -> match. Bo crop chinh xac de downscale_box
+        // chia het. ROI da clamp trong bien anh.
+        let roi = p.roi.clamp(img.width, img.height);
+        let sub = crop(img, roi);
+        let sub_ds = downscale_box(&sub, f);
+        let m = match_template_roi(
+            &sub_ds,
+            tmpl_ds,
+            Roi {
+                x: 0,
+                y: 0,
+                w: sub_ds.width,
+                h: sub_ds.height,
+            },
+        )?;
+        // anh xa vi tri ve goc: roi.xy + (vi tri trong sub_ds)*f
+        Some(MatchResult {
+            x: roi.x + m.x * f,
+            y: roi.y + m.y * f,
+            score: m.score,
         })
     }
 
@@ -113,7 +185,8 @@ impl PageDetector {
             .pages
             .iter()
             .map(|p| {
-                let s = match_template_roi(img, &p.template, p.roi)
+                let s = self
+                    .match_one(img, p)
                     .map(|m| m.score)
                     .unwrap_or(f64::NEG_INFINITY);
                 (p.page.clone(), s)
@@ -161,20 +234,21 @@ mod tests {
             }
         }
         let tmpl = Image::from_rgb(4, 4, td).unwrap();
-        let mut det = PageDetector::new();
-        det.add(PageTemplate {
-            page: "match".into(),
-            roi: Roi { x: 0, y: 0, w: 20, h: 20 },
-            threshold: 0.9,
-            template: tmpl,
-        });
+        // scale=1 (full) de test logic chinh xac tren anh nho
+        let mut det = PageDetector::new().with_scale(1);
+        det.add(PageTemplate::new(
+            "match".into(),
+            Roi { x: 0, y: 0, w: 20, h: 20 },
+            0.9,
+            tmpl,
+        ));
         // page khong khop: template solid lac
-        det.add(PageTemplate {
-            page: "nomatch".into(),
-            roi: Roi { x: 0, y: 0, w: 20, h: 20 },
-            threshold: 0.9,
-            template: solid(4, 4, (123, 45, 67)),
-        });
+        det.add(PageTemplate::new(
+            "nomatch".into(),
+            Roi { x: 0, y: 0, w: 20, h: 20 },
+            0.9,
+            solid(4, 4, (123, 45, 67)),
+        ));
         let hit = det.detect(&img).unwrap();
         assert_eq!(hit.page, "match");
         assert!(hit.score >= 0.99, "score={}", hit.score);
@@ -183,14 +257,14 @@ mod tests {
     #[test]
     fn khong_khop_tra_none() {
         let img = solid(20, 20, (10, 20, 30));
-        let mut det = PageDetector::new();
+        let mut det = PageDetector::new().with_scale(1);
         // template ngau nhien khac han -> score thap
-        det.add(PageTemplate {
-            page: "x".into(),
-            roi: Roi { x: 0, y: 0, w: 20, h: 20 },
-            threshold: 0.95,
-            template: solid(4, 4, (200, 100, 50)),
-        });
+        det.add(PageTemplate::new(
+            "x".into(),
+            Roi { x: 0, y: 0, w: 20, h: 20 },
+            0.95,
+            solid(4, 4, (200, 100, 50)),
+        ));
         // solid vs solid: den == 0 -> score 0 < 0.95 -> None
         assert!(det.detect(&img).is_none());
     }
