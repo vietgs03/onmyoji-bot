@@ -201,6 +201,7 @@ fn sobel_band(src: &Mat1, start: usize, rows: usize, dxc: &mut [i32], dyc: &mut 
 /// NMS cho 1 pixel (x,y): tra ve 0 (none), 1 (weak), hoac 2 (strong).
 /// Tach rieng de dung chung cho ban tuan tu va ban song song.
 #[inline]
+#[allow(clippy::too_many_arguments)]
 fn nms_pixel(mag: &[f32], dx: &[i32], dy: &[i32], w: usize, x: usize, y: usize, low: f32, high: f32) -> u8 {
     let i = y * w + x;
     let m = mag[i];
