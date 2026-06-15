@@ -120,6 +120,14 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
                 None => (Response::err(id, "snap: khong chup duoc (game tat?)"), false),
             }
         }
+        Op::Probe => {
+            // amp keo thu (px) - dung truong 'radius' lam bien do (mac dinh 200).
+            let amp = req.radius.unwrap_or(200);
+            match backend.probe(amp) {
+                Some(p) => (Response::probe(id, p), false),
+                None => (Response::err(id, "probe: khong chup/drag duoc (game tat?)"), false),
+            }
+        }
         Op::Shutdown => (
             Response {
                 ok: true,
@@ -128,6 +136,7 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
                 observation: None,
                 result: None,
                 snap: None,
+                probe: None,
             },
             true,
         ),

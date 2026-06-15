@@ -312,6 +312,10 @@ pub enum Op {
     /// SNAP toa do tho -> tam element gan nhat (cho agent click chinh xac khi CV
     /// sot element). Tra ket qua trong Response.snap.
     Snap,
+    /// PROBE kha nang di chuyen: drag thu (ngang + doc) -> do shift -> biet man co
+    /// scroll/keo duoc khong (ban do exploration, list menu Shop/Souls...). Tu keo
+    /// VE de khong lam xe dich man. Tra ket qua trong Response.probe.
+    Probe,
     Ping,
     Shutdown,
 }
@@ -353,6 +357,21 @@ pub struct SnapResult {
     pub dist: f64,
 }
 
+/// Ket qua probe kha nang di chuyen man (drag thu -> do shift). Cho agent biet
+/// man co scroll/keo duoc khong de kham pha het content (ban do, list menu).
+#[derive(Debug, Clone, Serialize, Default)]
+pub struct ProbeResult {
+    /// man co keo duoc khong (ngang HOAC doc dat nguong shift+score).
+    pub movable: bool,
+    pub can_x: bool,
+    pub can_y: bool,
+    pub dx: i32,
+    pub dx_score: f64,
+    pub dy: i32,
+    pub dy_score: f64,
+    pub diff: f64,
+}
+
 /// EYE -> BRAIN qua socket (1 dong NDJSON). Khop schema `Response`.
 #[derive(Debug, Clone, Serialize)]
 pub struct Response {
@@ -367,6 +386,8 @@ pub struct Response {
     pub result: Option<ActionResult>,
     #[serde(skip_serializing_if = "Option::is_none")]
     pub snap: Option<SnapResult>,
+    #[serde(skip_serializing_if = "Option::is_none")]
+    pub probe: Option<ProbeResult>,
 }
 
 impl Response {
@@ -378,6 +399,7 @@ impl Response {
             observation: None,
             result: None,
             snap: None,
+            probe: None,
         }
     }
 
@@ -389,6 +411,7 @@ impl Response {
             observation: Some(observation),
             result: None,
             snap: None,
+            probe: None,
         }
     }
 
@@ -400,6 +423,7 @@ impl Response {
             observation: None,
             result: Some(result),
             snap: None,
+            probe: None,
         }
     }
 
@@ -412,6 +436,20 @@ impl Response {
             observation: None,
             result: None,
             snap: Some(snap),
+            probe: None,
+        }
+    }
+
+    /// Response cho op probe (kha nang di chuyen man).
+    pub fn probe(id: Option<serde_json::Value>, probe: ProbeResult) -> Self {
+        Response {
+            ok: true,
+            id,
+            error: None,
+            observation: None,
+            result: None,
+            snap: None,
+            probe: Some(probe),
         }
     }
 }

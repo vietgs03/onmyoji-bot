@@ -222,6 +222,45 @@ def click_at(x: int, y: int, snap: bool = True) -> dict:
 
 
 @mcp.tool()
+def probe_scroll(amp: int = 200) -> dict:
+    """KIEM TRA man hien tai co KEO/SCROLL duoc khong (ngang + doc) - active probe.
+
+    Cach SENIOR (thay vi doan): EYE tu drag thu giua man ngang roi doc, do man
+    DICH bao nhieu px, sau do tu KEO VE (khong lam xe dich man). Dung khi gap man
+    co the con content AN ngoai khung: ban do Exploration (keo ngang/doc xem het
+    chuong/khu vuc), list menu (Shop, Souls, Shikigami keo doc xem het muc).
+
+    Tra ve:
+      - movable: True neu man keo duoc (ngang HOAC doc).
+      - can_x / can_y: keo duoc ngang / doc rieng.
+      - dx, dy: man dich bao nhieu px khi keo (do lon = muc scroll).
+      - dx_score, dy_score, diff: do tin cay.
+
+    CACH DUNG: sau khi observe_marked 1 man la, neu nghi con content ngoai khung
+    -> probe_scroll(). can_x/can_y=True -> drag(...) de lo content moi -> observe
+    tiep -> hoc them element. Giup kham pha HET man thay vi bo sot.
+
+    Tham so amp: bien do keo thu (px, mac dinh 200). Man nho dung 120-150.
+    """
+    eye = get_container().eye
+    if not hasattr(eye, "probe"):
+        return {"ok": False, "error": "EYE khong ho tro probe (chi RustEye)"}
+    p = eye.probe(int(amp))
+    if not p:
+        return {"ok": False, "error": "probe that bai (game tat / khong drag duoc)"}
+    p["ok"] = True
+    # goi y hanh dong cho agent
+    hints = []
+    if p.get("can_x"):
+        hints.append("keo NGANG duoc -> drag de xem content trai/phai")
+    if p.get("can_y"):
+        hints.append("keo DOC duoc -> drag de xem content tren/duoi")
+    p["hint"] = ("; ".join(hints) if hints
+                 else "man KHONG keo duoc (content vua khung) -> khong can scroll")
+    return p
+
+
+@mcp.tool()
 def learn_element(label: str, x: int, y: int) -> dict:
     """GHI NHO 1 element ban DA XAC NHAN bang mat (vision) cho man hinh hien tai.
 

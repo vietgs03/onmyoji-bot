@@ -194,6 +194,15 @@ class RustEye(EyePort):
             return (int(x), int(y), False)
         return (int(s.get("x", x)), int(s.get("y", y)), bool(s.get("snapped", False)))
 
+    def probe(self, amp: int = 200) -> dict:
+        """PROBE kha nang di chuyen man: drag thu ngang+doc tu giua man, do shift,
+        roi tu keo VE (khong lam xe dich). Tra dict {movable, can_x, can_y, dx,
+        dy, ...}. Cho agent biet man co scroll/keo duoc khong (ban do exploration,
+        list menu Shop/Souls) de kham pha het content - cach SENIOR thay vi doan.
+        amp = bien do keo thu (px). Dung truong 'radius' trong protocol."""
+        resp = self._rpc({"op": "probe", "radius": int(amp)})
+        return resp.get("probe") or {}
+
     def act(self, action: Action) -> ActionResult:
         resp = self._rpc({"op": "act", "action": action.to_dict()})
         result = resp.get("result") or {}

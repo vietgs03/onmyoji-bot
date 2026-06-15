@@ -76,6 +76,79 @@ pub trait Backend {
         Some(eye_core::snap_to_element(&img, rx, ry, radius))
     }
 
+    /// PROBE kha nang di chuyen man (active motion probe - cach SENIOR thay vi doan).
+    /// Drag thu NGANG roi DOC tu giua man, do shift moi truc, sau do KEO VE de
+    /// khong lam xe dich. Cho agent biet man co scroll/keo duoc khong (ban do
+    /// exploration, list menu Shop/Souls). amp = bien do keo thu (px). None neu
+    /// khong chup duoc / khong drag duoc.
+    fn probe(&mut self, amp: i32) -> Option<crate::protocol::ProbeResult> {
+        use crate::protocol::ProbeResult;
+        use eye_core::{analyze_movability, motion::Rect};
+        // amp vua phai: keo qua xa -> content dich > vung tim shift -> rail bien
+        // (score thap, am tinh gia). 150px du de phat hien, van trong tam tim.
+        let amp = amp.clamp(60, 200);
+        let base = self.grab()?;
+        let (w, h) = (base.width as i32, base.height as i32);
+        let (cx, cy) = (w / 2, h / 2);
+        // ROI CAO/RONG (8%..90%) de vung tim shift (+-max quanh bien) con du hang
+        // hop le sau khi tru le 2*max. ROI nho qua -> khong tim duoc dich lon.
+        let roi = Rect {
+            x: (base.width * 5 / 100),
+            y: (base.height * 8 / 100),
+            w: (base.width * 90 / 100),
+            h: (base.height * 82 / 100),
+        };
+        // tim shift trong khoang [-max,max] voi max hoi > amp (content co the dich
+        // ~1:1 voi ngon tay, doi khi hon chut do quan tinh).
+        let max = amp + 30;
+
+        // --- truc NGANG: keo trai amp, do, roi keo phai amp (ve cho cu) ---
+        let after_x = self.drag_then_grab(cx, cy, cx - amp, cy)?;
+        let mv_x = analyze_movability(&base, &after_x, roi, max);
+        let _ = self.drag_then_grab(cx - amp, cy, cx, cy); // keo VE
+        std::thread::sleep(std::time::Duration::from_millis(150));
+
+        // --- truc DOC: keo len amp, do, roi keo xuong amp (ve cho cu) ---
+        let base_y = self.grab().unwrap_or_else(|| base.clone());
+        let after_y = self.drag_then_grab(cx, cy, cx, cy - amp)?;
+        let mv_y = analyze_movability(&base_y, &after_y, roi, max);
+        let _ = self.drag_then_grab(cx, cy - amp, cx, cy); // keo VE
+
+        // movable: dich dang ke (>=15% bien do keo) voi do tin cay cao. Dung
+        // diff lam phu tro: man tinh keo -> diff ~0; co dich -> diff cao + shift ro.
+        let min_shift = (amp / 6).max(8); // ~15% amp, toi thieu 8px
+        const MIN_SCORE: f32 = 0.25;
+        let can_x = mv_x.dx.abs() >= min_shift && mv_x.dx_score >= MIN_SCORE;
+        let can_y = mv_y.dy.abs() >= min_shift && mv_y.dy_score >= MIN_SCORE;
+        Some(ProbeResult {
+            movable: can_x || can_y,
+            can_x,
+            can_y,
+            dx: mv_x.dx,
+            dx_score: mv_x.dx_score as f64,
+            dy: mv_y.dy,
+            dy_score: mv_y.dy_score as f64,
+            diff: (mv_x.diff.max(mv_y.diff)) as f64,
+        })
+    }
+
+    /// drag (x0,y0)->(x1,y1), cho man on dinh, chup lai. Dung trong probe.
+    fn drag_then_grab(&mut self, x0: i32, y0: i32, x1: i32, y1: i32) -> Option<Image> {
+        let a = Action {
+            kind: ActionKind::Drag,
+            x: Some(x0),
+            y: Some(y0),
+            x1: Some(x1),
+            y1: Some(y1),
+            steps: Some(12),
+            key: None,
+            duration_ms: None,
+        };
+        self.dispatch(&a).ok()?;
+        std::thread::sleep(std::time::Duration::from_millis(280));
+        self.grab()
+    }
+
     /// act = dispatch + observe lai (giong PythonEye.act).
     fn act(&mut self, action: &Action) -> ActionResult {
         match self.dispatch(action) {
