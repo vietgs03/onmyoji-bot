@@ -49,11 +49,39 @@ fn median_blur5(src: &Mat1) -> Mat1 {
     if w == 0 || h == 0 {
         return out;
     }
+    // Moi hang doc lap (tu tinh histogram) -> chia thanh BAND theo hang, chay
+    // song song. Bit-exact vi khong co phu thuoc giua cac hang.
+    let nt = crate::par::nthreads(h);
+    if nt <= 1 {
+        median_blur5_band(src, 0, h, out.data.as_mut_slice());
+        return out;
+    }
+    let band = h.div_ceil(nt);
+    std::thread::scope(|sc| {
+        let mut rest = out.data.as_mut_slice();
+        let mut y0 = 0usize;
+        while y0 < h {
+            let rows = band.min(h - y0);
+            let (chunk, tail) = rest.split_at_mut(rows * w);
+            rest = tail;
+            let start = y0;
+            sc.spawn(move || median_blur5_band(src, start, rows, chunk));
+            y0 += rows;
+        }
+    });
+    out
+}
+
+/// Tinh median_blur5 cho dai hang [start, start+rows), ghi vao `dst` (rows*w pixel).
+fn median_blur5_band(src: &Mat1, start: usize, rows: usize, dst: &mut [u8]) {
+    let (w, h) = (src.w, src.h);
     const TH: i32 = 13; // trung vi cua 25 = thong ke thu tu thu 13
     let wi = w as i32;
     let hi = h as i32;
     let mut hist = [0i32; 256];
-    for y in 0..h {
+    for ry_idx in 0..rows {
+        let y = start + ry_idx;
+        let row_off = ry_idx * w;
         // 5 hang trong cua so (clamp doc theo BORDER_REPLICATE)
         let ry = [
             (y as i32 - 2).clamp(0, hi - 1) as usize,
@@ -78,7 +106,7 @@ fn median_blur5(src: &Mat1) -> Mat1 {
             ltcount += hist[mdn as usize];
             mdn += 1;
         }
-        out.set(0, y, mdn as u8);
+        dst[row_off] = mdn as u8;
 
         // truot ngang: x = 1..w-1
         for x in 1..w {
@@ -107,10 +135,9 @@ fn median_blur5(src: &Mat1) -> Mat1 {
                 ltcount += hist[mdn as usize];
                 mdn += 1;
             }
-            out.set(x, y, mdn as u8);
+            dst[row_off + x] = mdn as u8;
         }
     }
-    out
 }
 
 /// Sobel 3x3 -> (dx, dy) dang i16 (BORDER_REPLICATE).
@@ -221,27 +248,29 @@ fn canny_edges(dx: &[i32], dy: &[i32], w: usize, h: usize, high: f32) -> Mat1 {
     out
 }
 
-/// Hough gradient: tra danh sach (cx, cy, r) cac vong tron tim duoc.
-fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
-    let (w, h) = (gray.w, gray.h);
-    let (dx, dy) = sobel(gray);
-    let edges = canny_edges(&dx, &dy, w, h, PARAM1);
-
-    // accumulator do phan giai dp (1/dp)
-    let inv_dp = 1.0 / DP;
-    let aw = ((w as f32 * inv_dp).ceil() as usize).max(1);
-    let ah = ((h as f32 * inv_dp).ceil() as usize).max(1);
-    let mut accum = vec![0i32; aw * ah];
-
-    // vote: tai moi edge pixel, di doc gradient tu minR den maxR (ca 2 chieu).
-    // Toi uu: buoc bang FIXED-POINT i64 (16 bit phan le) thay vi float -> tranh
-    // 2 lan float->int (cvttss2si) moi buoc, von la phan dat nhat. Toa do vote
-    // luon duong nen (q >> 16) = floor = truncate, khop ban float cu.
+/// Vote cho dai hang nguon [y0, y1): voi moi edge pixel di doc gradient tu
+/// MIN_RADIUS den MAX_RADIUS (ca 2 chieu), cong 1 vao accumulator `accum`.
+/// Buoc bang FIXED-POINT i64 (16 bit phan le) thay vi float -> tranh 2 lan
+/// float->int (cvttss2si) moi buoc. Toa do vote luon duong nen (q >> 16) =
+/// floor = truncate, khop ban float cu.
+#[allow(clippy::too_many_arguments)]
+fn vote_band(
+    edges: &Mat1,
+    dx: &[i32],
+    dy: &[i32],
+    w: usize,
+    y0: usize,
+    y1: usize,
+    aw: usize,
+    ah: usize,
+    accum: &mut [i32],
+) {
     const FP: i64 = 16;
     const ONE: f32 = 65536.0;
+    let inv_dp = 1.0 / DP;
     let aw_i = aw as i32;
     let ah_i = ah as i32;
-    for y in 0..h {
+    for y in y0..y1 {
         for x in 0..w {
             let i = y * w + x;
             if edges.data[i] == 0 {
@@ -281,8 +310,33 @@ fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
             }
         }
     }
+}
+
+/// Hough gradient: tra danh sach (cx, cy, r) cac vong tron tim duoc.
+fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
+    let (w, h) = (gray.w, gray.h);
+    // do thoi gian tung stage khi bat ONMYOJI_PROF=1 (dev only)
+    let prof = std::env::var("ONMYOJI_PROF").is_ok();
+    let t0 = std::time::Instant::now();
+    let (dx, dy) = sobel(gray);
+    let t_sobel = t0.elapsed();
+    let edges = canny_edges(&dx, &dy, w, h, PARAM1);
+    let t_canny = t0.elapsed();
+
+    // accumulator do phan giai dp (1/dp)
+    let inv_dp = 1.0 / DP;
+    let aw = ((w as f32 * inv_dp).ceil() as usize).max(1);
+    let ah = ((h as f32 * inv_dp).ceil() as usize).max(1);
+
+    // vote: tai moi edge pixel, di doc gradient tu minR den maxR (ca 2 chieu).
+    // Giu TUAN TU: thu nghiem chia band + cong don accumulator bi cham hon do
+    // chi phi merge (aw*ah*nbands phep cong) + oversubscription (median da spawn,
+    // nhanh saturation chay song song). vote_band tach rieng cho de doc/test.
+    let mut accum = vec![0i32; aw * ah];
+    vote_band(&edges, &dx, &dy, w, 0, h, aw, ah, &mut accum);
 
     // tim tam: cell > PARAM2 va la local-max trong 3x3
+    let t_vote = t0.elapsed();
     let mut centers: Vec<(i32, i32, i32)> = Vec::new(); // (vote, ax, ay)
     for ay in 1..ah - 1 {
         for ax in 1..aw - 1 {
@@ -311,6 +365,7 @@ fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
     }
     // sap theo vote giam
     centers.sort_by(|a, b| b.0.cmp(&a.0));
+    let t_centers = t0.elapsed();
 
     // loc minDist + chon ban kinh tot nhat moi tam
     let mut result: Vec<(i32, i32, i32)> = Vec::new();
@@ -333,6 +388,17 @@ fn hough_gradient(gray: &Mat1) -> Vec<(i32, i32, i32)> {
         if let Some(r) = best_radius(&edges, cx, cy) {
             result.push((cx as i32, cy as i32, r));
         }
+    }
+    if prof {
+        let t_end = t0.elapsed();
+        eprintln!(
+            "[hough] sobel={:.1} canny={:.1} vote={:.1} centers={:.1} radius={:.1} ms",
+            t_sobel.as_secs_f64() * 1000.0,
+            (t_canny - t_sobel).as_secs_f64() * 1000.0,
+            (t_vote - t_canny).as_secs_f64() * 1000.0,
+            (t_centers - t_vote).as_secs_f64() * 1000.0,
+            (t_end - t_centers).as_secs_f64() * 1000.0,
+        );
     }
     result
 }

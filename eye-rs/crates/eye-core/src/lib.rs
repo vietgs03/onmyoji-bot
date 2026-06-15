@@ -9,6 +9,7 @@ pub mod detect;
 pub mod hough;
 pub mod image;
 pub mod md5;
+pub mod par;
 pub mod perception;
 
 pub use detect::{detect_buttons, Button};
