@@ -14,4 +14,4 @@ pub mod perception;
 
 pub use detect::{detect_buttons, Button};
 pub use image::{Image, ImageError};
-pub use perception::{dhash, hamming, is_loading, state_id, H, W};
+pub use perception::{dhash, hamming, is_loading, resize_rgb, state_id, H, W};

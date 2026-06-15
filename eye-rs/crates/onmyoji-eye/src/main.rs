@@ -19,7 +19,7 @@ mod psbridge;
 mod server;
 
 use capture::FileCapture;
-use eye_core::{detect_buttons, dhash, is_loading, state_id, Image};
+use eye_core::Image;
 use psbridge::PsBridge;
 
 const DEFAULT_ADDR: &str = "127.0.0.1:8765";
@@ -75,24 +75,22 @@ fn cmd_inspect_path(path: &str) -> ExitCode {
             return ExitCode::FAILURE;
         }
     };
-    match dhash(&img) {
-        Some(dh) => {
-            println!("state_id={}", state_id(&dh));
-            println!("dhash={dh}");
-            println!("is_loading={}", is_loading(&img));
-            println!("size={}x{}", img.width, img.height);
-            let btns = detect_buttons(&img, false);
-            println!("buttons={}", btns.len());
-            for b in btns.iter().take(8) {
-                println!("  ({},{}) {}x{} score={:.3}", b.cx, b.cy, b.w, b.h, b.score);
-            }
-            ExitCode::SUCCESS
-        }
-        None => {
-            eprintln!("dhash None (anh < {}x{})", eye_core::W, eye_core::H);
-            ExitCode::FAILURE
-        }
+    // dung CHINH duong from_frame (resize ve canon cho dhash neu can) de inspect
+    // khop production. detect_buttons/loading tinh tren anh GOC -> toa do dung.
+    let obs = crate::protocol::Observation::from_frame(&img, 0.0, None);
+    if obs.dhash.is_none() {
+        eprintln!("dhash None (anh < {}x{})", eye_core::W, eye_core::H);
+        return ExitCode::FAILURE;
     }
+    println!("state_id={}", obs.state_id);
+    println!("dhash={}", obs.dhash.as_deref().unwrap_or(""));
+    println!("is_loading={}", obs.loading);
+    println!("size={}x{}", img.width, img.height);
+    println!("buttons={}", obs.buttons.len());
+    for b in obs.buttons.iter().take(8) {
+        println!("  ({},{}) {}x{} score={:.3}", b.x, b.y, b.w, b.h, b.score);
+    }
+    ExitCode::SUCCESS
 }
 
 /// serve: chon backend roi chay socket server.

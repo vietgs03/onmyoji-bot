@@ -35,8 +35,15 @@ class PythonEye(EyePort):
         self._c = controller or Controller()
         self._last_size = Size(0, 0)
 
+    # kich thuoc CHUAN cua knowledge base (goldens + dhash state_id).
+    # Game ep client 16:9 (1136x640) nhung KB duoc dung tren 1152x679.
+    # dhash phai chay tren anh resize ve day de state_id khop KB; resize
+    # client->canon cho hamming=0 (kiem chung tren state_fighting.png).
+    CANON_W, CANON_H = 1152, 679
+
     # ---------- EyePort ----------
     def observe(self) -> Observation:
+        import cv2
         from perception import dhash, is_loading, state_id, detect_buttons
         img = self._c.bgshot()
         ts = time.time()
@@ -48,8 +55,17 @@ class PythonEye(EyePort):
             )
         h, w = img.shape[:2]
         self._last_size = Size(w, h)
-        dh = dhash(img)
+        # dhash/state_id la VAN TAY DIEU HUONG -> tinh tren anh CHUAN (resize
+        # ve canon) de khop knowledge base bat ke resolution thuc. Resize ve
+        # 9x8 ben trong dhash nen khong anh huong toa do.
+        if (w, h) != (self.CANON_W, self.CANON_H):
+            canon = cv2.resize(img, (self.CANON_W, self.CANON_H))
+        else:
+            canon = img
+        dh = dhash(canon)
         sid = state_id(dh)
+        # buttons + loading tinh tren anh GOC (native client) -> toa do click
+        # khop 1:1 voi client area, khong bi scale lech.
         loading = bool(is_loading(img))
         buttons: tuple[Button, ...] = ()
         if not loading:

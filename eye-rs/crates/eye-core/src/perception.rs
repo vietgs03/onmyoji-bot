@@ -99,6 +99,89 @@ fn resize_linear(src: &[i32], src_w: usize, src_h: usize, dst_w: usize, dst_h: u
     out
 }
 
+/// Resize anh RGB (3 kenh) ve (dst_w x dst_h) bang bilinear fixed-point - khop
+/// cv2.resize INTER_LINEAR BYTE-EXACT (ca duong SIMD VResizeLinearVec_32s8u).
+/// Dung de CHUAN HOA resolution: game ep client 16:9 (vd 1136x640) nhung
+/// knowledge base / goldens dung 1152x679. Resize client->canon cho dhash
+/// hamming=0 (kiem chung tren game that), va byte-exact voi cv2 (golden_resize).
+///
+/// Khop cv2: pass NGANG luu buffer int day du (s0*xa0 + s1*xa1, don vi 2048);
+/// pass DOC theo SIMD: x = H >> 4; out = ((x*ya0)>>16) + ((x*ya1)>>16) roi
+/// (sum + 2) >> 2. Cong thuc nay (khong phai >>22 thuan) moi khop cv2 tren x86.
+pub fn resize_rgb(img: &Image, dst_w: usize, dst_h: usize) -> Image {
+    let src_w = img.width;
+    let src_h = img.height;
+    let xc = linear_coeffs(src_w, dst_w);
+    let yc = linear_coeffs(src_h, dst_h);
+    let src = &img.data; // RGB interleaved, stride = src_w*3
+
+    // Pass NGANG: voi MOI hang nguon, tinh hbuf[x][c] = s0*xa0 + s1*xa1 (i64).
+    // Luu het hang nguon (src_h hang) -> pass doc lay 2 hang ke. Cac hang doc lap
+    // -> song song theo band (ghi vung roi rac, an toan).
+    let mut hbuf = vec![0i32; src_h * dst_w * 3];
+    let nt_h = crate::par::nthreads(src_h);
+    {
+        let xc = &xc;
+        let band = src_h.div_ceil(nt_h);
+        std::thread::scope(|s| {
+            for (bi, chunk) in hbuf.chunks_mut(band * dst_w * 3).enumerate() {
+                let sy_base = bi * band;
+                s.spawn(move || {
+                    for (lo, row) in chunk.chunks_mut(dst_w * 3).enumerate() {
+                        let sy = sy_base + lo;
+                        let r = sy * src_w * 3;
+                        for (dx, &(sx0, xa0, xa1)) in xc.iter().enumerate() {
+                            let sx1 = (sx0 + 1).min(src_w - 1);
+                            let b0 = r + sx0 * 3;
+                            let b1 = r + sx1 * 3;
+                            let d = dx * 3;
+                            for c in 0..3 {
+                                row[d + c] = src[b0 + c] as i32 * xa0
+                                    + src[b1 + c] as i32 * xa1;
+                            }
+                        }
+                    }
+                });
+            }
+        });
+    }
+
+    // Pass DOC theo cong thuc SIMD cua cv2 (byte-exact). Hang dich doc lap -> band.
+    let mut out = vec![0u8; dst_w * dst_h * 3];
+    let nt_v = crate::par::nthreads(dst_h);
+    {
+        let yc = &yc;
+        let hbuf = &hbuf;
+        let band = dst_h.div_ceil(nt_v);
+        std::thread::scope(|s| {
+            for (bi, chunk) in out.chunks_mut(band * dst_w * 3).enumerate() {
+                let dy_base = bi * band;
+                s.spawn(move || {
+                    for (lo, orow) in chunk.chunks_mut(dst_w * 3).enumerate() {
+                        let dy = dy_base + lo;
+                        let (sy0, ya0, ya1) = yc[dy];
+                        let sy1 = (sy0 + 1).min(src_h - 1);
+                        let r0 = sy0 * dst_w * 3;
+                        let r1 = sy1 * dst_w * 3;
+                        for i in 0..dst_w * 3 {
+                            let x0 = hbuf[r0 + i] >> 4;
+                            let x1 = hbuf[r1 + i] >> 4;
+                            let r = ((x0 * ya0) >> 16) + ((x1 * ya1) >> 16);
+                            let v = (r + 2) >> 2;
+                            orow[i] = v.clamp(0, 255) as u8;
+                        }
+                    }
+                });
+            }
+        });
+    }
+    Image {
+        width: dst_w,
+        height: dst_h,
+        data: out,
+    }
+}
+
 /// Crop vung [x0,y0,x1,y1) cua anh -> mang gray i32 (row-major).
 fn crop_gray(img: &Image, x0: usize, y0: usize, x1: usize, y1: usize) -> (Vec<i32>, usize, usize) {
     let cw = x1 - x0;

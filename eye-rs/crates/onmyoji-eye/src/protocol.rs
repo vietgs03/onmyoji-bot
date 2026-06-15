@@ -91,8 +91,20 @@ impl Observation {
             w: img.width as i32,
             h: img.height as i32,
         };
-        let dh = dhash(img);
+        // dhash/state_id la VAN TAY DIEU HUONG -> tinh tren anh CHUAN (resize ve
+        // WxH=1152x679) de khop knowledge base bat ke resolution game thuc te.
+        // Game ep client 16:9 (1136x640); resize client->canon cho hamming=0.
+        // dhash resize ve 9x8 ben trong nen khong anh huong toa do.
+        let canon;
+        let dh = if img.width == eye_core::W && img.height == eye_core::H {
+            dhash(img)
+        } else {
+            canon = eye_core::resize_rgb(img, eye_core::W, eye_core::H);
+            dhash(&canon)
+        };
         let sid = dh.as_deref().map(state_id).unwrap_or_default();
+        // loading + buttons tinh tren anh GOC (native client) -> toa do click
+        // khop 1:1 voi client area, khong bi scale lech.
         let loading = is_loading(img);
         // man dang loading -> bo qua detect (giong PythonEye)
         let buttons = if loading {
