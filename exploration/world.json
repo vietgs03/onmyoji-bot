@@ -3511,6 +3511,35 @@
           "label": "Speed"
         }
       ]
+    },
+    "9fc826addb": {
+      "dhash": "0011111111111111000100010100101001100011001010101110111011011110",
+      "label": "SecretZone",
+      "desc": "Bi Van (秘闻 Secret Zone) - thach dau cot truyen/chien thuat (Secret/Strategy Challenge). Danh sach cac chuong bi an (Arakawa, Fading Sakura, New Makeup, Venom...) - moi cai co cac tang. Enter de vao. Rare/Ranking phai. Vao tu Exploration>SecretZone.",
+      "screenshot": null,
+      "buttons_tried": [
+        [
+          46,
+          46
+        ]
+      ],
+      "verified_elements": [
+        {
+          "cx": 930,
+          "cy": 558,
+          "label": "Enter"
+        },
+        {
+          "cx": 255,
+          "cy": 175,
+          "label": "ArakawaSecret"
+        },
+        {
+          "cx": 139,
+          "cy": 46,
+          "label": "back"
+        }
+      ]
     }
   },
   "edges": [
@@ -5009,6 +5038,14 @@
         230
       ],
       "to": "9197016791"
+    },
+    {
+      "from": "9fc826addb",
+      "click": [
+        46,
+        46
+      ],
+      "to": "cf22d0b534"
     }
   ]
 }
