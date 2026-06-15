@@ -45,7 +45,24 @@ impl Image {
         Ok(Image { width, height, data })
     }
 
-    /// Decode PNG bytes -> Image RGB8. Ho tro Rgb8/Rgba8/Grayscale8 (+ palette qua EXPAND).
+    /// Tao anh tu buffer **BGR** (vd raw tu LockBits Format24bppRgb cua Windows,
+    /// hoac cv2 von BGR). Doi cho B<->R sang RGB noi bo. Kich thuoc = w*h*3.
+    pub fn from_bgr(width: usize, height: usize, mut data: Vec<u8>) -> Result<Self, ImageError> {
+        if data.len() != width * height * 3 {
+            return Err(ImageError::Decode(format!(
+                "buffer {} != {}*{}*3",
+                data.len(),
+                width,
+                height
+            )));
+        }
+        // BGR -> RGB tai cho: swap byte 0 va 2 cua moi pixel.
+        for px in data.chunks_exact_mut(3) {
+            px.swap(0, 2);
+        }
+        Ok(Image { width, height, data })
+    }
+
     pub fn decode_png(bytes: &[u8]) -> Result<Self, ImageError> {
         let mut decoder = png::Decoder::new(bytes);
         // EXPAND: palette -> RGB, grayscale <8bit -> 8bit. Giup robust voi nhieu PNG.
@@ -103,3 +120,33 @@ impl Image {
         (self.data[i], self.data[i + 1], self.data[i + 2])
     }
 }
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn from_bgr_doi_kenh_dung() {
+        // 2 pixel BGR: [B0,G0,R0, B1,G1,R1] -> rgb() phai tra (R,G,B)
+        let bgr = vec![10, 20, 30, 40, 50, 60];
+        let img = Image::from_bgr(2, 1, bgr).unwrap();
+        assert_eq!(img.rgb(0, 0), (30, 20, 10)); // R=30,G=20,B=10
+        assert_eq!(img.rgb(1, 0), (60, 50, 40));
+    }
+
+    #[test]
+    fn from_bgr_bang_from_rgb_sau_swap() {
+        // from_bgr(data) phai == from_rgb(data da swap B<->R)
+        let bgr = vec![1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
+        let rgb_eq = vec![3, 2, 1, 6, 5, 4, 9, 8, 7, 12, 11, 10];
+        let a = Image::from_bgr(2, 2, bgr).unwrap();
+        let b = Image::from_rgb(2, 2, rgb_eq).unwrap();
+        assert_eq!(a.data, b.data);
+    }
+
+    #[test]
+    fn from_bgr_sai_kich_thuoc_loi() {
+        assert!(Image::from_bgr(2, 2, vec![0; 10]).is_err());
+    }
+}
+

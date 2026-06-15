@@ -30,6 +30,7 @@ fn main() -> ExitCode {
     match cmd {
         Some("inspect") => cmd_inspect(&args),
         Some("serve") => cmd_serve(&args),
+        Some("bench") => cmd_bench(&args),
         // tuong thich nguoc: `onmyoji-eye <anh.png>` = inspect
         Some(p) if !p.starts_with('-') && p.ends_with(".png") => {
             cmd_inspect_path(p)
@@ -46,7 +47,63 @@ fn usage() {
     eprintln!("  onmyoji-eye inspect <anh.png>          in state_id/dhash/loading/buttons");
     eprintln!("  onmyoji-eye serve [addr] --ps          socket server, game that (PowerShell)");
     eprintln!("  onmyoji-eye serve [addr] --file <PNG>   socket server, doc anh tu file (dev)");
+    eprintln!("  onmyoji-eye bench [N]                   do thoi gian grab+observe qua PsBridge (game that)");
     eprintln!("  (mac dinh addr = {DEFAULT_ADDR})");
+}
+
+/// bench: chup N lan qua PsBridge (raw capture) + chay observe, in thoi gian
+/// tach pha grab vs perception. Validate live duong raw thuc te.
+fn cmd_bench(args: &[String]) -> ExitCode {
+    use crate::capture::Backend;
+    use std::time::Instant;
+    let n: usize = args.get(2).and_then(|s| s.parse().ok()).unwrap_or(20);
+    let mut bridge = match PsBridge::spawn() {
+        Ok(b) => b,
+        Err(e) => {
+            eprintln!("spawn PsBridge that bai: {e}");
+            return ExitCode::FAILURE;
+        }
+    };
+    // warmup (JIT .NET module lan dau)
+    for _ in 0..3 {
+        let _ = bridge.grab();
+    }
+    let mut t_grab = Vec::with_capacity(n);
+    let mut t_obs = Vec::with_capacity(n);
+    let mut last = String::new();
+    for _ in 0..n {
+        let t0 = Instant::now();
+        let img = match bridge.grab() {
+            Some(i) => i,
+            None => {
+                eprintln!("grab tra None (game khong chay?)");
+                return ExitCode::FAILURE;
+            }
+        };
+        let t1 = Instant::now();
+        let obs = crate::protocol::Observation::from_frame(&img, 0.0, None);
+        let t2 = Instant::now();
+        t_grab.push((t1 - t0).as_secs_f64() * 1000.0);
+        t_obs.push((t2 - t1).as_secs_f64() * 1000.0);
+        last = format!(
+            "{}x{} state_id={} buttons={}",
+            img.width,
+            img.height,
+            obs.state_id,
+            obs.buttons.len()
+        );
+    }
+    let stat = |v: &mut Vec<f64>| {
+        v.sort_by(|a, b| a.partial_cmp(b).unwrap());
+        (v[0], v[v.len() / 2], v[v.len() - 1])
+    };
+    let (gmin, gmed, gmax) = stat(&mut t_grab);
+    let (omin, omed, omax) = stat(&mut t_obs);
+    println!("=== bench N={n} (raw capture qua PsBridge) ===");
+    println!("grab    : min={gmin:5.1} med={gmed:5.1} max={gmax:5.1} ms");
+    println!("observe : min={omin:5.1} med={omed:5.1} max={omax:5.1} ms");
+    println!("tong med: {:5.1} ms  ({last})", gmed + omed);
+    ExitCode::SUCCESS
 }
 
 /// inspect: chay perception tren 1 PNG, in ket qua de doi chieu Python.
