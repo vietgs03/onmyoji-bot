@@ -24,6 +24,22 @@ Neu Rust dhash lech, cac state da hoc thanh vo dung. May man:
 
 Moi thay doi perception PHAI chay `cargo test` (so voi `tests/goldens/`) truoc khi merge.
 
+## Chuan hoa resolution (RAT QUAN TRONG - loi production thuc te)
+Game ep client area ti le **16:9** (vd 1136x640) nhung knowledge base + goldens
+duoc dung tren **1152x679** (= client + vien window, hoac anh goc resize ve do).
+`dhash` yeu cau anh >= 1152x679, nen anh client 1136 -> `dhash=None` -> `state_id`
+rong -> **bot MU, khong dieu huong duoc**. Day la loi that phat hien khi test game live.
+
+Cach xu ly trong EYE (ca PythonEye va RustEye), tach 2 he quy chieu:
+- **dhash/state_id** (van tay dieu huong): `resize_rgb` anh ve **canon 1152x679**
+  TRUOC khi tinh. dhash resize ve 9x8 ben trong nen khong anh huong toa do. Cung 1
+  man hinh o native 1152 hay client 1136 deu ra dhash **hamming=0** (state_id trung).
+- **buttons/loading** (toa do click): tinh tren anh **GOC (native client)** -> click
+  khop 1:1 voi client area, khong scale lech (giu fix clientfix).
+
+`resize_rgb` **byte-exact** voi `cv2.resize` INTER_LINEAR (ke ca duong SIMD
+`VResizeLinearVec_32s8u`: `x=H>>4; ((x*b)>>16); (sum+2)>>2`). Khoa boi `golden_resize`.
+
 ## Cau truc
 - `crates/eye-core` : thu vien thuan (decode PNG, gray, resize, dhash, detect_buttons).
   Khong I/O he thong, de test. Day la phan port tu perception.py.
