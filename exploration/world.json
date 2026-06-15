@@ -3624,7 +3624,12 @@
       "label": "ChampionTrial",
       "desc": "Champion Trial (灵之契) - event nhan vat gioi han (vd Fujiwara no Michinaga). Co: Successor Trial (thu thach ke thua), Fujiwara Archives (Story cot truyen), Uncharted Dreams, Limited-time Challenge, Melodic Mastery (Skills). Co battle pass (Moonrise Pass) mua skin Totem. Vao tu Exploration>ChampionTrial.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          37,
+          36
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 253,
@@ -3645,6 +3650,40 @@
           "cx": 161,
           "cy": 576,
           "label": "MoonrisePass"
+        },
+        {
+          "cx": 37,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "33755d064b": {
+      "dhash": "0011001100111011101001101001010110101011001100111100111011010001",
+      "label": "TotemZone",
+      "desc": "Totem Zone (御灵) - farm tu 4 THAN THU (totem): Dark Shinzu (rong), Dark Hakuro (soi), Dark Qinglong (ho), Dark Peacock (phuong). Moi cai drop SOUL (ngoc hon) + items. Chon than thu de danh. Vao tu Exploration>Totem.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 193,
+          "cy": 254,
+          "label": "DarkShinzu"
+        },
+        {
+          "cx": 431,
+          "cy": 215,
+          "label": "DarkHakuro"
+        },
+        {
+          "cx": 748,
+          "cy": 211,
+          "label": "DarkQinglong"
+        },
+        {
+          "cx": 1006,
+          "cy": 230,
+          "label": "DarkPeacock"
         },
         {
           "cx": 37,
@@ -5161,6 +5200,14 @@
     },
     {
       "from": "1714520ac0",
+      "click": [
+        37,
+        36
+      ],
+      "to": "cf22d0b534"
+    },
+    {
+      "from": "2aacb9e5ee",
       "click": [
         37,
         36
