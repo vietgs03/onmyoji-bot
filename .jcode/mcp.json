@@ -1,0 +1,12 @@
+{
+  "servers": {
+    "onmyoji": {
+      "command": "/home/viethx/onmyoji-bot/scripts/onmyoji-mcp.sh",
+      "args": [],
+      "env": {
+        "ONMYOJI_EYE": "python"
+      },
+      "shared": false
+    }
+  }
+}
