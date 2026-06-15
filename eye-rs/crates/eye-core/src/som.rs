@@ -48,7 +48,7 @@ pub fn marks_from_buttons(img: &Image) -> Vec<Mark> {
     let mut cands: Vec<Button> = detect_buttons(img, false);
     cands.extend(bright_region_elements(img));
     let merged = nms_buttons(cands, 0.45);
-    sort_and_number(merged)
+    sort_and_number(merged, img.width as i32, img.height as i32)
 }
 
 /// Element tu vung SANG/tuong phan (value channel cao) - bat icon/chu/panel ma
@@ -60,18 +60,16 @@ fn bright_region_elements(img: &Image) -> Vec<Button> {
     // close de gom net chu/icon roi rac thanh 1 khoi
     let closed = cv::morph_close(&th, 11);
     let comps = cv::connected_components(&closed);
+    // tran dien tich = 8% man -> loai art nhan vat/nen lon (false positive)
+    let max_area = (img.width * img.height) as i32 * 8 / 100;
     let mut out = Vec::new();
     for c in comps {
         let (w, h) = (c.w as i32, c.h as i32);
         let area = w * h;
         let aspect = w as f32 / h.max(1) as f32;
-        // kich thuoc UI element hop ly: khong qua nho (nhieu) khong qua to (nen)
         // fill ratio: pixel thuc / bbox -> loai vung rong (vien)
         let fill = c.area as f32 / area.max(1) as f32;
-        if (700..90_000).contains(&area)
-            && (0.18..7.0).contains(&aspect)
-            && fill > 0.30
-        {
+        if (700..max_area).contains(&area) && (0.18..7.0).contains(&aspect) && fill > 0.30 {
             out.push(Button {
                 cx: c.x as i32 + w / 2,
                 cy: c.y as i32 + h / 2,
@@ -112,7 +110,8 @@ fn iou_btn(a: &Button, b: &Button) -> f32 {
 }
 
 /// Sap xep button theo lo (row band) roi trai->phai, danh so 1..n.
-fn sort_and_number(mut btns: Vec<Button>) -> Vec<Mark> {
+/// CLAMP bbox vao trong anh (tranh toa do am/tran mep -> nhan ve sai cho).
+fn sort_and_number(mut btns: Vec<Button>, iw: i32, ih: i32) -> Vec<Mark> {
     // gom theo hang: sap theo y truoc, x sau (band 60px de cung hang ~ gan nhau)
     const BAND: i32 = 60;
     btns.sort_by(|a, b| {
@@ -122,15 +121,38 @@ fn sort_and_number(mut btns: Vec<Button>) -> Vec<Mark> {
     });
     btns.into_iter()
         .enumerate()
-        .map(|(i, b)| Mark {
-            id: (i + 1) as u32,
-            x: b.cx - b.w / 2,
-            y: b.cy - b.h / 2,
-            w: b.w,
-            h: b.h,
-            cx: b.cx,
-            cy: b.cy,
-            score: b.score,
+        .map(|(i, b)| {
+            // clamp bbox vao [0,iw)x[0,ih) - element co the tran mep man
+            let mut x = b.cx - b.w / 2;
+            let mut y = b.cy - b.h / 2;
+            let mut w = b.w;
+            let mut h = b.h;
+            if x < 0 {
+                w += x; // thu hep theo phan bi cat
+                x = 0;
+            }
+            if y < 0 {
+                h += y;
+                y = 0;
+            }
+            if x + w > iw {
+                w = iw - x;
+            }
+            if y + h > ih {
+                h = ih - y;
+            }
+            w = w.max(1);
+            h = h.max(1);
+            Mark {
+                id: (i + 1) as u32,
+                x,
+                y,
+                w,
+                h,
+                cx: b.cx.clamp(0, iw - 1),
+                cy: b.cy.clamp(0, ih - 1),
+                score: b.score,
+            }
         })
         .collect()
 }
@@ -219,18 +241,28 @@ fn draw_digit(img: &mut Image, d: u8, x: i32, y: i32, sc: i32, rgb: (u8, u8, u8)
     }
 }
 
-/// Ve nhan so (vd "12") tren nen, goc tren-trai cua bbox mark.
-fn draw_label(img: &mut Image, n: u32, x: i32, y: i32) {
+/// Ve nhan so cho 1 mark. Nhan dat trong/canh bbox, CLAMP vao trong anh de
+/// khong bi cat mep. Tra (lx,ly,box_w,box_h) da ve (de tranh chong neu can).
+fn draw_label(img: &mut Image, n: u32, bx: i32, by: i32, _bw: i32, bh: i32) {
     let sc = 3; // phong to 3x -> moi so rong 9px, cao 15px
     let digits: Vec<u8> = n.to_string().bytes().map(|b| b - b'0').collect();
     let dw = 3 * sc + 1; // be rong 1 so + khoang cach
     let pad = 2;
     let box_w = dw * digits.len() as i32 + pad;
     let box_h = 5 * sc + pad * 2;
-    // nen nhan (vang) ngay tren bbox; neu sat mep tren thi day xuong trong box
-    let ly = if y - box_h >= 0 { y - box_h } else { y };
-    fill_rect(img, x, ly, box_w, box_h, LABEL_BG);
-    let mut dx = x + pad;
+    let (iw, ih) = (img.width as i32, img.height as i32);
+    // dat nhan o goc tren-trai cua bbox (trong box neu vua, neu khong day ra ngoai
+    // tren). Sau do CLAMP toan bo nhan vao trong anh.
+    let mut lx = bx;
+    let mut ly = if by - box_h >= 0 { by - box_h } else { by };
+    // neu box du cao, dat nhan ben trong goc tren de khong che element ke ben
+    if bh >= box_h && by - box_h < 0 {
+        ly = by;
+    }
+    lx = lx.clamp(0, (iw - box_w).max(0));
+    ly = ly.clamp(0, (ih - box_h).max(0));
+    fill_rect(img, lx, ly, box_w, box_h, LABEL_BG);
+    let mut dx = lx + pad;
     for d in digits {
         draw_digit(img, d, dx, ly + pad, sc, LABEL_FG);
         dx += dw;
@@ -242,7 +274,7 @@ pub fn render_marks(img: &Image, marks: &[Mark]) -> Image {
     let mut out = img.clone();
     for m in marks {
         draw_rect(&mut out, m.x, m.y, m.w, m.h, MARK_RGB, 2);
-        draw_label(&mut out, m.id, m.x, m.y);
+        draw_label(&mut out, m.id, m.x, m.y, m.w, m.h);
     }
     out
 }
@@ -270,12 +302,23 @@ mod tests {
             Button { cx: 50, cy: 100, w: 40, h: 40, score: 0.8 },  // hang 1 trai
             Button { cx: 100, cy: 400, w: 40, h: 40, score: 0.7 }, // hang 2
         ];
-        let marks = sort_and_number(btns);
+        let marks = sort_and_number(btns, 1136, 640);
         assert_eq!(marks.len(), 3);
         // mark 1 = hang1-trai (50,100), mark 2 = hang1-phai (200,100), mark 3 = hang2
         assert_eq!((marks[0].cx, marks[0].id), (50, 1));
         assert_eq!((marks[1].cx, marks[1].id), (200, 2));
         assert_eq!((marks[2].cy, marks[2].id), (400, 3));
+    }
+
+    #[test]
+    fn clamp_bbox_tran_mep() {
+        // button tran mep tren-trai: cx=10,cy=10,w=100,h=100 -> bbox (-40,-40)..
+        let btns = vec![Button { cx: 10, cy: 10, w: 100, h: 100, score: 0.9 }];
+        let marks = sort_and_number(btns, 1136, 640);
+        let m = marks[0];
+        assert!(m.x >= 0 && m.y >= 0, "bbox phai clamp >=0: {m:?}");
+        assert!(m.x + m.w <= 1136 && m.y + m.h <= 640, "bbox trong anh: {m:?}");
+        assert!(m.cx >= 0 && m.cy >= 0, "tam trong anh");
     }
 
     #[test]
