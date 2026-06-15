@@ -186,6 +186,44 @@ def test_verified_elements_selflearning():
     print("  [ok] verified elements (agent verify -> world_model nho, self-learning)")
 
 
+def test_observe_marked_confirm_screen():
+    """observe_marked PHAI xac nhan man truoc khi gop verified (tranh khoanh tum
+    lum tren man LA). Man LA (dhash khong match + page none) -> screen_confirmed
+    False + hint + KHONG gop verified. Man co page -> confirmed."""
+    from onmyoji.interface import mcp_server as M
+    from onmyoji.domain.entities import Observation, Size, Mark
+
+    class _W:
+        def match_state(self, dh, sid):
+            return None  # khong match (man chua hoc)
+
+        def elements_for(self, sid):
+            return [{"cx": 100, "cy": 100, "label": "X"}]  # co verified (khong duoc gop neu man LA)
+
+    class _C:
+        world = _W()
+
+    orig = M.get_container
+    M.get_container = lambda: _C()
+    try:
+        # man LA: page None, dhash khong match -> KHONG gop verified
+        la = Observation(ts=0, state_id="zzz", loading=False, size=Size(1136, 640),
+                         marks=(Mark(1, 50, 50, 28, 28, 44, 44, 1.0),),
+                         marked_path=None, page=None)
+        d = M._merge_verified(la)
+        assert d["screen_confirmed"] is False, "man LA phai confirmed=False"
+        assert "screen_hint" in d, "man LA phai co hint cho agent"
+        assert all(not m.get("label") for m in d["marks"]), "man LA KHONG duoc gop verified"
+        # man co page -> confirmed
+        ok = Observation(ts=0, state_id="zzz", loading=False, size=Size(1136, 640),
+                         marks=(), marked_path=None, page="page_main", page_score=0.97)
+        d2 = M._merge_verified(ok)
+        assert d2["screen_confirmed"] is True, "man co page phai confirmed=True"
+    finally:
+        M.get_container = orig
+    print("  [ok] observe_marked xac nhan man (man LA -> khong khoanh tum lum)")
+
+
 def test_match_state_fuzzy_dhash():
     """Rust EYE cho dhash lech vai bit -> state_id md5 KHAC HAN. match_state phai
     khop MO theo dhash (hamming<=12) -> tra dung sid Python da luu.

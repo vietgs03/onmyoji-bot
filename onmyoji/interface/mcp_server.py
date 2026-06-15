@@ -94,18 +94,87 @@ def observe_marked() -> dict:
     Dung khi can NHIN man hinh de quyet dinh click gi (man moi/la, hoac observe()
     khong du). Tra ve:
       - marked_path: duong dan anh DA DANH SO (mo anh nay de NHIN cac so tren nut).
-      - marks: [{id, cx, cy, w, h, score}] - id tren anh -> toa do (cx,cy) de click.
+      - marks: [{id, cx, cy, w, h, score, label?}] - id tren anh -> toa do (cx,cy).
+        Mark co 'label' = DA HOC tu lan truoc (ve mau XANH tren anh) -> tin cao,
+        click thang. Mark khong label = CV ung vien (mau DO) -> verify truoc.
       - state_id, page, loading, size nhu observe().
 
-    LUU Y QUAN TRONG: marks la UNG VIEN do CV detect, CO THE SOT (vd nut Explore/
-    Summon phuc tap) HOAC co RAC. Hay MO anh marked_path de NHIN, doi chieu:
-      - Mark dung element -> click_mark(id).
-      - Element BI SOT (khong co so) -> uoc toa do tu anh roi click(x,y).
+    LUU Y QUAN TRONG: CV marks (do) CO THE SOT (vd nut Explore/Summon phuc tap)
+    HOAC co RAC. Hay MO anh marked_path de NHIN, doi chieu:
+      - Mark XANH (da hoc) -> click_mark(id) ngay.
+      - Mark DO dung element -> click_mark(id).
+      - Element BI SOT (khong co so) -> click_at(x,y) (tu snap) + learn_element de
+        LAN SAU khong sot nua (he thong KHOANH VUNG nho lai).
       - Mark la RAC -> bo qua.
-    Sau khi xac dinh, dung click_mark(id) hoac click(x,y).
     """
-    obs = get_container().eye.observe_som()
-    return obs.to_dict()
+    obs = get_container().eye.observe_som(with_page=True)
+    return _merge_verified(obs)
+
+
+def _merge_verified(obs) -> dict:
+    """Gop verified elements (da hoc) vao ket qua SoM: them marks (co 'label') +
+    ve box XANH cho chung tren anh marked. Tra DICT cho agent.
+
+    QUAN TRONG (tranh khoanh vung tum lum): CHI gop verified khi man duoc XAC NHAN
+    chac chan:
+      - dhash match 1 state da hoc (hamming<=12), HOAC
+      - page detector ra 1 page (landmark robust).
+    Man LA (dhash khong match + page=none, vd popup) -> KHONG gop verified (state
+    moi/dong khong dang tin) + bao agent 'man la, hay NHIN'. Tranh element 'mo coi'
+    khoanh sai cho."""
+    d = obs.to_dict()
+    world = get_container().world
+    # xac nhan man: chi dung sid khi dhash THUC SU match (khong fallback raw id)
+    sid = world.match_state(obs.dhash, obs.state_id) if world else None
+    confirmed = sid is not None or bool(obs.page)
+    d["screen_confirmed"] = confirmed
+    if not confirmed:
+        # man LA -> bao agent NHIN, KHONG gop verified (tranh khoanh sai)
+        d["screen_hint"] = ("Man LA (dhash chua hoc + khong khop page nao). "
+                            "Hay NHIN anh marked de nhan dien; element CV la UNG VIEN.")
+        return d
+    if sid is None:
+        return d  # co page nhung chua co node dhash -> khong co verified de gop
+    learned = world.elements_for(sid)
+    if not learned:
+        return d
+    marks = list(d.get("marks", []))
+    next_id = max((m["id"] for m in marks), default=0) + 1
+    added = []
+    for e in learned:
+        cx, cy = int(e["cx"]), int(e["cy"])
+        dup = next((m for m in marks
+                    if abs(m["cx"] - cx) <= 18 and abs(m["cy"] - cy) <= 18), None)
+        if dup is not None:
+            dup["label"] = e.get("label", "")
+            continue
+        m = {"id": next_id, "cx": cx, "cy": cy, "x": cx - 22, "y": cy - 22,
+             "w": 44, "h": 44, "score": 1.0, "label": e.get("label", "")}
+        marks.append(m)
+        added.append(m)
+        next_id += 1
+    d["marks"] = marks
+    if added and d.get("marked_path"):
+        _draw_verified(d["marked_path"], added)
+    return d
+
+
+def _draw_verified(path, added):
+    """Ve box XANH + label cho cac element da hoc len anh marked (cv2)."""
+    try:
+        import cv2
+        img = cv2.imread(path)
+        if img is None:
+            return
+        for m in added:
+            cv2.rectangle(img, (m["x"], m["y"]), (m["x"] + m["w"], m["y"] + m["h"]),
+                          (0, 220, 0), 2)
+            cv2.putText(img, f"{m['id']}:{m.get('label','')}",
+                        (m["x"], max(12, m["y"] - 4)),
+                        cv2.FONT_HERSHEY_SIMPLEX, 0.5, (0, 220, 0), 2)
+        cv2.imwrite(path, img)
+    except Exception:  # noqa: BLE001
+        pass
 
 
 @mcp.tool()
@@ -169,18 +238,29 @@ def learn_element(label: str, x: int, y: int) -> dict:
     world = c.world
     if world is None:
         return {"ok": False, "error": "WorldModel khong kha dung"}
-    # xac dinh state hien tai (dhash)
-    obs = c.eye.observe_nav()
-    sid = world.match_state(obs.dhash, obs.state_id) or obs.state_id
+    # Xac dinh man hien tai cho CHAC (tranh hoc vao state dong/khong on dinh ->
+    # element 'mo coi' khoanh sai cho). Uu tien dhash match (state da hoc), neu
+    # khong thi page (landmark robust). Man LA hoan toan -> tu tao node tu dhash
+    # NHUNG canh bao agent (dhash man dong co the khong lap lai).
+    obs = c.eye.observe_som(with_page=True)
+    matched = world.match_state(obs.dhash, obs.state_id)
+    sid = matched or obs.state_id
     # snap toa do ve element that cho chuan
     sx, sy = x, y
     if hasattr(c.eye, "snap"):
         sx, sy, _ = c.eye.snap(x, y)
-    world.record_element(sid, sx, sy, label)
+    world.record_element(sid, sx, sy, label, dhash=obs.dhash)
     if hasattr(world, "save"):
         world.save()
-    return {"ok": True, "state_id": sid, "label": label,
-            "saved_at": [sx, sy], "learned": world.elements_for(sid)}
+    confirmed = matched is not None or bool(obs.page)
+    out = {"ok": True, "state_id": sid, "page": obs.page, "label": label,
+           "saved_at": [sx, sy], "screen_confirmed": confirmed,
+           "learned": world.elements_for(sid)}
+    if not confirmed:
+        out["warning"] = ("Man chua xac nhan (dhash moi + page=none, vd popup dong). "
+                          "Da luu nhung dhash co the khong lap lai -> element co the "
+                          "khong xuat hien lai. Nen hoc o man ON DINH (co page/da biet).")
+    return out
 
 
 @mcp.tool()

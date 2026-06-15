@@ -96,14 +96,24 @@ class WorldModel:
                     return True
         return False
 
-    def add_verified_element(self, sid, cx, cy, label, tol=18):
+    def add_verified_element(self, sid, cx, cy, label, tol=18, dhash=None):
         """Ghi 1 element DA DUOC AGENT XAC NHAN (vision verify) cho state: toa do
         + label ngu nghia. Self-learning: lan sau gap lai man nay (cung label) ->
         dung element da verify, KHONG can CV/agent lai. Gop theo label (man logic).
-        Khong them trung (cung label, toa do gan tol)."""
+        Khong them trung (cung label, toa do gan tol).
+
+        Neu state CHUA TON TAI (man dong/moi) va co `dhash` -> tu tao node moi
+        (agent dang nhin man do = man co that). Khong co dhash -> bo qua."""
         st = self.states.get(sid)
         if st is None:
-            return
+            if not dhash:
+                return  # khong biet dhash -> khong tao duoc node
+            # tu dang ky node moi cho man agent dang nhin
+            self.states[sid] = {
+                "dhash": dhash, "label": None, "desc": None,
+                "screenshot": None, "buttons_tried": [], "verified_elements": [],
+            }
+            st = self.states[sid]
         ve = st.setdefault("verified_elements", [])
         for e in self.verified_elements(sid):
             if e["label"] == label and abs(e["cx"] - cx) <= tol and abs(e["cy"] - cy) <= tol:

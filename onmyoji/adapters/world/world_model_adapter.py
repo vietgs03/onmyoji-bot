@@ -102,10 +102,12 @@ class WorldModelAdapter(WorldModelPort):
             self._wm.add_edge(frm, (action.x, action.y), to)
             self._wm.mark_tried(frm, (action.x, action.y))
 
-    def record_element(self, state_id: str, cx: int, cy: int, label: str) -> None:
-        """Ghi element da agent verify cho state (toa do + label). Self-learning."""
+    def record_element(self, state_id: str, cx: int, cy: int, label: str,
+                       dhash: str | None = None) -> None:
+        """Ghi element da agent verify cho state (toa do + label). Self-learning.
+        dhash cho phep tu tao node neu man chua hoc (man dong/moi)."""
         if hasattr(self._wm, "add_verified_element"):
-            self._wm.add_verified_element(state_id, cx, cy, label)
+            self._wm.add_verified_element(state_id, cx, cy, label, dhash=dhash)
 
     def elements_for(self, state_id: str) -> list[dict]:
         if hasattr(self._wm, "verified_elements"):
