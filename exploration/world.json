@@ -2764,7 +2764,39 @@
       "label": "Summon",
       "desc": "Summon Room Wisdom Flames",
       "screenshot": "exploration/screens/f1d02e59f7.png",
-      "buttons_tried": []
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 396,
+          "cy": 618,
+          "label": "NormalSummon"
+        },
+        {
+          "cx": 557,
+          "cy": 558,
+          "label": "MysterySummon"
+        },
+        {
+          "cx": 711,
+          "cy": 590,
+          "label": "JadeSummon"
+        },
+        {
+          "cx": 1048,
+          "cy": 126,
+          "label": "Scrolls"
+        },
+        {
+          "cx": 919,
+          "cy": 252,
+          "label": "Shrine"
+        },
+        {
+          "cx": 50,
+          "cy": 30,
+          "label": "back"
+        }
+      ]
     },
     "92f58d44ed": {
       "dhash": "1001100110011101001101110001111101100100110011001010000010001011",
@@ -3354,6 +3386,14 @@
           "label": "back"
         }
       ]
+    },
+    "11f9c07f69": {
+      "dhash": "0011010101000101110000100001100111001100110011001000100100100111",
+      "label": "Summon",
+      "desc": "Phong TRIEU HOI thuc than (画符/召唤 - ve bua). 3 loai bua: Normal (bua thuong - AR), Mystery (bua bi an - co the ra SSR/SP, QUAN TRONG), Jade (dung ngoc xanh 100). Co Scrolls (cuon trieu hoi), Shrine (den), Memory (hoi uc rut lai). Vao tu HOME>Summon.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": []
     }
   },
   "edges": [
