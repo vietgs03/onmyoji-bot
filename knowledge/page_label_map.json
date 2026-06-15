@@ -1,11 +1,9 @@
 {
-  "_comment": "Anh xa OAS page name -> WM label. Page detector (landmark template match) robust hon dhash voi man DONG/3D. NavigateUseCase dung lam fallback khi dhash khong khop state da hoc. Chi map cac page co label tuong ung trong world model.",
+  "_comment": "Anh xa OAS page name -> WM label. Page detector (landmark template match) robust hon dhash voi man DONG/3D. NavigateUseCase dung lam fallback khi dhash khong khop state da hoc.",
+  "_note": "CHI giu mapping CHAC CHAN (nghia game trung khop). page_main da verify LIVE (score 0.989 tren HOME). Cac mapping bi loai: page_realm_raid->World (SAI: realm raid 突破 != world chat), page_friends/page_guild (CHUA verify, desc WM khong ro). Them lai sau khi verify tung cai tren live game.",
   "page_main": "HOME",
   "page_summon": "Summon",
   "page_exploration": "Explore",
   "page_town": "Town",
-  "page_shikigami_records": "Shikigami",
-  "page_friends": "Friends",
-  "page_guild": "Guild Hall",
-  "page_realm_raid": "World"
+  "page_shikigami_records": "Shikigami"
 }

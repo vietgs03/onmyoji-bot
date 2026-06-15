@@ -73,27 +73,29 @@ class NavigateUseCase:
         self._world = world
         self._max_steps = max_steps
 
-    def _locate(self) -> tuple[str | None, str | None]:
-        """Xac dinh (sid_xuat_phat, label) hien tai. Thu dhash truoc, page sau.
-        sid dung cho path_to; label de kiem da toi dich chua."""
-        # tang 1: dhash (nhanh)
+    def _locate(self) -> tuple[str | None, str | None, bool]:
+        """Xac dinh (sid_xuat_phat, label, qua_dhash) hien tai.
+        Thu dhash truoc (chinh xac, ghi-duoc edge), page sau (robust nhung sid la
+        state CU -> KHONG ghi edge de tranh lam ban graph).
+        qua_dhash=True neu xac dinh bang dhash (sid that), False neu page-fallback."""
+        # tang 1: dhash (nhanh, sid CHINH XAC tu quan sat hien tai)
         obs = self._eye.observe_nav()
         sid = self._world.match_state(obs.dhash, obs.state_id) or obs.state_id
         label = self._world.resolve_label(sid)
         if label is not None:
-            return sid, label
-        # tang 2: page detector (landmark, robust voi man DONG) - chi khi dhash bi
+            return sid, label, True
+        # tang 2: page detector (landmark, robust voi man DONG) - chi khi dhash bi.
+        # sid tra ve la state CU (state_for_label) -> chi de path_to, KHONG ghi edge.
         obs_pg = self._eye.observe_page()
         page_label = self._world.resolve_page(obs_pg.page)
         if page_label is not None:
-            # diem xuat phat cho path_to = 1 state da luu co label nay
             start = self._world.state_for_label(page_label) or sid
-            return start, page_label
-        return sid, None
+            return start, page_label, False
+        return sid, None, True
 
     def execute(self, target_label: str) -> bool:
         for _ in range(self._max_steps):
-            sid, label = self._locate()
+            sid, label, via_dhash = self._locate()
             if label == target_label:
                 return True
             path = self._world.path_to(sid, target_label)
@@ -103,10 +105,14 @@ class NavigateUseCase:
             result = self._eye.act(action)
             if not result.ok:
                 return False
-            if result.observation:
+            # CHI ghi edge khi xac dinh nguon bang dhash (sid that). Page-fallback
+            # cho sid = state CU -> ghi edge se lam ban graph (edge tu state stale
+            # toi state moi/khong ro). Bo qua record trong truong hop do.
+            if via_dhash and result.observation:
                 to_obs = result.observation
-                to_sid = self._world.match_state(to_obs.dhash, to_obs.state_id) or to_obs.state_id
-                self._world.record_transition(sid, action, to_sid)
+                to_sid = self._world.match_state(to_obs.dhash, to_obs.state_id)
+                if to_sid is not None:  # chi ghi khi dich cung nhan dien duoc
+                    self._world.record_transition(sid, action, to_sid)
         return False
 
 
