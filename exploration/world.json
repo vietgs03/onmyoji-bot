@@ -921,9 +921,46 @@
     "7003532d8f": {
       "dhash": "0110011010100010010110011100000010100011000100101000100111000101",
       "label": "Shikigami",
-      "desc": "Shikigami collection grid",
+      "desc": "Bo suu tap/quan ly THUC THAN (式神录). Xem tat ca thuc than da co (My Shikigami 2955). Loc theo rank: All/UR/SSR/SR/R/N. Click thuc than de xem chi tiet (Liking/Showcase/Profile/Promote thang cap). Vao tu HOME>Shikigami.",
       "screenshot": "exploration/screens/7003532d8f.png",
-      "buttons_tried": []
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 266,
+          "cy": 82,
+          "label": "SearchShikigami"
+        },
+        {
+          "cx": 56,
+          "cy": 136,
+          "label": "FilterAll"
+        },
+        {
+          "cx": 188,
+          "cy": 137,
+          "label": "FilterSSR"
+        },
+        {
+          "cx": 334,
+          "cy": 88,
+          "label": "Preset"
+        },
+        {
+          "cx": 525,
+          "cy": 595,
+          "label": "Promote"
+        },
+        {
+          "cx": 912,
+          "cy": 574,
+          "label": "Profile"
+        },
+        {
+          "cx": 39,
+          "cy": 35,
+          "label": "back"
+        }
+      ]
     },
     "69c220ee42": {
       "dhash": "0110111011101101001010000100110010010010000101011000100111010101",
@@ -3151,6 +3188,25 @@
         {
           "cx": 48,
           "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "75c482e9c1": {
+      "dhash": "0011010110100110110101010101000110001001111010101000001010001000",
+      "label": "ShopStreet",
+      "desc": "Cua hang che do xem PHO (平安京 Heian-Kyo street view) - bien the cua Shop. Cac quay (S-Jade Shop, Skin, Mystic, Consignment, General, Soul, Mall) dat tren ban do pho. Thanh tab day giong Shop. Toggle tu Shop.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 483,
+          "cy": 282,
+          "label": "MallEntrance"
+        },
+        {
+          "cx": 98,
+          "cy": 28,
           "label": "back"
         }
       ]
