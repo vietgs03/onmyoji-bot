@@ -3575,7 +3575,12 @@
       "label": "SpiritVenture",
       "desc": "Spirit Venture - hub farm tai nguyen HANG NGAY (moi mode 2/2 luot/ngay). 6 mode: EXP Spirit (farm kinh nghiem), Coin Spirit (farm vang/kim tien), Kraken Zone (boss bach tuoc drop Soul/Evo), Enraged Kraken (cuoi tuan, manh hon), Mentorship Trial (thu thach su do), Shards (manh thuc than). Vao tu Exploration>SpiritVenture.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          37,
+          36
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 166,
@@ -3606,6 +3611,40 @@
           "cx": 967,
           "cy": 435,
           "label": "Shards"
+        },
+        {
+          "cx": 37,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "2aacb9e5ee": {
+      "dhash": "0101010101010101001010100111001100100010011011001000011101001001",
+      "label": "ChampionTrial",
+      "desc": "Champion Trial (灵之契) - event nhan vat gioi han (vd Fujiwara no Michinaga). Co: Successor Trial (thu thach ke thua), Fujiwara Archives (Story cot truyen), Uncharted Dreams, Limited-time Challenge, Melodic Mastery (Skills). Co battle pass (Moonrise Pass) mua skin Totem. Vao tu Exploration>ChampionTrial.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 253,
+          "cy": 307,
+          "label": "SuccessorTrial"
+        },
+        {
+          "cx": 719,
+          "cy": 225,
+          "label": "FujiwaraArchives"
+        },
+        {
+          "cx": 890,
+          "cy": 377,
+          "label": "UnchartedDreams"
+        },
+        {
+          "cx": 161,
+          "cy": 576,
+          "label": "MoonrisePass"
         },
         {
           "cx": 37,
@@ -5117,6 +5156,14 @@
       "click": [
         46,
         46
+      ],
+      "to": "cf22d0b534"
+    },
+    {
+      "from": "1714520ac0",
+      "click": [
+        37,
+        36
       ],
       "to": "cf22d0b534"
     }
