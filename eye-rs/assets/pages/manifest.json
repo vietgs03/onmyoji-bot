@@ -465,6 +465,20 @@
       "tmpl_w": 230,
       "tmpl_h": 130,
       "file": "page_town_live.png"
+    },
+    {
+      "page": "page_exploration_live",
+      "asset": "LIVE_PAGE_EXPLORATION_LIVE",
+      "roi": [
+        360,
+        540,
+        400,
+        100
+      ],
+      "threshold": 0.7,
+      "tmpl_w": 360,
+      "tmpl_h": 85,
+      "file": "page_exploration_live.png"
     }
   ]
 }

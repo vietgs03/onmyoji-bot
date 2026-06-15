@@ -201,7 +201,7 @@ def click_mark(mark_id: int) -> dict:
 
 
 @mcp.tool()
-def click_at(x: int, y: int, snap: bool = True) -> dict:
+def click_at(x: int, y: int, snap: bool = True, screen: str = "") -> dict:
     """Click tai toa do (x,y) ban UOC LUONG tu anh, voi SNAP tu dong (mac dinh).
 
     Dung khi element BI SOT (khong co mark trong observe_marked) -> ban nhin anh,
@@ -209,16 +209,63 @@ def click_at(x: int, y: int, snap: bool = True) -> dict:
     (trong ban kinh ~40px) -> click chinh xac du ban uoc hoi lech. snap=False de
     click dung (x,y) khong chinh.
 
+    GHI EDGE (ban do): click_at tu dong ghi canh "o man <screen/nguon> click (x,y)
+    -> toi man <dich>" vao world graph (neu CA HAI dau nhan dien duoc) -> goto()/
+    bfs_path dung lai duong nay. Day la cach graph TU LON khi kham pha.
+
     Tham so:
         x, y: toa do uoc luong tu anh marked/goc.
         snap: True (mac dinh) = snap ve element gan nhat; False = click nguyen xy.
-    Tra ve dict Observation MOI sau click.
+        screen: (tuy chon) ten man NGUON (vd 'RealmRaid') de neo edge chac chan khi
+            man nguon DONG khong page. Bo trong -> tu xac dinh qua dhash/page.
+    Tra ve dict Observation MOI sau click + 'edge' (neu ghi duoc).
     """
-    eye = get_container().eye
+    c = get_container()
+    eye = c.eye
+    world = c.world
     sx, sy = x, y
     if snap and hasattr(eye, "snap"):
         sx, sy, _ = eye.snap(x, y)
-    return get_container().act().execute(Action.click(sx, sy)).to_dict()
+    # NGUON: xac dinh canonical state truoc khi click (de ghi edge)
+    src_sid = None
+    if world is not None:
+        try:
+            src_obs = eye.observe_nav() if hasattr(eye, "observe_nav") else None
+            if src_obs is None:
+                src_obs = eye.observe()
+            # neu agent khai bao screen -> neo qua label (man dong khong page)
+            if screen and hasattr(world, "state_for_label"):
+                src_sid = world.state_for_label(screen)
+            if src_sid is None and hasattr(world, "canonical_state"):
+                # can page de neo man dong -> observe co page
+                src_pg = eye.observe_page() if hasattr(eye, "observe_page") else src_obs
+                src_sid, _ = world.canonical_state(src_obs.dhash, src_obs.state_id,
+                                                   getattr(src_pg, "page", None))
+        except Exception:  # noqa: BLE001
+            src_sid = None
+    # CLICK
+    obs_after = c.act().execute(Action.click(sx, sy))
+    d = obs_after.to_dict()
+    # DICH + ghi edge (chi khi ca hai nhan dien duoc -> tranh edge rac)
+    edge = None
+    if world is not None and src_sid is not None and hasattr(world, "record_transition"):
+        try:
+            dst_sid, dst_conf = (world.canonical_state(obs_after.dhash, obs_after.state_id,
+                                                       obs_after.page)
+                                 if hasattr(world, "canonical_state")
+                                 else (None, False))
+            if dst_sid is not None and dst_conf and dst_sid != src_sid:
+                world.record_transition(src_sid, Action.click(sx, sy), dst_sid)
+                if hasattr(world, "save"):
+                    world.save()
+                edge = {"from": src_sid, "click": [sx, sy], "to": dst_sid,
+                        "from_label": world.resolve_label(src_sid) if hasattr(world, "resolve_label") else None,
+                        "to_label": world.resolve_label(dst_sid) if hasattr(world, "resolve_label") else None}
+        except Exception:  # noqa: BLE001
+            edge = None
+    if edge:
+        d["edge"] = edge
+    return d
 
 
 @mcp.tool()

@@ -281,6 +281,38 @@ def test_learn_element_screen_anchor():
     print("  [ok] learn_element screen anchor (man dong khong page -> hoi tu 1 node)")
 
 
+def test_click_at_records_edge():
+    """click_at GHI EDGE (nguon->dich) vao world graph khi ca hai dau nhan dien
+    duoc -> goto()/bfs_path dung lai duong. Day la cach graph TU LON khi kham pha
+    (truoc day click_at KHONG ghi edge -> graph co node nhung thieu duong di)."""
+    import sys, os
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    from world_model import WorldModel
+    from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
+    from onmyoji.domain.entities import Action
+
+    wm = WorldModel()
+    wm.states = {
+        "src": {"dhash": "0" * 64, "label": "Town", "buttons_tried": [], "verified_elements": []},
+        "dst": {"dhash": "1" * 64, "label": "Arena", "buttons_tried": [], "verified_elements": []},
+    }
+    wm.edges = []
+    adapter = WorldModelAdapter(world=wm)
+    # mo phong click_at ghi edge: o src click (290,370) -> toi dst
+    adapter.record_transition("src", Action.click(290, 370), "dst")
+    assert len(wm.edges) == 1, f"phai ghi 1 edge: {wm.edges}"
+    e = wm.edges[0]
+    assert e["from"] == "src" and e["to"] == "dst" and e["click"] == [290, 370], f"edge sai: {e}"
+    # mark_tried an toan khi node thieu key buttons_tried
+    wm.states["nokey"] = {"dhash": "0101" * 16, "label": "X"}  # khong co buttons_tried
+    wm.mark_tried("nokey", (10, 20))  # khong duoc raise
+    assert wm.states["nokey"]["buttons_tried"] == [[10, 20]], "mark_tried phai tu tao key"
+    # path_to dung edge da ghi (Town -> Arena qua click)
+    path = adapter.path_to("src", "Arena")
+    assert path and path[0].x == 290 and path[0].y == 370, f"path_to phai ra click 290,370: {path}"
+    print("  [ok] click_at ghi edge (graph tu lon: goto/bfs_path dung lai duong)")
+
+
 def test_observe_marked_confirm_screen():
     """observe_marked PHAI xac nhan man truoc khi gop verified (tranh khoanh tum
     lum tren man LA). Man LA (dhash khong match + page none) -> screen_confirmed

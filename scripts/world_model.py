@@ -84,7 +84,10 @@ class WorldModel:
         return [s for s, st in self.states.items() if st.get("label") == lbl]
 
     def mark_tried(self, sid, click):
-        bt = self.states[sid]["buttons_tried"]
+        st = self.states.get(sid)
+        if st is None:
+            return
+        bt = st.setdefault("buttons_tried", [])
         if list(click) not in bt:
             bt.append(list(click))
 
