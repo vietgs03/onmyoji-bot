@@ -22,7 +22,10 @@ OUT_DIR = "/home/viethx/onmyoji-bot/eye-rs/assets/pages"
 
 def main():
     os.makedirs(OUT_DIR, exist_ok=True)
-    det = OASPageDetector()
+    # tight=False: dung roi_back RONG vi vi tri landmark trong game ta lech nhieu
+    # so voi roi_front cua OAS (khac layout/version). Toc do giai quyet bang thuat
+    # toan (integral image + song song) ben Rust, khong phai thu hep ROI.
+    det = OASPageDetector(tight=False)
     manifest = []
     for page, (rb, tmpl, thr, asset) in sorted(det.pages.items()):
         # tmpl la BGR (cv2.imread OAS asset). Muon file PNG co noi dung RGB THAT

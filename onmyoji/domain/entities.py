@@ -51,6 +51,10 @@ class Observation:
     # 64-bit dhash chuoi '0'/'1'. BRAIN dung khop mo (hamming<=12) khi state_id
     # khong trung (md5 khuech dai 1 bit dhash -> id khac han). None = anh sai size.
     dhash: Optional[str] = None
+    # Page UI nhan bang landmark template match (vd "page_main"). Robust hon dhash
+    # voi man DONG/3D. None neu khong chay page detection / khong khop.
+    page: Optional[str] = None
+    page_score: Optional[float] = None
 
     def to_dict(self) -> dict:
         d = asdict(self)
@@ -70,6 +74,8 @@ class Observation:
             resources=Resources(**d.get("resources", {})),
             frame_path=d.get("frame_path"),
             dhash=d.get("dhash"),
+            page=d.get("page"),
+            page_score=d.get("page_score"),
         )
 
 

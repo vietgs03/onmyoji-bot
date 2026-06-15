@@ -138,6 +138,8 @@ class RustEye(EyePort):
             resources=Resources(**(o.get("resources") or {})),
             frame_path=o.get("frame_path"),
             dhash=o.get("dhash"),
+            page=o.get("page"),
+            page_score=o.get("page_score"),
         )
 
     # ---------- EyePort ----------
@@ -152,6 +154,15 @@ class RustEye(EyePort):
         resp = self._rpc({"op": "observe", "with_buttons": False})
         if not resp.get("ok", False) and "observation" not in resp:
             raise RustEyeError(resp.get("error") or "observe_nav that bai")
+        return self._obs_from_resp(resp)
+
+    def observe_page(self) -> Observation:
+        """Observe co PAGE detection (landmark template match, ~300ms - CHI khi
+        can xac dinh man/dieu huong). Tra Observation co .page/.page_score.
+        Robust hon dhash voi man DONG/3D."""
+        resp = self._rpc({"op": "observe", "with_buttons": False, "with_page": True})
+        if not resp.get("ok", False) and "observation" not in resp:
+            raise RustEyeError(resp.get("error") or "observe_page that bai")
         return self._obs_from_resp(resp)
 
     def act(self, action: Action) -> ActionResult:

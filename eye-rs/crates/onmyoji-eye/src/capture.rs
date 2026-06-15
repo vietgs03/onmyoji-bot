@@ -36,9 +36,15 @@ pub trait Backend {
     /// observe co tuy chon: with_buttons=false -> tier "nav" (~9x nhanh, bo
     /// detect_buttons), chi dhash/state_id/loading cho dieu huong.
     fn observe_opts(&mut self, with_buttons: bool) -> Observation {
+        self.observe_full(with_buttons, false)
+    }
+
+    /// observe day du: them with_page (landmark template match, ~300ms - CHI khi
+    /// can xac dinh man/dieu huong, KHONG dung moi frame).
+    fn observe_full(&mut self, with_buttons: bool, with_page: bool) -> Observation {
         let ts = now_ts();
         match self.grab() {
-            Some(img) => Observation::from_frame_opts(&img, ts, None, with_buttons),
+            Some(img) => Observation::from_frame_full(&img, ts, None, with_buttons, with_page),
             None => Observation::dead(ts, Size { w: 0, h: 0 }),
         }
     }

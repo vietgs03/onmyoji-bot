@@ -80,7 +80,7 @@ fn process_line(line: &str, backend: &mut impl Backend) -> (Response, bool) {
     match req.op {
         Op::Ping => (Response::obs(id, backend.observe()), false),
         Op::Observe => (
-            Response::obs(id, backend.observe_opts(req.with_buttons)),
+            Response::obs(id, backend.observe_full(req.with_buttons, req.with_page)),
             false,
         ),
         Op::Act => match req.action {

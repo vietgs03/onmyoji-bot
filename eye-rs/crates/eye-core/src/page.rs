@@ -47,26 +47,59 @@ impl PageDetector {
     }
 
     /// Tra TAT CA page vuot threshold, sap theo score giam dan.
+    /// Song song theo page (moi page doc lap) khi co nhieu page + nhieu CPU.
     pub fn detect_all(&self, img: &Image) -> Vec<PageHit> {
-        let mut hits: Vec<PageHit> = self
-            .pages
-            .iter()
-            .filter_map(|p| {
-                let m = match_template_roi(img, &p.template, p.roi)?;
-                if m.score >= p.threshold {
-                    Some(PageHit {
-                        page: p.page.clone(),
-                        score: m.score,
-                        x: m.x,
-                        y: m.y,
-                    })
-                } else {
-                    None
-                }
-            })
-            .collect();
+        let mut hits = self.scan_all(img);
+        // loc theo threshold rieng cua tung page
+        let thr: std::collections::HashMap<&str, f64> =
+            self.pages.iter().map(|p| (p.page.as_str(), p.threshold)).collect();
+        hits.retain(|h| thr.get(h.page.as_str()).map(|t| h.score >= *t).unwrap_or(false));
         hits.sort_by(|a, b| b.score.partial_cmp(&a.score).unwrap_or(std::cmp::Ordering::Equal));
         hits
+    }
+
+    /// Quet moi page -> PageHit (CHUA loc threshold). Song song theo page.
+    fn scan_all(&self, img: &Image) -> Vec<PageHit> {
+        // moi page la 1 don vi cong viec nang (template match ROI rong) -> chia
+        // deu cho min(num_cpus, so_page) thread. Khong dung nthreads (theo hang).
+        let nthreads = crate::par::num_cpus().min(self.pages.len()).max(1);
+        if nthreads <= 1 {
+            return self
+                .pages
+                .iter()
+                .filter_map(|p| self.scan_one(img, p))
+                .collect();
+        }
+        // chia page thanh `nthreads` lo, moi thread quet 1 lo.
+        let chunk = self.pages.len().div_ceil(nthreads);
+        let mut out = Vec::with_capacity(self.pages.len());
+        std::thread::scope(|s| {
+            let mut handles = Vec::new();
+            for batch in self.pages.chunks(chunk) {
+                handles.push(s.spawn(|| {
+                    batch
+                        .iter()
+                        .filter_map(|p| self.scan_one(img, p))
+                        .collect::<Vec<_>>()
+                }));
+            }
+            for h in handles {
+                if let Ok(v) = h.join() {
+                    out.extend(v);
+                }
+            }
+        });
+        out
+    }
+
+    fn scan_one(&self, img: &Image, p: &PageTemplate) -> Option<PageHit> {
+        let m = match_template_roi(img, &p.template, p.roi)?;
+        Some(PageHit {
+            page: p.page.clone(),
+            score: m.score,
+            x: m.x,
+            y: m.y,
+        })
     }
 
     /// Tra page khop manh nhat (hoac None).

@@ -56,6 +56,13 @@ pub struct Observation {
     pub size: Size,
     #[serde(default)]
     pub buttons: Vec<Button>,
+    /// Page UI nhan duoc bang landmark template match (vd "page_main"). Robust
+    /// hon dhash voi man DONG. None neu khong khop page nao da biet.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page: Option<String>,
+    /// Score template cua page (TM_CCOEFF_NORMED) neu co `page`.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub page_score: Option<f64>,
     #[serde(default = "default_true")]
     pub alive: bool,
     #[serde(default)]
@@ -78,6 +85,8 @@ impl Observation {
             loading: false,
             size,
             buttons: Vec::new(),
+            page: None,
+            page_score: None,
             alive: false,
             resources: Resources::default(),
             frame_path: None,
@@ -93,11 +102,26 @@ impl Observation {
     /// Nhu from_frame nhung co the BO QUA detect_buttons (nang ~88% chi phi).
     /// `with_buttons=false` -> tier "nav" (~19ms): chi dhash/state_id/loading,
     /// dung cho dieu huong khi chua can toa do nut. `true` = day du (default).
+    ///
+    /// Page detection (landmark, ~300ms cho 32 page) KHONG chay o day vi qua nang
+    /// cho hot loop. Goi rieng `with_page` qua Backend::observe_full neu can.
     pub fn from_frame_opts(
         img: &Image,
         ts: f64,
         frame_path: Option<String>,
         with_buttons: bool,
+    ) -> Self {
+        Self::from_frame_full(img, ts, frame_path, with_buttons, false)
+    }
+
+    /// Day du nhat: co the bat `with_page` (landmark template match, ~300ms - CHI
+    /// dung khi can dieu huong/xac dinh man, KHONG dung moi frame).
+    pub fn from_frame_full(
+        img: &Image,
+        ts: f64,
+        frame_path: Option<String>,
+        with_buttons: bool,
+        with_page: bool,
     ) -> Self {
         let size = Size {
             w: img.width as i32,
@@ -118,6 +142,16 @@ impl Observation {
         // loading + buttons tinh tren anh GOC (native client) -> toa do click
         // khop 1:1 voi client area, khong bi scale lech.
         let loading = is_loading(img);
+        // Page detection (landmark template match) CHI khi with_page=true (nang
+        // ~300ms cho 32 page). Robust hon dhash voi man DONG/3D. Default OFF.
+        let (page, page_score) = if with_page {
+            match crate::pages_embed::detector().detect(img) {
+                Some(h) => (Some(h.page), Some(h.score)),
+                None => (None, None),
+            }
+        } else {
+            (None, None)
+        };
         // man dang loading HOAC tier nav (with_buttons=false) -> bo qua detect.
         let buttons = if loading || !with_buttons {
             Vec::new()
@@ -141,6 +175,8 @@ impl Observation {
             loading,
             size,
             buttons,
+            page,
+            page_score,
             alive: true,
             resources: Resources::default(),
             frame_path,
@@ -212,6 +248,10 @@ pub struct Request {
     /// observe: false = tier "nav" (bo detect_buttons, ~9x nhanh). Mac dinh true.
     #[serde(default = "default_true")]
     pub with_buttons: bool,
+    /// observe: true = chay page detection (landmark, ~300ms). Mac dinh false
+    /// (nang, chi bat khi can xac dinh man/dieu huong).
+    #[serde(default)]
+    pub with_page: bool,
 }
 
 /// EYE -> BRAIN qua socket (1 dong NDJSON). Khop schema `Response`.

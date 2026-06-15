@@ -40,14 +40,16 @@ _RULE_RE = re.compile(
 
 
 def _parse_assets(path):
-    """Doc file assets.py -> dict {ten: {roi_back, threshold, method, file}}."""
+    """Doc file assets.py -> dict {ten: {roi_front, roi_back, threshold, method, file}}."""
     out = {}
     with open(path, encoding="utf-8") as f:
         txt = f.read()
     for m in _RULE_RE.finditer(txt):
         name, rf, rb, thr, method, fname = m.groups()
+        rf = [int(x) for x in rf.split(",")]
         rb = [int(x) for x in rb.split(",")]
         out[name] = {
+            "roi_front": rf,
             "roi_back": rb,
             "threshold": float(thr),
             "method": method,
@@ -68,11 +70,16 @@ def _parse_page_checks(path):
 
 
 class OASPageDetector:
-    def __init__(self):
+    # Margin (px, khong gian game) mo rong quanh roi_front de tim landmark. Landmark
+    # UI o vi tri gan co dinh nen chi can tim quanh do -> nhanh hon roi_back rong.
+    SEARCH_MARGIN = 14
+
+    def __init__(self, tight=True):
         self.assets = _parse_assets(GAMEUI_ASSETS)
         self.page_checks = _parse_page_checks(PAGE_PY)
+        self.tight = tight
         # load + scale template cho moi page co asset hop le
-        self.pages = {}  # page_name -> (roi_back_scaled, template_scaled, threshold)
+        self.pages = {}  # page_name -> (roi_scaled, template_scaled, threshold, asset)
         for page, asset_name in self.page_checks.items():
             a = self.assets.get(asset_name)
             if not a or a["method"] != "Template matching":
@@ -84,10 +91,26 @@ class OASPageDetector:
             th, tw = tmpl.shape[:2]
             ntw, nth = max(1, round(tw * SX)), max(1, round(th * SY))
             tmpl_s = cv2.resize(tmpl, (ntw, nth), interpolation=cv2.INTER_AREA)
-            # scale roi_back
-            x, y, w, h = a["roi_back"]
-            rb = [round(x * SX), round(y * SY), round(w * SX), round(h * SY)]
-            self.pages[page] = (rb, tmpl_s, a["threshold"], asset_name)
+            if tight:
+                # ROI tim = roi_front + margin (gan vi tri landmark), GIAO roi_back.
+                fx, fy, fw, fh = a["roi_front"]
+                m = self.SEARCH_MARGIN
+                sx0, sy0 = fx - m, fy - m
+                sx1, sy1 = fx + fw + m, fy + fh + m
+                # giao voi roi_back (vung OAS cho phep)
+                bx, by, bw, bh = a["roi_back"]
+                sx0 = max(sx0, bx); sy0 = max(sy0, by)
+                sx1 = min(sx1, bx + bw); sy1 = min(sy1, by + bh)
+                # scale ve game
+                rx, ry = round(sx0 * SX), round(sy0 * SY)
+                rw, rh = round((sx1 - sx0) * SX), round((sy1 - sy0) * SY)
+                # dam bao >= template
+                rw = max(rw, ntw); rh = max(rh, nth)
+                roi = [rx, ry, rw, rh]
+            else:
+                x, y, w, h = a["roi_back"]
+                roi = [round(x * SX), round(y * SY), round(w * SX), round(h * SY)]
+            self.pages[page] = (roi, tmpl_s, a["threshold"], asset_name)
 
     def _score(self, img, rb, tmpl):
         """Tra max TM_CCOEFF_NORMED cua tmpl trong vung rb cua img."""

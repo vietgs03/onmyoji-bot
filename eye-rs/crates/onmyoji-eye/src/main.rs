@@ -14,6 +14,7 @@
 use std::process::ExitCode;
 
 mod capture;
+mod pages_embed;
 mod protocol;
 mod psbridge;
 mod server;
@@ -86,10 +87,11 @@ fn cmd_bench(args: &[String]) -> ExitCode {
         t_grab.push((t1 - t0).as_secs_f64() * 1000.0);
         t_obs.push((t2 - t1).as_secs_f64() * 1000.0);
         last = format!(
-            "{}x{} state_id={} buttons={}",
+            "{}x{} state_id={} page={} buttons={}",
             img.width,
             img.height,
             obs.state_id,
+            obs.page.as_deref().unwrap_or("(none)"),
             obs.buttons.len()
         );
     }
@@ -134,6 +136,9 @@ fn cmd_inspect_path(path: &str) -> ExitCode {
     };
     // dung CHINH duong from_frame (resize ve canon cho dhash neu can) de inspect
     // khop production. detect_buttons/loading tinh tren anh GOC -> toa do dung.
+    let t_pg = std::time::Instant::now();
+    let pg = crate::pages_embed::detector().detect(&img);
+    let dt_pg = t_pg.elapsed().as_secs_f64() * 1000.0;
     let obs = crate::protocol::Observation::from_frame(&img, 0.0, None);
     if obs.dhash.is_none() {
         eprintln!("dhash None (anh < {}x{})", eye_core::W, eye_core::H);
@@ -143,6 +148,12 @@ fn cmd_inspect_path(path: &str) -> ExitCode {
     println!("dhash={}", obs.dhash.as_deref().unwrap_or(""));
     println!("is_loading={}", obs.loading);
     println!("size={}x{}", img.width, img.height);
+    println!(
+        "page={} score={:.3} ({:.1}ms)",
+        pg.as_ref().map(|h| h.page.as_str()).unwrap_or("(none)"),
+        pg.as_ref().map(|h| h.score).unwrap_or(0.0),
+        dt_pg
+    );
     println!("buttons={}", obs.buttons.len());
     for b in obs.buttons.iter().take(8) {
         println!("  ({},{}) {}x{} score={:.3}", b.x, b.y, b.w, b.h, b.score);

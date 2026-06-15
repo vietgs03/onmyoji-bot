@@ -43,6 +43,8 @@
         },
         "buttons": {"type": "array", "items": {"$ref": "#/definitions/Button"}},
         "resources": {"$ref": "#/definitions/Resources"},
+        "page": {"type": ["string", "null"], "description": "Page UI nhan bang landmark template match (vd 'page_main'). Robust hon dhash voi man DONG/3D. null neu khong khop page nao."},
+        "page_score": {"type": ["number", "null"], "description": "Score template (TM_CCOEFF_NORMED) cua page, neu co."},
         "frame_path": {"type": ["string", "null"], "description": "duong dan anh DEBUG tuy chon (khong dung trong hot loop)"}
       }
     },
