@@ -3107,7 +3107,12 @@
       "label": "Soul",
       "desc": "Man chon khu farm NGOC HON (御魂). 4 zone: Orochi (大蛇 boss ran 8 dau, ngoc tan cong), Sougenbi, Fallen Sun (中央城 - Weekly 50/Daily 50), Sea of Eternity (Weekly 30). Moi zone co Daily Souls (thuc than drop). Vao tu Exploration>Soul.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          432,
+          230
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 159,
@@ -3461,6 +3466,49 @@
           "cx": 1014,
           "cy": 118,
           "label": "close"
+        }
+      ]
+    },
+    "13d26c793c": {
+      "dhash": "0010110001000010101000000100010001010101000100111111110111010101",
+      "label": "SoulPreBattle",
+      "desc": "Man DAN TRAN truoc khi danh (deploy shikigami). Tap khu vuc de dat thuc than vao tran. Co Ready (bat dau danh), Preset (doi hinh luu), Adjust Soul (chinh ngoc), Bonus. Vao tu SoulBattle>Challenge.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 1044,
+          "cy": 522,
+          "label": "Ready"
+        },
+        {
+          "cx": 93,
+          "cy": 563,
+          "label": "Preset"
+        },
+        {
+          "cx": 921,
+          "cy": 597,
+          "label": "AdjustSoul"
+        }
+      ]
+    },
+    "dcff6c40fc": {
+      "dhash": "1001100110011001000001101101100001011001011001010011010110100100",
+      "label": "SoulInBattle",
+      "desc": "Man TRONG TRAN danh boss ngoc hon (combat). Damage numbers bay, thanh skill thuc than duoi day (Skill1-3, Normal attack). Auto = tu danh, x2 = tang toc, timer + luot (5/8). Vao tu SoulPreBattle>Ready.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 40,
+          "cy": 585,
+          "label": "Auto"
+        },
+        {
+          "cx": 55,
+          "cy": 540,
+          "label": "Speed"
         }
       ]
     }
@@ -4953,6 +5001,14 @@
         590
       ],
       "to": "2cea68932c"
+    },
+    {
+      "from": "2cea68932c",
+      "click": [
+        432,
+        230
+      ],
+      "to": "9197016791"
     }
   ]
 }
