@@ -35,6 +35,10 @@ class Controller:
             ["powershell.exe", "-ExecutionPolicy", "Bypass", "-File", WIN_SERVER],
             stdin=subprocess.PIPE, stdout=subprocess.PIPE, stderr=subprocess.STDOUT,
             bufsize=0)
+        # _raw_ok: con thu raw khong. _raw_supported: server co hieu bgshot_raw khong
+        # (cap nhat sau lan goi dau). Cho phep ha xuong PNG khi chay voi server cu.
+        self._raw_ok = True
+        self._raw_supported = True
         # doc dong "OK ready"
         line = self._readline(timeout=20)
         if not line or not line.startswith("OK"):
@@ -95,6 +99,22 @@ class Controller:
         return self._readline()
 
     def bgshot(self):
+        """Chup man hinh -> numpy BGR (h,w,3) hoac None (game khong chay).
+        UU TIEN raw pipe (nhanh ~17x); neu server cu khong ho tro -> ha xuong
+        PNG file. Tat ca caller dung bgshot() deu huong loi tu dong."""
+        if self._raw_ok:
+            img = self.bgshot_raw()
+            if img is not None:
+                return img
+            # None co the do game tat HOAC server cu. Phan biet bang 1 lan thu PNG:
+            # neu server cu, bgshot_raw luon None -> ta tat raw de khoi thu lai.
+            if not self._raw_supported:
+                self._raw_ok = False
+            else:
+                return None  # game that su khong chay
+        return self._bgshot_png()
+
+    def _bgshot_png(self):
         r = self._cmd(f"bgshot {WIN_SHOT}")
         if not r or not r.startswith("OK"):
             return None
@@ -114,13 +134,16 @@ class Controller:
     def bgshot_raw(self):
         """Chup NHANH: nhan raw BGR24 thang qua stdout pipe, BO QUA encode PNG +
         file 9P + decode. Nhanh ~5-25x bgshot() (do 30ms vs 137-750ms).
-        Tra numpy BGR (h,w,3) hoac None neu game khong chay / loi.
+        Tra numpy BGR (h,w,3) hoac None neu game khong chay / loi / server cu.
         Giao thuc: server gui 'RAW <w> <h> <nbytes>\\n' roi <nbytes> byte BGR."""
         self.proc.stdin.write(b"bgshot_raw\n")
         self.proc.stdin.flush()
         hdr = self._readline()
         if not hdr or not hdr.startswith("RAW"):
+            # server cu khong co lenh bgshot_raw -> danh dau de bgshot() ha xuong PNG
+            self._raw_supported = False
             return None
+        self._raw_supported = True
         parts = hdr.split()
         if len(parts) != 4:
             return None
@@ -134,6 +157,7 @@ class Controller:
         if data is None or len(data) != n:
             return None
         return np.frombuffer(data, dtype=np.uint8).reshape(h, w, 3)
+
 
 
     def bgclick(self, x, y):
