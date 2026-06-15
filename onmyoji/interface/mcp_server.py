@@ -261,7 +261,7 @@ def probe_scroll(amp: int = 200) -> dict:
 
 
 @mcp.tool()
-def learn_element(label: str, x: int, y: int) -> dict:
+def learn_element(label: str, x: int, y: int, screen: str = "") -> dict:
     """GHI NHO 1 element ban DA XAC NHAN bang mat (vision) cho man hinh hien tai.
 
     Self-learning: sau khi ban NHIN anh (observe_marked) va xac dinh "cho (x,y) la
@@ -272,22 +272,31 @@ def learn_element(label: str, x: int, y: int) -> dict:
     Tham so:
         label: ten ngu nghia (vd 'Summon', 'Explore', 'Shop', 'back').
         x, y: toa do element (nen lay tu mark.cx/cy hoac sau khi snap).
+        screen: (KHUYEN DUNG cho man DONG khong co page) ten man chua element nay
+            (vd 'Town', 'Exploration'). Neu da learn_screen(screen) truoc do,
+            element se neo vao DUNG node logic do - tranh PHAN MANH khi dhash man
+            dong troi giua cac lan goi. Bo trong -> neo theo dhash/page (du cho
+            man tinh hoac man co page anchor nhu HOME/Soul).
     Tra ve: {ok, state_id, label, learned: [cac element da hoc cho man nay]}.
     """
     c = get_container()
     world = c.world
     if world is None:
         return {"ok": False, "error": "WorldModel khong kha dung"}
-    # Xac dinh man hien tai cho CHAC (tranh hoc vao state dong/khong on dinh ->
-    # element 'mo coi' khoanh sai cho). Uu tien dhash match (state da hoc), neu
-    # khong thi page (landmark robust). Man LA hoan toan -> tu tao node tu dhash
-    # NHUNG canh bao agent (dhash man dong co the khong lap lai).
-    # Xac dinh man hien tai cho CHAC + NEO ON DINH (tranh phan manh):
-    # canonical_state uu tien dhash-match, roi page->label->node da co. Man dong
-    # (HOME) dhash troi moi frame NHUNG page khong troi -> moi lan hoc hoi tu ve
-    # CUNG 1 node logic, verified elements khong rai rac.
+    # NEO ON DINH (tranh phan manh) theo thu tu do BEN nhat:
+    #   1. screen (agent khai bao ro) -> node co label do (man dong khong page van
+    #      hoi tu - vd Town). Day la neo MANH NHAT vi agent chu dong dạy.
+    #   2. canonical_state: dhash-match -> page->label->node (HOME/Soul co page).
+    # Man dong KHONG page (Town): dhash troi 30-40 bit moi frame -> screen anchor
+    # la cach duy nhat dung (dhash threshold se nham man).
     obs = c.eye.observe_som(with_page=True)
-    sid, confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page)
+    sid = None
+    if screen and hasattr(world, "state_for_label"):
+        sid = world.state_for_label(screen)
+    if sid is not None:
+        confirmed = True  # agent khai bao man -> tin
+    else:
+        sid, confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page)
     # snap toa do ve element that cho chuan
     sx, sy = x, y
     if hasattr(c.eye, "snap"):

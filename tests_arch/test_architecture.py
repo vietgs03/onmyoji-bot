@@ -235,6 +235,35 @@ def test_canonical_state_page_anchor():
     print("  [ok] canonical_state page anchor (man dong dhash troi -> recall on dinh)")
 
 
+def test_learn_element_screen_anchor():
+    """learn_element(screen='Town') NEO element vao node co label do (agent khai
+    bao ro) -> man DONG KHONG page (dhash troi 30-40 bit moi frame, threshold se
+    nham man) van hoi tu ve 1 node. Fix phan manh cho man khong page anchor."""
+    import sys, os
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    from world_model import WorldModel
+    from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
+
+    wm = WorldModel()
+    # node Town da co label (tu learn_screen), dhash mot bien the
+    wm.states = {"town_a": {"dhash": "0" * 64, "label": "Town", "buttons_tried": [], "verified_elements": []}}
+    wm.edges = []
+    adapter = WorldModelAdapter(world=wm)
+
+    # state_for_label('Town') -> node town_a (du dhash hien tai troi xa)
+    assert adapter.state_for_label("Town") == "town_a", "phai resolve Town -> town_a"
+    # state_for_label man chua co -> None (agent phai learn_screen truoc)
+    assert adapter.state_for_label("Arena") is None, "man chua hoc -> None"
+
+    # ghi element qua node resolved -> nam tren town_a (khong tao node moc coi)
+    adapter.record_element("town_a", 300, 318, "Arena", dhash="1" * 64)
+    adapter.record_element("town_a", 610, 306, "DemonParade", dhash="1" * 64)
+    els = adapter.elements_for("town_a")
+    labels = sorted(e["label"] for e in els)
+    assert labels == ["Arena", "DemonParade"], f"element phai gom ve town_a: {labels}"
+    print("  [ok] learn_element screen anchor (man dong khong page -> hoi tu 1 node)")
+
+
 def test_observe_marked_confirm_screen():
     """observe_marked PHAI xac nhan man truoc khi gop verified (tranh khoanh tum
     lum tren man LA). Man LA (dhash khong match + page none) -> screen_confirmed

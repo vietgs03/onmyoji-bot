@@ -29,22 +29,37 @@ graph TD
 3. **agent vision** -> khi 2 tang tren "bi" (screen_confirmed=False), agent NHIN
    anh marked + tu nhan dien.
 
+### LUU Y man DONG (dhash troi) - cach neo on dinh
+Man DONG (HOME, Town, Exploration: nen 3D/nuoc/nhan vat animation) co dhash troi
+30-40 bit MOI FRAME -> dhash KHONG dung lam neo (threshold 12 se nham man; do
+Town<->Town 38 bit con xa hon Town<->HOME 19 bit). Cach neo on dinh theo do BEN:
+- **Co page anchor** (HOME=page_main, Soul=page_soul_zones...): `canonical_state`
+  neo qua page->label->node -> moi frame hoi tu 1 node logic. Recall ON DINH.
+- **KHONG page anchor** (Town, Exploration chua co template): dung
+  `learn_element(label, x, y, screen='Town')` - agent KHAI BAO ro man -> neo qua
+  state_for_label('Town') -> element hoi tu dung node. KHONG bi phan manh khi hoc.
+  + RECALL man dong khong page van phu thuoc dhash match -> co the khong on dinh
+    (frame match node Town khac chua co element). FIX TRIET DE: them page template
+    cho man do (tool gen_pages_embed) - viec lon, lam sau.
+
 ### Vong KHAM PHA (di het cay ban do)
 ```
 explore_status()              # xem da map gi, con frontier gi, goi y buoc tiep
   -> observe_marked()         # NHIN man hien tai (SoM danh so element)
+  -> [neu man co the keo] probe_scroll()  # man co scroll/keo? -> drag xem het content
   -> [neu man LA] learn_screen(label, function, farms)  # DAY ngu nghia -> vector DB
-                  learn_element(label, x, y)            # DAY toa do -> world_model
+                  learn_element(label, x, y, screen=label)  # DAY toa do -> world_model
   -> click_at(x,y) / click_mark(id)   # click element CHUA thu -> sang man moi
   -> lap den khi frontier rong = phu het ban do
 ```
 
-### Tools (14)
+### Tools (16)
 | Nhom | Tool |
 |---|---|
 | Nhin | observe, observe_marked |
 | Lam | click, click_mark, click_at, polite_click, drag, key, goto |
-| Hoc | **learn_element** (toa do->world_model), **learn_screen** (ngu nghia->vector DB + label) |
+| Do | **probe_scroll** (man co keo/scroll duoc khong - active motion probe) |
+| Hoc | **learn_element** (toa do->world_model, co `screen` anchor), **learn_screen** (ngu nghia->vector DB + label) |
 | Kham pha | **explore_status** (frontier + goi y) |
 | Hoi | ask_kb (semantic search vector DB) |
 

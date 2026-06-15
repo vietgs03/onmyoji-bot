@@ -3261,14 +3261,6 @@
       "desc": "Thi tran 平安京 (Heian-Kyo Town) - HUB lon nhieu mode PvP/event. Co: Arena (斗技 dau truong PvP), Demon Parade (百鬼夜行 dieu hanh quy), Retrospect (hoi tuong), Encounter, Itachiland, Mystic Trader (神秘商人). Thanh day = HUD co dinh giong HOME. Pan ngang duoc. Vao tu HOME>Town.",
       "screenshot": null,
       "buttons_tried": [],
-      "verified_elements": []
-    },
-    "4db20b0266": {
-      "dhash": "1100100100011010100111101000000100100010110111010111100000010100",
-      "label": null,
-      "desc": null,
-      "screenshot": null,
-      "buttons_tried": [],
       "verified_elements": [
         {
           "cx": 300,
@@ -3296,6 +3288,14 @@
           "label": "Encounter"
         }
       ]
+    },
+    "4db20b0266": {
+      "dhash": "1100100100011010100111101000000100100010110111010111100000010100",
+      "label": null,
+      "desc": null,
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": []
     }
   },
   "edges": [
