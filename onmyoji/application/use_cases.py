@@ -60,20 +60,41 @@ class WaitStableUseCase:
 
 
 class NavigateUseCase:
-    """Di toi man hinh co label dich, theo path da hoc trong WorldModel."""
+    """Di toi man hinh co label dich, theo path da hoc trong WorldModel.
+
+    Xac dinh vi tri hien tai theo 2 tang (robust):
+      1. dhash match (nhanh, nhung fail tren man DONG/3D - shikigami dong v.v.)
+      2. neu dhash khong ra label -> page detector (landmark template match,
+         robust hon) -> map page->label. Day la fix diem yeu dhash.
+    """
 
     def __init__(self, eye: EyePort, world: WorldModelPort, max_steps: int = 8):
         self._eye = eye
         self._world = world
         self._max_steps = max_steps
 
+    def _locate(self) -> tuple[str | None, str | None]:
+        """Xac dinh (sid_xuat_phat, label) hien tai. Thu dhash truoc, page sau.
+        sid dung cho path_to; label de kiem da toi dich chua."""
+        # tang 1: dhash (nhanh)
+        obs = self._eye.observe_nav()
+        sid = self._world.match_state(obs.dhash, obs.state_id) or obs.state_id
+        label = self._world.resolve_label(sid)
+        if label is not None:
+            return sid, label
+        # tang 2: page detector (landmark, robust voi man DONG) - chi khi dhash bi
+        obs_pg = self._eye.observe_page()
+        page_label = self._world.resolve_page(obs_pg.page)
+        if page_label is not None:
+            # diem xuat phat cho path_to = 1 state da luu co label nay
+            start = self._world.state_for_label(page_label) or sid
+            return start, page_label
+        return sid, None
+
     def execute(self, target_label: str) -> bool:
         for _ in range(self._max_steps):
-            # nav chi can state_id/label, KHONG can buttons -> observe_nav (~9x nhanh)
-            obs = self._eye.observe_nav()
-            # khop MO theo dhash -> sid chuan da luu (chiu lech bit Rust/Python)
-            sid = self._world.match_state(obs.dhash, obs.state_id) or obs.state_id
-            if self._world.resolve_label(sid) == target_label:
+            sid, label = self._locate()
+            if label == target_label:
                 return True
             path = self._world.path_to(sid, target_label)
             if not path:

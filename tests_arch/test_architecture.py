@@ -106,6 +106,58 @@ def test_navigate_usecase_with_stub_world():
     print("  [ok] NavigateUseCase di HOME->SHOP qua Port (swap-able)")
 
 
+def test_navigate_page_fallback():
+    """dhash KHONG khop (man DONG) -> NavigateUseCase dung PAGE detector lam fallback
+    de xac dinh dang o dau, roi van path_to den dich. Fix diem yeu dhash."""
+    from onmyoji.domain.ports import WorldModelPort
+    from onmyoji.domain.entities import Observation, Size
+
+    class PageWorld(WorldModelPort):
+        def resolve_label(self, sid):
+            # dhash KHONG ra label (man dong) -> luon None
+            return None
+        def resolve_page(self, page):
+            # page detector ra "page_main" -> map sang HOME
+            return {"page_main": "HOME"}.get(page)
+        def state_for_label(self, label):
+            return "HOME_SID" if label == "HOME" else None
+        def path_to(self, frm, to_label):
+            # tu HOME (qua page) co duong toi EXPLORE
+            if frm == "HOME_SID" and to_label == "EXPLORE":
+                return [Action.click(300, 100)]
+            return None
+        def record_transition(self, frm, action, to):
+            pass
+
+    class PageEye(FakeEye):
+        def __init__(self):
+            super().__init__(state_id="DYNAMIC")  # dhash khong khop gi
+            self.reached = False
+        def observe_nav(self):
+            # man dong: state_id la, khong co dhash khop
+            return Observation(ts=0, state_id="DYNAMIC", loading=False,
+                               size=Size(1136, 640))
+        def observe_page(self):
+            # page detector nhan ra page_main (robust)
+            pg = "page_main" if not self.reached else "page_exploration"
+            return Observation(ts=0, state_id="DYNAMIC", loading=False,
+                               size=Size(1136, 640), page=pg, page_score=0.98)
+        def act(self, a):
+            self.reached = True  # sau click -> sang EXPLORE
+            return super().act(a)
+
+    eye = PageEye()
+    world = PageWorld()
+    # dich EXPLORE: ban dau dhash None -> page=page_main=HOME -> path_to -> click
+    # -> reached=True -> page=page_exploration (nhung world chua map) -> van la None
+    # de don gian: kiem da goi duoc path qua page fallback (1 buoc)
+    ok = NavigateUseCase(eye, world, max_steps=3).execute("EXPLORE")
+    # khong nhat thiet toi dich (page_exploration chua map), nhung phai DA THU
+    # di qua page fallback (khong return False ngay vi path_to ra duong)
+    assert eye.reached, "phai dung page fallback de xac dinh HOME va click di tiep"
+    print("  [ok] NavigateUseCase page fallback (dhash fail -> page detector)")
+
+
 def test_match_state_fuzzy_dhash():
     """Rust EYE cho dhash lech vai bit -> state_id md5 KHAC HAN. match_state phai
     khop MO theo dhash (hamming<=12) -> tra dung sid Python da luu.

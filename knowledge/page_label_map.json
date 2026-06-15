@@ -1,0 +1,11 @@
+{
+  "_comment": "Anh xa OAS page name -> WM label. Page detector (landmark template match) robust hon dhash voi man DONG/3D. NavigateUseCase dung lam fallback khi dhash khong khop state da hoc. Chi map cac page co label tuong ung trong world model.",
+  "page_main": "HOME",
+  "page_summon": "Summon",
+  "page_exploration": "Explore",
+  "page_town": "Town",
+  "page_shikigami_records": "Shikigami",
+  "page_friends": "Friends",
+  "page_guild": "Guild Hall",
+  "page_realm_raid": "World"
+}

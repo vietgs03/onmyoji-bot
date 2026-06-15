@@ -30,6 +30,12 @@ class EyePort(ABC):
         Mac dinh = observe() (adapter co the override de nhanh hon)."""
         return self.observe()
 
+    def observe_page(self) -> Observation:
+        """Tier "page": chup + nhan PAGE bang landmark template match (robust hon
+        dhash voi man DONG/3D). Tra Observation co .page/.page_score.
+        Mac dinh = observe() (adapter ho tro page se override)."""
+        return self.observe()
+
     @abstractmethod
     def act(self, action: Action) -> ActionResult:
         """Thuc thi 1 action len game, tra ket qua + observation moi."""
@@ -44,6 +50,19 @@ class WorldModelPort(ABC):
     @abstractmethod
     def resolve_label(self, state_id: str) -> Optional[str]:
         """state_id (dhash) -> label logic (vd 'HOME', 'SHOP')."""
+
+    def resolve_page(self, page: Optional[str]) -> Optional[str]:
+        """OAS page name (vd 'page_main') -> label logic (vd 'HOME').
+
+        Page detector (landmark template match) robust hon dhash voi man DONG/3D.
+        Dung lam fallback khi dhash khong khop state da hoc. Mac dinh: khong map."""
+        return None
+
+    def state_for_label(self, label: str) -> Optional[str]:
+        """Tra 1 state_id da luu co label nay (de lam diem xuat phat cho path_to
+        khi chi biet label, vd tu page detector). None neu chua hoc label do.
+        Mac dinh: khong tra (adapter override)."""
+        return None
 
     def match_state(self, dhash: Optional[str], state_id: str) -> Optional[str]:
         """Tra ve state_id CHUAN da luu khop voi quan sat hien tai.

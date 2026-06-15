@@ -5,6 +5,7 @@ contract moi (path_to tra list[Action]).
 """
 from __future__ import annotations
 
+import json
 import os
 import sys
 from typing import Optional
@@ -18,6 +19,19 @@ for _p in ("scripts", "automation"):
 from onmyoji.domain.entities import Action, ActionKind
 from onmyoji.domain.ports import WorldModelPort
 
+# Anh xa OAS page name -> WM label (data, khong hardcode). Page detector robust
+# hon dhash voi man DONG -> fallback khi dhash khong khop. Load 1 lan.
+_PAGE_MAP_PATH = os.path.join(_ROOT, "knowledge", "page_label_map.json")
+
+
+def _load_page_map() -> dict:
+    try:
+        with open(_PAGE_MAP_PATH, encoding="utf-8") as f:
+            d = json.load(f)
+        return {k: v for k, v in d.items() if not k.startswith("_")}
+    except Exception:  # noqa: BLE001
+        return {}
+
 
 class WorldModelAdapter(WorldModelPort):
     """Boc scripts/world_model.py WorldModel."""
@@ -27,10 +41,21 @@ class WorldModelAdapter(WorldModelPort):
             from world_model import WorldModel
             world = WorldModel().load()
         self._wm = world
+        self._page_map = _load_page_map()
 
     def resolve_label(self, state_id: str) -> Optional[str]:
         st = self._wm.states.get(state_id)
         return st.get("label") if st else None
+
+    def resolve_page(self, page: Optional[str]) -> Optional[str]:
+        """OAS page name -> WM label qua page_label_map.json. None neu khong map."""
+        if not page:
+            return None
+        return self._page_map.get(page)
+
+    def state_for_label(self, label: str) -> Optional[str]:
+        """1 state_id da luu co label nay (diem xuat phat cho path_to)."""
+        return self._label_to_state(label)
 
     def match_state(self, dhash: Optional[str], state_id: str) -> Optional[str]:
         """Khop MO theo dhash (hamming <= CANON_THR) -> tra sid CHUAN da luu.
