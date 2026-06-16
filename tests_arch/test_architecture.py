@@ -620,6 +620,58 @@ def test_autonomy_execute_task():
     print("  [ok] autonomy tang2: execute task (navigate+lap+verify, done 3/3)")
 
 
+def test_autonomy_wins_losses():
+    """Tang 2: ExecuteTask phan biet WINS vs LOSSES (review: defeat khong tinh win).
+    Battle xen ke thang/thua -> dem dung."""
+    from onmyoji.application.use_cases import ExecuteTaskUseCase
+    from onmyoji.domain.entities import (
+        TaskSpec, Outcome, Verdict, Observation, Size, ActionResult, Resources,
+    )
+
+    class _W:
+        def state_for_label(self, label):
+            return "n" if label == "SoulBattle" else None
+        def elements_for(self, sid):
+            return [{"cx": 1050, "cy": 550, "label": "Challenge"}] if sid == "n" else []
+        def resolve_page(self, pg):
+            return None
+
+    class _Eye:
+        def observe(self):
+            return Observation(ts=0, state_id="s", loading=False, size=Size(1136, 640),
+                               resources=Resources(ap=100))
+        def observe_nav(self):
+            return self.observe()
+        def observe_page(self):
+            return self.observe()
+        def act(self, a):
+            return ActionResult(ok=True, observation=self.observe())
+
+    class _Nav:
+        def execute(self, label): return True
+
+    class _Act:
+        def execute(self, a):
+            return Observation(ts=0, state_id="s", loading=False, size=Size(1136, 640))
+
+    # verify: thang, thua, thang (xen ke)
+    seq = [Outcome.VICTORY, Outcome.DEFEAT, Outcome.VICTORY]
+    class _Verify:
+        def __init__(self): self.i = 0
+        def classify(self, obs=None):
+            return Verdict(Outcome.UNKNOWN, 0.0, "")
+        def wait_outcome(self, accept, max_wait_s=90, poll_s=1):
+            o = seq[self.i]; self.i += 1
+            return Verdict(o, 0.9, "test")
+
+    ex = ExecuteTaskUseCase(_Eye(), _W(), _Verify(), _Nav(), _Act(), settle=None)
+    spec = TaskSpec(goal_screen="SoulBattle", element="Challenge", repeat=3)
+    res = ex.execute(spec)
+    assert res.wins == 2 and res.losses == 1, f"wins=2 losses=1, got {res.wins}/{res.losses}"
+    assert res.done_count == 3, f"done=3 (ca thang+thua), got {res.done_count}"
+    print("  [ok] autonomy tang2: wins/losses (thang 2, thua 1, done 3)")
+
+
 def test_autonomy_plan_daily():
     """Tang 3: PlanDailyUseCase doc plan + LOC man da map + sap priority."""
     import json

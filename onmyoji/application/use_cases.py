@@ -156,6 +156,14 @@ _PAGE_OUTCOME = {
 }
 
 
+def _bitdiff(a: Optional[str], b: Optional[str]) -> int:
+    """So bit khac giua 2 dhash (chuoi cung do dai). 999 neu khong so duoc.
+    Dung do man ON DINH (battle xong) - khong import perception (giu domain sach)."""
+    if not a or not b or len(a) != len(b):
+        return 999
+    return sum(1 for x, y in zip(a, b) if x != y)
+
+
 class VerifyUseCase:
     """Tang 1: nhan dien KET QUA hien tai (thang/thua/loading/reward) de dong vong
     feedback. Uu tien page detector (landmark robust), fallback loading flag.
@@ -186,12 +194,34 @@ class VerifyUseCase:
         return Verdict(Outcome.UNKNOWN, 0.0, f"page={pg}", res)
 
     def wait_outcome(self, accept: tuple[Outcome, ...],
-                     max_wait_s: float = 90.0, poll_s: float = 1.0) -> Verdict:
+                     max_wait_s: float = 90.0, poll_s: float = 1.5) -> Verdict:
         """Cho den khi classify ra 1 trong `accept` (vd VICTORY/DEFEAT) - dung cho
-        battle tu chay. Tra Verdict cuoi (UNKNOWN neu het gio)."""
+        battle tu chay. Tra Verdict cuoi (UNKNOWN neu het gio).
+
+        Toi uu (review): trong battle man DONG (damage bay) -> chua het. Chi chay
+        page detection (nang) khi man co dau hieu ON DINH (battle xong, man ket qua
+        tinh). Dung observe_nav nhe de do on dinh truoc -> giam tai page detector."""
         deadline = time.time() + max_wait_s
         last = Verdict(Outcome.UNKNOWN, 0.0, "chua bat dau")
+        prev_dh = None
+        stable = 0
+        has_nav = hasattr(self._eye, "observe_nav")
         while time.time() < deadline:
+            # buoc 1: do on dinh bang observe_nav (nhe). Battle dang chay -> dhash
+            # doi lien tuc -> chua can page detect.
+            if has_nav:
+                nav = self._eye.observe_nav()
+                dh = nav.dhash
+                if prev_dh is not None and dh and _bitdiff(dh, prev_dh) <= 2:
+                    stable += 1
+                else:
+                    stable = 0
+                prev_dh = dh
+                # man chua on dinh (battle dang chay) -> doi tiep, KHONG page detect
+                if stable < 1:
+                    time.sleep(poll_s)
+                    continue
+            # buoc 2: man on dinh -> classify (page detect)
             v = self.classify()
             last = v
             if v.outcome in accept:
@@ -256,8 +286,36 @@ class ExecuteTaskUseCase:
                 return (int(e["cx"]), int(e["cy"]))
         return (int(cand[0]["cx"]), int(cand[0]["cy"])) if cand else None
 
+    def _center(self) -> tuple[int, int]:
+        """Tam man hinh HIEN TAI (theo Observation.size, KHONG hardcode). Dung de
+        dismiss reward (tap giua khi khong biet nut). Fallback 568,320 (1136x640/2)."""
+        try:
+            obs = self._eye.observe_nav() if hasattr(self._eye, "observe_nav") else self._eye.observe()
+            if obs.size and obs.size.w and obs.size.h:
+                return (obs.size.w // 2, obs.size.h // 2)
+        except Exception:  # noqa: BLE001
+            pass
+        return (568, 320)
+
+    def _dismiss_until_screen(self, target_screen: str, taps: int = 4) -> bool:
+        """Dismiss man ket qua/reward bang cach tap giua + cho ve target_screen.
+        Hoc tu OAS (lap tap toi khi man muc tieu xuat hien) thay vi tap mu 1 lan.
+        Tra True neu ve duoc target_screen."""
+        cx, cy = self._center()
+        for _ in range(taps):
+            cur = self._eye.observe_page() if hasattr(self._eye, "observe_page") else self._eye.observe()
+            # da ve target?
+            if self._world is not None and cur.page and hasattr(self._world, "resolve_page"):
+                if self._world.resolve_page(cur.page) == target_screen:
+                    return True
+            self._act.execute(Action.click(cx, cy))
+            if self._settle:
+                self._settle(self._eye)
+        return False
+
     def execute(self, spec: TaskSpec) -> TaskResult:
         verdicts: list[Verdict] = []
+        wins = losses = 0
         # 1) DIEU HUONG toi goal_screen (qua world graph)
         try:
             reached = self._navigate.execute(spec.goal_screen)
@@ -273,18 +331,18 @@ class ExecuteTaskUseCase:
         # 2) LOOP repeat lan
         done = 0
         for i in range(spec.repeat):
-            # 4) resource check
-            obs = self._eye.observe()
+            # 4) resource check (observe_nav - nhanh, chi can resources)
+            obs = self._eye.observe_nav() if hasattr(self._eye, "observe_nav") else self._eye.observe()
             stop = ResourcePolicy.should_stop(spec, obs.resources)
             if stop is not None and stop in spec.stop_on:
                 return TaskResult(True, spec.goal_screen, done, spec.repeat,
-                                  "het tai nguyen (NO_RESOURCE)", tuple(verdicts))
+                                  "het tai nguyen (NO_RESOURCE)", tuple(verdicts), wins, losses)
             # tim nut hanh dong
             xy = self._element_xy(spec.goal_screen, spec.element)
             if xy is None:
                 return TaskResult(False, spec.goal_screen, done, spec.repeat,
                                   f"chua hoc element '{spec.element or 'hanh dong'}' o {spec.goal_screen}",
-                                  tuple(verdicts))
+                                  tuple(verdicts), wins, losses)
             # click vao -> co the qua pre-battle -> battle
             self._act.execute(Action.click(*xy))
             if self._settle:
@@ -293,19 +351,23 @@ class ExecuteTaskUseCase:
                 v = self._verify.classify()
                 verdicts.append(v)
                 done += 1
-                # dismiss reward neu co (tap giua man)
-                self._act.execute(Action.click(640, 360))
-                if self._settle:
-                    self._settle(self._eye)
+                if v.outcome in (Outcome.VICTORY, Outcome.REWARD):
+                    wins += 1
+                # dismiss reward -> ve goal_screen (lap, khong tap mu 1 lan)
+                self._dismiss_until_screen(spec.goal_screen)
                 continue
             # action == 'challenge': xu ly chuoi battle
             v = self._run_battle(spec)
             verdicts.append(v)
-            if v.outcome in (Outcome.VICTORY, Outcome.DEFEAT, Outcome.REWARD):
+            if v.outcome in (Outcome.VICTORY, Outcome.REWARD):
+                wins += 1
+                done += 1
+            elif v.outcome == Outcome.DEFEAT:
+                losses += 1
                 done += 1
             if v.outcome in spec.stop_on:
                 return TaskResult(True, spec.goal_screen, done, spec.repeat,
-                                  f"dung do gap {v.outcome.value}", tuple(verdicts))
+                                  f"dung do gap {v.outcome.value}", tuple(verdicts), wins, losses)
             # ve lai goal_screen cho vong sau (navigate lai cho chac)
             if i < spec.repeat - 1:
                 try:
@@ -313,35 +375,41 @@ class ExecuteTaskUseCase:
                 except Exception:  # noqa: BLE001
                     break
         return TaskResult(True, spec.goal_screen, done, spec.repeat,
-                          "hoan thanh", tuple(verdicts))
+                          "hoan thanh", tuple(verdicts), wins, losses)
 
     def _run_battle(self, spec: TaskSpec) -> Verdict:
         """Xu ly chuoi pre-battle (Ready) -> in-battle (Auto/cho) -> ket qua.
-        Tat ca dua page/verify, KHONG hardcode toa do battle."""
-        # neu co man pre-battle co element 'Ready' -> click
-        ready = self._element_xy("SoulPreBattle", "Ready")
+        GENERIC (khong hardcode label man): dua page detector + element da hoc.
+        Hoc tu OAS GeneralBattle: cho WIN/DEFEAT/REWARD roi dismiss bang cach
+        lap tap toi khi ve man goal."""
+        # 1) neu man hien tai la pre-battle (co element 'Ready') -> bam Ready.
+        #    Khong gia dinh ten man - check element 'Ready' tren CHINH man hien tai.
         cur = self._eye.observe_page() if hasattr(self._eye, "observe_page") else self._eye.observe()
-        # heuristic: neu man hien tai resolve la pre-battle -> bam Ready
-        if ready is not None and self._world is not None:
-            lbl = self._world.resolve_page(cur.page) if cur.page and hasattr(self._world, "resolve_page") else None
-            if lbl == "SoulPreBattle":
+        cur_label = None
+        if self._world is not None and cur.page and hasattr(self._world, "resolve_page"):
+            cur_label = self._world.resolve_page(cur.page)
+        if cur_label:
+            ready = self._element_xy(cur_label, "Ready")
+            if ready is not None:
                 self._act.execute(Action.click(*ready))
                 if self._settle:
                     self._settle(self._eye)
-        # bat Auto neu co (de tran tu chay)
-        auto = self._element_xy("SoulInBattle", "Auto")
-        if auto is not None:
-            self._act.execute(Action.click(*auto))
-        # cho ket qua
+                # sau Ready -> man battle moi, cap nhat label
+                cur = self._eye.observe_page() if hasattr(self._eye, "observe_page") else self._eye.observe()
+                cur_label = (self._world.resolve_page(cur.page)
+                             if self._world and cur.page and hasattr(self._world, "resolve_page") else None)
+        # 2) bat Auto neu man battle co element Auto (tran tu chay)
+        if cur_label:
+            auto = self._element_xy(cur_label, "Auto")
+            if auto is not None:
+                self._act.execute(Action.click(*auto))
+        # 3) cho ket qua (page victory/defeat/reward)
         v = self._verify.wait_outcome(
             accept=(Outcome.VICTORY, Outcome.DEFEAT, Outcome.REWARD),
-            max_wait_s=120.0, poll_s=1.5)
-        # dismiss man ket qua (tap giua) de ve
+            max_wait_s=spec.max_steps * 2.0, poll_s=1.5)
+        # 4) dismiss man ket qua -> ve goal_screen (lap tap, khong tap mu)
         if v.outcome in (Outcome.VICTORY, Outcome.DEFEAT, Outcome.REWARD):
-            self._act.execute(Action.click(640, 360))
-            if self._settle:
-                self._settle(self._eye)
-            self._act.execute(Action.click(640, 360))
+            self._dismiss_until_screen(spec.goal_screen, taps=5)
         return v
 
 

@@ -115,3 +115,26 @@ Moi buoc: entity -> usecase -> adapter (neu can) -> container -> MCP -> test -> 
 - **Popup la giua chung (level up, reward bat ngo):** ExecuteTask co buoc 'dismiss unknown'
   (tim nut close/tap-empty) truoc khi tiep.
 - **Khong lam hong graph:** ExecuteTask CHI dieu huong (click da hoc), khong learn_screen tu dong.
+
+## REVIEW lan 1 (da fix - doi chieu OAS GeneralBattle)
+Sau khi implement, review phan bien + hoc tu OAS production (tasks/Component/
+GeneralBattle). Da sua 7 diem:
+1. **Bo hardcode toa do (640,360)** dismiss reward -> `_center()` theo Observation.size
+   (1136x640 -> 568,320). Khong hardcode.
+2. **Bo hardcode label 'SoulPreBattle'/'SoulInBattle'** trong _run_battle -> GENERIC:
+   check element 'Ready'/'Auto' tren CHINH man hien tai (qua resolve_page) -> dung
+   cho moi nhanh battle (Soul/RealmRaid/Secret...), khong rieng Soul.
+3. **Dismiss = lap tap toi khi ve goal_screen** (`_dismiss_until_screen`, hoc OAS
+   battle_wait) thay vi tap mu 1 lan.
+4. **Tach wins/losses** (defeat KHONG tinh win). done_count = ca thang+thua.
+5. **collect dismiss** cung dung _dismiss_until_screen (lap), khong tap 1 lan.
+6. **Resource check dung observe_nav** (nhe) thay vi observe (full ~9x cham).
+7. **wait_outcome poll 2 buoc:** observe_nav do ON DINH truoc (battle dang chay =
+   dhash doi lien tuc -> chua page detect); chi page detect khi man tinh. Giam
+   tai page detector tu ~80 lan/battle xuong vai lan.
+
+## Con lai (lam khi co game)
+- Chup man Victory/Defeat -> add_live_page -> them vao _PAGE_OUTCOME + page_label_map.
+- Verify ap_cost that cho moi mode (hien daily_plan.json moi co Soul=6, con lai 0).
+- Doc luot con lai (vd "2/2") de stop chinh xac hon NO_RESOURCE.
+

@@ -260,13 +260,16 @@ class TaskResult:
     """Ket qua chay 1 TaskSpec."""
     ok: bool
     goal_screen: str
-    done_count: int = 0          # so lan hoan thanh (vd da danh 7/10 tran)
+    done_count: int = 0          # so lan da DANH xong (thang + thua + reward)
     requested: int = 0           # so lan yeu cau
     stopped_reason: str = ""     # vi sao dung (du repeat / no_resource / loi / chua map duong)
     verdicts: tuple[Verdict, ...] = ()
+    wins: int = 0                # so tran THANG (victory + reward)
+    losses: int = 0             # so tran THUA (defeat)
 
     def to_dict(self) -> dict:
         return {"ok": self.ok, "goal_screen": self.goal_screen,
                 "done_count": self.done_count, "requested": self.requested,
                 "stopped_reason": self.stopped_reason,
+                "wins": self.wins, "losses": self.losses,
                 "verdicts": [v.to_dict() for v in self.verdicts]}
