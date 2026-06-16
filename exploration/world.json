@@ -3697,7 +3697,12 @@
       "label": "SixRealmsGates",
       "desc": "Six Realms Gates (六道之门) - mode PvP/danh chiem vuong quoc theo than thu (vd Peacock Kingdom). Co Change (doi vuong quoc), Sentry (canh gac/phong thu), Marks. Mode canh tranh cap cao theo mua. Vao tu Exploration>SixRealmsGates.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          32,
+          36
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 310,
@@ -3716,6 +3721,35 @@
         },
         {
           "cx": 32,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "bc37d8df58": {
+      "dhash": "1100110111101000110110011000001010101110010111001101101011110011",
+      "label": "Dispatch",
+      "desc": "Dispatch (委托 phai thuc than di nhiem vu) - ban do lang que voi cac nhiem vu (A Gift of Fish, Sake Vine Ball, A Happy Dilemma, The River God...). Moi nhiem vu can thuc than phu hop, cho thuong vang/material sau thoi gian. Vao tu Exploration>Dispatch.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 981,
+          "cy": 172,
+          "label": "Task1GiftOfFish"
+        },
+        {
+          "cx": 959,
+          "cy": 290,
+          "label": "Task2SakeVineBall"
+        },
+        {
+          "cx": 988,
+          "cy": 402,
+          "label": "Task3HappyDilemma"
+        },
+        {
+          "cx": 46,
           "cy": 36,
           "label": "back"
         }
@@ -5239,6 +5273,14 @@
       "from": "2aacb9e5ee",
       "click": [
         37,
+        36
+      ],
+      "to": "cf22d0b534"
+    },
+    {
+      "from": "a33065c5dd",
+      "click": [
+        32,
         36
       ],
       "to": "cf22d0b534"
