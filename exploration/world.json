@@ -3045,7 +3045,7 @@
     },
     "cf22d0b534": {
       "dhash": "1101100100111010010110111010101010101001100110001010101011100110",
-      "label": "Exploration",
+      "label": "Explore",
       "desc": "Man Tham Hiem (探索) - HUB FARM CHINH. Vao cac mode: Soul (御魂 farm ngoc hon trang bi), Realm Raid (突破 dot pha cuop tai nguyen), Secret Zone (秘闻 farm material), Area Boss, Spirit Venture, Champion Trial, Six Realms Gates. Ban do KEO ngang+doc duoc. Vao tu HOME>Explore.",
       "screenshot": null,
       "buttons_tried": [
@@ -3331,14 +3331,6 @@
         }
       ]
     },
-    "4db20b0266": {
-      "dhash": "1100100100011010100111101000000100100010110111010111100000010100",
-      "label": null,
-      "desc": null,
-      "screenshot": null,
-      "buttons_tried": [],
-      "verified_elements": []
-    },
     "dd298238ba": {
       "dhash": "1110101010101010011001101011000000010001000100111011010111011101",
       "label": "ArenaHub",
@@ -3407,8 +3399,8 @@
     },
     "32499ccb88": {
       "dhash": "1101001111000101000100000000100010000000000001101110110110101101",
-      "label": "PlayerProfile",
-      "desc": "Popup HO SO nguoi choi (mo khi click avatar doi thu o RealmRaid/danh sach). Xem: ten, so likes, nut Message (nhan tin), Add Friend (ket ban), Page (xem trang ca nhan), Guild Invite (moi vao bang). close de dong. Mo tu RealmRaid>click avatar.",
+      "label": "RealmRaid",
+      "desc": "Dot pha (突破 Realm Raid)",
       "screenshot": null,
       "buttons_tried": [],
       "verified_elements": [
@@ -3440,31 +3432,6 @@
         {
           "cx": 1072,
           "cy": 116,
-          "label": "close"
-        },
-        {
-          "cx": 199,
-          "cy": 221,
-          "label": "Message"
-        },
-        {
-          "cx": 174,
-          "cy": 306,
-          "label": "AddFriend"
-        },
-        {
-          "cx": 174,
-          "cy": 306,
-          "label": "Page"
-        },
-        {
-          "cx": 202,
-          "cy": 391,
-          "label": "GuildInvite"
-        },
-        {
-          "cx": 1014,
-          "cy": 118,
           "label": "close"
         }
       ]
@@ -3841,28 +3808,12 @@
   },
   "edges": [
     {
-      "from": "eef6c85a46",
-      "click": [
-        125,
-        632
-      ],
-      "to": "f75b02582d"
-    },
-    {
       "from": "f75b02582d",
       "click": [
         59,
         89
       ],
       "to": "45e8880646"
-    },
-    {
-      "from": "45e8880646",
-      "click": [
-        308,
-        203
-      ],
-      "to": "739925704b"
     },
     {
       "from": "f75b02582d",
@@ -3881,28 +3832,12 @@
       "to": "f7c82a2059"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        235,
-        632
-      ],
-      "to": "c81c31c6bc"
-    },
-    {
       "from": "c81c31c6bc",
       "click": [
         628,
         212
       ],
       "to": "f7c82a2059"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        335,
-        632
-      ],
-      "to": "7e264a697a"
     },
     {
       "from": "7e264a697a",
@@ -3921,14 +3856,6 @@
       "to": "f7c82a2059"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        425,
-        632
-      ],
-      "to": "6f12779e52"
-    },
-    {
       "from": "6f12779e52",
       "click": [
         1077,
@@ -3945,44 +3872,12 @@
       "to": "f7c82a2059"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        523,
-        632
-      ],
-      "to": "e07e1a1db5"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        623,
-        632
-      ],
-      "to": "444b9b610c"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        723,
-        632
-      ],
-      "to": "444b9b610c"
-    },
-    {
       "from": "444b9b610c",
       "click": [
         67,
         86
       ],
       "to": "45e8880646"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        822,
-        632
-      ],
-      "to": "11fc5f017c"
     },
     {
       "from": "11fc5f017c",
@@ -3993,44 +3888,12 @@
       "to": "1bb4756a8f"
     },
     {
-      "from": "1bb4756a8f",
-      "click": [
-        1066,
-        590
-      ],
-      "to": "7a71153582"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        922,
-        632
-      ],
-      "to": "c5e9d1492a"
-    },
-    {
       "from": "c5e9d1492a",
       "click": [
         59,
         82
       ],
       "to": "c744fa0b6e"
-    },
-    {
-      "from": "c744fa0b6e",
-      "click": [
-        308,
-        203
-      ],
-      "to": "b5bfd6920a"
-    },
-    {
-      "from": "739925704b",
-      "click": [
-        380,
-        380
-      ],
-      "to": "b5bfd6920a"
     },
     {
       "from": "eef6c85a46",
@@ -4081,22 +3944,6 @@
       "to": "f9dfc53ce1"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        271,
-        91
-      ],
-      "to": "c6d3d9c4a2"
-    },
-    {
-      "from": "c6d3d9c4a2",
-      "click": [
-        1031,
-        70
-      ],
-      "to": "16e393445b"
-    },
-    {
       "from": "16e393445b",
       "click": [
         1077,
@@ -4143,14 +3990,6 @@
         313
       ],
       "to": "7354a09913"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        94,
-        407
-      ],
-      "to": "c65699e9c3"
     },
     {
       "from": "c65699e9c3",
@@ -4265,246 +4104,6 @@
       "to": "41bd554bf1"
     },
     {
-      "from": "41bd554bf1",
-      "click": [
-        895,
-        577
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        577,
-        205
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        557,
-        425
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        603,
-        451
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        895,
-        577
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        559,
-        424
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        747,
-        457
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        289,
-        393
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        263,
-        254
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        267,
-        407
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        620,
-        362
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        497,
-        175
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        536,
-        413
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        725,
-        254
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        293,
-        208
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        709,
-        370
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        410,
-        409
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        781,
-        425
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        287,
-        182
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        747,
-        457
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        499,
-        176
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        297,
-        188
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        265,
-        387
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        85,
-        626
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        703,
-        220
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        577,
-        218
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        371,
-        586
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        379,
-        295
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "e72dd865e0",
-      "click": [
-        455,
-        409
-      ],
-      "to": "6a4a4745c2"
-    },
-    {
-      "from": "6a4a4745c2",
-      "click": [
-        1077,
-        243
-      ],
-      "to": "846da320d2"
-    },
-    {
       "from": "846da320d2",
       "click": [
         53,
@@ -4553,36 +4152,12 @@
       "to": "1d811c3586"
     },
     {
-      "from": "1d811c3586",
-      "click": [
-        70,
-        215
-      ],
-      "to": "a1f61978c6"
-    },
-    {
       "from": "eef6c85a46",
       "click": [
         557,
         439
       ],
       "to": "0d383f13cc"
-    },
-    {
-      "from": "300e45f1cc",
-      "click": [
-        1052,
-        134
-      ],
-      "to": "eef6c85a46"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        470,
-        436
-      ],
-      "to": "6a4a4745c2"
     },
     {
       "from": "6a4a4745c2",
@@ -4609,22 +4184,6 @@
       "to": "ced1805075"
     },
     {
-      "from": "e72dd865e0",
-      "click": [
-        454,
-        363
-      ],
-      "to": "6a4a4745c2"
-    },
-    {
-      "from": "6a4a4745c2",
-      "click": [
-        1077,
-        175
-      ],
-      "to": "846da320d2"
-    },
-    {
       "from": "846da320d2",
       "click": [
         217,
@@ -4649,14 +4208,6 @@
       "to": "6dbfb79cfa"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        1054,
-        355
-      ],
-      "to": "39b697ba72"
-    },
-    {
       "from": "39b697ba72",
       "click": [
         766,
@@ -4673,60 +4224,12 @@
       "to": "f9dfc53ce1"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        401,
-        89
-      ],
-      "to": "c6d3d9c4a2"
-    },
-    {
       "from": "846da320d2",
       "click": [
         183,
         213
       ],
       "to": "f7c82a2059"
-    },
-    {
-      "from": "e91a4cdc54",
-      "click": [
-        857,
-        601
-      ],
-      "to": "21f4675f8a"
-    },
-    {
-      "from": "21f4675f8a",
-      "click": [
-        41,
-        55
-      ],
-      "to": "e91a4cdc54"
-    },
-    {
-      "from": "e91a4cdc54",
-      "click": [
-        759,
-        605
-      ],
-      "to": "5702b6005d"
-    },
-    {
-      "from": "5702b6005d",
-      "click": [
-        49,
-        596
-      ],
-      "to": "ebe3d911e8"
-    },
-    {
-      "from": "ebe3d911e8",
-      "click": [
-        47,
-        63
-      ],
-      "to": "e91a4cdc54"
     },
     {
       "from": "eef6c85a46",
@@ -4741,30 +4244,6 @@
       "click": [
         242,
         307
-      ],
-      "to": "a3f93ec6dd"
-    },
-    {
-      "from": "a3f93ec6dd",
-      "click": [
-        784,
-        265
-      ],
-      "to": "74abbbb405"
-    },
-    {
-      "from": "74abbbb405",
-      "click": [
-        685,
-        485
-      ],
-      "to": "a3f93ec6dd"
-    },
-    {
-      "from": "74abbbb405",
-      "click": [
-        63,
-        374
       ],
       "to": "a3f93ec6dd"
     },
@@ -4785,70 +4264,6 @@
       "to": "3fdba617ea"
     },
     {
-      "from": "3fdba617ea",
-      "click": [
-        109,
-        473
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        387,
-        302
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "41bd554bf1",
-      "click": [
-        1010,
-        560
-      ],
-      "to": "79abec1238"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        747,
-        194
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        607,
-        441
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        93,
-        487
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "79abec1238",
-      "click": [
-        263,
-        179
-      ],
-      "to": "41bd554bf1"
-    },
-    {
-      "from": "3fdba617ea",
-      "click": [
-        1071,
-        617
-      ],
-      "to": "41bd554bf1"
-    },
-    {
       "from": "e72dd865e0",
       "click": [
         89,
@@ -4865,60 +4280,12 @@
       "to": "3cf8734d7c"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        382,
-        77
-      ],
-      "to": "c6d3d9c4a2"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        433,
-        73
-      ],
-      "to": "c6d3d9c4a2"
-    },
-    {
-      "from": "846da320d2",
-      "click": [
-        201,
-        350
-      ],
-      "to": "97bf901238"
-    },
-    {
-      "from": "97bf901238",
-      "click": [
-        1078,
-        244
-      ],
-      "to": "846da320d2"
-    },
-    {
-      "from": "846da320d2",
-      "click": [
-        215,
-        317
-      ],
-      "to": "97bf901238"
-    },
-    {
       "from": "97bf901238",
       "click": [
         806,
         453
       ],
       "to": "a39e85b120"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        244,
-        137
-      ],
-      "to": "e72dd865e0"
     },
     {
       "from": "45e8880646",
@@ -4929,36 +4296,12 @@
       "to": "eef6c85a46"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        106,
-        385
-      ],
-      "to": "3d7b28f2a4"
-    },
-    {
       "from": "c65699e9c3",
       "click": [
         809,
         446
       ],
       "to": "4f1f9ea06f"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        469,
-        127
-      ],
-      "to": "c6d3d9c4a2"
-    },
-    {
-      "from": "c6d3d9c4a2",
-      "click": [
-        1091,
-        70
-      ],
-      "to": "846da320d2"
     },
     {
       "from": "846da320d2",
@@ -4969,60 +4312,12 @@
       "to": "79322e988a"
     },
     {
-      "from": "45e8880646",
-      "click": [
-        437,
-        352
-      ],
-      "to": "129ca2d344"
-    },
-    {
-      "from": "129ca2d344",
-      "click": [
-        299,
-        358
-      ],
-      "to": "c744fa0b6e"
-    },
-    {
-      "from": "c744fa0b6e",
-      "click": [
-        964,
-        397
-      ],
-      "to": "129ca2d344"
-    },
-    {
-      "from": "c744fa0b6e",
-      "click": [
-        199,
-        417
-      ],
-      "to": "129ca2d344"
-    },
-    {
-      "from": "c744fa0b6e",
-      "click": [
-        681,
-        351
-      ],
-      "to": "129ca2d344"
-    },
-    {
       "from": "eef6c85a46",
       "click": [
         241,
         233
       ],
       "to": "50d8a76f1b"
-    },
-    {
-      "from": "e72dd865e0",
-      "click": [
-        1093,
-        602
-      ],
-      "to": "eef6c85a46"
     },
     {
       "from": "eef6c85a46",
@@ -5103,14 +4398,6 @@
         559
       ],
       "to": "69227e751e"
-    },
-    {
-      "from": "eef6c85a46",
-      "click": [
-        973,
-        591
-      ],
-      "to": "16e393445b"
     },
     {
       "from": "16e393445b",
@@ -5289,14 +4576,6 @@
       "to": "01e04a2005"
     },
     {
-      "from": "eef6c85a46",
-      "click": [
-        271,
-        619
-      ],
-      "to": "eb87e0ee18"
-    },
-    {
       "from": "eb87e0ee18",
       "click": [
         55,
@@ -5311,14 +4590,6 @@
         70
       ],
       "to": "eb87e0ee18"
-    },
-    {
-      "from": "eb87e0ee18",
-      "click": [
-        1031,
-        70
-      ],
-      "to": "300e45f1cc"
     },
     {
       "from": "cf22d0b534",
@@ -5383,6 +4654,118 @@
         36
       ],
       "to": "cf22d0b534"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        614,
+        567
+      ],
+      "to": "a39e85b120"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        816,
+        567
+      ],
+      "to": "49c515b9f5"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        914,
+        566
+      ],
+      "to": "911e8f9a8a"
+    },
+    {
+      "from": "eef6c85a46",
+      "click": [
+        1032,
+        581
+      ],
+      "to": "7003532d8f"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        168,
+        581
+      ],
+      "to": "2cea68932c"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        255,
+        592
+      ],
+      "to": "32499ccb88"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        339,
+        587
+      ],
+      "to": "33755d064b"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        472,
+        585
+      ],
+      "to": "9fc826addb"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        488,
+        576
+      ],
+      "to": "f985b233c5"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        672,
+        587
+      ],
+      "to": "1714520ac0"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        761,
+        586
+      ],
+      "to": "2aacb9e5ee"
+    },
+    {
+      "from": "cf22d0b534",
+      "click": [
+        845,
+        587
+      ],
+      "to": "a33065c5dd"
+    },
+    {
+      "from": "10317f054b",
+      "click": [
+        300,
+        318
+      ],
+      "to": "dd298238ba"
+    },
+    {
+      "from": "10317f054b",
+      "click": [
+        610,
+        306
+      ],
+      "to": "c1cc1aaca8"
     }
   ]
 }

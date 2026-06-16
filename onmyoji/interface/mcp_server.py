@@ -521,6 +521,19 @@ def learn_screen(label: str, function: str, farms: str = "", note: str = "") -> 
     # Man dong dhash troi -> canonical_state hoi tu cac frame ve cung node logic.
     obs = c.eye.observe_som(with_page=True)
     sid, _confirmed = world.canonical_state(obs.dhash, obs.state_id, obs.page) if world else (obs.state_id, False)
+    # CHONG ALIAS (review thuat toan): neu man nay da co label CHUAN (qua page anchor
+    # hoac dhash da hoc) KHAC voi `label` agent dua -> dung ten CHUAN da co, tranh
+    # tao 2 ten cho 1 man (lam dut mach bfs_path). Bao agent biet da chuan hoa.
+    canon_label = None
+    if world is not None:
+        if obs.page and hasattr(world, "resolve_page"):
+            canon_label = world.resolve_page(obs.page)
+        if not canon_label and hasattr(world, "resolve_label"):
+            canon_label = world.resolve_label(sid)
+    aliased_from = None
+    if canon_label and canon_label != label:
+        aliased_from = label
+        label = canon_label  # dung ten chuan da ton tai
     # 2) NGU NGHIA -> vector DB (doc_id theo label de cap nhat duoc)
     text = f"Man hinh game '{label}': {function}."
     if farms:
@@ -539,7 +552,10 @@ def learn_screen(label: str, function: str, farms: str = "", note: str = "") -> 
             world.save()
     return {"ok": True, "label": label, "state_id": sid, "doc_id": doc_id,
             "function": function, "farms": farms,
-            "learned_kb": bool(learned_kb)}
+            "learned_kb": bool(learned_kb),
+            **({"normalized_from": aliased_from,
+                "note_alias": f"Man nay da co ten chuan '{label}' -> dung ten do (bo '{aliased_from}') de khong dut mach ban do."}
+               if aliased_from else {})}
 
 
 @mcp.tool()

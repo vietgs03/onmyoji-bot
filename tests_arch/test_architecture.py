@@ -285,7 +285,6 @@ def test_click_at_records_edge():
     """click_at GHI EDGE (nguon->dich) vao world graph khi ca hai dau nhan dien
     duoc -> goto()/bfs_path dung lai duong. Day la cach graph TU LON khi kham pha
     (truoc day click_at KHONG ghi edge -> graph co node nhung thieu duong di)."""
-    import sys, os
     sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
     from world_model import WorldModel
     from onmyoji.adapters.world.world_model_adapter import WorldModelAdapter
@@ -463,6 +462,54 @@ def test_match_state_fuzzy_dhash():
     assert adapter.match_state(None, rust_sid) is None
     assert adapter.match_state(None, py_sid) == py_sid
     print("  [ok] match_state khop mo dhash (Rust lech bit van resolve dung state)")
+
+
+def test_normalize_graph_algorithm():
+    """normalize_graph: (1) gop label alias, (2) xoa edge tu-than logic + node mo
+    coi, (3) SUY edge forward tu verified_elements -> bfs_path thong mach. Day la
+    fix thuat toan: kham pha sinh alias (Explore vs Exploration) + edge forward
+    miss do loading -> graph dut mach."""
+    sys.path.insert(0, os.path.join(os.path.dirname(os.path.dirname(os.path.abspath(__file__))), "scripts"))
+    import normalize_graph as NG
+    from world_model import WorldModel
+
+    # graph gia mo phong loi: alias (Exploration vs Explore), edge tu-than, thieu
+    # edge forward (chi co element label, chua co edge).
+    S = {
+        "home": {"label": "HOME", "verified_elements": [{"cx": 600, "cy": 190, "label": "Explore"}], "buttons_tried": []},
+        "exp1": {"label": "Exploration", "verified_elements": [{"cx": 168, "cy": 590, "label": "Soul"}], "buttons_tried": []},
+        "exp2": {"label": "Explore", "verified_elements": [], "buttons_tried": []},  # alias se gop
+        "soul": {"label": "Soul", "verified_elements": [], "buttons_tried": []},
+        "orphan": {"label": None, "verified_elements": [], "buttons_tried": []},  # mo coi -> xoa
+    }
+    E = [
+        {"from": "exp1", "click": [100, 100], "to": "exp2"},  # tu-than logic (Exploration==Explore sau gop) -> xoa
+        {"from": "soul", "click": [40, 40], "to": "exp1"},     # Soul->Explore (back) - giu
+    ]
+
+    # 1) gop alias Exploration->Explore
+    for sid, st in S.items():
+        if st.get("label") in NG.ALIASES:
+            st["label"] = NG.ALIASES[st["label"]]
+    assert S["exp1"]["label"] == "Explore", "alias phai gop Exploration->Explore"
+
+    # 2) suy forward edges tu verified_elements
+    added = NG._derive_forward_edges(S, E)
+    # HOME co element 'Explore' -> edge HOME->Explore; Explore co 'Soul' -> Explore->Soul
+    keys = {(e["from"], tuple(e["click"]), e["to"]) for e in E}
+    assert ("home", (600, 190), "exp1") in keys or any(
+        e["from"] == "home" and S[e["to"]]["label"] == "Explore" for e in E), "phai suy HOME->Explore"
+    assert any(e["from"] == "exp1" and e["to"] == "soul" for e in E), "phai suy Explore->Soul"
+    assert added >= 2, f"phai suy >=2 forward edge: {added}"
+
+    # 3) bfs HOME->Soul thong mach qua edge suy ra
+    wm = WorldModel()
+    wm.states = S
+    wm.edges = E
+    home_sid = "home"
+    path = wm.bfs_path(home_sid, "soul")
+    assert path is not None and len(path) == 2, f"HOME->Soul phai 2 click: {path}"
+    print("  [ok] normalize_graph (alias + suy forward edge -> bfs thong mach)")
 
 
 def run_all():

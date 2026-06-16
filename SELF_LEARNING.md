@@ -42,6 +42,34 @@ Town<->Town 38 bit con xa hon Town<->HOME 19 bit). Cach neo on dinh theo do BEN:
     (frame match node Town khac chua co element). FIX TRIET DE: them page template
     cho man do (tool gen_pages_embed) - viec lon, lam sau.
 
+### Page template TU LIVE (man dong khong co OAS template)
+OAS template (version cu) co the KHONG fire tren live (vd page_town -0.15,
+page_exploration 0.31 < threshold). Cach fix:
+1. `eye-rs/tools/add_live_page.py shoot /tmp/x.png` (chup frame dang o man do).
+2. Do diff nhieu frame tim vung CUC TINH + dac trung (left rooftops Town, mode
+   bar Exploration: max diff <=2 qua 5s).
+3. `add_live_page.py add /tmp/x.png page_<ten>_live "x y w h" [thr]` -> crop +
+   them manifest. Roi `gen_pages_embed.py` + build lai.
+4. Them `page_<ten>_live -> Label` vao knowledge/page_label_map.json.
+Da lam: page_town_live (0.97-0.99 x4 frame), page_exploration_live (0.94),
+page_soul_zones/hyakkiyakou/realm_raid/goryou_realm/delegation/awake_zones (OAS).
+
+### GIOI HAN: popup OVERLAY tren man nen (CHUA giai quyet hoan toan)
+Popup (vd PlayerProfile mo tren RealmRaid) co dhash GAN man nen + page detector
+van fire page nen -> canonical_state gop NHAM popup vao node nen -> label bi de +
+element tron lan. Da gap: node RealmRaid bi de label PlayerProfile + tron element.
+- Hien tai: tranh learn_screen tren popup, hoac dung label rieng + KHONG re-observe.
+- Fix tuong lai: detect popup (vung toi quanh + box giua) -> tao node rieng, khong
+  dung page nen. Hoac dsalt dhash popup. Ghi nhan, lam sau.
+
+### CHUAN HOA graph (scripts/normalize_graph.py)
+Chay dinh ky de don graph (idempotent, co --dry + backup .bak):
+- Gop label ALIAS (Exploration->Explore: cung man, 2 ten do hoc khac luc).
+- Xoa node mo coi (khong label/ve/edge/screenshot) + edge tu-than logic + trung.
+- SUY edge forward tu verified_elements (va edge forward bi miss do loading:
+  man hub co element 'Soul' + ton tai man Soul -> tao edge hub->Soul).
+-> bfs_path/goto thong mach (HOME->16/20 man co duong sau normalize).
+
 ### Vong KHAM PHA (di het cay ban do)
 ```
 explore_status()              # xem da map gi, con frontier gi, goi y buoc tiep
