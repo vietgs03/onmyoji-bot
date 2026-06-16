@@ -3691,6 +3691,35 @@
           "label": "back"
         }
       ]
+    },
+    "a33065c5dd": {
+      "dhash": "0100100110011100000100001000011001000100010001000111011111111011",
+      "label": "SixRealmsGates",
+      "desc": "Six Realms Gates (六道之门) - mode PvP/danh chiem vuong quoc theo than thu (vd Peacock Kingdom). Co Change (doi vuong quoc), Sentry (canh gac/phong thu), Marks. Mode canh tranh cap cao theo mua. Vao tu Exploration>SixRealmsGates.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 310,
+          "cy": 144,
+          "label": "Change"
+        },
+        {
+          "cx": 290,
+          "cy": 166,
+          "label": "PeacockKingdom"
+        },
+        {
+          "cx": 883,
+          "cy": 211,
+          "label": "Sentry"
+        },
+        {
+          "cx": 32,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
     }
   },
   "edges": [
