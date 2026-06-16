@@ -3731,7 +3731,12 @@
       "label": "Dispatch",
       "desc": "Dispatch (委托 phai thuc than di nhiem vu) - ban do lang que voi cac nhiem vu (A Gift of Fish, Sake Vine Ball, A Happy Dilemma, The River God...). Moi nhiem vu can thuc than phu hop, cho thuong vang/material sau thoi gian. Vao tu Exploration>Dispatch.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          46,
+          36
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 981,
@@ -3750,6 +3755,40 @@
         },
         {
           "cx": 46,
+          "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "166671e2af": {
+      "dhash": "1000100010001010101110100001010010001001001100111111111010110010",
+      "label": "EvolutionZone",
+      "desc": "Evolution Zone (觉醒之间) - farm MATERIAL tien hoa/thuc tinh thuc than tu 4 KIRIN nguyen to: Fire Kirin (hoa), Wind Kirin (phong), Water Kirin (thuy), Lightning Kirin (loi). Moi Kirin drop material nguyen to tuong ung. Vao tu Exploration>EvoMaterial.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 205,
+          "cy": 287,
+          "label": "FireKirin"
+        },
+        {
+          "cx": 450,
+          "cy": 234,
+          "label": "WindKirin"
+        },
+        {
+          "cx": 728,
+          "cy": 221,
+          "label": "WaterKirin"
+        },
+        {
+          "cx": 977,
+          "cy": 204,
+          "label": "LightningKirin"
+        },
+        {
+          "cx": 37,
           "cy": 36,
           "label": "back"
         }
@@ -5281,6 +5320,14 @@
       "from": "a33065c5dd",
       "click": [
         32,
+        36
+      ],
+      "to": "cf22d0b534"
+    },
+    {
+      "from": "bc37d8df58",
+      "click": [
+        46,
         36
       ],
       "to": "cf22d0b534"
