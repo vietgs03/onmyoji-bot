@@ -701,6 +701,115 @@ def test_autonomy_plan_daily():
     print("  [ok] autonomy tang3: plan daily (loc man chua map + sap priority)")
 
 
+def test_autonomy_end_to_end_fakegame():
+    """E2E (verify MO HINH chay dung KHONG can game): FakeGame state machine +
+    fake world -> chay do_task that su qua navigate+battle+verify. Day la cach
+    kiem chung runtime model truoc khi game mo (RUNTIME_MODEL.md)."""
+    from onmyoji.adapters.eye_py.fake_game import FakeGame, demo_soul_world
+    from onmyoji.application.use_cases import (
+        VerifyUseCase, ExecuteTaskUseCase, NavigateUseCase, ActUseCase,
+    )
+    from onmyoji.domain.entities import TaskSpec, Outcome
+
+    # fake world khop FakeGame: label = screen name, page anchor, element + edge
+    SCREENS = {
+        "HOME": {"page": "page_main", "el": [(600, 190, "Explore")]},
+        "Explore": {"page": "page_exploration_live", "el": [(168, 590, "Soul")]},
+        "Soul": {"page": "page_soul_zones", "el": [(159, 230, "SoulBattle")]},
+        "SoulBattle": {"page": None, "el": [(1050, 550, "Challenge")]},
+    }
+    PAGE2LABEL = {v["page"]: k for k, v in SCREENS.items() if v["page"]}
+    PAGE2LABEL["page_victory"] = None  # man ket qua khong phai 1 screen dieu huong
+
+    class _W:
+        def state_for_label(self, label):
+            return label if label in SCREENS else None
+        def elements_for(self, sid):
+            return [{"cx": x, "cy": y, "label": lb} for (x, y, lb) in SCREENS.get(sid, {}).get("el", [])]
+        def resolve_page(self, pg):
+            return PAGE2LABEL.get(pg)
+        def resolve_label(self, sid):
+            return sid if sid in SCREENS else None
+        def match_state(self, dh, sid):
+            return sid if sid in SCREENS else None
+        def canonical_state(self, dh, sid, page=None):
+            lbl = self.resolve_page(page) if page else None
+            if lbl and lbl in SCREENS:
+                return lbl, True
+            if sid in SCREENS:
+                return sid, True
+            return sid, False
+        def path_to(self, frm, to):
+            # duong di tuyen tinh HOME->Explore->Soul->SoulBattle
+            chain = ["HOME", "Explore", "Soul", "SoulBattle"]
+            from onmyoji.domain.entities import Action
+            if frm not in chain or to not in chain:
+                return None
+            i, j = chain.index(frm), chain.index(to)
+            if j <= i:
+                return []
+            acts = []
+            for k in range(i, j):
+                el = SCREENS[chain[k]]["el"][0]
+                acts.append(Action.click(el[0], el[1]))
+            return acts
+        def resolve_page_label(self, pg):
+            return self.resolve_page(pg)
+        def record_transition(self, frm, action, to):
+            pass  # E2E khong can ghi edge (fake world co san)
+
+    fg = FakeGame(demo_soul_world(), start="HOME", ap=100, ap_cost_battle=6,
+                  battle_loading=2, auto_win=True)
+    world = _W()
+    verify = VerifyUseCase(fg, world)
+    nav = NavigateUseCase(fg, world, max_steps=8)
+    act = ActUseCase(fg)
+    ex = ExecuteTaskUseCase(fg, world, verify, nav, act, settle=None)
+
+    # do_task: farm SoulBattle 3 tran (auto win)
+    spec = TaskSpec(goal_screen="SoulBattle", action="challenge",
+                    element="Challenge", repeat=3, ap_cost=6, max_steps=10)
+    res = ex.execute(spec)
+    assert res.ok, f"task phai ok: {res.stopped_reason}"
+    assert res.wins == 3, f"phai thang 3 tran (auto_win): wins={res.wins} reason={res.stopped_reason}"
+    assert res.done_count == 3
+    # AP da tru 3*6=18 -> con 82
+    assert fg.observe().resources.ap == 82, f"AP phai con 82: {fg.observe().resources.ap}"
+    print("  [ok] autonomy E2E: FakeGame do_task farm 3 tran (win 3, AP 100->82)")
+
+
+def test_autonomy_e2e_no_resource():
+    """E2E: het AP -> task DUNG dung luc (NO_RESOURCE), khong danh oan."""
+    from onmyoji.adapters.eye_py.fake_game import FakeGame, demo_soul_world
+    from onmyoji.application.use_cases import (
+        VerifyUseCase, ExecuteTaskUseCase, NavigateUseCase, ActUseCase,
+    )
+    from onmyoji.domain.entities import TaskSpec, Action
+
+    SCREENS = {"SoulBattle": {"page": None, "el": [(1050, 550, "Challenge")]}}
+
+    class _W:
+        def state_for_label(self, label): return "SoulBattle" if label == "SoulBattle" else None
+        def elements_for(self, sid): return [{"cx": 1050, "cy": 550, "label": "Challenge"}] if sid == "SoulBattle" else []
+        def resolve_page(self, pg): return "SoulBattle" if pg == "page_victory" else None
+        def resolve_label(self, sid): return sid
+        def match_state(self, dh, sid): return sid
+        def canonical_state(self, dh, sid, page=None): return ("SoulBattle", True)
+        def path_to(self, frm, to): return []  # da o SoulBattle
+
+    # AP=10, cost=6 -> chi danh duoc 1 tran (con 4 < 6 -> NO_RESOURCE)
+    fg = FakeGame(demo_soul_world(), start="SoulBattle", ap=10, ap_cost_battle=6)
+    world = _W()
+    ex = ExecuteTaskUseCase(fg, world, VerifyUseCase(fg, world),
+                            NavigateUseCase(fg, world), ActUseCase(fg), settle=None)
+    spec = TaskSpec(goal_screen="SoulBattle", element="Challenge", repeat=5, ap_cost=6,
+                    stop_on=(__import__("onmyoji.domain.entities", fromlist=["Outcome"]).Outcome.NO_RESOURCE,))
+    res = ex.execute(spec)
+    assert res.wins == 1, f"chi du AP danh 1 tran: wins={res.wins}"
+    assert "NO_RESOURCE" in res.stopped_reason or "tai nguyen" in res.stopped_reason, res.stopped_reason
+    print("  [ok] autonomy E2E: het AP -> dung dung luc (danh 1 tran roi NO_RESOURCE)")
+
+
 def run_all():
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     print(f"\n=== Chay {len(tests)} test kien truc Clean Architecture ===")
