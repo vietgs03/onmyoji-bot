@@ -3765,7 +3765,12 @@
       "label": "EvolutionZone",
       "desc": "Evolution Zone (觉醒之间) - farm MATERIAL tien hoa/thuc tinh thuc than tu 4 KIRIN nguyen to: Fire Kirin (hoa), Wind Kirin (phong), Water Kirin (thuy), Lightning Kirin (loi). Moi Kirin drop material nguyen to tuong ung. Vao tu Exploration>EvoMaterial.",
       "screenshot": null,
-      "buttons_tried": [],
+      "buttons_tried": [
+        [
+          37,
+          36
+        ]
+      ],
       "verified_elements": [
         {
           "cx": 205,
@@ -3790,6 +3795,45 @@
         {
           "cx": 37,
           "cy": 36,
+          "label": "back"
+        }
+      ]
+    },
+    "03f470fa8b": {
+      "dhash": "0101110111011100010100001000110011011100110111001100110001010100",
+      "label": "BondlingFairyland",
+      "desc": "Bondling Fairyland (契灵 Commune with Runes) - farm RUNES (御魂 cap cao) cung linh thu. Chon Onmyoji/Champion de tang ti le ra Rune cua ho len 35%. Co Search (bat dau farm), Co-op (cung ban), Memory Shop, 5x (danh nhanh), Auto. Vao tu Exploration>BondlingFairyland.",
+      "screenshot": null,
+      "buttons_tried": [],
+      "verified_elements": [
+        {
+          "cx": 1066,
+          "cy": 576,
+          "label": "Search"
+        },
+        {
+          "cx": 677,
+          "cy": 518,
+          "label": "Coop"
+        },
+        {
+          "cx": 259,
+          "cy": 594,
+          "label": "MemoryShop"
+        },
+        {
+          "cx": 813,
+          "cy": 600,
+          "label": "Speed5x"
+        },
+        {
+          "cx": 871,
+          "cy": 603,
+          "label": "Auto"
+        },
+        {
+          "cx": 42,
+          "cy": 41,
           "label": "back"
         }
       ]
@@ -5328,6 +5372,14 @@
       "from": "bc37d8df58",
       "click": [
         46,
+        36
+      ],
+      "to": "cf22d0b534"
+    },
+    {
+      "from": "166671e2af",
+      "click": [
+        37,
         36
       ],
       "to": "cf22d0b534"
