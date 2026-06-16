@@ -185,3 +185,88 @@ class ActionResult:
             error=d.get("error"),
             observation=Observation.from_dict(obs) if obs else None,
         )
+
+
+# ============================================================================
+# AUTONOMY (tu choi) - 4 tang: Outcome/Verdict, TaskSpec/TaskResult.
+# Xem AUTONOMY_DESIGN.md. Day la "ngon ngu chung" cho cac use case tu dong hoa.
+# ============================================================================
+
+
+class Outcome(str, Enum):
+    """Ket qua 1 hanh dong/battle (tang Outcome Verification)."""
+    VICTORY = "victory"        # thang tran
+    DEFEAT = "defeat"          # thua tran
+    IN_BATTLE = "in_battle"    # dang danh (chua xong)
+    LOADING = "loading"        # man chuyen canh
+    NO_RESOURCE = "no_resource"  # het AP/ve/dieu kien -> dung
+    REWARD = "reward"          # man nhan thuong (sau battle/collect)
+    UNKNOWN = "unknown"        # khong nhan dien duoc
+
+
+@dataclass(frozen=True, slots=True)
+class Verdict:
+    """Ket luan ve trang thai hien tai sau 1 hanh dong. confidence 0..1."""
+    outcome: Outcome
+    confidence: float = 0.0
+    detail: str = ""
+    resources: Resources = field(default_factory=Resources)
+
+    def to_dict(self) -> dict:
+        return {"outcome": self.outcome.value, "confidence": self.confidence,
+                "detail": self.detail, "resources": asdict(self.resources)}
+
+
+@dataclass(frozen=True, slots=True)
+class TaskSpec:
+    """Mo ta 1 NHIEM VU tu dong (tang Task Executor). Task = DU LIEU, khong code cung.
+
+    goal_screen: man dich (label trong world graph, vd 'SoulBattle').
+    action: loai viec - 'challenge' (vao danh), 'collect' (nhan thuong), 'navigate' (chi di toi).
+    element: (tuy chon) label element can click o goal_screen (vd 'Challenge'). None -> tu suy.
+    repeat: so lan lap (vd farm 10 tran).
+    stop_on: dung khi gap cac Outcome nay (vd NO_RESOURCE).
+    ap_cost: AP ton moi lan (de ResourcePolicy quyet dinh). 0 = khong ton/khong biet.
+    max_steps: tran an toan (so action toi da).
+    """
+    goal_screen: str
+    action: str = "challenge"
+    element: Optional[str] = None
+    repeat: int = 1
+    stop_on: tuple[Outcome, ...] = (Outcome.NO_RESOURCE,)
+    ap_cost: int = 0
+    max_steps: int = 60
+
+    def to_dict(self) -> dict:
+        d = asdict(self)
+        d["stop_on"] = [o.value for o in self.stop_on]
+        return d
+
+    @classmethod
+    def from_dict(cls, d: dict) -> "TaskSpec":
+        return cls(
+            goal_screen=d["goal_screen"],
+            action=d.get("action", "challenge"),
+            element=d.get("element"),
+            repeat=int(d.get("repeat", 1)),
+            stop_on=tuple(Outcome(o) for o in d.get("stop_on", ["no_resource"])),
+            ap_cost=int(d.get("ap_cost", 0)),
+            max_steps=int(d.get("max_steps", 60)),
+        )
+
+
+@dataclass(frozen=True, slots=True)
+class TaskResult:
+    """Ket qua chay 1 TaskSpec."""
+    ok: bool
+    goal_screen: str
+    done_count: int = 0          # so lan hoan thanh (vd da danh 7/10 tran)
+    requested: int = 0           # so lan yeu cau
+    stopped_reason: str = ""     # vi sao dung (du repeat / no_resource / loi / chua map duong)
+    verdicts: tuple[Verdict, ...] = ()
+
+    def to_dict(self) -> dict:
+        return {"ok": self.ok, "goal_screen": self.goal_screen,
+                "done_count": self.done_count, "requested": self.requested,
+                "stopped_reason": self.stopped_reason,
+                "verdicts": [v.to_dict() for v in self.verdicts]}

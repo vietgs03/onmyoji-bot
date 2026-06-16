@@ -1,0 +1,8 @@
+[
+  {"_comment": "Daily routine - DATA, khong code cung. screen=label trong world graph, action=challenge/collect/navigate, priority nho=uu tien. He thong LOC chi giu man da map (co duong tu HOME) truoc khi chay. Mo rong khi hoc them man + xac nhan luot/cost."},
+  {"screen": "SpiritVenture", "action": "challenge", "element": "EXPSpirit", "repeat": 2, "priority": 1, "ap_cost": 0, "why": "farm EXP daily 2 luot"},
+  {"screen": "SpiritVenture", "action": "challenge", "element": "CoinSpirit", "repeat": 2, "priority": 2, "ap_cost": 0, "why": "farm vang daily 2 luot"},
+  {"screen": "Dispatch", "action": "collect", "repeat": 1, "priority": 3, "ap_cost": 0, "why": "nhan thuong dispatch (phai thuc than)"},
+  {"screen": "RealmRaid", "action": "challenge", "element": "Refresh", "repeat": 3, "priority": 4, "ap_cost": 0, "stop_on": ["no_resource"], "why": "dot pha cuop tai nguyen"},
+  {"screen": "SoulBattle", "action": "challenge", "element": "Challenge", "repeat": 10, "priority": 5, "ap_cost": 6, "stop_on": ["no_resource"], "why": "farm ngoc hon (ton 6 AP/tran)"}
+]

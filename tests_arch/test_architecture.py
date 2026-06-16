@@ -512,6 +512,143 @@ def test_normalize_graph_algorithm():
     print("  [ok] normalize_graph (alias + suy forward edge -> bfs thong mach)")
 
 
+def test_autonomy_verify_outcome():
+    """Tang 1: VerifyUseCase nhan dien ket qua (page victory/defeat/loading)."""
+    from onmyoji.application.use_cases import VerifyUseCase
+    from onmyoji.domain.entities import Observation, Size, Outcome, Resources
+
+    eye = FakeEye()  # khong dung, classify nhan obs truc tiep
+    vu = VerifyUseCase(eye, world=None)
+    # page victory -> VICTORY
+    ov = Observation(ts=0, state_id="x", loading=False, size=Size(1136, 640),
+                     page="page_victory", page_score=0.95)
+    assert vu.classify(ov).outcome == Outcome.VICTORY
+    # page defeat -> DEFEAT
+    od = Observation(ts=0, state_id="x", loading=False, size=Size(1136, 640),
+                     page="page_defeat", page_score=0.9)
+    assert vu.classify(od).outcome == Outcome.DEFEAT
+    # loading -> LOADING
+    ol = Observation(ts=0, state_id="x", loading=True, size=Size(1136, 640))
+    assert vu.classify(ol).outcome == Outcome.LOADING
+    # khong page -> UNKNOWN (khong doan bua)
+    ou = Observation(ts=0, state_id="x", loading=False, size=Size(1136, 640), page=None)
+    assert vu.classify(ou).outcome == Outcome.UNKNOWN
+    print("  [ok] autonomy tang1: verify outcome (victory/defeat/loading/unknown)")
+
+
+def test_autonomy_resource_policy():
+    """Tang 4: ResourcePolicy quyet dinh theo AP (cost tu TaskSpec)."""
+    from onmyoji.application.use_cases import ResourcePolicy
+    from onmyoji.domain.entities import TaskSpec, Resources, Outcome
+
+    spec = TaskSpec(goal_screen="SoulBattle", ap_cost=6)
+    # du AP -> afford
+    assert ResourcePolicy.can_afford(spec, Resources(ap=10)) is True
+    # thieu AP -> khong afford -> NO_RESOURCE
+    assert ResourcePolicy.can_afford(spec, Resources(ap=3)) is False
+    assert ResourcePolicy.should_stop(spec, Resources(ap=3)) == Outcome.NO_RESOURCE
+    # cost=0 (khong biet) -> luon afford (khong chan oan)
+    free = TaskSpec(goal_screen="Dispatch", ap_cost=0)
+    assert ResourcePolicy.can_afford(free, Resources(ap=0)) is True
+    # khong doc duoc AP -> khong chan
+    assert ResourcePolicy.can_afford(spec, Resources(ap=None)) is True
+    print("  [ok] autonomy tang4: resource policy (het AP -> NO_RESOURCE)")
+
+
+def test_autonomy_execute_task():
+    """Tang 2: ExecuteTaskUseCase lam tron 1 task - navigate + lap + verify.
+    Dung fake navigate/verify/act de test state machine khong can game."""
+    from onmyoji.application.use_cases import ExecuteTaskUseCase
+    from onmyoji.domain.entities import (
+        TaskSpec, Outcome, Verdict, Observation, Size, Action, ActionResult, Resources,
+    )
+
+    # fake world: co element 'Challenge' tren SoulBattle
+    class _W:
+        def state_for_label(self, label):
+            return "soul_node" if label == "SoulBattle" else None
+        def elements_for(self, sid):
+            return [{"cx": 1050, "cy": 550, "label": "Challenge"}] if sid == "soul_node" else []
+        def resolve_page(self, pg):
+            return None
+
+    # fake eye: AP du, page None
+    class _Eye:
+        def observe(self):
+            return Observation(ts=0, state_id="s", loading=False, size=Size(1136, 640),
+                               resources=Resources(ap=100))
+        def observe_page(self):
+            return self.observe()
+        def act(self, action):
+            return ActionResult(ok=True, observation=self.observe())
+
+    # fake navigate: luon toi noi
+    class _Nav:
+        def execute(self, label):
+            return True
+
+    # fake act: dem so click
+    class _Act:
+        def __init__(self): self.clicks = 0
+        def execute(self, action):
+            self.clicks += 1
+            return Observation(ts=0, state_id="s", loading=False, size=Size(1136, 640))
+
+    # fake verify: luon VICTORY (mo phong battle thang)
+    class _Verify:
+        def classify(self, obs=None):
+            return Verdict(Outcome.VICTORY, 0.9, "test")
+        def wait_outcome(self, accept, max_wait_s=90, poll_s=1):
+            return Verdict(Outcome.VICTORY, 0.9, "test win")
+
+    eye, nav, act = _Eye(), _Nav(), _Act()
+    ex = ExecuteTaskUseCase(eye, _W(), _Verify(), nav, act, settle=None)
+    spec = TaskSpec(goal_screen="SoulBattle", action="challenge",
+                    element="Challenge", repeat=3, ap_cost=6)
+    res = ex.execute(spec)
+    assert res.ok, f"task phai ok: {res}"
+    assert res.done_count == 3, f"phai danh 3 tran (deu thang): {res.done_count}"
+    assert len(res.verdicts) == 3 and all(v.outcome == Outcome.VICTORY for v in res.verdicts)
+
+    # case: chua map duong -> bao ro
+    class _NavFail:
+        def execute(self, label):
+            return False
+    ex2 = ExecuteTaskUseCase(eye, _W(), _Verify(), _NavFail(), act, settle=None)
+    res2 = ex2.execute(spec)
+    assert not res2.ok and "chua map duong" in res2.stopped_reason
+    print("  [ok] autonomy tang2: execute task (navigate+lap+verify, done 3/3)")
+
+
+def test_autonomy_plan_daily():
+    """Tang 3: PlanDailyUseCase doc plan + LOC man da map + sap priority."""
+    import json
+    import tempfile
+    from onmyoji.application.use_cases import PlanDailyUseCase
+
+    plan = [
+        {"_comment": "test"},
+        {"screen": "SoulBattle", "action": "challenge", "repeat": 10, "priority": 5},
+        {"screen": "SpiritVenture", "action": "challenge", "repeat": 2, "priority": 1},
+        {"screen": "ChuaMap", "action": "challenge", "priority": 2},  # se bi loc (chua map)
+    ]
+    f = tempfile.NamedTemporaryFile("w", suffix=".json", delete=False)
+    json.dump(plan, f); f.close()
+
+    class _W:
+        def path_to(self, frm, to): return None
+        def state_for_label(self, label):
+            return label if label in ("SoulBattle", "SpiritVenture") else None
+
+    pu = PlanDailyUseCase(_W(), f.name)
+    specs = pu.plan()
+    labels = [s.goal_screen for s in specs]
+    # ChuaMap bi loc; con lai sap theo priority (SpiritVenture=1 truoc SoulBattle=5)
+    assert labels == ["SpiritVenture", "SoulBattle"], f"sai thu tu/loc: {labels}"
+    assert specs[0].repeat == 2 and specs[1].repeat == 10
+    print("  [ok] autonomy tang3: plan daily (loc man chua map + sap priority)")
+
+
 def run_all():
     tests = [v for k, v in sorted(globals().items()) if k.startswith("test_")]
     print(f"\n=== Chay {len(tests)} test kien truc Clean Architecture ===")

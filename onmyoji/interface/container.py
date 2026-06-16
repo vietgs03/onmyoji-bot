@@ -10,8 +10,10 @@ import os
 from onmyoji.domain.ports import EyePort, WorldModelPort, KnowledgePort
 from onmyoji.application.use_cases import (
     PerceiveUseCase, WaitStableUseCase, NavigateUseCase, ActUseCase,
-    AskKnowledgeUseCase,
+    AskKnowledgeUseCase, VerifyUseCase, ExecuteTaskUseCase, PlanDailyUseCase,
 )
+
+_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 
 
 def build_eye() -> EyePort:
@@ -99,6 +101,21 @@ class Container:
         if self.knowledge is None:
             raise RuntimeError("Knowledge khong kha dung")
         return AskKnowledgeUseCase(self.knowledge)
+
+    def verify(self) -> VerifyUseCase:
+        return VerifyUseCase(self.eye, self.world)
+
+    def execute_task(self, settle=None) -> ExecuteTaskUseCase:
+        """Tang 2: Task Executor. settle = callable(eye) doi man on dinh (tuy chon,
+        thuong truyen _wait_settle tu mcp_server)."""
+        if self.world is None:
+            raise RuntimeError("WorldModel khong kha dung")
+        return ExecuteTaskUseCase(self.eye, self.world, self.verify(),
+                                  self.navigate(), self.act(), settle=settle)
+
+    def plan_daily(self) -> PlanDailyUseCase:
+        path = os.path.join(_ROOT, "knowledge", "daily_plan.json")
+        return PlanDailyUseCase(self.world, path)
 
     def close(self) -> None:
         self.eye.close()

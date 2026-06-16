@@ -604,6 +604,92 @@ def explore_status() -> dict:
             "frontier": frontier[:8], "suggestion": sug}
 
 
+# ============================================================================
+# AUTONOMY tools (4 tang). Xem AUTONOMY_DESIGN.md.
+# ============================================================================
+
+
+@mcp.tool()
+def verify_outcome() -> dict:
+    """KIEM TRA ket qua man hien tai (thang/thua/loading/reward) - tang feedback.
+
+    Dung sau khi danh xong de biet ket qua (vd kiem tra battle VICTORY/DEFEAT).
+    Dua page detector (landmark robust) + trang thai loading. Tra Verdict:
+    {outcome, confidence, detail, resources}. outcome:
+      victory/defeat/in_battle/loading/reward/no_resource/unknown.
+    LUU Y: can co page template man Victory/Defeat (add_live_page) de nhan dien
+    chac. Chua co -> tra unknown (an toan, khong doan bua)."""
+    return get_container().verify().classify().to_dict()
+
+
+@mcp.tool()
+def do_task(goal_screen: str, action: str = "challenge", element: str = "",
+            repeat: int = 1, ap_cost: int = 0, stop_on: str = "no_resource") -> dict:
+    """LAM TRON 1 NHIEM VU tu dong: dieu huong + lap + verify + dung dung luc.
+
+    Tang Task Executor - bien nhan dien thanh TU DONG HOA that. He thong tu:
+      1. goto(goal_screen) qua world graph (bfs_path da hoc).
+      2. lap `repeat` lan: click element hanh dong -> (neu challenge) xu ly chuoi
+         battle (Ready -> Auto -> cho ket qua) -> verify VICTORY/DEFEAT.
+      3. dung khi het luot/het tai nguyen (stop_on) hoac du repeat.
+
+    Tham so:
+        goal_screen: man dich (label da hoc, vd 'SoulBattle', 'SpiritVenture').
+        action: 'challenge' (vao danh), 'collect' (nhan thuong), 'navigate' (chi di toi).
+        element: (tuy chon) label nut can click (vd 'Challenge'). "" -> tu suy.
+        repeat: so lan lap (vd 10 tran).
+        ap_cost: AP ton moi lan (de dung khi het AP). 0 = khong biet/khong chan.
+        stop_on: Outcome dung (mac dinh 'no_resource').
+    Tra TaskResult: {ok, goal_screen, done_count, requested, stopped_reason, verdicts}.
+
+    QUAN TRONG: chi dieu huong bang element DA HOC (khong hardcode). Neu thieu
+    duong/element -> tra ro 'chua map duong' / 'chua hoc element' (de explore truoc)."""
+    from onmyoji.domain.entities import TaskSpec, Outcome
+    c = get_container()
+    if c.world is None:
+        return {"ok": False, "error": "WorldModel khong kha dung"}
+    try:
+        stops = tuple(Outcome(s.strip()) for s in stop_on.split(",") if s.strip())
+    except ValueError:
+        stops = (Outcome.NO_RESOURCE,)
+    spec = TaskSpec(goal_screen=goal_screen, action=action,
+                    element=element or None, repeat=int(repeat),
+                    stop_on=stops or (Outcome.NO_RESOURCE,), ap_cost=int(ap_cost))
+    return c.execute_task(settle=_wait_settle).execute(spec).to_dict()
+
+
+@mcp.tool()
+def plan_daily() -> dict:
+    """LEN LICH cong viec daily tu knowledge/daily_plan.json (data) + trang thai.
+
+    Tang Daily Planner: doc plan (man nao farm gi, uu tien) -> LOC chi giu man DA
+    MAP (co duong tu HOME) -> sap theo priority -> tra list TaskSpec. Dung run_daily
+    de chay tuan tu, hoac goi do_task tung cai.
+    Tra ve: {ok, tasks: [TaskSpec], skipped_unmapped: [...] }."""
+    c = get_container()
+    specs = c.plan_daily().plan()
+    return {"ok": True, "count": len(specs),
+            "tasks": [s.to_dict() for s in specs]}
+
+
+@mcp.tool()
+def run_daily(max_tasks: int = 20) -> dict:
+    """CHAY toan bo daily routine: plan_daily -> thuc thi tuan tu tung TaskSpec.
+
+    Tu choi (autonomous): tu lam het cac viec daily da map. Tra tong ket moi task.
+    Tham so max_tasks: tran an toan (so task toi da chay)."""
+    c = get_container()
+    if c.world is None:
+        return {"ok": False, "error": "WorldModel khong kha dung"}
+    specs = c.plan_daily().plan()[:max_tasks]
+    executor = c.execute_task(settle=_wait_settle)
+    results = []
+    for s in specs:
+        r = executor.execute(s)
+        results.append(r.to_dict())
+    return {"ok": True, "ran": len(results), "results": results}
+
+
 def main() -> None:
     """Chay MCP server qua stdio (transport mac dinh cho jcode/Claude)."""
     mcp.run()
