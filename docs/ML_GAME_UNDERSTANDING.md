@@ -597,3 +597,41 @@ API: `find(name=,layout=,feature=,text=)`, `screen('guildBtn','43447')`
 ### Chi con thieu (phai dung OCR, khong co trong res.npk)
 - Man HOME / Explore / Town / Summon (canh 3D) -> `data/ui_home.json`
 - Man nghi (OCR=0 text) -> `data/ui_idle.json`
+
+## 19. BOT NHAN DIEN DANG O LAYOUT NAO (2026-10-13)
+
+### Van de
+2.189 layout -> bot phai biet dang o man nao moi bam dung nut.
+
+### Cach giai: CHU KY LAYOUT (tap nut + tap text)
+Moi layout co **tap TEN NUT** va **tap TEXT** dac trung. Do la "chu ky" cua man.
+Tool: `research/fx/layout_id.py` -> `layout_signatures.json` (2.173 layout).
+
+### DA TEST - nhan dien dung ca 3 man:
+| Man | Dau vao | Ket qua | Cach biet |
+|---|---|---|---|
+| Soul stage | text `奖励预览,挑战,66` + nut `btn_zhandou,btn_shishenlu` | **4529** (diem 4.98) | nhom sau chi 1.99 |
+| Man nghi | text `00:00,x1,1/12` + nut `button_auto,button_accelerate,buttonSetting` | **2043/46693** (diem 6.99) | nhom sau 5.95 |
+| Menu ngang | nut `tujianBtn,guildBtn,shishenluBtn,mailBtn` | **43447/33286** (diem 7.96) | nhom sau 1.98 |
+
+### Vi sao KHONG dung anh nguyen man de nhan dien
+- Nhieu man dung CHUNG khung/theme, chi khac vai nut -> anh nguyen man giong nhau.
+- Man nghi (46693) va man khac co the cung nen 3D -> phai dua vao TAP NUT.
+=> Dung TAP TEN NUT + TEXT lam chu ky, khong dung pixel toan man.
+
+### Luong nhan dien de xuat cho bot
+```
+1. OCR man hinh           -> tap text
+2. Phat hien nut (template/sprite tu NPK) -> tap ten nut
+3. layout_id.identify(texts, names)
+   - khop text: diem 1.0 / text
+   - khop nut : diem 2.0 / nut   (nut dac trung hon)
+   - tru diem neu layout qua nhieu nut/text (tranh khop ngau nhien)
+4. Lay layout diem cao nhat -> doc toa do nut tu coords_all.jsonl -> bam
+```
+
+### Y nghia cho ML
+- `layout_signatures.json` = nhan (label) cho bai toan "man nao?".
+- `coords_all.jsonl` (22.178 nut) = nhan toa do cho bai toan "nut o dau?".
+- Anh that (tu tex_res.npk + plist, hoac chup man hinh) = dau vao.
+=> Du 3 thanh phan de train: ANH -> (MAN, NUT, TOA DO).
