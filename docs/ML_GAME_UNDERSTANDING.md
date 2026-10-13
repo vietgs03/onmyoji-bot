@@ -522,3 +522,36 @@ KHONG the chi dung OCR. Phai chia:
 - Man/panel chuc nang (shop, soul, guild, menu ngang, man nghi) -> LAY TU LAYOUT NPK.
 - Canh 3D / man chinh (HOME, Explore, Town, Summon) -> dung OCR.
 - Man nghi -> OCR 0 text -> BAT BUOC dung layout.
+
+## 17. DANH MUC LAYOUT TU SOURCE (2026-10-13)
+
+### Da lap danh muc TOAN BO layout trong res.npk (khong bam thu, chi doc)
+- `research/fx/out/layout_catalog.json` - **2.106 layout** co nut/text
+  (moi dong: file, so node, so button, ten button, text)
+- `research/fx/out/layout_index_by_feature.json` - tra theo CHUC NANG:
+  guild(43 layout), friend(63), shop(29), shikigami(49), team(46),
+  warehouse(95), onmyoji(27), settings(32), summon(7), explore(3), battle(48), task(8),
+  soul(3), mail(11)
+
+### Cach tra dung (thay vi mo bang OCR)
+Muon biet man X nam o layout nao: tra `layout_index_by_feature.json` theo tu khoa
+-> ra danh sach file layout -> doc toa do nut tu file do.
+**Khong can bam thu, khong can OCR.**
+
+### Icon goc phai tren man HOME (tu layout 43447)
+| Icon | screen | node |
+|---|---|---|
+| Mail | (1024,40) | mailBtn |
+| Chat | (1084,40) | chatBtn |
+
+### MANH CUNG: man nao KHONG co trong res.npk
+Da kiem chung: HOME (canh 3D), Explore/Town/Summon (canh 3D) -> phai dung OCR.
+Man nghi -> OCR = 0 text -> phai dung layout (46693).
+Cac panel chuc nang -> deu CO trong layout, tra theo feature index.
+
+### Bai hoc phuong phap (quan trong)
+DUC TU SOURCE, khong mo bang OCR:
+- 1 lan quet 2106 layout trong ~40s -> co toan bo ban do UI.
+- Mo bang OCR + bam thu vua cham (5 phut/man), vua de lac (bam nham mo panel khac),
+  vua sai (OCR lech 30-156px).
+- Thu tu dung: tra catalog -> doc toa do -> UPLOAD 1 lan de verify, thay vi mo mo.
