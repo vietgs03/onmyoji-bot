@@ -718,3 +718,40 @@ Ban de nghi cap account de test API. Huong di:
 1. Kiem tra game co Python console/driver de goi API khong (khong can account).
 2. Neu co: goi `auto_yuhun_*` de doc bang + `Node.getWorldPosition` lay toa do that.
 3. Neu khong: bat log `EnableYuhunAlgoLog` xem engine tu in gi.
+
+## 22. DICH NGUOC PYTHON DE DOC BANG TI LE (2026-10-13) - DANG LAM
+
+### Da xac dinh nen tang (buoc quan trong)
+| Phat hien | Y nghia |
+|---|---|
+| `python27.dll` (trong game dir + Documents/cloudfilesys3/bin) | **CPython 2.7** |
+| PE machine `0x8664` | **64-bit** -> con tro 8 byte |
+| `.marshal` bat dau `63 00 00 00` | la TYPE_CODE; header 8 byte da bi cat |
+| `script.npk` giai ma duoc | 33.900 file Python -> `out/py/**.py.marshal` |
+
+### Layout struct CPython 2.7 64-bit (suy ra duoc, khong con doan)
+```
+PyObject_HEAD   = 16   (ob_refcnt@0, ob_type@8)
+PyDictObject    : ma_fill@16, ma_used@24, ma_mask@32, ma_table@40, smalltable@56
+PyDictEntry     : me_hash@0,  me_key@8,   me_value@16   (size 24)
+PyStringObject  : ob_size@16, ob_shash@24, ob_sstate@32, ob_sval@36
+PyIntObject     : ob_ival@16
+PyFloatObject   : ob_fval@16
+PyTypeObject    : tp_name@24
+```
+
+### CHAN DOAN LAI ket qua quet truoc (minh da ket luan sai)
+Vung `0x7FF6975EDE00` minh tuong la "bang dang ky" -> THAT RA la **UTF-16 bytecode**:
+giai ma ra `attr_idx < dict.ARRT_NUM`, `equip_init`, `equip_upgrade`... = TEN BIEN trong code.
+Vung `com.data.cdata.equip_attr` -> chi la **bang dang ky TEN MODULE**, moi con tro
+deu tro ve cung `0x7FF698B557B0` -> KHONG phai du lieu.
+
+### Tool da viet
+- `docs/mem_scan.ps1` - quet heap tim chuoi ten bang (DA CHAY, tim thay 7 ten)
+- `docs/mem_read.ps1` - hexdump + lan con tro (DA CHAY)
+- `docs/mem_dict.ps1` - **tim doi tuong STR -> quet con tro -> doc DICT** (dang chay)
+
+### Buoc tiep
+`mem_dict.ps1`: tu ob_sval lui 36 byte ra doi tuong str -> quet heap tim con tro
+(me_key) -> doc me_value @+8 -> in kieu + gia tri. Neu value la dict -> in cac cap
+key/value de lay SO TI LE.
