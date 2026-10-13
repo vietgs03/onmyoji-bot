@@ -365,3 +365,48 @@ Chua toa do zone + nut man Orochi lay tu layout, kem ham `contains()` de tu kiem
 - Nut trong game TO (84-159px). OCR doc CHU, tam chu KHONG trung tam nut.
 - Muon kiem khop: kiem tam chu co NAM TRONG rect nut, KHONG so tam voi tam.
 - Zone: OCR tra ve toa do tam chu -> click lech phai ~18px cho an toan.
+
+## 13. CO CHE CHON STAGE OROCHI (verify LIVE 2026-10-13) - RAT QUAN TRONG
+
+### Su that ve man Soul
+Man Soul **KHONG** co danh sach stage cuon duoc nhu minh tuong ban dau.
+Bo cuc that (nhin anh 1136x640):
+```
+COT TRAI (x 0-210)          | GIUA (3D model)   | PHAI (info + nut)
+ 4 PANEL ZONE:              |                   |
+  [Orochi]     Lv.6, Lv.7   |  Orochi 8 dau     | Orochi of the Maidens
+  [Sougenbi]   Lv.8         |                   | Rewards Preview 0/500
+  [Himiko]     Lv.9, Lv.10  |                   | Drops G4-G6 Souls
+  [Sea of Et.] Moan (dang   |                   | [Team] [Challenge x12]
+               chon, to do) |                   |
+```
+
+### Co che chon stage (BANG CHUNG)
+Bam vao NHAN "Lv.N" -> CHON stage do. Man KHONG doi, nhung phan `Drops` doi:
+| Bam nhan | Drops hien ra |
+|---|---|
+| Lv.6 | Drops G3-G5 Souls |
+| Lv.7 | Drops G3-G6 Souls |
+| Lv.8 | Drops G3-G6 Souls |
+| Lv.9 | Drops G4-G6 Souls |
+| Lv.10 | Drops G4-G6 Souls |
+
+=> **Moi nhan Lv la 1 STAGE RIENG.** Bam = chon.
+
+### DA CHAY 1 TRAN THAT (theo yeu cau user)
+1. Bam `Lv.6` @ (120,118) -> chon stage thap nhat dang thay
+2. Bam `Challenge` @ (1046,563) [layout btn_zhandou, da verify]
+3. Cho battle (~60s, thay 'Tap to continue' + mau 39539/39539)
+4. Bam tap to continue -> ve man stage
+5. **COUNTER: 0/500 -> 1/500** = DUNG 1 TRAN. XAC NHAN THANH CONG.
+
+### CHUA GIAI QUYET: cuon de lay stage thap hon (Lv.1..Lv.5)
+- `bgdrag` (SendMessage) va click deu KHONG lam panel dich chuyen.
+  Da thu: keo doc cot trai, keo ngang, keo manh, keo o giua -> khong doi.
+- Nen hien chi chon duoc stage DANG THAY (Lv.6..Lv.10 cho Orochi).
+- Muon lay Lv.1..Lv.5 phai tim cach cuon panel (co the can message khac,
+  hoac panel chi hien stage cao nhat da mo khoa -> Lv.1 nam sau 1 lan bam khac).
+
+### Da cap nhat
+`research/fx/soul_orochi.py`: them OROCHI_STAGE_LABELS_Y, stage_label_xy(),
+lowest_visible_stage().
