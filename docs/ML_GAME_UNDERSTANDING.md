@@ -242,3 +242,47 @@ Hoac nam trong `Documents/tex.npk` (NXPKM) / `script3.zip`.
 Chup lai man HOME 2 lan, OCR cho ket qua ON DINH:
 Explore (495,192), Event (1071,164), Town (501,365), Seal (81,322).
 => Xac nhan anh chup 1136x640 va scale 1.0 (so sanh voi canvas design).
+
+## 10. VERIFY CALIBRATION TREN MAN THAT (2026-10-13) - THANH CONG
+
+Da dieu huong that: HOME -> Explore -> Soul Zone -> man Soul stage (Orochi).
+OCR man Soul doc duoc: Challenge, Rewards Preview, Lineup, Auto, Orochi, Sougenbi,
+Himiko, Sea of Eternity, Shikigami, Presets, Record, Legend.
+
+### Doi chieu nut Challenge
+| Nguon | Gia tri |
+|---|---|
+| Layout NPK `25994.btnChallenge` canvas | (979, 91), 145x145 |
+| Cong thuc scale 1.0 -> screen | **(979, 549)** |
+| OCR anh that | **(975, 548)** |
+| Lech | dx=-4, dy=-1 (sai so OCR) |
+
+=> **CONG THUC DA DUOC CHUNG MINH:**
+```
+screen_x = canvas_x
+screen_y = 640 - canvas_y
+```
+
+### Con so cu trong farm_soul SAI
+`_CHALLENGE_XY = (1063, 580)` lech **88 px ngang, 32 px doc** so voi (975,548) that.
+Van bam trung duoc chi vi nut Challenge to (157x47). Nut nho se TRUOT.
+=> NEN sua lai theo layout.
+
+### CANH BAO: man Soul co NHIEU layout
+| Layout | btnChallenge canvas |
+|---|---|
+| 25994, 46987 | (979, 91) 145x145 |
+| 9550, 35317, 44568, 47054 | (913, 94) 159x159 |
+
+=> Phai chon dung layout theo man cu the, KHONG dung bua mot so cho moi man.
+
+### Nut cuong hoa soul (cho task enhance_soul)
+Tu ui_labeled.jsonl, cac nut ENHANCE + toa do screen (scale 1.0):
+| name | canvas | screen |
+|---|---|---|
+| strengthenBtn | (827, 63) | (827, 577) |
+| strengthenBtn | (488, 204) | (488, 436) |
+| enhancePanel | (566, 321) | (566, 319) |
+| enhance | (1027, 59) | (1027, 581) |
+=> Thay the ANCHORS gia thuyet trong tasks/enhance_soul.py bang cac so nay
+(khi da xac dinh dung layout cua man chi tiet soul).
