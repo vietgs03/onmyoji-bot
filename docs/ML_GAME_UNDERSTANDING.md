@@ -410,3 +410,35 @@ Bam vao NHAN "Lv.N" -> CHON stage do. Man KHONG doi, nhung phan `Drops` doi:
 ### Da cap nhat
 `research/fx/soul_orochi.py`: them OROCHI_STAGE_LABELS_Y, stage_label_xy(),
 lowest_visible_stage().
+
+
+## 14. SUA CHIEU CUON STAGE (2026-10-13) - USER CHI DUNG
+
+### Minh da lam SAI chieu
+Lan dau minh keo TU DUOI LEN TREN (y 580 -> 90) -> panel KHONG dich chuyen.
+Ket luan sai la "khong cuon duoc". Thuc ra chi la sai chieu.
+
+### Chieu DUNG: NAM TREN KEO XUONG (y 120 -> 580)
+Mot lan keo la du. Ket qua:
+
+| | Truoc keo | Sau keo 1 lan |
+|---|---|---|
+| Stage thay duoc | Lv.6, Lv.7, Lv.8, Lv.9, Lv.10 | **Lv.1, Lv.2, Lv.3, Lv.4, Lv.5, Lv.6** |
+
+Toa do OCR that sau khi keo (x tam ~83, click le x=120):
+```
+lv1 (83,102) | lv2 (83,193) | lv3 (83,287) | lv4 (83,378) | lv5 (83,470) | lv6 (82,563)
+```
+
+### DA CHAY STAGE LV.1 THAT
+1. Keo xuong 1 lan -> hien Lv.1..Lv.6
+2. Bam Lv.1 @ (120,102) -> Drops doi thanh **G1-G3 Souls**
+3. Bam Challenge @ (1046,563)
+4. Cho battle -> ve man stage
+5. **COUNTER: 1/500 -> 2/500** = dung 1 tran. XAC NHAN.
+
+### Da cap nhat
+`research/fx/soul_orochi.py`:
+- `SCROLL_DOWN_DRAG = (110,120,110,580,30)` - keo dung chieu
+- `OROCHI_STAGES_AFTER_SCROLL` - toa do Lv.1..Lv.6 sau khi keo
+- `scroll_stages_down()`, `stage_after_scroll(n)`
