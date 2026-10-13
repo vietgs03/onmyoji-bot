@@ -218,3 +218,27 @@ anh chup that hom nay (1136x640):
   => Thu MD5/SHA1 cua 10.462 ten da biet -> KHONG khop.
 - Van KHONG tim thay `files_hash_2_0.bin` tren dia (game dang chay van khong thay).
 - `pkgmapping.json`/`pkginfo.json` chi la bang anh xa THU MUC -> goi, khong co ten file.
+
+## 9. MAN HOME KHONG CO TRONG res.npk (2026-10-13)
+
+Quet TOAN BO 56.116 file cua `res.npk`: chi **6 file** chua chuoi "Explore", va
+khong file nao la layout man HOME:
+- 4 file = bang dich ten hien thi (39092.json, 37348.json, 36571.json, 7165.json)
+- 1 file = scene 3D 3ds Max (`bin_d0cf11e0`, OLE compound, co 'Autodesk'/'mental ray')
+- 1 file = `bin_14000000` (flatbuffer)
+
+=> **Man HOME (Explore/Summon/Town/Seal) KHONG nam trong res.npk.**
+Ly do kha nang cao: HOME la giao dien Cocos rieng, duoc dung bang CODE
+(`nxgui_res`/`Compiled_full3` theo pkgmapping), khong phai file layout tinh.
+Hoac nam trong `Documents/tex.npk` (NXPKM) / `script3.zip`.
+
+### He qua cho bot
+- 2.189 layout trong res.npk = cac PANEL/man chuc nang (shop, soul, guild, event...),
+  KHONG gom man HOME va cac man chinh.
+- Nen: toa do man HOME van phai lay bang OCR (nhu bot dang lam), KHONG lay duoc tu layout.
+- Nhung cac panel chuc nang (vd man cuong hoa soul, shop) THI lay duoc tu layout.
+
+### Da verify them
+Chup lai man HOME 2 lan, OCR cho ket qua ON DINH:
+Explore (495,192), Event (1071,164), Town (501,365), Seal (81,322).
+=> Xac nhan anh chup 1136x640 va scale 1.0 (so sanh voi canvas design).
