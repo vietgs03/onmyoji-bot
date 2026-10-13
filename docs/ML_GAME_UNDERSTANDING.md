@@ -635,3 +635,41 @@ Tool: `research/fx/layout_id.py` -> `layout_signatures.json` (2.173 layout).
 - `coords_all.jsonl` (22.178 nut) = nhan toa do cho bai toan "nut o dau?".
 - Anh that (tu tex_res.npk + plist, hoac chup man hinh) = dau vao.
 => Du 3 thanh phan de train: ANH -> (MAN, NUT, TOA DO).
+
+## 20. ASSET ANH: KET LUAN TRUNG THUC (2026-10-13)
+
+### Da co (verify duoc)
+1. **Toa do**: 22.178 nut / 2.189 layout -> `data/ui_coords/` (da verify 11 diem khop)
+2. **Nhan MAN**: 2.173 chu ky (tap nut + text) -> `layout_signatures.json`
+   Da test: nhan dien dung Soul(4529) / nghi(46693) / menu ngang(43447)
+3. **Anh**: 82.867 texture da dump (35 GB) trong `out/full_tex`
+4. **Plist**: 8.675 plist, ghi ten sheet + toa do cat tung sprite
+
+### THIEU: noi TEN SHEET -> ENTRY THAT. Da thu 5 cach, KHONG du:
+| # | Cach | Ket qua |
+|---|---|---|
+| a | Doc ten file tu NPK | NPK KHONG luu ten (chi `sign` u32) |
+| b | CRC32 / FNV | 6 thuat toan x 13 bien the -> KHONG khop `sign` |
+| c | `sign` dung chung 2 kho | 0/21 plist khop -> khong noi duoc |
+| d | Khop KICH THUOC | 8140 sheet khop, nhung **7476 TRUNG** kich thuoc |
+| e | Kiem NOI DUNG theo plist | 146x146 -> 13 ung vien, chi so 0.28..0.76, khong phan biet |
+
+=> **Dataset (ANH tu source, MAN, NUT, TOA DO) CHUA ghep duoc.**
+   Nguyen nhan goc: NPK khong luu ten file, nen khong co khoa noi plist <-> entry.
+
+### DUONG KHA THI (khong can anh sheet tu NPK)
+Dung **anh chup man hinh that** lam dau vao, voi SIEU DU LIEU tu source:
+```
+ANH (chup man that)  +  nhan MAN (layout_signatures)  +  nhan TOA DO (coords_all)
+```
+- Bot chup man -> OCR text + phat hien nut -> `layout_id.identify()` ra MAN
+- Tu MAN -> `coords_all.jsonl` cho toa do TUNG NUT -> nhan cho bai toan "nut o dau"
+- => Train duoc: (1) phan loai MAN tu anh, (2) dinh vi NUT, (3) map nut -> chuc nang
+
+Uu diem: anh dung nhu bot THAY (ke ca nhieu, anti-alias, hieu ung), khong phai
+anh ly tuong tu NPK. Thuc dung hon cho bot chay that.
+Nhuoc diem: can thu thap anh (chay bot/explorer), khong co san 82k anh.
+
+### Neu muon lay anh tu source sau nay
+Huong con lai: tim ham hash NeoX trong `Client.exe` (co `hashFileName` va
+`files_hash_2_0.bin` tai luc chay) -> tra `sign` ra ten file -> noi duoc plist.
