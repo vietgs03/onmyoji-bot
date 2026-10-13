@@ -36,7 +36,10 @@ File: `tasks/run.py` -> `farm_soul(agent, stage="Moan", zone="Orochi", times=N, 
 - Mo rong farm_soul cho zone/stage khac (Sougenbi/Himiko/Sea of Eternity).
 - Auto-repeat native cua game (nut 'x5'/'Auto' o man Soul) - co the dung thay vong lap thu cong.
 
-## Commit gan nhat
+## Commit gan nhat (2026-10-13: enhance_soul + soul_lines + tests)
+- feat(soul): task enhance_soul (loc som) + ml/soul_lines.py + 11 test offline
+
+## Commit truoc do
 - 84040a0 feat(soul): task farm_soul + GHI SO LIEU
 - (fix) tang timeout 75->120s + retry 6 lan tim Challenge
 
@@ -54,3 +57,29 @@ Man Soul co cac nut tang toc native (toa do tu /tmp/after_soul.png):
 - Popup Parade X @ (975,135). Reward dac biet -> tap (576,620)+(576,340).
 - Toa do chot: xem docs/farm_soul_report.md.
 - TODO: dung native x5(@650,635)/Auto(@707,639) de nhanh hon + bot dialog. Mo rong zone/stage khac.
+
+## CAP NHAT 2026-10-13 (task enhance_soul - cuong hoa Ngu Hon theo chien thuat loc som)
+Doi khi game KHONG chay -> lam phan verify DUOC OFFLINE, cam game vao la chay.
+
+- `ml/soul_lines.py` (MOI): doc DONG PHU cua soul tu OCR words -> `SoulState.stats`
+  ({'spd':2.4,'crit':3%,...}). Ghep <ten dong> <gia tri> theo HANG (loc dy <= 20px
+  truoc, roi uu tien so co '%'), co bang alias ten dong EN -> key chuan.
+- `tasks/enhance_soul.py` (MOI): task `enhance_soul`, chien thuat loc som:
+  cuong hoa -> OCR lai -> `_stats_diff` biet roll vao dong nao -> trung dich thi di
+  tiep, truot thi DUNG giu lam thuc an. `_decide()` la phan logic thuan, test rieng.
+  Ghi tung lan roll -> `logs/enhance_soul_stats.jsonl` (do TI LE THAT vs 1/4 cua wiki).
+  Co `_ocr_words()` tach ra de monkeypatch khi test. dry=True (mac dinh) KHONG bam gi.
+- Dang ky trong `tasks/run.py`: `python tasks/run.py enhance_soul target=spd times=5 --live`.
+- `tests_arch/test_soul_enhance.py` (MOI): 11 test OFFLINE (khong can game/OCR):
+  parse dong phu, khong gan lan so giua cac hang, logic quyet dinh, diff, mo phong
+  1/4 (cat som 74%), va **E2E voi FakeAgent** (dry khong bam / live co bam + ghi log).
+  => `python tests_arch/test_soul_enhance.py` -> "OK - tat ca test soul enhance pass".
+
+### CHUA VERIFY (can game chay)
+- Toa do nut trong `tasks/enhance_soul.py` -> `ANCHORS` la GIA THUYET suy tu layout
+  res.npk (entry 35994.json panel chi tiet / 26763.json panel cuong hoa). Phai chay
+  `python tasks/run.py enhance_soul --dry` khi game mo de doi chieu, roi moi --live.
+- Ten dong phu EN that tren client: bang alias trong ml/soul_lines.py can doi chieu
+  bang anh that (hien suy tu ten lore: Attack Bonus / Speed / Crit Rate / Effect Hit...).
+- Chua lam: tu dong CHON soul tu list (mo chi tiet tung con) - hien task gia dinh dang
+  o man chi tiet 1 soul; va nut danh dau bo (弃置) chua tu bam.

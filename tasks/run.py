@@ -19,6 +19,10 @@ ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 sys.path.insert(0, os.path.join(ROOT, "automation"))
 from agent import Agent
 
+# Task cuong hoa soul (tach module rieng: co test offline trong tests_arch/).
+sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+from enhance_soul import enhance_soul  # noqa: E402
+
 
 def daily_signin(agent: Agent):
     """Demo AN TOAN: ve HOME -> mo Event -> chup man (de nguoi/bot xem co nut Claim).
@@ -616,6 +620,7 @@ TASKS = {
     "daily_signin": daily_signin,
     "farm_realm": farm_realm,
     "farm_soul": farm_soul,
+    "enhance_soul": enhance_soul,
     "claim_home": claim_home,
     "claim_dolls": claim_dolls,
 }
@@ -655,6 +660,7 @@ def main():
         print("usage: python tasks/run.py <task> [key=value ...] [--live]")
         print("  vd: python tasks/run.py farm_soul zone=Orochi stage=Moan times=10")
         print("      python tasks/run.py farm_soul zone=Orochi stage=Moan --live")
+        print("      python tasks/run.py enhance_soul target=spd times=5 --live")
         return
     kw = _parse_kwargs(sys.argv[2:])
     agent = Agent()
