@@ -486,3 +486,39 @@ Da TEST: bam Guild @ (505,593) -> thoat Settings ve HOME. Toa do DUNG.
 ### Nguyen tac an toan (da ma hoa trong du lieu)
 - `never_click: ["summon"]` -> `safe_targets()` khong bao gio tra ve summon.
 - Nut 'settings' (cuon giay) KHONG phai menu chinh -> dung menu ngang de dieu huong.
+
+## 16. MAN NGHI (IDLE) - DUC TU LAYOUT NPK (2026-10-13)
+
+### Dac diem: OCR = 0 text
+Man nghi (giao dien bi an) OCR tra ve **0 text** -> KHONG the doc bang OCR.
+=> Bat buoc phai lay tu layout NPK. Day la ly do khong the chi dung OCR cho bot.
+
+### Tim ra layout: 46693.json (= 2043.json), 58 node
+Khop chinh xac voi anh that: 3 icon goc trai tren + nut goc phai duoi.
+
+| Node | screen | size | Y nghia |
+|---|---|---|---|
+| buttonExit | (33,30) | 60x60 | thoat/back |
+| buttonSetting | (96,30) | 60x60 | setting (icon nguoi) |
+| buttonChat | (158,30) | 60x60 | chat |
+| button_auto | (56,584) | 100x100 | auto battle ("自动") |
+| button_accelerate | (112,549) | 72x72 | tang toc ("x1") |
+| btnCombatTips | (1074,588) | 100x100 | tips/nhac ("特殊机制") |
+| panel_summon | (986,577) | 100x100 | summon panel |
+
+Label co text (de nhan dien man): 我方/敌方 (doi), 00:00 (thoi gian), 1/2 (so luong),
+1/12 (so hero), 5/3, 特殊机制.
+
+### Luu y: layout nay la MAN NGHI TRONG TRAN
+Co `button_auto` + `button_accelerate` + `我方/敌方` + `number_hero 1/12`
+=> day la giao dien trong luc danh nhau (auto mode), khong phai nghi ngoai tran.
+
+### Da luu thanh du lieu cho ML (co commit)
+- `data/ui_idle.json` - nut + label + toa do, ghi ro nguon layout 46693
+- `automation/ui_idle.py` - API: `buttons()`, `xy(name)`, `size(name)`, `labels()`
+
+### Nguyen tac rut ra (quan trong cho bot)
+KHONG the chi dung OCR. Phai chia:
+- Man/panel chuc nang (shop, soul, guild, menu ngang, man nghi) -> LAY TU LAYOUT NPK.
+- Canh 3D / man chinh (HOME, Explore, Town, Summon) -> dung OCR.
+- Man nghi -> OCR 0 text -> BAT BUOC dung layout.

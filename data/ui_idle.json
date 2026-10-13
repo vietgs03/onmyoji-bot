@@ -1,0 +1,177 @@
+{
+ "_doc": "Man NGHI (idle) - LAY TU LAYOUT res.npk 46693.json (ban sao 2043.json). KHONG phai doan bang OCR (man nay OCR = 0 text).",
+ "_source": "res.npk layout 46693, canvas 1136x640, screen_y = 640 - canvas_y",
+ "_verified": "2026-10-13. Anh that /tmp/idle.png khop: 3 icon goc trai + nut goc phai duoi.",
+ "buttons": {
+  "buttonSetting": {
+   "screen": [
+    96,
+    30
+   ],
+   "size": [
+    60,
+    60
+   ],
+   "canvas": [
+    96,
+    610
+   ]
+  },
+  "buttonChat": {
+   "screen": [
+    158,
+    30
+   ],
+   "size": [
+    60,
+    60
+   ],
+   "canvas": [
+    158,
+    610
+   ]
+  },
+  "buttonExit": {
+   "screen": [
+    33,
+    30
+   ],
+   "size": [
+    60,
+    60
+   ],
+   "canvas": [
+    33,
+    610
+   ]
+  },
+  "button_auto": {
+   "screen": [
+    56,
+    584
+   ],
+   "size": [
+    100,
+    100
+   ],
+   "canvas": [
+    56,
+    56
+   ]
+  },
+  "button_accelerate": {
+   "screen": [
+    112,
+    549
+   ],
+   "size": [
+    72,
+    72
+   ],
+   "canvas": [
+    112,
+    91
+   ]
+  },
+  "btnCombatTips": {
+   "screen": [
+    1074,
+    588
+   ],
+   "size": [
+    100,
+    100
+   ],
+   "canvas": [
+    1074,
+    52
+   ]
+  },
+  "panel_summon": {
+   "screen": [
+    986,
+    577
+   ],
+   "size": [
+    100,
+    100
+   ],
+   "canvas": [
+    986,
+    63
+   ]
+  }
+ },
+ "labels": {
+  "lblAuto": {
+   "text": "自动",
+   "screen": [
+    55,
+    586
+   ]
+  },
+  "lblAccelerate": {
+   "text": "x1",
+   "screen": [
+    112,
+    549
+   ]
+  },
+  "lblText": {
+   "text": "特殊机制",
+   "screen": [
+    1075,
+    616
+   ]
+  },
+  "number_hero": {
+   "text": "1/12",
+   "screen": [
+    383,
+    626
+   ]
+  },
+  "Label": {
+   "text": "5/3",
+   "screen": [
+    947,
+    609
+   ]
+  },
+  "timeLabel": {
+   "text": "00:00",
+   "screen": [
+    568,
+    33
+   ]
+  },
+  "left": {
+   "text": "我方",
+   "screen": [
+    519,
+    24
+   ]
+  },
+  "right": {
+   "text": "敌方",
+   "screen": [
+    617,
+    24
+   ]
+  },
+  "leftnum": {
+   "text": "1/2",
+   "screen": [
+    519,
+    47
+   ]
+  },
+  "rightnum": {
+   "text": "1/2",
+   "screen": [
+    617,
+    47
+   ]
+  }
+ }
+}
