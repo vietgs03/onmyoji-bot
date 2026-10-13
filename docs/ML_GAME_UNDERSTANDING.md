@@ -286,3 +286,41 @@ Tu ui_labeled.jsonl, cac nut ENHANCE + toa do screen (scale 1.0):
 | enhance | (1027, 59) | (1027, 581) |
 => Thay the ANCHORS gia thuyet trong tasks/enhance_soul.py bang cac so nay
 (khi da xac dinh dung layout cua man chi tiet soul).
+
+## 11. BANG DOI CHIEU MAN SOUL THAT (2026-10-13) - layout 4529/48704
+
+Da dieu huong that HOME -> Explore -> Soul Zone -> man Soul stage (Orochi).
+Tim duoc layout chuan: **4529.json va 48704.json** (giong nhau), 44 node, co text
+tieng Trung tuong ung voi nut. Day la bang vang de doi chieu.
+
+### Doi chieu text (CN trong layout) -> toa do -> OCR (EN man that)
+| Text CN | Nut | screen (layout) | OCR EN that | lech |
+|---|---|---|---|---|
+| 挑战 | btn_zhandou | (1046, 563) | Challenge (975,548) | -71,-15 |
+| 派遣 | btn_paiqian | (895, 563) | Presets (866,560) | -29,-3 |
+| 式神录 | btn_shishenlu | (761, 588) | Shikigami (768,560) | +7,-28 |
+| 自动战斗 | btn_auto | (967, 451) | Auto (693,618) | -274,+167 |
+| 奖励预览 | (label) | (452, 543) | RewardsPreview (913,177) | +461,-366 |
+
+**Ket luan:**
+- 3/5 nut khop TRONG SAI SO (nut to 84-159px, OCR +-5px, lech 3-71px = van bam trung).
+- `btn_zhandou` (挑战) = nut **Challenge**. Lech -71px nhung nut to 159x159 nen van trung.
+- `btn_auto` va `奖励预览` lech xa => chung thuoc PANEL KHAC khong hien trong layout nay
+  (panel_rightup/leftdown khac), hoac layout 4529 la bien the khac cua man.
+- => **Layout cho TOA DO DUNG, nhung phai chon dung layout cho dung bien the man.**
+
+### Sang toa do (DA XAC NHAN nhieu lan)
+```
+screen_x = canvas_x
+screen_y = 640 - canvas_y
+```
+Ap dung cho anh chup 1136x640 (crop vung game, khong gom title bar).
+
+### Y nghia tu cau hoi cua user (soul co nhieu loai + nhieu stage)
+- Man Soul co 4-5 ZONE: Orochi(42,140), Sougenbi(41,280), Himiko(42,419),
+  Sea of Eternity(41,548) - toa do OCR that.
+- Moi zone co NHIEU stage (Chapter/Floor). Stage list nam trong panel trai.
+- => Bot can: (1) chon zone theo toa do, (2) scroll tim stage theo TEN (OCR),
+  (3) bam Challenge. Toa do Challenge co the lay tu layout (btn_zhandou).
+- Layout 4529 = man stage cua MOT zone. Cac zone khac co the dung layout khac
+  hoac cung layout nhung ten zone khac -> CAN MAP rieng tung zone.
