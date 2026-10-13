@@ -1,39 +1,252 @@
 {
-  "_doc": "Toa do man HOME + menu ngang Onmyoji, lay bang OCR man THAT (2026-10-13). Dung cho bot/ML.",
-  "_meta": {
-    "source": "OCR man that, anh chup 1136x640",
-    "canvas": "1136x640",
-    "formula": "screen_x = canvas_x ; screen_y = 640 - canvas_y",
-    "verified": "2026-10-13",
-    "note": "Man HOME KHONG nam trong res.npk (da kiem chung: chi 6 file chua 'Explore', deu ko phai layout). Nen toa do HOME phai lay bang OCR, khong lay duoc tu layout NPK."
+ "_doc": "Toa do man HOME + menu ngang Onmyoji, lay bang OCR man THAT (2026-10-13). Dung cho bot/ML.",
+ "_meta": {
+  "source": "OCR man that, anh chup 1136x640",
+  "canvas": "1136x640",
+  "formula": "screen_x = canvas_x ; screen_y = 640 - canvas_y",
+  "verified": "2026-10-13",
+  "note": "Man HOME KHONG nam trong res.npk (da kiem chung: chi 6 file chua 'Explore', deu ko phai layout). Nen toa do HOME phai lay bang OCR, khong lay duoc tu layout NPK.",
+  "bottom_bar_source": "res.npk layout 43447 (LAYOUT GOC, khong phai OCR)",
+  "bottom_bar_note": "9 muc cach nhau ~104px, deu 120x120. OCR chi doc duoc 8 va lech 30-155px -> dung layout.",
+  "top_right_source": "res.npk layout 43447"
+ },
+ "home": {
+  "explore": {
+   "screen": [
+    495,
+    191
+   ],
+   "bbox": [
+    466,
+    181,
+    58,
+    20
+   ],
+   "action": "mo man Explore (co Soul Zone, Realm Raid, EVO, Chapter...)"
   },
-  "home": {
-    "explore":      {"screen": [495, 191], "bbox": [466, 181, 58, 20],  "action": "mo man Explore (co Soul Zone, Realm Raid, EVO, Chapter...)"},
-    "town":         {"screen": [501, 364], "bbox": [477, 352, 49, 25],  "action": "mo Town"},
-    "seal":         {"screen": [80, 323],  "bbox": [66, 316, 28, 15],   "action": "mo Seal"},
-    "demon_parade": {"screen": [508, 315], "bbox": [463, 306, 90, 18],  "action": "Demon Parade Up"},
-    "bonus":        {"screen": [337, 51],  "bbox": [323, 45, 28, 12],   "action": "Bonus"},
-    "event":        {"screen": [1071, 164],"bbox": [1050, 154, 40, 19], "action": "Event (cot phai)"},
-    "settings":     {"screen": [1075, 560], "action": "cuon giay goc phai duoi -> mo Settings (KHONG phai menu chinh)"},
-    "summon":       {"screen": [1022, 268], "bbox": [993, 259, 59, 18],  "action": "DANG KY: KHONG BAM khi khong co y dinh rut the", "danger": true}
+  "town": {
+   "screen": [
+    501,
+    364
+   ],
+   "bbox": [
+    477,
+    352,
+    49,
+    25
+   ],
+   "action": "mo Town"
   },
-  "bottom_bar": {
-    "_doc": "Menu ngang day man. Hien khi mo Settings hoac cac panel. y ~ 592-595.",
-    "house":     {"screen": [327, 595], "label": "House"},
-    "team":      {"screen": [406, 594], "label": "Team"},
-    "guild":     {"screen": [505, 593], "label": "Guild"},
-    "shop":      {"screen": [640, 593], "label": "Shop"},
-    "talisman":  {"screen": [740, 593], "label": "Talisman Pass"},
-    "friends":   {"screen": [800, 592], "label": "Friends"},
-    "onmyoji":   {"screen": [905, 595], "label": "Onmyoji"},
-    "shikigami": {"screen": [1004, 595], "label": "Shikigami"}
+  "seal": {
+   "screen": [
+    80,
+    323
+   ],
+   "bbox": [
+    66,
+    316,
+    28,
+    15
+   ],
+   "action": "mo Seal"
   },
-  "rules": {
-    "never_click": ["summon"],
-    "ocr_tips": [
-      "OCR FULL anh roi loc theo toa do; crop ROI nho lam OCR kem (0 ket qua).",
-      "Ten hien thi co the sai do OCR: 'FHienas'=Friends, 'Oniyoji'=Onmyoji, 'house'=House.",
-      "'Shop' va 'Talisman Pass' co the bi OCR gop thanh 'Shop& Talisman Pas'."
-    ]
+  "demon_parade": {
+   "screen": [
+    508,
+    315
+   ],
+   "bbox": [
+    463,
+    306,
+    90,
+    18
+   ],
+   "action": "Demon Parade Up"
+  },
+  "bonus": {
+   "screen": [
+    337,
+    51
+   ],
+   "bbox": [
+    323,
+    45,
+    28,
+    12
+   ],
+   "action": "Bonus"
+  },
+  "event": {
+   "screen": [
+    1071,
+    164
+   ],
+   "bbox": [
+    1050,
+    154,
+    40,
+    19
+   ],
+   "action": "Event (cot phai)"
+  },
+  "settings": {
+   "screen": [
+    1075,
+    560
+   ],
+   "action": "cuon giay goc phai duoi -> mo Settings (KHONG phai menu chinh)"
+  },
+  "summon": {
+   "screen": [
+    1022,
+    268
+   ],
+   "bbox": [
+    993,
+    259,
+    59,
+    18
+   ],
+   "action": "DANG KY: KHONG BAM khi khong co y dinh rut the",
+   "danger": true
   }
+ },
+ "bottom_bar": {
+  "_doc": "LAYOUT 43447.json trong res.npk - nguon GOC tu game, KHONG phai OCR. Node: tujianBtn/btn_yaoyue/battleNetBtn/guildBtn/shopBtn/achievementBtn/yinyangshuBtn/friendBtn/shishenluBtn. Da test bam guildBtn@(435,555) thay man doi.",
+  "_source": "res.npk layout 43447 (ban sao 33286) -> canvas y=85 -> screen y=555",
+  "collection": {
+   "screen": [
+    122,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "tujianBtn"
+  },
+  "travelers_stop": {
+   "screen": [
+    227,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "btn_yaoyue"
+  },
+  "warehouse": {
+   "screen": [
+    331,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "battleNetBtn"
+  },
+  "guild": {
+   "screen": [
+    435,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "guildBtn"
+  },
+  "shop": {
+   "screen": [
+    539,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "shopBtn"
+  },
+  "talisman_pass": {
+   "screen": [
+    644,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "achievementBtn"
+  },
+  "onmyoji": {
+   "screen": [
+    748,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "yinyangshuBtn"
+  },
+  "friends": {
+   "screen": [
+    852,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "friendBtn"
+  },
+  "shikigami": {
+   "screen": [
+    955,
+    555
+   ],
+   "size": [
+    120,
+    120
+   ],
+   "node": "shishenluBtn"
+  }
+ },
+ "rules": {
+  "never_click": [
+   "summon"
+  ],
+  "ocr_tips": [
+   "OCR FULL anh roi loc theo toa do; crop ROI nho lam OCR kem (0 ket qua).",
+   "Ten hien thi co the sai do OCR: 'FHienas'=Friends, 'Oniyoji'=Onmyoji, 'house'=House.",
+   "'Shop' va 'Talisman Pass' co the bi OCR gop thanh 'Shop& Talisman Pas'."
+  ]
+ },
+ "top_right": {
+  "_doc": "Icon goc PHAI TREN - LAY TU LAYOUT res.npk 43447 (nguon goc, khong phai OCR)",
+  "mail": {
+   "screen": [
+    1024,
+    40
+   ],
+   "size": [
+    64,
+    64
+   ],
+   "node": "mailBtn"
+  },
+  "chat": {
+   "screen": [
+    1084,
+    40
+   ],
+   "size": [
+    64,
+    64
+   ],
+   "node": "chatBtn"
+  }
+ }
 }
