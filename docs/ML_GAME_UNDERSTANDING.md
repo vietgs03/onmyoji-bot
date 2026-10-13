@@ -180,3 +180,41 @@ Da thu 4 duong, deu KHONG du de map ten sheet -> entry trong tex_res.npk:
   dung bang do tra `sign` -> ten file.
 - Duong khac: dump het `tex_res.npk` (37.4 GB, gio da DU cho vi o C con 165 GB) roi
   khop bang KICH THUOC + so sanh pixel. Nhung van nhap nhang vi 1.447 sheet la 512x512.
+
+## 8. CALIBRATION 2026-10-13 (GAME DA MO - bang chung that)
+
+### Phat hien quan trong nhat
+Game dang chay (Client PID 9708). Chup man hinh that: **1136 x 640**.
+=> **DUNG BANG design canvas trong layout NPK.** Nen:
+```
+screen_x = canvas_x            (scale = 1.0)
+screen_y = 640 - canvas_y      (lat truc Y)
+```
+**Khong can suy doan he so scale nua.** Truoc do minh doan 1.086 tu 1 diem -> SAI.
+
+### Toa do hardcode cu trong bot DA LECH
+So sanh man HOME, giua `automation/screen_graph.py` (ghi theo 1152x679) va OCR
+anh chup that hom nay (1136x640):
+
+| Nut | bot-hoc | OCR-that | lech |
+|---|---|---|---|
+| Explore | (608,192) | (495,192) | dx=-113, dy=0 |
+| Summon | (991,194) | (1018,270) | dx=+27, dy=+76 |
+| Event | (1078,195) | (1070,163) | dx=-8, dy=-32 |
+
+=> **Toa do hardcode cu KHONG con dung.** Layout NPK la nguon tin cay hon.
+
+### Con 1 diem chua giai thich
+`btnChallenge` canvas (979,91) voi scale 1.0 -> screen (979,549), khong phai
+(1063,580) da ghi trong farm_soul. Nen hoac:
+- (1063,580) la toa do tren cua so cu (1152x679), hoac
+- entry `btnChallenge` trong layout do KHONG phai nut Challenge man Soul.
+=> Can verify lai khi vao dung man Soul stage.
+
+### Da thu (that bai): tim bang ten file
+- `Documents/cloudfilesys3/bin/hash_version` = `nx3_260701_729de661e9_20260928111651`
+- `Documents/cloudfilesys3/zipres/script3.zip` (3 entry) ten file la **hash hex 16 byte**
+  (vd `51809e0ecb61db0b467a8fec389ad9`), noi dung bat dau `PC\x01\x00` (bytecode ma hoa).
+  => Thu MD5/SHA1 cua 10.462 ten da biet -> KHONG khop.
+- Van KHONG tim thay `files_hash_2_0.bin` tren dia (game dang chay van khong thay).
+- `pkgmapping.json`/`pkginfo.json` chi la bang anh xa THU MUC -> goi, khong co ten file.
