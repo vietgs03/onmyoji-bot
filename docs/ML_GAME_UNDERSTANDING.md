@@ -143,3 +143,40 @@ Da thu 4 duong, deu KHONG du de map ten sheet -> entry trong tex_res.npk:
 - Hoac tim ham hash NeoX trong `Client.exe`/`script.npk`.
 - Hoac bo qua anh sheet: dung TRUC TIEP anh chup man hinh that lam mau train
   (da co san trong bot), va dung ui_nodes.jsonl lam GROUND TRUTH toa do.
+
+## 7. DAO THEM 2026-10-13 (sau khi nen vhdx xong) - VAN CHUA NOI DUOC ANH
+
+### Da tim thay (nhung chua du)
+1. **`flathash.exe`** trong thu muc game = cong cu hash CUA CHINH NEOX. Co FNV:
+   fnv1_16, fnv1a_16, fnv1_32, fnv1a_32, fnv1_64, fnv1a_64 (khong co crc32).
+   => Da thu fnv1_32('common.png') = 2802890117 -> KHONG trung bat ky sign nao.
+   Brute-force 6 thuat toan x 13 bien the ten (co/khong duong dan, .plist/.xml/.png,
+   hoa/thuong) -> **KHONG KHOP** ca `res.npk` lan `tex_res.npk`.
+2. **`Client.exe` co `hashFileName` + `files_hash_2_0.bin`** = manifest ten file -> hash.
+   => Tim khap thu muc game: **KHONG co file `files_hash*` tren dia**. No duoc tai ve
+   luc chay (co chuoi `files_hash_2_0.bin_temp`, `download file`) -> **phai chay game**
+   moi co, hoac nam trong bo nho.
+3. `Documents/` la thu muc lam viec cua game: co `tex.npk` (4.9 GB, magic **`NXPKM`**
+   khac `NXPK`), `script.npk`, `res.npk` (2.0 GB), `resdb`, `cloudfilesys3/`.
+   `Documents/tex.npk` co 48.205 entry (khac `tex_res.npk` 82.876).
+4. **`.text` = atlas TexturePacker dang TEXT** (398 file, 370 ten): doc duoc het
+   ten sheet + kich thuoc + moi frame (xy/size/orig/offset). Rat de doc.
+   => Nhung 370 ten nay **KHONG trung** voi 709 sheet UI can (giao = 0).
+
+### Ket luan ve `sign`
+- `sign` co trong MOI entry cua moi npk, la so u32, KHONG trung giua cac entry
+  (54.718/54.718 duy nhat trong res.npk).
+- KHONG phai CRC32, KHONG phai FNV (moi bien the), KHONG phai index.
+- KHONG dung chung giua 2 kho (21 plist chua 'common.png' -> sign khong xuat hien
+  trong tex_res).
+- Plist CUNG ten sheet (`common.png`) nhung KHAC sign va KHAC kich thuoc
+  (300x300 vs 202x202) => xac nhan ten sheet bi TRUNG, khong dinh danh duy nhat.
+  => `sign` kha nang cao la hash cua DUONG DAN DAY DU (co tien to thu muc) hoac
+  hash noi bo khac, can `files_hash_2_0.bin` moi dich nguoc duoc.
+
+### Trang thai
+- **Chua lay duoc anh that.** Day la gioi han that, da thu 6 duong.
+- Duong kha thi nhat con lai: **chay game** de no tai `files_hash_2_0.bin`, roi
+  dung bang do tra `sign` -> ten file.
+- Duong khac: dump het `tex_res.npk` (37.4 GB, gio da DU cho vi o C con 165 GB) roi
+  khop bang KICH THUOC + so sanh pixel. Nhung van nhap nhang vi 1.447 sheet la 512x512.
