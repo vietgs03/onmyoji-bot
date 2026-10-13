@@ -442,3 +442,47 @@ lv1 (83,102) | lv2 (83,193) | lv3 (83,287) | lv4 (83,378) | lv5 (83,470) | lv6 (
 - `SCROLL_DOWN_DRAG = (110,120,110,580,30)` - keo dung chieu
 - `OROCHI_STAGES_AFTER_SCROLL` - toa do Lv.1..Lv.6 sau khi keo
 - `scroll_stages_down()`, `stage_after_scroll(n)`
+
+## 15. DUC MAN HOME (2026-10-13) - cho ML
+
+### Dieu quan trong: man HOME KHONG co trong res.npk
+Da quet ca 56.116 file: chi 6 file chua chuoi 'Explore', va KHONG file nao la layout
+HOME (4 file la bang dich, 1 la scene 3D 3ds Max, 1 flatbuffer).
+=> **Toa do HOME phai lay bang OCR truc tiep, khong the lay tu layout NPK.**
+Cac PANEL chuc nang (shop/soul/guild...) thi lay duoc tu layout.
+
+### Nut tren HOME (OCR that, anh 1136x640)
+| Nut | Toa do | Ghi chu |
+|---|---|---|
+| Explore | (495,191) | -> man Explore (Soul Zone, Realm Raid, EVO, Chapter...) |
+| Town | (501,364) | |
+| Seal | (80,323) | |
+| Demon Parade Up | (508,315) | |
+| Bonus | (337,51) | |
+| Event | (1071,164) | cot phai |
+| Settings | (1075,560) | **cuon giay goc phai duoi -> mo Settings**, KHONG phai menu chinh |
+| **Summon** | (1022,268) | **DANG KY: KHONG BAM** (ton tai nguyen) |
+
+### Menu ngang day man (menu chinh cua game)
+`House | Team | Guild | Shop | Talisman Pass | Friends | Onmyoji | Shikigami` @ y~592-595
+| Muc | Toa do |
+|---|---|
+| House | (327,595) |
+| Team | (406,594) |
+| Guild | (505,593) |
+| Shop | (640,593) |
+| Talisman Pass | (740,593) |
+| Friends | (800,592) |
+| Onmyoji | (905,595) |
+| Shikigami | (1004,595) |
+
+Da TEST: bam Guild @ (505,593) -> thoat Settings ve HOME. Toa do DUNG.
+
+### Da luu thanh DU LIEU CHO ML (co commit)
+- `data/ui_home.json` - toa do + nhan chuc nang + co `danger` cho tung nut
+- `automation/ui_home.py` - nap du lieu, API: `xy(area,name)`, `is_danger()`,
+  `safe_targets()` (TU DONG loai nut nguy hiem), `label()`
+
+### Nguyen tac an toan (da ma hoa trong du lieu)
+- `never_click: ["summon"]` -> `safe_targets()` khong bao gio tra ve summon.
+- Nut 'settings' (cuon giay) KHONG phai menu chinh -> dung menu ngang de dieu huong.

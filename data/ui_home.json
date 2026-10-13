@@ -1,0 +1,39 @@
+{
+  "_doc": "Toa do man HOME + menu ngang Onmyoji, lay bang OCR man THAT (2026-10-13). Dung cho bot/ML.",
+  "_meta": {
+    "source": "OCR man that, anh chup 1136x640",
+    "canvas": "1136x640",
+    "formula": "screen_x = canvas_x ; screen_y = 640 - canvas_y",
+    "verified": "2026-10-13",
+    "note": "Man HOME KHONG nam trong res.npk (da kiem chung: chi 6 file chua 'Explore', deu ko phai layout). Nen toa do HOME phai lay bang OCR, khong lay duoc tu layout NPK."
+  },
+  "home": {
+    "explore":      {"screen": [495, 191], "bbox": [466, 181, 58, 20],  "action": "mo man Explore (co Soul Zone, Realm Raid, EVO, Chapter...)"},
+    "town":         {"screen": [501, 364], "bbox": [477, 352, 49, 25],  "action": "mo Town"},
+    "seal":         {"screen": [80, 323],  "bbox": [66, 316, 28, 15],   "action": "mo Seal"},
+    "demon_parade": {"screen": [508, 315], "bbox": [463, 306, 90, 18],  "action": "Demon Parade Up"},
+    "bonus":        {"screen": [337, 51],  "bbox": [323, 45, 28, 12],   "action": "Bonus"},
+    "event":        {"screen": [1071, 164],"bbox": [1050, 154, 40, 19], "action": "Event (cot phai)"},
+    "settings":     {"screen": [1075, 560], "action": "cuon giay goc phai duoi -> mo Settings (KHONG phai menu chinh)"},
+    "summon":       {"screen": [1022, 268], "bbox": [993, 259, 59, 18],  "action": "DANG KY: KHONG BAM khi khong co y dinh rut the", "danger": true}
+  },
+  "bottom_bar": {
+    "_doc": "Menu ngang day man. Hien khi mo Settings hoac cac panel. y ~ 592-595.",
+    "house":     {"screen": [327, 595], "label": "House"},
+    "team":      {"screen": [406, 594], "label": "Team"},
+    "guild":     {"screen": [505, 593], "label": "Guild"},
+    "shop":      {"screen": [640, 593], "label": "Shop"},
+    "talisman":  {"screen": [740, 593], "label": "Talisman Pass"},
+    "friends":   {"screen": [800, 592], "label": "Friends"},
+    "onmyoji":   {"screen": [905, 595], "label": "Onmyoji"},
+    "shikigami": {"screen": [1004, 595], "label": "Shikigami"}
+  },
+  "rules": {
+    "never_click": ["summon"],
+    "ocr_tips": [
+      "OCR FULL anh roi loc theo toa do; crop ROI nho lam OCR kem (0 ket qua).",
+      "Ten hien thi co the sai do OCR: 'FHienas'=Friends, 'Oniyoji'=Onmyoji, 'house'=House.",
+      "'Shop' va 'Talisman Pass' co the bi OCR gop thanh 'Shop& Talisman Pas'."
+    ]
+  }
+}
