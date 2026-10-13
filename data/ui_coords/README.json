@@ -1,0 +1,30 @@
+{
+ "_doc": "FULL TOA DO nut UI cua Onmyoji - duc tu layout res.npk. Dung cho bot + ML.",
+ "_source": "res.npk dump -> 2189 layout Cocos widgetTree",
+ "_formula": "screen_x = canvas_x ; screen_y = 640 - canvas_y (da chung minh tren man that)",
+ "_verified": "2026-10-13: 11 gia tri doi chieu khop (Challenge, menu ngang, man nghi)",
+ "_files": {
+  "coords_all.jsonl": "1 dong/nut: layout, man, panel, name, class, text, canvas, screen, size, touch, image, features",
+  "coords_by_feature.json": "nhom theo chuc nang (tram muc)",
+  "coords_summary.json": "thong ke + top layout"
+ },
+ "features": {
+  "battle": 196,
+  "chat": 148,
+  "explore": 44,
+  "friend": 287,
+  "guild": 124,
+  "mail": 41,
+  "onmyoji": 59,
+  "reward": 459,
+  "settings": 121,
+  "shikigami": 317,
+  "shop": 104,
+  "soul": 55,
+  "summon": 25,
+  "task": 223,
+  "team": 215,
+  "warehouse": 3
+ },
+ "_note": "Man HOME/Explore/Town/Summon (canh 3D) va man nghi KHONG nam trong res.npk -> phai dung OCR (xem data/ui_home.json, data/ui_idle.json)"
+}

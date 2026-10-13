@@ -555,3 +555,45 @@ DUC TU SOURCE, khong mo bang OCR:
 - Mo bang OCR + bam thu vua cham (5 phut/man), vua de lac (bam nham mo panel khac),
   vua sai (OCR lech 30-156px).
 - Thu tu dung: tra catalog -> doc toa do -> UPLOAD 1 lan de verify, thay vi mo mo.
+
+## 18. RA FULL TOA DO - 22.178 NUT / 2.189 LAYOUT (2026-10-13)
+
+### Da ra FULL toa do tu source, khong con lam le tung man
+Tool: `research/fx/dump_all_coords.py` (chay offline 24s).
+Ket qua trong repo: `data/ui_coords/`
+| File | Noi dung |
+|---|---|
+| `coords_all.jsonl` (5.2 MB) | **1 dong/nut**: layout, man, panel, name, class, text, canvas, screen, size, touch, image, features |
+| `coords_by_feature.json` | nhom theo chuc nang |
+| `coords_summary.json` | thong ke + top layout |
+| `README.json` | nguon + cong thuc + ghi chu |
+
+**2.189 layout, 22.178 nut co toa do.**
+
+### Da VERIFY: 11 gia tri doi chieu khop 100%
+| Nut | Layout | screen | Ket qua |
+|---|---|---|---|
+| btn_zhandou (Challenge) | 4529 | (1046,563) | OK |
+| tujianBtn | 43447 | (122,555) | OK |
+| guildBtn | 43447 | (435,555) | OK |
+| shishenluBtn | 43447 | (955,555) | OK |
+| mailBtn | 43447 | (1024,40) | OK |
+| chatBtn | 43447 | (1084,40) | OK |
+| buttonExit | 46693 | (33,30) | OK |
+| buttonSetting | 46693 | (96,30) | OK |
+| buttonChat | 46693 | (158,30) | OK |
+| btnCombatTips | 46693 | (1074,588) | OK |
+| button_auto | 46693 | (56,584) | OK |
+
+### Tra cuu: `automation/ui_coords.py`
+```
+python automation/ui_coords.py --stats            # thong ke
+python automation/ui_coords.py --feature soul     # 55 nut lien quan soul
+python automation/ui_coords.py --name guildBtn    # tra theo ten nut
+python automation/ui_coords.py --layout 46693     # nut trong 1 man
+```
+API: `find(name=,layout=,feature=,text=)`, `screen('guildBtn','43447')`
+
+### Chi con thieu (phai dung OCR, khong co trong res.npk)
+- Man HOME / Explore / Town / Summon (canh 3D) -> `data/ui_home.json`
+- Man nghi (OCR=0 text) -> `data/ui_idle.json`
