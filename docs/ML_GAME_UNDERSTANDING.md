@@ -673,3 +673,48 @@ Nhuoc diem: can thu thap anh (chay bot/explorer), khong co san 82k anh.
 ### Neu muon lay anh tu source sau nay
 Huong con lai: tim ham hash NeoX trong `Client.exe` (co `hashFileName` va
 `files_hash_2_0.bin` tai luc chay) -> tra `sign` ra ten file -> noi duoc plist.
+
+## 21. GIAI MA SCRIPT.NPK + TIM BANG TI LE NGU HON (2026-10-13)
+
+### DOT PHA: giai ma duoc TOAN BO script.npk
+Tool co san `research/fx/script_dump.py` (Rotor cipher + marshal27) chay duoc:
+```
+33.900 file Python giai ma, 0 loi -> research/fx/out/py/**.py.marshal
+```
+(Python 2.7 marshal; doc bang `marshal27.load()`). Day la lan dau doc duoc logic game.
+
+### Tim thay trong code
+| File | Y nghia |
+|---|---|
+| `com/Equip.py` | logic ngự hồn |
+| `com/utils/yuhun_helpers.py` | hàm hỗ trợ |
+| `com/data/cdata_en/equip_upgrade` | bang cuong hoa |
+| `auto_yuhun_rand_attr_rate` | **ti le roll dong phu** |
+| `auto_yuhun_single_attr_rate` | ti le 1 dong |
+| `auto_yuhun_suit_attr_rate` | ti le theo bo |
+| `auto_yuhun_const` | hang so |
+
+### NHUNG: cac file nay chi la WRAPPER
+Vi du `equip_upgrade.py` chi chua:
+```
+names: [bindict, BindictProxy, game3d, taggeddict, TD, data, bin_data, equip_upgrade_orig]
+```
+=> Du lieu THAT nam trong file **bin_data** rieng, khong phai trong script.
+
+### Da tim bin_data o MOI noi - KHONG CO
+- Quet 9 kho NPK (res/script/func1/func2/qmodel/model1/liudao/scene1/scene2):
+  **0 entry** chua ten bang ti le.
+- Quet `Documents/` (moi file): khong co.
+=> Ket luan: **bang ti le duoc TAI TU SERVER luc chay**, khong nam tren dia.
+
+### Y nghia
+- Logic game (Equip.py, yuhun_helpers.py) thi doc duoc tu script.npk.
+- Nhung DU LIEU (ti le, bang cuong hoa) nam o server -> khong lay duoc bang cach doc file.
+- Muon co ti le THAT: phai (a) bat `EnableYuhunAlgoLog` de engine in ra, hoac
+  (b) bat goi mang khi game tai bang, hoac (c) dung wiki (da co trong data/fandom).
+
+### Viec con lai (can account + game chay)
+Ban de nghi cap account de test API. Huong di:
+1. Kiem tra game co Python console/driver de goi API khong (khong can account).
+2. Neu co: goi `auto_yuhun_*` de doc bang + `Node.getWorldPosition` lay toa do that.
+3. Neu khong: bat log `EnableYuhunAlgoLog` xem engine tu in gi.
