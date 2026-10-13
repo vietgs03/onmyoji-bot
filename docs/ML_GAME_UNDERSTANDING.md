@@ -324,3 +324,44 @@ Ap dung cho anh chup 1136x640 (crop vung game, khong gom title bar).
   (3) bam Challenge. Toa do Challenge co the lay tu layout (btn_zhandou).
 - Layout 4529 = man stage cua MOT zone. Cac zone khac co the dung layout khac
   hoac cung layout nhung ten zone khac -> CAN MAP rieng tung zone.
+
+## 12. SUA TOA DO OROCHI (2026-10-13) - CO DIEU CHINH TRUNG THUC
+
+### Dinh chinh: minh da noi QUA ve toa do Challenge
+| | gia tri | nam trong nut? |
+|---|---|---|
+| Nut challenge (layout 4529) | tam (1046,563) rect (967,484,159,159) | - |
+| Toa do MOI | (1046,563) | True (tam nut - chuan nhat) |
+| Toa do CU | (1063,580) | **True** (van bam trung) |
+
+=> O tin truoc minh noi "con so cu SAI 88px" -> dung la lech 88px NHUNG vi nut to
+159x159 nen **van bam trung**. Toa do cu KHONG lam hong farm_soul.
+Da sua thanh (1046,563) cho chuan, nhung khong phai loi nghiem trong.
+
+### Loi NGHIEM TRONG that su: CHON ZONE
+Code cu trong `tasks/run.py` gia dinh 4 zone **xep ngang**:
+```
+_ZONE_X = {"orochi": 200, "sougenbi": 460, "fallen sun": 740, ...}
+agent.click(zx, 250)
+```
+Nhung man Soul that: 4 zone **xep DOC ben trai** (OCR 2026-10-13):
+```
+Orochi (42,140) | Sougenbi (41,280) | Himiko (42,419) | Sea of Eternity (41,548)
+```
+=> Click (200,250) trung vao KHOANG TRONG giua cac zone -> **khong chon duoc zone**.
+    Day moi la loi lam farm_soul khong the chay dung.
+
+### Da sua + TEST THAT
+Sua thanh click theo tam zone (60,140),(60,280),(60,419),(60,548).
+Test live: bam (60,140) -> man doi thanh man stage Orochi
+(thay 'OROCHI GF', 'TheMaidens', '0/500', '2076/8000', 'Rewards Preview').
+=> **XAC NHAN SUA DUNG.**
+
+### File moi: research/fx/soul_orochi.py
+Chua toa do zone + nut man Orochi lay tu layout, kem ham `contains()` de tu kiem tra
+(tam OCR co nam trong rect nut khong). Dung lam nguon duy nhat cho toa do soul.
+
+### Ghi chu phuong phap (rut ra)
+- Nut trong game TO (84-159px). OCR doc CHU, tam chu KHONG trung tam nut.
+- Muon kiem khop: kiem tam chu co NAM TRONG rect nut, KHONG so tam voi tam.
+- Zone: OCR tra ve toa do tam chu -> click lech phai ~18px cho an toan.

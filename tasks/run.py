@@ -111,11 +111,15 @@ SOUL_ZONES = ("Orochi", "Sougenbi", "Himiko", "Fallen Sun", "Sea of Eternity")
 # Layout man Soul/<zone>: cot trai = danh sach stage (scroll duoc),
 # nut Challenge goc phai duoi, vung battle/reward sau do.
 _STAGE_COL = (95, 120, 185, 560)     # ROI cot trai chua ten stage (x,y,w,h)
-_CHALLENGE_XY = (1063, 580)          # nut Challenge
+# --- TOA DO (cap nhat 2026-10-13 tu LAYOUT NPK, da VERIFY tren man that) ---
+# Nguon: research/fx/soul_orochi.py
+#   Anh chup game = 1136x640 = canvas design -> screen_x = canvas_x ; screen_y = 640 - canvas_y
+#   Da kiem chung: nut Challenge trong layout chua OCR 'Challenge' tam (975,548).
+_CHALLENGE_XY = (1046, 563)          # btn_zhandou (挑战) - VERIFY: chua OCR Challenge
 _DRAG = (145, 500, 145, 180, 16)     # keo scroll list xuong (khong chiem chuot)
 # Duong di da-verify-live HOME -> Soul (graph nav chua map sau tier-2 nen di truc tiep)
-_HOME_EXPLORE_XY = (608, 192)        # nut Explore tren HOME
-_EXPLORE_SOUL_XY = (175, 620)        # icon 'Soul' footer trong man Explore
+_HOME_EXPLORE_XY = (495, 192)        # nut Explore tren HOME - OCR that 2026-10-13
+_EXPLORE_SOUL_XY = (465, 256)        # 'Soul Zone' trong man Explore - OCR that
 
 
 def _ensure_soul_screen(agent, max_try=4):
@@ -207,14 +211,16 @@ def farm_soul(agent: Agent, stage: str = "Moan", zone: str = "Orochi",
         print("  ! khong toi duoc man Soul"); return False
     print("  da o man Soul (thay Orochi/Eternity).")
 
-    # 2) chon zone: man Soul co 4 panel doc xep ngang. Click vao panel zone.
-    #    OCR ten zone bi xoay doc -> dung VI TRI panel (da verify live).
-    _ZONE_X = {"orochi": 200, "sougenbi": 460, "fallen sun": 740,
-               "fallensun": 740, "sea of eternity": 1040, "eternity": 1040,
-               "himiko": 740}
-    zx = _ZONE_X.get(zone.lower().replace("  ", " "), 200)
-    agent.click(zx, 250); time.sleep(2.5)
-    print(f"  da chon zone {zone} @ x={zx}")
+    # 2) chon zone: man Soul co 4 zone xep DOC ben trai (khong phai ngang!)
+    #    Toa do tu OCR that 2026-10-13 (anh 1136x640), xem research/fx/soul_orochi.py
+    #    Zone khac nhau ro -> click thang vao tam ten zone.
+    _ZONE_XY = {"orochi": (60, 140), "sougenbi": (60, 280),
+                "himiko": (60, 419), "sea of eternity": (60, 548),
+                "eternity": (60, 548)}
+    zk = zone.lower().replace("  ", " ").strip()
+    zxy = _ZONE_XY.get(zk) or _ZONE_XY.get(zk.split()[0] if zk else "", (60, 140))
+    agent.click(*zxy); time.sleep(2.5)
+    print(f"  da chon zone {zone} @ {zxy}")
     # neu chua vao (van o man chon zone) -> thu lai 1 lan
     from ocr import ocr_words
     toks = " ".join(str(t).lower() for t, *_ in ocr_words(agent.shot(), roi=(0, 40, 1152, 200), min_conf=40))
