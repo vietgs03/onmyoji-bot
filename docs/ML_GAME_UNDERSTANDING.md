@@ -114,3 +114,32 @@ Buoc tiep: doc 709 sheet do tu `tex_res.npk`, roi cat anh theo `rect` -> PNG.
   Truoc do nen chay script bang user thuong; script tu hien UAC.
 - LUU Y da rut ra: `diskpart` BAT BUOC quyen Admin. Loi that gap phai:
   "Program 'diskpart.exe' failed to run: requires elevation".
+
+
+## 6. GIOI HAN THAT: chua lay duoc anh sheet (2026-10-13)
+
+Da thu 4 duong, deu KHONG du de map ten sheet -> entry trong tex_res.npk:
+
+1. **NPK khong luu ten file.** `tex_res.jsonl` chi co `sign` (u32), `off`, `clen`,
+   `olen`, `flag`, `kind`. Khong co ten.
+2. **CRC32 khong khop.** Thu crc32('common.png')/lower/backslash vs `sign` -> khong trung.
+   => NeoX dung ham hash rieng (chua biet).
+3. **`sign` KHONG dung chung giua 2 kho.** Lay 21 plist co `common.png`, so `sign`
+   voi tex_res -> 0 trung. Nen khong the noi 2 kho bang sign.
+4. **Ten sheet bi TRUNG.** 8.675 plist nhung chi 7.499 ten khac nhau. Vi du
+   `template.png` xuat hien 250 lan, `vx.png` 89 lan. Va **403 ten co nhieu kich thuoc
+   khac nhau** (vd `common.png` la 300x300 o plist 1546 nhung 202x202 o plist 4359)
+   => trung ten that su, khong the lay theo ten.
+
+### He qua
+- Truong `sheet`/`rect` trong `ui_nodes.jsonl` la THONG TIN TU PLIST (dung), nhung
+  **chua noi duoc voi entry nao trong tex_res.npk**. Chua co anh that.
+- Muon lay anh phai giai bai toan hash ten -> entry cua NeoX (hoac dump het tex_res
+  roi khop theo kich thuoc/pixel).
+
+### Huong di tiep (chua lam)
+- Dump het `tex_res.npk` (37.4 GB) roi khop sheet theo KICH THUOC + so sanh pixel
+  voi mong doi tu plist (w*h*4 cho KTX RGBA8).
+- Hoac tim ham hash NeoX trong `Client.exe`/`script.npk`.
+- Hoac bo qua anh sheet: dung TRUC TIEP anh chup man hinh that lam mau train
+  (da co san trong bot), va dung ui_nodes.jsonl lam GROUND TRUTH toa do.
