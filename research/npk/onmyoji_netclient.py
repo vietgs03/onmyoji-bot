@@ -173,13 +173,51 @@ def short(v, n=300):
     return s if len(s) <= n else s[:n] + "..."
 
 
+def _parse_calls(s):
+    """Parse --calls. Each token is either `method` (params={}) or
+    `method={<json params>}` (JSON must start with { or [)."""
+    out = []
+    for tok in s.split(","):
+        tok = tok.strip()
+        if not tok:
+            continue
+        i = tok.find("=")
+        if i != -1 and i + 1 < len(tok) and tok[i + 1] in "{[":
+            name = tok[:i]
+            params = json.loads(tok[i + 1:])
+        else:
+            name = tok
+            params = {}
+        out.append((name, params))
+    return out
+
+
+def _find_key(o, key):
+    """Recursively find first value under `key` in a decoded msgpack/bson tree."""
+    if isinstance(o, dict):
+        for k, v in o.items():
+            if k == key:
+                return v
+            r = _find_key(v, key)
+            if r is not None:
+                return r
+    elif isinstance(o, list):
+        for v in o:
+            r = _find_key(v, key)
+            if r is not None:
+                return r
+    return None
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--session", default=os.path.join(DATA, "session.json"))
-    ap.add_argument("--calls", default="get_server_time,ping_message")
+    ap.add_argument("--calls", default="get_server_time,ping_message",
+                    help="comma list; each `method` or `method={<json params>}`")
     ap.add_argument("--listen", type=float, default=8.0)
     ap.add_argument("--dump", default="", help="ghi toan bo message nhan duoc ra file JSONL")
     ap.add_argument("--only", default="", help="chi in cac method co chuoi nay")
+    ap.add_argument("--reward-out", default="", help="append *_attack_return rewardId (JSONL)")
     a = ap.parse_args()
     s = json.load(open(a.session))
     entityid = bytes.fromhex(s["entityid"])
@@ -201,10 +239,11 @@ def main():
     if not connected:
         print("[!] resume failed"); return 1
 
-    for m in [x for x in a.calls.split(",") if x]:
-        print("[>] call", m)
-        c.entity_call(entityid, m, {})
+    for m, p in _parse_calls(a.calls):
+        print("[>] call", m, short(p, 200))
+        c.entity_call(entityid, m, p)
 
+    rewardf = open(a.reward_out, "a") if a.reward_out else None
     t_end = time.time() + a.listen
     seen = {}
     dumpf = open(a.dump, "w") if a.dump else None
@@ -221,10 +260,19 @@ def main():
                 dumpf.write(json.dumps({"method": mn, "params": p}, default=lambda o: o.hex() if isinstance(o, bytes) else (o.data.hex() if hasattr(o, "data") else str(o)), ensure_ascii=False) + "\n")
             if (not a.only or a.only in mn) and seen[mn] <= 2:
                 print("[<] entity_message %-40s %s" % (mn, short(p, 240)))
+            if "attack_return" in mn:
+                rid = _find_key(p, "rewardId")
+                if rid is not None:
+                    print("[REWARD] %s rewardId=%r" % (mn, rid))
+                    if rewardf:
+                        rewardf.write(json.dumps({"method": mn, "rewardId": rid, "params": p}, default=lambda o: o.hex() if isinstance(o, bytes) else (o.data.hex() if hasattr(o, "data") else str(o)), ensure_ascii=False) + "\n")
+                        rewardf.flush()
         elif name == "reg_md5_index":
             c.dyn_index[msg.index] = c.md5_names.get(msg.md5, msg.md5.hex())
         else:
             print("[<]", name, short(msg, 200))
+    if rewardf:
+        rewardf.close()
     print("[*] message counts:", dict(sorted(seen.items(), key=lambda x: -x[1])[:25]))
     return 0
 

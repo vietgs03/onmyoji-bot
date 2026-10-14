@@ -5,6 +5,11 @@ CACH DUNG
   -Mode findname -Name DATA_EQUIP_RANDOM_ATTR
       Tim PyString co noi dung Name, roi tim cac dict entry co key = string do,
       in ra value (type name + dia chi).
+  -Mode finddump -Name <key> [-All]
+      Nhu findname nhung dump luon GIA TRI cua entry do ra JSON (1 JSON sach).
+      Khong lap DictItems nen khong bi garble nhu modattr. Mac dinh chi dump ung
+      vien dau; them -All de dump tat ca entry trung ten. Vi du:
+        .\pyobj_dump.ps1 -Mode finddump -Name dungeon_reward -Depth 8 -Out dungeon_reward.json
   -Mode dump -Addr 0x... -Depth 8 -Out file.json
       Serialize object tai Addr ra JSON (dict/list/tuple/int/long/float/str/unicode/bool/None,
       module -> __dict__, object khac -> {"__type__":name,"__addr__":...,"__dict__":...}).
@@ -27,7 +32,8 @@ param(
   [string]$Addr = "",
   [int]$Depth = 12,
   [int]$MaxItems = 200000,
-  [string]$Out = ""
+  [string]$Out = "",
+  [switch]$All = $false
 )
 $ErrorActionPreference = "Stop"
 Add-Type -TypeDefinition @'
@@ -475,6 +481,19 @@ switch($Mode){
   "findname" {
     $vals = Find-Values $Name
     foreach($x in $vals){ Write-Host ("entry@0x{0:X} -> 0x{1:X} ({2})" -f $x[0],$x[1],$x[2]) }
+  }
+  # Tim key bang ten (nhu findname) roi dump GIA TRI cua entry do ra JSON.
+  # Cu lap giong findname (khong dung DictItems) nen khong bi garble nhu modattr.
+  # Mac dinh chi dump ung vien DAU (tranh output to); them -All de dump tat ca.
+  "finddump" {
+    $vals = Find-Values $Name
+    $done = $false
+    foreach($x in $vals){
+      if($done -and -not $All){ continue }
+      Write-Host ("entry@0x{0:X} -> 0x{1:X} ({2})" -f $x[0],$x[1],$x[2])
+      Write-Json ([PO]::Dump($x[1],$Depth))
+      if(-not $All){ $done = $true }
+    }
   }
   "dump" {
     $a=[Convert]::ToInt64($Addr.Replace("0x",""),16)
