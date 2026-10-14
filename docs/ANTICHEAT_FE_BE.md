@@ -64,3 +64,20 @@ Nguồn: `userinfomgr/ScreenRecordMgr.py`, `scenemembers/*FbScene.py`, `ClientEn
 **Bản global/EN:** không bị tắt (khác `battle_check`). Chỉ khác là `isp` để trống.
 
 **Ý nghĩa:** auto-click spam 1 điểm cho ra 50 toạ độ giống hệt nhau, dấu hiệu rất rõ. Client chỉ thu thập. Xử lý (bỏ qua, cảnh cáo, khóa theo đợt) nằm ở server, không xác định được từ client.
+
+## 6. Cơ chế liên quan trực tiếp tới việc gọi API
+| Cơ chế | FE/BE | Chi tiết | Đã quan sát? |
+|---|---|---|---|
+| **Xác thực phiên** | BE | `connect_server`: `deviceid` + `entityid` + `authmsg` (sid + vân tay thiết bị). Kết quả `RECONNECT_FAILED`/`FORBIDDEN`/`MAX_CONNECTION` | Có. Phiên cũ bị trả `RECONNECT_FAILED (3)` sau ~17 phút |
+| **Mỗi avatar một kết nối** | BE | Resume từ ngoài đá kết nối của game | Có. Game thoát khi script vào |
+| **Giới hạn RPC/giây** | FE (+BE?) | `_record_and_alert_abnormal_rpc` chặn ở client. Không rõ server có ngưỡng riêng không | Không bị chặn ở 0.35s/lần |
+| **Thống kê RPC theo giờ** | FE→BE | `_add_rpc_log` → `ClientLogger.send_rpc_counter_log` (chỉ server 15048/15049) | Không áp dụng cho server 18501 |
+| **Challenge qua hotfix** | BE | 3 `dynamic_hotfix` mỗi phiên, đòi `globals_hps_cb` + `fix_hero_data{nonce, md5}` | Có, 12/12 lần. Script không trả lời |
+| **Đồng bộ giờ server + check tăng tốc** | BE→FE→BE | `onSyncServerTime{t}` → `check_player_acc` → `log_check_player_acc` | Có `onSyncServerTime` mỗi phiên |
+| **Bảng index method** | BE | `reg_md5_index` / `Md5OrIndex`: client mới phải gửi md5 rồi nhận index. Một method lạ hoặc không có trong bản client thật có thể bị server ghi nhận | Server trả `reg_md5_index` cho các method đã gọi |
+| **Version script** | BE | `authmsg.script_version/res_version/patch_version`, `ping_message{new_ver}` | Server gửi `new_ver='1.8.13.2423310'` |
+| **Khoá bảo vệ / mật khẩu cấp 2** | BE | `safety_lock(err)`: 1 sai mật khẩu, 2 cần nhập, **3 = chưa đặt khoá** (reset state), 4 xoá mật khẩu local | `err=3` mỗi phiên (tài khoản không bật khoá) |
+| **Đóng băng / phạt (Guarantee)** | BE | `freeze_update{num, typ, stage, start/end_time, bail_*}`. Đây là **hệ thống phạt vi phạm**: hạn chế tính năng, có thể nộp *bail* bằng ngọc (勾玉保释金) để gỡ sớm, nếu tái phạm trong thời hạn thì mất tiền bảo lãnh | Có, `num=0, typ=0, stage=0`: **tài khoản đang không bị phạt** |
+| **Yidun token** | FE→BE | gắn vào một số request HTTP nhạy cảm (pick card) | Không gọi |
+
+**Ghi chú:** `freeze_update` là chỉ báo trực tiếp nhất xem server có xử phạt hay không. Sau 5 lần resume và ~230 RPC, giá trị vẫn là 0.
