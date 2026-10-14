@@ -26,11 +26,22 @@ REWARD_TBL = json.load(open(os.path.join(DATA, "cdata", "cdata_en.daily_task_rew
 REWARD_TBL = REWARD_TBL.get("data", REWARD_TBL)
 # Uu tien bang nguong day du dump tu RAM runtime (co truong 'score')
 _full = os.path.join(DATA, "daily_task_reward_full.json")
+_raw = os.path.join(DATA, "cdata_raw", "com.data.cdata_en.daily_task_reward.bin_data_content.bin")
 if os.path.exists(_full):
     try:
         REWARD_TBL = json.load(open(_full))
     except Exception:
         pass
+elif os.path.exists(_raw):
+    # blob bindict goc (dump tu RAM) co du truong score: 20/40/60/80/100
+    try:
+        sys.path.insert(0, os.path.join(os.path.dirname(os.path.abspath(__file__)), "bindict"))
+        from parser import BindictParser
+        _r = BindictParser()._parse_dictionary_data(open(_raw, "rb").read())
+        if _r:
+            REWARD_TBL = {str(k): dict(v) for k, v in _r.items()}
+    except Exception as e:
+        print("[!] khong parse duoc bang nguong goc:", e)
 
 
 def load_state():
@@ -59,22 +70,27 @@ def plan(state):
     todo = []
     score = state.get("day_active_score", 0)
     claimed = set(str(x) for x in _unwrap(state.get("daily_task_reward", [])))
+    # diem tung nhiem vu server da ghi nhan nhung chua nhan.
+    # Theo DailyTaskLogic.check_can_get_scores: daily_task[tid]['score'] > 0 => co diem cho nhan.
+    pending = 0
+    for tid, tdata in (state.get("daily_task") or {}).items():
+        if isinstance(tdata, dict) and int(tdata.get("score") or 0) > 0:
+            pending += int(tdata["score"])
+            todo.append(("daily_task_commit_score", {"id": int(tid)},
+                         "nhiem vu %s xong (cur_times=%s), cho nhan %s diem"
+                         % (tid, tdata.get("cur_times"), tdata["score"])))
+    # Moc ruong: tinh tren diem SAU KHI nhan diem cho -> phai chay lai sau khi commit_score
+    after = score + pending
     for rid, info in REWARD_TBL.items():
-        if not isinstance(info, dict):
+        if not isinstance(info, dict) or info.get("score") is None or rid in claimed:
             continue
-        need = info.get("score")
-        if need is None:
-            continue
-        if rid in claimed:
-            continue
+        need = info["score"]
         if score >= need:
             todo.append(("daily_task_commit_reward", {"rid": int(rid)},
                          "score %d >= nguong %d, moc %s chua nhan" % (score, need, rid)))
-    # diem tung nhiem vu da hoan thanh nhung chua commit score
-    for tid, tdata in state.get("daily_task", {}).items():
-        if isinstance(tdata, dict) and tdata.get("finished") and not tdata.get("score_taken"):
-            todo.append(("daily_task_commit_score", {"id": int(tid)},
-                         "nhiem vu %s hoan thanh, chua nhan diem" % tid))
+        elif after >= need:
+            print("  (moc %s nguong %d se du sau khi nhan diem: %d -> %d; chay lai sau)"
+                  % (rid, need, score, after))
     return todo
 
 

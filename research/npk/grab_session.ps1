@@ -46,11 +46,16 @@ $sess=[ordered]@{ gate_ip=$gate[0]; gate_port=[int]$gate[1]; deviceid=$fulluid; 
 $ps=[ordered]@{}
 $cur=A $pd "currency"
 $ps.day_active_score=0
+# id tien te diem hoat dong: doc tu module.dailytask.DailyTaskLogic.DAY_ACTIVE_SCORE (ban EN = 900505)
+$scoreId=900505
+$dtl=A $sm "module.dailytask.DailyTaskLogic"
+if($dtl){ $v=A ([PO]::InstDict($dtl)) "DAY_ACTIVE_SCORE"; if($v){ $scoreId=[PO]::I32($v+16) } }
+$ps.day_active_score_id=$scoreId
 if($cur){
   # CurrencyDict la subclass cua dict -> Dump khong doc duoc, doc thang bang DictItems (key int)
   foreach($kv in [PO]::DictItems($cur)){
     if([PO]::TypeName([PO]::Q($kv[0]+8)) -ne "int"){ continue }
-    if([PO]::I32($kv[0]+16) -eq 900005){ $ps.day_active_score=[PO]::I32($kv[1]+16) }
+    if([PO]::I32($kv[0]+16) -eq $scoreId){ $ps.day_active_score=[PO]::I32($kv[1]+16) }
   }
 }
 $dtr=A $pd "daily_task_reward"; $ps.daily_task_reward=@(); if($dtr){ $ps.daily_task_reward=@([PO]::Dump($dtr,2) | ConvertFrom-Json) }
