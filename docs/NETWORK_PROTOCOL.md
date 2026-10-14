@@ -63,9 +63,11 @@ Một số API đọc tiêu biểu đã có trả lời:
 | RPC | Reply | Nội dung |
 |---|---|---|
 | `friend_get_list` | `friend_get_list_return` | danh sách bạn, black list |
-| `guild_get_info` / `get_guild_members` | `*_cb` | thông tin và thành viên guild |
+| `guild_get_info` / `get_guild_members` | `guild_info_cb` / `get_guild_members_cb` | thông tin và thành viên guild |
 | `get_shop_items` / `get_shop_sort_info` | `*_cb` | hàng trong shop, xếp hạng skin bán chạy |
 | `mission_get_list` | `*_cb` | nhiệm vụ |
 | `damage_boss_get_info` / `_rank` | `*_callback` | điểm và hạng boss |
 | `dojo_member_self_win_info` | `*_cb` | thống kê đạo trường |
 | `ask_pet_dress_record` | `*_cb` | trang phục pet đã sở hữu |
+
+**Cách hiểu yêu cầu "rà toàn bộ api với session key mới lấy được":** (1) liệt kê đầy đủ các API có trong client, (2) dùng phiên vừa lấy để gọi thật diện rộng. Bước gọi thật chỉ áp dụng cho API **đọc, không tham số**, để tránh thay đổi tài khoản. API ghi và API cần tham số mới được liệt kê, chưa gọi.
