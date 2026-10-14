@@ -80,3 +80,27 @@ Một số API đọc tiêu biểu đã có trả lời:
 - **Danh sách sweep** (147 API) được soát lại bằng regex các từ nguy hiểm (answer/commit/finish/choose/vote/play/share/trigger/sync/apply...). 11 tên bị gắn cờ, xem tay thì đều là truy vấn `get_*`/`search_*`/`req_sync_*_info` gọi với `{}`.
 - **Kiểm theo hành vi:** trong toàn bộ message server gửi trong lúc sweep, không có message cộng hoặc trừ vật phẩm, tiền hay phần thưởng. Chỉ có `entity_param_update` sau `get_share_boss_info` (dấu thời gian `ffmld` / bộ đếm hiển thị `ffmt`) và sau `get_recommend_yuyue_guild` (`src`). Đây là trạng thái UI/cooldown, không phải tài nguyên.
 - **Kết luận:** độ chính xác của heuristic khoảng 90–95%, đủ để chọn ứng viên. Trước khi gọi bất kỳ API nào ngoài danh sách đã kiểm, vẫn phải xem tay hàm gọi.
+
+## Sweep đợt 2 (2026-10-14 17:18)
+- Danh sách: `research/npk/build_sweep2.py` → 72 API đọc, không tham số, chưa có ở đợt 1.
+  - Ngoài lọc theo tên, còn **đọc thân hàm gọi và callback**. Trong game này `get_` hay nghĩa là *nhận*: `cx_get_free_blue`, `guild_get_day_funds_bonus`, `cclive_get_red` mở `RookieRewardPanel`. `try_get_discount` random lại mức giảm giá. Bộ lọc loại 14 API như vậy.
+  - Loại tay: `get_event_from_set` (Quick Done dùng để lấy sự kiện Fengmo, tiêu lượt `EVENING_EVENT_COUNT`), mã mời bạn.
+- `api_sweep.py` giờ từ chối chạy nếu `session` trong `authmsg.bson` khác `sid` hiện tại (tránh resume bằng token cũ).
+- Kết quả: resume OK (`connect_reply 2`), **34/72 trả lời**, độ trễ 0.3–4.7s. Gap 0.35s + jitter 0–0.4s.
+- Kiểm hành vi: 110 message server gửi, không có message cộng/trừ vật phẩm hay tiền. `guild_ask_day_funds_bonus_cb` chỉ trả `{err_code:0, donate:40}` (xem số quỹ, không nhận). `safety_lock {err:3}` và 3 `dynamic_hotfix` là đợt sync bình thường lúc vào phiên (đã thấy ở đợt 1).
+- Game client hiện "Your account has been logged in elsewhere" như dự kiến (mỗi avatar một kết nối). Bấm OK để đăng nhập lại.
+- Tổng phủ API đọc không tham số: 147 + 72 = 219 đã gọi, 115 trả lời. Còn ~220 API đọc **cần tham số** (uid, id sự kiện...), phải lấy giá trị thật từ RAM/đợt sync trước khi gọi.
+
+| RPC | Reply | Nội dung |
+|---|---|---|
+| `mail_on_get_mails_list` | `_return` | `mails, cnt, err` |
+| `friend_get_relations` | `_callback` | quan hệ, độ thân, tương tác |
+| `guild_get_online_members` | `_cb` | thành viên guild online |
+| `get_dinner_info` | `_cb` | tiệc guild, số lần trong tuần |
+| `gym_query_defend_level` / `gym_get_defends_as_leader` | `_cb` | phòng thủ Guild Realm |
+| `gym_query_season_stamps` | `_cb` | mốc thời gian mùa |
+| `auto_yuhun_query_progresst` | `_cb` | tiến độ auto ngự hồn `err, remain, p` |
+| `hero_batch_get_cult_num_rate` | `_cb` | tỉ lệ nuôi thức thần |
+| `free_fengmo_get_calendar` | `_cb` | lịch Fengmo miễn phí |
+| `damage_boss_get_world_damage` | `_callback` | tổng sát thương boss thế giới |
+| `ns_get_month_card_count` | `_cb` | số thẻ tháng |
