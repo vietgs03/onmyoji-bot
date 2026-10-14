@@ -109,3 +109,9 @@ Một ngự hồn +15 có 9 phần tử trong `rattr` (`getEuipLuckyAttr` kiểm
 - Decompile bằng uncompyle6 sau khi đổi opcode: **116,800/117,138 hàm top-level (99.7%)** dịch thành công. 338 hàm lỗi, chủ yếu là Cython `stringsource` (293) và timeout (31). 3,549/3,624 file compile lại được bằng Python 2.
 - Kết quả cục bộ (gitignored): `research/npk/src_decompiled/` (63MB) và `research/npk/data/cdata/` (121MB).
 - Hạn chế: code `<module>` và thân class đã bị giải phóng sau khi import, nên mỗi file chỉ gồm danh sách hàm (method xuất dưới dạng hàm có `self`), không có lệnh import hay khai báo class.
+
+## 6. Kiểm chứng (chạy thật, không chỉ đọc)
+- **So với decompiler cũ:** bản cũ có 202,254/1,760,828 dòng chứa `?` (11.5%). Bản mới chỉ có 54 dòng chứa token `?` trên 1,352,475 dòng.
+- **Round-trip:** lấy 471 hàm stdlib đã dịch, biên dịch lại bằng CPython 2.7 rồi so chuỗi opcode với bản gốc. 428 hàm (90.9%) giống hệt, 0 lỗi cú pháp (`research/npk/verify_roundtrip.py`).
+- **Chạy hàm roll đã dịch với bảng thật** (`research/npk/verify_roll.py`): 60,000 lần `allitem_randEquipAttr(6, 4, 0)` cho ra 240,000 dòng.
+  Mỗi loại dòng chiếm 0.0905–0.0913 (kỳ vọng 1/11 = 0.0909). Có 0 bộ 4 dòng bị trùng. Hệ số nằm trong khoảng 0.8000–1.0000. Khớp với mục 3.
