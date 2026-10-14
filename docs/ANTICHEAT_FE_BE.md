@@ -46,3 +46,21 @@ Hệ quả: lần cuối không đủ dữ liệu để kết luận việc giã
 - Với game NetEase, **nguồn sự thật nằm ở server**. Bộ anti-cheat client có thể được cập nhật bất cứ lúc nào bằng code Python đẩy qua `dynamic_hotfix`, nên chỉ phân tích tĩnh là chưa đủ: phải bắt message lúc chạy.
 - Challenge kiểu nonce (`fix_hero_data` với `uid` ngẫu nhiên mỗi phiên) cùng việc đổi tên thuộc tính ngẫu nhiên là hai kỹ thuật chống tool bên ngoài phổ biến, đáng học.
 - Thông tin máy trong `authmsg` cho phép server gắn phiên với thiết bị. Dùng lại authmsg từ chỗ khác vẫn mang dấu vân tay của máy gốc.
+
+## 5. Chi tiết: ghi toạ độ chạm `ScreenRecordMgr` → `log_screen_click`
+Nguồn: `userinfomgr/ScreenRecordMgr.py`, `scenemembers/*FbScene.py`, `ClientEntities.screen_click_log_by_strength_start`.
+
+**Bật ghi khi:**
+- clear đủ số lần trong ngày (bộ đếm `screen_record_dict`, reset mỗi ngày ở `LocalRefreshManager.refresh_screen_record`):
+  `rune_fb_num`=10 (Soul Zone/Ngự hồn, gồm cả Hun13), `awake_fb_num`=10, `goren_fb_num`=10, `yaoqi_fb_num`=10, `bgyx_num`=10, `tansuo_fb_num`=40
+- server gọi RPC `screen_click_log_by_strength_start` (gắn với mốc tiêu 150 thể lực, log `copy='cost_enegy150'`). Chưa thấy server gọi trong 5 lần bắt message.
+- tạo nhân vật mới (`onCreateRole`)
+- `game3d.is_outlaw_device()` (root/jailbreak/thiết bị không chuẩn): ghi liên tục, cứ 900s gửi 1 lần
+
+**Ghi gì:** toạ độ (x, y) của 50 lần chạm kết thúc tiếp theo trên layer phủ toàn màn hình (`setSwallowTouches(False)`, nên chạm vẫn đi tiếp vào game). Đủ 50 thì gửi 1 lần rồi tắt. **Không ghi thời điểm** từng lần chạm.
+
+**Payload:** `cur_time, ip, device_model, device_width/height, os_name/os_ver, mac_addr, isp (chỉ CN: IMSI), total_cost (tổng nạp), network, app_channel, app_ver, server, account_id, old_accountid, role_id, invite_code, role_name, past_copy, past_tasks, copy, root, check_msg='{x:y,...}', click_type`.
+
+**Bản global/EN:** không bị tắt (khác `battle_check`). Chỉ khác là `isp` để trống.
+
+**Ý nghĩa:** auto-click spam 1 điểm cho ra 50 toạ độ giống hệt nhau, dấu hiệu rất rõ. Client chỉ thu thập. Xử lý (bỏ qua, cảnh cáo, khóa theo đợt) nằm ở server, không xác định được từ client.
