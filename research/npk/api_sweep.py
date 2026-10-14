@@ -5,7 +5,7 @@ Dung: .venv-net/bin/python api_sweep.py [--list data/sweep_list.json] [--gap 0.3
 Output: data/api_sweep_results.json  {method: {"replies": [{"method","params"}], "latency": s}}
         data/api_sweep_all.jsonl      moi entity_message nhan duoc (kem method dang cho)
 """
-import argparse, json, os, sys, time
+import argparse, json, os, random, sys, time
 
 sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
 from onmyoji_netclient import DATA, GateConn, _msg  # noqa
@@ -20,8 +20,12 @@ def main():
     ap.add_argument("--list", default=os.path.join(DATA, "sweep_list.json"))
     ap.add_argument("--gap", type=float, default=0.35)
     ap.add_argument("--tail", type=float, default=6.0)
+    ap.add_argument("--jitter", type=float, default=0.0, help="cong them uniform(0, jitter) giay moi lan goi")
+    ap.add_argument("--out", default="api_sweep", help="tien to file ket qua trong data/")
+    ap.add_argument("--limit", type=int, default=0)
     a = ap.parse_args()
     methods = json.load(open(a.list))
+    if a.limit: methods = methods[:a.limit]
     s = json.load(open(os.path.join(DATA, "session.json")))
     eid = bytes.fromhex(s["entityid"])
     auth = open(os.path.join(DATA, s["authmsg_file"]), "rb").read()
@@ -39,7 +43,7 @@ def main():
     if rtype != 2:
         print("resume failed (session expired?)"); return 1
 
-    allf = open(os.path.join(DATA, "api_sweep_all.jsonl"), "w")
+    allf = open(os.path.join(DATA, a.out + "_all.jsonl"), "w")
     results = {m: {"replies": [], "latency": None} for m in methods}
     sent_at = {}
     pending = list(methods)
@@ -73,13 +77,13 @@ def main():
         current = m
         sent_at[m] = time.time()
         c.entity_call(eid, m, {})
-        drain(time.time() + a.gap)
+        drain(time.time() + a.gap + random.uniform(0, a.jitter))
         if i % 20 == 0:
             print("JCODE_PROGRESS {\"current\":%d,\"total\":%d,\"unit\":\"rpc\"}" % (i, len(pending)), flush=True)
     current = None
     drain(time.time() + a.tail)
     allf.close()
-    json.dump(results, open(os.path.join(DATA, "api_sweep_results.json"), "w"), ensure_ascii=False, indent=1, default=jdefault)
+    json.dump(results, open(os.path.join(DATA, a.out + "_results.json"), "w"), ensure_ascii=False, indent=1, default=jdefault)
     ok = [m for m, r in results.items() if r["replies"]]
     print("called %d, replied %d, silent %d" % (len(methods), len(ok), len(methods) - len(ok)))
     return 0
