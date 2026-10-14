@@ -1,7 +1,10 @@
 #!/usr/bin/env python3
-"""ui_coords.py - Tra cuu FULL TOA DO nut UI tu data/ui_coords/coords_all.jsonl.
+"""ui_coords.py - Tra cuu FULL TOA DO nut UI tu data/ui_coords/.
 
-Du lieu: 2.189 layout, 22.178 nut, duc tu layout res.npk (nguon goc).
+Hai nguon (cung duc tu res.npk, khong can game chay):
+  coords_all.jsonl  : 2.189 layout JSON (Cocos 1.x widgetTree), 22.178 nut
+  coords_csb.jsonl  : 4.348 layout CSB full-screen (Cocos Studio 2.x FlatBuffers),
+                      layout id dang 'csb:<id>'. Sinh bang research/fx/csb_index.py
 Cong thuc: screen_x = canvas_x ; screen_y = 640 - canvas_y.
 
 API:
@@ -23,6 +26,7 @@ import os
 
 ROOT = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 PATH = os.path.join(ROOT, "data", "ui_coords", "coords_all.jsonl")
+PATH_CSB = os.path.join(ROOT, "data", "ui_coords", "coords_csb.jsonl")
 _C = None
 
 
@@ -30,11 +34,14 @@ def load(path=None):
     global _C
     if _C is None or path:
         rows = []
-        with open(path or PATH, encoding="utf-8") as f:
-            for line in f:
-                line = line.strip()
-                if line:
-                    rows.append(json.loads(line))
+        for p in ([path] if path else [PATH, PATH_CSB]):
+            if not os.path.exists(p):
+                continue
+            with open(p, encoding="utf-8") as f:
+                for line in f:
+                    line = line.strip()
+                    if line:
+                        rows.append(json.loads(line))
         _C = rows
     return _C
 
@@ -91,8 +98,8 @@ def main():
     rows = find(a.name, a.layout, a.feature, a.text, a.man)
     print(f"{len(rows)} nut khop")
     for r in rows[: a.limit]:
-        print(f"  {r['layout']:>6s} {str(r['name'])[:22]:22s} screen={str(r['screen']):12s} "
-              f"{str(r['size']):12s} {','.join(r.get('features') or [])}")
+        print(f"  {r['layout']:>10s} {str(r['name'])[:22]:22s} screen={str(r['screen']):12s} "
+              f"{str(r['size']):12s} {(r.get('text') or '')[:12]:12s} {','.join(r.get('features') or [])}")
 
 
 if __name__ == "__main__":

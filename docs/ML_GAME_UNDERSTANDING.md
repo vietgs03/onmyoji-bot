@@ -755,3 +755,54 @@ deu tro ve cung `0x7FF698B557B0` -> KHONG phai du lieu.
 `mem_dict.ps1`: tu ob_sval lui 36 byte ra doi tuong str -> quet heap tim con tro
 (me_key) -> doc me_value @+8 -> in kieu + gia tri. Neu value la dict -> in cac cap
 key/value de lay SO TI LE.
+
+## 23. MO KHOA 11.809 FILE CSB (Cocos Studio 2.x FlatBuffers) - 2026-10-14
+
+### Phat hien
+Truoc day chi parse **2.189 layout JSON** (Cocos 1.x widgetTree). Nhung `res.npk` con
+**11.809 file `*.bin_14000000`** = CSB nhi phan (magic version `2.1.0.0`), chinh la thu
+source game nap bang `CSLoader.createNodeWithFlatBuffersFile('ui_new/...csb')`.
+Muc 9 truoc day goi nhom nay la "flatbuffer" va bo qua. Nay da doc duoc het.
+
+### Tool
+- `research/fx/csb_parse.py` - doc CSB khong can flatc, theo schema
+  `CSParseBinary_generated.h` (cocos2d-x v3). Moi node: name, class, pos, anchor, size,
+  scale, visible, touch, text, image(path+plist), sub-csb (ProjectNode), callback.
+- `research/fx/csb_index.py` - quet het (~10s) -> `research/fx/out/csb/`
+  (`csb_index.jsonl`, `csb_nodes.jsonl` 325k node) + ban gon cho bot
+  `data/ui_coords/coords_csb.jsonl`.
+- `automation/ui_coords.py` nap ca 2 nguon. Layout CSB co id dang `csb:<id>`.
+
+### So lieu
+| | JSON cu | CSB moi |
+|---|---|---|
+| Layout | 2.189 | 11.809 (4.348 full-screen 1136x640) |
+| Node co ten | ~93k | 325.164 |
+| Nut/text xuat cho bot | 22.178 | 67.714 |
+Tong tra cuu hien tai: **89.892 nut / 6.430 layout**.
+
+### Khac biet he toa do (quan trong, de sai)
+- JSON 1.x: vi tri con tinh tu DIEM ANCHOR cua cha.
+- CSB 2.x: vi tri con tinh tu GOC DUOI-TRAI cua cha, va nhan voi scale cua cha.
+Cong thuc trong `csb_parse.walk()`:
+```
+anchor_world = parent_bottomleft + pos * parent_world_scale
+bottomleft   = anchor_world - anchor * size * world_scale
+screen       = (center_x, 640 - center_y)
+```
+
+### Verify
+Tim cap layout JSON <-> CSB cua CUNG man (trung >70% ten node), so toa do man hinh:
+- Node co chuoi cha GIONG HET o 2 nguon: **172/176 khop <=2px**.
+  4 node lech 5-24px deu nam duoi node co scale != 1 (0.96, 0.9): ban JSON cu
+  (`btnpos.flatten`) KHONG nhan scale cua cha cho con, ban CSB co nhan -> CSB dung hon.
+- Tong the 2.064/3.015 (68%) khop; phan con lai lech theo CUM ca nhanh (vd (0,-482),
+  (128,-29)) = 2 phien ban layout khac nhau cua cung man, khong phai loi tinh.
+
+### Gioi han con lai
+- CSB con (item, node_*.csb, root khong phai 1136x640) chi co toa do TUONG DOI noi
+  no duoc gan (ProjectNode / code). Chua ghep cay cha-con giua cac CSB (`sub_csb` da
+  ghi trong `csb_index.jsonl` de lam buoc sau).
+- File CSB khong mang ten goc (`ui_new/xxx.csb`), chi suy thu muc tu plist (`man`).
+- HOME / Explore / Town van la canh 3D -> van can OCR / template nhu muc 15.
+- Node an mac dinh (visible=false) bi loai khoi ban cho bot; code co the bat len luc chay.
