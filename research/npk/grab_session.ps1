@@ -40,3 +40,31 @@ Write-Host ("gate={0}:{1} entity={2} sid={3} fulluid={4} authmsg={5}" -f $gate[0
 if($auth){ [IO.File]::WriteAllBytes("$OUT\authmsg.bson",$auth) }
 $sess=[ordered]@{ gate_ip=$gate[0]; gate_port=[int]$gate[1]; deviceid=$fulluid; entityid=(($oid|%{$_.ToString('x2')}) -join ''); sid=$sid; authmsg_file="authmsg.bson"; pubkey=($pub -split ' ')[0..1] -join ' '; has_fresh_authmsg=[bool]$auth }
 [IO.File]::WriteAllText("$OUT\session.json",($sess | ConvertTo-Json),(New-Object Text.UTF8Encoding $false))
+
+# --- player_state.json: trang thai daily (chi doc, cho daily_claim.py dry-run) ---
+$ps=[ordered]@{}
+$cur=A $pd "currency"
+if($cur){ $cd=([PO]::Dump($cur,2) | ConvertFrom-Json); $ps.currency_raw=$cd; try { $ps.day_active_score=[int]($cd."900005") } catch {} }
+$dtr=A $pd "daily_task_reward"; if($dtr){ $ps.daily_task_reward=([PO]::Dump($dtr,2) | ConvertFrom-Json) }
+$dt=A $pd "daily_task"; if($dt){ $ps.daily_task=([PO]::Dump($dt,3) | ConvertFrom-Json) }
+$dte=A $pd "daily_task_event"; if($dte){ $ps.daily_task_event=([PO]::Dump($dte,3) | ConvertFrom-Json) }
+[IO.File]::WriteAllText("$OUT\player_state.json",($ps | ConvertTo-Json -Depth 8),(New-Object Text.UTF8Encoding $false))
+Write-Host ("player_state: day_active_score={0} claimed={1}" -f $ps.day_active_score,(@($ps.daily_task_reward).Count))
+
+# --- Bang nguong diem moc daily (DATA_DAILY_TASK_REWARD) tu RAM runtime ---
+# tim DynamicConfigData -> .DATA_DAILY_TASK_REWARD -> BindictProxy -> bindict cache
+$dcd=A $sm "DynamicConfigData"
+if($dcd){
+  $dcdd=[PO]::InstDict($dcd); $tbl=$null
+  if($dcdd){ $tbl=A $dcdd "DATA_DAILY_TASK_REWARD" }
+  if($tbl){
+    $tn=[PO]::TypeName([PO]::Q($tbl+8))
+    $data=$null
+    if($tn -eq "BindictProxy"){ $bd=[PO]::DictGetStr([PO]::InstDict($tbl),"bindict_data"); if($bd){ $data=[PO]::Q($bd+24) } }
+    elseif($tn -like "bindict*"){ $data=[PO]::Q($tbl+24) }
+    if($data -and [PO]::TypeName([PO]::Q($data+8)) -eq "dict"){
+      [IO.File]::WriteAllText("$OUT\daily_task_reward_full.json",[PO]::Dump($data,4),(New-Object Text.UTF8Encoding $false))
+      Write-Host "daily_task_reward_full.json written"
+    }
+  }
+}
