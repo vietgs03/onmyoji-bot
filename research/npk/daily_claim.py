@@ -41,11 +41,24 @@ def load_state():
     return json.load(open(p))
 
 
+def _unwrap(v):
+    """PowerShell 5 ConvertTo-Json boc mang thanh {"value":[...],"Count":n}; go lop boc."""
+    if isinstance(v, dict) and set(v) == {"value", "Count"}:
+        return _unwrap(v["value"])
+    if isinstance(v, list):
+        out = []
+        for x in v:
+            x = _unwrap(x)
+            out.extend(x if isinstance(x, list) else [x])
+        return out
+    return v
+
+
 def plan(state):
     """Tra ve danh sach (rpc, params, ly_do) cho cac moc da du dieu kien va chua nhan."""
     todo = []
     score = state.get("day_active_score", 0)
-    claimed = set(str(x) for x in state.get("daily_task_reward", []))
+    claimed = set(str(x) for x in _unwrap(state.get("daily_task_reward", [])))
     for rid, info in REWARD_TBL.items():
         if not isinstance(info, dict):
             continue
