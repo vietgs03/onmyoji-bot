@@ -40,3 +40,32 @@ Client Python độc lập, không cần game, đã làm được:
 - Phiên (`sid`) hết hạn hoặc đổi khi game đăng nhập lại. Mỗi lần cần đọc lại `authmsg` và `entityid` từ RAM (xem `pyobj_dump.ps1`: `GateClient.reconnect_data`).
 - `session.json` và `authmsg.bson` chứa token tài khoản. Chúng nằm trong `research/` (gitignored), **không commit**.
 - Chỉ gọi RPC đọc dữ liệu. Gọi RPC thay đổi trạng thái (mua bán, cường hóa...) từ client ngoài có rủi ro bị phát hiện (`_record_and_alert_abnormal_rpc`, log `rpc_counter`) và bị khóa tài khoản.
+
+## Rà toàn bộ API (2026-10-14 06:18)
+
+### Danh mục RPC (`research/npk/rpc_catalog.py` → `data/rpc_catalog.json`)
+- Trích được **2,193 RPC client→server** từ code đã dịch (`callServerMethod`/`callServerMethodDeprecated`), kèm file, hàm gọi, tên tham số và mẫu tham số.
+- 1,449 RPC có handler `<tên>_cb` phía client.
+- Phân loại theo tên (heuristic): 423 đọc, 1,146 ghi, 624 không rõ.
+- Nhóm lớn nhất: `get_*` 218, `guild_*` 106, `lbs_*` 98, `sg_*` 66, `team_*` 59, `friend_*` 50, `gamble_*` 49, `hero_*` 44, `gym_*` 44, `equip_*` 21.
+- Danh sách này chưa đủ: thiếu RPC gọi qua tên động (`'{}.open_box'.format(...)`, hằng `RpcConst.*`) và RPC của hàm bị lỗi decompile.
+- Client tự chặn khi một method bị gọi quá ngưỡng `RPC_PER_SEC_TIMES_RELEASE_THRESHOLD` lần mỗi giây (`_record_and_alert_abnormal_rpc`). Sweep chỉ gọi mỗi method 1 lần, cách nhau 0.35s.
+
+### Sweep bằng phiên đã lấy (`research/npk/api_sweep.py`)
+- Chọn 147 RPC thuộc loại đọc và **không cần tham số**, đã loại các tên chứa reward/buy/use/send/claim/draw/battle/set/...
+- Kết quả: resume thành công, **81/147 trả lời** với `<tên>_cb`/`_callback`/`_return`, độ trễ 0.23–0.56s.
+- 66 RPC im lặng: chủ yếu là sự kiện đã đóng (`asura_*`, `sg_*`, `luna_*`, `gongyi_*`), cần tham số thật, hoặc server trả về dưới tên khác (`get_season_resume` → `get_dojo_resume_cb`, `get_cur_guess_info` → `update_player_guess_data`).
+- Tên method trả về giải được 173/174 qua từ điển md5.
+- Phiên đã resume 4 lần liên tiếp trong khoảng 7 phút mà vẫn hợp lệ (sid không đổi khi chỉ reconnect).
+- Dữ liệu chi tiết nằm trong `data/api_sweep_results.json`, `data/api_sweep_all.jsonl`, `data/api_sweep_table.md` (gitignored vì chứa dữ liệu tài khoản).
+
+Một số API đọc tiêu biểu đã có trả lời:
+| RPC | Reply | Nội dung |
+|---|---|---|
+| `friend_get_list` | `friend_get_list_return` | danh sách bạn, black list |
+| `guild_get_info` / `get_guild_members` | `*_cb` | thông tin và thành viên guild |
+| `get_shop_items` / `get_shop_sort_info` | `*_cb` | hàng trong shop, xếp hạng skin bán chạy |
+| `mission_get_list` | `*_cb` | nhiệm vụ |
+| `damage_boss_get_info` / `_rank` | `*_callback` | điểm và hạng boss |
+| `dojo_member_self_win_info` | `*_cb` | thống kê đạo trường |
+| `ask_pet_dress_record` | `*_cb` | trang phục pet đã sở hữu |
