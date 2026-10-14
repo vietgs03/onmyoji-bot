@@ -1,44 +1,47 @@
 #!/usr/bin/env bash
-# run_full_decompile.sh - Pipeline tu dong dump + dich toan bo code object Onmyoji.
+# run_full_decompile.sh - Dump RAM game Onmyoji + dich toan bo code + dump toan bo data table.
 #
 # CACH DUNG:
-#   ./run_full_decompile.sh            # dump tu game + dich tat ca
-#   ./run_full_decompile.sh --decompile-only   # chi dich file dump da co
+#   ./scripts/run_full_decompile.sh              # dump code + data tu game, roi decompile
+#   ./scripts/run_full_decompile.sh --offline    # chi decompile/merge tu file dump da co
 #
 # YEU CAU:
-#   - Game Onmyoji dang chay (process Client.exe)
-#   - Docker image py27rotor (python:2.7 + rotor)
-#   - WSL voi powershell.exe truy cap duoc
+#   - Game Onmyoji (client.exe) dang chay, da vao sanh (de nap het module)
+#   - Docker image py27unc (python:2.7 + uncompyle6 3.9.2), xem research/npk/README
+#   - WSL co powershell.exe
+#
+# OUTPUT:
+#   /tmp/py27/work/codes.jsonl          code object day du (bytecode+consts+lnotab)
+#   /tmp/py27/work/src/**.py            source da decompile (uncompyle6 sau khi remap opcode)
+#   research/npk/data/cdata/*.json      toan bo data table com.data.* (bindict/taggeddict)
 set -euo pipefail
-
 cd "$(dirname "$0")/.."
 export DOCKER_CONFIG="${DOCKER_CONFIG:-/tmp/dockercfg}"
 mkdir -p "$DOCKER_CONFIG"; [ -f "$DOCKER_CONFIG/config.json" ] || echo '{}' > "$DOCKER_CONFIG/config.json"
 
 WORK=/tmp/py27/work
-DUMP="$WORK/all_code_dump.txt"
+NPK=research/npk
+WINNPK='\\wsl.localhost\Ubuntu\home\viethx\onmyoji-bot\research\npk'
 mkdir -p "$WORK"
-cp research/npk/opmap_ne.py research/npk/decompiler3.py "$WORK/"
+cp "$NPK/decompile_all.py" "$NPK/dc.env" "$WORK/"
+cp "$NPK/opmap_ne_learned.json" "$WORK/opmap_final2.json"
 
-# --- Buoc 1: dump tu RAM game ---
-if [ "${1:-}" != "--decompile-only" ]; then
-    echo "=== [1/2] Dump code object tu RAM game ==="
-    timeout 1800 powershell.exe -NoProfile -ExecutionPolicy Bypass -File \
-        "\\\\wsl.localhost\\Ubuntu\\home\\viethx\\onmyoji-bot\\research\\npk\\dump_all_code.ps1" \
-        2>&1 | tail -5
-    if [ ! -f "$DUMP" ]; then
-        echo "LOI: dump that bai (game chua chay?)"; exit 1
-    fi
-    wc -l "$DUMP"
-else
-    [ -f "$DUMP" ] || { echo "LOI: khong co $DUMP"; exit 1; }
+if [ "${1:-}" != "--offline" ]; then
+  echo "=== [1/4] Dump code objects ==="
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$WINNPK\\pyobj_dump.ps1" \
+      -Mode codes -Out '\\wsl.localhost\Ubuntu\tmp\py27\work\codes.jsonl' | tail -2
+
+  echo "=== [2/4] Tim sys.modules + dump data tables ==="
+  SM=$(powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$WINNPK\\pyobj_dump.ps1" \
+      -Mode sysmodules -Name com.data.cdata_en.equip_attr | grep -o 'sys.modules = 0x[0-9A-F]*' | awk '{print $3}')
+  echo "sys.modules=$SM"
+  powershell.exe -NoProfile -ExecutionPolicy Bypass -File "$WINNPK\\pyobj_dump.ps1" \
+      -Mode bindicts -Addr "$SM" -Out "$WINNPK\\data\\cdata_raw" | tail -2
 fi
 
-# --- Buoc 2: dich toan bo ---
-echo "=== [2/2] Dich toan bo $(wc -l < "$DUMP") dong dump ==="
-docker run --rm -v "$WORK:/work" -w /work py27rotor python2 decompiler3.py /work/all_code_dump.txt \
-    > research/npk/notes/decompiled_ALL.py 2>/dev/null
+echo "=== [3/4] Merge data tables -> $NPK/data/cdata ==="
+python3 "$NPK/merge_cdata.py" "$NPK/data/cdata_raw" "$NPK/data/cdata"
 
-echo "=== Ket qua ==="
-echo "  Ham da dich: $(grep -c '^def ' research/npk/notes/decompiled_ALL.py)"
-echo "  File: research/npk/notes/decompiled_ALL.py"
+echo "=== [4/4] Decompile (uncompyle6) -> $WORK/src ==="
+docker run --rm -u "$(id -u):$(id -g)" --env-file "$WORK/dc.env" -v "$WORK:/work" py27unc \
+    python2 /work/decompile_all.py /work/src
