@@ -29,7 +29,13 @@ def main():
     s = json.load(open(os.path.join(DATA, "session.json")))
     eid = bytes.fromhex(s["entityid"])
     auth = open(os.path.join(DATA, s["authmsg_file"]), "rb").read()
-
+    # Chan resume bang authmsg cu: sid trong authmsg phai khop sid hien tai cua game
+    # (tranh gui connect_server sai -> RECONNECT_FAILED, de lai dau vet dang nhap loi)
+    import bson
+    a_sid = bson.decode(auth).get("session")
+    if a_sid != s.get("sid"):
+        print("[!] authmsg.bson cu (sid khac phien hien tai). Chay grab_session.ps1 sau khi game tu reconnect.")
+        return 1
     c = GateConn(s["gate_ip"], s["gate_port"], s["pubkey"], verbose=False)
     c.handshake()
     c.resume(s["deviceid"], eid, auth)
