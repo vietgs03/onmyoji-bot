@@ -81,3 +81,25 @@ Nguồn: `userinfomgr/ScreenRecordMgr.py`, `scenemembers/*FbScene.py`, `ClientEn
 | **Yidun token** | FE→BE | gắn vào một số request HTTP nhạy cảm (pick card) | Không gọi |
 
 **Ghi chú:** `freeze_update` là chỉ báo trực tiếp nhất xem server có xử phạt hay không. Sau 5 lần resume và ~230 RPC, giá trị vẫn là 0.
+
+## 7. Có API nào thao túng drop rate (Soul Zone / Realm Raid) không?
+**Không có.** Drop do server quyết định **trước khi trận bắt đầu**. Client chỉ nhận một `rewardId` (khoá phần thưởng đã định sẵn) rồi gửi lại khi báo kết quả.
+
+**Soul Zone (Ngự hồn: `RuneFbScene`, `DungeonMember`, `TeamMember`):**
+- Tầng thường: `dungeon_rune_attack{dungeon_id}` → server trả `dungeon_rune_attack_return(dungeon_id, rewardId, copy_skin_id)`.
+  Sau trận: `dungeon_rune_attack_result{dungeon_id, result{..., rewardId}, heroes, buff=getSkinBuffList()}`.
+- Tầng 10–13: `team_create_rune_single{battleid, gkclass, gkid, gkparams{delay, filterData}}` → server trả `team_battle_start_cb(other, battleparams, rewardid, allRewards)`. Trận do server điều phối qua `team_battle_message` / `s_team_battle_message_cb`.
+- Hun13: `hun13_logic.start_battle{dungeon_id, gkparams}`.
+- `gkparams['reward_flag']=1` chỉ được đặt với `battleid==102` (cờ nhận thưởng của một chế độ), không phải hệ số drop.
+- `buff` gửi kèm là danh sách buff skin. Server so với dữ liệu sở hữu thật.
+
+**Realm Raid (Kết giới đột phá: `JieJieMember`):**
+- `lbs_onAttack{avater_id, cardid, itemid}` → server trả `onAttackTargeterInfo(attackinfo, rewardId, reward)`: **phần thưởng đã có ngay khi bắt đầu đánh**.
+- Sau trận: `lbs_onAttackResult{iswin, rewardId}`.
+- Quái thế giới: `lbs_onAttackMonster` → `lbs_onAttackMonsterRe(..., rewardId, reward)` → `lbs_onAttackMonsterEnd{cardid, dmg, isworld, iswin, rewardid}`.
+
+**Không tham số nào điều khiển drop:** trong 2,193 RPC không có tham số kiểu drop_rate/luck/multiplier cho các chế độ này. Các RPC có chữ `drop`/`luck` (`gamble_*luck_bag*`, `*_set_drop_hero`) đều thuộc gacha hoặc sự kiện (chọn shikigami cho túi may mắn), không phải tỉ lệ rơi ngự hồn.
+
+**Thứ client gửi lên nhưng server kiểm tra:** `iswin`/`result` (server so với trận đã tự mô phỏng hoặc điều phối), `rewardId` (khoá do server cấp, gửi id khác thì không khớp), `heroes`/`buff` (server có dữ liệu sở hữu thật). Đây là mô hình "server-authoritative": drop và chỉ số ngự hồn rơi ra (`rattr`, xem `YUHUN_SUBSTAT_ROLL.md`) đều sinh ở server.
+
+**Tỉ lệ thật nằm ở đâu:** bảng drop từng tầng không có trong client (chỉ có `allRewards` để hiển thị). Nằm ở server.
