@@ -1,0 +1,42 @@
+# Giao thức mạng Onmyoji (gate RPC), đọc từ code đã dịch và RAM
+
+Ngày 2026-10-14. Đã kiểm chứng bằng client độc lập `research/npk/onmyoji_netclient.py`.
+
+## Tóm tắt
+Không có HTTP API hay api key cố định. Gameplay đi qua **TCP tới gate** (ví dụ `34.48.52.40:10075`, lấy từ `mini_server_list_*.txt`):
+
+```
+frame      = u32le(len(pb)+2) | u16le(method_index) | protobuf        (lib/mobilerpc/RpcChannel.py)
+client->sv = RC4( zlib_sync_flush(frame) )                             (ConnectionDecorator.send_data)
+sv->client = zlib_decompress( RC4(data) )                              (stream liên tục)
+```
+
+1. `seed_request(Void)` → `seed_reply(SessionSeed{seed})`
+2. Client tạo `session_key = SHA1(rand32)`, gửi `session_key(EncryptString{ RSA-OAEP(loginpubkey, SessionKey{pad, key, seed, pad}) })`.
+   `loginpubkey` là RSA-2048 nằm trong `Globals.loginpubkey`. Sau bước này bật RC4(session_key) cho cả hai chiều. Server trả `session_key_ok`.
+3. `connect_server(ConnectServerRequest)`:
+   - `NEW_CONNECTION` khi đăng nhập mới. Sau đó account entity gọi `login_with_sdk` bằng token SDK NetEase.
+   - `RE_CONNECTION` khi vào lại phiên, gửi kèm `deviceid`, `entityid` (ObjectId 12 byte của avatar) và `authmsg` (BSON loginInfo, chứa `session` = sid, `sauth_str`, thông tin máy...).
+   - Sau `connect_server` bật zlib. Server trả `connect_reply(RECONNECT_SUCCEEDED=2)`.
+4. RPC gameplay: `entity_message(EntityMessage{id, method=Md5OrIndex{md5(tên) | index}, parameters=msgpack(dict)})`.
+   Server trả về `<tên>_cb` theo cùng định dạng. ObjectId trong msgpack là ExtType 42.
+
+Schema protobuf (`common.proto`, `client_gate.proto`) được lấy nguyên dạng `FileDescriptorProto` từ RAM, nằm trong `research/npk/data/proto/*.desc`.
+
+## Đã chạy thử (2026-10-14 06:13)
+Client Python độc lập, không cần game, đã làm được:
+- Bắt tay RSA + RC4 → server trả `session_key_ok`.
+- Resume phiên bằng authmsg đọc từ RAM → `RECONNECT_SUCCEEDED`.
+- Nhận ~60 message đồng bộ lúc vào phiên: inventory, cấu hình ngự hồn (`req_equip_set_info_cb`), rank (`get_rank_score_cb`), guild...
+- Gọi các API chỉ đọc và nhận được trả lời:
+  - `ping_message` → `{'new_ver': '1.8.13.2423310', 't': ...}`
+  - `get_shop_sort_info` → `get_shop_sort_info_cb {'skin_buy': [[id, count], ...]}`
+  - `get_guild_task_info` → `{'guild_lv': 8, 'construction': 382500, ...}`
+  - `get_guild_achieve_info` → `{'achieve_lv': 9, ...}`
+- Tên method được giải từ md5 bằng từ điển 214k định danh lấy từ code (`data/md5_names.json`). 54/55 method resolve được.
+
+## Lưu ý quan trọng
+- **Mỗi avatar chỉ có một kết nối.** Khi client ngoài resume vào, server đá kết nối của game. Trong lần chạy thử, game client đã thoát sau khi bị chiếm phiên.
+- Phiên (`sid`) hết hạn hoặc đổi khi game đăng nhập lại. Mỗi lần cần đọc lại `authmsg` và `entityid` từ RAM (xem `pyobj_dump.ps1`: `GateClient.reconnect_data`).
+- `session.json` và `authmsg.bson` chứa token tài khoản. Chúng nằm trong `research/` (gitignored), **không commit**.
+- Chỉ gọi RPC đọc dữ liệu. Gọi RPC thay đổi trạng thái (mua bán, cường hóa...) từ client ngoài có rủi ro bị phát hiện (`_record_and_alert_abnormal_rpc`, log `rpc_counter`) và bị khóa tài khoản.

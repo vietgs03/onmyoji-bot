@@ -119,6 +119,18 @@ public class PO {
         });
         return res;
     }
+    public static List<long> FindBytes(byte[] pat, int maxHits){
+        var res=new List<long>();
+        Scan((p,c,n)=>{
+            if(res.Count>=maxHits) return;
+            for(int i=0;i+pat.Length<=n;i++){
+                if(c[i]!=pat[0]) continue;
+                bool ok=true; for(int k=1;k<pat.Length;k++) if(c[i+k]!=pat[k]){ok=false;break;}
+                if(ok){ res.Add(p+i); if(res.Count>=maxHits) return; }
+            }
+        });
+        return res;
+    }
     delegate void ChunkFn(long p,byte[] c,int n);
     static void Scan(ChunkFn fn){
         long addr=0; MBI m; int sz=Marshal.SizeOf(typeof(MBI));
