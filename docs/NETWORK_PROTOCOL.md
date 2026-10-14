@@ -71,3 +71,12 @@ Một số API đọc tiêu biểu đã có trả lời:
 | `ask_pet_dress_record` | `*_cb` | trang phục pet đã sở hữu |
 
 **Cách hiểu yêu cầu "rà toàn bộ api với session key mới lấy được":** (1) liệt kê đầy đủ các API có trong client, (2) dùng phiên vừa lấy để gọi thật diện rộng. Bước gọi thật chỉ áp dụng cho API **đọc, không tham số**, để tránh thay đổi tài khoản. API ghi và API cần tham số mới được liệt kê, chưa gọi.
+
+### Kiểm chứng phân loại đọc/ghi
+- **Mẫu ngẫu nhiên gán nhãn tay** (seed 7, 20 API mỗi lớp, dựa trên tên, tham số và hàm gọi):
+  - Lớp `read` đúng 19/20. Sai: `dojo_answer_big_data`, thực chất là gửi đáp án.
+  - Lớp `write` đúng 18/20. Sai: `precheck_lbs_set_hero2other`, `lbs_request_all_JJCard_compose_plan`, thực chất là truy vấn.
+  - Lớp `unknown` thực tế gồm 16 ghi và 4 đọc, nên không được coi `unknown` là an toàn.
+- **Danh sách sweep** (147 API) được soát lại bằng regex các từ nguy hiểm (answer/commit/finish/choose/vote/play/share/trigger/sync/apply...). 11 tên bị gắn cờ, xem tay thì đều là truy vấn `get_*`/`search_*`/`req_sync_*_info` gọi với `{}`.
+- **Kiểm theo hành vi:** trong toàn bộ message server gửi trong lúc sweep, không có message cộng hoặc trừ vật phẩm, tiền hay phần thưởng. Chỉ có `entity_param_update` sau `get_share_boss_info` (dấu thời gian `ffmld` / bộ đếm hiển thị `ffmt`) và sau `get_recommend_yuyue_guild` (`src`). Đây là trạng thái UI/cooldown, không phải tài nguyên.
+- **Kết luận:** độ chính xác của heuristic khoảng 90–95%, đủ để chọn ứng viên. Trước khi gọi bất kỳ API nào ngoài danh sách đã kiểm, vẫn phải xem tay hàm gọi.
