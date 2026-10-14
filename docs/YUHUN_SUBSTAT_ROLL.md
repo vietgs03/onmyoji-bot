@@ -102,3 +102,10 @@ Một ngự hồn +15 có 9 phần tử trong `rattr` (`getEuipLuckyAttr` kiểm
   Phía client có mô phỏng ngược (`BatchStrengthenLogic.calc_attr_hit_cnt`) dùng đúng `EQUIP_UPGRADE.rattr_id` và `rang_rand` như trên, nên khả năng cao server dùng cùng bảng. Đây là suy luận, chưa có bằng chứng trực tiếp.
 - Client không cho biết quy tắc "khi cường hóa, nếu chưa đủ 4 dòng thì thêm dòng mới, ngược lại thì nâng một dòng đã có". Quy tắc này nằm ở server.
 - 6 blob bindict khác không parse được (skin_fx, skill_ai, ...). Chúng không liên quan đến ngự hồn.
+
+## 5. Kết quả pipeline (2026-10-14)
+- Dump RAM: 128,814 code object (`pyobj_dump.ps1 -Mode codes`), 698 module `com.data.*` (`-Mode bindicts`).
+- Opcode map NetEase được học tự động bằng cách so 1,921 hàm stdlib với CPython 2.7: 102 opcode khớp 100%, 12 opcode hiếm suy ra từ ngữ cảnh. Ngưỡng `HAVE_ARGUMENT=90` vẫn như bản gốc. File: `research/npk/opmap_ne_learned.json`.
+- Decompile bằng uncompyle6 sau khi đổi opcode: **116,800/117,138 hàm top-level (99.7%)** dịch thành công. 338 hàm lỗi, chủ yếu là Cython `stringsource` (293) và timeout (31). 3,549/3,624 file compile lại được bằng Python 2.
+- Kết quả cục bộ (gitignored): `research/npk/src_decompiled/` (63MB) và `research/npk/data/cdata/` (121MB).
+- Hạn chế: code `<module>` và thân class đã bị giải phóng sau khi import, nên mỗi file chỉ gồm danh sách hàm (method xuất dưới dạng hàm có `self`), không có lệnh import hay khai báo class.

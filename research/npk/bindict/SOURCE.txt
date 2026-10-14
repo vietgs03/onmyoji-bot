@@ -1,0 +1,3 @@
+bindict/parser.py and bindict/hasher.py are copied from NeoXtractor-v3
+(https://github.com/hengtek/NeoXtractor-v3, core/bindict), which has no LICENSE file.
+Used here only for local research parsing of game data dumped from RAM.
