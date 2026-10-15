@@ -244,15 +244,3 @@ Mô tả/icon lấy từ `DATA_CURRENCY.data[type_map[buffType]]['func_params']`
 ### Chưa xác nhận (cần đọc RAM lúc game ở Home)
 - `buffType` chính xác (907/909 hay số khác theo bản EN), `p` (hệ số), `cd` thật của "Soul bonus".
 - Công thức nhân drop (×? / +%?) nằm ở server; client chỉ thấy `p` và `func_params`.
-
-## 3g. Soul bonus (Bonus menu ở Home) — placeholder cũ
-
-Banner thật của người dùng nằm trong **menu "Bonus" ở màn Home**, KHÔNG phải weekend_rune. Hai dòng:
-- "Evo zones grant extra materials." (còn 46 ngày)
-- "Soul bonus in Orochi zones" (còn 8 ngày)
-
-Phân biệt với các cơ chế đã xét:
-- `weekendequip_set_equip` / `weekend_rune` = chọn LOẠI ngự hồn (sự kiện cuối tuần), client chặn bằng `is_at_opentime('weekend_rune')` ở UI, RPC không tự kiểm (server kiểm?). KHÁC với banner này.
-- Guild buff 2001/2002 = tăng EXP/vàng, server áp. KHÁC.
-
-Cần tìm: cơ chế "Bonus menu ở Home" (buff tăng drop/vật liệu theo khu, có đồng hồ đếm ngày). Giả thuyết: privilege/feather buff hoặc activity "bonus" toàn cục. Chưa xác định RPC/param.
