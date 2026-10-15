@@ -35,6 +35,8 @@ Ngày: 2026-10-14. Tài khoản: acc phụ của người kiểm thử. Phạm v
 
 ### 3.3 Kiểm tra trận đấu
 - `BattleSceneBase.requestCheckBattle` (`battle_check`) **bị tắt ở bản EN** (`if LANG.isEnglish(): return`).
+- **ĐÃ KIỂM CHỨNG (2026-10-15, tài khoản dev test, có đồng ý):** gửi `dungeon_rune_attack_result{iswin:true, rewardId, heroes, buff:{}}` cho một trận **không hề đánh** (chỉ gọi `dungeon_rune_attack` lấy `rewardId` rồi gửi `result` ngay) → server **chấp nhận và phát thưởng thật** (`dungeon_client_attack_return`: ngự hồn itemId 160002 qua=2, yysExp/ssExp 286, passRewards), đồng thời `day_limit_update {'2': 1}`. Bản EN không có bước xác thực trận (mô phỏng/so khớp) tương đương `battle_check`. Đây là lỗ hổng server-side: kết quả trận do client quyết định.
+- Giới hạn 500 lượt/ngày (`day_limit_pc`) **vẫn áp cho `result`**, nên không farm vô hạn, nhưng trong 500 lượt có thể nhận thưởng không cần đánh.
 - Drop do server định trước (`rewardId`). Không có tham số điều khiển tỉ lệ rơi.
 - Không kiểm thử động bằng cách gửi kết quả trận (ngoài phạm vi, xem mục 5).
 - **Client ngoài mở được trận Soul Zone (2026-10-15).** `dungeon_rune_attack` gửi từ client ngoài được server chấp nhận: trừ stamina, cấp `rewardId`, cộng tiến độ nhiệm vụ. Không gửi `result` thì không có thưởng.

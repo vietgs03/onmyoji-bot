@@ -166,6 +166,19 @@ Kết luận: **không đo được tỉ lệ rơi từ rewardId.** Nó chỉ l�
 - **Xác nhận 10:59:** người chơi tự đánh 1 trận Orochi Lv.3 trong game (bắt đầu + `result` thắng). Đọc RAM: `PClimit = {"2": 3}` (2 → 3). Trong cả 4 file phản hồi của các lần gọi API không có `day_limit_update`. Vậy **chỉ trận hoàn tất mới được tính, gọi `dungeon_rune_attack` qua API mà không có `result` thì không tính lượt nhưng vẫn trừ stamina.**
 - Đọc nhanh không tốn stamina: resume không gọi gì (`--calls ''`) rồi xem `day_limit_pc` trong `create_entity` (netclient ghi `__create_entity__` vào `--dump`). Lưu ý resume vẫn đá game ra.
 
+### Kết quả thử trên tài khoản dev test (2026-10-15 ~13:20)
+
+Chạy trên tài khoản dev test của chủ dự án, PvE đơn, có sự đồng ý. Gửi `result` **không qua trận thật**: chỉ `dungeon_rune_attack(3)` lấy `rewardId` rồi gửi ngay `dungeon_rune_attack_result{iswin:true, rewardId, heroes(7 uid từ RAM), buff:{}}`.
+
+Server **chấp nhận** và phản hồi:
+- `day_limit_update {'day_limit': {'2': 1}}` → **`result` CÓ cộng vào bộ đếm /500**. (Trả lời dứt điểm: lượt được tính ở bước `result`, không phải `attack`.)
+- `dungeon_client_attack_return{reward}` với **thưởng thật**: ngự hồn `itemId 160002` (qua=2, uuid mới), `yysExp 286`, `ssExp 286`, `passRewards`, `guild_buffs [2001]`.
+
+Kết luận quan trọng:
+1. **Bản EN không xác thực trận có thật hay không.** `battle_check` đã tắt (`requestCheckBattle` return khi `isEnglish`), và server chấp nhận `result` với `heroes` tĩnh + `buff` rỗng + không có mô phỏng trận. Thưởng được phát. Đây là lỗ hổng xác thực phía server (client-authoritative outcome).
+2. **Giới hạn 500/ngày vẫn áp cho `result`.** Nên không farm vô hạn: mỗi `result` ăn 1 lượt. Nhưng trong phạm vi 500 lượt, có thể nhận thưởng **không cần đánh** (bỏ qua thời gian trận, đội hình, kết quả thực).
+3. Cần xác nhận với team game (đã ghi `TESTING_REPORT.md`). Không lặp lại nhiều lần trên tài khoản thật.
+
 ### Giả thuyết "vượt 500/ngày qua API": chưa phải lỗ hổng
 
 Quan sát: gọi `dungeon_rune_attack` qua API không làm tăng `PClimit["2"]`. Câu hỏi đặt ra: vậy có farm vượt 500 lượt/ngày bằng API được không?
