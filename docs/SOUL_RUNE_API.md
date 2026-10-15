@@ -212,3 +212,15 @@ Ghi chú:
 - Địa chỉ dict đổi mỗi lần login. Chạy lại `finddump` trước khi watch.
 - netclient phải chạy bằng `research/npk/.venv-net/bin/python` (python hệ thống thiếu `msgpack`).
 - `session.json`, `authmsg.bson`, file watch nằm trong `research/` (gitignored, chứa token). Không commit.
+
+## 3f. Soul bonus (Bonus menu ở Home) — ĐANG TÌM
+
+Banner thật của người dùng nằm trong **menu "Bonus" ở màn Home**, KHÔNG phải weekend_rune. Hai dòng:
+- "Evo zones grant extra materials." (còn 46 ngày)
+- "Soul bonus in Orochi zones" (còn 8 ngày)
+
+Phân biệt với các cơ chế đã xét:
+- `weekendequip_set_equip` / `weekend_rune` = chọn LOẠI ngự hồn (sự kiện cuối tuần), client chặn bằng `is_at_opentime('weekend_rune')` ở UI, RPC không tự kiểm (server kiểm?). KHÁC với banner này.
+- Guild buff 2001/2002 = tăng EXP/vàng, server áp. KHÁC.
+
+Cần tìm: cơ chế "Bonus menu ở Home" (buff tăng drop/vật liệu theo khu, có đồng hồ đếm ngày). Giả thuyết: privilege/feather buff hoặc activity "bonus" toàn cục. Chưa xác định RPC/param.
