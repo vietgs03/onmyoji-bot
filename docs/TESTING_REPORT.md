@@ -25,7 +25,7 @@ Ngày: 2026-10-14. Tài khoản: acc phụ của người kiểm thử. Phạm v
 ## 3. Phát hiện
 ### 3.1 Xác thực phiên
 - Resume phiên chỉ cần `deviceid`, `entityid` và `authmsg` (BSON) đọc từ RAM client. Client ngoài resume thành công (`RECONNECT_SUCCEEDED`).
-- `authmsg` chỉ có trong RAM **sau khi client tự reconnect ít nhất 1 lần**.
+- `authmsg` chỉ có trong RAM **sau khi client tự reconnect ít nhất 1 lần**. **Cập nhật 2026-10-15:** không cần đợi reconnect. `authmsg` cũ dùng lại được, chỉ cần thay `session` = sid hiện tại và `versions` (đều đọc từ RAM). Resume vẫn thành công cả khi game client đã thoát. Token không gắn với lần đăng nhập.
 - Mỗi avatar một kết nối: client ngoài vào thì game hiện "Your account has been logged in elsewhere". Đây là cơ chế tốt, đã xác nhận 2 lần.
 - `authmsg` chứa thông tin thiết bị: MAC, udid, CPU, `real_ip`, `ip_country`, `sys_version`, `sauth_str`.
 
@@ -37,6 +37,8 @@ Ngày: 2026-10-14. Tài khoản: acc phụ của người kiểm thử. Phạm v
 - `BattleSceneBase.requestCheckBattle` (`battle_check`) **bị tắt ở bản EN** (`if LANG.isEnglish(): return`).
 - Drop do server định trước (`rewardId`). Không có tham số điều khiển tỉ lệ rơi.
 - Không kiểm thử động bằng cách gửi kết quả trận (ngoài phạm vi, xem mục 5).
+- **Client ngoài mở được trận Soul Zone (2026-10-15).** `dungeon_rune_attack` gửi từ client ngoài được server chấp nhận: trừ stamina, cấp `rewardId`, cộng tiến độ nhiệm vụ. Không gửi `result` thì không có thưởng.
+- **Bộ đếm lượt ngày Soul Zone (`day_limit_pc["2"]`, trần 500) chỉ tăng khi trận hoàn tất**, không tăng lúc mở trận (4 lần mở bằng API, bộ đếm giữ nguyên 2; 1 trận đánh thật trong game: 2 → 3). Hiện chưa thấy cách lấy thưởng vượt trần, vì không có `result` thì không có thưởng. Chưa kiểm được server có chặn `result` khi đã chạm trần với các trận mở từ trước hay không (cần gửi `result`, ngoài phạm vi). Chi tiết: `SOUL_RUNE_API.md` §3e.
 
 ### 3.4 Lộ dữ liệu ra client (đề xuất xem xét)
 - Các reply `friend_get_list_return`, `friend_get_recommend_return`, `get_team_friend_cb`, `friend_other_add_notify` chứa trường **`high_risk_account`** của **người chơi khác** (75 đối tượng quan sát, tất cả `False`). Cờ đánh giá rủi ro nội bộ không nên gửi xuống client.
@@ -51,6 +53,8 @@ Ngày: 2026-10-14. Tài khoản: acc phụ của người kiểm thử. Phạm v
 2. Cân nhắc gắn `authmsg` resume với kết nối TCP/thiết bị gốc, hoặc rút ngắn thời hạn, để giảm việc resume bằng token đọc từ RAM.
 3. Bật lại `battle_check` cho bản EN, hoặc xác nhận server đã có kiểm tra tương đương.
 4. Xử lý phiên không trả lời `dynamic_hotfix` (hiện vẫn dùng được RPC đọc bình thường).
+5. Xác nhận `day_limit` được kiểm ở **cả** `dungeon_rune_attack` lẫn `dungeon_rune_attack_result`. Nếu chỉ kiểm lúc mở trận thì có thể mở sẵn nhiều trận trước khi chạm trần rồi nộp `result` sau. Nên giới hạn số trận đang mở cùng lúc và thời hạn của `rewardId`.
+6. Mở trận (`dungeon_rune_attack`) từ phiên không trả lời `dynamic_hotfix` và không gửi `log_screen_click` vẫn được chấp nhận. Có thể dùng làm tín hiệu nghi tool.
 
 ## 5. Giới hạn
 - Kiểm thử trên **server production** (gate public, người chơi thật trong danh sách bạn bè, có bảo trì và sự kiện live). Vì vậy không gửi RPC ghi hay kết quả trận từ client ngoài.
