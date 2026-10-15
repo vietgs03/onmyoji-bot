@@ -119,6 +119,16 @@ Chỉ gửi `dungeon_rune_attack`, **không gửi `result`**.
 - Kết quả: stamina 18991 → **18979 (-12/lần)**, `yinchui` 158 → 170 (+12), `rewardId` mới `6ad041d36051644c2b3a0f39`, `copy_skin_id` 0, `freeze_update.num` = 0.
 - Mỗi lần gọi là một trận mới, `rewardId` khác nhau. Không có thưởng vì không gửi `result`.
 
+**Lần 3 (10:36, kiểm tra stamina có thật sự bị trừ):** đọc RAM game trước khi gọi `STAMINA=18985` (stamina đã hồi lại +6 từ 18979 trong ~36 phút). Sau `dungeon_rune_attack(3)`, server gửi `onUpdateCurrency {"cid":900003,"cnt":18979}` → **-6 so với số đọc từ RAM**. `rewardId` mới `6ad04a456051644c2b3a21ff`. Bảng tóm tắt 3 lần:
+
+| Giờ | rewardId | stamina sau |
+|---|---|---|
+| 09:53:52 | 6ad040406051644c2b3a0bfd | 18991 |
+| 10:00:35 | 6ad041d36051644c2b3a0f39 | 18979 (-12) |
+| 10:36:37 | 6ad04a456051644c2b3a21ff | 18979 (-6 so với 18985 trước đó) |
+
+Ghi chú: mức trừ đo được -12 rồi -6, chưa khớp một giá trị `strength` cố định. Có thể do hồi stamina chạy song song hoặc server tính khác khi trận trước còn dở (không gửi `result`). Cần thêm lần đo (đọc RAM ngay trước + ngay sau) để kết luận.
+
 **Resume không cần game reconnect:** authmsg cũ (BSON loginInfo) dùng lại được sau khi thay `session` = sid hiện tại (đọc RAM `player1.login_session.sid`) và `versions` = `heroes_version#inventory_version#_last_process` (`read_versions.ps1`). `sauth_str` cũ vẫn được chấp nhận. Đây là phát hiện đáng báo cho team game: token resume không gắn với lần đăng nhập cụ thể.
 
 ## 4. Giới hạn khi gọi từ client ngoài

@@ -25,3 +25,10 @@ foreach($k in "heroes_version","inventory_version","_last_process"){
 $sid=([PO]::Dump((A $pd "login_session"),2) | ConvertFrom-Json).sid
 Write-Host ("VERSIONS={0}#{1}#{2}" -f $ver.heroes_version,$ver.inventory_version,$ver._last_process)
 Write-Host ("SID={0}" -f $sid)
+$cur=A $pd "currency"
+if($cur){
+  foreach($kv in [PO]::DictItems($cur)){
+    if([PO]::TypeName([PO]::Q($kv[0]+8)) -ne "int"){ continue }
+    if([PO]::I32($kv[0]+16) -eq 900003){ Write-Host ("STAMINA={0}" -f [PO]::Dump($kv[1],1)) }
+  }
+}
