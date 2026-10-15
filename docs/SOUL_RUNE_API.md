@@ -131,6 +131,28 @@ Ghi chú: mức trừ đo được -12 rồi -6, chưa khớp một giá trị `
 
 **Resume không cần game reconnect:** authmsg cũ (BSON loginInfo) dùng lại được sau khi thay `session` = sid hiện tại (đọc RAM `player1.login_session.sid`) và `versions` = `heroes_version#inventory_version#_last_process` (`read_versions.ps1`). `sauth_str` cũ vẫn được chấp nhận. Đây là phát hiện đáng báo cho team game: token resume không gắn với lần đăng nhập cụ thể.
 
+## 3d. rewardId có random không? (5 mẫu, 2026-10-15)
+
+Mẫu lưu ở `research/npk/data/reward_id_samples.jsonl`.
+
+| Nguồn | dungeon_id | rewardId | Giờ (ts trong id) | counter |
+|---|---|---|---|---|
+| game (RAM) | 3 | 6ad03b66 6051644c2b 3a039d | 09:33:10 | 3802013 |
+| API | 3 | 6ad04040 6051644c2b 3a0bfd | 09:53:52 | 3804157 |
+| API | 3 | 6ad041d3 6051644c2b 3a0f39 | 10:00:35 | 3804985 |
+| API | 3 | 6ad04a45 6051644c2b 3a21ff | 10:36:37 | 3809791 |
+| API | 4 | 6ad04bd4 6051644c2b 3a2599 | 10:43:16 | 3810713 |
+
+`rewardId` là **MongoDB ObjectId chuẩn**, không chứa phần ngẫu nhiên nào liên quan tới thưởng:
+- 4 byte đầu = Unix timestamp lúc server tạo (trùng giây bấm Challenge).
+- 5 byte giữa `6051644c2b` = machine+pid của tiến trình server, **giống hệt** ở mọi mẫu và ở `sid` phiên.
+- 3 byte cuối = counter tăng dần, dùng chung cho **mọi** ObjectId tiến trình đó tạo (sid, rewardId, item...). Tăng đều ~1.7-2.3 id/giây, đúng là tốc độ tạo object của cả server, không phụ thuộc tầng.
+- Đổi tầng 3 → 4 không đổi cấu trúc. Id chỉ phản ánh "lúc nào, tiến trình nào tạo".
+
+Kết luận: **không đo được tỉ lệ rơi từ rewardId.** Nó chỉ là khóa tra cứu. Bản ghi phần thưởng thật (bộ ngự hồn, sao, số lượng) nằm ở server, gắn với khóa này, và client chỉ thấy khi nhận `dungeon_client_attack_return(reward)` sau `result` thắng. Muốn đo tỉ lệ rơi phải ghi lại `reward` của nhiều trận **thắng thật** (đọc `sceneUserData['allRewards']` từ RAM hoặc bắt `dungeon_client_attack_return`).
+
+Stamina lần 4: 18985 (RAM trước) → 18973 sau 2 lần (Lv3 rồi Lv4), mỗi lần -6.
+
 ## 4. Giới hạn khi gọi từ client ngoài
 
 - **Server quyết định phần thưởng.** `rewardId` cấp trước trận. `iswin`, `rewardId`, `heroes`, `buff` đều được server đối chiếu (xem `ANTICHEAT_FE_BE.md` §7). Gửi `result` thắng mà server không có trận tương ứng sẽ bị từ chối/ghi nhận bất thường.
