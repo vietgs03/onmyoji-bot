@@ -58,6 +58,19 @@ Cập nhật 2026-10-15. Nguồn: code game dịch từ RAM (`research/npk/src_d
 
 Chưa bắt được (không nằm trong `dungeon_reward`): `copy_skin_id`, `heroes`, `buff`. Muốn có phải đọc RAM khi trận đang chạy (engine trận / `save_begin_battle_params`).
 
+## 3b. Phần thưởng sinh ra khi nào
+
+| Thời điểm | Client nhận gì | Bằng chứng |
+|---|---|---|
+| Bấm Challenge (`dungeon_rune_attack_return`) | chỉ `rewardId` (ObjectId), **không có nội dung thưởng** | RAM 09:33:11; code gọi `enterMainUi(..., {'allRewards': {}})` |
+| Trong trận | không có gì về thưởng (`allRewards` rỗng) | code |
+| Sau khi gửi `dungeon_rune_attack_result` | `dungeon_client_attack_return(reward)`: nội dung thưởng (ngự hồn, vàng...) | code: gán `sceneUserData['allRewards'] = reward` rồi mở `PanelReward` |
+
+- **Chắc chắn:** server cấp `rewardId` trước trận. Client chỉ thấy nội dung thưởng sau khi báo kết quả. Chỉ số ngự hồn rơi ra (`rattr`) cũng do server sinh (`YUHUN_SUBSTAT_ROLL.md`).
+- **Chưa chứng minh:** server roll nội dung thưởng lúc cấp `rewardId` (rồi giữ lại) hay lúc nhận `result`. Cả hai đều chạy trên server, client không phân biệt được.
+- So sánh: Realm Raid (`lbs_onAttack` → `onAttackTargeterInfo(attackinfo, rewardId, reward)`) trả **cả nội dung thưởng ngay lúc bắt đầu đánh**, nên ở chế độ đó thưởng chắc chắn định trước. Soul Zone thì không trả nội dung lúc bắt đầu.
+- Dù roll lúc nào, client không đổi được kết quả: không có tham số nào ảnh hưởng thưởng, và `rewardId` chỉ là khóa để server đối chiếu.
+
 ## 4. Giới hạn khi gọi từ client ngoài
 
 - **Server quyết định phần thưởng.** `rewardId` cấp trước trận. `iswin`, `rewardId`, `heroes`, `buff` đều được server đối chiếu (xem `ANTICHEAT_FE_BE.md` §7). Gửi `result` thắng mà server không có trận tương ứng sẽ bị từ chối/ghi nhận bất thường.

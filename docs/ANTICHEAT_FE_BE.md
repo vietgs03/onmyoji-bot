@@ -83,7 +83,7 @@ Nguồn: `userinfomgr/ScreenRecordMgr.py`, `scenemembers/*FbScene.py`, `ClientEn
 **Ghi chú:** `freeze_update` là chỉ báo trực tiếp nhất xem server có xử phạt hay không. Sau 5 lần resume và ~230 RPC, giá trị vẫn là 0.
 
 ## 7. Có API nào thao túng drop rate (Soul Zone / Realm Raid) không?
-**Không có.** Drop do server quyết định **trước khi trận bắt đầu**. Client chỉ nhận một `rewardId` (khoá phần thưởng đã định sẵn) rồi gửi lại khi báo kết quả.
+**Không có.** Drop do server quyết định. Server cấp `rewardId` **trước khi trận bắt đầu**, client gửi lại khi báo kết quả. Realm Raid trả luôn nội dung thưởng lúc bắt đầu (định trước chắc chắn). Soul Zone chỉ trả `rewardId`, nội dung thưởng tới sau `result`, nên chưa chứng minh được server roll lúc nào (xem `SOUL_RUNE_API.md` §3b).
 
 **Soul Zone (Ngự hồn: `RuneFbScene`, `DungeonMember`, `TeamMember`):**
 - Tầng thường: `dungeon_rune_attack{dungeon_id}` → server trả `dungeon_rune_attack_return(dungeon_id, rewardId, copy_skin_id)`.
