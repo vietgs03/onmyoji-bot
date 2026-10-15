@@ -166,6 +166,19 @@ Kết luận: **không đo được tỉ lệ rơi từ rewardId.** Nó chỉ l�
 - **Xác nhận 10:59:** người chơi tự đánh 1 trận Orochi Lv.3 trong game (bắt đầu + `result` thắng). Đọc RAM: `PClimit = {"2": 3}` (2 → 3). Trong cả 4 file phản hồi của các lần gọi API không có `day_limit_update`. Vậy **chỉ trận hoàn tất mới được tính, gọi `dungeon_rune_attack` qua API mà không có `result` thì không tính lượt nhưng vẫn trừ stamina.**
 - Đọc nhanh không tốn stamina: resume không gọi gì (`--calls ''`) rồi xem `day_limit_pc` trong `create_entity` (netclient ghi `__create_entity__` vào `--dump`). Lưu ý resume vẫn đá game ra.
 
+### Giả thuyết "vượt 500/ngày qua API": chưa phải lỗ hổng
+
+Quan sát: gọi `dungeon_rune_attack` qua API không làm tăng `PClimit["2"]`. Câu hỏi đặt ra: vậy có farm vượt 500 lượt/ngày bằng API được không?
+
+Hiện **không có bằng chứng** cho việc này:
+- Lời gọi API chỉ **mở** trận. Không gửi `result` thì **không có phần thưởng** (§3b, §3c). Trận không tính lượt cũng là trận không ra gì. Kết quả hiện tại là "tốn stamina, không thưởng, không tính lượt", tức là người chơi bị thiệt.
+- Giới hạn ngày do **server** kiểm, client không chặn. Khi đủ lượt server gửi `day_limit_result(teamtype)` → client hiện "该玩法次数已达本日上限，请明天再来!" (`BattleRecordMember.day_limit_result`). Client chỉ hiển thị `PClimit`.
+- Bộ đếm tăng đúng lúc trận hoàn tất (xác nhận 2 → 3 ở trên), tức là đúng lúc server phát thưởng. Thưởng và lượt đi cùng nhau.
+
+Muốn thành lỗ hổng thật thì phải chứng minh **có phần thưởng mà không tăng bộ đếm**, hoặc **vẫn có thưởng sau khi đã chạm 500**. Cả hai đều cần gửi `dungeon_rune_attack_result` từ client ngoài. Nghĩa là tự dựng `heroes`/`buff` và báo thắng một trận không đánh thật. Đây là gửi kết quả giả lên server production. Không làm trên tài khoản thật. Cần server staging/QA do team game cấp (xem `TESTING_REPORT.md`).
+
+Câu hỏi nên chuyển cho team game: server có kiểm `day_limit` ở cả `dungeon_rune_attack` lẫn `dungeon_rune_attack_result`, hay chỉ ở một bên? Nếu chỉ kiểm ở `attack` thì có thể giữ sẵn nhiều `rewardId` mở từ trước khi chạm trần rồi nộp `result` sau.
+
 ## 4. Giới hạn khi gọi từ client ngoài
 
 - **Server quyết định phần thưởng.** `rewardId` cấp trước trận. `iswin`, `rewardId`, `heroes`, `buff` đều được server đối chiếu (xem `ANTICHEAT_FE_BE.md` §7). Gửi `result` thắng mà server không có trận tương ứng sẽ bị từ chối/ghi nhận bất thường.
