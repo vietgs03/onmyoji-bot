@@ -119,15 +119,20 @@ Chỉ gửi `dungeon_rune_attack`, **không gửi `result`**.
 - Kết quả: stamina 18991 → **18979 (-12/lần)**, `yinchui` 158 → 170 (+12), `rewardId` mới `6ad041d36051644c2b3a0f39`, `copy_skin_id` 0, `freeze_update.num` = 0.
 - Mỗi lần gọi là một trận mới, `rewardId` khác nhau. Không có thưởng vì không gửi `result`.
 
-**Lần 3 (10:36, kiểm tra stamina có thật sự bị trừ):** đọc RAM game trước khi gọi `STAMINA=18985` (stamina đã hồi lại +6 từ 18979 trong ~36 phút). Sau `dungeon_rune_attack(3)`, server gửi `onUpdateCurrency {"cid":900003,"cnt":18979}` → **-6 so với số đọc từ RAM**. `rewardId` mới `6ad04a456051644c2b3a21ff`. Bảng tóm tắt 3 lần:
+**Lần 3 (10:36):** server gửi `onUpdateCurrency {"cid":900003,"cnt":18979}`. `rewardId` mới `6ad04a456051644c2b3a21ff`.
 
-| Giờ | rewardId | stamina sau |
-|---|---|---|
-| 09:53:52 | 6ad040406051644c2b3a0bfd | 18991 |
-| 10:00:35 | 6ad041d36051644c2b3a0f39 | 18979 (-12) |
-| 10:36:37 | 6ad04a456051644c2b3a21ff | 18979 (-6 so với 18985 trước đó) |
+Stamina theo số **server** gửi (`onUpdateCurrency` ngay sau mỗi lần gọi):
 
-Ghi chú: mức trừ đo được -12 rồi -6, chưa khớp một giá trị `strength` cố định. Có thể do hồi stamina chạy song song hoặc server tính khác khi trận trước còn dở (không gửi `result`). Cần thêm lần đo (đọc RAM ngay trước + ngay sau) để kết luận.
+| Giờ | dungeon_id | stamina sau | thay đổi |
+|---|---|---|---|
+| 09:53:52 | 3 | 18991 | (chưa có mốc trước) |
+| 10:00:35 | 3 | 18979 | -12 trong 7 phút |
+| 10:36:37 | 3 | 18979 | 0 trong 36 phút |
+| 10:43:16 | 4 | 18973 | -6 trong 7 phút |
+
+- Giữa hai lần gọi stamina hồi theo thời gian, nên chênh lệch = hồi - trừ. 10:00 → 10:36 bằng 0 nghĩa là ~36 phút hồi đúng bằng 1 lần trừ.
+- **Không dùng số RAM game làm mốc.** Sau khi tool resume, game bị đá ra và không cập nhật nữa: RAM vẫn ghi 18985 lúc 10:42, trong khi server đã báo 18979 từ 10:36. (Ghi chú trước đây "-6 so với RAM" là so sai mốc.)
+- Chắc chắn: **mỗi lần gọi đều trừ stamina** (lần nào server cũng gửi `onUpdateCurrency` giảm). Mức trừ chính xác mỗi lần cần đo 2 lần gọi liền nhau trong cùng một phiên, để loại phần hồi.
 
 **Resume không cần game reconnect:** authmsg cũ (BSON loginInfo) dùng lại được sau khi thay `session` = sid hiện tại (đọc RAM `player1.login_session.sid`) và `versions` = `heroes_version#inventory_version#_last_process` (`read_versions.ps1`). `sauth_str` cũ vẫn được chấp nhận. Đây là phát hiện đáng báo cho team game: token resume không gắn với lần đăng nhập cụ thể.
 
@@ -150,8 +155,6 @@ Mẫu lưu ở `research/npk/data/reward_id_samples.jsonl`.
 - Đổi tầng 3 → 4 không đổi cấu trúc. Id chỉ phản ánh "lúc nào, tiến trình nào tạo".
 
 Kết luận: **không đo được tỉ lệ rơi từ rewardId.** Nó chỉ là khóa tra cứu. Bản ghi phần thưởng thật (bộ ngự hồn, sao, số lượng) nằm ở server, gắn với khóa này, và client chỉ thấy khi nhận `dungeon_client_attack_return(reward)` sau `result` thắng. Muốn đo tỉ lệ rơi phải ghi lại `reward` của nhiều trận **thắng thật** (đọc `sceneUserData['allRewards']` từ RAM hoặc bắt `dungeon_client_attack_return`).
-
-Stamina lần 4: 18985 (RAM trước) → 18973 sau 2 lần (Lv3 rồi Lv4), mỗi lần -6.
 
 ## 4. Giới hạn khi gọi từ client ngoài
 
