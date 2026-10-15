@@ -28,6 +28,12 @@ Cập nhật 2026-10-15. Nguồn: code game dịch từ RAM (`research/npk/src_d
 - Các chế độ khác cùng mẫu, khác key trong `dungeon_reward`:
   `dungeon_challenge_*` -> `'dungeon_challenge'`, `dungeon_challenge_leaf_*` -> `'dungeon_leaf_challenge'`, `dungeon_awake_*` -> `'dungeon_awake'`, `dungeon_friend_*` -> `'dungeon_friend'`.
 
+### Không có API bỏ qua trận
+Đã rà 2,193 RPC trong `rpc_catalog.json` (tìm sweep/quick/saodang/multi/repeat/batch/auto_battle/again). Soul Zone chỉ có `dungeon_rune_attack`, `dungeon_rune_attack_result`, `team_create_rune`, `team_create_rune_single`, `rune_plot_finish_dialog`.
+- Nút "Đánh lại" (`PanelReward`) chỉ gọi lại `dungeon_rune_attack(*params)` phía client, kèm `from_again_btn=True`. Mỗi lần vẫn là một trận mới.
+- `auto_yuhun_*` là công cụ tính bộ ngự hồn tối ưu (calc/rank), không phải farm.
+- Không có RPC nào trả thưởng Soul mà không qua trận.
+
 ## 2. Bảng dungeon_id (từ `cdata_en.dungeon_rune.json`)
 
 | dungeon_id | Zone (`typedesc`) | Tầng | Vé (`menpiao`) |
