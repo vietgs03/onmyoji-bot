@@ -192,6 +192,18 @@ Muốn thành lỗ hổng thật thì phải chứng minh **có phần thưởng
 
 Câu hỏi nên chuyển cho team game: server có kiểm `day_limit` ở cả `dungeon_rune_attack` lẫn `dungeon_rune_attack_result`, hay chỉ ở một bên? Nếu chỉ kiểm ở `attack` thì có thể giữ sẵn nhiều `rewardId` mở từ trước khi chạm trần rồi nộp `result` sau.
 
+## 3f. Soul bonus (Bonus menu ở Home) — nguồn CHƯA chốt
+
+Banner người dùng ("Soul bonus in Orochi zones" 8 ngày, "Evo zones grant extra materials" 46 ngày) nằm ở **menu Bonus/thông báo trên Home**.
+
+**Ứng viên đã loại một phần: `ALL_ITEM_BUFF`.** Nút Buff ở Home (`MapWorld.updateBuffBtnState` → `UiUtil.getBuffData`) đọc `player1.recordparam['aib']`. `buff_define` trong `PanelReward`: `907`=drop_awake (Evo), `909`=drop_equip (Soul). NHƯNG đọc RAM tài khoản này **`recordparam['aib']` RỖNG** (cả `expbuff`, `moneybuff`, `weekend_equip` đều rỗng). Vậy hai banner đó KHÔNG phải personal buff của tài khoản → nhiều khả năng là **sự kiện toàn server** (global activity), hiển thị cho mọi người.
+
+Param codes resolve từ RAM (ParamNameDef): `ALL_ITEM_BUFF='aib'`, `EXPBUFF='expbuff'`, `MONEYBUFF='moneybuff'`, `ALL_ITEM_STOP_BUFF='aisb'`, `WEEKEND_EQUIP='weekend_equip'`. Tất cả rỗng lúc đọc (2026-10-15).
+
+**Chưa xác định:** RPC/param thật của banner. Giả thuyết: activity notice toàn cục (`ActivityNoticeLogic`), server áp hệ số drop khi tính `allRewards`, không cần client gửi. Cần đọc lúc game ở Home + buff đang bật.
+
+**Điểm chắc chắn:** dù buff/sự kiện ở đâu, nó **server-authoritative** — server tự áp khi phát `passRewards`. Client không gửi nó trong `result`, nên không giả được; nhưng nếu đang bật thì `result` giả (§3.3) vẫn được cộng bonus.
+
 ## 4. Giới hạn khi gọi từ client ngoài
 
 - **Server quyết định phần thưởng.** `rewardId` cấp trước trận. `iswin`, `rewardId`, `heroes`, `buff` đều được server đối chiếu (xem `ANTICHEAT_FE_BE.md` §7). Gửi `result` thắng mà server không có trận tương ứng sẽ bị từ chối/ghi nhận bất thường.
@@ -212,35 +224,3 @@ Ghi chú:
 - Địa chỉ dict đổi mỗi lần login. Chạy lại `finddump` trước khi watch.
 - netclient phải chạy bằng `research/npk/.venv-net/bin/python` (python hệ thống thiếu `msgpack`).
 - `session.json`, `authmsg.bson`, file watch nằm trong `research/` (gitignored, chứa token). Không commit.
-
-## 3f. Soul bonus (Bonus menu ở Home) = `ALL_ITEM_BUFF`
-
-Banner người dùng ("Soul bonus in Orochi zones" 8 ngày, "Evo zones grant extra materials" 46 ngày) là nút **Buff ở Home** (`MapWorld.updateBuffBtnState` → `UiUtil.getBuffData`), đọc từ param **`player1.ALL_ITEM_BUFF`**. KHÁC weekend_rune (chọn loại ngự hồn) và KHÁC guild buff 2001/2002 (EXP/vàng).
-
-### Cấu trúc
-```python
-ALL_ITEM_BUFF = {
-  "<buffType>": {"cd": <end_time unix>, "p": <factor>, "aisb": <bool pause>}
-}
-```
-`buff_define` trong `PanelReward`:
-- `907` → `drop_awake`  (icon item 901004) = "Evo zones grant extra materials"
-- `909` → `drop_equip`  (icon item 901010) = "Soul bonus in Orochi zones"
-
-Mô tả/icon lấy từ `DATA_CURRENCY.data[type_map[buffType]]['func_params']`. `cd` chính là đồng hồ "8 days/46 days".
-
-### Luồng (server-authoritative)
-1. Server đẩy `ALL_ITEM_BUFF` xuống qua `entity_param_update` (ClientEntities ~5807). Client **chỉ hiển thị**.
-2. **Client KHÔNG gửi buff này trong `result`.** `dungeon_rune_attack_result` chỉ có `dungeon_id/result/heroes/buff(skin)`. Khi tính drop, server **tự đọc `ALL_ITEM_BUFF`** của tài khoản.
-3. → Buff cộng vào thưởng **kể cả khi `result` giả**. Nối với lỗ hổng §3.3: server EN không kiểm trận thật, nhưng vẫn áp bonus drop khi phát `passRewards`. Nếu 909 đang bật, `result` giả vẫn nhận thêm drop ngự hồn.
-4. **Client không giả được buff**: `ALL_ITEM_BUFF` là trạng thái server, gửi lên vô nghĩa. Buff an toàn ở khâu xác thực; chỉ khâu "trận thật?" là lỗ hổng.
-
-### Nút bật/tắt (vì sao "mỗi lần attack hay bật")
-- Buff đếm giờ thực (`cd`). Người chơi **tạm dừng** (pause) để không hao giờ khi offline, rồi **bật lại** trước khi đánh. RPC: `stop_buff_process{buff_type, factor, cancel}` → `stop_buff_process_cb(err,...)`.
-  - `err=1`: "đang trong tổ đội/chiến đấu không thể đổi trạng thái" → server kiểm trạng thái, không cho pause/resume giữa trận.
-  - `aisb` trong `ALL_ITEM_BUFF` = cờ đang pause (`checkBuffIsPause`).
-- Đây đúng là "cái buff bạn bật mỗi lần đi Moans": resume buff drop (909) trước khi vào, server đếm giờ khi active.
-
-### Chưa xác nhận (cần đọc RAM lúc game ở Home)
-- `buffType` chính xác (907/909 hay số khác theo bản EN), `p` (hệ số), `cd` thật của "Soul bonus".
-- Công thức nhân drop (×? / +%?) nằm ở server; client chỉ thấy `p` và `func_params`.
