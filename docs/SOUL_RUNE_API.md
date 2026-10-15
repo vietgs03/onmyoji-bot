@@ -252,3 +252,22 @@ Ghi chú:
 - Địa chỉ dict đổi mỗi lần login. Chạy lại `finddump` trước khi watch.
 - netclient phải chạy bằng `research/npk/.venv-net/bin/python` (python hệ thống thiếu `msgpack`).
 - `session.json`, `authmsg.bson`, file watch nằm trong `research/` (gitignored, chứa token). Không commit.
+
+## 6. Bảng chứng cứ (provenance mỗi kết luận)
+
+Phân biệt rõ 3 mức: **[LIVE]** quan sát phản hồi server thật; **[RAM]** đọc bộ nhớ game; **[CODE]** suy từ code giải mã (chưa chạy).
+
+| Kết luận | Mức | Nguồn / tái kiểm |
+|---|---|---|
+| `dungeon_rune_attack{dungeon_id}` → server trả `rewardId` | LIVE | `data/rune_rewards.jsonl` (4 bản ghi) |
+| Mỗi lần attack trừ stamina | LIVE | `onUpdateCurrency` trong `data/rune_reply*.jsonl` |
+| attack KHÔNG tăng day_limit | LIVE+RAM | 4 lần attack, `PClimit` giữ 2 (RAM) |
+| Trận thật (có result) tăng day_limit 2→3 | RAM | `read_day_limit.ps1` 2 lần (transcript) |
+| **result GIẢ được chấp nhận → thưởng + day_limit {2:1}** | LIVE | **CHỈ trên terminal 13:20, KHÔNG lưu dump.** Tái kiểm: chạy `rune_result_demo.py --send --dump` |
+| rewardId = ObjectId (ts+machine+counter) | LIVE | `data/reward_id_samples.jsonl` (5 mẫu) |
+| Orochi 1-10 drop table theo thứ | CODE+RAM | `cdata_en.dungeon_rune.json` + `DATA_REWARD` giải mã |
+| Banner "Soul bonus" = item type 909 | CODE (suy luận) | `func_params` khớp text; CHƯA xác nhận runtime (`aib` rỗng lúc đọc) |
+| Hệ số N (0.1..3) | CODE | `extra_params` trong currency_data; nghĩa của N CHƯA xác minh |
+| 970000/980000 = kho vật liệu | SUY ĐOÁN | KHÔNG có trong currency_data, KHÔNG có handler |
+
+**Lỗ hổng chưa đóng feedback loop đầy đủ:** phát hiện quan trọng nhất (result giả được phát thưởng) chỉ có bằng chứng transcript, không lưu file. Để chốt làm bằng chứng cho team game, cần chạy lại với `--dump data/result_test.jsonl` lưu đủ `day_limit_update` + `dungeon_client_attack_return`. Chưa làm lại để tránh lạm dụng tài khoản thật.
