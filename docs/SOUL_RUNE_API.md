@@ -194,7 +194,7 @@ Câu hỏi nên chuyển cho team game: server có kiểm `day_limit` ở cả `
 
 ## 3f. Soul bonus (Bonus menu ở Home) = buff item ALL_ITEM_BUFF (type 909)
 
-Đã map chính xác từ `currency_data` (giải mã RAM):
+Map dựa trên `func_params` + tên item khớp banner (**suy luận mạnh, chưa phải xác nhận runtime**):
 
 | Banner Home | item | type | func_params (CN) | nghĩa |
 |---|---|---|---|---|
@@ -214,7 +214,7 @@ Có nhiều item khác thời lượng: 901097 "Evo Drop Bonus (14 days)", 90109
 - Nút "bật" = resume buff đang pause: RPC `stop_buff_process{buff_type, factor, cancel}`; `cb err=1` = "đang tổ đội/chiến đấu không đổi được" (server kiểm). `aisb`=cờ pause.
 
 ### Hệ số buff (từ config, đã giải mã)
-Mỗi item buff có `extra_params = [pool_id, N]`. `pool_id` 970000 = kho vật liệu ngự hồn (Soul), 980000 = vật liệu tỉnh thức (Evo). `N` = hệ số cộng thêm:
+Mỗi item buff có `extra_params = [A, N]` (đọc thẳng từ config — **dữ kiện**). Mọi item Soul (type 909) có `A=970000`, Evo (907) có `A=980000`. **Suy đoán (chưa xác minh):** `A` là id kho vật liệu (970000~ngự hồn, 980000~tỉnh thức), `N` là hệ số cộng thêm. KHÔNG tìm thấy `970000/980000` trong currency_data, và KHÔNG có Currency_909/907 handler trong dump để xác nhận cách server dùng N. Bảng N (dữ kiện thô từ config):
 
 | item | tên | N (hệ số) |
 |---|---|---|
@@ -226,7 +226,7 @@ Mỗi item buff có `extra_params = [pool_id, N]`. `pool_id` 970000 = kho vật 
 | 901011 | Soul Drop Bonus | 2 |
 | 901012 | Soul Drop Bonus | 3 |
 
-`N` là bội số vật liệu THÊM (vd N=1 → +100% vật liệu ngự hồn mỗi trận Orochi/Moans). Server áp khi phát `passRewards`; client chỉ lưu `aib` để hiển thị.
+**Suy đoán:** `N` có thể là bội số vật liệu thêm (N=1 → +100%?), nhưng công thức thật chưa xác minh (không có handler trong dump). Chắc chắn: server áp buff khi phát `passRewards` (client không gửi trong `result`).
 
 ### Chưa xác nhận (nice-to-have)
 - Giá trị `cd/p` THẬT của buff đang chạy: đọc `recordparam['aib']` lúc buff bật (hiện rỗng). `p` trong `aib` khả năng = `N` ở trên.
