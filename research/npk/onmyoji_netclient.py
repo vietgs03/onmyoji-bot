@@ -288,6 +288,11 @@ def main():
                         rewardf.flush()
         elif name == "reg_md5_index":
             c.dyn_index[msg.index] = c.md5_names.get(msg.md5, msg.md5.hex())
+        elif name == "create_entity":
+            p = c.decode_params(getattr(msg, "info", b""))
+            if dumpf:
+                dumpf.write(json.dumps({"method": "__create_entity__", "params": p}, default=lambda o: o.hex() if isinstance(o, bytes) else (o.data.hex() if hasattr(o, "data") else str(o)), ensure_ascii=False) + "\n")
+            print("[<] create_entity keys=%d" % (len(p) if isinstance(p, dict) else -1))
         else:
             print("[<]", name, short(msg, 200))
     if rewardf:

@@ -156,6 +156,15 @@ Mẫu lưu ở `research/npk/data/reward_id_samples.jsonl`.
 
 Kết luận: **không đo được tỉ lệ rơi từ rewardId.** Nó chỉ là khóa tra cứu. Bản ghi phần thưởng thật (bộ ngự hồn, sao, số lượng) nằm ở server, gắn với khóa này, và client chỉ thấy khi nhận `dungeon_client_attack_return(reward)` sau `result` thắng. Muốn đo tỉ lệ rơi phải ghi lại `reward` của nhiều trận **thắng thật** (đọc `sceneUserData['allRewards']` từ RAM hoặc bắt `dungeon_client_attack_return`).
 
+## 3e. Bộ đếm lượt Soul Zone trong ngày ("X/500")
+
+- UI: `runelevelpanel.refreshDailyLimit()` chỉ hiện trên PC (`PLATFORM_WIN32`) và chỉ ở zone Orochi (`CurrentType == 1`). Chuỗi hiện là `"%d/%d" % (curpro, total)`.
+- `curpro` = `player1.PClimit["2"]`. Server gửi giá trị này lúc vào phiên (`bdict['day_limit_pc']`) và mỗi lần thay đổi (`day_limit_update`).
+- `total` = `DATA_DAY_LIMIT.data[2]['limit_pc']`. Id 2 = "Soul Zone" (bảng `day_limit`: Evolution Zone, Soul Zone, Demon Seal, Kraken, Realm Raid, Guild Realm Raid, Totem Zone, Demons in Exploration Zones). Khi chạm trần game báo "Daily attempts limit reached. Please come again tomorrow!". Giá trị 500 lấy từ OCR UI trước đây (`STATE.md`). Bảng `day_limit` chưa load trong RAM lúc đọc nên chưa xác nhận số từ config.
+- **Đọc lúc 10:51 ngày 2026-10-15** (cả RAM game lẫn `create_entity` server gửi khi resume): `day_limit_pc = {"2": 2}` → **2/500**.
+- Hôm nay đã có 4 lần gọi `dungeon_rune_attack` qua API (đều không gửi `result`) mà bộ đếm vẫn chỉ là 2. Vậy **bộ đếm không tăng khi bắt đầu trận, chỉ tăng khi trận hoàn tất (`result`)**. Khớp với dữ liệu tháng 6: farm 30 trận thắng thì counter 6 → 36.
+- Đọc nhanh không tốn stamina: resume không gọi gì (`--calls ''`) rồi xem `day_limit_pc` trong `create_entity` (netclient ghi `__create_entity__` vào `--dump`). Lưu ý resume vẫn đá game ra.
+
 ## 4. Giới hạn khi gọi từ client ngoài
 
 - **Server quyết định phần thưởng.** `rewardId` cấp trước trận. `iswin`, `rewardId`, `heroes`, `buff` đều được server đối chiếu (xem `ANTICHEAT_FE_BE.md` §7). Gửi `result` thắng mà server không có trận tương ứng sẽ bị từ chối/ghi nhận bất thường.
