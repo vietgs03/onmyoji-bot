@@ -192,17 +192,30 @@ Muốn thành lỗ hổng thật thì phải chứng minh **có phần thưởng
 
 Câu hỏi nên chuyển cho team game: server có kiểm `day_limit` ở cả `dungeon_rune_attack` lẫn `dungeon_rune_attack_result`, hay chỉ ở một bên? Nếu chỉ kiểm ở `attack` thì có thể giữ sẵn nhiều `rewardId` mở từ trước khi chạm trần rồi nộp `result` sau.
 
-## 3f. Soul bonus (Bonus menu ở Home) — nguồn CHƯA chốt
+## 3f. Soul bonus (Bonus menu ở Home) = buff item ALL_ITEM_BUFF (type 909)
 
-Banner người dùng ("Soul bonus in Orochi zones" 8 ngày, "Evo zones grant extra materials" 46 ngày) nằm ở **menu Bonus/thông báo trên Home**.
+Đã map chính xác từ `currency_data` (giải mã RAM):
 
-**Ứng viên đã loại một phần: `ALL_ITEM_BUFF`.** Nút Buff ở Home (`MapWorld.updateBuffBtnState` → `UiUtil.getBuffData`) đọc `player1.recordparam['aib']`. `buff_define` trong `PanelReward`: `907`=drop_awake (Evo), `909`=drop_equip (Soul). NHƯNG đọc RAM tài khoản này **`recordparam['aib']` RỖNG** (cả `expbuff`, `moneybuff`, `weekend_equip` đều rỗng). Vậy hai banner đó KHÔNG phải personal buff của tài khoản → nhiều khả năng là **sự kiện toàn server** (global activity), hiển thị cho mọi người.
+| Banner Home | item | type | func_params (CN) | nghĩa |
+|---|---|---|---|---|
+| "Soul bonus in Orochi zones" | 901010/901011/901019/901099... = "Soul Drop Bonus" | **909** | 八岐大蛇掉落额外的御魂材料 | Orochi/Ngự hồn rơi THÊM vật liệu ngự hồn |
+| "Evo zones grant extra materials" | 901004/901020/901097... = "Evo Drop Bonus" | **907** | 觉醒副本掉落额外的觉醒材料 | Tỉnh thức rơi THÊM vật liệu tỉnh thức |
 
-Param codes resolve từ RAM (ParamNameDef): `ALL_ITEM_BUFF='aib'`, `EXPBUFF='expbuff'`, `MONEYBUFF='moneybuff'`, `ALL_ITEM_STOP_BUFF='aisb'`, `WEEKEND_EQUIP='weekend_equip'`. Tất cả rỗng lúc đọc (2026-10-15).
+Có nhiều item khác thời lượng: 901097 "Evo Drop Bonus (14 days)", 901098 "(1.5 hours)", 901099 "Soul Drop Bonus (1.5 hours)".
 
-**Chưa xác định:** RPC/param thật của banner. Giả thuyết: activity notice toàn cục (`ActivityNoticeLogic`), server áp hệ số drop khi tính `allRewards`, không cần client gửi. Cần đọc lúc game ở Home + buff đang bật.
+### Cơ chế
+- Buff lưu ở `player1.recordparam['aib']` (`ALL_ITEM_BUFF`): `{ "<type>": {"cd": end_time, "p": factor, "aisb": pause} }`. Hiện ở Home qua `UiUtil.getBuffData` (`PanelReward.buff_define`: 907=drop_awake, 909=drop_equip).
+- **Nó cộng THÊM vật liệu drop** (không nhân EXP/vàng như guild buff 2001/2002). Với Soul zone, type 909 cho thêm "御魂材料".
+- **Lưu ý RAM:** lúc đọc tài khoản dev test, `recordparam['aib']` RỖNG → buff không active ngay thời điểm đó (hoặc banner là preview sự kiện server). Đồng hồ "8 days/46 days" không nằm trong `active_time_list` hay `recordparam` của player → nhiều khả năng config thời lượng do server/activity giữ, client chỉ thấy `cd` khi buff thực sự active trong `aib`.
 
-**Điểm chắc chắn:** dù buff/sự kiện ở đâu, nó **server-authoritative** — server tự áp khi phát `passRewards`. Client không gửi nó trong `result`, nên không giả được; nhưng nếu đang bật thì `result` giả (§3.3) vẫn được cộng bonus.
+### Server-authoritative (điểm chính)
+- `ALL_ITEM_BUFF` do server đẩy xuống; client chỉ hiển thị, KHÔNG gửi trong payload `result`.
+- Khi tính drop, server tự đọc `aib`. → Nếu buff 909 đang active, kể cả `result` giả (§3.3) cũng được cộng vật liệu ngự hồn. Client không giả được buff (server kiểm trạng thái), nhưng cũng không chặn được việc result giả hưởng ké.
+- Nút "bật" = resume buff đang pause: RPC `stop_buff_process{buff_type, factor, cancel}`; `cb err=1` = "đang tổ đội/chiến đấu không đổi được" (server kiểm). `aisb`=cờ pause.
+
+### Chưa xác nhận
+- `p` (hệ số) và công thức cộng vật liệu (server-side).
+- Thời điểm đọc `aib` rỗng nên chưa lấy được giá trị `cd/p` thật của buff Soul (909) đang chạy. Cần đọc `recordparam['aib']` lúc buff đang bật.
 
 ## 4. Giới hạn khi gọi từ client ngoài
 
