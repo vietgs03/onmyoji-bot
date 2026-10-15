@@ -271,3 +271,23 @@ Phân biệt rõ 3 mức: **[LIVE]** quan sát phản hồi server thật; **[RA
 | 970000/980000 = kho vật liệu | SUY ĐOÁN | KHÔNG có trong currency_data, KHÔNG có handler |
 
 **Lỗ hổng chưa đóng feedback loop đầy đủ:** phát hiện quan trọng nhất (result giả được phát thưởng) chỉ có bằng chứng transcript, không lưu file. Để chốt làm bằng chứng cho team game, cần chạy lại với `--dump data/result_test.jsonl` lưu đủ `day_limit_update` + `dungeon_client_attack_return`. Chưa làm lại để tránh lạm dụng tài khoản thật.
+
+## 7. Replay test rewardId (2026-10-15 ~14:27, dev test, có dump)
+
+Câu hỏi: client có "ép"/tái dùng được `rewardId` không? Test gửi `dungeon_rune_attack_result{iswin:true}` **KHÔNG gọi attack mới**, với 2 loại id. Bằng chứng: `data/replay_test.jsonl` (LIVE, có dump).
+
+| Case | rewardId | day_limit | Kết quả |
+|---|---|---|---|
+| before | - | {2:1} | mốc |
+| **reuse_old_id** | `6ad04a45...` (id CŨ đã dùng ở trận 10:36) | {2:1}→**{2:2}** | **SERVER CHẤP NHẬN** |
+| **fabricated_id** | `5f8c2122...` (ObjectId BỊA ngẫu nhiên) | {2:2}→**{2:3}** | **SERVER CHẤP NHẬN** |
+
+### Kết luận (nghiêm trọng hơn dự đoán ban đầu)
+- **`rewardId` KHÔNG được server kiểm.** Cả id cũ đã tiêu lẫn id bịa hoàn toàn đều được chấp nhận: mỗi lần `day_limit` +1 (2→3), server xử lý như một lượt hoàn tất.
+- Trước đó (§6) tôi suy đoán "gửi id bịa sẽ không khớp → bị từ chối". **SAI.** Replay test LIVE chứng minh ngược lại: server không đối chiếu `rewardId` với bản ghi trận nào.
+- Nghĩa là **không cần cả bước `dungeon_rune_attack`**: có thể spam thẳng `dungeon_rune_attack_result` với id bịa để ăn lượt/thưởng, tới trần 500/ngày. Không tốn stamina cho `attack`, không cần mở trận.
+- Lỗ hổng rộng hơn "giả iswin": toàn bộ cặp (attack cấp id → result echo id) **không có ràng buộc** ở server EN. `rewardId` chỉ là field client tự do điền.
+
+### Lưu ý
+- Lần này 2 case đều +1 day_limit nhưng output chỉ thấy `day_limit_update`, không thấy `dungeon_client_attack_return` (reward content) trong cửa sổ 12s — có thể reward về chậm/khác frame. day_limit tăng = server đã tính lượt. Cần 1 lần đọc RAM `allRewards`/currency để xác nhận có vật phẩm thực.
+- Đã tiêu 2 lượt/500 hôm nay cho test (2→3... thực ra 1→3). Dừng ở đây.
