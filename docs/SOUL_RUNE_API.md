@@ -77,6 +77,26 @@ Chưa bắt được (không nằm trong `dungeon_reward`): `copy_skin_id`, `her
 - So sánh: Realm Raid (`lbs_onAttack` → `onAttackTargeterInfo(attackinfo, rewardId, reward)`) trả **cả nội dung thưởng ngay lúc bắt đầu đánh**, nên ở chế độ đó thưởng chắc chắn định trước. Soul Zone thì không trả nội dung lúc bắt đầu.
 - Dù roll lúc nào, client không đổi được kết quả: không có tham số nào ảnh hưởng thưởng, và `rewardId` chỉ là khóa để server đối chiếu.
 
+## 3c. Gọi thật bằng API (2026-10-15 09:53, Orochi Lv.3)
+
+Chỉ gửi `dungeon_rune_attack`, **không gửi `result`**.
+
+```
+[>] dungeon_rune_attack {"dungeon_id": 3}
+[<] onUpdateCurrency {"cid": 900003, "cnt": 18991, ...}        <- trừ stamina
+[<] screen_click_log_by_strength_start {}                      <- server bảo client bắt đầu ghi toạ độ chạm
+[<] yys_yinchui_update_task_cb {"task_sid": 187, "task_info": {"process": 158}}
+[<] dungeon_rune_attack_return {"dungeon_id": 3, "rewardId": "6ad040406051644c2b3a0bfd", "copy_skin_id": 0}
+```
+
+- Server chấp nhận lời gọi từ client ngoài: trừ stamina, cấp `rewardId` mới, tiến độ nhiệm vụ tăng.
+- `copy_skin_id` = 0 (skin cảnh mặc định).
+- `screen_click_log_by_strength_start` → client gọi `ScreenRecordMgr.onStrengthDailyCost()`: mỗi lần tiêu stamina, game bắt đầu ghi toạ độ chạm để gửi lên (`log_screen_click`, xem `ANTICHEAT_FE_BE.md` §5). Client ngoài không gửi log này, nên phía server có dấu hiệu "tiêu stamina mà không có thao tác chạm".
+- `freeze_update.frozen.num = 0`, `safety_lock {err:3}` như các lần resume trước.
+- Trận bỏ dở: không gửi `result`, nên không có thưởng. Game client bị đá ra khi tool resume (mỗi avatar một kết nối).
+
+**Resume không cần game reconnect:** authmsg cũ (BSON loginInfo) dùng lại được sau khi thay `session` = sid hiện tại (đọc RAM `player1.login_session.sid`) và `versions` = `heroes_version#inventory_version#_last_process` (`read_versions.ps1`). `sauth_str` cũ vẫn được chấp nhận. Đây là phát hiện đáng báo cho team game: token resume không gắn với lần đăng nhập cụ thể.
+
 ## 4. Giới hạn khi gọi từ client ngoài
 
 - **Server quyết định phần thưởng.** `rewardId` cấp trước trận. `iswin`, `rewardId`, `heroes`, `buff` đều được server đối chiếu (xem `ANTICHEAT_FE_BE.md` §7). Gửi `result` thắng mà server không có trận tương ứng sẽ bị từ chối/ghi nhận bất thường.
