@@ -213,9 +213,24 @@ Có nhiều item khác thời lượng: 901097 "Evo Drop Bonus (14 days)", 90109
 - Khi tính drop, server tự đọc `aib`. → Nếu buff 909 đang active, kể cả `result` giả (§3.3) cũng được cộng vật liệu ngự hồn. Client không giả được buff (server kiểm trạng thái), nhưng cũng không chặn được việc result giả hưởng ké.
 - Nút "bật" = resume buff đang pause: RPC `stop_buff_process{buff_type, factor, cancel}`; `cb err=1` = "đang tổ đội/chiến đấu không đổi được" (server kiểm). `aisb`=cờ pause.
 
-### Chưa xác nhận
-- `p` (hệ số) và công thức cộng vật liệu (server-side).
-- Thời điểm đọc `aib` rỗng nên chưa lấy được giá trị `cd/p` thật của buff Soul (909) đang chạy. Cần đọc `recordparam['aib']` lúc buff đang bật.
+### Hệ số buff (từ config, đã giải mã)
+Mỗi item buff có `extra_params = [pool_id, N]`. `pool_id` 970000 = kho vật liệu ngự hồn (Soul), 980000 = vật liệu tỉnh thức (Evo). `N` = hệ số cộng thêm:
+
+| item | tên | N (hệ số) |
+|---|---|---|
+| 1001119 | Soul Drop Bonus | 0.1 |
+| 901019 | Soul Drop Up | 0.25 |
+| 901022/901027 | Soul Drop Up | 0.5 |
+| 901010/901021/1438058 | Soul Drop Bonus | 1 |
+| 901099 | Soul Drop Bonus (1.5h) | 1.5 |
+| 901011 | Soul Drop Bonus | 2 |
+| 901012 | Soul Drop Bonus | 3 |
+
+`N` là bội số vật liệu THÊM (vd N=1 → +100% vật liệu ngự hồn mỗi trận Orochi/Moans). Server áp khi phát `passRewards`; client chỉ lưu `aib` để hiển thị.
+
+### Chưa xác nhận (nice-to-have)
+- Giá trị `cd/p` THẬT của buff đang chạy: đọc `recordparam['aib']` lúc buff bật (hiện rỗng). `p` trong `aib` khả năng = `N` ở trên.
+- Công thức chính xác server dùng `N` (nhân thẳng số vật liệu, hay theo bảng pool 970000).
 
 ## 4. Giới hạn khi gọi từ client ngoài
 
