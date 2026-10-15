@@ -163,6 +163,7 @@ Kết luận: **không đo được tỉ lệ rơi từ rewardId.** Nó chỉ l�
 - `total` = `DATA_DAY_LIMIT.data[2]['limit_pc']`. Id 2 = "Soul Zone" (bảng `day_limit`: Evolution Zone, Soul Zone, Demon Seal, Kraken, Realm Raid, Guild Realm Raid, Totem Zone, Demons in Exploration Zones). Khi chạm trần game báo "Daily attempts limit reached. Please come again tomorrow!". Giá trị 500 lấy từ OCR UI trước đây (`STATE.md`). Bảng `day_limit` chưa load trong RAM lúc đọc nên chưa xác nhận số từ config.
 - **Đọc lúc 10:51 ngày 2026-10-15** (cả RAM game lẫn `create_entity` server gửi khi resume): `day_limit_pc = {"2": 2}` → **2/500**.
 - Hôm nay đã có 4 lần gọi `dungeon_rune_attack` qua API (đều không gửi `result`) mà bộ đếm vẫn chỉ là 2. Vậy **bộ đếm không tăng khi bắt đầu trận, chỉ tăng khi trận hoàn tất (`result`)**. Khớp với dữ liệu tháng 6: farm 30 trận thắng thì counter 6 → 36.
+- **Xác nhận 10:59:** người chơi tự đánh 1 trận Orochi Lv.3 trong game (bắt đầu + `result` thắng). Đọc RAM: `PClimit = {"2": 3}` (2 → 3). Trong cả 4 file phản hồi của các lần gọi API không có `day_limit_update`. Vậy **chỉ trận hoàn tất mới được tính, gọi `dungeon_rune_attack` qua API mà không có `result` thì không tính lượt nhưng vẫn trừ stamina.**
 - Đọc nhanh không tốn stamina: resume không gọi gì (`--calls ''`) rồi xem `day_limit_pc` trong `create_entity` (netclient ghi `__create_entity__` vào `--dump`). Lưu ý resume vẫn đá game ra.
 
 ## 4. Giới hạn khi gọi từ client ngoài
