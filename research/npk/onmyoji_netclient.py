@@ -218,6 +218,8 @@ def main():
     ap.add_argument("--dump", default="", help="ghi toan bo message nhan duoc ra file JSONL")
     ap.add_argument("--only", default="", help="chi in cac method co chuoi nay")
     ap.add_argument("--reward-out", default="", help="append *_attack_return rewardId (JSONL)")
+    ap.add_argument("--wait-ready", type=float, default=0.0,
+                    help="cho toi da N giay den khi nhan become_player roi moi gui --calls")
     a = ap.parse_args()
     s = json.load(open(a.session))
     entityid = bytes.fromhex(s["entityid"])
@@ -239,15 +241,25 @@ def main():
     if not connected:
         print("[!] resume failed"); return 1
 
-    for m, p in _parse_calls(a.calls):
-        print("[>] call", m, short(p, 200))
-        c.entity_call(entityid, m, p)
-
     rewardf = open(a.reward_out, "a") if a.reward_out else None
-    t_end = time.time() + a.listen
     seen = {}
     dumpf = open(a.dump, "w") if a.dump else None
+    calls = _parse_calls(a.calls)
+    sent = False
+    if a.wait_ready <= 0:
+        for m, p in calls:
+            print("[>] call", m, short(p, 200))
+            c.entity_call(entityid, m, p)
+        sent = True
+    ready_deadline = time.time() + a.wait_ready
+    t_end = time.time() + a.wait_ready + a.listen
     while time.time() < t_end:
+        if not sent and time.time() >= ready_deadline:
+            print("[!] khong thay become_player sau %.0fs, gui luon" % a.wait_ready)
+            for m, p in calls:
+                print("[>] call", m, short(p, 200))
+                c.entity_call(entityid, m, p)
+            sent = True
         try:
             name, msg = c.recv_frame(timeout=max(0.1, t_end - time.time()))
         except TimeoutError:
@@ -256,6 +268,13 @@ def main():
             mn = c.method_name(msg.method)
             p = c.decode_params(msg.parameters)
             seen[mn] = seen.get(mn, 0) + 1
+            if not sent and mn == "become_player":
+                time.sleep(1.0)
+                for m2, p2 in calls:
+                    print("[>] call (after become_player)", m2, short(p2, 200))
+                    c.entity_call(entityid, m2, p2)
+                sent = True
+                t_end = max(t_end, time.time() + a.listen)
             if dumpf:
                 dumpf.write(json.dumps({"method": mn, "params": p}, default=lambda o: o.hex() if isinstance(o, bytes) else (o.data.hex() if hasattr(o, "data") else str(o)), ensure_ascii=False) + "\n")
             if (not a.only or a.only in mn) and seen[mn] <= 2:

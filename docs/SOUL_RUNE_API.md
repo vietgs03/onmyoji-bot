@@ -95,6 +95,11 @@ Chỉ gửi `dungeon_rune_attack`, **không gửi `result`**.
 - `freeze_update.frozen.num = 0`, `safety_lock {err:3}` như các lần resume trước.
 - Trận bỏ dở: không gửi `result`, nên không có thưởng. Game client bị đá ra khi tool resume (mỗi avatar một kết nối).
 
+**Lần 2 (10:00, game đã thoát):** resume lại bằng cùng authmsg (`session_live.json`) vẫn `RECONNECT_SUCCEEDED` dù game client không còn chạy.
+- Gửi ngay sau `connect_reply` thì server **bỏ qua** lời gọi (chưa có entity). Phải đợi `become_player` rồi mới gửi (`--wait-ready 60`).
+- Kết quả: stamina 18991 → **18979 (-12/lần)**, `yinchui` 158 → 170 (+12), `rewardId` mới `6ad041d36051644c2b3a0f39`, `copy_skin_id` 0, `freeze_update.num` = 0.
+- Mỗi lần gọi là một trận mới, `rewardId` khác nhau. Không có thưởng vì không gửi `result`.
+
 **Resume không cần game reconnect:** authmsg cũ (BSON loginInfo) dùng lại được sau khi thay `session` = sid hiện tại (đọc RAM `player1.login_session.sid`) và `versions` = `heroes_version#inventory_version#_last_process` (`read_versions.ps1`). `sauth_str` cũ vẫn được chấp nhận. Đây là phát hiện đáng báo cho team game: token resume không gắn với lần đăng nhập cụ thể.
 
 ## 4. Giới hạn khi gọi từ client ngoài
