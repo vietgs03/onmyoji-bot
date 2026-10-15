@@ -34,6 +34,25 @@ Cập nhật 2026-10-15. Nguồn: code game dịch từ RAM (`research/npk/src_d
 - `auto_yuhun_*` là công cụ tính bộ ngự hồn tối ưu (calc/rank), không phải farm.
 - Không có RPC nào trả thưởng Soul mà không qua trận.
 
+## 2b. Orochi Lv.1-10 rơi gì (bảng phần thưởng thật của game)
+
+Nguồn: `RuneLevelInfoDict[1]` (module `com.data.cdata_en.dungeon_rune`, đọc RAM) có **một** `loot_id` chung cho cả Lv.1-10: `"4418|4419|4420|4421|4422|4423|4424"`, `leveldesc: "Drops G5-G6 Souls"`. Game chọn theo **thứ trong tuần (giờ UTC+8)**: `loot_id = lootList[dayOfWeek]` (`runelevelsystem.getCurrencyList`, Mon=0). Bảng `reward` (`DATA_REWARD`) cho từng loot_id:
+
+| Thứ | loot_id | Bộ ngự hồn rơi | coin | EXP |
+|---|---|---|---|---|
+| T2 | 4418 | Snow Spirit, House Imp, Claws, Jizo Statue + 2 bộ mới (300079, 300080) | 1800 | 1860 |
+| T3 | 4419 | Holy Flame, Fortune Cat, Scarlet, 300007 + 2 bộ mới (300081, 300082) | 1800 | 1860 |
+| T4 | 4420 | Mimic, Boroboroton, Harpy, 300035 + 2 bộ mới (300083, 300084) | 1800 | 1860 |
+| T5 | 4421 | Shy Soul, Watcher, Tree Spirit, Seductress + 2 bộ mới (300079, 300082) | 1800 | 1860 |
+| T6 | 4422 | Dawn Fairy, Mirror Lady, Priestess, Shadow + 2 bộ mới (300080, 300083) | 1800 | 1860 |
+| T7 | 4423 | Soul III (900180, ngẫu nhiên) + 300081, 300084 | 1800 | 1860 |
+| CN | 4424 | Soul III + cả 6 bộ mới 300079-300084 | 1800 | 1860 |
+
+- `Soul III` (900180): "Grants the same souls of the day (obtainable from stage 1-10)".
+- Tên lấy từ bảng vật phẩm `DATA_CURRENCY` giải mã từ RAM (20,446 dòng) và bảng dịch EN cùng chỉ mục (`translate_buf`, 62,166 chuỗi). 300007, 300035 và 6 bộ mới 300079-300084 (icon `hscard_0064_1`..`0069_1`) không có dòng tên trong `DATA_CURRENCY`. Tên nằm ở `DATA_CARD_INIT`, mà module này chưa load trong lần chạy (chỉ load khi mở màn ngự hồn).
+- **Mọi tầng 1-10 dùng chung danh sách bộ rơi.** Bảng không có khác biệt theo tầng. Tầng chỉ đổi stat quái (`atk_alter`, `crt_alter`, `def_alter`: Lv.1 atk -0.7, Lv.10 atk +2.5) và `strength` (stamina). Số sao/số lượng ngự hồn theo tầng và tỉ lệ rơi **không có trong client**, nằm ở server.
+- Gọi `dungeon_rune_attack` 1-10 qua API **không** cho biết thêm: lời gọi chỉ trả `rewardId`, nội dung thưởng chỉ tới sau `result` thắng thật (§3b).
+
 ## 2. Bảng dungeon_id (từ `cdata_en.dungeon_rune.json`)
 
 | dungeon_id | Zone (`typedesc`) | Tầng | Vé (`menpiao`) |
