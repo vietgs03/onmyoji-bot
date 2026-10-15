@@ -291,3 +291,28 @@ Câu hỏi: client có "ép"/tái dùng được `rewardId` không? Test gửi `
 ### Lưu ý
 - Lần này 2 case đều +1 day_limit nhưng output chỉ thấy `day_limit_update`, không thấy `dungeon_client_attack_return` (reward content) trong cửa sổ 12s — có thể reward về chậm/khác frame. day_limit tăng = server đã tính lượt. Cần 1 lần đọc RAM `allRewards`/currency để xác nhận có vật phẩm thực.
 - Đã tiêu 2 lượt/500 hôm nay cho test (2→3... thực ra 1→3). Dừng ở đây.
+
+## 8. Duplication test: cùng 1 rewardId gửi 3 lần (2026-10-15 ~14:33, dump)
+
+Câu hỏi: gửi CÙNG 1 `rewardId` nhiều lần có nhận thưởng nhiều lần (nhân bản) không? Bằng chứng: `data/dup_test.jsonl` (LIVE).
+
+| Lần | rewardId | day_limit | onUpdateCurrency | dungeon_client_attack_return |
+|---|---|---|---|---|
+| before | - | {2:3} | - | - |
+| 1 | 6ad04a45 (cùng) | →{2:4} | KHÔNG | KHÔNG |
+| 2 | 6ad04a45 (cùng) | →{2:5} | KHÔNG | KHÔNG |
+| 3 | 6ad04a45 (cùng) | →{2:6} | KHÔNG | KHÔNG |
+
+### Kết luận (điều chỉnh mức độ "lỗ hổng")
+- **`day_limit` TĂNG mỗi lần (3→6), nhưng KHÔNG có `onUpdateCurrency`, KHÔNG có `dungeon_client_attack_return`.** → `result` **tiêu lượt** nhưng **không thấy phát thưởng** trong cả 2 test (replay §7 + dup §8). reward_hits = 0/3.
+- Nghĩa là **KHÔNG xác nhận được việc "nhân thưởng"**. Server tăng counter nhưng không gửi reward về trong phiên API.
+- Giả thuyết mới (chưa chắc): `result` không có `attack` tương ứng thì server không có `allRewards` để phát → chỉ ghi nhận lượt, không ra đồ. Lần test §3.3 (13:20) có thấy reward — nhưng lần đó mình dùng `--attack-first` (gọi attack lấy id thật trước), nên CÓ bản ghi trận ở server.
+- **Phân biệt 2 kịch bản:**
+  - `--attack-first` (attack rồi result cùng id): §3.3 thấy có reward. (nhưng id đó server cấp hợp lệ)
+  - result-only id cũ/bịa (§7, §8): day_limit tăng, KHÔNG thấy reward.
+
+### Hệ quả đính chính
+- Lỗ hổng chắc chắn: **gửi `result` không cần đánh vẫn TIÊU lượt day_limit** (phá counter, có thể làm cạn 500/ngày của nhân vật — griefing/phá hoại, không phải lợi về vật phẩm).
+- Việc **nhận thưởng từ result giả**: CHỈ quan sát được 1 lần ở §3.3 (có attack-first). Chưa tái lập được "ra đồ" với id bịa. Cần test có kiểm soát: `--attack-first` lấy id thật -> gửi result CHÍNH id đó -> xem reward; rồi gửi LẠI id đó lần 2 -> xem có nhân không. (chưa làm, tránh tiêu thêm lượt)
+
+Đã tiêu tổng cộng tới day_limit {2:6} hôm nay cho các test. DỪNG.
